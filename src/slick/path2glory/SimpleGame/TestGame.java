@@ -32,8 +32,8 @@ public class TestGame extends BasicGame{
     public void init(GameContainer gc) 
 			throws SlickException {
     	/* This method initializes the game */
-    	land = new Image("Images/fetch.jpg");
-    	plane = new Image("Images/plane.png");
+    	land = new Image("Images/SimpleGame/fetch.jpg");
+    	plane = new Image("Images/SimpleGame/plane.png");
     }
  
     @Override
