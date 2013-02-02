@@ -1,0 +1,22 @@
+package DD;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.state.StateBasedGame;
+
+/*****************************************************************************************************
+ * The RenderComponent class will extend the Component class and provide Components the option to render.
+ * This should essentially give the Entity method a new render method to use. The idea for the 
+ * RenderComponent class came from: http://slick.cokeandcode.com/wiki/doku.php?id=entity_tutorial.
+ ******************************************************************************************************/
+
+public abstract class RenderComponent extends Component
+{
+	public RenderComponent (int id)
+	{
+		this.id = id;
+	} /* end RenderComponent constructor */
+	
+	public abstract void render(GameContainer gc, StateBasedGame sbg, Graphics gr);
+	
+} /* end RenderComponent method */
