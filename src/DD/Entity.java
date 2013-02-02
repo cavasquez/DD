@@ -35,14 +35,24 @@ public class Entity
 	
 	public void update (GameContainer gc, StateBasedGame sbg, int delta)
 	{
+		updateComponents(gc, sbg, delta);
+	} /* end update method */
+	
+	public void render (GameContainer gc, StateBasedGame sbg, Graphics gr)
+	{
+		
+		renderComponents(gc, sbg, gr);
+	} /* end render method */
+	
+	protected void updateComponents(GameContainer gc, StateBasedGame sbg, int delta)
+	{
 		for (Component component : components)
 		{
 			component.update(gc, sbg, delta);
 		} /* end for loop */
-		
-	} /* end update method */
+	} /* end updateComponents method */
 	
-	public void render (GameContainer gc, StateBasedGame sbg, Graphics gr)
+	protected void renderComponents(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
 		RenderComponent renderComponent = null;
 		for (Component component : components)
@@ -55,7 +65,7 @@ public class Entity
 			
 		} /* end for loop */
 		
-	} /* end render method */
+	} /* end renderComponents method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
