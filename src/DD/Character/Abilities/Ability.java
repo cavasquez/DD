@@ -35,11 +35,6 @@ public abstract class Ability extends RenderComponent
 		activated = false;
 	} /* end ability constructor */
 	
-	private void unclickSubActions()
-	{ /* set abilityClicked to false for all subActions in ActionBox */ 
-		((ActionBox) owner).unclickSubActions();
-	} /* end unclickSubACtions method */
-	
 	public void activate()
 	{
 		activated = true;

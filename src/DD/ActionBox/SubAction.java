@@ -18,12 +18,14 @@ public class SubAction extends RenderComponent
 {
 	/************************************ Class Attributes *************************************/
 	Ability ability = null;
+	boolean clicked;
 	
 	/************************************ Class Methods *************************************/
 	public SubAction(int id) 
 	{
 		super(id);
 		ability = null;
+		clicked = false;
 	} /* end SubAction constructor */
 
 	@Override
@@ -37,6 +39,16 @@ public class SubAction extends RenderComponent
 		// TODO Auto-generated method stub
 		
 	} /* end update method */
+	
+	private void unclickSubActions()
+	{ /* set abilityClicked to false for all subActions in ActionBox */ 
+		((ActionBox) owner).unclickSubActions();
+	} /* end unclickSubACtions method */
+	
+	private void unclick()
+	{ /* set abilityClicked to false for all subActions in ActionBox */ 
+		clicked = false;
+	} /* end unclickSubACtions method */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
