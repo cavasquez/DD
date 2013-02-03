@@ -16,10 +16,11 @@ import DD.Character.Abilities.Ability;
 
 public class StandardAttack extends Ability
 {
-	/************************************ Class Methods*************************************/
+	/************************************ Class Attributes *************************************/
 	boolean userRolls;		/* Determine if the user wishes to roll or have the program roll */
+	Character character;	/* We need this so we can render the FF style squares near the character */
 	
-	/************************************ Class Methods*************************************/
+	/************************************ Class Methods *************************************/
 	public StandardAttack(int id, int abilityType, String name, String description) 
 	{
 		super(id, abilityType, name, description);

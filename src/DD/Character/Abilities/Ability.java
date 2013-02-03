@@ -24,6 +24,7 @@ public abstract class Ability extends RenderComponent
 	protected final String name;
 	protected final String description;
 	public boolean abilityClicked;		/* flag that establishes if an ability has been clicked. */
+	private boolean renderCharacter;	/* flag to see if a render should be placed on the character */
 	
 	/************************************ Class Methods*************************************/
 	public Ability(int id, int actionType, String name, String description)
@@ -39,6 +40,15 @@ public abstract class Ability extends RenderComponent
 	{ /* set abilityClicked to false for all subActions in ActionBox */ 
 		((ActionBox) owner).unclickSubActions();
 	} /* end unclickSubACtions method */
+	
+	
+	/******************************************************************************
+	 ******************************* Setter Methods *******************************
+	 ******************************************************************************/
+	public void setOwnerCharacter(Character character)
+	{
+		this.character = character;
+	} /* end  */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

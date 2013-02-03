@@ -35,6 +35,15 @@ public class Character extends Entity
 		
 	} /* end resetCharacter method */
 	
+	public void addAbility(Ability ability)
+	{/* Character does have addComponent, however abilities have a specific purpose than 
+	 	the standard component object. Thus, they have their own array and add method. */
+		ability.setOwnerEntity(this);
+		abilities.add(ability);	
+	} /* end addAbility methods */
+	
+	/* Combat Related Methods */
+	
 	public void startTurn()
 	{
 		hasTurn = true;
