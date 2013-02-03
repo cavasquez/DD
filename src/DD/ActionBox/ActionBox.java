@@ -3,7 +3,9 @@ package DD.ActionBox;
 import java.util.ArrayList;
 
 import DD.Character.Character;
+import DD.Character.Abilities.Ability;
 import DD.SlickTools.BoxInterface;
+import DD.SlickTools.Component;
 import DD.SlickTools.Entity;
 import DD.SlickTools.RenderComponent;
 
@@ -43,18 +45,16 @@ public class ActionBox extends BoxInterface
 	public static final int NUM_OF_ACTIONS = 6;
 	
 	/************************************ Class Attributes *************************************/
-	public ArrayList<RenderComponent> subActions;
-	boolean hasTurn;
+	public ArrayList<Ability> subActions;
 	public static Character character = null;
 	
 	public ActionBox(int id, float length, float width, Character character) 
 	{
 		super(id, length, width);
 		ActionBox.character = character;
-		hasTurn = false;
 	} /* end ActionBox constructor */
 	
-	public void addSubAction(RenderComponent subAction)
+	public void addSubAction(Ability subAction)
 	{
 		subAction.setOwnerEntity((Entity)this);
 		subActions.add(subAction);
@@ -69,5 +69,13 @@ public class ActionBox extends BoxInterface
 	{ /* removes all Sub Actions form subAction */
 		
 	} /* end clearSubACtions method */
+	
+	public void unclickSubActions()
+	{ /* set abilityClicked to false for all subActions in ActionBox */ 
+		for (Ability subAction: subActions)
+		{
+			subAction.abilityClicked = false;
+		} /* end for loop */
+	} /* end unclickSubACtions method */
 
 } /* end ActionBox method */
