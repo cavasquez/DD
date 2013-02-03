@@ -78,7 +78,7 @@ public class Character extends Entity
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
-	public static Ability[] getSubActions(int actionType)
+	public static Ability[] getAbilities(int actionType)
 	{ /*  */
 		Ability[] returner = null;
 		

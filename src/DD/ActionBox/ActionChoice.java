@@ -54,8 +54,16 @@ public class ActionChoice extends RenderComponent
 	protected void performAction()
 	{ /* Logic that should take place when action is clicked on.
 	 	performAction needs to get all the appropriate abilities from
-	 	the Character and make them available in ActionBox.*/
-		Ability subActions[] = Character.getSubActions(this.id);
+	 	the Character and make them available in ActionBox by creating
+	 	adding the ability to the SubAction array list in ActionBox.*/
+		Ability abilities[] = Character.getAbilities(this.id);
+		
+		for (Ability ability : abilities)
+		{
+			SubAction subAction = null;
+			subAction.setAbility(ability);
+			((ActionBox)owner).addSubAction(subAction);
+		} /* end for loop */
 		
 		/*TODO: Need to add the subActions to ActionBox's subActions */
 	} /* end performAction method */

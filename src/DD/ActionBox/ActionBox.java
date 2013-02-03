@@ -45,16 +45,17 @@ public class ActionBox extends BoxInterface
 	public static final int NUM_OF_ACTIONS = 6;
 	
 	/************************************ Class Attributes *************************************/
-	public ArrayList<Ability> subActions;
-	public static Character character = null;
+	protected ArrayList<SubAction> subActions;
+	protected static Character character = null;
 	
 	public ActionBox(int id, float length, float width, Character character) 
 	{
 		super(id, length, width);
 		ActionBox.character = character;
+		subActions = null;
 	} /* end ActionBox constructor */
 	
-	public void addSubAction(Ability subAction)
+	public void addSubAction(SubAction subAction)
 	{
 		subAction.setOwnerEntity((Entity)this);
 		subActions.add(subAction);
@@ -72,9 +73,9 @@ public class ActionBox extends BoxInterface
 	
 	public void unclickSubActions()
 	{ /* set abilityClicked to false for all subActions in ActionBox */ 
-		for (Ability subAction: subActions)
+		for (SubAction subAction: subActions)
 		{
-			subAction.abilityClicked = false;
+			
 		} /* end for loop */
 	} /* end unclickSubACtions method */
 

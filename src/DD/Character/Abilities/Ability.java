@@ -5,7 +5,7 @@ import DD.Character.Character;
 import DD.SlickTools.RenderComponent;
 
 /*****************************************************************************************************
- * The Ability class will subclass the RenderComponent class. It should contain all the possible player
+ * The Ability class will subclass the RenderComponent class. It will hold any possible player
  * abilities. This includes feats, spells, default actions, etc. The Ability class should be subclassed
  * to further specify the type of ability that is being utilized. For example, the movement types of
  * abilities will always interact with the Character whereas the Full-round actions might not. In this
@@ -19,12 +19,11 @@ import DD.SlickTools.RenderComponent;
 public abstract class Ability extends RenderComponent
 {
 	/************************************ Class Attributes *************************************/
-	private Character character;
+	protected Character character;
 	protected final int actionType;
 	protected final String name;
 	protected final String description;
-	public boolean abilityClicked;		/* flag that establishes if an ability has been clicked. */
-	private boolean renderCharacter;	/* flag to see if a render should be placed on the character */
+	protected boolean activated;			/* flag that establishes if an ability has been clicked. */
 	
 	/************************************ Class Methods*************************************/
 	public Ability(int id, int actionType, String name, String description)
@@ -33,13 +32,23 @@ public abstract class Ability extends RenderComponent
 		this.actionType = actionType;
 		this.name = name;
 		this.description = description;
-		abilityClicked = false;
+		activated = false;
 	} /* end ability constructor */
 	
 	private void unclickSubActions()
 	{ /* set abilityClicked to false for all subActions in ActionBox */ 
 		((ActionBox) owner).unclickSubActions();
 	} /* end unclickSubACtions method */
+	
+	public void activate()
+	{
+		activated = true;
+	} /* end activate method */
+	
+	public void deactivate()
+	{
+		activated = false;
+	} /* end activate method */
 	
 	
 	/******************************************************************************
