@@ -66,20 +66,20 @@ public class ActionBox extends BoxInterface
 	
 	public void removeSubAction(int id)
 	{ /* remove the provided subAction from the components array list */
-		
+		this.removeComponent(id);
 	} /* end removeSubAction method */
 	
 	public void clearSubActions()
 	{ /* removes all Sub Actions from subAction and components*/
-		
+		for (Integer subAction : subActions)
+		{
+			this.removeComponent(subAction);
+		} /* end for loop */
 	} /* end clearSubACtions method */
 	
 	public void unclickSubActions()
 	{ /* set abilityClicked to false for all subActions in ActionBox */ 
-		for (Component component : components)
-		{
-			
-		} /* end for loop */
+
 	} /* end unclickSubACtions method */
 
 } /* end ActionBox method */
