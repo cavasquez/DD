@@ -1,11 +1,13 @@
 package DD.SlickTools;
 
 import java.util.ArrayList;
-
+import java.util.Queue;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
+import DD.ActionBox.SubAction;
+import DD.Character.Abilities.Ability;
 
 /*****************************************************************************************************
  * The Entity class will represent objects in game. A monster, a menu, or whatever else will appear.
@@ -17,11 +19,13 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class Entity 
 {
-	/************************************ Class Constants *************************************/
-	protected int id;
+	/************************************ Class Attributes *************************************/
+	protected int id;								/* id used to keep track of component ID's */
+	protected Queue<Integer> recycledIds;			/* ID's of objects that have given up their id (thus the ID can be used again */
 	protected Vector2f position;
 	protected float scale;
-	ArrayList<Component> components = null;
+	protected ArrayList<Component> components = null;
+	
 	
 	/************************************ Class Methods *************************************/
 	public Entity (int id)
@@ -29,18 +33,44 @@ public class Entity
 		this.id = id;
 	} /* end Entity constructor */
 	
-	public void addComponent(Component component)
-	{
+	public int addComponent(Component component)
+	{ /* add a component to the components ArrayList and return it's id */
+		Integer id = this.id;
+		if((id = recycledIds.poll()) != null) id = this.id++; /* Take a recycled id. If none exists, take an ID from id and increment it */
+		
 		component.setOwnerEntity(this);
+		component.setId(id);
 		components.add(component);
+		
+		return(id);
 	} /* end AddComponent method */
 	
-	public void update (GameContainer gc, StateBasedGame sbg, int delta)
+	public void removeComponent(int id)
+	{ /* Remove the component with the provided ID from components and add it's id to the recycledIds ArrayList */
+		boolean found = false;
+		int index = 0;
+		Component deleteMe = null;
+		
+		while (!found)
+		{
+			deleteMe = components.get(index++);
+			if (deleteMe.getId() == id) 
+			{ /* component found. remove it */
+				found = true; 
+				components.remove(index);
+				recycledIds.offer(id);
+			} /* end if */
+			
+		} /* end while loop */
+		
+	} /* end AddComponent method */
+	
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 	{
 		updateComponents(gc, sbg, delta);
 	} /* end update method */
 	
-	public void render (GameContainer gc, StateBasedGame sbg, Graphics gr)
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
 		
 		renderComponents(gc, sbg, gr);
@@ -107,5 +137,5 @@ public class Entity
 	{
 		this.scale = scale;
 	} /* end setScale method */
-	
+
 } /* End Entity class */

@@ -40,14 +40,21 @@ public class SubAction extends RenderComponent
 		
 	} /* end update method */
 	
+	private void click()
+	{ /* set abilityClicked to true and activate ability*/ 
+		clicked = true;
+		ability.activate();
+	} /* end clickSubACtions method */
+	
+	private void unclick()
+	{ /* set abilityClicked to false and deactivate ability */ 
+		clicked = false;
+		ability.deactivate();
+	} /* end unclickSubACtions method */
+	
 	private void unclickSubActions()
 	{ /* set abilityClicked to false for all subActions in ActionBox */ 
 		((ActionBox) owner).unclickSubActions();
-	} /* end unclickSubACtions method */
-	
-	private void unclick()
-	{ /* set abilityClicked to false for all subActions in ActionBox */ 
-		clicked = false;
 	} /* end unclickSubACtions method */
 	
 	/******************************************************************************

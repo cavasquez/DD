@@ -25,15 +25,17 @@ import DD.SlickTools.RenderComponent;
 public class ActionChoice extends RenderComponent
 {
 	/************************************ Class Attributes *************************************/
-	int numOfSubActions; /* Number of subActions available */
+	int numOfSubActions; 	/* Number of subActions available */
+	int actionType;			/* Number that refers to the type of action this ActionChoice represents (standard, move, etc.) */
 	String display;
 	boolean actionPerformed;
 	
 	/************************************ Class Methods *************************************/
 	/* Remember, ID is the same as ActionType */
-	public ActionChoice(int id, String display)
+	public ActionChoice(int id, int actionType, String display)
 	{
 		super(id);
+		this.actionType = actionType;
 		this.display = display;
 		actionPerformed = false;
 		
@@ -56,13 +58,11 @@ public class ActionChoice extends RenderComponent
 	 	performAction needs to get all the appropriate abilities from
 	 	the Character and make them available in ActionBox by creating
 	 	adding the ability to the SubAction array list in ActionBox.*/
-		Ability abilities[] = Character.getAbilities(this.id);
+		Ability abilities[] = Character.getAbilities(this.actionType);
 		
 		for (Ability ability : abilities)
 		{
-			SubAction subAction = null;
-			subAction.setAbility(ability);
-			((ActionBox)owner).addSubAction(subAction);
+			((ActionBox)owner).addSubAction(ability);
 		} /* end for loop */
 		
 		/*TODO: Need to add the subActions to ActionBox's subActions */

@@ -32,6 +32,11 @@ public abstract class Component
 		this.owner = owner;
 	} /* end setOwnerEntity method */
 	
+	public void setId(int id)
+	{
+		this.id = id;
+	} /* end setOwnerEntity method */
+	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/

@@ -1,6 +1,9 @@
 package DD.ActionBox;
 
 import java.util.ArrayList;
+import java.util.Queue;
+
+import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 import DD.Character.Character;
 import DD.Character.Abilities.Ability;
@@ -45,7 +48,7 @@ public class ActionBox extends BoxInterface
 	public static final int NUM_OF_ACTIONS = 6;
 	
 	/************************************ Class Attributes *************************************/
-	protected ArrayList<SubAction> subActions;
+	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
 	protected static Character character = null;
 	
 	public ActionBox(int id, float length, float width, Character character) 
@@ -55,25 +58,25 @@ public class ActionBox extends BoxInterface
 		subActions = null;
 	} /* end ActionBox constructor */
 	
-	public void addSubAction(SubAction subAction)
-	{
-		subAction.setOwnerEntity((Entity)this);
-		subActions.add(subAction);
+	public void addSubAction(Ability ability)
+	{ /* Convert the provided Ability into a SubAction and add it to the components ArrayList*/
+		SubAction subAction = new SubAction(this.id);	/* the id is set to any arbitrary id. It will be reset in the addComponent method */
+		subActions.add(this.addComponent(subAction));	/* Add the SubAction and add it's id to the subActions ArrayList */
 	} /* end addSubAction method */
 	
 	public void removeSubAction(int id)
-	{ /* remove the provided subAction */
+	{ /* remove the provided subAction from the components array list */
 		
 	} /* end removeSubAction method */
 	
 	public void clearSubActions()
-	{ /* removes all Sub Actions form subAction */
+	{ /* removes all Sub Actions from subAction and components*/
 		
 	} /* end clearSubACtions method */
 	
 	public void unclickSubActions()
 	{ /* set abilityClicked to false for all subActions in ActionBox */ 
-		for (SubAction subAction: subActions)
+		for (Component component : components)
 		{
 			
 		} /* end for loop */
