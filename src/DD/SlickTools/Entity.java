@@ -73,7 +73,6 @@ public class Entity
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
-		
 		renderComponents(gc, sbg, gr);
 	} /* end render method */
 	

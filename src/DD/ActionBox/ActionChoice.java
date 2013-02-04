@@ -16,10 +16,10 @@ import DD.SlickTools.RenderComponent;
  * can perform for the given action. This will be done by adding new components to the ActionBox method.
  * 
  * Each ActionChoice should be defined by an ActionType which is defined as a constant in the ActionBox
- * class. The ActionType is equivalent to the objects ID. This will be important when determining
- * what feats/abilities will be added as Ability object.. We will draw these from the Character class.
+ * class. This will be important when determining what feats/abilities will be added as Ability object. 
+ * We will get these from the Character class.
  * 
- * The id should also be used when determining where to render the ActionChoice in the ActionBox.  
+ * The actionType should also be used when determining where to render the ActionChoice in the ActionBox.  
  ******************************************************************************************************/
 
 public class ActionChoice extends RenderComponent
@@ -43,13 +43,13 @@ public class ActionChoice extends RenderComponent
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) 
-	{
+	{/* TODO: generate */
 		
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
-	{
+	{ /* TODO: generate */
 		
 	}
 	

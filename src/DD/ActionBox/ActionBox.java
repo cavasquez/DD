@@ -32,7 +32,7 @@ import DD.SlickTools.RenderComponent;
  * actions, however, need to be available in the ActionBox for the player to be able to decide on an
  * action to perform.
  * 
- * The "extra" actions will be some subtype of the Component class that will be added to the SubAction
+ * The "extra" actions will be some sub-type of the Component class that will be added to the SubAction
  * array list so that they can be updated and rendered accordingly, based on the action chosen. 
  ******************************************************************************************************/
 
@@ -56,6 +56,15 @@ public class ActionBox extends BoxInterface
 		super(id, length, width);
 		ActionBox.character = character;
 		subActions = null;
+		
+		/* To begin with, the basic ActionChoices need to be available. */
+		this.addComponent(new ActionChoice(this.id, STANDARD_ACTION, "Standard Action"));
+		this.addComponent(new ActionChoice(this.id, MOVE_ACTION, "Move Action"));
+		this.addComponent(new ActionChoice(this.id, FULL_ROUND_ACTION, "Full Round Action"));
+		this.addComponent(new ActionChoice(this.id, SWIFT_ACTION, "Swift Action"));
+		this.addComponent(new ActionChoice(this.id, IMMEDIATE_ACTION, "Immediate Action"));
+		this.addComponent(new ActionChoice(this.id, FREE_ACTION, "Free Action"));
+		
 	} /* end ActionBox constructor */
 	
 	public void addSubAction(Ability ability)
@@ -70,16 +79,19 @@ public class ActionBox extends BoxInterface
 	} /* end removeSubAction method */
 	
 	public void clearSubActions()
-	{ /* removes all Sub Actions from subAction and components*/
-		for (Integer subAction : subActions)
-		{
-			this.removeComponent(subAction);
-		} /* end for loop */
+	{ /* removes all SubActions from subAction */
+		for (Integer subAction : subActions) this.removeComponent(subAction);
 	} /* end clearSubACtions method */
 	
 	public void unclickSubActions()
-	{ /* set abilityClicked to false for all subActions in ActionBox */ 
-
+	{ /* Set abilityClicked to false for all subActions in ActionBox. */
+		Component holder = null;
+		for (Integer subAction : subActions) 
+		{ /* unclick */
+			holder = getComponent(subAction);
+			((SubAction)holder).unclick();
+		} /* end for loop */
+		
 	} /* end unclickSubACtions method */
 
 } /* end ActionBox method */

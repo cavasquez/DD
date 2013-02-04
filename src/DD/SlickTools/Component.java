@@ -49,6 +49,6 @@ public abstract class Component
 	public Entity getOwner()
 	{
 		return(owner);
-	} /* emd getOwner method */
+	} /* end getOwner method */
 	
 } /* end Component class */

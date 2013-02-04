@@ -8,10 +8,13 @@ import DD.Character.Abilities.Ability;
 import DD.SlickTools.RenderComponent;
 
 /*****************************************************************************************************
- * The SubAction class will be a Conatainer that holds an Ability. The purpose of the SubAction class
+ * The SubAction class will be a conatainer that holds an Ability. The purpose of the SubAction class
  * is to display the ability and activate it. The activation may be different depending on the ability,
  * however, all SubActions need to render the ability choice in the ActionBox and activate the ability
  * if the SubAction is clicked on.
+ * 
+ * The rendering will be done by adding the ability to a special variable in the Character class that 
+ * will be called during render.
  ******************************************************************************************************/
 
 public class SubAction extends RenderComponent
@@ -27,26 +30,27 @@ public class SubAction extends RenderComponent
 		ability = null;
 		clicked = false;
 	} /* end SubAction constructor */
-
-	@Override
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) {
-		// TODO Auto-generated method stub
-		
-	} /* end render method */
-
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) {
 		// TODO Auto-generated method stub
 		
 	} /* end update method */
+
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) {
+		// TODO Auto-generated method stub
+		/* TODO: implement the abilities renderSubAction method */
+	} /* end render method */
 	
-	private void click()
-	{ /* set abilityClicked to true and activate ability*/ 
+	public void click()
+	{ /* set abilityClicked to true and activate ability. Furthermore, unclick any other clicked SubActions*/ 
+		this.unclickSubActions();
 		clicked = true;
 		ability.activate();
 	} /* end clickSubACtions method */
 	
-	private void unclick()
+	public void unclick()
 	{ /* set abilityClicked to false and deactivate ability */ 
 		clicked = false;
 		ability.deactivate();
