@@ -20,7 +20,8 @@ import DD.Character.Abilities.Ability;
 public class Entity 
 {
 	/************************************ Class Attributes *************************************/
-	protected int id;								/* id used to keep track of component ID's */
+	protected int id;								/* entities ID */
+	protected int componentId;						/* id used to keep track of component ID's (currently holds the NEXT component ID) */
 	protected Queue<Integer> recycledIds;			/* ID's of objects that have given up their id (thus the ID can be used again */
 	protected Vector2f position;
 	protected float scale;
@@ -35,8 +36,8 @@ public class Entity
 	
 	public int addComponent(Component component)
 	{ /* add a component to the components ArrayList and return it's id */
-		Integer id = this.id;
-		if((id = recycledIds.poll()) != null) id = this.id++; /* Take a recycled id. If none exists, take an ID from id and increment it */
+		Integer id = this.componentId;
+		if((id = recycledIds.poll()) != null) id = this.componentId++; /* Take a recycled id. If none exists, take an ID from id and increment it */
 		
 		component.setOwnerEntity(this);
 		component.setId(id);
