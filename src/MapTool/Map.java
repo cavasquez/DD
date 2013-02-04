@@ -1,22 +1,24 @@
 package MapTool;
 /*
- * @author Michael VanWie
- * i need to figure out how to make the render method still
- * 
+ * @author GM-Michael VanWie
  */
 
 import org.newdawn.slick.Image;
 
-public class Map  {
+import DD.Entity;
+
+public class Map extends Entity{
+	
+	protected String id;
 	Objects[][] objects;
 	TempObjects[][] tempObjects;
 	int numTempObjects;
-	int ID;
-	String name;
 	Image defImage;
 	boolean hasTempObjects;
-
-	public Map(){
+	
+	public Map(String name){
+		this.name = name;
+		super(0);
 		objects = new Objects[50][50];
 		tempObjects = new TempObjects[50][50];
 		for (int i = 0; i < objects.length; i++) {
@@ -31,8 +33,6 @@ public class Map  {
 		}
 				
 		numTempObjects=0;
-		ID = 1;
-		name = "MapName";
 		defImage = null;
 		hasTempObjects = false;
 	}
@@ -54,6 +54,8 @@ public class Map  {
 		}
 	}
 	
+
+	
 	public Objects getObjectAtLocation(int x, int y){
 		return objects[x][y];
 	}
@@ -65,6 +67,7 @@ public class Map  {
 	public void placeTempObject(int x,int y,TempObjects temp) {
 		this.tempObjects[x][y] = temp;
 		numTempObjects++;
+		//map.addComp(temp);
 		setHasTempObjects(true);
 	}
 	
@@ -76,18 +79,15 @@ public class Map  {
 		this.objects[x][y] = obj;
 	}
 
-	public int getID() {
-		return ID;
-	}
 	
 	//needed for gui
-	public String getName() {
-		return name;
+	public String getId() {
+		return id;
 	}
 
 	//GM should be able to name the map at will.
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String id) {
+		this.id = id;
 	}
 
 	public Image getDefImage() {

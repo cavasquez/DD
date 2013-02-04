@@ -1,17 +1,21 @@
 package MapTool;
 
-import org.newdawn.slick.Image;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.state.StateBasedGame;
+
+import DD.ImageRenderComponent;
 
 public class ObjectsOfInterest extends Objects{
 	String toolTipContent;
 	
-	public ObjectsOfInterest(String toolTipContent, Image image, int move, int light, String name){
+	public ObjectsOfInterest(String id, String toolTipContent, ImageRenderComponent image, int move, int light, String name){
+		super(id);
 		this.toolTipContent = toolTipContent;
 		super.image =image;
 		super.movePenalty = move;
 		super.lightPenalty = light;
 		super.name = name;
-		super.addNormList(this);
+		MapTool.addNormList(this);
 	}
 	/*
 	 * TODO: i need more info to handle this.
@@ -24,5 +28,10 @@ public class ObjectsOfInterest extends Objects{
 	 */
 	void action() {
 			
+	}
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) {
+		// TODO Auto-generated method stub
+		
 	}
 }
