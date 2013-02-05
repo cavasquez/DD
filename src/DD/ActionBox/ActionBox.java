@@ -30,7 +30,8 @@ import DD.SlickTools.RenderComponent;
  * provide an interface to obtain "default" actions as well as "sub" actions. That is, a default
  * action a player might have would be attack. However, a feat would not be a default action. These 
  * actions, however, need to be available in the ActionBox for the player to be able to decide on an
- * action to perform.
+ * action to perform. ActionBox will be the View component for DD combat. It will communicate with 
+ * CombatSystem (the controller).
  * 
  * The "extra" actions will be some sub-type of the Component class that will be added to the SubAction
  * array list so that they can be updated and rendered accordingly, based on the action chosen. 
