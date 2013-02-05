@@ -9,16 +9,20 @@ import DD.Entity;
 
 public class Map extends Entity{
 	
-	protected String id;
+	//protected String id;
 	Objects[][] objects;
 	TempObjects[][] tempObjects;
 	int numTempObjects;
 	Image defImage;
 	boolean hasTempObjects;
+	String name;
 	
 	public Map(String name){
-		this.name = name;
+		
+		
 		super(0);
+		this.name = name;
+		
 		objects = new Objects[50][50];
 		tempObjects = new TempObjects[50][50];
 		for (int i = 0; i < objects.length; i++) {
@@ -81,13 +85,13 @@ public class Map extends Entity{
 
 	
 	//needed for gui
-	public String getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
 
 	//GM should be able to name the map at will.
-	public void setName(String id) {
-		this.id = id;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public Image getDefImage() {

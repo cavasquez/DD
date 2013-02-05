@@ -6,7 +6,7 @@ import java.util.ArrayList;
 //implements serializable ~
 public class MapTool {
 	World world;
-	ArrayList<> 
+	
 
 	/*
 	 * reads possible items via objects.ser files. add those items to an array that can be scanned each time.

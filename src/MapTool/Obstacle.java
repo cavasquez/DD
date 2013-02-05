@@ -1,18 +1,22 @@
 package MapTool;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.state.StateBasedGame;
 
 import DD.ImageRenderComponent;
 
 public class Obstacle extends Objects{
-	public Obstacle(String id , ImageRenderComponent image, int move, int light, String name){
-		super(id);
-		super.image =image;
+	
+	//@brandon
+	World world;
+	public Obstacle(String name , Image image, int move, int light){
+		super(name, image);
+		//super.image =image;
 		super.movePenalty = move;
 		super.lightPenalty = light;
-		super.name = name;
-		addNormList(this);
+		//super.name = name;
+		world.addNormList(this);
 	}
 
 	void checks() {

@@ -1,11 +1,10 @@
 package DD.Character.CharacterSheet;
 
 /*****************************************************************************************************
- * This structure represents the basic class information for a specific Character. The information includes
- * HP gained from a particular class, levels in a particular class, etc.
+ * This structure represents the Misc. modifier in the Character Sheet class. It will hold extra information
+ * in regards to the modifier (ie, where the modifiers come from and the individual modifier values.
  ******************************************************************************************************/
 
-public class ClassRecorder 
-{
-	
-} /* end ClassRecorder class */
+public class MiscModifier {
+
+}

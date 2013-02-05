@@ -6,6 +6,14 @@ import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.SlickTools.*;
 
+/*****************************************************************************************************
+ * The Character class will act as an interface to CharacterSheet as well as play the role of the Model
+ * in the Model View Controller scheme for DD combat (although in reality, it is more of a Model Controller
+ * mix). It will provide the CombatSystem any necessary information and represent the Character being 
+ * played by the player. It will hold some extra information such as turn, current speed, etc. that are 
+ * needed to keep up the game.
+ ******************************************************************************************************/
+
 public class Character extends Entity
 {
 	/************************************ Class Attributes *************************************/
@@ -59,7 +67,7 @@ public class Character extends Entity
 	
 	/************************************ Combat Mechanisms *************************************/
 	public boolean defend(int attack, int attackType)
-	{ /* The character must attempt to defend against an attack.
+	{/* The character must attempt to defend against an attack.
 	 	Attack type identifies if the attack is regular, touch, etc. 
 	 	TODO: check for flat-footed, etc. */
 		/* TODO: implement */
