@@ -1,5 +1,6 @@
 package MapTool;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import DD.Entity;
 
@@ -8,9 +9,16 @@ public class World extends Entity implements Serializable{
 	Map[][] world;
 	String WorldName;
 	int worldSize = 5;
+	//normList is an Array of all Possible Objects?
+	ArrayList<Objects> normList;
+	ArrayList<Objects> tempList;//holds temp items like from spells
 	
 	public World(){
+		
+		
 		super(0);
+		normList = new ArrayList<Objects>();
+		tempList = new ArrayList<Objects>();
 		world = new Map[worldSize][worldSize];
 		for (int i = 0; i < world.length; i++) {
 			for (int j = 0; j < world.length; j++) {
@@ -48,5 +56,14 @@ public class World extends Entity implements Serializable{
 	
 	public World loadWorld(){
 		return null;	
+	}
+
+	public void addNormList(Objects o) {
+		// TODO Auto-generated method stub
+		normList.add(o);
+	}
+	public void addTempList(Objects o) {
+		// TODO Auto-generated method stub
+		tempList.add(o);
 	}
 }

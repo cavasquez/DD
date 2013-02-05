@@ -1,21 +1,23 @@
 package MapTool;
 
+import org.newdawn.slick.Image;
+
 import DD.Entity;
 import DD.ImageRenderComponent;
 
 public abstract class Objects extends ImageRenderComponent{//figure out comp.
-
-	ImageRenderComponent image; //renderImageComp. 
 	int movePenalty;
 	int lightPenalty;
 	String name;
-	int id;
-	
-	public Objects(String name) {
-		super(id);
-		this.name = name;		
+	//int id;
+	//could pass in ID into constructor from the Component setID(...) ?
+	//@brandon
+	public Objects(String name, Image image) {
+		
+		super(0, image);
+		this.name = name;
 	}
-	
+
 	abstract void checks();
 
 	abstract void action();	
