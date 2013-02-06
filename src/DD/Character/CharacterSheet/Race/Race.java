@@ -1,6 +1,7 @@
 package DD.Character.CharacterSheet.Race;
 
-public class Race 
+public abstract class  Race 
 {
-
+	int baseSpeed;
+	
 }
