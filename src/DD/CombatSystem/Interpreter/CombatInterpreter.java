@@ -15,6 +15,6 @@ public interface CombatInterpreter
 {
 	/************************************ Class Methods *************************************/
 	public CombatValidationMessage validate(CombatMessage cm);
-	public void interpret(CombatSystem cs, CombatMessage cm);
+	public void interpret(CombatMessage cm);
 	
 } /* end CombatInterpreter class */
