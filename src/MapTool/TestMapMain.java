@@ -2,6 +2,7 @@ package MapTool;
 
 public class TestMapMain {
 	public static void main(String[] args) {
+		/*
 		World world = new World();
 		MapTool maptool= new MapTool();
 		world.WorldName = "TESTME";
@@ -14,5 +15,9 @@ public class TestMapMain {
 		System.out.println("World Map:	0,0\n"+
 						   "Map Location:  	0,0\n"+
 						   world.world[0][0].getTempAtLocation(0, 0).toString());
+		 */
+		
+		
 	}
+
 }

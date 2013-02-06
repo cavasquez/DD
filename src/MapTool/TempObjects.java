@@ -20,7 +20,7 @@ public class TempObjects extends Objects{
 		super.movePenalty = move;
 		super.lightPenalty = light;
 		this.owner  = owner;
-		//DO YOU WANT THIS METHOD STILL? OR USE THE ONE FROM WORLD?
+		//DO YOU WANT THIS METHOD STILL? OR USE THE ONE FROM WORLD? ...i need it here for in the place method.
 		//GOING TO USE THE ONE FROM WORLD, IT WAS FROM being cast from MapTool
 		//MADE A METHOD IN WORLD TO HOLD JUST TEMP ITEMS
 		world.addTempList(this);
@@ -32,6 +32,8 @@ public class TempObjects extends Objects{
 	void action() {
 			
 	}
+	
+	//method for testing.
 	public String toString(){	
 		return "Id: "+id+"\n"+
 			   "TurnCount: "+turnCount+"\n"+

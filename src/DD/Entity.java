@@ -6,6 +6,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.SlickException;
 
 /*****************************************************************************************************
  * The Entity class will represent objects in game. A monster, a menu, or whatever else will appear.

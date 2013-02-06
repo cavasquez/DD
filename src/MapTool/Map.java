@@ -22,17 +22,16 @@ public class Map extends Entity{
 		
 		super(0);
 		this.name = name;
-		
 		objects = new Objects[50][50];
 		tempObjects = new TempObjects[50][50];
 		for (int i = 0; i < objects.length; i++) {
 			for (int j = 0; j < objects.length; j++) {
-				objects[i][j] = null;
+				objects[i][j] = new Floor("floor"+(j*i+5), null , 5, 5);
 			}
 		}
 		for (int i = 0; i < tempObjects.length; i++) {
 			for (int j = 0; j < tempObjects.length; j++) {
-				tempObjects[i][j]=null;
+				tempObjects[i][j]= null;
 			}
 		}
 				
@@ -113,6 +112,18 @@ public class Map extends Entity{
 	public void setObjects(Objects[][] objects) {
 		this.objects = objects;
 	}
-	
+	public String toString(){
+		String t ="";
+		for (int i = 0; i < objects.length; i++) {
+			for (int j = 0; j < objects.length; j++) {
+				if(j == objects.length-1)
+				t += objects[i][j].name;
+			
+			else
+				t += objects[i][j].name;
+			}
+		}
+		return t;
+	}
 	
 }
