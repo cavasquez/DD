@@ -15,7 +15,7 @@ public class NetworkMessage extends Message
 	/************************************ Class Methods *************************************/
 	public NetworkMessage()
 	{
-		this.messageType = Message.NETWORK_MESSAGE;
+		super(Message.NETWORK_MESSAGE);
 	} /* end Constructor */
 	
 } /* end NetworkMessage */
