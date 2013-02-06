@@ -27,7 +27,7 @@ public class I_StandardAttack implements CombatInterpreter
 	} /* end validate method */
 
 	@Override
-	public void interpret(CombatSystem cs, CombatMessage cm) 
+	public void interpret(CombatMessage cm) 
 	{
 		// TODO Auto-generated method stub
 		
