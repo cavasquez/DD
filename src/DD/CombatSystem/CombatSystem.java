@@ -50,14 +50,20 @@ public class CombatSystem
 		returner = CombatSystem.validate(cm);
 		if (returner.getValid()) 
 		{
-			this.interpret(cm);
 			/* TODO: Send to Server */
 			/* We send the message to the network from here because
 			 * the receiver should not be calling validated on the
 			 * received message. Any sent messages are known to be
 			 * valid. This way, it will automatically call interpret
 			 * and will not infinitely re-send the same message by
-			 * calling validate.*/
+			 * calling validate. Furthermore, we send the message
+			 * before interpreting so we can somehwat parallelize
+			 * interpret across the network (instead of waiting for
+			 * interpret to happen and then sending the message,
+			 * send the message and have most games process interpret
+			 * at roughly the same time.*/
+			this.interpret(cm);
+			
 		} /* end if */
 		
 		return(returner);
@@ -87,9 +93,9 @@ public class CombatSystem
 		return (returner);
 	} /* end the interpreter method */
 	
-	private void interpret(CombatMessage cm)
+	private static void interpret(CombatMessage cm)
 	{
-		system[cm.getRequest()].interpret(this, cm);
+		system[cm.getRequest()].interpret(cm);
 	} /* end interpret method */
 	
 	public boolean characterExists(int characterID)
