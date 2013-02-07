@@ -3,6 +3,7 @@ package DD.Character.CharacterSheet;
 import java.util.ArrayList;
 import java.util.Random;
 
+import DD.ActionBox.Dice;
 import DD.Character.CharacterSheet.Race.Race;
 
 
@@ -15,7 +16,7 @@ import DD.Character.CharacterSheet.Race.Race;
 public class CharacterSheet 
 {
 	/*THE DICE!*/
-	Random dice = new Random();
+	Dice dice = new Dice();
 	/************************************ Class Constants *************************************/
 	/* Ability Array locations */
 	public static final int ABILITY_STRENGTH = 0;
@@ -28,6 +29,7 @@ public class CharacterSheet
 	public static final int ABILITY_TOTAL = 0;
 	public static final int ABILITY_MODIFIER = 1;
 	public static final int ABILITY_BASE = 2;
+	public static final int ABILITY_INHERENT = 3;
 	public static final int ABILITY_ENHANCE = 4;
 	public static final int ABILITY_MISC = 5;
 	
@@ -237,62 +239,62 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 	public void setStr(Race race)
 	{
 		stat = race.getStr();
-		rawStats[0][0] = stat;
+		rawStats[ABILITY_STRENGTH][ABILITY_TOTAL] = stat;
 	}
 	public void setDex(Race race)
 	{
 		stat = race.getDex();
-		rawStats[1][0] = stat;
+		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
 	}
 	public void setCon(Race race)
 	{
 		 stat = race.getCon();
-		rawStats[2][0] = stat;
+		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
 	}
 	public void setInt(Race race)
 	{
 		stat = race.getIntel();
-		rawStats[3][0] = stat;
+		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
 	}
 	public void setWis(Race race)
 	{
 		stat = race.getWis();
-		rawStats[4][0] = stat;
+		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
 	}
 	public void setCha(Race race)
 	{
 		stat = race.getcha();
-		rawStats[5][0] = stat;
+		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
 	}
 	/*GETTERS*/
 	public int getStr()
 	{
-		stat =rawStats[10][0];
+		stat =rawStats[ABILITY_STRENGTH][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getDex()
 	{
-		stat =rawStats[1][0];
+		stat =rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getCon()
 	{
-		stat =rawStats[2][0];
+		stat =rawStats[2][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getIntel()
 	{
-		stat =rawStats[3][0];
+		stat =rawStats[3][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getWis()
 	{
-		stat =rawStats[4][0];
+		stat =rawStats[4][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getCha()
 	{
-		stat =rawStats[5][0];
+		stat =rawStats[5][ABILITY_TOTAL];
 		return stat;
 	}
 	
@@ -342,4 +344,34 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 		stat =savingthrows[3][0]; 
 		return stat;
 	}
+	
+	public int makeBase()
+	{
+		int returner= dice.roll(3, 4, 6);
+		return returner;
+	}
+	public void setBase(int stat, int statValue)
+	{
+		
+		rawStats[stat][ABILITY_BASE] = statValue; 
+		
+	}
+	public int getBase()
+	{
+		int returner =rawStats[stat][ABILITY_BASE];
+		return returner;
+	}
+	public void setInher()
+	{
+		
+	}
+	public void setMod(int stat, int statValue)
+	{
+		
+		rawStats[stat][1] =(statValue - 10 )/ 2; 
+		
+	}
+	
+	
+	
 } /* end CharacterSheet method */
