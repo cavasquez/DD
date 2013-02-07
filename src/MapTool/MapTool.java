@@ -9,8 +9,12 @@ public class MapTool {
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;
 	
-
-	/*
+	public MapTool(){
+		
+	}
+	
+	/* TODO:updateNormList()  and tempList()
+	 * 
 	 * reads possible items via objects.ser files. add those items to an array that can be scanned each time.
 	 * posts those items to the gui.
 	 * clone/copy those items when they are selected to be placed.

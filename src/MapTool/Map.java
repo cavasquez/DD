@@ -3,34 +3,41 @@ package MapTool;
  * @author GM-Michael VanWie
  */
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Image;
 
+import DD.Component;
 import DD.Entity;
 
 public class Map extends Entity{
 	
-	//protected String id;
-	Objects[][] objects;
+	
+	/*
+	 * if we use components we dont actually need the objects array....
+	 */
+	Objects[][] objects; 
 	TempObjects[][] tempObjects;
 	int numTempObjects;
 	Image defImage;
 	boolean hasTempObjects;
 	String name;
 	final int mapSize = 50;
-	
-	
-	
-	
+
 	public Map(String name){
-		
 		
 		super(0);
 		this.name = name;
+
 		objects = new Objects[mapSize][mapSize];
 		tempObjects = new TempObjects[mapSize][mapSize];
-		for (int i = 0; i < objects.length; i++) {
-			for (int j = 0; j < objects.length; j++) {
-				objects[i][j] = new Floor("floor"+j*(i+5), null , 5, 5,this);
+		super.components = new ArrayList<Component>();
+		
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				Floor floor = new Floor("floor",null,5,5,this);
+				super.addComponent(floor);
+				objects[i][j] = floor;
 			}
 		}
 		for (int i = 0; i < tempObjects.length; i++) {
@@ -43,6 +50,8 @@ public class Map extends Entity{
 		defImage = null;
 		hasTempObjects = false;
 	}
+	
+	
 	/*
 	 * after each player turn, decrement each temp object turn count.
 	 * 	if turn count == 0 after decremented, remove that temp item.
@@ -74,7 +83,6 @@ public class Map extends Entity{
 	public void placeTempObject(int x,int y,TempObjects temp) {
 		this.tempObjects[x][y] = temp;
 		numTempObjects++;
-		//map.addComp(temp);
 		setHasTempObjects(true);
 	}
 	

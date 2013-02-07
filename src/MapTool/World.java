@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import DD.Entity;
 
-public class World extends Entity implements Serializable{
+public class World implements Serializable{
 	private static final long serialVersionUID = 1L;
 	Map[][] world;
 	String WorldName;
@@ -14,9 +14,6 @@ public class World extends Entity implements Serializable{
 	ArrayList<Objects> tempList;//holds temp items like from spells
 	
 	public World(){
-		
-		
-		super(0);
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();
 		world = new Map[worldSize][worldSize];
@@ -37,7 +34,15 @@ public class World extends Entity implements Serializable{
 		}
 	}
 	
-	public void LoadMap(int x, int y, Map mapIn){
+	/*
+	 * returns the map specified by input coordinates.
+	 */
+	public Map getMap(int x, int y){
+		return world[x][y];
+	}
+	
+	
+	public void loadMap(int x, int y, Map mapIn){
 		/*
 		 * TODO:
 		 * parse a text file to make a map

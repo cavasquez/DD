@@ -21,7 +21,7 @@ public class Entity
 	protected int id;
 	protected Vector2f position;
 	protected float scale;
-	ArrayList<Component> components = null;
+	protected ArrayList<Component> components = null;
 	
 	public Entity (int id)
 	{
@@ -31,7 +31,7 @@ public class Entity
 	public void addComponent(Component component)
 	{
 		component.setOwnerEntity(this);
-		components.add(component);
+		getComponents().add(component);
 	} /* end AddComponent method */
 	
 	public void update (GameContainer gc, StateBasedGame sbg, int delta)
@@ -47,7 +47,7 @@ public class Entity
 	
 	protected void updateComponents(GameContainer gc, StateBasedGame sbg, int delta)
 	{
-		for (Component component : components)
+		for (Component component : getComponents())
 		{
 			component.update(gc, sbg, delta);
 		} /* end for loop */
@@ -56,7 +56,7 @@ public class Entity
 	protected void renderComponents(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
 		RenderComponent renderComponent = null;
-		for (Component component : components)
+		for (Component component : getComponents())
 		{
 			if (RenderComponent.class.isInstance(component))
 			{
@@ -106,5 +106,13 @@ public class Entity
 	{
 		this.scale = scale;
 	} /* end setScale method */
+
+	public ArrayList<Component> getComponents() {
+		return components;
+	}
+
+	public void setComponents(ArrayList<Component> components) {
+		this.components = components;
+	}
 	
 } /* End Entity class */
