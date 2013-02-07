@@ -29,6 +29,19 @@ public class ServerSystem implements NetworkSystem
 		return instance;
 	} /* end getInstance method */
 	
+	public void sendMessage(int sender, int receiver, Message message)
+	{
+		/* A system needs a message sent to all clients */
+		/* Wrap message in a NetworkMessage */
+		NetworkMessage send = new NetworkMessage
+		if (receiver == NetworkSyste.EVERYONE)
+		{/* send message to everyone */
+			
+		} /* end if */
+	} /* end sendMessage method */
+	
+	public void sendMessage()
+	
 	public boolean addUser(int userID, String username, Server server)
 	{
 		boolean userExists = false;
