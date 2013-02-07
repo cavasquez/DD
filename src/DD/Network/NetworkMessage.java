@@ -10,12 +10,27 @@ package DD.Network;
 
 public class NetworkMessage extends Message
 {
-/************************************ Class Attributes *************************************/
+	/************************************ Class Attributes *************************************/
+	private Message message;
 	
 	/************************************ Class Methods *************************************/
-	public NetworkMessage()
+	public NetworkMessage(Message message)
 	{
 		super(Message.NETWORK_MESSAGE);
+		this.message = message;
 	} /* end Constructor */
+	
+	/******************************************************************************
+	 ******************************* Getter Methods *******************************
+	 ******************************************************************************/
+	public int getType()
+	{
+		return message.getMessageType();
+	} /* end getType */
+	
+	public Message getMessage()
+	{
+		return message;
+	} /* end getMessage method */
 	
 } /* end NetworkMessage */

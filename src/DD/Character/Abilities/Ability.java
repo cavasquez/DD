@@ -24,6 +24,9 @@ import DD.SlickTools.RenderComponent;
  * 
  * The renderActionBox will be used to render the ActionBox related components. It should be called by
  * the SubAction owning the Ability. This way, we can separate Character renders and ActionBox renders.
+ * 
+ * Abilities will work in Conjunction with CombatSystem and should be treated as the view to the 
+ * appropriate Interpreter in CombatSystem. 
  ******************************************************************************************************/
 
 public abstract class Ability extends RenderComponent

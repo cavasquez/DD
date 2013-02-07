@@ -11,10 +11,12 @@ package DD.Network;
 public class Message 
 {
 	/************************************ Class Constants *************************************/
-	public static final int NETWORK_MESSAGE = 0;	/* Message that wraps messages to be sent through the network */
-	public static final int COMBAT_MESSAGE = 1;		/* Message to be given to CombatSystem */
-	public static final int CHAT_MESSAGE = 2;		/* Message to be sent through the network that contains chat messages */
-	public static final int COMBAT_VALIDATION_MESSAGE = 4;	/* Message returned by CombatSystem to ActionBox */ 
+	private static int NUM_OF_MESSAGES = 0;
+	public static final int NETWORK_MESSAGE = NUM_OF_MESSAGES++;			/* Message that wraps messages to be sent through the network */
+	public static final int COMBAT_MESSAGE = NUM_OF_MESSAGES++;				/* Message to be given to CombatSystem */
+	public static final int CHAT_MESSAGE = NUM_OF_MESSAGES++;				/* Message to be sent through the network that contains chat messages */
+	public static final int COMBAT_VALIDATION_MESSAGE = NUM_OF_MESSAGES++;	/* Message returned by CombatSystem to ActionBox */ 
+	public static final int INITIAL_NETWORK_MESSAGE = NUM_OF_MESSAGES++;	/* First Message sent to client/server */
 	
 	/************************************ Class Attributes *************************************/
 	protected int messageType;
@@ -34,5 +36,14 @@ public class Message
 	{
 		return(messageType);
 	} /* end getMessageType method */
+	
+	public static boolean messageExists(Message message)
+	{
+		boolean exists = false;
+		int messageType = message.getMessageType();
+		if (messageType > 0 && messageType < NUM_OF_MESSAGES) exists = true;
+		
+		return exists;
+	} /* end messageExists method */
 	
 } /* end Message class */

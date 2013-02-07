@@ -20,14 +20,17 @@ import DD.Network.Message;
  * will know what messages it can send and what actions it can perform. The actions that are allowed 
  * will be heavily based on feats, abilities, and spells. The GameSystem is essentially where the
  * core of the GameLogic lies.
+ * 
+ * CombatSystem will be a singleton to choke access (mostly for the server).
  ******************************************************************************************************/
 
 public class CombatSystem 
 {
 	/************************************ Class Constants *************************************/
-	private static final int NUM_OF_INTERPRETERS = 1;
+	private static volatile CombatSystem instance = null;
 	
-	public static final int STANDARD_ATTACK = 0;
+	private static int NUM_OF_INTERPRETERS = 0;
+	public static final int STANDARD_ATTACK = NUM_OF_INTERPRETERS++;
 	
 	/************************************ Class Attributes *************************************/
 	static private ArrayList<Character> characterList;	/* A list of all the Characters in game so they may be modified */
@@ -35,7 +38,7 @@ public class CombatSystem
 	static private CombatInterpreter[] system;			/* The core of CombatSystem */					
 	
 	/************************************ Class Methods *************************************/
-	public CombatSystem()
+	private CombatSystem()
 	{
 		system = new CombatInterpreter[NUM_OF_INTERPRETERS];
 		
@@ -57,7 +60,7 @@ public class CombatSystem
 			 * valid. This way, it will automatically call interpret
 			 * and will not infinitely re-send the same message by
 			 * calling validate. Furthermore, we send the message
-			 * before interpreting so we can somehwat parallelize
+			 * before interpreting so we can somewhat parallelize
 			 * interpret across the network (instead of waiting for
 			 * interpret to happen and then sending the message,
 			 * send the message and have most games process interpret
@@ -98,7 +101,7 @@ public class CombatSystem
 		system[cm.getRequest()].interpret(cm);
 	} /* end interpret method */
 	
-	public boolean characterExists(int characterID)
+	public static boolean characterExists(int characterID)
 	{/* check to see if a character with the provided ID exists */
 		boolean found = false;
 		int index = 0;
@@ -117,7 +120,13 @@ public class CombatSystem
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public Character getCharacter(int characterID)
+	public static CombatSystem getInstance()
+	{
+		if (instance == null) instance = new CombatSystem();
+		return instance;
+	} /* end getInstance method */
+	
+	public static Character getCharacter(int characterID)
 	{/* return character with provided characterID */
 		Character returner = null;
 		int index = 0;
