@@ -37,4 +37,14 @@ public class NetworkMessage extends Message
 		return message;
 	} /* end getMessage method */
 	
+	public int getSender()
+	{
+		return(sender);
+	} /* end getSender method */
+	
+	public int getReceiver()
+	{
+		return(receiver);
+	} /* end getReceiver method */
+	
 } /* end NetworkMessage */
