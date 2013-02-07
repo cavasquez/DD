@@ -11,7 +11,7 @@ import DD.Chat.ChatSystem;
  * For the servers sake, it will be a singleton to choke entry.
  ******************************************************************************************************/
 
-public class ServerSystem
+public class ServerSystem implements NetworkSystem
 {
 	/************************************ Class Constants *************************************/
 	private static ServerSystem instance = null;
