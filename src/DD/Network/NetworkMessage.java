@@ -12,11 +12,15 @@ public class NetworkMessage extends Message
 {
 	/************************************ Class Attributes *************************************/
 	private Message message;
+	private int sender;
+	private int receiver;
 	
 	/************************************ Class Methods *************************************/
-	public NetworkMessage(Message message)
+	public NetworkMessage(int receiver, int sender, Message message)
 	{
 		super(Message.NETWORK_MESSAGE);
+		this.receiver = receiver;
+		this.sender = sender;
 		this.message = message;
 	} /* end Constructor */
 	
