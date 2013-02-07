@@ -33,14 +33,21 @@ public class ServerSystem implements NetworkSystem
 	{
 		/* A system needs a message sent to all clients */
 		/* Wrap message in a NetworkMessage */
-		NetworkMessage send = new NetworkMessage
+		NetworkMessage send = new NetworkMessage(sender, receiver, message);
 		if (receiver == NetworkSyste.EVERYONE)
 		{/* send message to everyone */
 			
 		} /* end if */
+		else
+		{ /* send to specific client */
+			
+		} /* end else */
 	} /* end sendMessage method */
 	
-	public void sendMessage()
+	public void getMessage(NetworkMessage message)
+	{
+		/* get message from a client. Deal with it. Send and process the message. */
+	} /* end getMessage method */
 	
 	public boolean addUser(int userID, String username, Server server)
 	{
