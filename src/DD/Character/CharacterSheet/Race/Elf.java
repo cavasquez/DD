@@ -1,8 +1,8 @@
 package DD.Character.CharacterSheet.Race;
 
-public class Human extends Race {
+public class Elf extends Race{
 
-	public Human()
+	public Elf()
 	{
 		baseSpeed = 30;
 	}
