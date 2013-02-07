@@ -1,5 +1,11 @@
 package DD.Character.CharacterSheet;
 
+import java.util.ArrayList;
+import java.util.Random;
+
+import DD.Character.CharacterSheet.Race.Race;
+
+
 /*****************************************************************************************************
  * This class holds the characters most important information. It contains all the information that
  * concerns a character. The Character Sheet itself is modeled after the Pathfinder character. Thus,
@@ -8,6 +14,8 @@ package DD.Character.CharacterSheet;
 
 public class CharacterSheet 
 {
+	/*THE DICE!*/
+	Random dice = new Random();
 	/************************************ Class Constants *************************************/
 	/* Ability Array locations */
 	public static final int ABILITY_STRENGTH = 0;
@@ -64,12 +72,15 @@ public class CharacterSheet
 	 * column index 4 = enhance
 	 * column index 5 = misc
 	 */
-	private int[][] abilityScore;
+	private int[][] rawStats;
 	
 	private int[][] classRecorder;
 	
 	
 	private int hitpoints;//work on this later
+	
+	
+	
 	/* Ability Score influences */
 	
 	/*	Attacks And Defense*/
@@ -95,7 +106,7 @@ public class CharacterSheet
 	 */
 	private int[] touch; //has a -10
 	
-	/*FLATFOO
+	/*FLATFOOT
 	 * index 0 = total
 	 * index 1 = armor
 	 * index 2 = shield
@@ -137,7 +148,7 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 	 * column index 2 = ability
 	 * column index 3 = enhance
 	 */
-	private int[] savingthrows;
+	private int[][] savingthrows;
 	
 	
 	
@@ -163,22 +174,38 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 	
 	
 	//NEED SKILLS
-	
+	/*
+	 * Just returns the String name of the skill.
+	 * Will need to implement a 2d array for values
+	 * of the skills
+	 */
+	public ArrayList<String> skills;
+	public void getSkills(CharacterClass clas)
+	{
+		skills = clas.skills;
+	}
 	//NEED EXPERIANCE
 	private int currentXP;
 	private int xpTotalLvl;
 	
 	//NEED INIT
-	public void init()
+	public int getinit()
 	{
+		int dex = rawStats[1][0];
+		return dex;
+		
+	//NEED MORE TO DETERMINE INITITIVE!!
+		
 		
 	}
+	
+	
 	//NEED DR-DAMAGE REDUCTION
-	
+	int damageReduction;
 	//NEED SR-SPELL RESIST
-	
+	int spellResist;
 	//NEED AP-ACTION POINTS
-	
+	int actionPoints;
 	/************************************ Class Methods *************************************/
 	public void initialize()
 	{
@@ -204,4 +231,115 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 		return(this.race);
 	}
 	
+	/************************************ Stat Setters/Getters *************************************/
+	/*SETTERS*/
+	int stat;
+	public void setStr(Race race)
+	{
+		stat = race.getStr();
+		rawStats[0][0] = stat;
+	}
+	public void setDex(Race race)
+	{
+		stat = race.getDex();
+		rawStats[1][0] = stat;
+	}
+	public void setCon(Race race)
+	{
+		 stat = race.getCon();
+		rawStats[2][0] = stat;
+	}
+	public void setInt(Race race)
+	{
+		stat = race.getIntel();
+		rawStats[3][0] = stat;
+	}
+	public void setWis(Race race)
+	{
+		stat = race.getWis();
+		rawStats[4][0] = stat;
+	}
+	public void setCha(Race race)
+	{
+		stat = race.getcha();
+		rawStats[5][0] = stat;
+	}
+	/*GETTERS*/
+	public int getStr()
+	{
+		stat =rawStats[10][0];
+		return stat;
+	}
+	public int getDex()
+	{
+		stat =rawStats[1][0];
+		return stat;
+	}
+	public int getCon()
+	{
+		stat =rawStats[2][0];
+		return stat;
+	}
+	public int getIntel()
+	{
+		stat =rawStats[3][0];
+		return stat;
+	}
+	public int getWis()
+	{
+		stat =rawStats[4][0];
+		return stat;
+	}
+	public int getCha()
+	{
+		stat =rawStats[5][0];
+		return stat;
+	}
+	
+	/************************************ Saving Throws Setters/Getters *************************************/
+	/*Setters*/
+	//FIX ME don't have sets for columns yet just totals
+	public void setBab(CharacterClass clas)
+	{
+		stat = clas.getBab();
+		savingthrows[0][0] = stat;
+	}
+	public void setFort(CharacterClass clas)
+	{
+		stat = clas.getFort();
+		savingthrows[1][0] = stat;
+	}
+	public void setRef(CharacterClass clas)
+	{
+		stat = clas.getRef();
+		savingthrows[2][0] = stat;
+	}
+	public void setWill(CharacterClass clas)
+	{
+		stat = clas.getWill();
+		savingthrows[3][0] = stat;
+	}
+	
+	/*Getters*/
+	//FIX ME dont have gets for columns yet
+	public int getBab()
+	{
+		stat =savingthrows[0][0]; 
+		return stat;
+	}
+	public int getFort()
+	{
+		stat =savingthrows[1][0]; 
+		return stat;
+	}
+	public int getRef()
+	{
+		stat =savingthrows[2][0]; 
+		return stat;
+	}
+	public int getWill()
+	{
+		stat =savingthrows[3][0]; 
+		return stat;
+	}
 } /* end CharacterSheet method */
