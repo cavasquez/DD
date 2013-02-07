@@ -52,6 +52,7 @@ public class Floor extends Objects{
 			   "lightPenalty: "+lightPenalty+"\n";
 	}
 
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) {
 		// TODO Auto-generated method stub
