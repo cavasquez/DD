@@ -9,16 +9,16 @@ import DD.ImageRenderComponent;
 
 public class ObjectsOfInterest extends Objects{
 	String toolTipContent;
-	World world;
+	
 	//@brandon
-	public ObjectsOfInterest(String name, String toolTipContent, Image image, int move, int light){
-		super(name,image);
+	public ObjectsOfInterest(String name, String toolTipContent, Image image, int move, int light, Map map){
+		super(name,image,map);
 		this.toolTipContent = toolTipContent;
 		
 		super.movePenalty = move;
 		super.lightPenalty = light;
-		//aDDED THIS METHOD
-		world.addNormList((Objects)this);
+	
+	
 	}
 	/*
 	 * TODO: i need more info to handle this.

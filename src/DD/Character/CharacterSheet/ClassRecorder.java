@@ -8,7 +8,7 @@ package DD.Character.CharacterSheet;
 public class ClassRecorder 
 {
 	String className;
-	int bab;
+	int bab; //base attack bonus
 	int skills;
 	int fort;
 	int ref;

@@ -16,17 +16,21 @@ public class Map extends Entity{
 	Image defImage;
 	boolean hasTempObjects;
 	String name;
+	final int mapSize = 50;
+	
+	
+	
 	
 	public Map(String name){
 		
 		
 		super(0);
 		this.name = name;
-		objects = new Objects[50][50];
-		tempObjects = new TempObjects[50][50];
+		objects = new Objects[mapSize][mapSize];
+		tempObjects = new TempObjects[mapSize][mapSize];
 		for (int i = 0; i < objects.length; i++) {
 			for (int j = 0; j < objects.length; j++) {
-				objects[i][j] = new Floor("floor"+(j*i+5), null , 5, 5);
+				objects[i][j] = new Floor("floor"+j*(i+5), null , 5, 5,this);
 			}
 		}
 		for (int i = 0; i < tempObjects.length; i++) {

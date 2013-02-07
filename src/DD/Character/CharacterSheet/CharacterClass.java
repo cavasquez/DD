@@ -1,5 +1,12 @@
 package DD.Character.CharacterSheet;
 
-public class CharacterClass {
-
+public abstract class CharacterClass {
+	String className;
+	int bab;
+	int skills;
+	int fort;
+	int ref;
+	int will;
+	int levels;
+	
 }

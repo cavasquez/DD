@@ -9,14 +9,14 @@ import DD.ImageRenderComponent;
 public class Obstacle extends Objects{
 	
 	//@brandon
-	World world;
-	public Obstacle(String name , Image image, int move, int light){
-		super(name, image);
-		//super.image =image;
+	
+	public Obstacle(String name , Image image, int move, int light,Map map){
+		super(name, image, map);
+		
 		super.movePenalty = move;
 		super.lightPenalty = light;
-		//super.name = name;
-		world.addNormList(this);
+		
+	
 	}
 
 	void checks() {

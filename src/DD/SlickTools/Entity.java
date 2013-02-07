@@ -1,5 +1,6 @@
 package DD.SlickTools;
 
+import java.awt.List;
 import java.util.ArrayList;
 import java.util.Queue;
 import org.newdawn.slick.GameContainer;
@@ -30,6 +31,7 @@ public class Entity
 	public Entity (int id)
 	{
 		this.id = id;
+		components = new ArrayList<Component>();
 	} /* end Entity constructor */
 	
 	public int addComponent(Component component)

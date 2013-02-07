@@ -57,13 +57,5 @@ public class World extends Entity implements Serializable{
 	public World loadWorld(){
 		return null;	
 	}
-
-	public void addNormList(Objects o) {
-		// TODO Auto-generated method stub
-		normList.add(o);
-	}
-	public void addTempList(Objects o) {
-		// TODO Auto-generated method stub
-		tempList.add(o);
-	}
+	
 }

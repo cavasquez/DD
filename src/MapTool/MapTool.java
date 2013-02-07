@@ -6,6 +6,8 @@ import java.util.ArrayList;
 //implements serializable ~
 public class MapTool {
 	World world;
+	ArrayList<Objects> normList;
+	ArrayList<Objects> tempList;
 	
 
 	/*
@@ -28,7 +30,15 @@ public class MapTool {
 		
 	}
 	
-	
+	public void addNormList(Objects o) {
+		// TODO deserialize a file of objects 
+		// DO: foreach (Objects:normList.update())
+		normList.add(o);
+	}
+	public void addTempList(Objects o) {
+		// TODO Auto-generated method stub
+		tempList.add(o);
+	}
 	
 	
 	public static void main(String[] args) {

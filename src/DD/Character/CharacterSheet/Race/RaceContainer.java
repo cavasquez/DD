@@ -12,8 +12,8 @@ public class RaceContainer
 	public RaceContainer()
 	{
 		Race[] race = new Race[TOTAL_RACES];
-		race[ELF] = new Race();
-		race[HUMAN] = new Race();
+		race[ELF] = new Elf() ;
+		race[HUMAN] = new Human();
 	}
 	
 	

@@ -12,15 +12,15 @@ public class Floor extends Objects{
 	 * May have to pass the World ID or name to get the specific world
 	 * 
 	 */
-	World world;
+
 	//type means like snow or dirt or stone or anything else
 	
 	/*
 	 * 
 	 */
 	//@brandon
-	public Floor(String name, Image image, int move, int light){
-		super(name, image);
+	public Floor(String name, Image image, int move, int light, Map map){
+		super(name, image, map);
 		//super.image =image;
 		super.movePenalty = move;
 		super.lightPenalty = light;
@@ -35,7 +35,8 @@ public class Floor extends Objects{
 		//this will run into a problem if this list has other things than floors
 		//how will we be able to tell the difference between floors and other objects
 		//in this array
-		world.addNormList((Objects)this);
+		
+		//world.addNormList((Objects)this);
 	}
 	
 	void checks() {

@@ -17,6 +17,8 @@ public abstract class Objects extends ImageRenderComponent{//figure out comp.
 		
 		super(0, image);
 		this.name = name;
+		// TODO
+		//owner.addComponent(this);
 	}
 
 	abstract void checks();
