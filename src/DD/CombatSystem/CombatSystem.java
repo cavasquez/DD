@@ -7,7 +7,8 @@ import com.sun.xml.internal.stream.Entity;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.CombatSystem.Interpreter.Standard.I_StandardAttack;
 import DD.MapTool.Map;
-import DD.Network.Message;
+import DD.Network.Message.CombatMessage;
+import DD.Network.Message.Message;
 
 /*****************************************************************************************************
  * CombatSystem will be the controller for DD combat. It will take messages from ActionBox (the player)

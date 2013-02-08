@@ -2,11 +2,9 @@ package DD.Network.Client;
 
 import java.util.ArrayList;
 
-import DD.Network.Message;
 import DD.Network.Network;
-import DD.Network.NetworkMessage;
-import DD.Network.UserTable;
-import DD.Network.Server.ServerSystem;
+import DD.Network.Message.Message;
+import DD.Network.Message.NetworkMessage;
 
 /*****************************************************************************************************
  * ClientSystem will be in charge of routing the messages received by the server and distributing
@@ -21,7 +19,7 @@ public class ClientSystem implements Network
 	private static ClientSystem instance = null;
 	
 	/************************************ Class Attributes *************************************/
-	private static volatile ArrayList<UserTable> userList;
+	private static volatile ArrayList<> userList;
 	
 	/************************************ Class Methods *************************************/
 	private ClientSystem() {}
@@ -39,7 +37,7 @@ public class ClientSystem implements Network
 	}
 
 	@Override
-	public void getMessage(int socketID, NetworkMessage message) {
+	public boolean getMessage(int socketID, NetworkMessage message) {
 		// TODO Auto-generated method stub
 		
 	}

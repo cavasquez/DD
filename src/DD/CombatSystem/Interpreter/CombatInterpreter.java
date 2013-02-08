@@ -1,8 +1,8 @@
 package DD.CombatSystem.Interpreter;
 
-import DD.CombatSystem.CombatMessage;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.CombatValidationMessage;
+import DD.Network.Message.CombatMessage;
 
 /*****************************************************************************************************
  * CombatInterpreter will be used by CombatSystem to interpret every action. CombatInterpreter will

@@ -3,11 +3,13 @@ package DD.Network.Server;
 import java.util.ArrayList;
 
 import DD.Chat.ChatSystem;
-import DD.Network.Message;
 import DD.Network.Network;
-import DD.Network.NetworkMessage;
-import DD.Network.NetworkSystem;
-import DD.Network.Server.Interpreter.*;
+import DD.Network.Message.Message;
+import DD.Network.Message.NetworkMessage;
+import DD.Network.Server.Interpreter.I_ChatMessage;
+import DD.Network.Server.Interpreter.I_CombatMessage;
+import DD.Network.Server.Interpreter.I_InitialMessage;
+import DD.Network.Server.Interpreter.ServerInterpreter;
 
 /*****************************************************************************************************
  * ServerSystem will be in charge of routing the messages received by the server and distributing
@@ -35,13 +37,20 @@ public class ServerSystem implements Network
 		system[Message.CHAT_MESSAGE] = new I_ChatMessage();
 		system[Message.INITIAL_MESSAGE] = new I_InitialMessage();
 		
+		/* TODO: get username from wherever it's made, and then:
+		 * addUser(Network.GEM_USER_ID, username, null); */
 	} /* end ServerSystem constructor */
+	
+	public static void interpret(int socketID, NetworkMessage message)
+	{
+		/* Assume all messages are of correct type and legally formatted */
+		system[message.getType()].interpret(socketID, message);
+	} /* end interpret */
 	
 	@Override
 	public void sendMessage(int sender, int receiver, Message message)
 	{
-		/* A system needs a message sent to all clients */
-		/* Wrap message in a NetworkMessage */
+		/* Send message to everyone unless a receiver is specified */
 		NetworkMessage send = new NetworkMessage(sender, receiver, message);
 		ArrayList<User>users = userList.getUserList();
 		
@@ -49,7 +58,7 @@ public class ServerSystem implements Network
 		{/* send message to everyone */
 			for (User user : users)
 			{/* don't send it back to the server. in fact, you can't because it has no Server thread. */
-				if (user.playerID != Network.GM_USER_ID)(user.server).sendMessage(send);
+				if (user.socketID != Network.GM_USER_ID) (user.server).sendMessage(send);
 			} /* end for loop */
 		} /* end if */
 		else
@@ -57,29 +66,53 @@ public class ServerSystem implements Network
 			
 			for (User user : users)
 			{
-				if (user.playerID == receiver) (user.server).sendMessage(send);
+				if (user.socketID == receiver) (user.server).sendMessage(send);
 			} /* end for loop */
 		} /* end else */
 	} /* end sendMessage method */
 	
-	public boolean addUser(int serverID, String username, Server server)
+	public void sendMessage(int sender, int receiver, Message message, int exclude)
 	{
-		return userList.addUser(serverID, username, server);
+		/* Send message to everyone except the excluded client (in such cases that client was originator) */
+		NetworkMessage send = new NetworkMessage(sender, receiver, message);
+		ArrayList<User>users = userList.getUserList();
+		
+		for (User user : users)
+		{/* don't send it back to the server. in fact, you can't because it has no Server thread. */
+			if (user.socketID != Network.GM_USER_ID && user.socketID != exclude) (user.server).sendMessage(send);
+		} /* end for loop */
+
+	} /* end sendMessage method */
+	
+	public boolean addUser(int socketID, String username, Server server)
+	{
+		return userList.addUser(socketID, username, server);
 	} /* end addUser method */
 	
-	public boolean addServer(int serverID, Server server)
+	public boolean addServer(int socketID, Server server)
 	{
-		return addServer(serverID, server);
+		return addServer(socketID, server);
 	} /* end addServer method */
 	
-	public boolean addUsername(int serverID, String username)
+	public boolean addUsername(int socketID, String username)
 	{
-		return userList.addUsername(serverID, username);
+		return userList.addUsername(socketID, username);
 	} /* end addUsername */
 	
-	public boolean removeUser(int serverID)
+	public boolean removeUser(int socketID)
 	{
-		return userList.removeUser(serverID);
+		boolean success = false;
+		User user = userList.removeUser(socketID);
+		
+		if (user != null)
+		{ /* successfully removed user from list. Terminate socket and kill thread. */
+			success = true;
+			user.server.close();
+		} /* end if */
+		
+		/* if user = null then socketID never existed */
+		
+		return success;
 	} /* end removeServer method */
 	
 	public static boolean validMessage(int type)
@@ -100,12 +133,6 @@ public class ServerSystem implements Network
 		return valid;
 	} /* end validMessage method */
 	
-	public static void interpret(int serverID, NetworkMessage message)
-	{
-		/* Assume all messages are of correct type and legally formatted */
-		system[message.getType()].interpret(serverID, message);
-	} /* end interpret */
-	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
@@ -116,14 +143,19 @@ public class ServerSystem implements Network
 	} /* end getInstance method */
 	
 	@Override
-	public boolean getMessage(int serverID, NetworkMessage message)
+	public boolean getMessage(int socketID, NetworkMessage message)
 	{
 		boolean error = false;
 		/* get message from a client. Check for validity and if valid, interpret. */
-		if (validMessage(message.getType())) interpret(serverID, message);
+		if (validMessage(message.getType()) && message.getMessageType() == Message.NETWORK_MESSAGE) interpret(socketID, message);
 		else error = true;
 		
 		return error;
 	} /* end getMessage method */
+	
+	public UserTable getUserList()
+	{
+		return userList;
+	} /* end getUserList */
 	
 } /* end ServerSystem class */

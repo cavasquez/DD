@@ -1,6 +1,6 @@
 package DD.Network.Server.Interpreter;
 
-import DD.Network.NetworkMessage;
+import DD.Network.Message.NetworkMessage;
 
 /*****************************************************************************************************
  * ServerInterpreter will be used by ServerSystem to interpret every message. 

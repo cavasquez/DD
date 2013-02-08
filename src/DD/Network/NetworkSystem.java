@@ -1,7 +1,10 @@
 package DD.Network;
 
 import DD.Network.Client.ClientSystem;
+import DD.Network.Message.Message;
+import DD.Network.Message.NetworkMessage;
 import DD.Network.Server.ServerSystem;
+
 
 /*****************************************************************************************************
 * NetworkSystem will create a singleton and be the interface through which GameSystem and ChatSystem 

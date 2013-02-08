@@ -3,9 +3,11 @@ package DD.Network;
 import java.util.ArrayList;
 
 import DD.Chat.ChatSystem;
+import DD.Network.Message.Message;
+import DD.Network.Message.NetworkMessage;
 
 /*****************************************************************************************************
-* Networkwill be an interface through which GameSystem, ChatSystem and any other System
+* Network will be an interface through which GameSystem, ChatSystem and any other System
 * will be able to communicate with ClientSystem or ServerSystem. It will also specify the methods
 * and attributes that ClientSystem and ServerSystem will need to support.
 * 

@@ -2,12 +2,14 @@ package DD.Network.Server;
 
 import java.util.ArrayList;
 
+
 /*****************************************************************************************************
- * UserTable is a structure that will hold data that references a player id, the players username,
+ * UserTable is a structure that will hold data that references a socket id, the players username,
  * and the Server thread associated with that player.
  * 
- * Note that the playerID is the same as the Servers serverID (since there is a one to one relationship
- * between Servers and players).
+ * Note that the socketID is a unique ID the server gives out for every socket that connects to it. 
+ * Thus, there is a one to one correspondence to socketID and client. This will be used when declaring
+ * senders and receivers in the NetworkMessage.
  ******************************************************************************************************/
 
 public class UserTable 
@@ -47,7 +49,7 @@ public class UserTable
 		/* Check to see if the server exists. */
 		for (User user : userList)
 		{
-			if (user.playerID == serverID) serverExists = true;
+			if (user.socketID == serverID) serverExists = true;
 		} /* end for loop */
 		
 		if(!serverExists) userList.add(new User(serverID, null, server));
@@ -74,7 +76,7 @@ public class UserTable
 			userExists = false; /* use as flag to see if user was added */
 			for (User user : userList)
 			{
-				if (user.playerID == serverID) 
+				if (user.socketID == serverID) 
 				{
 					user.username = username;
 					userExists = true;
@@ -85,22 +87,22 @@ public class UserTable
 		return userExists;
 	} /* end addUsername */
 	
-	public boolean removeUser(int serverID)
+	public User removeUser(int serverID)
 	{
-		boolean removed = false;
 		int index = -1;
+		User returner = null;
 		
 		for (User user : userList)
 		{
-			if (user.playerID == serverID)
+			if (user.socketID == serverID)
 			{ 
 				index = userList.indexOf(user);
+				returner = user;
 				userList.remove(index);
-				removed = true;
 			} /* end if */
 		} /* end for loop */
 		
-		return removed;
+		return returner;
 	} /* end removeUser method */
 	
 	public ArrayList<User> getUserList()
