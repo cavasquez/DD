@@ -79,6 +79,12 @@ public class Barbarian extends CharacterClass {
 		// TODO Auto-generated method stub
 		return skills;
 	}
+
+	@Override
+	public String getClassName() {
+		// TODO Auto-generated method stub
+		return className;
+	}
 	
 	
 }

@@ -18,6 +18,7 @@ public class Human extends Race {
 	public Human()
 	{
 		baseSpeed = 30;
+		size = 0;
 		choice = stat(choice);
 		if(choice == 0)
 		{

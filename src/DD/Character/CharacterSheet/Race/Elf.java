@@ -9,9 +9,11 @@ public class Elf extends Race{
 	int con;
 	int wis;
 	int cha;
+	
 	public Elf()
 	{
 		baseSpeed = 30;
+		size = 0;
 		str =0;
 		dex = 2;
 		intel =2;
