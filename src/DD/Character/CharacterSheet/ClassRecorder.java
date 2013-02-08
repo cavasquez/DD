@@ -1,5 +1,7 @@
 package DD.Character.CharacterSheet;
 
+import java.util.ArrayList;
+
 /*****************************************************************************************************
  * This structure represents the basic class information for a specific Character. The information includes
  * HP gained from a particular class, levels in a particular class, etc.
@@ -7,52 +9,43 @@ package DD.Character.CharacterSheet;
 
 public class ClassRecorder 
 {
+	
+	
+	Object[][] classRecorder;
+	
 	String className;
-	int bab; //base attack bonus
-	int skills;
+	int bab;
+	ArrayList<String> skills;
 	int fort;
 	int ref;
 	int will;
 	int levels;
-	//default paladin class
-	public ClassRecorder()
+	
+	
+	public ClassRecorder(CharacterClass clas)
 	{
-		className = "paladin";
-		bab= 0;
-		skills = 0;
-		fort =0;
-		ref = 0;
-		will =0;
-		levels =0;
-	}
-	public ClassRecorder(String className,int bab,int skills,
-			int fort,int ref,int will,int levels)
-	{
-		this.className = className;
-		this.bab= bab;
-		this.skills = skills;
-		this.fort =fort;
-		this.ref = ref;
-		this.will = will;
-	   	this.levels = levels;
+		className = clas.getClassName();
+		bab = clas.getBab();
+		fort = clas.getFort();
+		ref = clas.getRef();
+		will = clas.getWill();
+		skills = clas.getSkills();
+		levels = clas.getLevels();
+		
 	}
 	
-	public String getClassName() {
-		return className;
-	}
-	public void setClassName(String className) {
-		this.className = className;
-	}
+	
+	
 	public int getBab() {
 		return bab;
 	}
 	public void setBab(int bab) {
 		this.bab = bab;
 	}
-	public int getSkills() {
+	public ArrayList<String> getSkills() {
 		return skills;
 	}
-	public void setSkills(int skills) {
+	public void setSkills(ArrayList<String> skills) {
 		this.skills = skills;
 	}
 	public int getFort() {

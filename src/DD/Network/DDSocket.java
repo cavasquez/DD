@@ -7,6 +7,11 @@ import java.net.Socket;
 import java.util.Queue;
 import DD.Network.Message.NetworkMessage;
 
+/*****************************************************************************************************
+* DDSocket is an experimental socket that will attempt to use one thread to control both listening
+* and sending.
+******************************************************************************************************/
+
 public abstract class DDSocket extends Thread
 {
 
@@ -29,6 +34,7 @@ public abstract class DDSocket extends Thread
 		this.sending = false;
 		this.working = true;
 		this.socketID = socketID;
+		this.messageList = new ArrayList<NetworkMessage>();
 	} /* end Server constructor */
 	
 	public void run() {} /* end run method */

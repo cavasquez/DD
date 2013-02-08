@@ -28,9 +28,10 @@ public class Entity
 	
 	
 	/************************************ Class Methods *************************************/
-	public Entity (int id)
+	public Entity (int id, Vector2f position)
 	{
 		this.id = id;
+		this.position = position;
 		components = new ArrayList<Component>();
 	} /* end Entity constructor */
 	

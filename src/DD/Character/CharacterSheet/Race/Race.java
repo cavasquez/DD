@@ -9,6 +9,7 @@ public abstract class  Race
 	public int wis;
 	public int cha;
 	public int baseSpeed;
+	public int size; // 1 small . 0 med. -1 large
 	
 	public abstract int getStr();
 	public abstract int getDex();

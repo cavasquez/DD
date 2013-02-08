@@ -1,5 +1,7 @@
 package DD.SlickTools;
 
+import org.newdawn.slick.geom.Vector2f;
+
 /*****************************************************************************************************
  * The BoxInterface class is an extension of Entity that focuses on representing a menu or other box in 
  * the interface. This could be the ChatBox, ActionBox, StatusBox, etc. The point being that the 
@@ -15,9 +17,9 @@ public abstract class BoxInterface extends Entity
 	float width;
 	
 	/************************************ Class Methods *************************************/
-	public BoxInterface(int id, float length, float width) 
+	public BoxInterface(int id, float length, float width, Vector2f position) 
 	{
-		super(id);
+		super(id, position);
 		this.length = length;
 		this.width = width;
 	} /* end MenuBox constructor */

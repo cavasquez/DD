@@ -27,14 +27,36 @@ public class CharacterSheet
 	public static final int ABILITY_CHARISMA = 5;
 	
 	public static final int ABILITY_TOTAL = 0;
-	public static final int ABILITY_MODIFIER = 1;
+	public static final int ABILITY_MODIFIER = 1; // how to get?
 	public static final int ABILITY_BASE = 2;
-	public static final int ABILITY_INHERENT = 3;
-	public static final int ABILITY_ENHANCE = 4;
-	public static final int ABILITY_MISC = 5;
+	public static final int ABILITY_INHERENT = 3; // how to get?
+	public static final int ABILITY_ENHANCE = 4; // how to get?
+	public static final int ABILITY_MISC = 5;    //what is this?
 	
 	public static final int ABILITY_COUNT = 5;		/* The number of abilities possessed by a character */
-	public static final int ABILITY_FACTORS = 5;		/* The number of factors that affect the ability score */
+	public static final int ABILITY_FACTORS = 5;
+	/* The number of factors that affect the ability score */
+	/*
+			 * row index 1 = fort
+			 * row index 2 = reflex
+			 * row index 3 = willpower
+			 * 
+			 * Y:
+			 * column index 0 = total
+			 * column index 1 ...class base.. 
+			 * column index 2 = ability
+			 * column index 3 = enhance
+			 */
+	
+	
+	public static final int SAVE_FORT = 0;
+	public static final int SAVE_REF = 1;
+	public static final int SAVE_WILL = 2;
+	
+	public static final int SAVE_TOTAL = 0;
+	public static final int SAVE_CLASSBASE = 1;
+	public static final int SAVE_ABILITY = 2;
+	public static final int SAVE_ENHANCE = 3;
 	
 	
 	/************************************ Class Attributes *************************************/
@@ -76,7 +98,7 @@ public class CharacterSheet
 	 */
 	private int[][] rawStats;
 	
-	private int[][] classRecorder;
+	ClassRecorder classRecorder;
 	
 	
 	private int hitpoints;//work on this later
@@ -140,9 +162,9 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 	
 	/*SavingThrows
 	 * X:
-	 * row index 0 = fort
-	 * row index 1 = reflex
-	 * row index 2 = willpower
+	 * row index 1 = fort
+	 * row index 2 = reflex
+	 * row index 3 = willpower
 	 * 
 	 * Y:
 	 * column index 0 = total
@@ -193,7 +215,7 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 	//NEED INIT
 	public int getinit()
 	{
-		int dex = rawStats[1][0];
+		int dex = rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL];
 		return dex;
 		
 	//NEED MORE TO DETERMINE INITITIVE!!
@@ -235,12 +257,34 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 	
 	/************************************ Stat Setters/Getters *************************************/
 	/*SETTERS*/
+	//need to add
+	//fix me need more parameters for sets like add rolls = base, add inherence, enhance = 0, and misc = 0;
 	int stat;
-	public void setStr(Race race)
+	int base; 
+	int inher;
+	int enhance;
+	int misc;
+	public void setStrTotal()//enchance set to 0
+	{
+		base =rawStats[ABILITY_STRENGTH][ABILITY_BASE];
+		inher =rawStats[ABILITY_STRENGTH][ABILITY_INHERENT];
+		enhance = 0;
+		misc = 0;
+		
+		rawStats[ABILITY_STRENGTH][ABILITY_TOTAL]= base + inher + enhance + misc;
+		
+	}
+	public void setStrBase()
+	{
+		stat = abilityRoll();
+		rawStats[ABILITY_STRENGTH][ABILITY_BASE] = stat;
+	}
+	public void setStrInher(Race race)
 	{
 		stat = race.getStr();
-		rawStats[ABILITY_STRENGTH][ABILITY_TOTAL] = stat;
+		rawStats[ABILITY_STRENGTH][ABILITY_INHERENT] = stat;
 	}
+	//NEED TO DO THE SAME TO THE REST AS I DID TO STR FOR SETTERS
 	public void setDex(Race race)
 	{
 		stat = race.getDex();
@@ -249,22 +293,22 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 	public void setCon(Race race)
 	{
 		 stat = race.getCon();
-		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
+		rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL] = stat;
 	}
 	public void setInt(Race race)
 	{
 		stat = race.getIntel();
-		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
+		rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL] = stat;
 	}
 	public void setWis(Race race)
 	{
 		stat = race.getWis();
-		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
+		rawStats[ABILITY_WISDOM][ABILITY_TOTAL] = stat;
 	}
 	public void setCha(Race race)
 	{
 		stat = race.getcha();
-		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
+		rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] = stat;
 	}
 	/*GETTERS*/
 	public int getStr()
@@ -279,99 +323,113 @@ Multiclass Ex: - 1st Fighter/1st Monk FORT +4 / REF +2 / WILL +2
 	}
 	public int getCon()
 	{
-		stat =rawStats[2][ABILITY_TOTAL];
+		stat =rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getIntel()
 	{
-		stat =rawStats[3][ABILITY_TOTAL];
+		stat =rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getWis()
 	{
-		stat =rawStats[4][ABILITY_TOTAL];
+		stat =rawStats[ABILITY_WISDOM][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getCha()
 	{
-		stat =rawStats[5][ABILITY_TOTAL];
+		stat =rawStats[ABILITY_CHARISMA][ABILITY_TOTAL];
 		return stat;
 	}
 	
 	/************************************ Saving Throws Setters/Getters *************************************/
 	/*Setters*/
 	//FIX ME don't have sets for columns yet just totals
-	public void setBab(CharacterClass clas)
-	{
-		stat = clas.getBab();
-		savingthrows[0][0] = stat;
-	}
+	
+	/*
+	
+	public static final int SAVE_FORT = 0;
+	public static final int SAVE_REF = 1;
+	public static final int SAVE_WILL = 2;
+	
+	public static final int SAVE_TOTAL = 0;
+	public static final int SAVE_CLASSBASE = 1;
+	public static final int SAVE_ABILITY = 2;
+	public static final int SAVE_ENHANCE = 3;
+	 */
+	
 	public void setFort(CharacterClass clas)
 	{
 		stat = clas.getFort();
-		savingthrows[1][0] = stat;
+		savingthrows[SAVE_FORT][ SAVE_TOTAL] = stat;
 	}
 	public void setRef(CharacterClass clas)
 	{
 		stat = clas.getRef();
-		savingthrows[2][0] = stat;
+		savingthrows[SAVE_REF][ SAVE_TOTAL] = stat;
 	}
 	public void setWill(CharacterClass clas)
 	{
 		stat = clas.getWill();
-		savingthrows[3][0] = stat;
+		savingthrows[SAVE_WILL][ SAVE_TOTAL] = stat;
 	}
 	
 	/*Getters*/
 	//FIX ME dont have gets for columns yet
-	public int getBab()
-	{
-		stat =savingthrows[0][0]; 
-		return stat;
-	}
+	
 	public int getFort()
 	{
-		stat =savingthrows[1][0]; 
+		stat =savingthrows[SAVE_FORT][ SAVE_TOTAL]; 
 		return stat;
 	}
 	public int getRef()
 	{
-		stat =savingthrows[2][0]; 
+		stat =savingthrows[SAVE_REF][ SAVE_TOTAL]; 
 		return stat;
 	}
 	public int getWill()
 	{
-		stat =savingthrows[3][0]; 
+		stat =savingthrows[SAVE_WILL][ SAVE_TOTAL]; 
 		return stat;
 	}
 	
-	public int makeBase()
-	{
-		int returner= dice.roll(3, 4, 6);
-		return returner;
-	}
 	public void setBase(int stat, int statValue)
 	{
 		
 		rawStats[stat][ABILITY_BASE] = statValue; 
 		
 	}
-	public int getBase()
+	public int getBase(int stat)
 	{
 		int returner =rawStats[stat][ABILITY_BASE];
 		return returner;
 	}
 	public void setInher()
 	{
-		
+		//no idea what this is
 	}
 	public void setMod(int stat, int statValue)
 	{
 		
-		rawStats[stat][1] =(statValue - 10 )/ 2; 
+		rawStats[stat][ABILITY_MODIFIER] =(statValue - 10 )/ 2; 
 		
 	}
+	public int getMod(int stat)
+	{
+		
+		int r =rawStats[stat][ABILITY_MODIFIER]; 
+		return r;
+	}
 	
-	
+	//ROLL FOR ABILITY METHOD
+	/*
+	 * This method can be used for deciding the initial values of your abilities
+	 * 
+	 */
+	public int abilityRoll()
+	{
+		int returner= dice.roll(3, 4, 6);
+		return returner;
+	}
 	
 } /* end CharacterSheet method */

@@ -8,6 +8,7 @@ import DD.Network.DDSocket;
 import DD.Network.Message.NetworkMessage;
 
 /*****************************************************************************************************
+ * Server is an experimental class that tries to implement listening and sending in one class.
  * Server is a thread that will be dedicated to servicing one client. The services are as follows:
  * 
  * 1. Listen for messages. If a message is received, pass it to ServerSystem.
@@ -17,16 +18,6 @@ import DD.Network.Message.NetworkMessage;
 
 public class Server extends DDSocket
 {
-	/************************************ Class Attributes *************************************/
-	private Socket socket = null;
-	private ObjectInputStream input = null;
-	private ObjectOutputStream output = null;
-	private volatile boolean sending;
-	private volatile boolean done;						/* done should be called when thread is to be closed */
-	private boolean working;							/* thread is doing work */
-	private int socketID;								/* Unique ID for thread */
-	private volatile Queue<NetworkMessage> messageList;	/* messages to be sent */
-	
 	/************************************ Class Methods *************************************/
 	public Server(Socket socket, int socketID)
 	{

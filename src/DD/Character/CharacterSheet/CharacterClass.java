@@ -10,7 +10,7 @@ public abstract class CharacterClass {
 	int ref;
 	int will;
 	int levels;
-	
+	public abstract String getClassName();
 	public abstract int getBab();
 	public abstract int getFort();
 	public abstract int getRef();
