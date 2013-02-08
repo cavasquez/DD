@@ -34,6 +34,7 @@ public abstract class DDSocket extends Thread
 		this.sending = false;
 		this.working = true;
 		this.socketID = socketID;
+		this.messageList = new ArrayList<NetworkMessage>();
 	} /* end Server constructor */
 	
 	public void run() {} /* end run method */
