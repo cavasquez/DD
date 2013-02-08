@@ -7,7 +7,8 @@ import com.sun.xml.internal.stream.Entity;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.CombatSystem.Interpreter.Standard.I_StandardAttack;
 import DD.MapTool.Map;
-import DD.Network.Message;
+import DD.Network.Message.CombatMessage;
+import DD.Network.Message.Message;
 
 /*****************************************************************************************************
  * CombatSystem will be the controller for DD combat. It will take messages from ActionBox (the player)
@@ -29,8 +30,9 @@ public class CombatSystem
 	/************************************ Class Constants *************************************/
 	private static volatile CombatSystem instance = null;
 	
-	private static int NUM_OF_INTERPRETERS = 0;
-	public static final int STANDARD_ATTACK = NUM_OF_INTERPRETERS++;
+	private static int I = 0;
+	public static final int STANDARD_ATTACK = I++;
+	public static int NUM_OF_INTERPRETERS = I;
 	
 	/************************************ Class Attributes *************************************/
 	static private ArrayList<Character> characterList;	/* A list of all the Characters in game so they may be modified */

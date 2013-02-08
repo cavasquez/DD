@@ -1,4 +1,4 @@
-package DD.Network;
+package DD.Network.Message;
 
 /*****************************************************************************************************
  * Message will be used to subclass into various messages that will need to be sent through the network.
@@ -17,6 +17,7 @@ public class Message
 	public static final int CHAT_MESSAGE = I++;					/* Message to be sent through the network that contains chat messages */
 	public static final int COMBAT_VALIDATION_MESSAGE = I++;	/* Message returned by CombatSystem to ActionBox */ 
 	public static final int INITIAL_MESSAGE = I++;				/* First Message sent to client/server */
+	public static final int ADD_USER_MESSAGE = I++;				/* Message sent when a new user joins the network */
 	public static final int NUM_OF_MESSAGES = I;				/* Total number of messages */
 	
 	/************************************ Class Attributes *************************************/

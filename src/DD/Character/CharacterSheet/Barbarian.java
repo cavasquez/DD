@@ -27,6 +27,7 @@ public class Barbarian extends CharacterClass {
 	{
 		/*
 		 * Barbarians have specific skills
+		 * always plus 2 to trianed
 		 * 
 		 */
 		skills.add("Acrobatics");
@@ -42,6 +43,7 @@ public class Barbarian extends CharacterClass {
 		
 		
 	}
+	
 	@Override
 	public int getBab() {
 		// TODO Auto-generated method stub

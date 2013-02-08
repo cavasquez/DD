@@ -57,4 +57,34 @@ public class Dice
 		return(returner);
 	} /* end roll method */
 	
+	public int roll(int bestOf, int numOfRolls, int dieSize)
+	{
+		int returner = 0;
+		int index = 0;
+		int max = 0;
+		int[] holding = new int[numOfRolls];
+		for (int i = 0; i < numOfRolls; i++)
+		{
+			holding[i] = generator.nextInt(this.dieSize) + 1;
+		} 
+		for (int i = 0; i < bestOf; i++)
+		{
+			for (int j = 0; j < numOfRolls; j++) 
+			{
+			
+				int temp = holding[j];
+				if(temp > max)
+				{
+					index =j;
+					max = temp;
+				}
+				
+			}
+			returner += max;
+			holding[index] = 0;
+		} 
+		
+		return returner;
+	} 
+	
 } /* end Dice class */
