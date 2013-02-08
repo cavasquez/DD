@@ -14,7 +14,7 @@ import DD.Network.Message.NetworkMessage;
 * Listener will need to utilize ServerSocket
 ******************************************************************************************************/
 
-public abstract class DDSocket extends Thread
+public abstract class Listener extends NetworkSocket
 {
 
         /************************************ Class Attributes *************************************/
