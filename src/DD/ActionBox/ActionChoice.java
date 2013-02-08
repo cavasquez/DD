@@ -2,10 +2,14 @@ package DD.ActionBox;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
 import DD.Character.Character;
 import DD.Character.Abilities.Ability;
+import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
 
 /*****************************************************************************************************
@@ -22,28 +26,32 @@ import DD.SlickTools.RenderComponent;
  * The actionType should also be used when determining where to render the ActionChoice in the ActionBox.  
  ******************************************************************************************************/
 
-public class ActionChoice extends RenderComponent
+public class ActionChoice extends ImageRenderComponent
 {
 	/************************************ Class Attributes *************************************/
 	int numOfSubActions; 	/* Number of subActions available */
 	int actionType;			/* Number that refers to the type of action this ActionChoice represents (standard, move, etc.) */
 	String display;
 	boolean actionPerformed;
+	float x, y;
 	
 	/************************************ Class Methods *************************************/
 	/* Remember, ID is the same as ActionType */
-	public ActionChoice(int id, int actionType, String display)
+	public ActionChoice(int id, int actionType, String display, Image image, float x, float y)
 	{
-		super(id);
+		super(id, image);
 		this.actionType = actionType;
 		this.display = display;
 		actionPerformed = false;
+		this.x = x;
+		this.y = y;
 		
 	} /* end ActionChoice constructor */
 
 	@Override
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) 
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{/* TODO: generate */
+		image.draw(x, y);
 		
 	}
 

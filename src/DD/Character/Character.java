@@ -2,6 +2,8 @@ package DD.Character;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.geom.Vector2f;
+
 import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.SlickTools.*;
@@ -28,9 +30,9 @@ public class Character extends Entity
 	boolean engaged;								/* Engaged in combat with another character */
 	
 	/************************************ Class Methods *************************************/
-	public Character(int id) 
+	public Character(int id, Vector2f position) 
 	{
-		super(id);
+		super(id, position);
 		hasTurn = false;
 		moved = false;
 		attackCount = 0;

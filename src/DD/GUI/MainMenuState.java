@@ -1,5 +1,5 @@
 package DD.GUI;
-import org.newdawn.slick.state.BasicGameState; 
+import org.newdawn.slick.state.BasicGameState;  
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -26,8 +26,8 @@ public class MainMenuState extends BasicGameState {
 	}
 	
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
-		background = new Image("Resources/titleBackground.png");
-		Image menuOptions = new Image("Resources/options.png");
+		background = new Image("Images/Test/titleBackground.png");
+		Image menuOptions = new Image("Images/Test/options.png");
 		
 		startOption = menuOptions.getSubImage(0, 0, 377, 71);
 		exitOption = menuOptions.getSubImage(0, 71, 377, 71);

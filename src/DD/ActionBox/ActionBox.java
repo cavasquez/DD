@@ -3,6 +3,10 @@ package DD.ActionBox;
 import java.util.ArrayList;
 import java.util.Queue;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
+
 import com.sun.corba.se.spi.orbutil.fsm.Action;
 
 import DD.Character.Character;
@@ -52,21 +56,37 @@ public class ActionBox extends BoxInterface
 	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
 	protected static Character character = null;
 	
-	public ActionBox(int id, float length, float width, Character character) 
+	/************************************ Button Images *************************************/
+	Image freeAction = null;
+	Image fullRoundAction = null;
+	Image immediateAction = null;
+	Image moveAction = null;
+	Image standardAction = null;
+	Image swiftAction = null;
+	
+	public ActionBox(int id, float length, float width, Character character, Vector2f position) throws SlickException
 	{
-		super(id, length, width);
+		super(id, length, width, position);
 		ActionBox.character = character;
 		subActions = null;
 		
+		freeAction = new Image("Images/ActionBox/FreeAction.png");
+		fullRoundAction = new Image("Images/ActionBox/FullRound.png");
+		immediateAction = new Image("Images/ActionBox/ImmediateAction.png");
+		moveAction = new Image("Images/ActionBox/MoveAction.png");
+		standardAction = new Image("Images/ActionBox/StandardAction.png");
+		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
+		
 		/* To begin with, the basic ActionChoices need to be available. */
-		this.addComponent(new ActionChoice(this.id, STANDARD_ACTION, "Standard Action"));
-		this.addComponent(new ActionChoice(this.id, MOVE_ACTION, "Move Action"));
-		this.addComponent(new ActionChoice(this.id, FULL_ROUND_ACTION, "Full Round Action"));
-		this.addComponent(new ActionChoice(this.id, SWIFT_ACTION, "Swift Action"));
-		this.addComponent(new ActionChoice(this.id, IMMEDIATE_ACTION, "Immediate Action"));
-		this.addComponent(new ActionChoice(this.id, FREE_ACTION, "Free Action"));
+		this.addComponent(new ActionChoice(this.id, STANDARD_ACTION, "Standard Action", standardAction, position.x, position.y));
+		this.addComponent(new ActionChoice(this.id, MOVE_ACTION, "Move Action", moveAction, position.x + 20, position.y + 20));
+		this.addComponent(new ActionChoice(this.id, FULL_ROUND_ACTION, "Full Round Action", fullRoundAction, position.x + 40, position.y + 40));
+		this.addComponent(new ActionChoice(this.id, SWIFT_ACTION, "Swift Action", swiftAction, position.x + 60, position.y + 60));
+		this.addComponent(new ActionChoice(this.id, IMMEDIATE_ACTION, "Immediate Action", immediateAction, position.x + 80, position.y + 60));
+		this.addComponent(new ActionChoice(this.id, FREE_ACTION, "Free Action", freeAction, position.x + 100, position.y + 100));
 		
 	} /* end ActionBox constructor */
+	
 	
 	public void addSubAction(Ability ability)
 	{ /* Convert the provided Ability into a SubAction and add it to the components ArrayList*/

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="30" height="30" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="Terrain" tilewidth="16" tileheight="16">
+  <image source="16x16-tiles_0.png" width="120" height="86"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="30" height="30">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3UMQoAIQxE0Wga8f4HdrewCXFBcBJwp/iVkEdErCJSgZVF71kDRZcuyl3ZSPdr55tdz0a7sww3a1/vv466Z+tHutY/NU+fukkDXTXdvK8X2s16V3Tp0v2Pu9uJOQO4MM69EA4AAA==
+  </data>
+ </layer>
+</map>
