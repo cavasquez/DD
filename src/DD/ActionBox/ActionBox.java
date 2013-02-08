@@ -55,6 +55,7 @@ public class ActionBox extends BoxInterface
 	public ActionBox(int id, float length, float width, Character character) 
 	{
 		super(id, length, width);
+		components = new ArrayList<Component>();
 		ActionBox.character = character;
 		subActions = null;
 		
