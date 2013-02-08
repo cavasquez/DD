@@ -23,15 +23,17 @@ import DD.Network.Server.Interpreter.ServerInterpreter;
 public class ServerSystem implements Network
 {
 	/************************************ Class Constants *************************************/
-	private static volatile ServerSystem instance = null;
+	private static ServerSystem instance = null;
 	
 	/************************************ Class Attributes *************************************/
-	private static volatile UserTable userList;
-	private static volatile ServerInterpreter[] system = null;
+	private static UserTable userList;
+	private static ServerInterpreter[] system = null;
+	private static volatile boolean inUser;
 	
 	/************************************ Class Methods *************************************/
 	private ServerSystem() 
 	{
+		this.inUse = false;
 		system = new ServerInterpreter[Message.NUM_OF_MESSAGES];
 		system[Message.COMBAT_MESSAGE] = new I_CombatMessage();
 		system[Message.CHAT_MESSAGE] = new I_ChatMessage();
@@ -133,15 +135,32 @@ public class ServerSystem implements Network
 		return valid;
 	} /* end validMessage method */
 	
-	/******************************************************************************
-	 ******************************* Getter Methods *******************************
-	 ******************************************************************************/
-	public static ServerSystem getInstance()
+	private static ServerSystem getInstance()
 	{
 		if (instance == null) instance = new ServerSystem();
 		return instance;
 	} /* end getInstance method */
 	
+	public static ServerSystem checkIn()
+	{
+		ServerSystem returner = null;
+		if (!inUse)
+		{
+			inUse = true;
+			returner = instance;
+		} /* end if */
+		return returner;
+	} /* end checkIn method */
+	
+	public static ServerSystem checkOut()
+	{
+		inUse = false;
+		return null;
+	} /* end checkOut method */
+	
+	/******************************************************************************
+	 ******************************* Getter Methods *******************************
+	 ******************************************************************************/
 	@Override
 	public boolean getMessage(int socketID, NetworkMessage message)
 	{
