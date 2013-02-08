@@ -25,15 +25,34 @@ public class NetworkSystem implements Network
 	/************************************ Class Attributes *************************************/
 	private static int networkType;
 	private static NetworkSystem instance = null;
+	private static volatile boolena inUse;
 	
 	/************************************ Class Methods *************************************/
 	private NetworkSystem() {}
 	
-	public static NetworkSystem getInstance()
+	protected static NetworkSystem getInstance()
 	{
 		if (instance == null) instance = new NetworkSystem();
+		inUser = false;
 		return instance;
 	} /* end getInstance method */
+	
+	public static NetworkSystem checkIn()
+	{
+		NetworkSystem returner = null;
+		if (!inUser)
+		{
+			inUser = true;
+			returner = instance;
+		} /* end if */
+		return returner;
+	} /* end checkIn method */
+	
+	public static NetworkSystem checkOut()
+	{
+		inUser = false;
+		return null;
+	} /* end checkOut method */
 	
 	@Override
 	public void sendMessage(int sender, int receiver, Message message) 
