@@ -66,4 +66,5 @@ public abstract class NetworkSocket extends Thread
 		/* thread is done */
 		done = true;
 	} /* end close method */
-} /* end DDSocket */
+	
+} /* end NetworkSocket class */
