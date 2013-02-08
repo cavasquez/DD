@@ -8,80 +8,21 @@ import java.util.Queue;
 import DD.Network.Message.NetworkMessage;
 
 /*****************************************************************************************************
-* DDSocket is an experimental socket that will attempt to use one thread to control both listening
-* and sending.
+* Sender will provide the tools that ClientSender and ServerSender will need to send a message.
 ******************************************************************************************************/
 
-public abstract class DDSocket extends Thread
+public abstract class Sender extends NetworkSocket
 {
 
         /************************************ Class Attributes *************************************/
-	protected Socket socket = null;
-	protected ObjectInputStream input = null;
-	protected ObjectOutputStream output = null;
-	protected volatile boolean sending;
-	protected volatile boolean done;						/* done should be called when thread is to be closed */
-	protected boolean working;							/* thread is doing work */
-	protected int socketID;								/* Unique ID for thread */
-	protected volatile Queue<NetworkMessage> messageList;	/* messages to be sent */
 	
 	/************************************ Class Methods *************************************/
-	public DDSocket(Socket socket, int socketID)
+	public Sender(Socket socket, int socketID)
 	{
-		super("DDSocketThread" + Integer.toHexString(socketID));
-		this.socket = socket;
-		this.done = false;
-		this.sending = false;
-		this.working = true;
-		this.socketID = socketID;
+		super(socket, socketID);
 	} /* end Server constructor */
 	
 	public void run() {} /* end run method */
-	
-	protected void createStreams()
-	{
-		try 
-		{
-			input = new ObjectInputStream(socket.getInputStream());
-			output = new ObjectOutputStream(socket.getOutputStream());
-		} /* end try */ 
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /* end catch */
-	} /* end createStreams method */
-
-	protected void closeStreams()
-	{
-		try 
-		{
-			input.close();
-			output.close();
-		} /* end try */ 
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /* end catch */
-		
-	} /* end closeServerSocket method */
-	
-	protected NetworkMessage getSocketMessage()
-	{
-		NetworkMessage message = null;
-		
-		try
-		{
-			message = (NetworkMessage) input.readObject();
-		} /* end try */
-		catch(IOException | ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		} /* end catch */
-		
-		return(message);
-	} /* end getSocketMessage method */
 	
 	protected void sendSocketMessage(NetworkMessage message)
 	{
@@ -97,21 +38,10 @@ public abstract class DDSocket extends Thread
 		
 	} /* end sendSocketMessage method */
 	
-	protected void getMessage(NetworkMessage message)
-	{ /* We got a message from the stream. Process it. */
-		NetworkSystem.getInstance().getMessage(socketID, message);
-		
-	} /* end getMessage method */
-	
 	public void sendMessage(NetworkMessage message)
 	{
 		messageList.offer(message);
 		sending = true;
 	} /* end sendMessage method */
-
-	public void close()
-	{
-		/* thread is done */
-		done = true;
-	} /* end close method */
-} /* end DDSocket */
+	
+} /* end Sender class */
