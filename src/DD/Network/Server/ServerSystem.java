@@ -141,6 +141,7 @@ public class ServerSystem implements Network
 		return instance;
 	} /* end getInstance method */
 	
+	@Override
 	public static ServerSystem checkIn()
 	{
 		ServerSystem returner = null;
@@ -152,6 +153,7 @@ public class ServerSystem implements Network
 		return returner;
 	} /* end checkIn method */
 	
+	@Override
 	public static ServerSystem checkOut()
 	{
 		inUse = false;
