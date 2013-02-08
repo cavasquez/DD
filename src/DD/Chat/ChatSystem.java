@@ -2,8 +2,8 @@ package DD.Chat;
 
 import java.util.ArrayList;
 
+import DD.Network.UserTable;
 import DD.Network.Server.Server;
-import DD.Network.Server.UserTable;
 
 /*****************************************************************************************************
  * ChatSystem will take in ChatMessages from the MessageBox, interpret it, and route it through the 

@@ -4,12 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Queue;
-
-import DD.Chat.ChatSystem;
-import DD.Network.InitialNetworkMessage;
-import DD.Network.Message;
 import DD.Network.NetworkMessage;
 
 public class Server extends Thread
@@ -38,10 +33,10 @@ public class Server extends Thread
 	public void run() 
 	{
 		createStreams(); 
-		/* The first message should always contain the username of
-		 * the player. We will need to validate this. */
-		NetworkMessage message = getSocketMessage();
-		ServerSystem.getinstance().addUser(serverID, ((InitialNetworkMessage)message.getMessage()).getUsername(), this);
+		NetworkMessage message = null;
+		
+		/* the first thing a server should do is add itself to the ServerSystems userList */
+		ServerSystem.getInstance().addServer(serverID, this);
 		
 		while (!done || working)
 		{
@@ -68,6 +63,8 @@ public class Server extends Thread
 			
 		} /* end done loop */
 		
+		/* Done. Close streams. */
+		closeStreams();
 	} /* end run method */
 	
 	private void createStreams()
@@ -84,6 +81,21 @@ public class Server extends Thread
 		} /* end catch */
 	} /* end createStreams method */
 
+	private void closeStreams()
+	{
+		try 
+		{
+			input.close();
+			output.close();
+		} /* end try */ 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
+		
+	} /* end closeServerSocket method */
+	
 	private NetworkMessage getSocketMessage()
 	{
 		NetworkMessage message = null;
@@ -114,29 +126,16 @@ public class Server extends Thread
 		
 	} /* end sendSocketMessage method */
 	
-	public boolean sendMessage(Message message)
-	{ /* Called by CombatSystem or ChatSystem. */
-		/* sendMessage will check to see if the message is of valid type.
-		 * if it is, it will wrap the message in a NetworkMessage and
-		 * add it to the messageList. Then, it will set a flag that
-		 * there is a message waiting to be send. */
-		boolean valid = false;
-		
-		if (Message.messageExists(message)) valid = true;
-		if (valid)
-		{
-			messageList.offer(new NetworkMessage(message));
-			sending = true;
-		} /* end message */
-		return valid;
-	} /* end sendMessage method */
-	
 	private void getMessage(NetworkMessage message)
 	{ /* We got a message from the stream. Process it. */
-		/* Since this is the server, we have to redirect this message to 
-		 * everyone else. However, we do not want to re-send it to the
-		 * sender.  */
+		ServerSystem.getInstance().getMessage(serverID, message);
 		
 	} /* end getMessage method */
+	
+	public void sendMessage(NetworkMessage message)
+	{
+		messageList.offer(message);
+		sending = true;
+	} /* end sendMessage method */
 	
 } /* end Server class */

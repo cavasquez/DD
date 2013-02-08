@@ -11,12 +11,13 @@ package DD.Network;
 public class Message 
 {
 	/************************************ Class Constants *************************************/
-	private static int NUM_OF_MESSAGES = 0;
-	public static final int NETWORK_MESSAGE = NUM_OF_MESSAGES++;			/* Message that wraps messages to be sent through the network */
-	public static final int COMBAT_MESSAGE = NUM_OF_MESSAGES++;				/* Message to be given to CombatSystem */
-	public static final int CHAT_MESSAGE = NUM_OF_MESSAGES++;				/* Message to be sent through the network that contains chat messages */
-	public static final int COMBAT_VALIDATION_MESSAGE = NUM_OF_MESSAGES++;	/* Message returned by CombatSystem to ActionBox */ 
-	public static final int INITIAL_NETWORK_MESSAGE = NUM_OF_MESSAGES++;	/* First Message sent to client/server */
+	private static int I = 0;
+	public static final int NETWORK_MESSAGE = I++;				/* Message that wraps messages to be sent through the network */
+	public static final int COMBAT_MESSAGE = I++;				/* Message to be given to CombatSystem */
+	public static final int CHAT_MESSAGE = I++;					/* Message to be sent through the network that contains chat messages */
+	public static final int COMBAT_VALIDATION_MESSAGE = I++;	/* Message returned by CombatSystem to ActionBox */ 
+	public static final int INITIAL_MESSAGE = I++;				/* First Message sent to client/server */
+	public static final int NUM_OF_MESSAGES = I;				/* Total number of messages */
 	
 	/************************************ Class Attributes *************************************/
 	protected int messageType;
