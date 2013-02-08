@@ -18,9 +18,7 @@ public abstract class Listener extends NetworkSocket
 {
 
         /************************************ Class Attributes *************************************/
-	protected Socket socket = null;
-	protected ObjectInputStream input = null;
-	protected ObjectOutputStream output = null;
+	private ServerSocket sSocket;
 	
 	/************************************ Class Methods *************************************/
 	public Listener(Socket socket, int socketID)
