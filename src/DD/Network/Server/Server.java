@@ -18,16 +18,6 @@ import DD.Network.Message.NetworkMessage;
 
 public class Server extends DDSocket
 {
-	/************************************ Class Attributes *************************************/
-	private Socket socket = null;
-	private ObjectInputStream input = null;
-	private ObjectOutputStream output = null;
-	private volatile boolean sending;
-	private volatile boolean done;						/* done should be called when thread is to be closed */
-	private boolean working;							/* thread is doing work */
-	private int socketID;								/* Unique ID for thread */
-	private volatile Queue<NetworkMessage> messageList;	/* messages to be sent */
-	
 	/************************************ Class Methods *************************************/
 	public Server(Socket socket, int socketID)
 	{
