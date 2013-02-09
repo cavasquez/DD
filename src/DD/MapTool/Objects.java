@@ -1,6 +1,9 @@
 package DD.MapTool;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.state.StateBasedGame;
 
 import DD.Entity;
 import DD.ImageRenderComponent;
@@ -24,5 +27,12 @@ public abstract class Objects extends ImageRenderComponent{//figure out comp.
 	abstract void checks();
 
 	abstract void action();	
-			
+	
+	
+	
+	/*
+	 * only render objectsStack[x][y].peek() 
+	 */
+	public abstract void render(GameContainer gc, StateBasedGame sbg, Graphics gr);
+	
 }

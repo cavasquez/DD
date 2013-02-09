@@ -18,7 +18,7 @@ public class Map extends Entity{
 	Image defImage;
 	boolean hasTempObjects;
 	String name;
-	final int mapSize = 10;
+	final int mapSize = 11;
 
 	public Map(String name){
 		
@@ -59,7 +59,7 @@ public class Map extends Entity{
 				if(tempObjects[i][j]!=null){
 					tempObjects[i][j].turnCount--;
 					if(tempObjects[i][j].turnCount == 0){
-						removeTempObjects(i,j);
+						removeTempObjects(i,j,tempObjects[i][j]);
 					}
 				}
 			}
@@ -78,6 +78,16 @@ public class Map extends Entity{
 	/*
 	 * assigns the tempObjects passed in to the specified location.
 	 */
+	
+	public void updateComponentList(){
+		components.clear();
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				components.add(objectsStack[i][j].peek());
+			}
+		}
+	}
+	
 	public void placeTempObject(int x,int y,TempObjects temp) {
 		if(tempObjects[x][y]!=null){
 			/*
@@ -91,44 +101,58 @@ public class Map extends Entity{
 			 * 		reasoning: cant have 2 temp objects in the same location.
 			 * 
 			 * 		ill implement the non gui part...
-			 */
-			
-				//GUI message: Would you like to replace the temp object currently
-				//			   in that location?
-				//if yes DO:
-				removeTempObjects(x, y);
-				placeObjects(x, y, temp);
-				//else ask them if they want to place that object in a diferent location?
-				//if yes
-				//placeObjects(NewUserInputX, NewUserInputY, obj);	
+			 */	
 		}
 		else{
 			tempObjects[x][y] = temp;
 			numTempObjects++;
-			super.components.add(temp);
 			setHasTempObjects(true);
+			updateComponentList();
 		}
 	}
-	
-	public void removeTempObjects(int x, int y) {
+
+	public void removeTempObjects(int x, int y, TempObjects temp) {
 		tempObjects[x][y] = null;
 		numTempObjects--;
+		objectsStack[x][y].pop();
+		updateComponentList();
 		if(numTempObjects==0)
 			setHasTempObjects(false);
 	}
-			
+	
+	//places single object on x,y
 	public void placeObjects(int x,int y,Objects obj) {
 		super.components.add(obj);
 		objectsStack[x][y].push(obj);
+		updateComponentList();
 	}
-
+	
+	/*
+	 * massPlaceObjects(int x1, int y1, int x2, int y2, Objects obj)
+	 * takes in 2 locations x1,y1 x2,y2 places a deep copy of the
+	 *  object passed in from from point to point(inclusive)
+	 *  
+	 *  because of stack implementation the object that is all ready 
+	 *  there will be 2nd on the stack.
+	 *  
+	
+	public void massPlaceObjects(int x1, int y1, int x2, int y2, Objects obj){
+		if(x1==x2){
+			
+		}
+		else if(){
+			
+		}
+		
+	}
+	 */
+	
 	
 	//needed for gui
 	public String getName() {
 		return name;
 	}
 
-	//GM should be able to name the map at will.
 	public void setName(String name) {
 		this.name = name;
 	}

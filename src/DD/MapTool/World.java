@@ -66,6 +66,21 @@ public class World implements Serializable{
 		String t = "";
 		for (int i = 0; i < worldSize; i++) {
 			for (int j = 0; j < worldSize; j++) {
+				if(j == worldSize-1)
+				{
+					t += world[i][j].name+"\n";
+				}
+				else
+				{
+					t += world[i][j].name+"\t";
+				}
+			}
+		}
+		
+		t += "\n";
+		
+		for (int i = 0; i < worldSize; i++) {
+			for (int j = 0; j < worldSize; j++) {
 				t += "***********************\n";
 				t += "\t"+world[i][j].name+"\n";
 				t += "***********************\n";
