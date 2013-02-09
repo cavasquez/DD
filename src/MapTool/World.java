@@ -62,5 +62,17 @@ public class World implements Serializable{
 	public World loadWorld(){
 		return null;	
 	}
+	public String toString(){
+		String t = "";
+		for (int i = 0; i < worldSize; i++) {
+			for (int j = 0; j < worldSize; j++) {
+				t += "***********************\n";
+				t += "\t"+world[i][j].name+"\n";
+				t += "***********************\n";
+				t += world[i][j].toString();
+			}
+		}
+		return t;
+	}
 	
 }

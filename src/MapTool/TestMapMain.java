@@ -21,13 +21,14 @@ public class TestMapMain {
 			}
 		}	
 		
-		for (int i = 0; i < world.worldSize; i++) {
-			for (int j = 0; j < world.worldSize; j++) {
-				System.out.println("***********************");
-				System.out.println("\t"+world.world[i][j].name);
-				System.out.println("***********************");
-				System.out.println(world.world[i][j].toString());
+		for (int i = 0; i < world.world[0][0].mapSize; i++) {
+			for (int j = 0; j < world.world[0][0].mapSize; j++) {
+				if(i == 0 || j == 0 || i == 9 || j == 9 || i == 4 || j == 4){
+					Obstacle obs = new Obstacle("walll", null, 5, 5, world.world[0][0]);
+					world.world[0][0].placeObjects(i, j, obs);
+				}
 			}
-		}	
+		}
+		System.out.println(world.toString());
 	}
 }
