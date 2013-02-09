@@ -34,6 +34,8 @@ public class Floor extends Objects{
 	}
 
 	
+	public void render(){}
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) {
 		// TODO Auto-generated method stub

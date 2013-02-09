@@ -21,21 +21,13 @@ public class TestMapMain {
 			}
 		}	
 		
-		int t=0;
-		
-		for (int i = 0; i < world.getMap(t, t).mapSize ; i++) {
-			for (int j = 0; j < world.getMap(t, t).mapSize; j++) {
-				if(j == world.getMap(t, t).mapSize -1)
-				{
-					System.out.println(world.getMap(t, t).objects[i][j].name);
-				}
-				else
-				{
-					System.out.print(world.getMap(t, t).objects[i][j].name);
-				}
+		for (int i = 0; i < world.worldSize; i++) {
+			for (int j = 0; j < world.worldSize; j++) {
+				System.out.println("***********************");
+				System.out.println("\t"+world.world[i][j].name);
+				System.out.println("***********************");
+				System.out.println(world.world[i][j].toString());
 			}
-		}
-		
-		//world.world[t][t].addComponent(component);
+		}	
 	}
 }
