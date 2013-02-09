@@ -28,12 +28,12 @@ public class Entity
 	
 	
 	/************************************ Class Methods *************************************/
-	public Entity (int id, Vector2f position)
+	public Entity (int id)
 	{
 		this.id = id;
 		this.position = position;
 		components = new ArrayList<Component>();
-		recycledIds = (Queue) new ArrayList<Integer>();
+		//recycledIds = (Queue) new ArrayList<Integer>();
 	} /* end Entity constructor */
 	
 	public int addComponent(Component component)

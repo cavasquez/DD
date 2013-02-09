@@ -17,9 +17,9 @@ public abstract class BoxInterface extends Entity
 	float width;
 	
 	/************************************ Class Methods *************************************/
-	public BoxInterface(int id, float length, float width, Vector2f position) 
+	public BoxInterface(int id, float length, float width) 
 	{
-		super(id, position);
+		super(id);
 		this.length = length;
 		this.width = width;
 	} /* end MenuBox constructor */

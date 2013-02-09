@@ -52,8 +52,6 @@ public class ActionChoice extends ImageRenderComponent
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{/* TODO: generate */
 		image.draw(x, y);
-		System.out.println("I'm printing");
-		
 	}
 
 	@Override

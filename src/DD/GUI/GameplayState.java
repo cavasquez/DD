@@ -43,10 +43,10 @@ public class GameplayState extends BasicGameState {
 		arg0.setVSync(true);
 		//SpriteSheet sheet = new SpriteSheet("Images/Test/karbonator.png",32,32);
 		//SpriteSheet ogre = new SpriteSheet("Resources/DnD-OgreLeader.png", 130, 135);
-		Vector2f actionBoxPosition = new Vector2f(600f, 200f);
+		//Vector2f actionBoxPosition = new Vector2f(600f, 200f);
 		Vector2f characterPosition = new Vector2f(0f, 0f);
-		warrior = new Character(stateID, characterPosition);
-		actionBox = new ActionBox(stateID, 300, 200, warrior, actionBoxPosition);
+		warrior = new Character(stateID);
+		actionBox = new ActionBox(stateID, 300, 200, warrior);
 		
 		Image characters = new Image("Images/Test/characterImages.png");
 		System.out.println("Image height: " + characters.getHeight());

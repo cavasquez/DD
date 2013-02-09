@@ -30,9 +30,9 @@ public class Character extends Entity
 	boolean engaged;								/* Engaged in combat with another character */
 	
 	/************************************ Class Methods *************************************/
-	public Character(int id, Vector2f position) 
+	public Character(int id) 
 	{
-		super(id, position);
+		super(id);
 		hasTurn = false;
 		moved = false;
 		attackCount = 0;

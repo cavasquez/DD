@@ -64,9 +64,9 @@ public class ActionBox extends BoxInterface
 	Image standardAction = null;
 	Image swiftAction = null;
 	
-	public ActionBox(int id, float length, float width, Character character, Vector2f position) throws SlickException
+	public ActionBox(int id, float length, float width, Character character) throws SlickException
 	{
-		super(id, length, width, position);
+		super(id, length, width);
 		components = new ArrayList<Component>();
 		this.character = character;
 		subActions = null;
@@ -78,13 +78,17 @@ public class ActionBox extends BoxInterface
 		standardAction = new Image("Images/ActionBox/StandardAction.png");
 		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
 		
+		int shift = freeAction.getHeight();
+		Vector2f boxPosition = new Vector2f(500f, 0f);
+		this.setPosition(boxPosition);
+		
 		/* To begin with, the basic ActionChoices need to be available. */
 		this.addComponent(new ActionChoice(this.id, STANDARD_ACTION, "Standard Action", standardAction, position.x, position.y));
-		this.addComponent(new ActionChoice(this.id, MOVE_ACTION, "Move Action", moveAction, position.x + 20, position.y + 20));
-		this.addComponent(new ActionChoice(this.id, FULL_ROUND_ACTION, "Full Round Action", fullRoundAction, position.x + 40, position.y + 40));
-		this.addComponent(new ActionChoice(this.id, SWIFT_ACTION, "Swift Action", swiftAction, position.x + 60, position.y + 60));
-		this.addComponent(new ActionChoice(this.id, IMMEDIATE_ACTION, "Immediate Action", immediateAction, position.x + 80, position.y + 60));
-		this.addComponent(new ActionChoice(this.id, FREE_ACTION, "Free Action", freeAction, position.x + 100, position.y + 100));
+		this.addComponent(new ActionChoice(this.id, MOVE_ACTION, "Move Action", moveAction, position.x, position.y + shift));
+		this.addComponent(new ActionChoice(this.id, FULL_ROUND_ACTION, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
+		this.addComponent(new ActionChoice(this.id, SWIFT_ACTION, "Swift Action", swiftAction, position.x, position.y + shift*3));
+		this.addComponent(new ActionChoice(this.id, IMMEDIATE_ACTION, "Immediate Action", immediateAction, position.x, position.y + shift*4));
+		this.addComponent(new ActionChoice(this.id, FREE_ACTION, "Free Action", freeAction, position.x, position.y + shift*5));
 		
 	} /* end ActionBox constructor */
 	
