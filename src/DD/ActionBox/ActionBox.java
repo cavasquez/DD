@@ -88,6 +88,10 @@ public class ActionBox extends BoxInterface
 		
 	} /* end ActionBox constructor */
 	
+	public ArrayList<Component> getComponentList() 
+	{
+		return components;
+	}
 	
 	public void addSubAction(Ability ability)
 	{ /* Convert the provided Ability into a SubAction and add it to the components ArrayList*/

@@ -100,9 +100,10 @@ public class GameplayState extends BasicGameState {
 		map.render(0, 0);
 		
 		/* render action box */
-		for(int i = 0; i < actionBox.subActions.size(); i++)
+		
+		for(int i = 0; i < actionBox.getComponentList().size(); i++)
 		{
-			
+			actionBox.getComponentList().get(i).render();
 		}
 		
 		
