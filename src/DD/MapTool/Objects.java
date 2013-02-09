@@ -1,37 +1,28 @@
 package DD.MapTool;
 
-import java.util.ArrayList;
-
 import org.newdawn.slick.Image;
 
-public abstract class Objects {
-	ArrayList<Objects> normList;
-	ArrayList<TempObjects> tempList;
-	Image image;
+import DD.Entity;
+import DD.ImageRenderComponent;
+
+public abstract class Objects extends ImageRenderComponent{//figure out comp.
 	int movePenalty;
 	int lightPenalty;
 	String name;
-	
-	
+	Entity owner;
+	//int id;
+	//could pass in ID into constructor from the Component setID(...) ?
+	//@brandon
+	public Objects(String name, Image image, Map owner) {
+		
+		super(0, image);
+		this.name = name;
+		// TODO
+		owner.addComponent(this);
+	}
+
 	abstract void checks();
-	public ArrayList<Objects> getObjectsList(){
-		return normList;
-	}
+
 	abstract void action();	
-	
-	
-	/*
-	 * returns a list of all normal Objects that can be created.
-	 */
-	
-	public void addNormList(Objects obj){
-		normList.add(obj);
-	}
-	
-	/*
-	 * returns a list of all temp objects that can be created.
-	 */
-	public void addTempList(TempObjects temp){
-		tempList.add(temp);
-	}	
+			
 }

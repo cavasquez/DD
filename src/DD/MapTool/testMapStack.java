@@ -1,4 +1,4 @@
-package MapTool;
+package DD.MapTool;
 
 import java.util.Stack;
 
