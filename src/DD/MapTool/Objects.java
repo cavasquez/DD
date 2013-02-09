@@ -1,14 +1,12 @@
 package DD.MapTool;
 
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.state.StateBasedGame;
 
-import DD.Entity;
-import DD.ImageRenderComponent;
+import DD.SlickTools.*;
 
-public abstract class Objects extends ImageRenderComponent{//figure out comp.
+public class Objects extends ImageRenderComponent {//figure out comp.
 	int movePenalty;
 	int lightPenalty;
 	String name;
@@ -24,15 +22,10 @@ public abstract class Objects extends ImageRenderComponent{//figure out comp.
 		owner.addComponent(this);
 	}
 
-	abstract void checks();
-
-	abstract void action();	
-	
-	
-	
-	/*
-	 * only render objectsStack[x][y].peek() 
-	 */
-	public abstract void render(GameContainer gc, StateBasedGame sbg, Graphics gr);
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

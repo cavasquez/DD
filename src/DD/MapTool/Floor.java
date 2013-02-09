@@ -1,10 +1,6 @@
 package DD.MapTool;
-
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.state.StateBasedGame;
-import DD.ImageRenderComponent;
+
 
 public class Floor extends Objects{
 
@@ -26,15 +22,8 @@ public class Floor extends Objects{
 		return "Name: "+name+ ", movePenalty: "+ movePenalty+ ", lightPenalty: "+lightPenalty+"\n";
 	}
 	
-	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int delta) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) {
-		// TODO Auto-generated method stub
+	
+	public static void main(String[] args) {
 		
 	}
 	

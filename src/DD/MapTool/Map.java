@@ -3,13 +3,11 @@ package DD.MapTool;
  * @author GM-Michael VanWie
  */
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Stack;
-
 import org.newdawn.slick.Image;
-
-import DD.Component;
-import DD.Entity;
+import org.newdawn.slick.geom.Vector2f;
+import DD.SlickTools.*;
 
 public class Map extends Entity{
 	Stack<Objects>[][] objectsStack ;
@@ -22,7 +20,7 @@ public class Map extends Entity{
 
 	public Map(String name){
 		
-		super(0);
+		super(0, null);
 		this.name = name;
 		objectsStack =  new Stack[mapSize][mapSize];
 		tempObjects = new TempObjects[mapSize][mapSize];
@@ -30,9 +28,10 @@ public class Map extends Entity{
 		
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
-				
+				//needs image                    VVV
 				Floor floor = new Floor("floor",null,5,5,this);
-				super.addComponent(floor);
+				
+				addComponent(floor);
 				objectsStack[i][j] =  new Stack();
 				objectsStack[i][j].push(floor);
 			}
@@ -47,8 +46,7 @@ public class Map extends Entity{
 		defImage = null;
 		hasTempObjects = false;
 	}
-	
-	
+
 	/*
 	 * after each player turn, decrement each temp object turn count.
 	 * 	if turn count == 0 after decremented, remove that temp item.
@@ -59,7 +57,8 @@ public class Map extends Entity{
 				if(tempObjects[i][j]!=null){
 					tempObjects[i][j].turnCount--;
 					if(tempObjects[i][j].turnCount == 0){
-						removeTempObjects(i,j,tempObjects[i][j]);
+						System.out.println("removing object");
+						removeTempObjects(i,j);
 					}
 				}
 			}
@@ -98,20 +97,19 @@ public class Map extends Entity{
 			 * 		 ??ask the user if they want to remove. if yes then
 			 * 		 call removeTempObjects(x,y), then call place(x,y,temp)
 			 * 
-			 * 		reasoning: cant have 2 temp objects in the same location.
-			 * 
-			 * 		ill implement the non gui part...
+			 * 		 reasoning: cant have 2 temp objects in the same location.
 			 */	
 		}
 		else{
 			tempObjects[x][y] = temp;
 			numTempObjects++;
 			setHasTempObjects(true);
+			objectsStack[x][y].push(temp);
 			updateComponentList();
 		}
 	}
 
-	public void removeTempObjects(int x, int y, TempObjects temp) {
+	public void removeTempObjects(int x, int y) {
 		tempObjects[x][y] = null;
 		numTempObjects--;
 		objectsStack[x][y].pop();
@@ -128,24 +126,27 @@ public class Map extends Entity{
 	}
 	
 	/*
-	 * massPlaceObjects(int x1, int y1, int x2, int y2, Objects obj)
+	 * massPlaceObjectsLine(int x1, int y1, int x2, int y2, Objects obj)
 	 * takes in 2 locations x1,y1 x2,y2 places a deep copy of the
-	 *  object passed in from from point to point(inclusive)
+	 *  object passed in from point to point(inclusive)
 	 *  
 	 *  because of stack implementation the object that is all ready 
 	 *  there will be 2nd on the stack.
-	 *  
+	 */  
 	
-	public void massPlaceObjects(int x1, int y1, int x2, int y2, Objects obj){
+	public void massPlaceObjectsLine(int x1, int y1, int x2, int y2, Objects obj){
 		if(x1==x2){
-			
+			if(y1 > y2){
+				int t = y2;
+				y2 = y1;
+				y1 = t;
+			}
+			for (int i = 0; i < y2-y1+1; i++) {
+				placeObjects(x1,y1+i,obj);
+			}
 		}
-		else if(){
-			
-		}
-		
 	}
-	 */
+	 
 	
 	
 	//needed for gui
@@ -173,15 +174,19 @@ public class Map extends Entity{
 		this.hasTempObjects = hasTempObjects;
 	}
 
+	/*
+	 * debuging toString
+	 * only used in testMapMain.
+	 */
 	public String toString(){
 		String t ="";
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
 				if(j == mapSize-1){
-					t += objectsStack[i][j].peek().name +"\n";
+					t += objectsStack[j][i].peek().name +"\n";
 				}
 				else{
-					t += objectsStack[i][j].peek().name;
+					t += objectsStack[j][i].peek().name;
 				}
 			}
 		}

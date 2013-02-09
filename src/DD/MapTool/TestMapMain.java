@@ -13,36 +13,32 @@ public class TestMapMain {
 					world.world[0][0].placeObjects(i, j, obs);
 				}
 				else{
-					if(i==1 && j==1){
-						TempObjects temp = new TempObjects("tempTestRemove", 5,null,5,5,world.world[0][0]);
-						world.world[0][0].placeObjects(i, j, temp);
-					}
-					else{
 						TempObjects temp = new TempObjects("2 ", 5,null,5,5,world.world[0][0]);
-						world.world[0][0].placeObjects(i, j, temp);
+						world.world[0][0].placeTempObject(i, j, temp);
 					}
 				}
 			}
-		}
 		
 		
 		
 		for (int i = 0; i < world.world[0][0].mapSize; i++) {
 			for (int j = 0; j < world.world[0][0].mapSize; j++) {
-				if(i>0&&i<5 && j>0&&j<5)
-				world.world[0][0].removeTempObjects(i, j, world.world[0][0].getTempAtLocation(i, j));
+				if(world.world[0][0].tempObjects[i][j] !=null)
+				System.out.println(world.world[0][0].tempObjects[i][j].name);
 			}
 		}
+	
 		
-		
-				
+		for (int i = 0; i < world.world[0][0].mapSize; i++) {
+			for (int j = 0; j < world.world[0][0].mapSize; j++) {
+				if(i>0&&i<5 && j>0&&j<5)
+				world.world[0][0].removeTempObjects(i, j);
+			}
+		}
+		Obstacle obs = new Obstacle("3 " , null, 5, 5, world.world[0][0]);
+		world.world[0][0].massPlaceObjectsLine(0, 0, 0, 5, obs);
 		
 		world.world[0][0].updateComponentList();
-		
-		System.out.println(world.world[0][0].toString());
-		System.out.println(world.world[0][0].getComponents().toString());
-		
-		
 		
 		System.out.println(world.toString());
 	}
