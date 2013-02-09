@@ -1,6 +1,8 @@
 package DD.GUI;
 import DD.ActionBox.ActionBox;
 import DD.Character.Character;
+import DD.SlickTools.Component;
+import DD.SlickTools.RenderComponent;
 
 import org.newdawn.slick.Animation; 
 import org.newdawn.slick.geom.Vector2f;
@@ -101,11 +103,25 @@ public class GameplayState extends BasicGameState {
 		
 		/* render action box */
 		
+		RenderComponent renderComponent = null;
+		for (Component component : actionBox.getComponentList())
+		{
+			if (RenderComponent.class.isInstance(component))
+			{
+				renderComponent = (RenderComponent) component;
+				renderComponent.render(container, sb, g);
+			} /* end if */
+			
+		} /* end for loop */
+		
+		
+		
+		/*
 		for(int i = 0; i < actionBox.getComponentList().size(); i++)
 		{
-			actionBox.getComponentList().get(i).render();
+			renderComponent = actionBox.getComponentList().get(i).render();
 		}
-		
+		*/
 		
 		g.drawAnimation(player, playerX, playerY);
 	}

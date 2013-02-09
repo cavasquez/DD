@@ -1,6 +1,6 @@
 package DD.ActionBox;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Queue;
 
 import org.newdawn.slick.Image;
@@ -72,7 +72,7 @@ public class ActionBox extends BoxInterface
 		subActions = null;
 		
 		freeAction = new Image("Images/ActionBox/FreeAction.png");
-		fullRoundAction = new Image("Images/ActionBox/FullRound.png");
+		fullRoundAction = new Image("Images/ActionBox/FullRoundAction.png");
 		immediateAction = new Image("Images/ActionBox/ImmediateAction.png");
 		moveAction = new Image("Images/ActionBox/MoveAction.png");
 		standardAction = new Image("Images/ActionBox/StandardAction.png");
