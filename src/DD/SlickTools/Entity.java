@@ -38,9 +38,9 @@ public class Entity
 	
 	public int addComponent(Component component)
 	{ /* add a component to the components ArrayList and return it's id */
-		Integer id = this.componentId;
-		if((id = recycledIds.poll()) != null) id = this.componentId++; /* Take a recycled id. If none exists, take an ID from id and increment it */
-		
+		Integer id = this.componentId++;
+		//if((id = recycledIds.poll()) != null) id = this.componentId++; /* Take a recycled id. If none exists, take an ID from id and increment it */
+		//TODO: implement the above later
 		component.setOwnerEntity(this);
 		component.setId(id);
 		components.add(component);
@@ -61,7 +61,7 @@ public class Entity
 			{ /* component found. remove it */
 				found = true; 
 				components.remove(index);
-				recycledIds.offer(id);
+				//recycledIds.offer(id); /* TODO: implement later */
 			} /* end if */
 			
 		} /* end while loop */
