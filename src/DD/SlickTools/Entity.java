@@ -33,7 +33,7 @@ public class Entity
 		this.id = id;
 		this.position = position;
 		components = new ArrayList<Component>();
-		recycledIds = (Queue) new ArrayList<Integer>();
+		//recycledIds =  (Queue<Integer>) new List();
 	} /* end Entity constructor */
 	
 	public int addComponent(Component component)
