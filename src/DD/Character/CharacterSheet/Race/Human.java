@@ -17,6 +17,7 @@ public class Human extends Race {
 	int cha;*/
 	public Human()
 	{
+		naturalArmor = 0;
 		baseSpeed = 30;
 		size = 0;
 		choice = stat(choice);
@@ -118,6 +119,18 @@ public class Human extends Race {
 	public int getcha() {
 		
 		return cha;
+	}
+	
+	@Override
+	public int getSize() {
+		
+		return size;
+	}
+
+	@Override
+	public int getNaturalArmor() {
+		// TODO Auto-generated method stub
+		return naturalArmor;
 	}
 	
 }

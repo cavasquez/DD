@@ -2,6 +2,7 @@ package DD.Character.CharacterSheet.Race;
 
 public abstract class  Race 
 {
+	public int naturalArmor;
 	public int str;
 	public int dex;
 	public int intel;
@@ -17,4 +18,6 @@ public abstract class  Race
 	public abstract int getCon();
 	public abstract int getWis();
 	public abstract int getcha();
+	public abstract int getSize();
+	public abstract int getNaturalArmor();
 }
