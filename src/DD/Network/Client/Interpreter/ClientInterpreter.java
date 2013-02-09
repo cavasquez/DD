@@ -1,22 +1,22 @@
-package DD.Network.Server.Interpreter;
+package DD.Network.Client.Interpreter;
 
+import DD.Network.Client.ClientSystem;
 import DD.Network.Message.NetworkMessage;
-import DD.Network.Server.ServerSystem;
 
 /*****************************************************************************************************
- * ServerInterpreter will be used by ServerSystem to interpret every message. 
+ * ServerInterpreter will be used by ClientSystem to interpret every message. 
  * 
  * The interpreter should have an equivalent ability for which it is interpreting. The interpreter will
- * be named I_MessageName so as to provide an easy and obvious scheme.
+ * be named I_MessageName so as to provide an easy and obvious scheme to follow.
  ******************************************************************************************************/
 
-public abstract class ServerInterpreter 
+public abstract class ClientInterpreter 
 {
 	/************************************ Class Attributes *************************************/
-	protected static ServerSystem system;
+	protected static ClientSystem system;
 	
 	/************************************ Class Methods *************************************/
-	public void interpret(int listenerID, NetworkMessage message) {}
-	public void setServerSystem(ServerSystem system) {}
+	public void interpret(NetworkMessage message) {}
+	public void setClientSystem(ClientSystem system) {}
 
-} /* end ServerInterpreter class */
+} /* end ClientInterpreter class */

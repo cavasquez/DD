@@ -128,14 +128,13 @@ public class ClientTable
 	
 	public Client removeClient(int clientID)
 	{
-		int index = -1;
 		Client returner = null;
 		
 		for (Client client : clientList)
 		{
 			if (client.clientID == clientID)
 			{ 
-				index = clientList.indexOf(client);
+				int index = clientList.indexOf(client);
 				returner = client;
 				clientList.remove(index);
 			} /* end if */
@@ -148,5 +147,24 @@ public class ClientTable
 	{
 		return(clientList);
 	} /* end getUserList */
+	
+	/******************************************************************************
+	 ******************************* Getter Methods *******************************
+	 ******************************************************************************/
+	public InetAddress getListenerIP(int listenerID)
+	{
+		InetAddress ip = null;
+		for (Client client : clientList)
+		{
+			if (client.listenerID != null)
+			{
+				if (client.listenerID == listenerID) ip = client.ip;
+				
+			} /* end if */
+			
+		} /* end for loop */
+		
+		return ip;
+	} /* end getListener IP */
 	
 } /* end UserTable */

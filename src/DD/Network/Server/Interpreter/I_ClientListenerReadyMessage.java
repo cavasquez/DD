@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import DD.Network.Network;
 import DD.Network.NetworkSystem;
 import DD.Network.Sender;
+import DD.Network.Message.AddUserMessage;
 import DD.Network.Message.ClientListenerReadyMessage;
 import DD.Network.Message.NetworkMessage;
 import DD.Network.Server.Client;
@@ -15,11 +17,12 @@ import DD.Network.Server.ServerSender;
 
 /*****************************************************************************************************
  * I_ClientListenerReadyMessage will create a ServerSender to connect to the clients ClientListener
- * and then add it to the tale.
+ * and then add it to the table. Furthermore, we will communicate to the client it's brothers (peers).
  ******************************************************************************************************/
 
 public class I_ClientListenerReadyMessage extends ServerInterpreter
 {
+	@Override
 	public void interpret(int listenerID, NetworkMessage message)
 	{
 		ClientTable clientList = system.getClientList();
@@ -47,11 +50,24 @@ public class I_ClientListenerReadyMessage extends ServerInterpreter
 					
 					if (connected)
 					{
-						/* Successfully connected. Create ServerSender, open streams, and add to Client list */
+						/* Successfully connected. Create ServerSender, open streams, and add to Client list.
+						 * Then communicate to the ClientListener it's new peers */
 						ServerSender sender = new ServerSender(senderSocket);
 						sender.setUp();
-						client.listenerID = sender.getID();
-						client.sender = sender;
+						system.addSender(client.clientID, sender.getID(), sender);
+						
+						/* Communicate to the client it's peers */
+						ArrayList<Client> brothers = clientList.getClientList();
+						for(Client brother : brothers)
+						{/* Send message to everyone except the server */
+							if (brother.clientID != Network.GM_USER_ID && brother.listenerID != listenerID)
+							{
+								AddUserMessage am = new AddUserMessage(brother.clientID, brother.username, brother.ip);
+								system.sendMessage(Network.GM_USER_ID, client.clientID, am);
+							} /* end if */
+							
+						} /* end for loop */
+						
 					} /* end if */
 					
 				} /* end if */

@@ -23,9 +23,13 @@ public interface Network
 	/************************************ Class Constants *************************************/
 	public static final int EVERYONE = -1;		/* a message sent to EVERYONE will be to -1 */
 	public static int GM_USER_ID = -2;			/* GM (Server) will always have an ID of -1 */
+	public static int SELF = -3;				/* Send message to self (for Clients) */
 	
 	/************************************ Class Methods *************************************/
+	/* Send message on part of some part of the system (ChatSystem, CombatSystem, etc.) */
 	public boolean sendMessage(int sender, int receiver, Message message);
+	
+	/* Get messaeg from server or client */
 	public boolean getMessage(int listenerID, NetworkMessage message);
 	
 } /* end Network class  */

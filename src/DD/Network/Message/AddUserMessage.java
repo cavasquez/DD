@@ -1,5 +1,7 @@
 package DD.Network.Message;
 
+import java.net.InetAddress;
+
 
 /*****************************************************************************************************
 * AddUserMessage is a message send by the Server to the client informing it that there is a new peer
@@ -11,13 +13,15 @@ public class AddUserMessage extends Message
 	/************************************ Class Attributes *************************************/
 	private int playerID;
 	private String username;
+	private InetAddress ip;
 	
 	/************************************ Class Methods *************************************/
-	public AddUserMessage(int playerID, String username) 
+	public AddUserMessage(int playerID, String username, InetAddress ip) 
 	{
 		super(Message.ADD_USER_MESSAGE);
 		this.playerID = playerID;
 		this.username = username;
+		this.ip = ip;
 	} /* end AddUserMessage constructor */
 	
 	/******************************************************************************
@@ -32,5 +36,10 @@ public class AddUserMessage extends Message
 	{
 		return username;
 	} /* end getUsername method */
+	
+	public InetAddress getIP()
+	{
+		return ip;
+	} /* end getIP method */
 	
 } /* end AddUserMessage class */

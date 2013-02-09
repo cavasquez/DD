@@ -1,5 +1,6 @@
 package DD.Network.Server;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import DD.Network.MessageQueue;
 import DD.Network.Network;
@@ -14,9 +15,8 @@ import DD.Network.Server.Interpreter.ServerInterpreter;
 
 /*****************************************************************************************************
  * ServerSystem will be in charge of routing the messages received by the server and distributing
- * them to all the clients(except for the sender).
- * 
- * For the servers sake, it will be a singleton to choke entry and retain knowledge of Sockets.
+ * them to all the clients. It will also accept messages from the client and route them to all the peers
+ * except the sender client. 
  * 
  * The server will use interpreters which will hold the server logic for different kinds of messages.
  ******************************************************************************************************/
@@ -28,13 +28,13 @@ public class ServerSystem implements Network
 	private static ServerInterpreter[] system = null;
 	private static int clientID;						/* Unique ID to be assigned to clients */
 	@SuppressWarnings("unused")
-	private MessageQueue queue = null;					/* reference to MessageQueue thread. Will need to be cleaned up */
+	private static MessageQueue queue = null;					/* reference to MessageQueue thread. Will need to be cleaned up */
 	
 	/************************************ Class Methods *************************************/
 	public ServerSystem() 
 	{
 		clientID = 0;
-		
+		clientList = new ClientTable();
 		system = new ServerInterpreter[Message.NUM_OF_MESSAGES];
 		system[Message.COMBAT_MESSAGE] = new I_CombatMessage();
 		system[Message.CHAT_MESSAGE] = new I_ChatMessage();
@@ -45,10 +45,10 @@ public class ServerSystem implements Network
 		system[Message.COMBAT_MESSAGE].setServerSystem(this);
 		
 		/* TODO: get username from wherever it's made, and then:
-		 * addUser(Network.GEM_USER_ID, username, null); */
+		 * addClient(Network.GEM_USER_ID, username, null); */
 	} /* end ServerSystem constructor */
 	
-	public static void interpret(int listenerID, NetworkMessage message)
+	public void interpret(int listenerID, NetworkMessage message)
 	{
 		/* Assume all messages are of correct type and legally formatted.
 		 * In any case, messages are always given by the ServerListener */
@@ -107,23 +107,6 @@ public class ServerSystem implements Network
 		return sent;
 	} /* end sendMessage method */
 	
-	public boolean removeClient(int clientID)
-	{
-		boolean success = false;
-		Client client = clientList.removeClient(clientID);
-		
-		if (client != null)
-		{ /* successfully removed client from list. Terminate socket and kill thread. */
-			success = true;
-			client.sender.close();
-			client.listener.close();
-		} /* end if */
-		
-		/* if client = null then clientID never existed */
-		
-		return success;
-	} /* end removeServer method */
-	
 	public static boolean validMessage(int type)
 	{
 		/* Check to see if the message is supported by the system. Used only for getMessage */
@@ -143,6 +126,44 @@ public class ServerSystem implements Network
 		
 		return valid;
 	} /* end validMessage method */
+	
+	/************************************ clineList Related Methods ******************************/
+	public boolean removeClient(int clientID)
+	{
+		boolean success = false;
+		Client client = clientList.removeClient(clientID);
+		
+		if (client != null)
+		{ /* successfully removed client from list. Terminate socket and kill thread. */
+			success = true;
+			client.sender.close();
+			client.listener.close();
+		} /* end if */
+		
+		/* if client = null then clientID never existed */
+		
+		return success;
+	} /* end removeServer method */
+	
+	public boolean addListener(int listenerID, ServerListener listener, InetAddress ip )
+	{
+		return clientList.addListener(listenerID, listener, ip);
+	} /* end addListener method */
+	
+	public boolean addSender(int clientID, int senderID, ServerSender sender)
+	{
+		return clientList.addSender(senderID, senderID, sender);
+	} /* end addSender method */
+	
+	public boolean addUsername(int listenerID, int clientID, String username)
+	{
+		return clientList.addUsername(listenerID, clientID, username);
+	} /* end addUsername method */
+	
+	public InetAddress getListenerIP(int listenerID)
+	{
+		return clientList.getListenerIP(listenerID);
+	} /* end getListenerIP method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
