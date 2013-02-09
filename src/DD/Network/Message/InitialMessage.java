@@ -11,13 +11,15 @@ public class InitialMessage extends Message
 	/************************************ Class Attributes *************************************/
 	private String username;
 	private boolean valid; 
+	private Integer id;
 	
 	/************************************ Class Methods *************************************/
-	public InitialMessage(String username, boolean valid)
+	public InitialMessage(String username, boolean valid, Integer id)
 	{
 		super(Message.INITIAL_MESSAGE);
 		this.username = username;
 		this.valid = valid;
+		this.id = id;
 		
 	} /* end InitiaMessage constructor */
 	
@@ -33,5 +35,10 @@ public class InitialMessage extends Message
 	{	
 		return valid;
 	} /* end getValid method */
+	
+	public Integer getID()
+	{
+		return id;
+	} /* end getID method */
 	
 } /* end InitialMessage */

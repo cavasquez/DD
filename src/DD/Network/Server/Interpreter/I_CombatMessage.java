@@ -8,7 +8,6 @@ import DD.Network.Message.NetworkMessage;
 
 public class I_CombatMessage extends ServerInterpreter
 {
-
 	@Override
 	public void interpret(int listenerID, NetworkMessage message) {
 		// TODO Auto-generated method stub

@@ -31,29 +31,14 @@ public class I_InitialMessage extends ServerInterpreter
 		if (clientList.addUsername(listenerID, newID, im.getUsername()))
 		{
 			/* Username was successfully added to userList. Now, give the client
-			 * it's new serverID, inform it of it's peers, and inform the peers
-			 * of their new brother. */
+			 * it's new serverID, inform it's peers of their new brother. */
 			
 			/* Tell client it's serverID */
-			
-			InitialMessage confirmation = new InitialMessage(Integer.toString(newID), true);
+			InitialMessage confirmation = new InitialMessage(im.getUsername(), true, newID);
 			system.sendMessage(Network.GM_USER_ID, newID, confirmation);
 			
-			/* Communicate to the client it's peers */
-			ArrayList<Client> clients = clientList.getClientList();
-			AddUserMessage am = null;
-			for(Client client : clients)
-			{/* Send message to everyone except the server */
-				if (client.clientID != Network.GM_USER_ID && client.listenerID != listenerID)
-				{
-					am = new AddUserMessage(newID, client.username);
-					system.sendMessage(Network.GM_USER_ID, newID, am);
-				} /* end if */
-				
-			} /* end for loop */
-			
 			/* Communicate to the peers their new brother */
-			am = new AddUserMessage(newID, im.getUsername());
+			AddUserMessage am = new AddUserMessage(newID, im.getUsername(), system.getListenerIP(listenerID));
 			system.sendMessage(Network.GM_USER_ID, Network.EVERYONE, am, newID);
 			
 		} /* end if */
@@ -61,10 +46,9 @@ public class I_InitialMessage extends ServerInterpreter
 		{
 			/* Username already exists. Process failed. Alert the client and disconnect.
 			 * Then, remove Server from userList */
-			InitialMessage rejection = new InitialMessage(null, false);
+			InitialMessage rejection = new InitialMessage(null, false, null);
 			system.sendMessage(Network.GM_USER_ID, newID, rejection);
 			system.removeClient(listenerID); /* removeUser kills the Server thread */
-			
 		} /* end else */
 		
 	} /* end interpret method */
