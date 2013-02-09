@@ -19,16 +19,6 @@ public class TestMapMain {
 				}
 			}
 		
-		
-		
-		for (int i = 0; i < world.world[0][0].mapSize; i++) {
-			for (int j = 0; j < world.world[0][0].mapSize; j++) {
-				if(world.world[0][0].tempObjects[i][j] !=null)
-				System.out.println(world.world[0][0].tempObjects[i][j].name);
-			}
-		}
-	
-		
 		for (int i = 0; i < world.world[0][0].mapSize; i++) {
 			for (int j = 0; j < world.world[0][0].mapSize; j++) {
 				if(i>0&&i<5 && j>0&&j<5)
