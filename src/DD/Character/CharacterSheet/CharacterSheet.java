@@ -85,7 +85,18 @@ public class CharacterSheet
 	 * column index 4 = enhance
 	 * column index 5 = misc
 	 */
+	
+	
 	private int[][] rawStats;
+	int stat;
+	int base; 
+	int inher;
+	int enhance;
+	int misc;
+	
+	/*STRENGTH*/
+	
+	//SETTERS
 	public void setStrTotal()//enchance set to 0
 	{
 		base =rawStats[ABILITY_STRENGTH][ABILITY_BASE];
@@ -94,6 +105,12 @@ public class CharacterSheet
 		misc = 0;
 		
 		rawStats[ABILITY_STRENGTH][ABILITY_TOTAL]= base + inher + enhance + misc;
+		
+	}
+	public void setStrMod()
+	{
+		int total = getStrTotal();
+		rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER] =(total - 10 )/ 2; 
 		
 	}
 	public void setStrBase()
@@ -106,35 +123,13 @@ public class CharacterSheet
 		stat = race.getStr();
 		rawStats[ABILITY_STRENGTH][ABILITY_INHERENT] = stat;
 	}
-	//NEED TO DO THE SAME TO THE REST AS I DID TO STR FOR SETTERS
-	public void setDex(Race race)
+	public void setStrMisc(/*Not sure what goes here*/)
 	{
-		stat = race.getDex();
-		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] = stat;
+		stat = 0;
+		rawStats[ABILITY_STRENGTH][ABILITY_MISC] = stat;
 	}
-	public void setCon(Race race)
-	{
-		 stat = race.getCon();
-		rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL] = stat;
-	}
-	public void setInt(Race race)
-	{
-		stat = race.getIntel();
-		rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL] = stat;
-	}
-	public void setWis(Race race)
-	{
-		stat = race.getWis();
-		rawStats[ABILITY_WISDOM][ABILITY_TOTAL] = stat;
-	}
-	public void setCha(Race race)
-	{
-		stat = race.getcha();
-		rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] = stat;
-	}
-	/*GETTERS*/
+	//GETTERS
 	
-	//STR
 	public int getStrTotal()
 	{
 		stat =rawStats[ABILITY_STRENGTH][ABILITY_TOTAL];
@@ -160,62 +155,183 @@ public class CharacterSheet
 		stat =rawStats[ABILITY_STRENGTH][ABILITY_ENHANCE];
 		return stat;
 	}
-	
-	//DEX
-	public int getDexTotal()
+	public int getStrMisc()
 	{
-		stat =rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL];
-		return stat;
-	}
-	public int getDexMod()
-	{
-		stat =rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
-		return stat;
-	}
-	public int getDexBase()
-	{
-		stat =rawStats[ABILITY_DEXTERITY][ABILITY_BASE];
-		return stat;
-	}
-	public int getDexInherent()
-	{
-		stat =rawStats[ABILITY_DEXTERITY][ABILITY_INHERENT];
-		return stat;
-	}
-	public int getDexEnhance()
-	{
-		stat =rawStats[ABILITY_DEXTERITY][ABILITY_ENHANCE];
+		stat =rawStats[ABILITY_STRENGTH][ABILITY_MISC];
 		return stat;
 	}
 	
-	//Con
-	public int getConTotal()
-	{
-		stat =rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL];
-		return stat;
-	}
-	public int getConMod()
-	{
-		stat =rawStats[ABILITY_CONSTITUTION][ABILITY_MODIFIER];
-		return stat;
-	}
-	public int getConBase()
-	{
-		stat =rawStats[ABILITY_CONSTITUTION][ABILITY_BASE];
-		return stat;
-	}
-	public int getConInherent()
-	{
-		stat =rawStats[ABILITY_CONSTITUTION][ABILITY_INHERENT];
-		return stat;
-	}
-	public int getConEnhance()
-	{
-		stat =rawStats[ABILITY_CONSTITUTION][ABILITY_ENHANCE];
-		return stat;
-	}
 	
-	//Int
+	/*DEX*/
+	
+	//SETTERS
+	public void setDexTotal()//enchance set to 0
+	{
+		base =rawStats[ABILITY_DEXTERITY][ABILITY_BASE];
+		inher =rawStats[ABILITY_DEXTERITY][ABILITY_INHERENT];
+		enhance = 0;
+		misc = 0;
+		
+		rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL]= base + inher + enhance + misc;
+		
+	}
+		public void setDexMod()
+		{
+			int total = getDexTotal();
+			rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER] =(total - 10 )/ 2; 
+			
+		}
+		public void setDexBase()
+		{
+			stat = abilityRoll();
+			rawStats[ABILITY_DEXTERITY][ABILITY_BASE] = stat;
+		}
+		public void setInher(Race race)
+		{
+			stat = race.getDex();
+			rawStats[ABILITY_DEXTERITY][ABILITY_INHERENT] = stat;
+		}
+		public void setDexMisc(/*Not sure what goes here*/)
+		{
+			stat = 0;
+			rawStats[ABILITY_DEXTERITY][ABILITY_MISC] = stat;
+		}
+		//GETTERS
+		
+		public int getDexTotal()
+		{
+			stat =rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL];
+			return stat;
+		}
+		public int getDexMod()
+		{
+			stat =rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
+			return stat;
+		}
+		public int getDexBase()
+		{
+			stat =rawStats[ABILITY_DEXTERITY][ABILITY_BASE];
+			return stat;
+		}
+		public int getDexInherent()
+		{
+			stat =rawStats[ABILITY_DEXTERITY][ABILITY_INHERENT];
+			return stat;
+		}
+		public int getDexEnhance()
+		{
+			stat =rawStats[ABILITY_DEXTERITY][ABILITY_ENHANCE];
+			return stat;
+		}
+		public int getDexMisc()
+		{
+			stat =rawStats[ABILITY_DEXTERITY][ABILITY_MISC];
+			return stat;
+		}
+	
+	/*CON*/
+		//SETTERS
+		public void setConTotal()//enchance set to 0
+		{
+			base =rawStats[ABILITY_CONSTITUTION][ABILITY_BASE];
+			inher =rawStats[ABILITY_CONSTITUTION][ABILITY_INHERENT];
+			enhance = 0;
+			misc = 0;
+			
+			rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL]= base + inher + enhance + misc;
+			
+		}
+		public void setConMod()
+		{
+			int total = getConTotal();
+			rawStats[ABILITY_CONSTITUTION][ABILITY_MODIFIER] =(total - 10 )/ 2; 
+			
+		}
+		public void setConBase()
+		{
+			stat = abilityRoll();
+			rawStats[ABILITY_CONSTITUTION][ABILITY_BASE] = stat;
+		}
+		public void setConInher(Race race)
+		{
+			stat = race.getCon();
+			rawStats[ABILITY_CONSTITUTION][ABILITY_INHERENT] = stat;
+		}
+		public void setConMisc(/*Not sure what goes here*/)
+		{
+			stat = 0;
+			rawStats[ABILITY_CONSTITUTION][ABILITY_MISC] = stat;
+		}
+		//GETTERS
+		
+		public int getConTotal()
+		{
+			stat =rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL];
+			return stat;
+		}
+		public int getConMod()
+		{
+			stat =rawStats[ABILITY_CONSTITUTION][ABILITY_MODIFIER];
+			return stat;
+		}
+		public int getConBase()
+		{
+			stat =rawStats[ABILITY_CONSTITUTION][ABILITY_BASE];
+			return stat;
+		}
+		public int getConInherent()
+		{
+			stat =rawStats[ABILITY_CONSTITUTION][ABILITY_INHERENT];
+			return stat;
+		}
+		public int getConEnhance()
+		{
+			stat =rawStats[ABILITY_CONSTITUTION][ABILITY_ENHANCE];
+			return stat;
+		}
+		public int getConMisc()
+		{
+			stat =rawStats[ABILITY_CONSTITUTION][ABILITY_MISC];
+			return stat;
+		}
+	
+	/*INT*/
+		//SETTERS
+		
+	
+		public void setIntTotal()//enchance set to 0
+		{
+			base =rawStats[ABILITY_INTELLIGENCE][ABILITY_BASE];
+			inher =rawStats[ABILITY_INTELLIGENCE][ABILITY_INHERENT];
+			enhance = 0;
+			misc = 0;
+			
+			rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL]= base + inher + enhance + misc;
+			
+		}
+		public void setIntMod()
+		{
+			int total = getIntTotal();
+			rawStats[ABILITY_INTELLIGENCE][ABILITY_MODIFIER] =(total - 10 )/ 2; 
+			
+		}
+		public void setIntBase()
+		{
+			stat = abilityRoll();
+			rawStats[ABILITY_INTELLIGENCE][ABILITY_BASE] = stat;
+		}
+		public void setIntInher(Race race)
+		{
+			stat = race.getIntel();
+			rawStats[ABILITY_INTELLIGENCE][ABILITY_INHERENT] = stat;
+		}
+		public void setIntMisc(/*Not sure what goes here*/)
+		{
+			stat = 0;
+			rawStats[ABILITY_INTELLIGENCE][ABILITY_MISC] = stat;
+		}
+	
+	//GETTERS
 	public int getIntTotal()
 	{
 		stat =rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL];
@@ -241,8 +357,48 @@ public class CharacterSheet
 		stat =rawStats[ABILITY_INTELLIGENCE][ABILITY_ENHANCE];
 		return stat;
 	}
+	public int getIntMisc()
+	{
+		stat =rawStats[ABILITY_INTELLIGENCE][ABILITY_MISC];
+		return stat;
+	}
 	
-	//WIS
+	
+	/*WIS*/
+	//SETTERS
+	public void setWisTotal()//enchance set to 0
+	{
+		base =rawStats[ABILITY_WISDOM][ABILITY_BASE];
+		inher =rawStats[ABILITY_WISDOM][ABILITY_INHERENT];
+		enhance = 0;
+		misc = 0;
+		
+		rawStats[ABILITY_WISDOM][ABILITY_TOTAL]= base + inher + enhance + misc;
+		
+	}
+		public void setWisMod()
+		{
+			int total = getWisTotal();
+			rawStats[ABILITY_WISDOM][ABILITY_MODIFIER] =(total - 10 )/ 2; 
+			
+		}
+		public void setWisBase()
+		{
+			stat = abilityRoll();
+			rawStats[ABILITY_WISDOM][ABILITY_BASE] = stat;
+		}
+		public void setWisInher(Race race)
+		{
+			stat = race.getWis();
+			rawStats[ABILITY_WISDOM][ABILITY_INHERENT] = stat;
+		}
+		public void setWisMisc(/*Not sure what goes here*/)
+		{
+			stat = 0;
+			rawStats[ABILITY_WISDOM][ABILITY_MISC] = stat;
+		}
+	
+	//GETTERS
 	public int getWisTotal()
 	{
 		stat =rawStats[ABILITY_WISDOM][ABILITY_TOTAL];
@@ -268,14 +424,55 @@ public class CharacterSheet
 		stat =rawStats[ABILITY_WISDOM][ABILITY_ENHANCE];
 		return stat;
 	}
+	public int getWisMisc()
+	{
+		stat =rawStats[ABILITY_WISDOM][ABILITY_MISC];
+		return stat;
+	}
+	/*CHA*/
+	//SETTERS
+	
+	public void setChaTotal()//enchance set to 0
+	{
+		base =rawStats[ABILITY_CHARISMA][ABILITY_BASE];
+		inher =rawStats[ABILITY_CHARISMA][ABILITY_INHERENT];
+		enhance = 0;
+		misc = 0;
+		
+		rawStats[ABILITY_CHARISMA][ABILITY_TOTAL]= base + inher + enhance + misc;
+		
+	}
+	public void setChaMod()
+	{
+		int total = getChaTotal();
+		rawStats[ABILITY_CHARISMA][ABILITY_MODIFIER] =(total - 10 )/ 2; 
+				
+	}
+	public void setChaBase()
+	{
+		stat = abilityRoll();
+		rawStats[ABILITY_CHARISMA][ABILITY_BASE] = stat;
+	}
+	public void setChaInher(Race race)
+	{
+		stat = race.getcha();
+		rawStats[ABILITY_CHARISMA][ABILITY_INHERENT] = stat;
+	}
+	public void setChaMisc(/*Not sure what goes here*/)
+	{
+		stat = 0;
+		rawStats[ABILITY_CHARISMA][ABILITY_MISC] = stat;
+	}
+	
+	//GETTERs
 	public int getChaTotal()
 	{
-		stat =rawStats[ABILITY_WISDOM][ABILITY_TOTAL];
+		stat =rawStats[ABILITY_CHARISMA][ABILITY_TOTAL];
 		return stat;
 	}
 	public int getChaMod()
 	{
-		stat =rawStats[ABILITY_WISDOM][ABILITY_MODIFIER];
+		stat =rawStats[ABILITY_CHARISMA][ABILITY_MODIFIER];
 		return stat;
 	}
 	public int getChaBase()
@@ -293,7 +490,6 @@ public class CharacterSheet
 		stat =rawStats[ABILITY_CHARISMA][ABILITY_ENHANCE];
 		return stat;
 	}
-	
 	//END OF ABILITY
 	/********* HITPOINTS *********/
 	private int hitpoints;//work on this later
@@ -604,68 +800,168 @@ public class CharacterSheet
 	public static final int SAVE_ENHANCE = 3;
 	 
 	private int[][] savingthrows;
-	public void setFort(CharacterClass clas)
+	
+	//FORT
+	
+	//SETTERS
+	public void setFortBase(ClassRecorder cr)
 	{
-		stat = clas.getFort();
+		stat =cr.getFort();
+		savingthrows[SAVE_FORT][ SAVE_CLASSBASE] = stat;
+	}
+	public void setFortAbility()
+	{
+		stat =rawStats[ABILITY_CONSTITUTION][ABILITY_MODIFIER];
+		savingthrows[SAVE_FORT][ SAVE_ABILITY] = stat;
+	}
+	public void setFortEnhance(/*need something to give enhance values*/)
+	{
+		stat = 0;
+		savingthrows[SAVE_FORT][ SAVE_ENHANCE] = stat;
+	}
+	public void setFortTotal()
+	{
+		int base = getFortBase();
+		int ability = getFortAbility();
+		int enhance = getFortEnhance();
+		stat = base + ability + enhance;
 		savingthrows[SAVE_FORT][ SAVE_TOTAL] = stat;
 	}
-	public void setRef(CharacterClass clas)
-	{
-		stat = clas.getRef();
-		savingthrows[SAVE_REF][ SAVE_TOTAL] = stat;
-	}
-	public void setWill(CharacterClass clas)
-	{
-		stat = clas.getWill();
-		savingthrows[SAVE_WILL][ SAVE_TOTAL] = stat;
-	}
 	
-	/*Getters*/
-	//FIX ME dont have gets for columns yet
 	
-	public int getFort()
+	//Getters
+	public int getFortBase()
 	{
+		
+		stat =savingthrows[SAVE_FORT][ SAVE_CLASSBASE]; 
+		return stat;
+	}
+	public int getFortAbility()
+	{
+		
+		stat =savingthrows[SAVE_FORT][ SAVE_ABILITY]; 
+		return stat;
+	}
+	public int getFortEnhance()
+	{
+		
+		stat =savingthrows[SAVE_FORT][ SAVE_ENHANCE]; 
+		return stat;
+	}
+	public int getFortTotal()
+	{
+		
 		stat =savingthrows[SAVE_FORT][ SAVE_TOTAL]; 
 		return stat;
 	}
-	public int getRef()
-	{
-		stat =savingthrows[SAVE_REF][ SAVE_TOTAL]; 
-		return stat;
-	}
-	public int getWill()
-	{
-		stat =savingthrows[SAVE_WILL][ SAVE_TOTAL]; 
-		return stat;
-	}
 	
-	public void setBase(int stat, int statValue)
-	{
+	
+	/* REFLEX */
+	//SETTERS
+		public void setRefBase(ClassRecorder cr)
+		{
+			stat =cr.getRef();
+			savingthrows[SAVE_REF][ SAVE_CLASSBASE] = stat;
+		}
+		public void setRefAbility()
+		{
+			stat =rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
+			savingthrows[SAVE_REF][ SAVE_ABILITY] = stat;
+		}
+		public void setRefEnhance(/*need something to give enhance values*/)
+		{
+			stat = 0;
+			savingthrows[SAVE_REF][ SAVE_ENHANCE] = stat;
+		}
+		public void setRefTotal()
+		{
+			int base = getRefBase();
+			int ability = getRefAbility();
+			int enhance = getRefEnhance();
+			stat = base + ability + enhance;
+			savingthrows[SAVE_REF][ SAVE_TOTAL] = stat;
+		}
 		
-		rawStats[stat][ABILITY_BASE] = statValue; 
 		
-	}
-	public int getBase(int stat)
-	{
-		int returner =rawStats[stat][ABILITY_BASE];
-		return returner;
-	}
-	public void setInher()
-	{
-		//no idea what this is
-	}
-	public void setMod(int stat, int statValue)
-	{
+		//Getters
+		public int getRefBase()
+		{
+			
+			stat =savingthrows[SAVE_REF][ SAVE_CLASSBASE]; 
+			return stat;
+		}
+		public int getRefAbility()
+		{
+			
+			stat =savingthrows[SAVE_REF][ SAVE_ABILITY]; 
+			return stat;
+		}
+		public int getRefEnhance()
+		{
+			
+			stat =savingthrows[SAVE_REF][ SAVE_ENHANCE]; 
+			return stat;
+		}
+		public int getRefTotal()
+		{
+			
+			stat =savingthrows[SAVE_REF][ SAVE_TOTAL]; 
+			return stat;
+		}
+	
+		//WILL
+		//SETTERS
+		public void setWillBase(ClassRecorder cr)
+		{
+			stat =cr.getWill();
+			savingthrows[SAVE_WILL][ SAVE_CLASSBASE] = stat;
+		}
+		public void setWillAbility()
+		{
+			stat =rawStats[ABILITY_WISDOM][ABILITY_MODIFIER];
+			savingthrows[SAVE_WILL][ SAVE_ABILITY] = stat;
+		}
+		public void setWillEnhance(/*need something to give enhance values*/)
+		{
+			stat = 0;
+			savingthrows[SAVE_WILL][ SAVE_ENHANCE] = stat;
+		}
+		public void setWillTotal()
+		{
+			int base = getWillBase();
+			int ability = getWillAbility();
+			int enhance = getWillEnhance();
+			stat = base + ability + enhance;
+			savingthrows[SAVE_WILL][ SAVE_TOTAL] = stat;
+		}
 		
-		rawStats[stat][ABILITY_MODIFIER] =(statValue - 10 )/ 2; 
 		
-	}
-	public int getMod(int stat)
-	{
-		
-		int r =rawStats[stat][ABILITY_MODIFIER]; 
-		return r;
-	}
+		//Getters
+		public int getWillBase()
+		{
+			
+			stat =savingthrows[SAVE_WILL][ SAVE_CLASSBASE]; 
+			return stat;
+		}
+		public int getWillAbility()
+		{
+			
+			stat =savingthrows[SAVE_WILL][ SAVE_ABILITY]; 
+			return stat;
+		}
+		public int getWillEnhance()
+		{
+			
+			stat =savingthrows[SAVE_WILL][ SAVE_ENHANCE]; 
+			return stat;
+		}
+		public int getWillTotal()
+		{
+			
+			stat =savingthrows[SAVE_WILL][ SAVE_TOTAL]; 
+			return stat;
+		}
+	
 	
 	
 	/*
@@ -747,16 +1043,7 @@ public class CharacterSheet
 		return(this.race);
 	}
 	
-	/************************************ Stat Setters/Getters *************************************/
-	/*SETTERS*/
-	//need to add
-	//fix me need more parameters for sets like add rolls = base, add inherence, enhance = 0, and misc = 0;
-	int stat;
-	int base; 
-	int inher;
-	int enhance;
-	int misc;
-	
+
 	
 	
 	
