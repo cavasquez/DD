@@ -1,6 +1,7 @@
 package DD.Network;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 
 import DD.Network.Message.NetworkMessage;
@@ -39,7 +40,7 @@ public class MessageQueue extends Thread
 	{
 		super("MessageQueue Thread");
 		system = new NetworkSystem();
-		messageQueue = (Queue<QueueMessage>) new ArrayList<QueueMessage>();
+		messageQueue = (Queue<QueueMessage>) new LinkedList<QueueMessage>();
 		hasMessage = false;
 		done = false;
 	} /* end MessageQueue constructor */

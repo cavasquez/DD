@@ -2,6 +2,7 @@ package DD.SlickTools;
 
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Queue;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -33,13 +34,13 @@ public class Entity
 		this.id = id;
 		this.position = position;
 		components = new ArrayList<Component>();
-		//recycledIds =  (Queue<Integer>) new List();
+		recycledIds = new LinkedList<Integer>();
 	} /* end Entity constructor */
 	
 	public int addComponent(Component component)
 	{ /* add a component to the components ArrayList and return it's id */
-		Integer id = this.componentId++;
-		//if((id = recycledIds.poll()) != null) id = this.componentId++; /* Take a recycled id. If none exists, take an ID from id and increment it */
+		Integer id = this.componentId;
+		if((id = recycledIds.poll()) == null) id = this.componentId++; /* Take a recycled id. If none exists, take an ID from id and increment it */
 		//TODO: implement the above later
 		component.setOwnerEntity(this);
 		component.setId(id);
@@ -61,7 +62,7 @@ public class Entity
 			{ /* component found. remove it */
 				found = true; 
 				components.remove(index);
-				//recycledIds.offer(id); /* TODO: implement later */
+				recycledIds.offer(id); /* TODO: implement later */
 			} /* end if */
 			
 		} /* end while loop */

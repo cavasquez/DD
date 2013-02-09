@@ -49,6 +49,7 @@ public class I_InitialMessage extends ClientInterpreter
 			if (success)
 			{/* successfully connected, send server ClientListenerReadyMessage */
 				ClientListenerReadyMessage clrm = new ClientListenerReadyMessage(system.getClientID());
+				system.sendMessage(system.getClientID(), , message)
 			} /*  end if*/
 			
 		} /* end else */

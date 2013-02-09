@@ -3,7 +3,6 @@ package DD.CombatSystem;
 import java.util.ArrayList;
 
 import com.sun.xml.internal.stream.Entity;
-
 import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.CombatSystem.Interpreter.Standard.I_StandardAttack;
 import DD.MapTool.Map;
