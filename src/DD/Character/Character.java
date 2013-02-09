@@ -100,4 +100,10 @@ public class Character extends Entity
 		return(returner);
 	} /* end getSubActions method */
 	
+	@Override
+	public int getId()
+	{
+		return this.id;
+	} /* end getId method */
+	
 } /* Character class */

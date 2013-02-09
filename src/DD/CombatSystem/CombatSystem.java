@@ -21,15 +21,11 @@ import DD.Network.Message.Message;
  * will know what messages it can send and what actions it can perform. The actions that are allowed 
  * will be heavily based on feats, abilities, and spells. The GameSystem is essentially where the
  * core of the GameLogic lies.
- * 
- * CombatSystem will be a singleton to choke access (mostly for the server).
  ******************************************************************************************************/
 
 public class CombatSystem 
 {
 	/************************************ Class Constants *************************************/
-	private static volatile CombatSystem instance = null;
-	
 	private static int I = 0;
 	public static final int STANDARD_ATTACK = I++;
 	public static int NUM_OF_INTERPRETERS = I;
@@ -40,7 +36,7 @@ public class CombatSystem
 	static private CombatInterpreter[] system;			/* The core of CombatSystem */					
 	
 	/************************************ Class Methods *************************************/
-	private CombatSystem()
+	public CombatSystem()
 	{
 		system = new CombatInterpreter[NUM_OF_INTERPRETERS];
 		
@@ -122,12 +118,6 @@ public class CombatSystem
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public static CombatSystem getInstance()
-	{
-		if (instance == null) instance = new CombatSystem();
-		return instance;
-	} /* end getInstance method */
-	
 	public static Character getCharacter(int characterID)
 	{/* return character with provided characterID */
 		Character returner = null;

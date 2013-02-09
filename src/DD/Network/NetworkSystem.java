@@ -10,9 +10,6 @@ import DD.Network.Server.ServerSystem;
 * NetworkSystem will create a singleton and be the interface through which GameSystem and ChatSystem 
 * (along with any other systems) will communicate with ClientSystem or ServerSystem based on whether
 * the user is a client or a server.
-* 
-* It will also be a singleton so as to not violate the singleton pattern utilized by ClientSystem or
-* ServerSystem.
 ******************************************************************************************************/
 
 public class NetworkSystem implements Network
@@ -24,45 +21,19 @@ public class NetworkSystem implements Network
 	
 	/************************************ Class Attributes *************************************/
 	private static int networkType;
-	private static NetworkSystem instance = null;
-	private static volatile boolena inUse;
+	private static Network network;
 	
 	/************************************ Class Methods *************************************/
-	private NetworkSystem() {}
-	
-	protected static NetworkSystem getInstance()
-	{
-		if (instance == null) instance = new NetworkSystem();
-		inUser = false;
-		return instance;
-	} /* end getInstance method */
-	
-	public static NetworkSystem checkIn()
-	{
-		NetworkSystem returner = null;
-		if (!inUser)
-		{
-			inUser = true;
-			returner = instance;
-		} /* end if */
-		return returner;
-	} /* end checkIn method */
-	
-	public static NetworkSystem checkOut()
-	{
-		inUser = false;
-		return null;
-	} /* end checkOut method */
+	public NetworkSystem() 
+	{}
 	
 	@Override
-	public void sendMessage(int sender, int receiver, Message message) 
+	public boolean sendMessage(int sender, int receiver, Message message)
 	{
-		if (networkType == SERVER) (ServerSystem.getInstance()).sendMessage(sender, receiver, message);
-		else if (networkType == SERVER) (ClientSystem.getInstance()).sendMessage(sender, receiver, message);
-		
+		return network.sendMessage(sender, receiver, message);
 	} /* end sendMessage method */
 	
-	private boolean networkTypeExists(int networkType)
+	private static boolean networkTypeExists(int networkType)
 	{
 		boolean exists = false;
 		if ( networkType == SERVER ||
@@ -78,26 +49,23 @@ public class NetworkSystem implements Network
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
 	@Override
-	public boolean getMessage(int socketID, NetworkMessage message) 
-	{
-		boolean exists = true;
-		if (networkType == SERVER) (ServerSystem.getInstance()).getMessage(socketID, message);
-		else if (networkType == CLIENT) (ClientSystem.getInstance()).getMessage(socketID, message);
-		else exists = false;
-		
-		return exists;
+	public boolean getMessage(int listenerID, NetworkMessage message) 
+	{ /* Get message from client. (This is how client passes messages to NetworkSyste/ServerSystem to interpret). */
+		return network.getMessage(listenerID, message);
 		
 	} /* end getMessage method */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public boolean setNetworkType(int type)
+	public static boolean setNetworkType(int type)
 	{
 		boolean exists = false;
 		if (networkTypeExists(type))
 		{
 			networkType = type;
+			if (networkType == SERVER) network = new ServerSystem();
+			else if (networkType == CLIENT) network = new ClientSystem();
 		}
 		
 		return exists;

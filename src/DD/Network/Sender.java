@@ -13,13 +13,14 @@ import DD.Network.Message.NetworkMessage;
 
 public abstract class Sender extends NetworkSocket
 {
-
-        /************************************ Class Attributes *************************************/
+	/************************************ Class Attributes *************************************/
+	protected static final int sleepTime = 200;		/* Time thread is spent sleeping */ 
 	
 	/************************************ Class Methods *************************************/
-	public Sender(Socket socket, int socketID)
+	public Sender(Socket socket)
 	{
-		super(socket, socketID);
+		super(socket);
+
 	} /* end Server constructor */
 	
 	public void run() {} /* end run method */
@@ -40,8 +41,12 @@ public abstract class Sender extends NetworkSocket
 	
 	public void sendMessage(NetworkMessage message)
 	{
-		messageList.offer(message);
-		sending = true;
+		sendSocketMessage(message);
 	} /* end sendMessage method */
+	
+	public void setUp()
+	{
+		createStreams();
+	} /* end setUp method*/
 	
 } /* end Sender class */

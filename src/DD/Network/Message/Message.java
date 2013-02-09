@@ -18,6 +18,9 @@ public class Message
 	public static final int COMBAT_VALIDATION_MESSAGE = I++;	/* Message returned by CombatSystem to ActionBox */ 
 	public static final int INITIAL_MESSAGE = I++;				/* First Message sent to client/server */
 	public static final int ADD_USER_MESSAGE = I++;				/* Message sent when a new user joins the network */
+	public static final int QUEUE_MESSAGE = I++;				/* Message held by MessageQueue */
+	public static final int NEW_LISTENER_MESSAGE = I++;			/* Message telling NetworkSystem there is a new listener*/
+	public static final int CLIENT_LISTENER_READY_MESSAGE = I++;/* Message telling the server ClientListener is up */
 	public static final int NUM_OF_MESSAGES = I;				/* Total number of messages */
 	
 	/************************************ Class Attributes *************************************/

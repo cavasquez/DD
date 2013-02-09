@@ -25,7 +25,7 @@ public interface Network
 	public static int GM_USER_ID = -2;			/* GM (Server) will always have an ID of -1 */
 	
 	/************************************ Class Methods *************************************/
-	public void sendMessage(int sender, int receiver, Message message);
-	public boolean getMessage(int socketID, NetworkMessage message);
+	public boolean sendMessage(int sender, int receiver, Message message);
+	public boolean getMessage(int listenerID, NetworkMessage message);
 	
 } /* end Network class  */

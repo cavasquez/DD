@@ -6,9 +6,8 @@ import DD.Network.Network;
 import DD.Network.Message.AddUserMessage;
 import DD.Network.Message.InitialMessage;
 import DD.Network.Message.NetworkMessage;
-import DD.Network.Server.Server.ServerSystem;
-import DD.Network.Server.Server.User;
-import DD.Network.Server.Server.UserTable;
+import DD.Network.Server.Client;
+import DD.Network.Server.ClientTable;
 
 /*****************************************************************************************************
  * I_InitialMessage will be used to interpret and process all InitialMessages sent to the Server.
@@ -20,40 +19,42 @@ import DD.Network.Server.Server.UserTable;
  * InitialMessage will also need to update the peers to the presence of the new client.
  ******************************************************************************************************/
 
-public class I_InitialMessage implements ServerInterpreter
+public class I_InitialMessage extends ServerInterpreter
 {
-
 	@Override
-	public void interpret(int serverID, NetworkMessage message) 
+	public void interpret(int listenerID, NetworkMessage message) 
 	{
 		InitialMessage im = (InitialMessage) (message.getMessage());
+		int newID = system.getNewClientID();
+		ClientTable clientList = system.getClientList();
 		
-		if (ServerSystem.getInstance().addUsername(serverID, im.getUsername()))
+		if (clientList.addUsername(listenerID, newID, im.getUsername()))
 		{
 			/* Username was successfully added to userList. Now, give the client
 			 * it's new serverID, inform it of it's peers, and inform the peers
 			 * of their new brother. */
 			
 			/* Tell client it's serverID */
-			InitialMessage confirmation = new InitialMessage(Integer.toString(serverID), true);
-			ServerSystem.getInstance().sendMessage(Network.GM_USER_ID, serverID, confirmation);
+			
+			InitialMessage confirmation = new InitialMessage(Integer.toString(newID), true);
+			system.sendMessage(Network.GM_USER_ID, newID, confirmation);
 			
 			/* Communicate to the client it's peers */
-			ArrayList<User> users = ServerSystem.getInstance().getUserList().getUserList();
+			ArrayList<Client> clients = clientList.getClientList();
 			AddUserMessage am = null;
-			for(User user : users)
-			{
-				if (user.socketID != Network.GM_USER_ID && user.socketID != serverID)
+			for(Client client : clients)
+			{/* Send message to everyone except the server */
+				if (client.clientID != Network.GM_USER_ID && client.listenerID != listenerID)
 				{
-					am = new AddUserMessage(user.socketID, user.username);
-					ServerSystem.getInstance().sendMessage(Network.GM_USER_ID, serverID, am);
+					am = new AddUserMessage(newID, client.username);
+					system.sendMessage(Network.GM_USER_ID, newID, am);
 				} /* end if */
 				
 			} /* end for loop */
 			
 			/* Communicate to the peers their new brother */
-			am = new AddUserMessage(serverID, im.getUsername());
-			ServerSystem.getInstance().sendMessage(Network.GM_USER_ID, Network.EVERYONE, am, serverID);
+			am = new AddUserMessage(newID, im.getUsername());
+			system.sendMessage(Network.GM_USER_ID, Network.EVERYONE, am, newID);
 			
 		} /* end if */
 		else
@@ -61,8 +62,8 @@ public class I_InitialMessage implements ServerInterpreter
 			/* Username already exists. Process failed. Alert the client and disconnect.
 			 * Then, remove Server from userList */
 			InitialMessage rejection = new InitialMessage(null, false);
-			ServerSystem.getInstance().sendMessage(Network.GM_USER_ID, serverID, rejection);
-			ServerSystem.getInstance().removeUser(serverID); /* removeUser kills the Server thread */
+			system.sendMessage(Network.GM_USER_ID, newID, rejection);
+			system.removeClient(listenerID); /* removeUser kills the Server thread */
 			
 		} /* end else */
 		

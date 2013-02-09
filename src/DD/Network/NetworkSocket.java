@@ -8,26 +8,30 @@ import java.util.Queue;
 import DD.Network.Message.NetworkMessage;
 
 /*****************************************************************************************************
-* NetworkSocket will contain the basic tools that Listener and Client will be using.
+* NetworkSocket will contain the basic tools that Listener and Client will be using. It extends Thread
+* so that Listener can be threaded.
 ******************************************************************************************************/
 
 public abstract class NetworkSocket extends Thread
 {
-
-        /************************************ Class Attributes *************************************/
+	/************************************ Class Attributes *************************************/
 	protected Socket socket = null;
 	protected ObjectInputStream input = null;
 	protected ObjectOutputStream output = null;
-	protected int socketID;					/* Unique ID for thread */
-        protected boolean done;                                 /* Thread is done */
+	protected int socketID;						/* Unique ID for thread */
+	protected boolean done;						/* Thread is done */
+	protected boolean working;
+	protected NetworkMessage message = null;
+	protected static volatile int nextID = 0;
 	
 	/************************************ Class Methods *************************************/
-	public NetworkSocket(Socket socket, int socketID)
+	public NetworkSocket(Socket socket)
 	{
-		super("DDSocketThread" + Integer.toHexString(socketID));
+		super("DDSocketThread" + Integer.toHexString(nextID++));
 		this.socket = socket;
-		this.socketID = socketID;
-                this.done = false;
+		this.socketID = nextID;
+		this.done = false;
+		this.working = true;
 	} /* end Server constructor */
 	
 	public void run() {} /* end run method */
@@ -66,5 +70,13 @@ public abstract class NetworkSocket extends Thread
 		/* thread is done */
 		done = true;
 	} /* end close method */
+	
+	/******************************************************************************
+	 ******************************* Getter Methods *******************************
+	 ******************************************************************************/
+	public int getID()
+	{
+		return socketID;
+	} /* end getID method */
 	
 } /* end NetworkSocket class */

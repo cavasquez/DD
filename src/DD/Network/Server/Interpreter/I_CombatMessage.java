@@ -6,11 +6,11 @@ import DD.Network.Message.NetworkMessage;
  * I_CombatMessage will be used to interpret and process all CombatMessages sent to the Server
  ******************************************************************************************************/
 
-public class I_CombatMessage implements ServerInterpreter
+public class I_CombatMessage extends ServerInterpreter
 {
 
 	@Override
-	public void interpret(int serverID, NetworkMessage message) {
+	public void interpret(int listenerID, NetworkMessage message) {
 		// TODO Auto-generated method stub
 		
 	} /* end interpret method */

@@ -3,6 +3,7 @@ package DD.Network;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Queue;
 import DD.Network.Message.NetworkMessage;
@@ -16,14 +17,14 @@ import DD.Network.Message.NetworkMessage;
 
 public abstract class Listener extends NetworkSocket
 {
-
-        /************************************ Class Attributes *************************************/
+	/************************************ Class Attributes *************************************/
 	private ServerSocket sSocket;
+	private MessageQueue queue= null;
 	
 	/************************************ Class Methods *************************************/
-	public Listener(Socket socket, int socketID)
+	public Listener(Socket socket)
 	{
-		super(socket, socketID);
+		super(socket);
 	} /* end Server constructor */
 	
 	public void run() {} /* end run method */
@@ -43,11 +44,5 @@ public abstract class Listener extends NetworkSocket
 		
 		return(message);
 	} /* end getSocketMessage method */
-	
-	protected void getMessage(NetworkMessage message)
-	{ /* We got a message from the stream. Process it. */
-		NetworkSystem.getInstance().getMessage(socketID, message);
-		
-	} /* end getMessage method */
 
 } /* end Listener class */
