@@ -1,7 +1,5 @@
 package DD.SlickTools;
 
-import org.newdawn.slick.geom.Vector2f;
-
 /*****************************************************************************************************
  * The BoxInterface class is an extension of Entity that focuses on representing a menu or other box in 
  * the interface. This could be the ChatBox, ActionBox, StatusBox, etc. The point being that the 

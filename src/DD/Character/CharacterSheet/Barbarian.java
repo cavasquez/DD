@@ -1,9 +1,7 @@
 package DD.Character.CharacterSheet;
 
 import java.util.ArrayList;
-
 import DD.SlickTools.Component;
-import MapTool.Objects;
 
 public class Barbarian extends CharacterClass {
 	

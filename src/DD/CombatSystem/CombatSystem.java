@@ -1,13 +1,12 @@
 package DD.CombatSystem;
 
 import java.util.ArrayList;
-
-import com.sun.xml.internal.stream.Entity;
-import DD.CombatSystem.Interpreter.CombatInterpreter;
-import DD.CombatSystem.Interpreter.Standard.I_StandardAttack;
+import DD.CombatSystem.Interpreter.*;
+import DD.CombatSystem.Interpreter.Standard.*;
 import DD.MapTool.Map;
-import DD.Network.Message.CombatMessage;
-import DD.Network.Message.Message;
+import DD.Message.CombatMessage;
+import DD.Message.Message;
+import DD.Character.*;
 
 /*****************************************************************************************************
  * CombatSystem will be the controller for DD combat. It will take messages from ActionBox (the player)
@@ -30,7 +29,7 @@ public class CombatSystem
 	public static int NUM_OF_INTERPRETERS = I;
 	
 	/************************************ Class Attributes *************************************/
-	static private ArrayList<Character> characterList;	/* A list of all the Characters in game so they may be modified */
+	static private ArrayList<DDCharacter> characterList;	/* A list of all the Characters in game so they may be modified */
 	static private Map map;								/* The game map that may need to be modified. */
 	static private CombatInterpreter[] system;			/* The core of CombatSystem */					
 	
@@ -62,7 +61,7 @@ public class CombatSystem
 			 * interpret to happen and then sending the message,
 			 * send the message and have most games process interpret
 			 * at roughly the same time.*/
-			this.interpret(cm);
+			CombatSystem.interpret(cm);
 			
 		} /* end if */
 		
@@ -117,9 +116,9 @@ public class CombatSystem
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public static Character getCharacter(int characterID)
+	public static DDCharacter getCharacter(int characterID)
 	{/* return character with provided characterID */
-		Character returner = null;
+		DDCharacter returner = null;
 		int index = 0;
 		while (returner == null)
 		{

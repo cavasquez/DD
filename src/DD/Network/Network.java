@@ -1,10 +1,7 @@
 package DD.Network;
 
-import java.util.ArrayList;
-
-import DD.Chat.ChatSystem;
-import DD.Network.Message.Message;
-import DD.Network.Message.NetworkMessage;
+import DD.Message.Message;
+import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
 * Network will be an interface through which GameSystem, ChatSystem and any other System
@@ -22,8 +19,9 @@ public interface Network
 {  
 	/************************************ Class Constants *************************************/
 	public static final int EVERYONE = -1;		/* a message sent to EVERYONE will be to -1 */
-	public static int GM_USER_ID = -2;			/* GM (Server) will always have an ID of -1 */
-	public static int SELF = -3;				/* Send message to self (for Clients) */
+	public static final int GM_USER_ID = -2;	/* GM (Server) will always have an ID of -1 */
+	public static final int SELF = -3;			/* Send message to self (for Clients) */
+	public static final int PORT = 8080;		/* Port that ServerSocket connects to */	
 	
 	/************************************ Class Methods *************************************/
 	/* Send message on part of some part of the system (ChatSystem, CombatSystem, etc.) */

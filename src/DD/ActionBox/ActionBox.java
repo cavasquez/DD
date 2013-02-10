@@ -6,10 +6,8 @@ import java.util.Queue;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
-
 import com.sun.corba.se.spi.orbutil.fsm.Action;
-
-import DD.Character.Character;
+import DD.Character.*;
 import DD.Character.Abilities.Ability;
 import DD.SlickTools.BoxInterface;
 import DD.SlickTools.Component;
@@ -54,7 +52,7 @@ public class ActionBox extends BoxInterface
 	
 	/************************************ Class Attributes *************************************/
 	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
-	protected static Character character = null;
+	protected static DDCharacter character = null;
 	
 	/************************************ Button Images *************************************/
 	Image freeAction = null;
@@ -64,7 +62,7 @@ public class ActionBox extends BoxInterface
 	Image standardAction = null;
 	Image swiftAction = null;
 	
-	public ActionBox(int id, float length, float width, Character character) throws SlickException
+	public ActionBox(int id, float length, float width, DDCharacter character) throws SlickException
 	{
 		super(id, length, width);
 		components = new ArrayList<Component>();

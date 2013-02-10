@@ -1,11 +1,9 @@
 package DD.Network;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Queue;
-import DD.Network.Message.NetworkMessage;
+
+import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
 * Sender will provide the tools that ClientSender and ServerSender will need to send a message.

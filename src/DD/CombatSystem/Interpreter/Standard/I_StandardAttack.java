@@ -3,7 +3,7 @@ package DD.CombatSystem.Interpreter.Standard;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.CombatValidationMessage;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
-import DD.Network.Message.CombatMessage;
+import DD.Message.CombatMessage;
 
 /*****************************************************************************************************
  * Interpreter for StandardAttack

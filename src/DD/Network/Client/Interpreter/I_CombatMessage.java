@@ -1,6 +1,6 @@
 package DD.Network.Client.Interpreter;
 
-import DD.Network.Message.NetworkMessage;
+import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
  * I_CombatMessage will pass combat messages to CombatSystem

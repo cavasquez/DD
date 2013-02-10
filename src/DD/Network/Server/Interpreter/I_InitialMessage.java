@@ -1,12 +1,9 @@
 package DD.Network.Server.Interpreter;
 
-import java.util.ArrayList;
-
+import DD.Message.AddUserMessage;
+import DD.Message.InitialMessage;
+import DD.Message.NetworkMessage;
 import DD.Network.Network;
-import DD.Network.Message.AddUserMessage;
-import DD.Network.Message.InitialMessage;
-import DD.Network.Message.NetworkMessage;
-import DD.Network.Server.Client;
 import DD.Network.Server.ClientTable;
 
 /*****************************************************************************************************

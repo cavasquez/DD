@@ -3,6 +3,8 @@ package DD.Network.Server;
 import java.io.IOException;
 import java.net.ServerSocket;
 
+import DD.Network.Network;
+
 
 /*****************************************************************************************************
  * ListenerSpawner will be responsible for creating ServerSocket's for every client while in the lobby.
@@ -11,9 +13,6 @@ import java.net.ServerSocket;
 
 public class ListenerSpawner extends Thread
 {
-	/************************************ Class Constants *************************************/
-	public static final int port = 8080;
-	
 	/************************************ Class Attributes *************************************/
 	private ServerSocket serverSocket = null;
 	private boolean acceptingConnections;		
@@ -48,11 +47,11 @@ public class ListenerSpawner extends Thread
 	{
 		try
 		{
-			serverSocket = new ServerSocket(port);
+			serverSocket = new ServerSocket(Network.PORT);
 		} /* end try */
 		catch (IOException e)
 		{
-			System.out.println("Failed to listen on port: " + Integer.toString(port));
+			System.out.println("Failed to listen on port: " + Integer.toString(Network.PORT));
 		} /* end catch */
 		
 		while (!closed)

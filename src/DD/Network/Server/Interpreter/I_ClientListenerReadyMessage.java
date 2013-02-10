@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import DD.Message.AddUserMessage;
+import DD.Message.ClientListenerReadyMessage;
+import DD.Message.NetworkMessage;
 import DD.Network.Network;
 import DD.Network.NetworkSystem;
-import DD.Network.Sender;
-import DD.Network.Message.AddUserMessage;
-import DD.Network.Message.ClientListenerReadyMessage;
-import DD.Network.Message.NetworkMessage;
 import DD.Network.Server.Client;
 import DD.Network.Server.ClientTable;
-import DD.Network.Server.ListenerSpawner;
 import DD.Network.Server.ServerSender;
 
 /*****************************************************************************************************
@@ -39,7 +37,7 @@ public class I_ClientListenerReadyMessage extends ServerInterpreter
 					Socket senderSocket = null;
 					try 
 					{
-						senderSocket = new Socket(client.ip, ListenerSpawner.port);
+						senderSocket = new Socket(client.ip, Network.PORT);
 					} /* end try */ 
 					catch (IOException e) 
 					{
@@ -59,8 +57,8 @@ public class I_ClientListenerReadyMessage extends ServerInterpreter
 						/* Communicate to the client it's peers */
 						ArrayList<Client> brothers = clientList.getClientList();
 						for(Client brother : brothers)
-						{/* Send message to everyone except the server */
-							if (brother.clientID != Network.GM_USER_ID && brother.listenerID != listenerID)
+						{/* Send the listener peer info for all the current peers (including the server) */
+							if (brother.listenerID != listenerID)
 							{
 								AddUserMessage am = new AddUserMessage(brother.clientID, brother.username, brother.ip);
 								system.sendMessage(Network.GM_USER_ID, client.clientID, am);
@@ -70,6 +68,18 @@ public class I_ClientListenerReadyMessage extends ServerInterpreter
 						
 					} /* end if */
 					
+					else
+					{
+						//TODO: Deal with connection loss
+						System.out.println("Failed to Connect to listener" + Integer.toString(client.clientID));
+					} /* end else */
+					
+				} /* end if */
+				
+				else
+				{
+					//TODO: deal with bad clientID
+					System.out.println("Client ID does not exists");
 				} /* end if */
 			} /* end if */
 			

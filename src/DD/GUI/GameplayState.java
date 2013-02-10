@@ -1,9 +1,8 @@
 package DD.GUI;
 import DD.ActionBox.ActionBox;
-import DD.Character.Character;
+import DD.Character.*;
 import DD.SlickTools.Component;
 import DD.SlickTools.RenderComponent;
-
 import org.newdawn.slick.Animation; 
 import org.newdawn.slick.geom.Vector2f;
 //import org.newdawn.slick.AppGameContainer;
@@ -13,7 +12,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 import org.newdawn.slick.tiled.TiledMap;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -27,7 +25,7 @@ public class GameplayState extends BasicGameState {
 	private TiledMap map;	
 	private Animation player;
 	private ActionBox actionBox;
-	private Character warrior;
+	private DDCharacter warrior;
 	//private int frame = 0;
 	//private Image image
 	
@@ -45,7 +43,7 @@ public class GameplayState extends BasicGameState {
 		//SpriteSheet ogre = new SpriteSheet("Resources/DnD-OgreLeader.png", 130, 135);
 		//Vector2f actionBoxPosition = new Vector2f(600f, 200f);
 		Vector2f characterPosition = new Vector2f(0f, 0f);
-		warrior = new Character(stateID);
+		warrior = new DDCharacter(stateID);
 		actionBox = new ActionBox(stateID, 300, 200, warrior);
 		
 		Image characters = new Image("Images/Test/characterImages.png");

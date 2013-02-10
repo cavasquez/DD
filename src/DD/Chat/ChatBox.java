@@ -1,6 +1,7 @@
 package DD.Chat;
 
-import com.sun.xml.internal.stream.Entity;
+import DD.Message.ChatMessage;
+import DD.SlickTools.Entity;
 
 /*****************************************************************************************************
  * ChatBox will display all ChatMessages received by the client/server on the GUI. It will also keep
@@ -9,17 +10,19 @@ import com.sun.xml.internal.stream.Entity;
 
 public class ChatBox extends Entity
 {
+	/************************************ Class Methods *************************************/
+	public ChatBox(int id) 
+	{
+		super(id);
+		// TODO Auto-generated constructor stub
+	} /* end ChatBox constructor */
 
-	@Override
-	public boolean isExternal() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isUnparsed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	/******************************************************************************
+	 ******************************* Getter Methods *******************************
+	 ******************************************************************************/
+	public static void getMessage(ChatMessage cm)
+	{/* get ChatMessage from ChatBox and process it. */
+		
+	} /* end getMessage method */
+	
 } /* end ChatBox class */

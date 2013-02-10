@@ -6,7 +6,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import DD.ActionBox.ActionBox;
 import DD.ActionBox.SubAction;
-import DD.Character.Character;
+import DD.Character.*;
 import DD.SlickTools.RenderComponent;
 
 /*****************************************************************************************************
@@ -32,7 +32,7 @@ import DD.SlickTools.RenderComponent;
 public abstract class Ability extends RenderComponent
 {
 	/************************************ Class Attributes *************************************/
-	protected Character character;
+	protected DDCharacter character;
 	protected SubAction subAction;
 	protected final int actionType;
 	protected final String name;
@@ -87,7 +87,7 @@ public abstract class Ability extends RenderComponent
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public void setOwnerCharacter(Character character)
+	public void setOwnerCharacter(DDCharacter character)
 	{
 		this.character = character;
 	} /* end setOwnerCharacter method */

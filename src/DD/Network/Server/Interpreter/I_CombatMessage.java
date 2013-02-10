@@ -1,6 +1,6 @@
 package DD.Network.Server.Interpreter;
 
-import DD.Network.Message.NetworkMessage;
+import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
  * I_CombatMessage will be used to interpret and process all CombatMessages sent to the Server

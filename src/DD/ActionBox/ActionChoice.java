@@ -6,8 +6,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
-
-import DD.Character.Character;
+import DD.Character.*;
 import DD.Character.Abilities.Ability;
 import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
@@ -65,7 +64,7 @@ public class ActionChoice extends ImageRenderComponent
 	 	performAction needs to get all the appropriate abilities from
 	 	the Character and make them available in ActionBox by creating
 	 	adding the ability to the SubAction array list in ActionBox.*/
-		Ability abilities[] = Character.getAbilities(this.actionType);
+		Ability abilities[] = DDCharacter.getAbilities(this.actionType);
 		
 		for (Ability ability : abilities)
 		{

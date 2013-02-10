@@ -2,14 +2,15 @@ package DD.Network.Client.Interpreter;
 
 import java.io.IOException;
 import java.net.Socket;
+
+import DD.Message.InitialMessage;
+import DD.Message.NetworkMessage;
+import DD.Network.Network;
 import DD.Network.Client.ClientListener;
-import DD.Network.Message.ClientListenerReadyMessage;
-import DD.Network.Message.InitialMessage;
-import DD.Network.Message.NetworkMessage;
-import DD.Network.Server.ListenerSpawner;
 
 /*****************************************************************************************************
- * I_InitialMessage will pass combat messages to InitialSystem
+ * I_InitialMessage will check to see if the username was correct and then add itself to the peerList
+ * and set up a listener for the server to connect to.
  ******************************************************************************************************/
 
 public class I_InitialMessage extends ClientInterpreter
@@ -18,10 +19,11 @@ public class I_InitialMessage extends ClientInterpreter
 	public void interpret(NetworkMessage message)
 	{
 		InitialMessage im = (InitialMessage) message.getMessage();
-		if (im.getValid())
+		if (!im.getValid())
 		{/* The sent username was invalid (already exists). Kill sender */
 			//TODO: communicate to lobby (and then to user) that username was invalid and try again
 			system.setSender(null);
+			System.out.println("Username Exists!");
 		} /* end if */
 		else
 		{/* The sent username was valid. Add the provided ID to ClientSystem and the peerList */
@@ -34,10 +36,9 @@ public class I_InitialMessage extends ClientInterpreter
 			boolean success = true;
 			try 
 			{
-				Socket socket = new Socket(system.getServerIP(), ListenerSpawner.port);
+				Socket socket = new Socket(system.getServerIP(), Network.PORT);
 				ClientListener listener = new ClientListener(socket);
 				listener.run();
-				system.setListener(listener);
 			} /* end try */
 			catch (IOException e) 
 			{
@@ -46,10 +47,9 @@ public class I_InitialMessage extends ClientInterpreter
 				success = false;
 			} /* end catch */
 			
-			if (success)
-			{/* successfully connected, send server ClientListenerReadyMessage */
-				ClientListenerReadyMessage clrm = new ClientListenerReadyMessage(system.getClientID());
-				system.sendMessage(system.getClientID(), , message)
+			if (!success)
+			{/* Failed to connect to server */
+				//TODO: deal with error
 			} /*  end if*/
 			
 		} /* end else */

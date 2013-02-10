@@ -1,11 +1,10 @@
 package DD.Network;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import DD.Network.Message.NetworkMessage;
-import DD.Network.Message.QueueMessage;
+import DD.Message.NetworkMessage;
+import DD.Message.QueueMessage;
 
 /*****************************************************************************************************
 * MessageQueue will be a singleton that interacts with ServerSystem to give the ServerSystem 
@@ -40,7 +39,7 @@ public class MessageQueue extends Thread
 	{
 		super("MessageQueue Thread");
 		system = new NetworkSystem();
-		messageQueue = (Queue<QueueMessage>) new LinkedList<QueueMessage>();
+		messageQueue = new LinkedList<QueueMessage>();
 		hasMessage = false;
 		done = false;
 	} /* end MessageQueue constructor */

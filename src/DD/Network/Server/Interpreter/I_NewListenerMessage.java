@@ -1,8 +1,7 @@
 package DD.Network.Server.Interpreter;
 
-import DD.Network.Message.NetworkMessage;
-import DD.Network.Message.NewListenerMessage;
-import DD.Network.Server.ClientTable;
+import DD.Message.NetworkMessage;
+import DD.Message.NewListenerMessage;
 import DD.Network.Server.ServerListener;
 
 /*****************************************************************************************************

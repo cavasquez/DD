@@ -2,10 +2,11 @@ package DD.Network.Server;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+
+import DD.Message.Message;
+import DD.Message.NetworkMessage;
 import DD.Network.MessageQueue;
 import DD.Network.Network;
-import DD.Network.Message.Message;
-import DD.Network.Message.NetworkMessage;
 import DD.Network.Server.Interpreter.I_ChatMessage;
 import DD.Network.Server.Interpreter.I_ClientListenerReadyMessage;
 import DD.Network.Server.Interpreter.I_CombatMessage;
@@ -48,7 +49,7 @@ public class ServerSystem implements Network
 		 * addClient(Network.GEM_USER_ID, username, null); */
 	} /* end ServerSystem constructor */
 	
-	public void interpret(int listenerID, NetworkMessage message)
+	private void interpret(int listenerID, NetworkMessage message)
 	{
 		/* Assume all messages are of correct type and legally formatted.
 		 * In any case, messages are always given by the ServerListener */

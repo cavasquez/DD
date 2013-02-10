@@ -1,10 +1,10 @@
 package DD.Network.Client.Interpreter;
 
+import DD.Message.NetworkMessage;
 import DD.Network.Client.ClientSystem;
-import DD.Network.Message.NetworkMessage;
 
 /*****************************************************************************************************
- * ServerInterpreter will be used by ClientSystem to interpret every message. 
+ * ClientInterpreter will be used by ClientSystem to interpret every message. 
  * 
  * The interpreter should have an equivalent ability for which it is interpreting. The interpreter will
  * be named I_MessageName so as to provide an easy and obvious scheme to follow.

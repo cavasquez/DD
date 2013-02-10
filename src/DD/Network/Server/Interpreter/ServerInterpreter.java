@@ -1,13 +1,12 @@
 package DD.Network.Server.Interpreter;
 
-import DD.Network.Message.NetworkMessage;
+import DD.Message.NetworkMessage;
 import DD.Network.Server.ServerSystem;
 
 /*****************************************************************************************************
- * ServerInterpreter will be used by ServerSystem to interpret every message. 
+ * ServerInterpreter will be used by ServerSystem to interpret every NetworkMessage. 
  * 
- * The interpreter should have an equivalent ability for which it is interpreting. The interpreter will
- * be named I_MessageName so as to provide an easy and obvious scheme.
+ * The interpreter will be named I_MessageName so as to provide an easy and obvious scheme.
  ******************************************************************************************************/
 
 public abstract class ServerInterpreter 

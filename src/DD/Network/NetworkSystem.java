@@ -1,8 +1,8 @@
 package DD.Network;
 
+import DD.Message.Message;
+import DD.Message.NetworkMessage;
 import DD.Network.Client.ClientSystem;
-import DD.Network.Message.Message;
-import DD.Network.Message.NetworkMessage;
 import DD.Network.Server.ServerSystem;
 
 
@@ -54,6 +54,15 @@ public class NetworkSystem implements Network
 		return network.getMessage(listenerID, message);
 		
 	} /* end getMessage method */
+	
+	public int getUserID()
+	{
+		Integer id = null;
+		if (networkType == SERVER) id = Network.GM_USER_ID;
+		else if (networkType == CLIENT) id = ((ClientSystem)network).getClientID();
+		
+		return id;
+	} /* end getUserID */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************

@@ -2,10 +2,10 @@ package DD.Network.Client;
 
 import java.net.InetAddress;
 
+import DD.Message.Message;
+import DD.Message.NetworkMessage;
 import DD.Network.MessageQueue;
 import DD.Network.Network;
-import DD.Network.Message.Message;
-import DD.Network.Message.NetworkMessage;
 import DD.Network.Client.Interpreter.*;
 
 /*****************************************************************************************************
@@ -36,6 +36,7 @@ public class ClientSystem implements Network
 		system[Message.CHAT_MESSAGE] = new I_ChatMessage();
 		system[Message.INITIAL_MESSAGE] = new I_InitialMessage();
 		system[Message.NEW_LISTENER_MESSAGE] = new I_NewListenerMessage();
+		system[Message.ADD_USER_MESSAGE] = new I_AddUserMessage();
 		system[Message.COMBAT_MESSAGE].setClientSystem(this);
 
 	} /* end ServerSystem constructor */
@@ -66,7 +67,8 @@ public class ClientSystem implements Network
 			type == Message.COMBAT_MESSAGE ||
 			type == Message.CHAT_MESSAGE ||
 			type == Message.INITIAL_MESSAGE ||
-			type == Message.NEW_LISTENER_MESSAGE
+			type == Message.NEW_LISTENER_MESSAGE ||
+			type == Message.ADD_USER_MESSAGE
 		)
 		{
 			valid = true;

@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Queue;
-import DD.Network.Message.NetworkMessage;
+
+import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
 * NetworkSocket will contain the basic tools that Listener and Client will be using. It extends Thread
@@ -20,9 +20,9 @@ public abstract class NetworkSocket extends Thread
 	protected ObjectOutputStream output = null;
 	protected int socketID;						/* Unique ID for thread */
 	protected boolean done;						/* Thread is done */
-	protected boolean working;
-	protected NetworkMessage message = null;
-	protected static volatile int nextID = 0;
+	protected boolean working;					/* flag stating that socket is working */
+	protected NetworkMessage message = null;	
+	protected static volatile int nextID = 0;	/* keeps track of the next id */
 	
 	/************************************ Class Methods *************************************/
 	public NetworkSocket(Socket socket)

@@ -20,7 +20,7 @@ public class Map extends Entity{
 
 	public Map(String name){
 		
-		super(0, null);
+		super(0);
 		this.name = name;
 		objectsStack =  new Stack[mapSize][mapSize];
 		tempObjects = new TempObjects[mapSize][mapSize];
