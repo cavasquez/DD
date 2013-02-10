@@ -68,18 +68,16 @@ public class Play extends BasicGameState{
 		//play now button
 		if((posX > 100 && posX < 244) && (posY > 497 && posY < 549))
 		{
-			if(Mouse.isButtonDown(0))
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				//button.play();
 				sbg.enterState(0);
 			}
 		}
 		//about
 		if((posX > 100 && posX < 241) && (posY > 310 && posY < 349))
 		{
-			if(Mouse.isButtonDown(0))
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-
 				//button.play();
 				sbg.enterState(2);
 			}

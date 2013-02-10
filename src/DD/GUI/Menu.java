@@ -48,7 +48,7 @@ public class Menu extends BasicGameState
 		//Join Lobby button
 		if((posX > 130 && posX < 335) && (posY > 384 && posY < 450))
 		{
-			if(Mouse.isButtonDown(0))
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				//button.play();
 				sbg.enterState(1);
@@ -58,7 +58,7 @@ public class Menu extends BasicGameState
 		//Create Lobby
 		if((posX > 130 && posX < 335) && (posY > 299 && posY < 365))
 		{
-			if(Mouse.isButtonDown(0))
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				//button.play();
 				sbg.enterState(3);
@@ -68,8 +68,9 @@ public class Menu extends BasicGameState
 		//play game
 		if((posX > 130 && posX < 335) && (posY > 200 && posY < 280))
 		{
-			if(Mouse.isButtonDown(0))
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
+				//button.play();
 				sbg.enterState(4);
 			}
 		}
@@ -77,7 +78,7 @@ public class Menu extends BasicGameState
 		//exit button
 		if((posX > 130 && posX < 335) && (posY > 118 && posY < 184))
 		{
-			if(Mouse.isButtonDown(0))
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				//button.play();
 				System.exit(0);

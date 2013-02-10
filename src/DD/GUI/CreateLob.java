@@ -50,7 +50,7 @@ public class CreateLob extends BasicGameState
 		//Back button
 		if((posX > 125 && posX < 170) && (posY > 199 && posY < 219))
 		{
-			if(Mouse.isButtonDown(0))
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				//button.play();
 				sbg.enterState(0);

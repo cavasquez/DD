@@ -48,8 +48,8 @@ public class GameplayState extends BasicGameState {
 		actionBox = new ActionBox(stateID, 300, 200, warrior);
 		
 		Image characters = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
-		System.out.println("Image height: " + characters.getHeight());
-		System.out.println("Image width: " + characters.getWidth());
+		//System.out.println("Image height: " + characters.getHeight());
+		//System.out.println("Image width: " + characters.getWidth());
 		
 		/*2 up from bottom, 16 across */
 		Image warrior = characters.getSubImage(2530, 1440, 33, 34);
@@ -63,45 +63,29 @@ public class GameplayState extends BasicGameState {
 		player = new Animation();
 		player.setAutoUpdate(true);
 		
-		//System.out.println("Horizontal: " + sheet.getHorizontalCount());
-		//System.out.println("Vertical: " + sheet.getVerticalCount());
+		//System.out.println("Map height: "+ map.getHeight());	//height is 30
+		//System.out.println("Map width: " + map.getWidth());		//width is 40
 		
-		System.out.println("Map height: "+ map.getHeight());	//height is 30
-		System.out.println("Map width: " + map.getWidth());		//width is 40
-		//Each "tile" is 5x5 tiles
-		
-		
-		
-		//player.addFrame(sheet.getSprite(0, 0), 150);
 		player.addFrame(warrior, 150);
-		
-		/*
-		for (int frame=0;frame<8;frame++) {
-			player.addFrame(ogre.getSprite(frame,1), 150);
-		}
-		*/
-		
 		
 	}
 	
 	public void update(GameContainer container, StateBasedGame sb, int delta) throws SlickException { 
-		
-		/*
-		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {playerX--;}
-		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {playerX++;}
-		if (container.getInput().isKeyDown(Input.KEY_UP)) {playerY--;}
-		if (container.getInput().isKeyDown(Input.KEY_DOWN)) {playerY++;}
-		*/
-		
 		/* Want to make character move faster */
-		
 		if (container.getInput().isKeyDown(Input.KEY_LEFT)) {
 			playerX = playerX - 2;
 		}
-		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {playerX = playerX + 2;}
-		if (container.getInput().isKeyDown(Input.KEY_UP)) {playerY = playerY - 2;}
-		if (container.getInput().isKeyDown(Input.KEY_DOWN)) {playerY = playerY + 2;}
+		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) {
+			playerX = playerX + 2;
+		}
+		if (container.getInput().isKeyDown(Input.KEY_UP)) {
+			playerY = playerY - 2;
+		}
+		if (container.getInput().isKeyDown(Input.KEY_DOWN)) {
+			playerY = playerY + 2;
+		}
 		
+		/* go through ArrayList of Components to call their update methods */
 		RenderComponent renderComponent = null;
 		for (Component component : actionBox.getComponentList())
 		{
@@ -117,11 +101,12 @@ public class GameplayState extends BasicGameState {
 	public void render(GameContainer container, StateBasedGame sb, Graphics g) throws SlickException {
 		/* render map */
 		map.render(0, 0);
+		/* render enemies */
 		enemy.draw(200, 100);
 		enemy2.draw(160, 100);
 		enemy3.draw(240, 100);
 		
-		/* render action box */
+		/* go through ArrayList of Components to call their render methods */
 		RenderComponent renderComponent = null;
 		for (Component component : actionBox.getComponentList())
 		{
@@ -133,15 +118,6 @@ public class GameplayState extends BasicGameState {
 			
 		}
 		
-		
-		
 		g.drawAnimation(player, playerX, playerY);
 	}
-	/*
-	public static void main(String[] argv) throws SlickException {
-		AppGameContainer container = 
-			new AppGameContainer(new Game(), 640, 480, false);
-		container.start();
-	}
-	*/
 }

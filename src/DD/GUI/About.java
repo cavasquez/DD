@@ -42,7 +42,7 @@ public class About extends BasicGameState
 		//back button
 		if((posX > 120 && posX < 163) && (posY > 2 && posY < 15))
 		{
-			if(Mouse.isButtonDown(0))
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				//button.play();
 				sbg.enterState(1);

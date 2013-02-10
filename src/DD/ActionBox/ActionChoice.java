@@ -37,7 +37,9 @@ public class ActionChoice extends ImageRenderComponent
 	String display;
 	boolean actionPerformed;
 	String message = " ";
+	String mousePos = " ";
 	float x, y;
+	Input mouse = new Input(650);
 	
 	/************************************ Class Methods *************************************/
 	/* Remember, ID is the same as ActionType */
@@ -54,23 +56,16 @@ public class ActionChoice extends ImageRenderComponent
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
-	{/* TODO: generate */
+	{
 		image.draw(x, y);
 		gr.drawString(message, x, 250 + y);
-		/*
-		 This is Full Round Actionwith x and y of 500.0 80.0
-		This is Swift Actionwith x and y of 500.0 120.0
-		This is Immediate Actionwith x and y of 500.0 160.0
-		This is Free Actionwith x and y of 500.0 200.0
-		This is Standard Actionwith x and y of 500.0 0.0
-		This is Move Actionwith x and y of 500.0 40.0
-		 */
+		gr.drawString(mousePos, 800, 100);
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
 	{ 	 
-		Input mouse = new Input(600);
+		
 		/* get mouse coordinates */
 		int mouseX = mouse.getMouseX();
 		int mouseY = mouse.getMouseY();
@@ -80,16 +75,15 @@ public class ActionChoice extends ImageRenderComponent
 		{
 			/* You are inside the button */
 			
-			if(!mouse.isMousePressed(Input.MOUSE_LEFT_BUTTON)) 
+			//if(mouse.isMousePressed(Input.MOUSE_LEFT_BUTTON)) 
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				if(mouse.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON))
-				{
-					System.out.println("You are clicking " + display);
-					message = "You are clicking " + display;
-					
-				}
+				System.out.println("You are clicking " + display);
+				message = "You are clicking " + display;
 			}
 		}
+		
+		mousePos = "Mouse Position x: " + mouseX + " y: " + mouseY;
 	}
 	
 	protected void performAction()
