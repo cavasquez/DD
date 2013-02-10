@@ -4,7 +4,6 @@ import org.newdawn.slick.GameContainer;
 //import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-//lol
  
 public class Game extends StateBasedGame {
 
@@ -22,7 +21,7 @@ public class Game extends StateBasedGame {
 	
 	public static void main(String[] argv) throws SlickException {
 		AppGameContainer app = new AppGameContainer(new Game());
-		app.setDisplayMode(800, 600, false);	// last parameter is full screen
+		app.setDisplayMode(1200, 650, false);	// last parameter is full screen
 		app.start();
 	}
 	

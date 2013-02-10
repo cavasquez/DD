@@ -1,11 +1,10 @@
 package DD.ActionBox;
 
-import java.awt.Font;
-
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
@@ -37,6 +36,7 @@ public class ActionChoice extends ImageRenderComponent
 	int actionType;			/* Number that refers to the type of action this ActionChoice represents (standard, move, etc.) */
 	String display;
 	boolean actionPerformed;
+	String message = " ";
 	float x, y;
 	
 	/************************************ Class Methods *************************************/
@@ -56,6 +56,7 @@ public class ActionChoice extends ImageRenderComponent
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{/* TODO: generate */
 		image.draw(x, y);
+		gr.drawString(message, x, 250 + y);
 		/*
 		 This is Full Round Actionwith x and y of 500.0 80.0
 		This is Swift Actionwith x and y of 500.0 120.0
@@ -68,27 +69,27 @@ public class ActionChoice extends ImageRenderComponent
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
-	{ 
+	{ 	 
+		Input mouse = new Input(600);
 		/* get mouse coordinates */
-		int mouseX = Mouse.getX();
-		int mouseY = Mouse.getY();
-		
-		//Font font = new Font("Verdana", Font.BOLD, 20);
-		//TrueTypeFont ttf = new TrueTypeFont(font, true); 
-		//Color color = new Color(1,1,1);
+		int mouseX = mouse.getMouseX();
+		int mouseY = mouse.getMouseY();
 		
 		if( (mouseX >= x && mouseX <= x + image.getWidth() ) &&
-			(mouseY >= 560 - y && mouseY <= 560 - y + image.getHeight() ) )
+			(mouseY >= y && mouseY <= y + image.getHeight() ) )
 		{
 			/* You are inside the button */
-			if(Mouse.isButtonDown(0))
+			
+			if(!mouse.isMousePressed(Input.MOUSE_LEFT_BUTTON)) 
 			{
-				System.out.println("You are clicking " + display);
-				//ttf.drawString(100, 100, "Hello", color);
+				if(mouse.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON))
+				{
+					System.out.println("You are clicking " + display);
+					message = "You are clicking " + display;
+					
+				}
 			}
 		}
-			 
-		
 	}
 	
 	protected void performAction()
