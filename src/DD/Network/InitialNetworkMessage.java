@@ -14,7 +14,7 @@ public class InitialNetworkMessage extends Message
 	/************************************ Class Methods *************************************/
 	public InitialNetworkMessage(String username, boolean valid)
 	{
-		super(Message.INITIAL_NETWORK_MESSAGE);
+		super(Message.INITIAL_MESSAGE);
 		this.username = username;
 		this.valid = valid;
 		

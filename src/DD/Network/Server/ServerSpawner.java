@@ -17,7 +17,6 @@ public class ServerSpawner extends Thread
 	private ServerSocket serverSocket = null;
 	private boolean acceptingConnections;
 	private boolean closed;
-	private int socketCount;					/* id for thread */
 	
 	/************************************ Class Methods *************************************/
 	public ServerSpawner()
@@ -25,7 +24,6 @@ public class ServerSpawner extends Thread
 		super("ServerSpawnerThread");
 		acceptingConnections = true;
 		closed = false;
-		socketCount = 0;
 	} /* end ServerSpawner */
 	
 	public void close()
@@ -62,7 +60,7 @@ public class ServerSpawner extends Thread
 			{
 				try 
 				{
-					new Server(serverSocket.accept(), socketCount++).run();
+					new ServerListener(serverSocket.accept()).run();
 				} /* end try */ 
 				catch (IOException e) 
 				{
