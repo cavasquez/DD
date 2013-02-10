@@ -59,13 +59,12 @@ public class ActionChoice extends ImageRenderComponent
 	{
 		image.draw(x, y);
 		gr.drawString(message, x, 250 + y);
-		gr.drawString(mousePos, 800, 100);
+		gr.drawString(mousePos, 900, 0);
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
 	{ 	 
-		
 		/* get mouse coordinates */
 		int mouseX = mouse.getMouseX();
 		int mouseY = mouse.getMouseY();
@@ -82,7 +81,6 @@ public class ActionChoice extends ImageRenderComponent
 				message = "You are clicking " + display;
 			}
 		}
-		
 		mousePos = "Mouse Position x: " + mouseX + " y: " + mouseY;
 	}
 	
