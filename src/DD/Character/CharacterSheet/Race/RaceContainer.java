@@ -9,11 +9,18 @@ public class RaceContainer
 	 * humna
 	 * elf
 	 */
+	Race[] race = new Race[TOTAL_RACES];
 	public RaceContainer()
 	{
-		Race[] race = new Race[TOTAL_RACES];
+		
 		race[ELF] = new Elf() ;
 		race[HUMAN] = new Human();
+	}
+	
+	public Race getRace(int inputRace)
+	{
+		Race myRace = race[inputRace];
+		return myRace;
 	}
 	
 	

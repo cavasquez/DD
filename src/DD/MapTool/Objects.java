@@ -11,6 +11,7 @@ public class Objects extends ImageRenderComponent {//figure out comp.
 	int lightPenalty;
 	String name;
 	Entity owner;
+	int priority;
 	//int id;
 	//could pass in ID into constructor from the Component setID(...) ?
 	//@brandon

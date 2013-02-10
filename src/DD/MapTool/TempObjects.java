@@ -16,6 +16,7 @@ public class TempObjects extends Objects{
 		this.turnCount = turnCont;
 		super.movePenalty = move;
 		super.lightPenalty = light;
+		super.priority = 4;
 	}
 	void checks() {
 

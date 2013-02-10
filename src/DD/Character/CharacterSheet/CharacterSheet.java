@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import DD.ActionBox.Dice;
+import DD.Character.CharacterSheet.Race.Human;
 import DD.Character.CharacterSheet.Race.Race;
+import DD.Character.CharacterSheet.Race.RaceContainer;
 
 
 /*****************************************************************************************************
@@ -15,6 +17,28 @@ import DD.Character.CharacterSheet.Race.Race;
 
 public class CharacterSheet 
 {
+	
+	public CharacterSheet()
+	{
+		name = "";
+	    player = "";
+		race = new Human();
+		languages = "";
+		size = 0; // medium
+		gender = 0; //male
+		height = 6;//6 feet
+		weight = 130; //130lbs
+		age = 25;
+		alignments="";
+		deity="";
+		background ="";
+		occupation="";
+		base =0; 
+		inher=0;
+		enhance=0;
+		misc=0;
+		
+	}
 	/*THE DICE!*/
 	Dice dice = new Dice();
 	/************************************ Class Constants *************************************/
@@ -42,15 +66,15 @@ public class CharacterSheet
 	/******** Basic Info *********/
 	private String name;
 	private String player;
-	private int race;
-	private int[] languages;
+	Race race;
+	private String languages;
 	private int size;
 	private int gender;
 	private int height;
 	private int weight;
 	private int age;
-	private int alignments;
-	private int deity;
+	private String alignments;
+	private String deity;
 	private String background;
 	private String occupation;
 	
@@ -123,6 +147,11 @@ public class CharacterSheet
 		stat = race.getStr();
 		rawStats[ABILITY_STRENGTH][ABILITY_INHERENT] = stat;
 	}
+	public void setStrEnhance(/*Not sure what goes here*/)
+	{
+		stat = 0;
+		rawStats[ABILITY_STRENGTH][ABILITY_ENHANCE] = stat;
+	}
 	public void setStrMisc(/*Not sure what goes here*/)
 	{
 		stat = 0;
@@ -186,10 +215,15 @@ public class CharacterSheet
 			stat = abilityRoll();
 			rawStats[ABILITY_DEXTERITY][ABILITY_BASE] = stat;
 		}
-		public void setInher(Race race)
+		public void setDexInher(Race race)
 		{
 			stat = race.getDex();
 			rawStats[ABILITY_DEXTERITY][ABILITY_INHERENT] = stat;
+		}
+		public void setDexEnhance(/*Not sure what goes here*/)
+		{
+			stat = 0;
+			rawStats[ABILITY_DEXTERITY][ABILITY_ENHANCE] = stat;
 		}
 		public void setDexMisc(/*Not sure what goes here*/)
 		{
@@ -256,6 +290,11 @@ public class CharacterSheet
 		{
 			stat = race.getCon();
 			rawStats[ABILITY_CONSTITUTION][ABILITY_INHERENT] = stat;
+		}
+		public void setConEnhance(/*Not sure what goes here*/)
+		{
+			stat = 0;
+			rawStats[ABILITY_CONSTITUTION][ABILITY_ENHANCE] = stat;
 		}
 		public void setConMisc(/*Not sure what goes here*/)
 		{
@@ -325,6 +364,11 @@ public class CharacterSheet
 			stat = race.getIntel();
 			rawStats[ABILITY_INTELLIGENCE][ABILITY_INHERENT] = stat;
 		}
+		public void setIntEnhance(/*Not sure what goes here*/)
+		{
+			stat = 0;
+			rawStats[ABILITY_INTELLIGENCE][ABILITY_ENHANCE] = stat;
+		}
 		public void setIntMisc(/*Not sure what goes here*/)
 		{
 			stat = 0;
@@ -392,6 +436,11 @@ public class CharacterSheet
 			stat = race.getWis();
 			rawStats[ABILITY_WISDOM][ABILITY_INHERENT] = stat;
 		}
+		public void setWisEnhance(/*Not sure what goes here*/)
+		{
+			stat = 0;
+			rawStats[ABILITY_WISDOM][ABILITY_ENHANCE] = stat;
+		}
 		public void setWisMisc(/*Not sure what goes here*/)
 		{
 			stat = 0;
@@ -457,6 +506,11 @@ public class CharacterSheet
 	{
 		stat = race.getcha();
 		rawStats[ABILITY_CHARISMA][ABILITY_INHERENT] = stat;
+	}
+	public void setChaEnhance(/*Not sure what goes here*/)
+	{
+		stat = 0;
+		rawStats[ABILITY_CHARISMA][ABILITY_ENHANCE] = stat;
 	}
 	public void setChaMisc(/*Not sure what goes here*/)
 	{
@@ -804,9 +858,9 @@ public class CharacterSheet
 	//FORT
 	
 	//SETTERS
-	public void setFortBase(ClassRecorder cr)
+	public void setFortBase(CharacterClass c)
 	{
-		stat =cr.getFort();
+		stat =c.getFort();
 		savingthrows[SAVE_FORT][ SAVE_CLASSBASE] = stat;
 	}
 	public void setFortAbility()
@@ -858,7 +912,7 @@ public class CharacterSheet
 	
 	/* REFLEX */
 	//SETTERS
-		public void setRefBase(ClassRecorder cr)
+		public void setRefBase(CharacterClass cr)
 		{
 			stat =cr.getRef();
 			savingthrows[SAVE_REF][ SAVE_CLASSBASE] = stat;
@@ -911,7 +965,7 @@ public class CharacterSheet
 	
 		//WILL
 		//SETTERS
-		public void setWillBase(ClassRecorder cr)
+		public void setWillBase(CharacterClass cr)
 		{
 			stat =cr.getWill();
 			savingthrows[SAVE_WILL][ SAVE_CLASSBASE] = stat;
@@ -981,9 +1035,22 @@ public class CharacterSheet
 	 * column index 2 = ability
 	 * column index 3 = size
 	 */
-	
+		public static final int ATTACK_MELEE = 0;
+		public static final int ATTACK_RANGED = 1;
+		public static final int ATTACK_CMB= 2;
+		public static final int ATTACK_CMD = 3;
+		
+		public static final int ATTACK_TOTAL = 0;
+		public static final int ATTACK_BAB = 1; 
+		public static final int ATTACK_ABILITY = 2;
+		public static final int ATTACK_SIZE = 3; 
+		
 	private int[] attacks;
 	
+	public void setMeleeBab(CharacterClass clas)
+	{
+		attacks[][]
+	}
 	
 	//NEED SKILLS
 	/*
@@ -991,7 +1058,7 @@ public class CharacterSheet
 	 * Will need to implement a 2d array for values
 	 * of the skills
 	 */
-	public ArrayList<String> skills;
+	public int skills;
 	public void getSkills(CharacterClass clas)
 	{
 		skills = clas.skills;
@@ -1013,11 +1080,11 @@ public class CharacterSheet
 	
 	
 	//NEED DR-DAMAGE REDUCTION
-	int damageReduction;
+	int damageReduction =0;
 	//NEED SR-SPELL RESIST
-	int spellResist;
+	int spellResist = 0;
 	//NEED AP-ACTION POINTS
-	int actionPoints;
+	int actionPoints = 0;
 	/************************************ Class Methods *************************************/
 	public void initialize()
 	{
@@ -1033,12 +1100,14 @@ public class CharacterSheet
 	/*
 	 * Setting a race with a value in a raceContainer
 	 */
-	public void setRace(int raceValue)
+	
+	
+	public void setRace(Race race)
 	{
-		this.race=raceValue;
+		this.race=race;
 		
 	}
-	public int getRace()
+	public Race getRace()
 	{
 		return(this.race);
 	}
@@ -1056,6 +1125,80 @@ public class CharacterSheet
 	{
 		int returner= dice.roll(3, 4, 6);
 		return returner;
+	}
+	
+	/** FILL CHARACTER SHEET METHODS **/
+	/*
+	 * FILL IN THIS ORDER OR IT WILL BREAK
+	 * fillBasic(...)
+	 * fillAbilities()
+	 * 
+	 */
+	public void fillBasic(String name,String player,int race,String languages, int size,
+						  int gender,int height,int weight,int age,String alignments,
+						  String deity,String background,String occupation)
+	{
+		RaceContainer container = new RaceContainer();
+		this.name =name;
+		this.player=player;
+		this.race=container.getRace(race);
+		this.languages = languages;
+		this.size = size;
+		this.gender = gender;
+		this.height = height;
+		this.weight = weight;
+		this.age = age;
+		this.alignments = alignments;
+		this.deity = deity;
+		this.background = background;
+		this.occupation = occupation;
+	
+	}
+	
+	public void fillAbilities()
+	{
+		//Str
+		setStrBase();
+		setStrInher(race);
+		setStrEnhance();
+		setStrMisc();
+		setStrTotal();
+		setStrMod();
+		//Dex
+		setDexBase();
+		setDexInher(race);
+		setDexEnhance();
+		setDexMisc();
+		setDexTotal();
+		setDexMod();
+		//Con
+		setConBase();
+		setConInher(race);
+		setConEnhance();
+		setConMisc();
+		setConTotal();
+		setConMod();
+		//Int
+		setIntBase();
+		setIntInher(race);
+		setIntEnhance();
+		setIntMisc();
+		setIntTotal();
+		setIntMod();
+		//Wis
+		setWisBase();
+		setWisInher(race);
+		setWisEnhance();
+		setWisMisc();
+		setWisTotal();
+		setWisMod();
+		//Cha
+		setChaBase();
+		setChaInher(race);
+		setChaEnhance();
+		setChaMisc();
+		setChaTotal();
+		setChaMod();
 	}
 	
 } /* end CharacterSheet method */

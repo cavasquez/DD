@@ -11,6 +11,7 @@ public class Obstacle extends Objects{
 		super(name, image, map);
 		super.movePenalty = move;
 		super.lightPenalty = light;
+		super.priority = 2;
 	}
 
 	void checks() {

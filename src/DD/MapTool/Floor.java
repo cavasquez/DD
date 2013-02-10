@@ -8,6 +8,7 @@ public class Floor extends Objects{
 		super(name, image, map);
 		super.movePenalty = move;
 		super.lightPenalty = light;
+		super.priority = 0;
 	}
 	
 	void checks() {

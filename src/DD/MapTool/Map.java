@@ -9,20 +9,21 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import DD.SlickTools.*;
 
+
 public class Map extends Entity{
-	Stack<Objects>[][] objectsStack ;
+	ObjectsPriorityStack[][] objectsStack ; //ops<Objects>
 	TempObjects[][] tempObjects;
 	int numTempObjects;
 	Image defImage;
 	boolean hasTempObjects;
 	String name;
-	final int mapSize = 11;
+	final int mapSize = 21;
 
 	public Map(String name){
 		
 		super(0);
 		this.name = name;
-		objectsStack =  new Stack[mapSize][mapSize];
+		objectsStack =  new ObjectsPriorityStack[mapSize][mapSize];
 		tempObjects = new TempObjects[mapSize][mapSize];
 		super.components = new ArrayList<Component>();
 		
@@ -32,7 +33,7 @@ public class Map extends Entity{
 				Floor floor = new Floor("floor",null,5,5,this);
 				
 				addComponent(floor);
-				objectsStack[i][j] =  new Stack();
+				objectsStack[i][j] =  new ObjectsPriorityStack();
 				objectsStack[i][j].push(floor);
 			}
 		}
@@ -114,37 +115,144 @@ public class Map extends Entity{
 		numTempObjects--;
 		objectsStack[x][y].pop();
 		updateComponentList();
-		if(numTempObjects==0)
+		if(numTempObjects==0){
 			setHasTempObjects(false);
+		}
 	}
 	
 	//places single object on x,y
 	public void placeObjects(int x,int y,Objects obj) {
+		//System.out.println("map.placeObjects()");
 		super.components.add(obj);
 		objectsStack[x][y].push(obj);
 		updateComponentList();
 	}
 	
-	/*
-	 * massPlaceObjectsLine(int x1, int y1, int x2, int y2, Objects obj)
-	 * takes in 2 locations x1,y1 x2,y2 places a deep copy of the
+	public void resetMap(){
+		//TODO: resets all arrays to default objects.
+	}
+	
+	/*  TODO: i need to finish this for any type of input.
+	 *  massPlaceObjectsLine(int x1, int y1, int x2, int y2, Objects obj)
+	 *  takes in 2 locations x1,y1 x2,y2 places a deep copy of the
 	 *  object passed in from point to point(inclusive)
 	 *  
 	 *  because of stack implementation the object that is all ready 
 	 *  there will be 2nd on the stack.
+	 *  
+	 *  
+	 *  first click = 1
+	 *  second click = 2
+	 *  filler = 3
+	 *  example:
+	 *  click 1 = point(0,0)
+	 *  click 2 = point(6,0)
+	 * 	1333332
+	 * 	0000000
+	 *	0000000
+	 * 	0000000
+	 * 	
+	 * 	
+	 * 
 	 */  
 	
 	public void massPlaceObjectsLine(int x1, int y1, int x2, int y2, Objects obj){
-		if(x1==x2){
-			if(y1 > y2){
-				int t = y2;
-				y2 = y1;
-				y1 = t;
+		/* if  
+		 * 	
+		 *  0000000
+		 *  0000000
+		 *	1333200
+		 * 	0000000
+		 *
+		 * OR
+		 * 	
+		 *  0000000
+		 *  0000000
+		 *	2333100
+		 * 	0000000
+		 */
+			
+		if(y1==y2){
+			if(x1 > x2){
+					int t = x2;
+					x2 = x1;
+					x1 = t;
+				}
+			for (int i = 0; i < x2-x1+1; i++) {
+				placeObjects(x1+i,y1,obj);
 			}
+		}
+		
+		/* if  
+		 * 	
+		 *  0100000
+		 *  0300000
+		 *	0300000
+		 * 	0200000
+		 *
+		 *  OR
+		 *  
+		 *	0200000
+		 *  0300000
+		 *	0300000
+		 * 	0100000
+		 */
+		
+		else if(x1==x2){
+			if(y1 > y2){
+					int t = y2;
+					y2 = y1;
+					y1 = t;
+				}
 			for (int i = 0; i < y2-y1+1; i++) {
 				placeObjects(x1,y1+i,obj);
 			}
 		}
+		
+		/* if  			OR
+		 * 	
+		 *  1000000      0001000
+		 *  0300000      0030000
+		 *	0030000      0300000
+		 * 	0002000      2000000
+		 *
+		 * OR  			OR
+		 * 	
+		 *  2000000      0002000
+		 *  0300000      0030000
+		 *	0030000      0300000
+		 * 	0001000      1000000
+		 */
+		
+		else if(x2-x1 == y2-y1){ //slope == 1 or -1
+			/* if  
+			 * 	
+			 *  0000000
+			 *  0000000
+			 *	0000000
+			 * 	0000000
+			 *
+			 *  OR
+			 *  
+			 *	0000000
+			 *  0000000
+			 *	0000000
+			 * 	0000000
+			 */
+			
+			if(x1>x2 && y1>y2){
+				int timesPlaced = x1-x2;
+				System.out.println("slop1");
+				for (int i = 0; i < timesPlaced; i++) {
+					
+				}
+			}
+			else{
+				System.out.println("slop2");
+			}
+		}
+				
+		updateComponentList();
 	}
 	 
 	
@@ -191,6 +299,11 @@ public class Map extends Entity{
 			}
 		}
 		return t;
+	}
+
+	public void removeObjects(int x, int y) {
+		objectsStack[x][y].pop();
+		updateComponentList();
 	}
 	
 }
