@@ -1,11 +1,16 @@
 package DD.ActionBox;
 
+import java.awt.Font;
+
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.TrueTypeFont;
+import org.lwjgl.input.Mouse;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
 import DD.SlickTools.ImageRenderComponent;
@@ -51,11 +56,38 @@ public class ActionChoice extends ImageRenderComponent
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{/* TODO: generate */
 		image.draw(x, y);
+		/*
+		 This is Full Round Actionwith x and y of 500.0 80.0
+		This is Swift Actionwith x and y of 500.0 120.0
+		This is Immediate Actionwith x and y of 500.0 160.0
+		This is Free Actionwith x and y of 500.0 200.0
+		This is Standard Actionwith x and y of 500.0 0.0
+		This is Move Actionwith x and y of 500.0 40.0
+		 */
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
-	{ /* TODO: generate */
+	{ 
+		/* get mouse coordinates */
+		int mouseX = Mouse.getX();
+		int mouseY = Mouse.getY();
+		
+		//Font font = new Font("Verdana", Font.BOLD, 20);
+		//TrueTypeFont ttf = new TrueTypeFont(font, true); 
+		//Color color = new Color(1,1,1);
+		
+		if( (mouseX >= x && mouseX <= x + image.getWidth() ) &&
+			(mouseY >= 560 - y && mouseY <= 560 - y + image.getHeight() ) )
+		{
+			/* You are inside the button */
+			if(Mouse.isButtonDown(0))
+			{
+				System.out.println("You are clicking " + display);
+				//ttf.drawString(100, 100, "Hello", color);
+			}
+		}
+			 
 		
 	}
 	
