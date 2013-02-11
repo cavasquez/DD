@@ -1,4 +1,7 @@
 package DD.GUI;
+
+import DD.Character.CharacterSheet.*;
+import DD.Character.CharacterSheet.Race.*;
 import DD.ActionBox.ActionBox;
 import DD.Character.*;
 import DD.SlickTools.Component;
@@ -20,6 +23,9 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameplayState extends BasicGameState {
 	private int stateID = 0;
 	
+	private CharacterSheet sheet = new CharacterSheet();
+	
+	private String charToString = " ";
 	private float playerX=230;
 	private float playerY=445;
 	private TiledMap map;	
@@ -39,12 +45,34 @@ public class GameplayState extends BasicGameState {
 	}
 	
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
+		/* character creation process */
+		sheet.fillBasic("Max", 
+			"Bob", 
+			0, 
+			"Elvish, Common", 
+			0, 
+			1, 
+			5, 
+			150, 
+			200, 
+			"Chaotic Neutral", 
+			"Apple", 
+			"Noble", 
+			"Archer");
+		
+		sheet.fillAbilities();
+		CharacterClass barb = sheet.chooseClass(0);	//this is barbarian
+		sheet.fillRecorder(barb);
+		sheet.fillAttacksAndDefense(barb);
+		
+		
 		arg0.setVSync(true);
 		//SpriteSheet sheet = new SpriteSheet("Images/Test/karbonator.png",32,32);
 		//SpriteSheet ogre = new SpriteSheet("Resources/DnD-OgreLeader.png", 130, 135);
 		//Vector2f actionBoxPosition = new Vector2f(600f, 200f);
 		//Vector2f characterPosition = new Vector2f(0f, 0f);
 		warrior = new DDCharacter(stateID);
+		warrior.setCharacterSheet(sheet);
 		actionBox = new ActionBox(stateID, 300, 200, warrior);
 		
 		Image characters = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
@@ -97,9 +125,12 @@ public class GameplayState extends BasicGameState {
 			
 		}
 		
+		charToString = "CHARACTER SHEET: \n" + warrior.getCharacterSheet().toString();
+		
 	}
 	public void render(GameContainer container, StateBasedGame sb, Graphics g) throws SlickException {
 		/* render map */
+		g.drawString(charToString, 800, 30);
 		map.render(0, 0);
 		/* render enemies */
 		enemy.draw(200, 100);

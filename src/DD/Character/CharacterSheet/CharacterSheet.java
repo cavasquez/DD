@@ -20,6 +20,7 @@ public class CharacterSheet
 	
 	public CharacterSheet()
 	{
+		String raceName = "";
 		name = "";
 	    player = "";
 		race = new Human();
@@ -37,6 +38,7 @@ public class CharacterSheet
 		inher=0;
 		enhance=0;
 		misc=0;
+		
 		
 	}
 	/*THE DICE!*/
@@ -64,6 +66,7 @@ public class CharacterSheet
 	/************************************ Class Attributes *************************************/
 	
 	/******** Basic Info *********/
+	private String raceName;
 	private String name;
 	private String player;
 	Race race;
@@ -111,7 +114,7 @@ public class CharacterSheet
 	 */
 	
 	
-	private int[][] rawStats;
+	private int[][] rawStats = new int[6][6];
 	int stat;
 	int base; 
 	int inher;
@@ -584,7 +587,7 @@ public class CharacterSheet
 	 */
 	int dex;
 	
-	private int[][] armorClass;
+	private int[][] armorClass = new int[3][8];
 	//have not implemented armor Penalty yet
 	//AC
 	public void setACArmor(/*need armor Class to be made*/)
@@ -853,7 +856,7 @@ public class CharacterSheet
 	public static final int SAVE_ABILITY = 2;
 	public static final int SAVE_ENHANCE = 3;
 	 
-	private int[][] savingthrows;
+	private int[][] savingthrows = new int[3][4];
 	
 	//FORT
 	
@@ -1049,7 +1052,7 @@ public class CharacterSheet
 		public static final int ATTACK_ABILITY = 5;
 		public static final int ATTACK_SIZE = 6; 
 		
-	private int[][] attacks;
+	private int[][] attacks = new int[4][7];
 	//Melee
 	public void setMeleeBab(CharacterClass clas)
 	{
@@ -1391,6 +1394,7 @@ public class CharacterSheet
 		this.name =name;
 		this.player=player;
 		this.race=container.getRace(race);
+		this.raceName = this.race.getRaceName();
 		this.languages = languages;
 		this.size = size;
 		this.gender = gender;
@@ -1529,7 +1533,7 @@ public class CharacterSheet
 		ClassRecorder clas = recorder.get(0);
 		String r = "Name: " +name + " \n" +
 				   "Player Name: " + player + " \n" +
-				   "Race: " + race + " \n" +
+				   "Race: " + raceName + " \n" +
 				   "Gender: " + gender + " \n" +
 				   "Age: " + age + " \n\n" +
 				   

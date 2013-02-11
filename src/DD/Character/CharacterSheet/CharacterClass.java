@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public abstract class CharacterClass {
 	String className;
-	int[] bab;
+	int[] bab = new int[5];
 	int[] fortSave = new int[20];
 	int[] refSave  = new int[20];
 	int[] willSave = new int[20];

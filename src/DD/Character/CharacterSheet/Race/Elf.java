@@ -12,6 +12,7 @@ public class Elf extends Race{
 	
 	public Elf()
 	{
+		raceName="Elf";
 		naturalArmor =0;
 		baseSpeed = 30;
 		size = 0;
@@ -68,5 +69,11 @@ public class Elf extends Race{
 	public int getNaturalArmor() {
 		// TODO Auto-generated method stub
 		return naturalArmor;
+	}
+
+	@Override
+	public String getRaceName() {
+		// TODO Auto-generated method stub
+		return raceName;
 	}
 }

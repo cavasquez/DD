@@ -19,7 +19,7 @@ import DD.SlickTools.*;
 public class DDCharacter extends Entity
 {
 	/************************************ Class Attributes *************************************/
-	private CharacterSheet character;
+	private CharacterSheet sheet;
 	private boolean hasTurn = false;
 	private int currentHP;
 	private int currentSpeed;
@@ -39,7 +39,17 @@ public class DDCharacter extends Entity
 		engaged = false;
 		
 	} /* end Character Constructor */
-		
+	
+	public CharacterSheet getCharacterSheet() 
+	{
+		return sheet;
+	}
+	
+	public void setCharacterSheet(CharacterSheet sheet)
+	{
+		this.sheet = sheet;
+	}
+	
 	public void resetCharacter()
 	{ /* TODO: generate */
 		
@@ -75,7 +85,7 @@ public class DDCharacter extends Entity
 		/* TODO: implement */
 		boolean returner = false;
 		
-		if (attack >= character.getAP(attackType)) returner = true;
+		if (attack >= sheet.getAP()) returner = true;
 		
 		return(returner); /*  */
 	} /* end getAttacked method */

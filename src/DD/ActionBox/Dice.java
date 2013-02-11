@@ -26,11 +26,13 @@ public class Dice
 	public Dice() 
 	{
 		dieSize = Integer.MAX_VALUE;
+		generator = new Random();
 	} /* end dieSize */
 	
 	public Dice(int dieSize) 
 	{
 		this.dieSize = dieSize;
+		generator = new Random();
 	} /* end Dice constructor */
 	
 	public int roll(int numOfRolls, int dieSize)
@@ -65,7 +67,7 @@ public class Dice
 		int[] holding = new int[numOfRolls];
 		for (int i = 0; i < numOfRolls; i++)
 		{
-			holding[i] = generator.nextInt(this.dieSize) + 1;
+			holding[i] = generator.nextInt(dieSize) + 1;
 		} 
 		for (int i = 0; i < bestOf; i++)
 		{

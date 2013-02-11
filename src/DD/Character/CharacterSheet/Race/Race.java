@@ -2,6 +2,7 @@ package DD.Character.CharacterSheet.Race;
 
 public abstract class  Race 
 {
+	public String raceName;
 	public int naturalArmor;
 	public int str;
 	public int dex;
@@ -20,4 +21,5 @@ public abstract class  Race
 	public abstract int getcha();
 	public abstract int getSize();
 	public abstract int getNaturalArmor();
+	public abstract String getRaceName();
 }
