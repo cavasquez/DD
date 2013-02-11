@@ -600,7 +600,7 @@ public class CharacterSheet
 		dex = rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
 		armorClass[DEFENSE_AC][DEFENSE_DEX]= dex;
 	}
-	public void setACSize(Race race)
+	public void setACSize()
 	{
 		 size = race.getSize();
 		armorClass[DEFENSE_AC][DEFENSE_SIZE]= size;
@@ -687,7 +687,7 @@ public class CharacterSheet
 		dex = rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
 		armorClass[DEFENSE_TOUCH][DEFENSE_DEX]= dex;
 	}
-	public void setTouchSize(Race race)
+	public void setTouchSize()
 	{
 		 size = race.getSize();
 		armorClass[DEFENSE_TOUCH][DEFENSE_SIZE]= size;
@@ -751,7 +751,7 @@ public class CharacterSheet
 	{
 		armorClass[DEFENSE_FLATFOOT][DEFENSE_SHIELD]= 0;
 	}
-	public void setFlatfootSize(Race race)
+	public void setFlatfootSize()
 	{
 		 size = race.getSize();
 		armorClass[DEFENSE_FLATFOOT][DEFENSE_SIZE]= size;
@@ -1031,27 +1031,272 @@ public class CharacterSheet
 	 * 
 	 * Y:
 	 * column index 0 = total
-	 * column index 1 .. base attack.. 
-	 * column index 2 = ability
-	 * column index 3 = size
+	 * column index 1,2,3,4,5 .. base attack.. 
+	 * column index 6 = ability
+	 * column index 7 = size
 	 */
 		public static final int ATTACK_MELEE = 0;
 		public static final int ATTACK_RANGED = 1;
 		public static final int ATTACK_CMB= 2;
 		public static final int ATTACK_CMD = 3;
 		
-		public static final int ATTACK_TOTAL = 0;
-		public static final int ATTACK_BAB = 1; 
-		public static final int ATTACK_ABILITY = 2;
-		public static final int ATTACK_SIZE = 3; 
 		
-	private int[] attacks;
-	
+		public static final int ATTACK_BABFIRST = 0;
+		public static final int ATTACK_BABSECOND = 1;
+		public static final int ATTACK_BABTHIRD = 2;
+		public static final int ATTACK_BABFOURTH = 3;
+		public static final int ATTACK_BABFIFTH = 4;
+		public static final int ATTACK_ABILITY = 5;
+		public static final int ATTACK_SIZE = 6; 
+		
+	private int[][] attacks;
+	//Melee
 	public void setMeleeBab(CharacterClass clas)
 	{
-		attacks[][]
+		int[] babValues = clas.getBab();
+		int value = babValues[0];
+		attacks[ATTACK_MELEE][ATTACK_BABFIRST] = value;
+		value = babValues[1];
+		attacks[ATTACK_MELEE][ATTACK_BABSECOND] = value;
+		value = babValues[2];
+		attacks[ATTACK_MELEE][ATTACK_BABTHIRD] = value;
+		value = babValues[3];
+		attacks[ATTACK_MELEE][ATTACK_BABFOURTH] = value;
+		value = babValues[4];
+		attacks[ATTACK_MELEE][ATTACK_BABFIFTH] = value;
+		
+	}
+	public void setMeleeAbility()
+	{
+		int strMod = rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER];
+		attacks[ATTACK_MELEE][ATTACK_ABILITY] = strMod;
+		
+	}
+	public void setMeleeSize()
+	{
+		
+		attacks[ATTACK_MELEE][ATTACK_SIZE] = race.getSize();
+		
+	}
+	public int getMeleeAbility()
+	{
+		
+		return attacks[ATTACK_MELEE][ATTACK_ABILITY];
+		
+	}
+	public int getMeleeSize()
+	{
+		
+		return attacks[ATTACK_MELEE][ATTACK_SIZE];
+		
+	}
+	public int[] getMeleeBab()
+	{
+		int[] bab = new int[5];
+		bab[0]= attacks[ATTACK_MELEE][ATTACK_BABFIRST];
+	
+		bab[1]= attacks[ATTACK_MELEE][ATTACK_BABSECOND];
+		
+		bab[2]= attacks[ATTACK_MELEE][ATTACK_BABTHIRD];
+	
+		bab[3]= attacks[ATTACK_MELEE][ATTACK_BABFOURTH];
+		
+		bab[4]= attacks[ATTACK_MELEE][ATTACK_BABFIFTH];
+		return bab;
+		
+	}
+	//Ranged
+	public void setRangedBab(CharacterClass clas)
+	{
+		int[] babValues = clas.getBab();
+		int value = babValues[0];
+		attacks[ATTACK_RANGED][ATTACK_BABFIRST] = value;
+		value = babValues[1];
+		attacks[ATTACK_RANGED][ATTACK_BABSECOND] = value;
+		value = babValues[2];
+		attacks[ATTACK_RANGED][ATTACK_BABTHIRD] = value;
+		value = babValues[3];
+		attacks[ATTACK_RANGED][ATTACK_BABFOURTH] = value;
+		value = babValues[4];
+		attacks[ATTACK_RANGED][ATTACK_BABFIFTH] = value;
+		
+	}
+	public void setRangedAbility()
+	{
+		int dexMod = rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
+		attacks[ATTACK_RANGED][ATTACK_ABILITY] = dexMod;
+		
+	}
+	public void setRangedSize()
+	{
+		
+		attacks[ATTACK_RANGED][ATTACK_SIZE] = race.getSize();
+		
+	}
+	public int getRangedAbility()
+	{
+		
+		return attacks[ATTACK_RANGED][ATTACK_ABILITY];
+		
+	}
+	public int getRangedSize()
+	{
+		
+		return attacks[ATTACK_RANGED][ATTACK_SIZE];
+		
+	}
+	public int[] getRangedBab()
+	{
+		int[] bab = new int[5];
+		bab[0]= attacks[ATTACK_RANGED][ATTACK_BABFIRST];
+	
+		bab[1]= attacks[ATTACK_RANGED][ATTACK_BABSECOND];
+		
+		bab[2]= attacks[ATTACK_RANGED][ATTACK_BABTHIRD];
+	
+		bab[3]= attacks[ATTACK_RANGED][ATTACK_BABFOURTH];
+		
+		bab[4]= attacks[ATTACK_RANGED][ATTACK_BABFIFTH];
+		return bab;
+		
+	}
+	//CMB
+	public void setCmbBab(CharacterClass clas)
+	{
+		int[] babValues = clas.getBab();
+		int value = babValues[0];
+		attacks[ATTACK_CMB][ATTACK_BABFIRST] = value;
+		value = babValues[1];
+		attacks[ATTACK_CMB][ATTACK_BABSECOND] = value;
+		value = babValues[2];
+		attacks[ATTACK_CMB][ATTACK_BABTHIRD] = value;
+		value = babValues[3];
+		attacks[ATTACK_CMB][ATTACK_BABFOURTH] = value;
+		value = babValues[4];
+		attacks[ATTACK_CMB][ATTACK_BABFIFTH] = value;
+		
+	}
+	public void setCmbAbility()
+	{
+		int strMod = rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER];
+		attacks[ATTACK_CMB][ATTACK_ABILITY] = strMod;
+		
+	}
+	public void setCmbSize()
+	{
+		
+		attacks[ATTACK_CMB][ATTACK_SIZE] = race.getSize();
+		
+	}
+	public int getCmbAbility()
+	{
+		
+		return attacks[ATTACK_CMB][ATTACK_ABILITY];
+		
+	}
+	public int getCmbSize()
+	{
+		
+		return attacks[ATTACK_CMB][ATTACK_SIZE];
+		
+	}
+	public int[] getCmbBab()
+	{
+		int[] bab = new int[5];
+		bab[0]= attacks[ATTACK_CMB][ATTACK_BABFIRST];
+	
+		bab[1]= attacks[ATTACK_CMB][ATTACK_BABSECOND];
+		
+		bab[2]= attacks[ATTACK_CMB][ATTACK_BABTHIRD];
+	
+		bab[3]= attacks[ATTACK_CMB][ATTACK_BABFOURTH];
+		
+		bab[4]= attacks[ATTACK_CMB][ATTACK_BABFIFTH];
+		return bab;
+		
 	}
 	
+	//cmd
+	public void setCmdBab(CharacterClass clas)
+	{
+		int[] babValues = clas.getBab();
+		int value = babValues[0];
+		attacks[ATTACK_CMD][ATTACK_BABFIRST] = value;
+		value = babValues[1];
+		attacks[ATTACK_CMD][ATTACK_BABSECOND] = value;
+		value = babValues[2];
+		attacks[ATTACK_CMD][ATTACK_BABTHIRD] = value;
+		value = babValues[3];
+		attacks[ATTACK_CMD][ATTACK_BABFOURTH] = value;
+		value = babValues[4];
+		attacks[ATTACK_CMD][ATTACK_BABFIFTH] = value;
+		
+	}
+	public void setCmdAbility()
+	{
+		int strMod = rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER];
+		attacks[ATTACK_CMD][ATTACK_ABILITY] = strMod;
+		
+	}
+	public void setCmdSize()
+	{
+		
+		attacks[ATTACK_CMD][ATTACK_SIZE] = race.getSize();
+		
+	}
+	
+	
+	
+	
+	public int getCmdAbility()
+	{
+		
+		return attacks[ATTACK_CMD][ATTACK_ABILITY];
+		
+	}
+	public int getCmdSize()
+	{
+		
+		return attacks[ATTACK_CMD][ATTACK_SIZE];
+		
+	}
+	public int[] getCmdBab()
+	{
+		int[] bab = new int[5];
+		bab[0]= attacks[ATTACK_CMD][ATTACK_BABFIRST];
+	
+		bab[1]= attacks[ATTACK_CMD][ATTACK_BABSECOND];
+		
+		bab[2]= attacks[ATTACK_CMD][ATTACK_BABTHIRD];
+	
+		bab[3]= attacks[ATTACK_CMD][ATTACK_BABFOURTH];
+		
+		bab[4]= attacks[ATTACK_CMD][ATTACK_BABFIFTH];
+		return bab;
+		
+	}
+	//not attack value, passing in if it's the first attack or send or so on
+	public int getCmdTotal(int attack)
+	{
+		int r = 10 + attacks[ATTACK_CMD][attack-1]+rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER]+rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER] + getCmdSize();
+		return r;
+	}
+	
+	public int getCmbTotal(int attack)
+	{
+		int r = attacks[ATTACK_CMB][attack-1]+rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER] + getCmbSize();
+		return r;
+	}
+	public int getRangedTotal(int attack)
+	{
+		int r = attacks[ATTACK_RANGED][attack-1]+rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER] + getCmbSize();
+		return r;
+	}
+	public int getMeleeTotal(int attack)
+	{
+		int r = attacks[ATTACK_MELEE][attack-1]+rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER] + getCmbSize();
+		return r;
+	}
 	//NEED SKILLS
 	/*
 	 * Just returns the String name of the skill.
@@ -1068,7 +1313,7 @@ public class CharacterSheet
 	private int xpTotalLvl;
 	
 	//NEED INIT
-	public int getinit()
+	public int getInit()
 	{
 		int dex = rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL];
 		return dex;
@@ -1085,18 +1330,22 @@ public class CharacterSheet
 	int spellResist = 0;
 	//NEED AP-ACTION POINTS
 	int actionPoints = 0;
-	/************************************ Class Methods *************************************/
-	public void initialize()
-	{
-		
-	} /* end Initialize */
 	
 	/************************************ Class Getters *************************************/
-	public int getAP(int attackType)
+	public int getAP()
 	{
-		return(0);
+		return actionPoints;
 	}
 	
+	public int getSR()
+	{
+		return spellResist;
+	}
+	
+	public int getDR()
+	{
+		return damageReduction;
+	}
 	/*
 	 * Setting a race with a value in a raceContainer
 	 */
@@ -1199,6 +1448,101 @@ public class CharacterSheet
 		setChaMisc();
 		setChaTotal();
 		setChaMod();
+	}
+	/*input is based on value of the class container 
+	 *  input is 0 then barb
+	 *  
+	
+	*/
+	public CharacterClass chooseClass(int clas)
+	{
+		ClassContainer container = new ClassContainer(this);
+		CharacterClass r = container.getClass(clas);
+		return r;
+	}
+	ArrayList<ClassRecorder> recorder = new ArrayList<ClassRecorder>();
+	public void fillRecorder(CharacterClass clas)
+	{
+		ClassRecorder rec = new ClassRecorder(clas);
+		recorder.add(rec);
+	}
+	
+	public void fillAttacksAndDefense(CharacterClass clas)
+	{
+		setACArmor();
+		setACShield();
+		setACDex();
+		setACSize();
+		setACDodge();
+		setACNaturalArmor(race);
+		setACDeflect();
+		setACTotal();
+		
+		setTouchDex();
+		setTouchSize();
+		setTouchDodge();
+		setTouchDeflect();
+		setTouchTotal();
+		
+		setFlatfootArmor();
+		setFlatfootShield();
+		setFlatfootSize();
+		setFlatfootNaturalArmor(race);
+		setFlatfootDeflect();
+		
+		setFortBase(clas);
+		setFortAbility();
+		setFortEnhance();
+		setFortTotal();
+		
+		setRefBase(clas);
+		setRefAbility();
+		setRefEnhance();
+		setRefTotal();
+		
+		setWillBase(clas);
+		setWillAbility();
+		setWillEnhance();
+		setWillTotal();
+		
+		setMeleeBab(clas);
+		setMeleeAbility();
+		setMeleeSize();
+		
+		setRangedBab(clas);
+		setRangedAbility();
+		setRangedSize();
+		
+		setCmbBab(clas);
+		setCmbAbility();
+		setCmbSize();
+		
+		setCmdBab(clas);
+		setCmdAbility();
+		setCmdSize();
+		
+		
+	}
+	
+	public String toString()
+	{
+		ClassRecorder clas = recorder.get(0);
+		String r = "Name: " +name + " \n" +
+				   "Player Name: " + player + " \n" +
+				   "Race: " + race + " \n" +
+				   "Gender: " + gender + " \n" +
+				   "Age: " + age + " \n\n" +
+				   
+				   "Str: " + rawStats[ABILITY_STRENGTH][ABILITY_TOTAL] + "\n" +
+				   "Dex: " + rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] + "\n" +
+				   "Con: " + rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL] + "\n" +
+				   "Int: " + rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL] + "\n" +
+				   "Wis: " + rawStats[ABILITY_WISDOM][ABILITY_TOTAL] + "\n" +
+				   "Cha: " + rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] + "\n\n" +
+					
+				   "Class: " + clas.className + "\n" +
+				   "Hp: " + clas.hp;
+		return r;
 	}
 	
 } /* end CharacterSheet method */
