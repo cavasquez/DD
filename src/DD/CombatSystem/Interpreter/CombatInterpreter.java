@@ -1,6 +1,5 @@
 package DD.CombatSystem.Interpreter;
 
-import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.CombatValidationMessage;
 import DD.Message.CombatMessage;
 

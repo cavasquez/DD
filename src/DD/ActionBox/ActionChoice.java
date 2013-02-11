@@ -3,13 +3,10 @@ package DD.ActionBox;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
 import DD.SlickTools.ImageRenderComponent;
-import DD.SlickTools.RenderComponent;
 
 /*****************************************************************************************************
  * The ActionChoice class will represent the many actions available to the player in the ActionBox class.

@@ -2,8 +2,6 @@ package DD.Chat.Interpreter;
 
 import DD.Chat.ChatSystem;
 import DD.Message.ChatMessage;
-import DD.Message.NetworkMessage;
-import DD.Network.Network;
 import DD.Network.NetworkSystem;
 
 /*****************************************************************************************************
