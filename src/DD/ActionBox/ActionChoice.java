@@ -1,9 +1,15 @@
 package DD.ActionBox;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.TrueTypeFont;
+import org.lwjgl.input.Mouse;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
 import DD.SlickTools.ImageRenderComponent;
@@ -29,7 +35,10 @@ public class ActionChoice extends ImageRenderComponent
 	int actionType;			/* Number that refers to the type of action this ActionChoice represents (standard, move, etc.) */
 	String display;
 	boolean actionPerformed;
+	String message = " ";
+	String mousePos = " ";
 	float x, y;
+	Input mouse = new Input(650);
 	
 	/************************************ Class Methods *************************************/
 	/* Remember, ID is the same as ActionType */
@@ -46,14 +55,32 @@ public class ActionChoice extends ImageRenderComponent
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
-	{/* TODO: generate */
+	{
 		image.draw(x, y);
+		gr.drawString(message, x, 250 + y);
+		gr.drawString(mousePos, 900, 0);
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
-	{ /* TODO: generate */
+	{ 	 
+		/* get mouse coordinates */
+		int mouseX = mouse.getMouseX();
+		int mouseY = mouse.getMouseY();
 		
+		if( (mouseX >= x && mouseX <= x + image.getWidth() ) &&
+			(mouseY >= y && mouseY <= y + image.getHeight() ) )
+		{
+			/* You are inside the button */
+			
+			//if(mouse.isMousePressed(Input.MOUSE_LEFT_BUTTON)) 
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				System.out.println("You are clicking " + display);
+				message = "You are clicking " + display;
+			}
+		}
+		mousePos = "Mouse Position x: " + mouseX + " y: " + mouseY;
 	}
 	
 	protected void performAction()

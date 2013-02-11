@@ -6,6 +6,8 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.state.StateBasedGame;
+
+import Temp.Game;
  
 public class MainMenuState extends BasicGameState {
 	int stateID = 0;

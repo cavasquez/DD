@@ -1,34 +1,50 @@
 package DD.GUI;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
-//import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
-//lol
- 
-public class Game extends StateBasedGame {
 
-	public static final int MAINMENUSTATE = 0;
-	public static final int GAMEPLAYSTATE = 1;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
+
+public class Game extends StateBasedGame
+{
+	public static final String gamename = "Dungeons & Dragons!";
 	
+	public static final int menu = 0;
+	public static final int play = 1;
+	public static final int about = 2;
+	public static final int createLob = 3;
+	public static final int gameplay = 4;
 	
-	public Game() {
-		super("GUI Testing");
+	public Game(String gamename)
+	{
+		super(gamename);
+		this.addState(new Menu(menu));
+		this.addState(new Play(play));
+		this.addState(new About(about));
+		this.addState(new CreateLob(createLob));
+		this.addState(new GameplayState(gameplay));
+	}
+	
+	public void initStatesList(GameContainer gc) throws SlickException
+	{
+		this.getState(menu).init(gc, this);
+		this.getState(play).init(gc, this);
+		this.getState(about).init(gc, this);
+		this.getState(createLob).init(gc, this);
+		this.getState(gameplay).init(gc, this);
 		
-		this.addState(new MainMenuState(MAINMENUSTATE));
-		this.addState(new GameplayState(GAMEPLAYSTATE));
-		this.enterState(MAINMENUSTATE);
+		this.enterState(menu);
+		
 	}
 	
-	public static void main(String[] argv) throws SlickException {
-		AppGameContainer app = new AppGameContainer(new Game());
-		app.setDisplayMode(800, 600, false);	// last parameter is full screen
-		app.start();
+	public static void main(String[] args)
+	{
+		AppGameContainer appgc;
+		try{
+			appgc = new AppGameContainer(new Game(gamename));
+			appgc.setDisplayMode(1200, 650, false);
+			appgc.start();
+		}catch(SlickException e){
+			e.printStackTrace();
+		}
 	}
-	
-	public void initStatesList(GameContainer gameContainer) throws SlickException {
-		this.getState(MAINMENUSTATE).init(gameContainer, this);
-		this.getState(GAMEPLAYSTATE).init(gameContainer, this);
-	}
-	
+
 }

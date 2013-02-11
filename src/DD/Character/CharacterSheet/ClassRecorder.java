@@ -11,19 +11,21 @@ public class ClassRecorder
 {
 	
 	
-	Object[][] classRecorder;
+	
 	
 	String className;
-	int bab;
-	ArrayList<String> skills;
+	int[] bab;
+	int skills;
 	int fort;
 	int ref;
 	int will;
 	int levels;
+	int hp;
 	
 	
 	public ClassRecorder(CharacterClass clas)
 	{
+		hp = clas.getHp();
 		className = clas.getClassName();
 		bab = clas.getBab();
 		fort = clas.getFort();
@@ -36,16 +38,16 @@ public class ClassRecorder
 	
 	
 	
-	public int getBab() {
+	public int[] getBab() {
 		return bab;
 	}
-	public void setBab(int bab) {
+	public void setBab(int[] bab) {
 		this.bab = bab;
 	}
-	public ArrayList<String> getSkills() {
+	public int getSkills() {
 		return skills;
 	}
-	public void setSkills(ArrayList<String> skills) {
+	public void setSkills(int skills) {
 		this.skills = skills;
 	}
 	public int getFort() {

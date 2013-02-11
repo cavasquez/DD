@@ -17,7 +17,7 @@ public class ObjectsOfInterest extends Objects{
 		
 		super.movePenalty = move;
 		super.lightPenalty = light;
-	
+		super.priority = 2;
 	
 	}
 	/*

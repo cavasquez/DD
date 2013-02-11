@@ -30,7 +30,11 @@ public abstract class Listener extends NetworkSocket
 		{
 			message = (NetworkMessage) input.readObject();
 		} /* end try */
-		catch(IOException | ClassNotFoundException e)
+		catch(IOException e)
+		{
+			e.printStackTrace();
+		} /* end catch */
+		catch(ClassNotFoundException e)
 		{
 			e.printStackTrace();
 		} /* end catch */
