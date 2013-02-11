@@ -130,7 +130,7 @@ public class GameplayState extends BasicGameState {
 	}
 	public void render(GameContainer container, StateBasedGame sb, Graphics g) throws SlickException {
 		/* render map */
-		g.drawString(charToString, 800, 30);
+		g.drawString(charToString, 850, 30);
 		map.render(0, 0);
 		/* render enemies */
 		enemy.draw(200, 100);
