@@ -23,6 +23,8 @@ public class Objects extends ImageRenderComponent {//figure out comp.
 		owner.addComponent(this);
 	}
 
+	
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) {
 		// TODO Auto-generated method stub

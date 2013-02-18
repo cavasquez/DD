@@ -52,6 +52,16 @@ public class Map extends Entity{
 	 * after each player turn, decrement each temp object turn count.
 	 * 	if turn count == 0 after decremented, remove that temp item.
 	 */
+	
+	public CharacterObjects getDDCharacter(int x, int y){
+		if(objectsStack[x][y].peek() instanceof CharacterObjects){
+			return (CharacterObjects) objectsStack[x][y].peek();
+		}
+		else {
+			return null;
+		}
+	}
+	
 	public void tempObjectsUpdate(){
 		for (int i = 0; i < tempObjects.length; i++) {
 			for (int j = 0; j < tempObjects.length; j++) {
