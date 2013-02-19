@@ -22,6 +22,12 @@ public abstract class Component
 		this.id = id;
 	} /* end Component Constructor */
 	
+	public Component() {
+		this.id = 0;
+		this.owner =null;
+		// TODO Auto-generated constructor stub
+	}
+
 	public abstract void update(GameContainer gc, StateBasedGame sbg, int delta);
 	
 	/******************************************************************************

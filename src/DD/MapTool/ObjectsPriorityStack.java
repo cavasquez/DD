@@ -1,9 +1,12 @@
 package DD.MapTool;
 
+import java.io.Serializable;
 import java.util.PriorityQueue;
 
 
-public class ObjectsPriorityStack {
+public class ObjectsPriorityStack implements Serializable{
+
+	private static final long serialVersionUID = 3048624868543442456L;
 	private  PriorityQueue<Objects> pQueue;
 	public ObjectsPriorityStack() {
 		OPSComparator opsc = new OPSComparator();

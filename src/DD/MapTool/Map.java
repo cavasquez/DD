@@ -3,6 +3,12 @@ package DD.MapTool;
  * @author GM-Michael VanWie
  */
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList; 
 import java.util.Stack;
 import org.newdawn.slick.Image;
@@ -10,17 +16,22 @@ import org.newdawn.slick.geom.Vector2f;
 import DD.SlickTools.*;
 
 
-public class Map extends Entity{
+public class Map extends Entity implements Serializable{
+	private static final long serialVersionUID = -2402013046237396326L;
 	ObjectsPriorityStack[][] objectsStack ; //ops<Objects>
-	TempObjects[][] tempObjects;
+	TempObjects[][]  tempObjects;
 	int numTempObjects;
 	Image defImage;
 	boolean hasTempObjects;
 	String name;
-	final int mapSize = 21;
+	final int mapSize = 10;
 
-	public Map(String name){
+	public Map(){
+		super();
 		
+	}
+	
+	public Map(String name){
 		super(0);
 		this.name = name;
 		objectsStack =  new ObjectsPriorityStack[mapSize][mapSize];
@@ -52,6 +63,19 @@ public class Map extends Entity{
 	 * after each player turn, decrement each temp object turn count.
 	 * 	if turn count == 0 after decremented, remove that temp item.
 	 */
+	public void writeMe(){
+		try{
+			FileOutputStream fileOut = new FileOutputStream(name+".ser");
+			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
+			out.writeObject(this);
+			out.close();
+			fileOut.close();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public CharacterObjects getDDCharacter(int x, int y){
 		if(objectsStack[x][y].peek() instanceof CharacterObjects){
@@ -314,6 +338,11 @@ public class Map extends Entity{
 	public void removeObjects(int x, int y) {
 		objectsStack[x][y].pop();
 		updateComponentList();
+	}
+
+	public Object getComponents() {
+		// TODO Auto-generated method stub
+		return super.components;
 	}
 	
 }

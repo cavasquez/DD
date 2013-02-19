@@ -1,15 +1,14 @@
 package DD.MapTool;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import DD.SlickTools.*;
 
-
-/*
- * TODO: implement Serializable
- */
 public class World implements Serializable{
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2853246324745729078L;
 	Map[][] world;
 	String WorldName;
 	int worldSize = 5;
@@ -60,12 +59,82 @@ public class World implements Serializable{
 	}
 	
 	public void saveWorld(){
-
+		//TODO: 
 	}
 	
 	public World loadWorld(){
+		//TODO		
 		return null;	
 	}
+	
+	
+	public Floor readFloor(String name){
+		Floor e = null;
+	      try
+	      {
+	         FileInputStream fileIn =
+	                          new FileInputStream(name);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         e = (Floor) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         
+	      }catch(ClassNotFoundException c)
+	      {
+	         c.printStackTrace();
+	         
+	      }
+	      return e;
+	 }
+	
+	public Obstacle readObstacle(String name){
+		Obstacle e = null;
+	      try
+	      {
+	         FileInputStream fileIn =
+	                          new FileInputStream(name);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         e = (Obstacle) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         
+	      }catch(ClassNotFoundException c)
+	      {
+	         c.printStackTrace();
+	         
+	      }
+	      return e;
+	 }
+	
+	
+	public Map readMap(String name){
+		Map e = null;
+	      try
+	      {
+	         FileInputStream fileIn =
+	                          new FileInputStream(name);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         e = (Map) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         
+	      }catch(ClassNotFoundException c)
+	      {
+	         c.printStackTrace();
+	         
+	      }
+	      return e;
+	 }
+	
 	public String toString(){
 		String t = "";
 		for (int i = 0; i < worldSize; i++) {

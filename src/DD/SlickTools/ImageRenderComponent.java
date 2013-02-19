@@ -12,6 +12,10 @@ public abstract class ImageRenderComponent extends RenderComponent
 	protected Image image;
 	
 	/************************************ Class Methods *************************************/
+	public ImageRenderComponent(){
+		super();
+	}
+	
 	public ImageRenderComponent(int id, Image image)
 	{
 		super(id);
