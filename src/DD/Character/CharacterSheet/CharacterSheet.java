@@ -588,7 +588,8 @@ public class CharacterSheet
 	int dex;
 	
 	private int[][] armorClass = new int[3][8];
-	//have not implemented armor Penalty yet
+	
+	int armorPenalty;
 	//AC
 	public void setACArmor(/*need armor Class to be made*/)
 	{
@@ -818,7 +819,6 @@ public class CharacterSheet
 	
 	/************************************ Saving Throws Setters/Getters *************************************/
 	/*Setters*/
-	//FIX ME don't have sets for columns yet just totals
 		
 		/*
 		 * NOTE ON BASE SAVE (CLASS BASE)
@@ -1306,10 +1306,172 @@ public class CharacterSheet
 	 * Will need to implement a 2d array for values
 	 * of the skills
 	 */
-	public int skills;
-	public void getSkills(CharacterClass clas)
+	
+	public int[][] skills = new int[32][4];
+	//public int[][] classSkills = new int[32][4];
+	SkillsList list;
+	
+	public int[][] getSkills()
 	{
-		skills = clas.skills;
+		//bad overrides current skills
+		
+		return skills;
+	}
+	
+	/*
+	 * need to setClassSkills first then ability then ranks
+	 * should only have to do this once
+	*/
+	
+	public void setClassSkills(CharacterClass clas)
+	{
+	    list = new SkillsList(clas);
+		skills = list.getList();
+		
+	}
+	/*
+	 * This method sets the ability values of Skills based on the mod value of the abilities
+	 * Certain skills require a specific ability mod. 
+	 */
+	public void setAbilitySkills()//or updateAbilitySkills
+	{
+		int str = rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER];
+		int dex = rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
+		int inte = rawStats[ABILITY_INTELLIGENCE][ABILITY_MODIFIER];
+		int wis = rawStats[ABILITY_WISDOM][ABILITY_MODIFIER];
+		int cha = rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
+		
+		
+		skills[list.ACROBATICS][list.ABILITY] = dex;
+		skills[list.APPRAISE][list.ABILITY] = inte;
+		skills[list.BLUFF][list.ABILITY] = cha;
+		skills[list.CLIMB][list.ABILITY] = str;
+		skills[list.CRAFT1][list.ABILITY] = inte;
+		skills[list.CRAFT2][list.ABILITY] = inte;
+		skills[list.DIPLOMACY][list.ABILITY] = cha;
+		skills[list.DISABLEDEVICE][list.ABILITY] = dex;
+		skills[list.DISGUISE][list.ABILITY] = cha;
+		skills[list.ESCAPEARTIST][list.ABILITY] = dex;
+		skills[list.FLY][list.ABILITY] = dex;
+		skills[list.HANDLEANIMAL][list.ABILITY] = cha;
+		skills[list.HEAL][list.ABILITY] = wis;
+		skills[list.INTIMIDATE][list.ABILITY] = cha;
+		skills[list.KNOWLEDGE1][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE2][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE3][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE4][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE5][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE6][list.ABILITY] = inte;
+		skills[list.LINGUISTICS][list.ABILITY] = inte;
+		skills[list.PERCEPTION][list.ABILITY] = wis;
+		skills[list.PERFORM][list.ABILITY] = cha;
+		skills[list.PROFESSION][list.ABILITY] = inte;
+		skills[list.RIDE][list.ABILITY] = dex;
+		skills[list.SENSEMOTIVE][list.ABILITY] = wis;
+		skills[list.SLEIGHTOFHAND][list.ABILITY] = dex;
+		skills[list.SPELLCRAFT][list.ABILITY] = inte;
+		skills[list.STEALTH][list.ABILITY] = dex;
+		skills[list.SURVIVAL][list.ABILITY] = wis;
+		skills[list.SWIM][list.ABILITY] = str;
+		skills[list.USEMAGICDEVICE][list.ABILITY] = inte;
+		
+		
+		
+		
+		
+	}
+	/*
+	 * This method will be asked using skill points, when calling this method 
+	 * you will need to set the amount of skills available and decrease it every time
+	 * after calling this method. It does not take into account how many skills can
+	 * be assigned it will just assign the value +1 each time it is called. Will need to pass
+	 * in the row value you wish to add a rank to. row value is the skill you want to increase
+	 * it's numerical value can be found in SkillsList.java
+	 */
+	public void setRanksSkills(int skillValue)
+	{
+		
+	}
+	/*
+	 * does the same thing setAbilitySkills() does but makes more sense to use this after
+	 * the first time
+	 */
+	public void updateAbilitySkills()
+	{
+		int str = rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER];
+		int dex = rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
+		int inte = rawStats[ABILITY_INTELLIGENCE][ABILITY_MODIFIER];
+		int wis = rawStats[ABILITY_WISDOM][ABILITY_MODIFIER];
+		int cha = rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
+		
+		
+		skills[list.ACROBATICS][list.ABILITY] = dex;
+		skills[list.APPRAISE][list.ABILITY] = inte;
+		skills[list.BLUFF][list.ABILITY] = cha;
+		skills[list.CLIMB][list.ABILITY] = str;
+		skills[list.CRAFT1][list.ABILITY] = inte;
+		skills[list.CRAFT2][list.ABILITY] = inte;
+		skills[list.DIPLOMACY][list.ABILITY] = cha;
+		skills[list.DISABLEDEVICE][list.ABILITY] = dex;
+		skills[list.DISGUISE][list.ABILITY] = cha;
+		skills[list.ESCAPEARTIST][list.ABILITY] = dex;
+		skills[list.FLY][list.ABILITY] = dex;
+		skills[list.HANDLEANIMAL][list.ABILITY] = cha;
+		skills[list.HEAL][list.ABILITY] = wis;
+		skills[list.INTIMIDATE][list.ABILITY] = cha;
+		skills[list.KNOWLEDGE1][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE2][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE3][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE4][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE5][list.ABILITY] = inte;
+		skills[list.KNOWLEDGE6][list.ABILITY] = inte;
+		skills[list.LINGUISTICS][list.ABILITY] = inte;
+		skills[list.PERCEPTION][list.ABILITY] = wis;
+		skills[list.PERFORM][list.ABILITY] = cha;
+		skills[list.PROFESSION][list.ABILITY] = inte;
+		skills[list.RIDE][list.ABILITY] = dex;
+		skills[list.SENSEMOTIVE][list.ABILITY] = wis;
+		skills[list.SLEIGHTOFHAND][list.ABILITY] = dex;
+		skills[list.SPELLCRAFT][list.ABILITY] = inte;
+		skills[list.STEALTH][list.ABILITY] = dex;
+		skills[list.SURVIVAL][list.ABILITY] = wis;
+		skills[list.SWIM][list.ABILITY] = str;
+		skills[list.USEMAGICDEVICE][list.ABILITY] = inte;
+		
+		
+		
+		
+		
+	}
+	
+	/*
+	 * Need to set Ranks values before totals will have any values other than 0
+	 */
+	public void setTotalSkills()
+	{
+		int rank;
+		for (int i = 0; i < list.TOTAL_SKILL_ROWS; i++) {
+			
+				rank = skills[i][list.RANKS];
+				if(rank < 1)
+				{
+					skills[i][list.TOTAL] = 0;
+				}
+				else // add up the ranks,ability mod, and the trained.
+				{
+					skills[i][list.TOTAL] = skills[i][list.RANKS] + skills[i][list.ABILITY] + skills[i][list.TRAINED];
+				}
+			
+		}
+	}
+	
+	/*
+	 * input which skill you want, the numerical value of each skill is found on
+	 * SkillsList.java
+	 */
+	public int getTotalSkill(int skill)
+	{
+		return skills[skill][list.TOTAL];
 	}
 	//NEED EXPERIANCE
 	private int currentXP;
