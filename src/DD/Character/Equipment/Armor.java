@@ -1,5 +1,5 @@
 package DD.Character.Equipment;
 
-public class Armor {
+public class Armor extends Equipment{
 
 }
