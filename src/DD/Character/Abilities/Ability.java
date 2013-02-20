@@ -3,8 +3,6 @@ package DD.Character.Abilities;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
-
-import DD.ActionBox.ActionBox;
 import DD.ActionBox.SubAction;
 import DD.Character.*;
 import DD.SlickTools.RenderComponent;

@@ -1,6 +1,9 @@
 package DD.Character;
 
 import java.util.ArrayList;
+
+import org.newdawn.slick.geom.Vector2f;
+
 import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.SlickTools.*;
@@ -13,10 +16,10 @@ import DD.SlickTools.*;
  * needed to keep up the game.
  ******************************************************************************************************/
 
-public class DDCharacter extends Entity
+public class Character extends Entity
 {
 	/************************************ Class Attributes *************************************/
-	private CharacterSheet sheet;
+	private CharacterSheet character;
 	private boolean hasTurn = false;
 	private int currentHP;
 	private int currentSpeed;
@@ -27,7 +30,7 @@ public class DDCharacter extends Entity
 	boolean engaged;								/* Engaged in combat with another character */
 	
 	/************************************ Class Methods *************************************/
-	public DDCharacter(int id) 
+	public Character(int id) 
 	{
 		super(id);
 		hasTurn = false;
@@ -36,17 +39,7 @@ public class DDCharacter extends Entity
 		engaged = false;
 		
 	} /* end Character Constructor */
-	
-	public CharacterSheet getCharacterSheet() 
-	{
-		return sheet;
-	}
-	
-	public void setCharacterSheet(CharacterSheet sheet)
-	{
-		this.sheet = sheet;
-	}
-	
+		
 	public void resetCharacter()
 	{ /* TODO: generate */
 		
@@ -82,7 +75,7 @@ public class DDCharacter extends Entity
 		/* TODO: implement */
 		boolean returner = false;
 		
-		if (attack >= sheet.getAP()) returner = true;
+		if (attack >= character.getAP(attackType)) returner = true;
 		
 		return(returner); /*  */
 	} /* end getAttacked method */

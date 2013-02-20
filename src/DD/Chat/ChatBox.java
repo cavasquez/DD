@@ -22,7 +22,7 @@ public class ChatBox extends Entity
 	 ******************************************************************************/
 	public static void getMessage(ChatMessage cm)
 	{/* get ChatMessage from ChatBox and process it. */
-		
+		//TODO: Carll render
 	} /* end getMessage method */
 	
 } /* end ChatBox class */

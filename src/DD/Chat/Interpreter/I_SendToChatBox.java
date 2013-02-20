@@ -2,7 +2,6 @@ package DD.Chat.Interpreter;
 
 import DD.Chat.ChatBox;
 import DD.Message.ChatMessage;
-import DD.Network.NetworkSystem;
 
 /*****************************************************************************************************
  * I_SendToChatBox will send the message to the ChatBox
