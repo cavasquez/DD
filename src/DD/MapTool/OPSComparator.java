@@ -1,7 +1,8 @@
 package DD.MapTool;
+import java.io.Serializable;
 import java.util.Comparator;
 
-public class OPSComparator implements Comparator<Objects>{
+public class OPSComparator implements Comparator<Objects>, Serializable{
 	
 
 		public int compare(Objects o1, Objects o2) {

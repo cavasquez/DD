@@ -35,6 +35,16 @@ public class Entity
 		recycledIds = new LinkedList<Integer>();
 	} /* end Entity constructor */
 	
+	/*
+	 * used for Serializable.
+	 */
+	public Entity() {
+		id=0;
+		components = new ArrayList<Component>();
+		recycledIds = new LinkedList<Integer>();
+		// TODO Auto-generated constructor stub
+	}
+
 	public int addComponent(Component component)
 	{ /* add a component to the components ArrayList and return it's id */
 		Integer id = this.componentId;

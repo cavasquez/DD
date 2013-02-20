@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import DD.ActionBox.Dice;
 import DD.SlickTools.Component;
 
-public class Barbarian extends CharacterClass {
+public class Barbarian extends CharacterClass  {
+	
 	
 	//import class of skills
 	private final int FIRSTATTACK = 0;
@@ -13,11 +14,13 @@ public class Barbarian extends CharacterClass {
 	private final int THIRDATTACK =2;
 	private final int FOURTHATTACK = 3;
 	private final int FIFTHATTACK=4;
+	
+	int[][] list;
+	
 	//Barbarian Level 1
 	/*
 	 * HARD CODE VALUES
 	 */
-	
 	
 	
 	
@@ -98,28 +101,24 @@ public class Barbarian extends CharacterClass {
 		willSave[17] = 6;
 		willSave[18] = 6;
 		willSave[19] = 6;
+		list=skillList.getList();//filled with 0s
 	}
 	
-	public void fillBarbSkills()
+	public int[][] fillSkills()
 	{
-		/*
-		 * Barbarians have specific skills
-		 * always plus 2 to trianed
-		 * 
-		 */
-		/*
-		skills.add("Acrobatics");
-		skills.add("Climb");
-		skills.add("Craft");
-		skills.add("Handle Animal");
-		skills.add("Inimidate");
-		skills.add("Knowledge(nature)");
-		skills.add("Perception");
-		skills.add("Ride");
-		skills.add("Survival");
-		skills.add("Swim");
-		*/
 		
+		
+		list[skillList.ACROBATICS][skillList.TRAINED] = 3;
+		list[skillList.CLIMB][skillList.TRAINED] = 3;
+		list[skillList.CRAFT1][skillList.TRAINED] = 3;
+		list[skillList.HANDLEANIMAL][skillList.TRAINED] = 3;
+		list[skillList.INTIMIDATE][skillList.TRAINED] = 3;
+		list[skillList.KNOWLEDGE1][skillList.TRAINED] = 3;
+		list[skillList.PERCEPTION][skillList.TRAINED] = 3;
+		list[skillList.RIDE][skillList.TRAINED] = 3;
+		list[skillList.SURVIVAL][skillList.TRAINED] = 3;
+		list[skillList.SWIM][skillList.TRAINED] = 3;
+		return list;
 	}
 	
 	@Override
@@ -246,6 +245,7 @@ public class Barbarian extends CharacterClass {
 		sheet.setFortBase(this);
 	    //need attacks COME BACK HERE
 	}
+
 	
 	
 }
