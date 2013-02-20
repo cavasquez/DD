@@ -49,6 +49,7 @@ public abstract class Ability extends RenderComponent
 	
 	public void activate()
 	{ /* Activate ability and add it to the appropriate Character variable. */
+		/* When clicked on, the ability will perform this action */
 		/* TODO: implement */
 		activated = true;
 	} /* end activate method */
@@ -59,11 +60,18 @@ public abstract class Ability extends RenderComponent
 		activated = false;
 	} /* end activate method */
 	
+	public void obtainTarget()
+	{ /* obtainTarget will be called on by the TargetSystem signaling that a target(s) has
+	 	been chosen */
+		
+	} /* end obtainTarget method */
+	
+	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
 	{
 		// TODO Auto-generated method stub
-		/* TODO: add activate where necessarry */
+		/* TODO: add activate where necessary */
 		
 	} /* end update method */
 	

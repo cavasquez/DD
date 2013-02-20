@@ -2,8 +2,8 @@ package MapTool;
 
 import org.newdawn.slick.Image;
 
-import DD.Entity;
-import DD.ImageRenderComponent;
+import DD.SlickTools.Entity;
+import DD.SlickTools.ImageRenderComponent;
 
 public abstract class Objects extends ImageRenderComponent{//figure out comp.
 	int movePenalty;

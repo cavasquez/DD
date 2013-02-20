@@ -4,11 +4,9 @@ package MapTool;
  */
 
 import java.util.ArrayList;
-
 import org.newdawn.slick.Image;
-
-import DD.Component;
-import DD.Entity;
+import DD.SlickTools.Component;
+import DD.SlickTools.Entity;
 
 public class Map extends Entity{
 	

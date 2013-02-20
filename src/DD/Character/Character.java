@@ -75,7 +75,7 @@ public class Character extends Entity
 		/* TODO: implement */
 		boolean returner = false;
 		
-		if (attack >= character.getAP(attackType)) returner = true;
+		if (attack >= character.getAC(attackType)) returner = true;
 		
 		return(returner); /*  */
 	} /* end getAttacked method */
@@ -92,7 +92,13 @@ public class Character extends Entity
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
-	public static Ability[] getAbilities(int actionType)
+	public int getAC(int attackType)
+	{
+		/* AttackType: standard, flat footed, or touch */
+		return 0;
+	} /* end getAC method */
+	
+	public Ability[] getAbilities(int actionType)
 	{ /* Return the Characters usable abilities */
 		/* TODO: generate */
 		Ability[] returner = null;

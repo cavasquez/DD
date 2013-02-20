@@ -1,5 +1,7 @@
 package DD.ActionBox.CombatSystem;
 
+import DD.Message.CombatMessage;
+
 /*****************************************************************************************************
  * CombatSystem will be the Controller for DD combat.
  * ******************************************************************/

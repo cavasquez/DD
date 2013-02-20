@@ -43,6 +43,11 @@ public class SubAction extends RenderComponent
 		/* TODO: implement the abilities renderSubAction method */
 	} /* end render method */
 	
+	public void activate()
+	{
+		/* This method should be called upon click */
+	} /* end activate method */
+	
 	public void click()
 	{ /* set abilityClicked to true and activate ability. Furthermore, unclick any other clicked SubActions*/ 
 		this.unclickSubActions();
