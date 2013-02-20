@@ -1,7 +1,9 @@
 package DD.MapTool;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -10,13 +12,14 @@ import DD.SlickTools.*;
 public class World implements Serializable{
 	private static final long serialVersionUID = 2853246324745729078L;
 	Map[][] world;
-	String WorldName;
+	String worldName;
 	int worldSize = 5;
 	//normList is an Array of all Possible Objects?
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;//holds temp items like from spells
 	
-	public World(){
+	public World(String name){
+		this.worldName = name;
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();
 		world = new Map[worldSize][worldSize];
@@ -44,6 +47,9 @@ public class World implements Serializable{
 		return world[x][y];
 	}
 	
+	public void setWorldName(String name){
+		this.worldName = name;
+	}
 	
 	public void loadMap(int x, int y, Map mapIn){
 		/*
@@ -58,22 +64,26 @@ public class World implements Serializable{
 		world[x][y] = null;
 	}
 	
-	public void saveWorld(){
-		//TODO: 
+	public void writeMe(String path){
+		try{
+			FileOutputStream fileOut = new FileOutputStream(path+worldName+".ser");
+			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
+			out.writeObject(this);
+			out.close();
+			fileOut.close();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
 	}
 	
-	public World loadWorld(){
-		//TODO		
-		return null;	
-	}
 	
-	
-	public Floor readFloor(String name){
+	public Floor readFloor(String name, String path){
 		Floor e = null;
 	      try
 	      {
 	         FileInputStream fileIn =
-	                          new FileInputStream(name);
+	                          new FileInputStream(path+name);
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         e = (Floor) in.readObject();
 	         in.close();
@@ -90,12 +100,12 @@ public class World implements Serializable{
 	      return e;
 	 }
 	
-	public Obstacle readObstacle(String name){
+	public Obstacle readObstacle(String name, String path){
 		Obstacle e = null;
 	      try
 	      {
 	         FileInputStream fileIn =
-	                          new FileInputStream(name);
+	                          new FileInputStream(path+name);
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         e = (Obstacle) in.readObject();
 	         in.close();
@@ -113,12 +123,12 @@ public class World implements Serializable{
 	 }
 	
 	
-	public Map readMap(String name){
+	public Map readMap(String name, String path){
 		Map e = null;
 	      try
 	      {
 	         FileInputStream fileIn =
-	                          new FileInputStream(name);
+	                          new FileInputStream(path+name);
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         e = (Map) in.readObject();
 	         in.close();
@@ -136,7 +146,7 @@ public class World implements Serializable{
 	 }
 	
 	public String toString(){
-		String t = "";
+		String t = worldName+"\n";
 		for (int i = 0; i < worldSize; i++) {
 			for (int j = 0; j < worldSize; j++) {
 				if(j == worldSize-1)

@@ -5,8 +5,7 @@ import DD.Character.DDCharacter;
 public class TestMapMain {
 	public static void main(String[] args) {
 		
-		World world = new World();
-		world.WorldName = "TESTME";
+		World world = new World("TESTME");
 	
 		/*
 		 * proof of concept movement backend

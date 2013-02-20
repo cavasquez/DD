@@ -12,11 +12,13 @@ import org.newdawn.slick.state.StateBasedGame;
 import DD.SlickTools.*;
 
 public class Objects extends ImageRenderComponent implements Serializable{//figure out comp.
+	private static final long serialVersionUID = 7499478093741949923L;
 	int movePenalty;
 	int lightPenalty;
 	String name;
 	Entity owner;
 	int priority;
+	
 
 	public Objects(String name, Image image, Map owner) {
 		
@@ -35,9 +37,11 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		// TODO Auto-generated constructor stub
 	}
 
-	public void writeMe(){
+	//set owner is in component.
+	
+	public void writeMe(String InName,String path){
 		try{
-			FileOutputStream fileOut = new FileOutputStream(name+".ser");
+			FileOutputStream fileOut = new FileOutputStream(path+InName+".ser");
 			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
 			out.writeObject(this);
 			out.close();

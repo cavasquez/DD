@@ -1,16 +1,25 @@
 package DD.MapTool;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
 //implements serializable ~
-public class MapTool {
+public class MapTool implements Serializable{
+	private static final long serialVersionUID = 5788724726419120129L;
 	World world;
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;
 	
 	public MapTool(){
-		
+		world = new World("world");
+		normList = new ArrayList<Objects>();
+		tempList = new ArrayList<Objects>();
 	}
 	
 	/* TODO:updateNormList()  and tempList()
@@ -25,14 +34,32 @@ public class MapTool {
 	 *  
 	 */
 	
-	
-	
-	/*
+
+    /*
 	 * loads world then maps then objects on the maps using .ser files.
 	 */
-	public void loadWorld(){
-		
-	}
+	public void loadWorld(String name, String path){
+		World e = null;
+	      try
+	      {
+	         FileInputStream fileIn =
+	                          new FileInputStream(path+name);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         e = (World) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         
+	      }catch(ClassNotFoundException c)
+	      {
+	         c.printStackTrace();
+	         
+	      }
+	      this.world = e;
+	 }
+	
 	
 	public void addNormList(Objects o) {
 		// TODO deserialize a file of objects 
@@ -43,11 +70,4 @@ public class MapTool {
 		// TODO Auto-generated method stub
 		tempList.add(o);
 	}
-	
-	
-	public static void main(String[] args) {
-		MapTool mt = new MapTool();
-
-	}
-
 }

@@ -26,7 +26,7 @@ public class ObjectsPriorityStack implements Serializable{
 	}
 	public static void main(String[] args) {
 
-		World world = new World();
+		World world = new World("world1");
 		
 		for (int i = 0; i < 11; i++) {
 			for (int j = 0; j < 11; j++) {

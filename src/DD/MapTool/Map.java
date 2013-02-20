@@ -63,9 +63,9 @@ public class Map extends Entity implements Serializable{
 	 * after each player turn, decrement each temp object turn count.
 	 * 	if turn count == 0 after decremented, remove that temp item.
 	 */
-	public void writeMe(){
+	public void writeMe(String name, String path){
 		try{
-			FileOutputStream fileOut = new FileOutputStream(name+".ser");
+			FileOutputStream fileOut = new FileOutputStream(path+name+".ser");
 			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
 			out.writeObject(this);
 			out.close();
