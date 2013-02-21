@@ -3,8 +3,6 @@ package DD.MapTool;
 public class TestSerMain {
 	public static void main(String[] args) {
 		/*
-		 * IGNORE THIS CONTENT OF THIS MAIN IT'S NOT WORKING
-		 * 
 		 * IMPORTANT: to see this working edit this path to a new folder you create on you Desktop.
 		 * Run this main once to create the .ser files.
 		 * comment out the map.writeMe() below. the lines are marked.
@@ -36,7 +34,7 @@ public class TestSerMain {
 		
 		/*
 		
-		///*use bulk comment on all lines between this line and when u see 
+		//use bulk comment on all lines between this line and when u see 
 		Obstacle wall1 = new Obstacle("wall1", null, 5, 5, world.world[0][0]);
 		wall1.writeMe("wall1.ser",path);		
 		
