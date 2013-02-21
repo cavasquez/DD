@@ -2,8 +2,6 @@ package MapTool;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import DD.Entity;
-
 public class World implements Serializable{
 	private static final long serialVersionUID = 1L;
 	Map[][] world;

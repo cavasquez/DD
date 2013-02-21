@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
 import DD.ActionBox.SubAction;
+import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.*;
 import DD.SlickTools.RenderComponent;
 
@@ -35,7 +36,8 @@ public abstract class Ability extends RenderComponent
 	protected final int actionType;
 	protected final String name;
 	protected final String description;
-	protected boolean activated;			/* flag that establishes if an ability has been clicked. */
+	protected boolean activated;				/* flag that establishes if an ability has been clicked. */
+	protected static TargetingSystem ts = null;	/* to be used by abilities that need a target */
 	
 	/************************************ Class Methods*************************************/
 	public Ability(int id, int actionType, String name, String description)
@@ -45,6 +47,7 @@ public abstract class Ability extends RenderComponent
 		this.name = name;
 		this.description = description;
 		activated = false;
+		if (ts == null) ts = new TargetingSystem();
 	} /* end ability constructor */
 	
 	public void activate()
@@ -89,19 +92,6 @@ public abstract class Ability extends RenderComponent
 		
 		
 	} /* end render method */
-
-	/******************************************************************************
-	 ******************************* Setter Methods *******************************
-	 ******************************************************************************/
-	public void setOwnerCharacter(DDCharacter character)
-	{
-		this.character = character;
-	} /* end setOwnerCharacter method */
-	
-	public void setOwnerSubAction(SubAction subAction)
-	{
-		this.subAction = subAction;
-	} /* end setOwnerCharacter method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
@@ -120,5 +110,19 @@ public abstract class Ability extends RenderComponent
 	{
 		return(description);
 	} /* end getDescription method */
+
+	/******************************************************************************
+	 ******************************* Setter Methods *******************************
+	 ******************************************************************************/
+	public void setOwnerCharacter(DDCharacter character)
+	{
+		this.character = character;
+	} /* end setOwnerCharacter method */
+	
+	public void setOwnerSubAction(SubAction subAction)
+	{
+		this.subAction = subAction;
+	} /* end setOwnerCharacter method */
+	
 	
 } /* end Ability class */
