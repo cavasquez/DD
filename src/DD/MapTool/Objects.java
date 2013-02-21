@@ -13,8 +13,8 @@ import DD.SlickTools.*;
 
 public class Objects extends ImageRenderComponent implements Serializable{//figure out comp.
 	private static final long serialVersionUID = 7499478093741949923L;
-	int movePenalty;
-	int lightPenalty;
+	protected int movePenalty;
+	protected int lightPenalty;
 	String name;
 	Entity owner;
 	int priority;
@@ -29,6 +29,22 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 			owner.addComponent(this);
 	}
 
+	/*
+	 * 
+	 */
+	public int getMovePenalty(){
+		return movePenalty;
+	}
+	public void setMovePenalty(int mp){
+		this.movePenalty = mp;
+	}
+	public int getlightPenalty(){
+		return lightPenalty;
+	}
+	public void setlightPenalty(int lp){
+		this.lightPenalty = lp;
+	}
+	
 	/*
 	 * Default constructor used for Serializable.
 	 */

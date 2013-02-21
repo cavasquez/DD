@@ -5,7 +5,7 @@ public class TestSerMain {
 		/*
 		 * IGNORE THIS CONTENT OF THIS MAIN IT'S NOT WORKING
 		 * 
-		 * IMPORTANT: to see this working edit this path to a new folder you create on you Decktop.
+		 * IMPORTANT: to see this working edit this path to a new folder you create on you Desktop.
 		 * Run this main once to create the .ser files.
 		 * comment out the map.writeMe() below. the lines are marked.
 		 */
@@ -25,6 +25,7 @@ public class TestSerMain {
 				mt.world.world[0][0].getObjectAtLocation(i, j).setOwnerEntity(mt.world.world[0][0]);
 			}
 		}
+		
 		for (int k = 0; k < mt.world.worldSize; k++) {
 			for (int k2 = 0; k2 < mt.world.worldSize; k2++) {
 				mt.world.world[k][k2].writeMe(mt.world.world[k][k2].name, path);
