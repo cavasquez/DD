@@ -16,6 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * game design to utilize the idea of the Entity class.
  * 
  * @author Carlos Vasquez
+ * @author GM-Michael VanWie
  ******************************************************************************************************/
 
 public class Entity 
