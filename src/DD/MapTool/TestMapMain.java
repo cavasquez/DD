@@ -5,6 +5,12 @@ import DD.Character.DDCharacter;
 public class TestMapMain {
 	public static void main(String[] args) {
 		
+		/*
+		 * IMPORTANT: for this main to work, mapSize needs to be 21 or larger due to hardcodes massPlaceObjectsLine values.
+		 * other wise you will get nullpointers.
+		 */
+		
+		
 		World world = new World("TESTME");
 	
 		/*

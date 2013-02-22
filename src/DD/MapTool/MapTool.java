@@ -43,7 +43,7 @@ public class MapTool implements Serializable{
 	      try
 	      {
 	         FileInputStream fileIn =
-	                          new FileInputStream(path+name);
+	                          new FileInputStream(path+"/"+name+"/"+name+".ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         e = (World) in.readObject();
 	         in.close();
@@ -59,6 +59,10 @@ public class MapTool implements Serializable{
 	      }
 	      this.world = e;
 	 }
+	
+	public Map getMapAtLocation(int x,int y){
+		return world.world[x][y];
+	}
 	
 	
 	public void addNormList(Objects o) {

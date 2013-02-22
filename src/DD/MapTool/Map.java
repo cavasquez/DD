@@ -24,7 +24,7 @@ public class Map extends Entity implements Serializable{
 	Image defImage;
 	boolean hasTempObjects;
 	String name;
-	final int mapSize = 10;
+	final int mapSize = 21;
 
 	public Map(){
 		super();
@@ -92,7 +92,6 @@ public class Map extends Entity implements Serializable{
 				if(tempObjects[i][j]!=null){
 					tempObjects[i][j].turnCount--;
 					if(tempObjects[i][j].turnCount == 0){
-						System.out.println("removing object");
 						removeTempObjects(i,j);
 					}
 				}
