@@ -5,6 +5,8 @@ package DD.Character.Abilities.DefaultAbilities.FullRound;
  * and to do so without incurring an attack of opportunity and not consuming an entire round.
  * 
  * IMPORTANT: This ability is a start/end full round action.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class FiveFootAdjust 

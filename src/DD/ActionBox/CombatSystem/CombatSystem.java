@@ -5,6 +5,8 @@ import DD.Message.CombatMessage;
 /*****************************************************************************************************
  * CombatSystem will be the Controller for DD combat. DD Combat will interpret the CombatMessage
  * sent by the Ability class and apply the appropriate action to the provided Character or Map.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class CombatSystem 

@@ -6,6 +6,8 @@ package DD.Network;
  * 
  * The interpreter should have an equivalent ability for which it is interpreting. The interpreter will
  * be named I_AbilityName so as to provide an easy and obvious scheme.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public interface NetworkInterpreter 

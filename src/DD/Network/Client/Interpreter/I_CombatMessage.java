@@ -4,6 +4,8 @@ import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
  * I_CombatMessage will pass combat messages to CombatSystem
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_CombatMessage extends ClientInterpreter

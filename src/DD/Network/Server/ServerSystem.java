@@ -20,6 +20,8 @@ import DD.Network.Server.Interpreter.ServerInterpreter;
  * except the sender client. 
  * 
  * The server will use interpreters which will hold the server logic for different kinds of messages.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ServerSystem implements Network

@@ -32,6 +32,8 @@ import DD.SlickTools.Component;
  * 
  * The "extra" actions will be some sub-type of the Component class that will be added to the SubAction
  * array list so that they can be updated and rendered accordingly, based on the action chosen. 
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ActionBox extends BoxInterface 

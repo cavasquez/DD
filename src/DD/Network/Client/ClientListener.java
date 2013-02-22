@@ -11,6 +11,8 @@ import DD.Network.Network;
 /*****************************************************************************************************
  * ClientListener will be a thread dedicated to Listening for messages from the server and giving the
  * message to MessageQueue to be sent to the Client.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ClientListener extends Listener

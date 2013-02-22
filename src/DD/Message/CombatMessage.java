@@ -13,6 +13,8 @@ package DD.Message;
  * constants that will be structured as REQUEST_PLACEMENT/DATA_NAME.
  * 
  * Attributes are private because they should not be changed.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class CombatMessage extends Message

@@ -6,6 +6,8 @@ package DD.Character.Abilities.DefaultAbilities.FullRound;
  * class than an ability class. The special abilities themselves should be listed by this class.
  * 
  * IMPORTANT: This ability is a start/end full round action.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class UseSpecialAbility 

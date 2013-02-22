@@ -11,6 +11,8 @@ import DD.Character.Abilities.Ability;
  * consumes one attack and, by definition, allows for a movement action. The update method should render
  * a FF tactics style square selection for selecting targets. The selected target will need to be passed
  * to the action method.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class StandardAttack extends Ability

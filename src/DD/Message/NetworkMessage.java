@@ -7,6 +7,8 @@ package DD.Message;
  * sender. The message contained in NetworkMessage will either be CombatMessage or ChatMessage. The
  * Message type should be declared in the message so that it can be easily routed on the Server and 
  * Client side.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class NetworkMessage extends Message

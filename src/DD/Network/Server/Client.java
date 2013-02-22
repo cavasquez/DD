@@ -4,6 +4,8 @@ import java.net.InetAddress;
 
 /*****************************************************************************************************
  * Client contains releveat network information used when communicating with the client.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class Client 

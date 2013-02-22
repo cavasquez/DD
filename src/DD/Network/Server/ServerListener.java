@@ -11,6 +11,8 @@ import DD.Network.NetworkSystem;
 /*****************************************************************************************************
  * ServerListener will be a thread dedicated to Listening for messages from a client and giving the
  * message to MessageQueue to be sent to the Server.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ServerListener extends Listener

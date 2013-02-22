@@ -6,6 +6,8 @@ package DD.Network;
  * 
  * There is a MessageType so that messages can easily be identified when sent across the network without
  * having to be casted and checked.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class Message 

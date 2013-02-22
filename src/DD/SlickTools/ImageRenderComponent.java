@@ -6,6 +6,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
+/*****************************************************************************************************
+ * @author Carlos Vasquez
+ ******************************************************************************************************/
+
 public abstract class ImageRenderComponent extends RenderComponent
 {
 	/************************************ Class Constants *************************************/

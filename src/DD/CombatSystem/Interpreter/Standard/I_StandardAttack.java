@@ -6,6 +6,8 @@ import DD.Message.CombatMessage;
 
 /*****************************************************************************************************
  * Interpreter for StandardAttack
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_StandardAttack implements CombatInterpreter

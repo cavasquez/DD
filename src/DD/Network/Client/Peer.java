@@ -5,6 +5,8 @@ import java.net.InetAddress;
 /*****************************************************************************************************
  * Peer is a data structure that will be used by PeerTable. Peer will hold some peer information 
  * including peerID, username, and the IP address associated with that peer. 
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class Peer 

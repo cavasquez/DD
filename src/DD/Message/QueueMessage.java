@@ -3,6 +3,8 @@ package DD.Message;
 /*****************************************************************************************************
 * QueueMessage will be used by MessageQueue to hold the listenerID and NetworkMessag to be sent to
 * the NetworkSystem being used.
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public class QueueMessage extends Message

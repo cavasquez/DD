@@ -5,6 +5,8 @@ package DD.Character.Abilities.DefaultAbilities.FullRound;
  * it also prohibits the character from making an attack of opportunity.
  * 
  * IMPORTANT: This ability is a start/end full round action.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class TotalDefense 

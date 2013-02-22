@@ -11,6 +11,8 @@ import DD.Network.Client.ClientListener;
 /*****************************************************************************************************
  * I_InitialMessage will check to see if the username was correct and then add itself to the peerList
  * and set up a listener for the server to connect to.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_InitialMessage extends ClientInterpreter

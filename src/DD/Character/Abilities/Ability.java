@@ -27,6 +27,8 @@ import DD.SlickTools.RenderComponent;
  * 
  * Abilities will work in Conjunction with CombatSystem and should be treated as the view to the 
  * appropriate Interpreter in CombatSystem. 
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public abstract class Ability extends RenderComponent

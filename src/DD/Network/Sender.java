@@ -7,6 +7,8 @@ import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
 * Sender will provide the tools that ClientSender and ServerSender will need to send a message.
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public abstract class Sender extends NetworkSocket

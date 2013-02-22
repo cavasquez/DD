@@ -20,6 +20,8 @@ import DD.Message.QueueMessage;
 * I justify my use of singleton with little protection by stating that the only resource being shared 
 * is the messageQueue queue. No outsider can remove from it, only add to it. This makes the harm to data
 * impossible?
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public class MessageQueue extends Thread

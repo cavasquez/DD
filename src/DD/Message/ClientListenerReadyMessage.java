@@ -3,6 +3,8 @@ package DD.Message;
 /*****************************************************************************************************
  * ClientListenerReadyMessage is a message sent strictly by clients to the server telling the server
  * that the Client is ready to have a ServerSender connect to it.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ClientListenerReadyMessage extends Message

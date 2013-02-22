@@ -2,6 +2,8 @@ package DD.ActionBox.CombatSystem.TargetingSystem;
 
 /*****************************************************************************************************
  * Coordinate will simply be an object that holds a pair of points (x,y)
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class Coordinate

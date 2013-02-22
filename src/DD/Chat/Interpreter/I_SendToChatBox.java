@@ -5,6 +5,8 @@ import DD.Message.ChatMessage;
 
 /*****************************************************************************************************
  * I_SendToChatBox will send the message to the ChatBox
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_SendToChatBox extends ChatInterpreter

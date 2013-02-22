@@ -8,6 +8,8 @@ import org.newdawn.slick.state.StateBasedGame;
  * as new abilities to the Entity class. The Component class should provide new functionality to the
  * Entity class and provide an easy way to change how one interacts with the Entity. Once again, the
  * idea for the Component class came from: http://slick.cokeandcode.com/wiki/doku.php?id=entity_tutorial.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public abstract class Component 

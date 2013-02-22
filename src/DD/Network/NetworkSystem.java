@@ -10,6 +10,8 @@ import DD.Network.Server.ServerSystem;
 * NetworkSystem will create a singleton and be the interface through which GameSystem and ChatSystem 
 * (along with any other systems) will communicate with ClientSystem or ServerSystem based on whether
 * the user is a client or a server.
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public class NetworkSystem implements Network

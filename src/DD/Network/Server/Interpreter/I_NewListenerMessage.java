@@ -7,6 +7,8 @@ import DD.Network.Server.ServerListener;
 /*****************************************************************************************************
  * I_NewListenerMessage will create a new entry in the clientList for the new ServerListener. 
  * This happens when the server connects with a new client.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_NewListenerMessage extends ServerInterpreter

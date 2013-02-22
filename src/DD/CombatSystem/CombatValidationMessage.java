@@ -5,6 +5,8 @@ import DD.Message.Message;
 /*****************************************************************************************************
  * CombatValidation will be the message returned by CombatSystem to ActionBox to let ActionBox know 
  * if the action it requested is valid. If it is, the message will then be sent through the network.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class CombatValidationMessage extends Message

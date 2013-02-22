@@ -13,6 +13,8 @@ import DD.Message.NetworkMessage;
 * 
 * getMessage() will be used by the Socket threads to give NetworkSystem a NetworkSystem to interpret
 * and (if Server) send to all the other clients.
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public interface Network

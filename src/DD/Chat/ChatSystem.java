@@ -9,6 +9,8 @@ import DD.Message.ChatMessage;
  * 
  * Having a ChatSystem will allow us to extend functionality by adding such things as /whisper or
  * similar features.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ChatSystem 

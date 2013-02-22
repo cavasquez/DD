@@ -10,6 +10,8 @@ import DD.Message.NetworkMessage;
 * tools used by ServerListener and ClientListener.
 * 
 * Listener will need to utilize ServerSocket
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public abstract class Listener extends NetworkSocket

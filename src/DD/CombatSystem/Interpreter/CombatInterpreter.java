@@ -9,6 +9,8 @@ import DD.Message.CombatMessage;
  * 
  * The interpreter should have an equivalent Ability object for whatever it is interpreting. The 
  * interpreter will be named I_AbilityName so as to provide an easy and obvious scheme.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public interface CombatInterpreter 

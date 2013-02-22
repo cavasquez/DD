@@ -13,6 +13,8 @@ import DD.Message.ChatMessage;
  * 
  * slash roll #D# (case does not matter)
  * slash r #D# (case does not matter)
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_ProcessMessage extends ChatInterpreter

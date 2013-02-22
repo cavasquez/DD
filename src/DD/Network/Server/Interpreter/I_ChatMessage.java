@@ -7,6 +7,8 @@ import DD.Network.Network;
 
 /*****************************************************************************************************
  * I_ChatMessage will be used to interpret and process all ChatMessages sent to the Server
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_ChatMessage extends ServerInterpreter

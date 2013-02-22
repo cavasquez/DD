@@ -14,6 +14,8 @@ import org.newdawn.slick.state.StateBasedGame;
  * it's update method, and it's knowledge of it's place in the world. The idea for the Entity class
  * came from: http://slick.cokeandcode.com/wiki/doku.php?id=entity_tutorial. It appears to be basic
  * game design to utilize the idea of the Entity class.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class Entity 

@@ -5,6 +5,8 @@ package DD.Character.Abilities.DefaultAbilities.Move;
  * opportunity, nor require concentration. It does, however, require the character to have moved.
  * 
  * IMPORTANT: This ability is a start/end full round action.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class DirectOrRedirectSpell 

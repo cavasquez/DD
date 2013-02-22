@@ -6,6 +6,8 @@ import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
  * I_ChatMessage will pass combat messages to ChatSystem
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_ChatMessage extends ClientInterpreter

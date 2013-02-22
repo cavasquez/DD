@@ -9,6 +9,8 @@ import DD.Network.Client.ClientListener;
 /*****************************************************************************************************
  * I_NewListenerMessage will add the new listener to ClientSystem and communicate to the server that
  * the listener is ready. 
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_NewListenerMessage extends ClientInterpreter

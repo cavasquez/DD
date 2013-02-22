@@ -10,6 +10,8 @@ import DD.Message.NetworkMessage;
 /*****************************************************************************************************
 * NetworkSocket will contain the basic tools that Listener and Client will be using. It extends Thread
 * so that Listener can be threaded.
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public abstract class NetworkSocket extends Thread

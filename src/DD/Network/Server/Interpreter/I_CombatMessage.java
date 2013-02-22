@@ -4,6 +4,8 @@ import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
  * I_CombatMessage will be used to interpret and process all CombatMessages sent to the Server
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_CombatMessage extends ServerInterpreter

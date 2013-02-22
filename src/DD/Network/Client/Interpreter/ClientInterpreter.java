@@ -8,6 +8,8 @@ import DD.Network.Client.ClientSystem;
  * 
  * The interpreter should have an equivalent ability for which it is interpreting. The interpreter will
  * be named I_MessageName so as to provide an easy and obvious scheme to follow.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public abstract class ClientInterpreter 

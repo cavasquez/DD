@@ -4,6 +4,8 @@ import java.util.Random;
 
 /*****************************************************************************************************
  * The Dice class will provide the basic dice rolling mechanics to the game.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class Dice 

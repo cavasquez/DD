@@ -15,6 +15,8 @@ import DD.SlickTools.RenderComponent;
  * 
  * The rendering will be done by adding the ability to a special variable in the Character class that 
  * will be called during render.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class SubAction extends RenderComponent

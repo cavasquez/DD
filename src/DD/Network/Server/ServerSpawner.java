@@ -6,6 +6,8 @@ import java.net.ServerSocket;
 /*****************************************************************************************************
  * ServerSpawner will be responsible for creating ServerSocket's for every client while in the lobby.
  * It should be terminated after leaving the lobby.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ServerSpawner extends Thread

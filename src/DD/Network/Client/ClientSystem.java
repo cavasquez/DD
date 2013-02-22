@@ -13,6 +13,8 @@ import DD.Network.Client.Interpreter.*;
  * Furthermore, it will send messages from the client and send them through the socket to the server.
  * 
  * The client will use interpreters which will hold the server logic for different kinds of messages.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ClientSystem implements Network

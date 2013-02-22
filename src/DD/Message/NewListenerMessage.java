@@ -7,6 +7,8 @@ import DD.Network.Listener;
 /*****************************************************************************************************
 * NewListenerMessage is a message that tells NetworkServer there is a new Listener available and that
 * it should configure itself accordingly.
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public class NewListenerMessage extends Message

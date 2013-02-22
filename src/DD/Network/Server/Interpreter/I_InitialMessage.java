@@ -14,6 +14,8 @@ import DD.Network.Server.ClientTable;
  * userList and then update it with the userList (minus the server) so that it can know who is online.
  * 
  * InitialMessage will also need to update the peers to the presence of the new client.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_InitialMessage extends ServerInterpreter

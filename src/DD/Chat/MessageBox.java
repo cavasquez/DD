@@ -9,6 +9,8 @@ import DD.SlickTools.Entity;
  * MessageBox will be the box through which the player will communicate (chat) with the rest of the
  * players. It is strictly input and will send the message to ChatSystem for interpretation and
  * network access.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class MessageBox extends Entity

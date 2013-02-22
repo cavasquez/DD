@@ -7,6 +7,8 @@ package DD.Character.Abilities.DefaultAbilities.Standard;
  * potions, scrolls, wants, rods, staves
  * It is possible that there are other magical items that must be activated as a standard action. These
  * should also be covered.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ActivateMagicalItem 

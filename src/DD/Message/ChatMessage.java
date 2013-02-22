@@ -5,6 +5,8 @@ package DD.Message;
  * Chat message will provide a way for MessageBox (the view) to communicate with ChatSystem (the controller)
  * and for the server to send chat messages to the ChatBox. It will contain the basic necessary
  * data that is needed when sending and getting messages.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ChatMessage extends Message

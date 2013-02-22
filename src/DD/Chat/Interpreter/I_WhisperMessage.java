@@ -4,6 +4,8 @@ import DD.Message.ChatMessage;
 
 /*****************************************************************************************************
  * I_SendToNetworkSystem will set the ChatMessage body accordingly
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_WhisperMessage extends ChatInterpreter

@@ -15,6 +15,8 @@ import DD.MapTool.Objects;
  * to reflect that it has been selected.
  * 
  * Upon placement, the TargetBlock should check for any Character's on the block and get their reference.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class TargetBlock extends Objects

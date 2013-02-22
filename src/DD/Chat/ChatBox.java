@@ -6,6 +6,8 @@ import DD.SlickTools.Entity;
 /*****************************************************************************************************
  * ChatBox will display all ChatMessages received by the client/server on the GUI. It will also keep
  * track of all previous messages so the user can go through older messages.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ChatBox extends Entity

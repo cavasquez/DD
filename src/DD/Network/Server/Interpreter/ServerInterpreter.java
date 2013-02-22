@@ -7,6 +7,8 @@ import DD.Network.Server.ServerSystem;
  * ServerInterpreter will be used by ServerSystem to interpret every NetworkMessage. 
  * 
  * The interpreter will be named I_MessageName so as to provide an easy and obvious scheme.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public abstract class ServerInterpreter 

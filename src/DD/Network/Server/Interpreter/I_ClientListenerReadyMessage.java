@@ -16,6 +16,8 @@ import DD.Network.Server.ServerSender;
 /*****************************************************************************************************
  * I_ClientListenerReadyMessage will create a ServerSender to connect to the clients ClientListener
  * and then add it to the table. Furthermore, we will communicate to the client it's brothers (peers).
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_ClientListenerReadyMessage extends ServerInterpreter

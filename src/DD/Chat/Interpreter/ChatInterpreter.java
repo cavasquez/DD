@@ -7,6 +7,8 @@ import DD.Message.ChatMessage;
  * ChatInterpreter will be used by ChatSystem to interpret every ChatMessage. 
  * 
  * The Interpreters will be named I_Action as an easy to follow scheme for what each action does.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public abstract class ChatInterpreter 

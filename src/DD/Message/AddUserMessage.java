@@ -6,6 +6,8 @@ import java.net.InetAddress;
 /*****************************************************************************************************
 * AddUserMessage is a message send by the Server to the client informing it that there is a new peer
 * in the network. It contains the username of the peer and its associated playerID
+* 
+* @author Carlos Vasquez
 ******************************************************************************************************/
 
 public class AddUserMessage extends Message

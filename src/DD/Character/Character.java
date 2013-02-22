@@ -14,6 +14,8 @@ import DD.SlickTools.*;
  * mix). It will provide the CombatSystem any necessary information and represent the Character being 
  * played by the player. It will hold some extra information such as turn, current speed, etc. that are 
  * needed to keep up the game.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class Character extends Entity

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 /*****************************************************************************************************
  * PeerTable will hold all the Peer objects used by ClientSystem and provide it with some methods to
  * modify and get Peer information.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class PeerTable 

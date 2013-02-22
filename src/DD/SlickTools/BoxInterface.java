@@ -6,6 +6,8 @@ package DD.SlickTools;
  * BoxInterface will need to retain a bit more information than a typical entity would (such as the size 
  * of the box, the location of the corners, etc). It might also need to hold more entities (such as menu 
  * selection choices) that a typical entity would not have to hold. 
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public abstract class BoxInterface extends Entity 

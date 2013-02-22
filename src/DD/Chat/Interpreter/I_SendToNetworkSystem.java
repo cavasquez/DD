@@ -8,6 +8,8 @@ import DD.Network.NetworkSystem;
  * I_SendToNetworkSystem will send the provided message to the NetworkSystem. Note that this class
  * is only ever invoked once by the sender. Once it gets to NetworkSystem, the ChatMessage is set to
  * go straight to the ChatBox
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class I_SendToNetworkSystem extends ChatInterpreter

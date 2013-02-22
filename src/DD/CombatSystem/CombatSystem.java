@@ -19,6 +19,8 @@ import DD.Character.*;
  * will know what messages it can send and what actions it can perform. The actions that are allowed 
  * will be heavily based on feats, abilities, and spells. The GameSystem is essentially where the
  * core of the GameLogic lies.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class CombatSystem 

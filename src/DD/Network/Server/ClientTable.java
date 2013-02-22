@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * ClientTable will hold all relevant network information that will be used by NetwrokSystem to send
  * messages to clients and receiving messages from clients. It should also be noted that the server
  * will have a slot in the clientList
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ClientTable 

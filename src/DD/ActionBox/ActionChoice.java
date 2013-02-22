@@ -26,6 +26,8 @@ import DD.SlickTools.ImageRenderComponent;
  * We will get these from the Character class.
  * 
  * The actionType should also be used when determining where to render the ActionChoice in the ActionBox.  
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ActionChoice extends ImageRenderComponent
