@@ -1,4 +1,5 @@
 package DD.MapTool;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -65,8 +66,22 @@ public class World implements Serializable{
 	}
 	
 	public void writeMe(String path){
+		File theDir = new File(path+worldName);
+		// if it doesn't exist, make a directory with the name of the world
+		if (!theDir.exists())
+		{
+			theDir.mkdir();  
+		}
+		
+		for (int k = 0; k <worldSize; k++) {
+			for (int k2 = 0; k2 <worldSize; k2++) {
+				world[k][k2].writeMe(world[k][k2].name, path+"/"+worldName+"/");
+			}
+		}
+		
+		
 		try{
-			FileOutputStream fileOut = new FileOutputStream(path+worldName+".ser");
+			FileOutputStream fileOut = new FileOutputStream(path+"/"+worldName+"/"+worldName+".ser");
 			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
 			out.writeObject(this);
 			out.close();

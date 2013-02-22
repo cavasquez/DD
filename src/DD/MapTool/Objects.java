@@ -28,10 +28,6 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		if(owner!=null)
 			owner.addComponent(this);
 	}
-
-	/*
-	 * 
-	 */
 	public int getMovePenalty(){
 		return movePenalty;
 	}
