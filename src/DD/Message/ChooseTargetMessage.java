@@ -2,6 +2,7 @@ package DD.Message;
 
 import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
+import DD.Character.Abilities.Ability;
 
 
 /*****************************************************************************************************
@@ -11,18 +12,15 @@ import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 
 public class ChooseTargetMessage extends Message
 {
-	/************************************ Class Constants *************************************/
-
-	
 	/************************************ Class Attributes *************************************/
 	private TargetingSystem.TargetCount targetCount = null;
 	private TargetingSystem.TargetShape targetShape = null;
 	private TargetingSystem.TargetSelection targetSelection = null;
-	
-	private int numOfTargets;			/* This is used when there are multiple targets */
-	private Coordinate origin;			/* Point of origin for the Target */
-	private boolean self;				/* Refers to whether or not the ability allows the character to target himself */
-	
+	private Integer numOfTargets = null;	/* This is used when there are multiple targets */
+	private Coordinate origin;				/* Point of origin for the Target */
+	private int length;						/* the radius of the circle or length of the cone or speed of the character */
+	private boolean self;					/* Refers to whether or not the ability allows the character to target himself */
+	private Ability caller;					/* ability calling the TargetingSystem to select a target */
 	
 	/************************************ Class Methods *************************************/
 	public ChooseTargetMessage
@@ -31,7 +29,9 @@ public class ChooseTargetMessage extends Message
 		TargetingSystem.TargetShape targetShape,
 		TargetingSystem.TargetSelection targetSelection,
 		boolean self,
-		Coordinate origin
+		Coordinate origin,
+		int length,
+		Ability caller
 	) 
 	{
 		super(Message.CHOOSE_TARGET_MESSAGE);
@@ -40,6 +40,8 @@ public class ChooseTargetMessage extends Message
 		this.targetSelection = targetSelection;
 		this.self = self;
 		this.origin = origin;
+		this.length = length;
+		this.caller = caller;
 		
 	} /* end ChooseTargetMessage constructor */
 
@@ -61,7 +63,7 @@ public class ChooseTargetMessage extends Message
 		return this.targetSelection;
 	} /* end getTargetShape method */
 	
-	public int getNumOfTargets()
+	public Integer getNumOfTargets()
 	{
 		return numOfTargets;
 	} /* end getNumOfTargets method */
@@ -75,6 +77,16 @@ public class ChooseTargetMessage extends Message
 	{
 		return origin;
 	} /* end getOrigin method */
+	
+	public int getLength()
+	{
+		return length;
+	} /* end getLength method */
+	
+	public Ability getCaller()
+	{
+		return caller;
+	} /* end getCaller method */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************

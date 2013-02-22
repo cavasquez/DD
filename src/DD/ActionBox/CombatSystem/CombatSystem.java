@@ -12,6 +12,11 @@ public class CombatSystem
 	/************************************ Class Attributes *************************************/
 	
 	/************************************ Class Methods *************************************/
+	public CombatSystem()
+	{
+		
+	} /* end constructor */
+	
 	public CombatMessage interpreter(CombatMessage cm)
 	{/* Interpreter will take in all combat related messages
 	 	and "interpret" or process them. It will decide on 

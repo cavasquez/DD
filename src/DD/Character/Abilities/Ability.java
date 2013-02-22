@@ -6,6 +6,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import DD.ActionBox.SubAction;
 import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.*;
+import DD.Message.TargetSelectedMessage;
 import DD.SlickTools.RenderComponent;
 
 /*****************************************************************************************************
@@ -37,6 +38,7 @@ public abstract class Ability extends RenderComponent
 	protected final String name;
 	protected final String description;
 	protected boolean activated;				/* flag that establishes if an ability has been clicked. */
+	protected boolean targetSelected;
 	protected static TargetingSystem ts = null;	/* to be used by abilities that need a target */
 	
 	/************************************ Class Methods*************************************/
@@ -46,7 +48,8 @@ public abstract class Ability extends RenderComponent
 		this.actionType = actionType;
 		this.name = name;
 		this.description = description;
-		activated = false;
+		this.activated = false;
+		this.targetSelected = false;
 		if (ts == null) ts = new TargetingSystem();
 	} /* end ability constructor */
 	
@@ -63,10 +66,10 @@ public abstract class Ability extends RenderComponent
 		activated = false;
 	} /* end activate method */
 	
-	public void obtainTarget()
+	public void obtainTarget(TargetSelectedMessage tsm)
 	{ /* obtainTarget will be called on by the TargetSystem signaling that a target(s) has
 	 	been chosen */
-		
+		targetSelected = true;
 	} /* end obtainTarget method */
 	
 	

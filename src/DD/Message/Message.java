@@ -22,6 +22,7 @@ public class Message
 	public static final int NEW_LISTENER_MESSAGE = I++;			/* Message telling NetworkSystem there is a new listener*/
 	public static final int CLIENT_LISTENER_READY_MESSAGE = I++;/* Message telling the server ClientListener is up */
 	public static final int CHOOSE_TARGET_MESSAGE = I++;		/* Message telling TargetingSystem to choose a target */
+	public static final int TARGET_SELECTED_MESSAGE = I++;		/* Message telling an ability its targets*/
 	public static final int NUM_OF_MESSAGES = I;				/* Total number of messages */
 	
 	/************************************ Class Attributes *************************************/
