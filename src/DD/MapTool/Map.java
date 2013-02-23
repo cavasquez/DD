@@ -76,6 +76,10 @@ public class Map extends Entity implements Serializable{
 		}
 	}
 	
+	public Objects[] getContent(int x, int y){
+		return objectsStack[x][y].toArray();
+	}
+	
 	
 	public CharacterObjects getDDCharacter(int x, int y){
 		if(objectsStack[x][y].peek() instanceof CharacterObjects){
@@ -138,6 +142,7 @@ public class Map extends Entity implements Serializable{
 			tempObjects[x][y] = temp;
 			numTempObjects++;
 			setHasTempObjects(true);
+			//placeObjectHelper(x, y,temp);
 			objectsStack[x][y].push(temp);
 			updateComponentList();
 		}
@@ -155,11 +160,27 @@ public class Map extends Entity implements Serializable{
 	
 	//places single object on x,y
 	public void placeObjects(int x,int y,Objects obj) {
-		//System.out.println("map.placeObjects()");
 		super.components.add(obj);
+		placeObjectHelper(x, y, obj);
 		objectsStack[x][y].push(obj);
-		updateComponentList();
+		updateComponentList();		
 	}
+	public void placeObjectHelper(int x, int y, Objects obj){
+		//check if there is an objects with the same priority. if so remove it.
+		Objects[] t = objectsStack[x][y].toArray(); //generates a sorted array based on the given priority queue
+		for (int i = 0; i < t.length; i++) {
+			if(t[i].getPriority() == obj.getPriority()){
+				t[i] = null;
+			}
+		}
+		objectsStack[x][y].getPQueue().clear();
+		for (int i = 0; i < t.length; i++) {
+			if(t[i]!=null)
+				objectsStack[x][y].push(t[i]);
+		}
+	}
+	
+	
 	
 	public void resetMap(){
 		//TODO: resets all arrays to default objects.

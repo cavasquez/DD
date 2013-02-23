@@ -28,7 +28,7 @@ public class TempObjects extends Objects{
 	
 	//method for testing.
 	public String toString(){	
-		return "Name: "+name+ ", TurnCount: "+turnCount + ", movePenalty:" + movePenalty+ ", lightPenalty: "+lightPenalty+"\n";
+		return "Name: "+name+ ", TurnCount: "+turnCount + ", movePenalty:" + movePenalty+ ", lightPenalty: "+lightPenalty;
 
 	}
 	@Override

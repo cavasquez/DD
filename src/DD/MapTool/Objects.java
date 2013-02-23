@@ -40,7 +40,10 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 	public void setlightPenalty(int lp){
 		this.lightPenalty = lp;
 	}
-	
+	public int getPriority(){
+		return priority;
+	}
+		
 	/*
 	 * Default constructor used for Serializable.
 	 */

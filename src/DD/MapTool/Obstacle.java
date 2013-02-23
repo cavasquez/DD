@@ -23,7 +23,7 @@ public class Obstacle extends Objects{
 	}
 	//tooltip info?
 	public String toString(){	
-		return "Name: "+name+ ", movePenalty: "+ movePenalty+ ", lightPenalty: "+lightPenalty+"\n";
+		return "Name: "+name+ ", movePenalty: "+ movePenalty+ ", lightPenalty: "+lightPenalty;
 	}
 
 	@Override

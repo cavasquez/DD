@@ -20,23 +20,23 @@ public class TestSerMain {
 		//***************************************************
 		//START PHASE1
 		//***************************************************
-		mt.world.writeMe(path);
-		Obstacle wall1 = new Obstacle("wall1", null, 5, 5, null);
-
-		for (int i = 0; i < mt.world.worldSize; i++) {
-			for (int j = 0; j < mt.world.worldSize; j++) {
-				for (int j2 = 0; j2 < mt.getMapAtLocation(i, j).mapSize; j2++) {
-					for (int k = 0; k < mt.getMapAtLocation(i, j).mapSize; k++) {
-						mt.getMapAtLocation(i, j).placeObjects(j2, k, wall1);
-						mt.getMapAtLocation(i, j).getObjectAtLocation(j2, k).setOwnerEntity(mt.getMapAtLocation(i, j));
-					}
-				}
-			}
-		}
-		
-		mt.world.setWorldName("Norrath");
-		//path/Norrath/Norrath.ser
-		mt.world.writeMe(path);
+//		mt.world.writeMe(path);
+//		Obstacle wall1 = new Obstacle("wall1", null, 5, 5, null);
+//
+//		for (int i = 0; i < mt.world.worldSize; i++) {
+//			for (int j = 0; j < mt.world.worldSize; j++) {
+//				for (int j2 = 0; j2 < mt.getMapAtLocation(i, j).mapSize; j2++) {
+//					for (int k = 0; k < mt.getMapAtLocation(i, j).mapSize; k++) {
+//						mt.getMapAtLocation(i, j).placeObjects(j2, k, wall1);
+//						mt.getMapAtLocation(i, j).getObjectAtLocation(j2, k).setOwnerEntity(mt.getMapAtLocation(i, j));
+//					}
+//				}
+//			}
+//		}
+//		
+//		mt.world.setWorldName("Norrath");
+//		//path/Norrath/Norrath.ser
+//		mt.world.writeMe(path);
 		//***************************************************
 		//END PHASE1
 		//***************************************************
