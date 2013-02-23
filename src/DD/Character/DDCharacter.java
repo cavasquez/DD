@@ -22,6 +22,7 @@ public class DDCharacter extends Entity
 	private int currentSpeed;
 	private ArrayList<Ability> abilities = null;	
 	boolean moved; 									/* player moved this turn */
+	private boolean movedDiagonal;					/* player has moved diagonally this turn */
 	int attackCount;								/* number of attacks made this turn */
 	int maxAttacks;
 	boolean engaged;								/* Engaged in combat with another character */
@@ -34,6 +35,7 @@ public class DDCharacter extends Entity
 		moved = false;
 		attackCount = 0;
 		engaged = false;
+		movedDiagonal = true;
 		
 	} /* end Character Constructor */
 	
@@ -112,5 +114,10 @@ public class DDCharacter extends Entity
 	{
 		return this.id;
 	} /* end getId method */
+	
+	public boolean getMovedDiagonal()
+	{
+		return movedDiagonal;
+	} /* end getMovedDiagonal method */
 	
 } /* Character class */

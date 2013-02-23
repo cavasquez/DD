@@ -3,7 +3,8 @@ package DD.Character.Abilities.DefaultAbilities.Standard;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.state.StateBasedGame;
-import DD.ActionBox.ActionBox;
+
+import DD.Character.DDCharacter;
 import DD.Character.Abilities.Ability;
 
 /*****************************************************************************************************
@@ -39,7 +40,7 @@ public class StandardAttack extends Ability
 		
 	} /* end render method */
 	
-	private String action(Character target)
+	private String action(DDCharacter target)
 	{ /* This method needs to be used in update */
 		/* TODO: Should check for flat-footed and sneak attacks */
 		/* TODO: Implement user roll later */

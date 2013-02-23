@@ -4,10 +4,11 @@ import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.Abilities.Ability;
 
-
 /*****************************************************************************************************
  * ChooseTargetMessage will be used by an Ability to tell the TargetingSystem that a target(s) needs to
  * be found. The message will instruct the TargetingSystem on the specifics of the target(s) required.
+ * 
+ * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class ChooseTargetMessage extends Message

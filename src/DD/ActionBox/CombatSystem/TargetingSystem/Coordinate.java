@@ -9,11 +9,11 @@ package DD.ActionBox.CombatSystem.TargetingSystem;
 public class Coordinate
 {
 	/************************************ Class Attributes *************************************/
-	public final Integer x;
-	public final Integer y;
+	public final int x;
+	public final int y;
 	
 	/************************************ Class Methods *************************************/
-	public Coordinate(Integer x, Integer y)
+	public Coordinate(int x, int y)
 	{
 		this.x = x;
 		this.y = y;

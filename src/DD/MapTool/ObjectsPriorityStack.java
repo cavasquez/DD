@@ -1,6 +1,7 @@
 package DD.MapTool;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
 
@@ -24,6 +25,12 @@ public class ObjectsPriorityStack implements Serializable{
 	public void push(Objects obj){
 		pQueue.add(obj);
 	}
+	
+	public Iterator<Objects> getIterator()
+	{ //@author Carlos Vasquez
+		return pQueue.iterator();
+	} 
+	
 	public static void main(String[] args) {
 
 		World world = new World("world1");

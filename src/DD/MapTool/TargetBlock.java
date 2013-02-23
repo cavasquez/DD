@@ -1,11 +1,11 @@
-package DD.ActionBox.CombatSystem.TargetingSystem;
+package DD.MapTool;
 
+import java.util.Iterator;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-
+import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
+import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.DDCharacter;
-import DD.MapTool.Map;
-import DD.MapTool.Objects;
 
 /*****************************************************************************************************
  * TargetBlock will be a special block on the map reserved for use by the TargetSystem to find Targets
@@ -25,11 +25,13 @@ public class TargetBlock extends Objects
 	private static final long serialVersionUID = 1L;
 	
 	/************************************ Class Attributes *************************************/
-	private static Coordinate position = null;
+	private Coordinate position = null;
 	private static final String imagePath = "";
 	private DDCharacter target = null;
 	private boolean selected;
+	private static TargetingSystem system = null;
 	private static TargetingSystem.TargetCount targetCount = null;	/* Used by targetBlock to check if it will call TargetingSystems targetSelected method */
+	private static TargetingSystem.TargetSelection targetSelection = null;
 	private static Integer numOfTargets = null;
 	
 	/************************************ Class Methods 
@@ -40,16 +42,22 @@ public class TargetBlock extends Objects
 		super.movePenalty = 0;
 		super.lightPenalty = 0;
 		this.target = null;
-		selected = false; 			/* start off as not selected */
+		selected = false; 		/* start off as not selected */
+		super.priority = 9;			/* set to highest? priority */
+		
+		if (system == null) system = new TargetingSystem();
+		
 	} /* end TargetBlock constructor */
 	
-	public void setTargetBlock(Coordinate coordinate)
+	public void setTargetBlock(Coordinate coordinate, ObjectsPriorityStack stack)
 	{
 		this.position = coordinate;
 		
 		//TODO: TargetBlock will need to check the objects at this position for a Character.
 		// If a character exists, store it as a target.
 		if (targetCount == TargetingSystem.TargetCount.ALL) this.select(); /* We want to select this as a target */
+		target = system.getCharacter(stack); /* get the target */
+		
 	} /* end setTargetBlock method */
 	
 	public void cleanUp()
@@ -114,5 +122,10 @@ public class TargetBlock extends Objects
 	{
 		TargetBlock.numOfTargets = numOfTargets;
 	} /* end setTargetCount method */
+	
+	public static void setTargetSelection(TargetingSystem.TargetSelection targetSelection)
+	{
+		TargetBlock.targetSelection = targetSelection;
+	} /* end setTargetSelection method */
 	
 } /* end TargetBlock class */

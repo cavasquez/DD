@@ -18,13 +18,13 @@ import DD.SlickTools.*;
 
 public class Map extends Entity implements Serializable{
 	private static final long serialVersionUID = -2402013046237396326L;
-	ObjectsPriorityStack[][] objectsStack ; //ops<Objects>
+	public ObjectsPriorityStack[][] objectsStack ; //ops<Objects>
 	TempObjects[][]  tempObjects;
 	int numTempObjects;
 	Image defImage;
 	boolean hasTempObjects;
 	String name;
-	final int mapSize = 21;
+	public final int mapSize = 21;
 
 	public Map(){
 		super();

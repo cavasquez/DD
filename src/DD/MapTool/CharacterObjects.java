@@ -4,7 +4,7 @@ import org.newdawn.slick.Image;
 import DD.Character.*;
 
 public class CharacterObjects extends Objects{
-	DDCharacter ddchar;
+	public DDCharacter ddchar;
 	
 	public CharacterObjects(String name, Image image, Map owner, DDCharacter ddchar) {
 		super(name, image, owner);
