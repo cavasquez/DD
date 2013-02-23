@@ -34,7 +34,7 @@ public class TestMainPriority {
 		
 		//bulk comment from stars to stars to see another test.
 		//****************************************************
-		Objects[] objTemp = map.objectsStack[0][0].toArray();
+		Objects[] objTemp = map.getContent(0, 0);
 		System.out.println("Content of the Stack at 0,0");
 		for (int i = 0; i < objTemp.length; i++) {
 			System.out.println(objTemp[i].toString());

@@ -76,6 +76,10 @@ public class Map extends Entity implements Serializable{
 		}
 	}
 	
+	public Objects[] getContent(int x, int y){
+		return objectsStack[x][y].toArray();
+	}
+	
 	
 	public CharacterObjects getDDCharacter(int x, int y){
 		if(objectsStack[x][y].peek() instanceof CharacterObjects){
