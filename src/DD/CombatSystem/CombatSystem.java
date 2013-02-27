@@ -32,7 +32,7 @@ public class CombatSystem
 	{
 		STANDARD_ATTACK (I++);
 		
-		private final int index;
+		public final int index;
 		
 		Action (int index)
 		{
@@ -41,6 +41,15 @@ public class CombatSystem
 		
 	} /* end Action enum */
 	public static int NUM_OF_INTERPRETERS = I;
+	
+	public static enum ActionTypes
+	{
+		FREE,
+		FULL_ROUND,
+		IMMEDIATE,
+		MOVE,
+		STANDARD;
+	} /* end ActionTypes enum */
 	
 	/************************************ Class Attributes *************************************/
 	static private ArrayList<DDCharacter> characterList;	/* A list of all the Characters in game so they may be modified */
@@ -94,6 +103,10 @@ public class CombatSystem
 		{/* The message is invalid */
 			returner = new CombatValidationMessage(false, "Message is not a CombatValidationMessage.");
 		} /* end if */
+		else if(cm.getRequest() == null)
+		{/* The message is invalid */
+			returner = new CombatValidationMessage(false, "Request is null.");
+		} /* end if */
 		else
 		{
 			returner = system[cm.getRequest().index].validate(cm);
@@ -123,6 +136,11 @@ public class CombatSystem
 		return(found);
 	} /* end characterExists method */
 	
+	public void endAbility()
+	{
+		
+	} /* end endAbility method */
+	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
@@ -141,5 +159,13 @@ public class CombatSystem
 		
 		return (returner);
 	} /* end getCharacter method */
+	
+	/****************************************************************************************
+	 ************************************ Setter Methods ************************************
+	 ****************************************************************************************/
+	public static void setMap(Map map)
+	{
+		CombatSystem.map = map;
+	} /* end setMap method */
 	
 } /* end CombatSystem class */

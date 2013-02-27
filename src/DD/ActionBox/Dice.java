@@ -11,14 +11,25 @@ import java.util.Random;
 public class Dice 
 {
 	/************************************ Class Constants*************************************/
-	public final static int D3 = 3;
-	public final static int D4 = 4;
-	public final static int D6 = 6;
-	public final static int D8 = 8;
-	public final static int D10 = 10;
-	public final static int D12 = 12;
-	public final static int D20 = 20;
-	public final static int D100 = 100;
+	public static enum DieSize
+	{
+		D3 (3),
+		D4 (4),
+		D6 (6),
+		D8 (8),
+		D10 (10),
+		D12 (12),
+		D20 (20),
+		D100 (100);
+		
+		public final int size;
+		
+		DieSize(int size)
+		{
+			this.size = size;
+		} /* end TargetCount index */
+		
+	} /* end Dice enum */
 	
 	/************************************ Class Attributes *************************************/
 	Random generator;
@@ -36,6 +47,11 @@ public class Dice
 		this.dieSize = dieSize;
 		generator = new Random();
 	} /* end Dice constructor */
+	
+	public int roll(DieSize dieSize)
+	{
+		return (generator.nextInt(dieSize.index) + 1);
+	} /* end roll method */
 	
 	public int roll(int numOfRolls, int dieSize)
 	{

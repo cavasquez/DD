@@ -26,10 +26,10 @@ public class SubAction extends RenderComponent
 	boolean clicked;
 	
 	/************************************ Class Methods *************************************/
-	public SubAction(int id) 
+	public SubAction(int id, Ability ability) 
 	{
 		super(id);
-		ability = null;
+		ability = ability;
 		clicked = false;
 	} /* end SubAction constructor */
 	

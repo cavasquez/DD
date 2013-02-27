@@ -13,7 +13,7 @@ import DD.Message.CombatValidationMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public interface CombatInterpreter 
+public abstract interface CombatInterpreter 
 {
 	/************************************ Class Methods *************************************/
 	public CombatValidationMessage validate(CombatMessage cm);

@@ -34,7 +34,7 @@ import DD.SlickTools.RenderComponent;
 public abstract class Ability extends RenderComponent
 {
 	/************************************ Class Attributes *************************************/
-	protected DDCharacter character;
+	protected static DDCharacter character;
 	protected SubAction subAction;
 	protected final int actionType;
 	protected final String name;
@@ -74,7 +74,6 @@ public abstract class Ability extends RenderComponent
 		targetSelected = true;
 	} /* end obtainTarget method */
 	
-	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
 	{
@@ -97,6 +96,11 @@ public abstract class Ability extends RenderComponent
 		
 		
 	} /* end render method */
+	
+	public void sendToInterpreter()
+	{
+		/* Send the message to the proper interpreter and send it through the network */
+	} /* end sendToInterpreter method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

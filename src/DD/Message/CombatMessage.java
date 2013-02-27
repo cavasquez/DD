@@ -1,5 +1,6 @@
 package DD.Message;
 
+import DD.Character.DDCharacter;
 import DD.CombatSystem.CombatSystem;
 
 
@@ -22,16 +23,16 @@ import DD.CombatSystem.CombatSystem;
 public class CombatMessage extends Message
 {
 	/************************************ Class Attributes *************************************/
-	private Character source;				/* The source of the request */
-	private Character target[];				/* The target, if any, of the request */
+	private int source;						/* The source of the request */
+	private int target[];					/* The target, if any, of the request */
 	private CombatSystem.Action request;	/* The requested action, ability, or spell to be performed */
 	private int[] body;						/* An array that will contain well defined data */
 	
 	/************************************ Class Methods *************************************/
 	public CombatMessage
 	(
-			Character source,
-			Character target[],
+			int source,		/* This should be the ID of the source DDCharacter */
+			int target[], /* This should be the ID of the target DDCharacter */
 			CombatSystem.Action request,
 			int[] body
 	)
@@ -46,12 +47,12 @@ public class CombatMessage extends Message
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public Character getSource() 
+	public int getSource() 
 	{
 		return source;
 	} /* end getSource method */
 	
-	public Character[] getTarget() 
+	public int[] getTarget() 
 	{
 		return target;
 	} /* end getTarget method */

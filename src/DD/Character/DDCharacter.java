@@ -1,6 +1,8 @@
 package DD.Character;
 
 import java.util.ArrayList;
+import DD.ActionBox.Dice;
+import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.SlickTools.*;
@@ -15,6 +17,14 @@ import DD.SlickTools.*;
 
 public class DDCharacter extends Entity
 {
+	/************************************ Class Constants *************************************/
+	public static enum ACType
+	{
+		NORMAL,
+		FLAT_FOOTED,
+		TOUCH;
+		
+	} /* end ACType enum */
 	/************************************ Class Attributes *************************************/
 	private CharacterSheet sheet;
 	private boolean hasTurn = false;
@@ -26,6 +36,8 @@ public class DDCharacter extends Entity
 	int attackCount;								/* number of attacks made this turn */
 	int maxAttacks;
 	boolean engaged;								/* Engaged in combat with another character */
+	private Coordinate coordinate;					/* Characters location on board */
+	private int characterID;						/* This ID should be different form Entity ID and should be the same across network */
 	
 	/************************************ Class Methods *************************************/
 	public DDCharacter(int id) 
@@ -77,14 +89,18 @@ public class DDCharacter extends Entity
 	
 	
 	/************************************ Combat Mechanisms *************************************/
-	public boolean defend(int attack, int attackType)
+	public boolean defend(int attack, int damage, ACType attackType)
 	{/* The character must attempt to defend against an attack.
 	 	Attack type identifies if the attack is regular, touch, etc. 
 	 	TODO: check for flat-footed, etc. */
 		/* TODO: implement */
 		boolean returner = false;
 		
-		if (attack >= sheet.getAP()) returner = true;
+		if (attack >= sheet.getACArmor())
+		{
+			returner = true;
+			getHit(damage);
+		} /* end if */
 		
 		return(returner); /*  */
 	} /* end getAttacked method */
@@ -119,5 +135,50 @@ public class DDCharacter extends Entity
 	{
 		return movedDiagonal;
 	} /* end getMovedDiagonal method */
+	
+	public Coordinate getCoordinate()
+	{
+		return coordinate;
+	} /* end getCoordinate method */
+	
+	public int getWeaponReach()
+	{ /* TODO: Implement this method */
+		return 5;
+	} /* end getWeaponReach method */
+	
+	public Dice.DieSize getAttackDie()
+	{ /* TODO: Implement, this is dependent on equipment */
+		return Dice.DieSize.D6;
+	} /* end getAttackDie method */
+	
+	public Dice.DieSize getDamageDie()
+	{ /* TODO: Implement, this is dependent on equipment */
+		return Dice.DieSize.D6;
+	} /* end getDamageDie method */
+	
+	public int[] getAttack()
+	{ /* This should return an array with all the attack modifiers */
+		//TODO: Implement
+		return null;
+	} /* end getAttack method */
+	
+	public int[] getDamange()
+	{ /* This should return an array with all the damage modifiers */
+		//TODO: Implement
+		return null;
+	} /* end getAttack method */
+	
+	public int getCharacterID()
+	{
+		return characterID;
+	} /* end getCharacterID method */
+	
+	/******************************************************************************
+	 ******************************* Setter Methods *******************************
+	 ******************************************************************************/
+	public void setCoordiante(Coordinate coordinate)
+	{
+		this.coordinate = coordinate;
+	} /* end setCoordinate method */
 	
 } /* Character class */

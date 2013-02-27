@@ -192,6 +192,7 @@ public class TargetingSystem
 		 */
 		boolean placeBlock = false;
 		boolean lookForMoreBlocks = false;
+		int diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
 		
 		/* First, make sure we are in bounds. Thus must happen first so we do not get array outofbounds errors*/
 		if 
@@ -215,15 +216,16 @@ public class TargetingSystem
 						/* Since the origin has not been dealt with, we should branch 
 						 * from the origin to look for more blocks that could be potential targets. */
 						lookForMoreBlocks = true;
+						diagonalPenalty = 1;		/* We have not had the chance to take a diagonal yet, no penalty */
 						if (self == true) placeBlock = true; /* since this is a self target, we can place a block at this position */
 					} /* end if */
 				} /* end else */
 				/* Lastly, check to see that we are within the radius (0 is still valid) and check to see that
 				 * there are no walls */
-				else if (distance >= 0	&& hasWall(position))
+				else if (distance >= 0	&& !hasWall(position))
 				{
 					placeBlock = true;
-					lookForMoreBlocks = true;
+					if (distance > 0 )lookForMoreBlocks = true;
 				} /* end else if */
 			} /* end if */
 			/* If this position is a TargetBlock or wall, then we are done.  */
@@ -237,6 +239,7 @@ public class TargetingSystem
 		if (lookForMoreBlocks)
 		{
 			/* Recursion for the win! */
+			/* Deal with the sides */
 			/* Search for the next block one to the right */
 			placeCircle(new Coordinate(position.x + 1, position.y), distance - blockSize, true);
 			/* Search for the next block one block to the left */
@@ -245,6 +248,16 @@ public class TargetingSystem
 			placeCircle(new Coordinate(position.x, position.y + 1), distance - blockSize, true);
 			/* Search for the next block one block down */
 			placeCircle(new Coordinate(position.x, position.y - 1), distance - blockSize, true);
+			
+			/* Deal with the diagonals */
+			/* Search for the next block to the top right*/
+			placeCircle(new Coordinate(position.x + 1, position.y + 1), distance - (blockSize * diagonalPenalty), true);
+			/* Search for the next block to the top left */
+			placeCircle(new Coordinate(position.x - 1, position.y + 1), distance - (blockSize * diagonalPenalty), true);
+			/* Search for the next block to the bottom right*/
+			placeCircle(new Coordinate(position.x + 1, position.y - 1), distance - (blockSize * diagonalPenalty), true);
+			/* Search for the next block to the bottom left */
+			placeCircle(new Coordinate(position.x - 1, position.y - 1), distance - (blockSize * diagonalPenalty), true);
 			
 		} /* finish looking for more blocks */
 		

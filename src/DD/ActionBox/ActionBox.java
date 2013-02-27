@@ -49,7 +49,7 @@ public class ActionBox extends BoxInterface
 	
 	/************************************ Class Attributes *************************************/
 	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
-	protected static DDCharacter character = null;
+	protected static DDCharacter character = null;	/* The character performing the actions */
 	
 	/************************************ Button Images *************************************/
 	Image freeAction = null;
@@ -94,7 +94,7 @@ public class ActionBox extends BoxInterface
 	
 	public void addSubAction(Ability ability)
 	{ /* Convert the provided Ability into a SubAction and add it to the components ArrayList*/
-		SubAction subAction = new SubAction(this.id);	/* the id is set to any arbitrary id. It will be reset in the addComponent method */
+		SubAction subAction = new SubAction(this.id, ability);	/* the id is set to any arbitrary id. It will be reset in the addComponent method */
 		subActions.add(this.addComponent(subAction));	/* Add the SubAction and add it's id to the subActions ArrayList */
 	} /* end addSubAction method */
 	
