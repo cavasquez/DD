@@ -7,6 +7,9 @@ import DD.ActionBox.Dice;
 import DD.Character.CharacterSheet.Race.Human;
 import DD.Character.CharacterSheet.Race.Race;
 import DD.Character.CharacterSheet.Race.RaceContainer;
+import DD.Character.Equipment.Armor;
+import DD.Character.Equipment.ArmorContainer;
+import DD.Character.Equipment.Equipment;
 
 
 /*****************************************************************************************************
@@ -1540,6 +1543,64 @@ public class CharacterSheet
 		int returner= dice.roll(3, 4, 6);
 		return returner;
 	}
+	
+	/**
+	 * EQUIPMENT
+	 */
+	
+	
+	/*
+	 * Equipment List of everything the character has.
+	 */
+	ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
+	
+	public void setEquipment(Equipment e)
+	{
+		equipmentList.add(e);
+	}
+	
+	
+	/**
+	 * ARMOR  
+	  **/
+	//HERE IS THE CONTAINER OF ALL ARMOR IN OUR GAME
+	ArmorContainer armorchest = new ArmorContainer();
+	
+	//This is what should be shown on the GUI, the ArrayList of Armor
+	//The character can have
+	ArrayList<Armor> armor = new ArrayList<Armor>(2);
+	
+	//put armor in the arrayList and into the equipmentList
+	public void setArmor(Armor arm)
+	{
+		armor.add(arm);
+		equipmentList.add(arm);
+	}
+	
+	//get the armor from the arraylist
+	public Armor getArmor(int index)
+	{
+		return armor.get(index);
+	}
+	
+	/*
+	 * Look at ArmorContainer for list of all armor and their index
+	 * this will help get the armor you want to put in the arrayList
+	 */
+	public Armor getArmorFromContainer(int index)
+	{
+		return armorchest.getArmor(index);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	/** FILL CHARACTER SHEET METHODS **/
 	/*
