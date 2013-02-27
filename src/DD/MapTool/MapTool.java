@@ -7,6 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
+
+import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 
 
 //implements serializable ~
@@ -15,11 +18,13 @@ public class MapTool implements Serializable{
 	World world;
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;
+	LinkedList<Coordinate> selectedList;
 	
 	public MapTool(){
 		world = new World("world");
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();
+		selectedList = new LinkedList<Coordinate>();
 	}
 	
 	/* TODO:updateNormList()  and tempList()
