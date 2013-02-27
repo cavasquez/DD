@@ -50,7 +50,7 @@ public class Dice
 	
 	public int roll(DieSize dieSize)
 	{
-		return (generator.nextInt(dieSize.index) + 1);
+		return (generator.nextInt(dieSize.size) + 1);
 	} /* end roll method */
 	
 	public int roll(int numOfRolls, int dieSize)
