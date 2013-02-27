@@ -1,6 +1,5 @@
-package DD.CombatSystem;
+package DD.Message;
 
-import DD.Message.Message;
 
 /*****************************************************************************************************
  * CombatValidation will be the message returned by CombatSystem to ActionBox to let ActionBox know 

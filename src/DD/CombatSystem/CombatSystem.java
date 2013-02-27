@@ -5,6 +5,7 @@ import DD.CombatSystem.Interpreter.*;
 import DD.CombatSystem.Interpreter.Standard.*;
 import DD.MapTool.Map;
 import DD.Message.CombatMessage;
+import DD.Message.CombatValidationMessage;
 import DD.Message.Message;
 import DD.Character.*;
 
@@ -27,7 +28,18 @@ public class CombatSystem
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;
-	public static final int STANDARD_ATTACK = I++;
+	public static enum Action
+	{
+		STANDARD_ATTACK (I++);
+		
+		private final int index;
+		
+		Action (int index)
+		{
+			this.index = index;
+		} /* end TargetCount index */
+		
+	} /* end Action enum */
 	public static int NUM_OF_INTERPRETERS = I;
 	
 	/************************************ Class Attributes *************************************/
@@ -41,7 +53,7 @@ public class CombatSystem
 		system = new CombatInterpreter[NUM_OF_INTERPRETERS];
 		
 		/* First, we need to create the system */
-		system[STANDARD_ATTACK] = new I_StandardAttack();
+		system[Action.STANDARD_ATTACK.index] = new I_StandardAttack();
 	} /* end CombatSystem constructor */
 	
 	public CombatValidationMessage process(CombatMessage cm)
@@ -82,13 +94,9 @@ public class CombatSystem
 		{/* The message is invalid */
 			returner = new CombatValidationMessage(false, "Message is not a CombatValidationMessage.");
 		} /* end if */
-		else if ( cm.getRequest() < 0 || cm.getRequest() > NUM_OF_INTERPRETERS)
-		{ /* The request does not exist and thus is invalid. */
-			returner = new CombatValidationMessage(false, "Request does not exist");
-		} /* end else */
 		else
 		{
-			returner = system[cm.getRequest()].validate(cm);
+			returner = system[cm.getRequest().index].validate(cm);
 		} /* end else */
 		
 		return (returner);
@@ -96,7 +104,7 @@ public class CombatSystem
 	
 	private static void interpret(CombatMessage cm)
 	{
-		system[cm.getRequest()].interpret(cm);
+		system[cm.getRequest().index].interpret(cm);
 	} /* end interpret method */
 	
 	public static boolean characterExists(int characterID)

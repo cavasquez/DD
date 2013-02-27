@@ -1,5 +1,7 @@
 package DD.Message;
 
+import DD.CombatSystem.CombatSystem;
+
 
 /*****************************************************************************************************
  * CombatMessage will provide a way for the View to communicate with CombatSystem. While CombatSystem
@@ -20,17 +22,17 @@ package DD.Message;
 public class CombatMessage extends Message
 {
 	/************************************ Class Attributes *************************************/
-	private Character source;	/* The source of the request */
-	private Character target[];	/* The target, if any, of the request */
-	private int request;		/* The requested action, ability, or spell to be performed */
-	private int[] body;			/* An array that will contain well defined data */
+	private Character source;				/* The source of the request */
+	private Character target[];				/* The target, if any, of the request */
+	private CombatSystem.Action request;	/* The requested action, ability, or spell to be performed */
+	private int[] body;						/* An array that will contain well defined data */
 	
 	/************************************ Class Methods *************************************/
 	public CombatMessage
 	(
 			Character source,
 			Character target[],
-			int request,
+			CombatSystem.Action request,
 			int[] body
 	)
 	{
@@ -54,7 +56,7 @@ public class CombatMessage extends Message
 		return target;
 	} /* end getTarget method */
 
-	public int getRequest() 
+	public CombatSystem.Action getRequest() 
 	{
 		return request;
 	} /* end getRequest method */

@@ -1,8 +1,8 @@
 package DD.CombatSystem.Interpreter.Standard;
 
-import DD.CombatSystem.CombatValidationMessage;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.Message.CombatMessage;
+import DD.Message.CombatValidationMessage;
 
 /*****************************************************************************************************
  * Interpreter for StandardAttack
