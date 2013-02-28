@@ -91,7 +91,6 @@ public class TargetingSystem
 	private static Map map = null;						/* Map on which we are placing TargetBlocks */
 	private static Ability caller = null;				/* keeps track of Ability that called TargetSystem */
 	private static TargetSelection selection = null;	/* keeps track of type of TargetSelection so targetSelected know which Characters to return */
-	private static TargetShape shape = null;			/* We need to know the shape during clean up */
 	private static Queue<TargetBlock> blocks = null;	/* this stack will be used to keep track of placed blocks */
 	private static boolean self;						/* determine whether or not target can choose self */
 	private static Coordinate origin = null;			/* keep track of the origins position */
@@ -112,7 +111,6 @@ public class TargetingSystem
 		
 		caller = ctm.getCaller(); /* set the Caller */
 		TargetingSystem.selection = ctm.getTargetSelection();
-		TargetingSystem.shape = ctm.getTargetShape();
 		TargetingSystem.self = ctm.getSelf();
 		TargetingSystem.origin = ctm.getOrigin();
 		placeTargetBlocks(ctm);
@@ -131,7 +129,11 @@ public class TargetingSystem
 		while (blocks.peek() == null)
 		{
 			/* Get all Character targets that are not null */
-			if ((block = blocks.remove()).getTarget() != null) blockTargets.add(block.getTarget());
+			if ((block = blocks.remove()).getTarget() != null && 
+					((selection == TargetSelection.SELECTED && block.getSelected() == true) || (selection == TargetSelection.UNSELECTED && block.getSelected() == false))) 
+			{
+				blockTargets.add(block.getTarget());
+			} /* end if */
 			movePosition = block.getPosition(); /* This should work because there is only one target in a move */
 			block.cleanUp();
 		} /* end while loop */

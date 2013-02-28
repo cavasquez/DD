@@ -1,6 +1,7 @@
 package DD.CombatSystem.Interpreter.Standard;
 
 import DD.Character.DDCharacter;
+import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
@@ -15,13 +16,11 @@ public class I_StandardAttack implements CombatInterpreter
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;
-	public static final int attackRoll = I++;
-	public static final int damageRoll = I++;
-	public static final int bodySize = I;
+	public static final int ATTACK_ROLL = I++;
+	public static final int DAMAGE_ROLL = I++;
+	public static final int BODY_SIZE = I;
 	
-	/************************************ Class Attributes *************************************/
-	
-	/************************************ Class Attributes *************************************/
+	/************************************ Class Methods *************************************/
 	public I_StandardAttack()
 	{
 		
@@ -37,16 +36,17 @@ public class I_StandardAttack implements CombatInterpreter
 	@Override
 	public void interpret(CombatMessage cm) 
 	{
-		int attack = cm.getBody()[attackRoll];	/* the attack against the opponent */
-		int damage = cm.getBody()[damageRoll];	/* the damage against the opponent */
+		int attack = cm.getBody()[ATTACK_ROLL];	/* the attack against the opponent */
+		int damage = cm.getBody()[DAMAGE_ROLL];	/* the damage against the opponent */
 		
 		/* Add modifier to rolls */
-		int[] attackModifiers = cm.getSource().getAttack();
-		int[] damageModifiers = cm.getSource().getDamange();
+		int[] attackModifiers = CombatSystem.getCharacter(cm.getSource()).getAttack();
+		int[] damageModifiers = CombatSystem.getCharacter(cm.getSource()).getDamange();
 		for (int i = 0; i < attackModifiers.length; i++) attack += attackModifiers[i];
 		for (int i = 0; i < damageModifiers.length; i++) damage += damageModifiers[i];
 		
-		cm.getTarget()[0].defend(attack, damage, DDCharacter.ACType.NORMAL);
+		if (cm.getTarget() != null)CombatSystem.getCharacter(cm.getTarget()[0]).defend(attack, damage, DDCharacter.ACType.NORMAL);
+		/* if cmTarget is null, player attacked the air */
 	} /* end interpret method */
 	
 } /* end I_StandardAttack class */

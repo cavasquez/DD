@@ -12,7 +12,7 @@ public class TargetSelectedMessage extends Message
 {
 	/************************************ Class Attributes *************************************/
 	private DDCharacter[] targets;
-	private Coordinate position;
+	private Coordinate position;	/* position of single target */
 	
 	/************************************ Class Methods *************************************/
 	public TargetSelectedMessage(DDCharacter[] targets, Coordinate position)

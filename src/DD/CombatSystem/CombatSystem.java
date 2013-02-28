@@ -30,7 +30,8 @@ public class CombatSystem
 	private static int I = 0;
 	public static enum Action
 	{
-		STANDARD_ATTACK (I++);
+		STANDARD_ATTACK (I++),
+		MOVE(I++);
 		
 		public final int index;
 		
@@ -53,8 +54,8 @@ public class CombatSystem
 	
 	/************************************ Class Attributes *************************************/
 	static private ArrayList<DDCharacter> characterList;	/* A list of all the Characters in game so they may be modified */
-	static private Map map;								/* The game map that may need to be modified. */
-	static private CombatInterpreter[] system;			/* The core of CombatSystem */					
+	static private Map map;									/* The game map that may need to be modified. */
+	static private CombatInterpreter[] system;				/* The core of CombatSystem */					
 	
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
@@ -127,7 +128,7 @@ public class CombatSystem
 		int size = characterList.size();
 		while (!found && (index < size))
 		{
-			if ( ((characterList.get(index++)).getId() == characterID ) )
+			if ( ((characterList.get(index++)).getCharacterID() == characterID ) )
 			{
 				found = true;
 			} /* end if */
@@ -150,7 +151,7 @@ public class CombatSystem
 		int index = 0;
 		while (returner == null)
 		{
-			if (characterList.get(index++).getId() == characterID )
+			if (characterList.get(index++).getCharacterID() == characterID )
 			{
 				returner = characterList.get(--index);
 			} /* end if */
@@ -159,6 +160,11 @@ public class CombatSystem
 		
 		return (returner);
 	} /* end getCharacter method */
+	
+	public static Map getMap()
+	{
+		return map;
+	} /* end getMap method */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************

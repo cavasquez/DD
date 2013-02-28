@@ -4,11 +4,8 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
-
 import DD.ActionBox.Dice;
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
-import DD.Character.DDCharacter;
 import DD.Character.Abilities.Ability;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.Standard.I_StandardAttack;
@@ -26,13 +23,11 @@ import DD.Message.TargetSelectedMessage;
  ******************************************************************************************************/
 
 public class StandardAttack extends Ability
-{
-	/************************************ Class Attributes *************************************/
-	
+{	
 	/************************************ Class Methods *************************************/
-	public StandardAttack(int id, int abilityType, String name, String description) 
+	public StandardAttack(int id) 
 	{
-		super(id, abilityType, name, description);
+		super(id, CombatSystem.ActionTypes.STANDARD, "Standard Attack", "Perform an attack with main hand weapon as a standard action");
 	} /* end StandardAttack constructor */
 
 	@Override
@@ -47,10 +42,10 @@ public class StandardAttack extends Ability
 		
 	} /* end render method */
 	
-	private void action() throws SlickException
+	@Override
+	protected void action() throws SlickException
 	{ /* This method needs to be used in update */
 		/* TODO: Check for sneak attacks, flat footed, etc. */
-		String returner = ""; /* Description of roll */
 		ChooseTargetMessage tcm = new ChooseTargetMessage
 				(
 					TargetingSystem.TargetCount.SINGLE,
@@ -68,19 +63,22 @@ public class StandardAttack extends Ability
 	@Override
 	public void obtainTarget(TargetSelectedMessage tsm)
 	{ 
-		targetSelected = true;
 		Dice attackRoll = new Dice(character.getAttackDie().size);
 		Dice damageRoll = new Dice(character.getDamageDie().size);
 		int attack = attackRoll.roll(1);				/* This variable will hold the roll and the sum of the attack bonuses */
 		int damage = damageRoll.roll(1);				/* This variable will hold the roll and sum of the damage bonuses */
 		
-		/* create the combat message that will take care of this */
-		int[] target = new int[1];		/* There is only ever one target */
-		target[0] = tsm.getTargets()[0].getCharacterID();
+		/* create the combat message that will take care of this ability */
+		Integer[] target = null;
+		if (tsm.getTargets() != null )
+		{
+			target = new Integer[1];		/* There is only ever one target */
+			target[0] = tsm.getTargets()[0].getCharacterID();
+		}
 		
-		int[] body = new int[I_StandardAttack.bodySize];
-		body[I_StandardAttack.attackRoll] = attack;
-		body[I_StandardAttack.damageRoll] = damage;
+		int[] body = new int[I_StandardAttack.BODY_SIZE];
+		body[I_StandardAttack.ATTACK_ROLL] = attack;
+		body[I_StandardAttack.DAMAGE_ROLL] = damage;
 		
 		CombatMessage cm = new CombatMessage
 				(
@@ -89,7 +87,8 @@ public class StandardAttack extends Ability
 						CombatSystem.Action.STANDARD_ATTACK,
 						body
 				);
-		
+		done = true;
+		sendToInterpreter(cm);
 	} /* end obtainTarget method */
 	
 } /* end StandardAttack method */

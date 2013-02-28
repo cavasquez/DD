@@ -1,7 +1,6 @@
-package DD.Message;
+package DD.CombatSystem;
 
-import DD.CombatSystem.CombatSystem;
-
+import DD.Network.Message;
 
 /*****************************************************************************************************
  * CombatMessage will provide a way for the View to communicate with CombatSystem. While CombatSystem
@@ -15,24 +14,22 @@ import DD.CombatSystem.CombatSystem;
  * constants that will be structured as REQUEST_PLACEMENT/DATA_NAME.
  * 
  * Attributes are private because they should not be changed.
- * 
- * @author Carlos Vasquez
  ******************************************************************************************************/
 
 public class CombatMessage extends Message
 {
 	/************************************ Class Attributes *************************************/
-	private Integer source;					/* The source of the request */
-	private Integer target[];				/* The target, if any, of the request */
-	private CombatSystem.Action request;	/* The requested action, ability, or spell to be performed */
-	private int[] body;						/* An array that will contain well defined data */
+	private Character source;	/* The source of the request */
+	private Character target[];	/* The target, if any, of the request */
+	private int request;		/* The requested action, ability, or spell to be performed */
+	private int[] body;			/* An array that will contain well defined data */
 	
 	/************************************ Class Methods *************************************/
 	public CombatMessage
 	(
-			Integer source,		/* This should be the ID of the source DDCharacter */
-			Integer target[], 	/* This should be the ID of the target DDCharacter */
-			CombatSystem.Action request,
+			Character source,
+			Character target[],
+			int request,
 			int[] body
 	)
 	{
@@ -46,17 +43,17 @@ public class CombatMessage extends Message
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public Integer getSource() 
+	public Character getSource() 
 	{
 		return source;
 	} /* end getSource method */
 	
-	public Integer[] getTarget() 
+	public Character[] getTarget() 
 	{
 		return target;
 	} /* end getTarget method */
 
-	public CombatSystem.Action getRequest() 
+	public int getRequest() 
 	{
 		return request;
 	} /* end getRequest method */

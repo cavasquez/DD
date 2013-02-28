@@ -39,6 +39,16 @@ public class DDCharacter extends Entity
 	private Coordinate coordinate;					/* Characters location on board */
 	private int characterID;						/* This ID should be different form Entity ID and should be the same across network */
 	
+	/* Turn related attributes */
+	private boolean hasStandardAction;
+	private boolean hasMoveAction;
+	private boolean hasFreeAction;
+	private boolean hasSwiftAction;
+	private boolean hasFullRoundAction;
+	private boolean hasImmediateAction;
+	private boolean hasStartEndFullRoundAction;
+	
+	
 	/************************************ Class Methods *************************************/
 	public DDCharacter(int id) 
 	{
@@ -80,13 +90,21 @@ public class DDCharacter extends Entity
 		hasTurn = true;
 		moved = false;
 		attackCount = 0;
+		
+		hasStandardAction = true;
+		hasMoveAction = true;
+		hasFreeAction = true;
+		hasSwiftAction = true;
+		hasFullRoundAction = true;
+		hasImmediateAction = true;
+		hasStartEndFullRoundAction = true;
+		
 	} /* end startTurn method */
 	
 	public void endTurn()
 	{ /* It is the end of the characters turn. Modify the appropriate variables. */
 		hasTurn = false;
 	} /* end endTurn method */
-	
 	
 	/************************************ Combat Mechanisms *************************************/
 	public boolean defend(int attack, int damage, ACType attackType)
@@ -173,6 +191,46 @@ public class DDCharacter extends Entity
 		return characterID;
 	} /* end getCharacterID method */
 	
+	public int getCurrentSpeed()
+	{
+		return currentSpeed;
+	} /* end getCurrentSpeed method */
+	
+	public boolean getHasStandardAction() 
+	{
+		return hasStandardAction;
+	} /* end getHasStandardAction method */
+
+	public boolean getHasMoveAction() 
+	{
+		return hasMoveAction;
+	} /* end getHasMoveAction method */
+
+	public boolean getHasFreeAction() 
+	{
+		return hasFreeAction;
+	} /* end getHasFreeAction method */
+
+	public boolean getHasSwiftAction() 
+	{
+		return hasSwiftAction;
+	} /* end getHasSwiftAction method */
+
+	public boolean getHasFullRoundAction() 
+	{
+		return hasFullRoundAction;
+	} /* end getHasFullRoundAction method */
+
+	public boolean getHasImmediateAction() 
+	{
+		return hasImmediateAction;
+	} /* end getHasImmediateAction method */
+
+	public boolean getHasStartEndFullRoundAction() 
+	{
+		return hasStartEndFullRoundAction;
+	} /* end getHasStardEndFullAction method */
+	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
@@ -180,5 +238,10 @@ public class DDCharacter extends Entity
 	{
 		this.coordinate = coordinate;
 	} /* end setCoordinate method */
+	
+	public void setCurrentSpeed(int currentSpeed)
+	{
+		this.currentSpeed = currentSpeed;
+	} /* end setCurrentSpeed method */
 	
 } /* Character class */

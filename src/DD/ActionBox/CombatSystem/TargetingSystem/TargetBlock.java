@@ -1,11 +1,16 @@
 package DD.ActionBox.CombatSystem.TargetingSystem;
 
+import java.util.Iterator;
+
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 import DD.Character.DDCharacter;
+import DD.MapTool.CharacterObjects;
 import DD.MapTool.Map;
 import DD.MapTool.Objects;
+import DD.MapTool.ObjectsPriorityStack;
+import DD.MapTool.Wall;
 
 /*****************************************************************************************************
  * TargetBlock will be a special block on the map reserved for use by the TargetSystem to find Targets
@@ -26,12 +31,10 @@ public class TargetBlock extends Objects
 	
 	/************************************ Class Attributes *************************************/
 	private Coordinate position = null;
-	private static Coordinate origin = null;
 	private static final String imagePath = "";
 	private DDCharacter target = null;
 	private boolean selected;
 	private static TargetingSystem.TargetCount targetCount = null;	/* Used by targetBlock to check if it will call TargetingSystems targetSelected method */
-	private static TargetingSystem.TargetSelection targetSelection = null;
 	private static Integer numOfTargets = null;
 	
 	/************************************ Class Methods 
@@ -49,14 +52,29 @@ public class TargetBlock extends Objects
 	{
 		this.position = coordinate;
 		
-		//TODO: TargetBlock will need to check the objects at this position for a Character.
+		/* Look for a Character and set it as target if it exists */
+		ObjectsPriorityStack stack = ((Map)(this.owner)).objectsStack[position.x][position.y];
+		Iterator<Objects> obj = stack.getIterator();
+		boolean found = false;
+		Objects tempTarget = null;
+		
+		while (found == false && obj.hasNext())
+		{
+			if(CharacterObjects.class.isInstance(tempTarget = obj.next()))
+				{/* Character found in the stack, target it */
+					target = ((CharacterObjects)(tempTarget)).ddchar;
+					found = true;
+				} /* end if */
+		} /* end while loop */
+		
 		// If a character exists, store it as a target.
 		if (targetCount == TargetingSystem.TargetCount.ALL) this.select(); /* We want to select this as a target */
 	} /* end setTargetBlock method */
 	
 	public void cleanUp()
 	{/* cleanUp will remove the block from the map */
-		
+		/* The targetBlock should be located on the top of the ObjectStack of the map */
+		((Map)(this.owner)).objectsStack[position.x][position.y].pop();
 	} /* end pickUp method */
 	
 	public void select()
@@ -116,15 +134,5 @@ public class TargetBlock extends Objects
 	{
 		TargetBlock.numOfTargets = numOfTargets;
 	} /* end setTargetCount method */
-	
-	public static void setOrigin(Coordinate origin)
-	{
-		TargetBlock.origin = origin;
-	} /* end setOrigin method */
-	
-	public static void setTargetSelection(TargetingSystem.TargetSelection targetSelection)
-	{
-		TargetBlock.targetSelection = targetSelection;
-	} /* end setTargetSelection method */
 	
 } /* end TargetBlock class */

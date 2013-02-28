@@ -2,10 +2,14 @@ package DD.Character.Abilities;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import DD.ActionBox.SubAction;
 import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.*;
+import DD.CombatSystem.CombatSystem;
+import DD.Message.CombatMessage;
+import DD.Message.CombatValidationMessage;
 import DD.Message.TargetSelectedMessage;
 import DD.SlickTools.RenderComponent;
 
@@ -36,24 +40,32 @@ public abstract class Ability extends RenderComponent
 	/************************************ Class Attributes *************************************/
 	protected static DDCharacter character;
 	protected SubAction subAction;
-	protected final int actionType;
+	protected final CombatSystem.ActionTypes actionType;
 	protected final String name;
 	protected final String description;
 	protected boolean activated;				/* flag that establishes if an ability has been clicked. */
-	protected boolean targetSelected;
+	protected static boolean done;				/* flag to check if player is done with ability */
 	protected static TargetingSystem ts = null;	/* to be used by abilities that need a target */
+	protected static CombatSystem cs = null;	/* Used for combat */
 	
 	/************************************ Class Methods*************************************/
-	public Ability(int id, int actionType, String name, String description)
+	public Ability(int id, CombatSystem.ActionTypes actionType, String name, String description)
 	{
 		super(id);
 		this.actionType = actionType;
 		this.name = name;
 		this.description = description;
 		this.activated = false;
-		this.targetSelected = false;
 		if (ts == null) ts = new TargetingSystem();
+		if (cs == null) cs = new CombatSystem();
 	} /* end ability constructor */
+	
+	public abstract void obtainTarget(TargetSelectedMessage tsm);
+	/* obtainTarget will be called on by the TargetSystem signaling that a target(s) has
+ 	been chosen */
+	
+	protected abstract void action() throws SlickException;
+	/* action will be the action performed by the ability */
 	
 	public void activate()
 	{ /* Activate ability and add it to the appropriate Character variable. */
@@ -68,11 +80,6 @@ public abstract class Ability extends RenderComponent
 		activated = false;
 	} /* end activate method */
 	
-	public void obtainTarget(TargetSelectedMessage tsm)
-	{ /* obtainTarget will be called on by the TargetSystem signaling that a target(s) has
-	 	been chosen */
-		targetSelected = true;
-	} /* end obtainTarget method */
 	
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
@@ -97,15 +104,28 @@ public abstract class Ability extends RenderComponent
 		
 	} /* end render method */
 	
-	public void sendToInterpreter()
+	public void sendToInterpreter(CombatMessage cm)
 	{
 		/* Send the message to the proper interpreter and send it through the network */
+		/* First, send to network */
+		//TODO: send to network
+		
+		/* Second, sent to interpreter */
+		CombatValidationMessage cvm = cs.process(cm);
+		
+		//TODO: Check for validity of cvm
+		
+		
+		if(done)
+		{
+			//TODO: "Unclick" ie reset action box. By now, interpreter should have changed turn states
+		} /* end if */
 	} /* end sendToInterpreter method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
-	public int getActionType()
+	public CombatSystem.ActionTypes getActionType()
 	{
 		return(actionType);
 	} /* end getAbilityType method */
@@ -123,9 +143,9 @@ public abstract class Ability extends RenderComponent
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public void setOwnerCharacter(DDCharacter character)
+	public static void setOwnerCharacter(DDCharacter character)
 	{
-		this.character = character;
+		Ability.character = character;
 	} /* end setOwnerCharacter method */
 	
 	public void setOwnerSubAction(SubAction subAction)

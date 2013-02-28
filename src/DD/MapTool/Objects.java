@@ -16,7 +16,6 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 	protected int movePenalty;
 	protected int lightPenalty;
 	String name;
-	Entity owner;
 	int priority;
 	
 

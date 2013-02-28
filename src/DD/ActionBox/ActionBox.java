@@ -39,13 +39,30 @@ import DD.SlickTools.Component;
 public class ActionBox extends BoxInterface 
 {
 	/************************************ Class Constants *************************************/
-	public static final int STANDARD_ACTION = 1;
-	public static final int MOVE_ACTION = 2;
-	public static final int FULL_ROUND_ACTION = 3;
-	public static final int SWIFT_ACTION = 4;
-	public static final int IMMEDIATE_ACTION = 5;
-	public static final int FREE_ACTION = 6;
-	public static final int NUM_OF_ACTIONS = 6;
+	private static int actionCount= 0;
+	public static enum Action
+	{
+		STANDARD_ACTION (actionCount++),
+		MOVE_ACTION(actionCount++),
+		FULL_ROUND_ACTION (actionCount++),
+		SWIFT_ACTION (actionCount++),
+		IMMEDIATE_ACTION (actionCount++),
+		FREE_ACTION (actionCount++);
+		
+		private final int index;
+		
+		Action (int index)
+		{
+			this.index = index;
+		} /* end TargetCount index */
+		
+		public int index()
+		{
+			return index;
+		} /* end index for enum */
+		
+	} /* end Action enum */
+	public static final int NUM_OF_ACTIONS = actionCount;
 	
 	/************************************ Class Attributes *************************************/
 	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
@@ -63,7 +80,7 @@ public class ActionBox extends BoxInterface
 	{
 		super(id, length, width);
 		components = new ArrayList<Component>();
-		this.character = character;
+		ActionBox.character = character;
 		subActions = null;
 		
 		freeAction = new Image("Images/ActionBox/FreeAction.png");
@@ -78,12 +95,12 @@ public class ActionBox extends BoxInterface
 		this.setPosition(boxPosition);
 		
 		/* To begin with, the basic ActionChoices need to be available. */
-		this.addComponent(new ActionChoice(this.id, STANDARD_ACTION, "Standard Action", standardAction, position.x, position.y));
-		this.addComponent(new ActionChoice(this.id, MOVE_ACTION, "Move Action", moveAction, position.x, position.y + shift));
-		this.addComponent(new ActionChoice(this.id, FULL_ROUND_ACTION, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
-		this.addComponent(new ActionChoice(this.id, SWIFT_ACTION, "Swift Action", swiftAction, position.x, position.y + shift*3));
-		this.addComponent(new ActionChoice(this.id, IMMEDIATE_ACTION, "Immediate Action", immediateAction, position.x, position.y + shift*4));
-		this.addComponent(new ActionChoice(this.id, FREE_ACTION, "Free Action", freeAction, position.x, position.y + shift*5));
+		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y));
+		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift));
+		this.addComponent(new ActionChoice(this.id, Action.FULL_ROUND_ACTION.index, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
+		this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
+		this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
+		this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
 		
 	} /* end ActionBox constructor */
 	
@@ -118,5 +135,21 @@ public class ActionBox extends BoxInterface
 		} /* end for loop */
 		
 	} /* end unclickSubACtions method */
-
+	
+	/****************************************************************************************
+	 ************************************ Getter Methods ************************************
+	 ****************************************************************************************/
+	public static DDCharacter getCharacter()
+	{
+		return ActionBox.character;
+	} /* end getCharacter method */
+	
+	/****************************************************************************************
+	 ************************************ Setter Methods ************************************
+	 ****************************************************************************************/
+	public static void setCharacter(DDCharacter character)
+	{
+		ActionBox.character = character;
+		Ability.setOwnerCharacter(character);
+	} /* end setCharacter method */
 } /* end ActionBox method */
