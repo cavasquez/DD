@@ -11,9 +11,11 @@ public class ObjectsPriorityStack implements Serializable{
 	private static final long serialVersionUID = 3048624868543442456L;
 	private  PriorityQueue<Objects> pQueue;
 	private OPSComparator opsc;
+	private boolean hasTargetBlock;
 	public ObjectsPriorityStack() {
 		opsc = new OPSComparator();
 		pQueue = new PriorityQueue<Objects>(2,opsc);
+		hasTargetBlock = false;
 	}
 	
 	public PriorityQueue<Objects> getPQueue(){
@@ -61,4 +63,18 @@ public class ObjectsPriorityStack implements Serializable{
 	
 	public static void main(String[] args) { }
 
+	public boolean hasTargetBlock()
+	{
+		return hasTargetBlock;
+	} /* end getHasTargetBlock method */
+	
+	public void setHasTargetBlock(boolean hasTargetBlock)
+	{
+		this.hasTargetBlock = hasTargetBlock;
+	} /* end setHasTargetBlock method */
+	
+	public boolean remove(Objects obj)
+	{
+		return pQueue.remove(obj);
+	} /* end remove method */
 }

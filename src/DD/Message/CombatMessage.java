@@ -1,5 +1,6 @@
 package DD.Message;
 
+import DD.ActionBox.ActionBox;
 import DD.CombatSystem.CombatSystem;
 
 
@@ -24,6 +25,7 @@ public class CombatMessage extends Message
 	/************************************ Class Attributes *************************************/
 	private Integer source;					/* The source of the request */
 	private Integer target[];				/* The target, if any, of the request */
+	private CombatSystem.ActionType action;	/* Type of action being performed */
 	private CombatSystem.Action request;	/* The requested action, ability, or spell to be performed */
 	private int[] body;						/* An array that will contain well defined data */
 	
@@ -32,6 +34,7 @@ public class CombatMessage extends Message
 	(
 			Integer source,		/* This should be the ID of the source DDCharacter */
 			Integer target[], 	/* This should be the ID of the target DDCharacter */
+			CombatSystem.ActionType action,
 			CombatSystem.Action request,
 			int[] body
 	)
@@ -39,6 +42,7 @@ public class CombatMessage extends Message
 		super(Message.COMBAT_MESSAGE);
 		this.source = source;
 		this.target = target;
+		this.action = action;
 		this.request = request;
 		this.body = body;
 	} /* end Constructor */
@@ -55,6 +59,11 @@ public class CombatMessage extends Message
 	{
 		return target;
 	} /* end getTarget method */
+	
+	public CombatSystem.ActionType getAction() 
+	{
+		return action;
+	} /* end getAction method */
 
 	public CombatSystem.Action getRequest() 
 	{

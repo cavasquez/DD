@@ -27,7 +27,7 @@ public class StandardAttack extends Ability
 	/************************************ Class Methods *************************************/
 	public StandardAttack(int id) 
 	{
-		super(id, CombatSystem.ActionTypes.STANDARD, "Standard Attack", "Perform an attack with main hand weapon as a standard action");
+		super(id, CombatSystem.ActionType.STANDARD, "Standard Attack", "Perform an attack with main hand weapon as a standard action");
 	} /* end StandardAttack constructor */
 
 	@Override
@@ -61,7 +61,7 @@ public class StandardAttack extends Ability
 	} /* end action method */
 	
 	@Override
-	public void obtainTarget(TargetSelectedMessage tsm)
+	public void obtainTarget(TargetSelectedMessage tsm) throws SlickException
 	{ 
 		Dice attackRoll = new Dice(character.getAttackDie().size);
 		Dice damageRoll = new Dice(character.getDamageDie().size);
@@ -82,10 +82,11 @@ public class StandardAttack extends Ability
 		
 		CombatMessage cm = new CombatMessage
 				(
-						character.getCharacterID(),
-						target,
-						CombatSystem.Action.STANDARD_ATTACK,
-						body
+					character.getCharacterID(),
+					target,
+					CombatSystem.ActionType.STANDARD,
+					CombatSystem.Action.STANDARD_ATTACK,
+					body
 				);
 		done = true;
 		sendToInterpreter(cm);

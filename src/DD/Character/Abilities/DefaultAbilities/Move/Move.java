@@ -1,8 +1,6 @@
 package DD.Character.Abilities.DefaultAbilities.Move;
 
 import org.newdawn.slick.SlickException;
-
-import DD.ActionBox.ActionBox;
 import DD.ActionBox.Dice;
 import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.Abilities.Ability;
@@ -23,7 +21,7 @@ public class Move extends Ability
 	/************************************ Class Methods *************************************/
 	public Move(int id) 
 	{
-		super(id, CombatSystem.ActionTypes.MOVE, "Move", "Move up do characters speed");
+		super(id, CombatSystem.ActionType.MOVE, "Move", "Move up do characters speed");
 		done = false;
 		// TODO Auto-generated constructor stub
 	} /* end move constructor */
@@ -31,23 +29,38 @@ public class Move extends Ability
 	protected void action() throws SlickException
 	{ /* This method needs to be used in update */
 		
-		/* TODO: Guess, loop through this while not done to continue moving */
-		ChooseTargetMessage tcm = new ChooseTargetMessage
-				(
-					TargetingSystem.TargetCount.SINGLE,
-					TargetingSystem.TargetShape.MOVE,
-					TargetingSystem.TargetSelection.SELECTED,
-					false,
-					character.getCoordinate(),
-					character.getCurrentSpeed(),
-					this
-				);
-		ts.chooseTarget(tcm);
+		if ((character.getCurrentSpeed() <= 0 && !character.getHasMoveAction()))
+		{/* check to see that we can continue moving */
+			done = true;
+			CombatMessage cm = new CombatMessage
+					(
+							character.getCharacterID(),
+							null, 
+							CombatSystem.ActionType.MOVE,
+							CombatSystem.Action.MOVE,
+							null
+					);
+			sendToInterpreter(cm);
+		} /* end if */
+		else
+		{
+			ChooseTargetMessage tcm = new ChooseTargetMessage
+					(
+						TargetingSystem.TargetCount.SINGLE,
+						TargetingSystem.TargetShape.MOVE,
+						TargetingSystem.TargetSelection.SELECTED,
+						false,
+						character.getCoordinate(),
+						character.getCurrentSpeed(),
+						this
+					);
+			ts.chooseTarget(tcm);
+		} /* end else */
 		
 	} /* end action method */
 	
 	@Override
-	public void obtainTarget(TargetSelectedMessage tsm)
+	public void obtainTarget(TargetSelectedMessage tsm) throws SlickException
 	{ 
 		/* create the combat message that will take care of this ability */
 		Integer[] target = null;
@@ -68,11 +81,10 @@ public class Move extends Ability
 				(
 						character.getCharacterID(),
 						target, /* The target will be the null if there is no character in the square */
+						CombatSystem.ActionType.MOVE,
 						CombatSystem.Action.MOVE,
 						body
 				);
-		if ((character.getCurrentSpeed() <= 0 && !character.getHasMoveAction())) done = true;		
-		
 		sendToInterpreter(cm);
 		
 	} /* end obtainTarget method */
@@ -80,6 +92,7 @@ public class Move extends Ability
 	protected void doneMoving()
 	{/* Should be used by the "done" button. */
 		done = true;
+		ts.clearTargets();
 	} /* end doneMoving method */
 
 } /* end Move class */

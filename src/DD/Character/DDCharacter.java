@@ -48,7 +48,6 @@ public class DDCharacter extends Entity
 	private boolean hasImmediateAction;
 	private boolean hasStartEndFullRoundAction;
 	
-	
 	/************************************ Class Methods *************************************/
 	public DDCharacter(int id) 
 	{
@@ -131,6 +130,42 @@ public class DDCharacter extends Entity
 		/* TODO: take care of damage reduction */
 		currentHP -= hit;
 	} /* end getHit method */
+	
+	/************************************ Turn Mechanisms *************************************/
+	public void endHasStandardAction() 
+	{
+		hasStandardAction = false;
+	} /* end getHasStandardAction method */
+
+	public void endHasMoveAction() 
+	{
+		hasMoveAction = false;
+	} /* end getHasMoveAction method */
+
+	public void endHasFreeAction() 
+	{
+		hasFreeAction = false;
+	} /* end getHasFreeAction method */
+
+	public void endHasSwiftAction() 
+	{
+		hasSwiftAction = false;
+	} /* end getHasSwiftAction method */
+
+	public void endHasFullRoundAction() 
+	{
+		hasFullRoundAction = false;
+	} /* end getHasFullRoundAction method */
+
+	public void endHasImmediateAction() 
+	{
+		hasImmediateAction = false;
+	} /* end getHasImmediateAction method */
+
+	public void endHasStartEndFullRoundAction() 
+	{
+		hasStartEndFullRoundAction = false;
+	} /* end getHasStardEndFullAction method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
@@ -243,5 +278,10 @@ public class DDCharacter extends Entity
 	{
 		this.currentSpeed = currentSpeed;
 	} /* end setCurrentSpeed method */
+	
+	public void setCharacterID(int characterID)
+	{
+		this.characterID = characterID;
+	} /* end setCharacterID method */
 	
 } /* Character class */

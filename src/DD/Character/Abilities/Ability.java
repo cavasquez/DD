@@ -40,16 +40,16 @@ public abstract class Ability extends RenderComponent
 	/************************************ Class Attributes *************************************/
 	protected static DDCharacter character;
 	protected SubAction subAction;
-	protected final CombatSystem.ActionTypes actionType;
+	protected final CombatSystem.ActionType actionType;
 	protected final String name;
 	protected final String description;
 	protected boolean activated;				/* flag that establishes if an ability has been clicked. */
-	protected static boolean done;				/* flag to check if player is done with ability */
+	protected boolean done;						/* flag to check if player is done with ability */
 	protected static TargetingSystem ts = null;	/* to be used by abilities that need a target */
 	protected static CombatSystem cs = null;	/* Used for combat */
 	
 	/************************************ Class Methods*************************************/
-	public Ability(int id, CombatSystem.ActionTypes actionType, String name, String description)
+	public Ability(int id, CombatSystem.ActionType actionType, String name, String description)
 	{
 		super(id);
 		this.actionType = actionType;
@@ -60,18 +60,19 @@ public abstract class Ability extends RenderComponent
 		if (cs == null) cs = new CombatSystem();
 	} /* end ability constructor */
 	
-	public abstract void obtainTarget(TargetSelectedMessage tsm);
+	public abstract void obtainTarget(TargetSelectedMessage tsm) throws SlickException;
 	/* obtainTarget will be called on by the TargetSystem signaling that a target(s) has
  	been chosen */
 	
 	protected abstract void action() throws SlickException;
 	/* action will be the action performed by the ability */
 	
-	public void activate()
+	public void activate() throws SlickException
 	{ /* Activate ability and add it to the appropriate Character variable. */
 		/* When clicked on, the ability will perform this action */
 		/* TODO: implement */
 		activated = true;
+		this.action();
 	} /* end activate method */
 	
 	public void deactivate()
@@ -104,7 +105,7 @@ public abstract class Ability extends RenderComponent
 		
 	} /* end render method */
 	
-	public void sendToInterpreter(CombatMessage cm)
+	public void sendToInterpreter(CombatMessage cm) throws SlickException
 	{
 		/* Send the message to the proper interpreter and send it through the network */
 		/* First, send to network */
@@ -115,17 +116,30 @@ public abstract class Ability extends RenderComponent
 		
 		//TODO: Check for validity of cvm
 		
-		
-		if(done)
+		if(done())
 		{
+			/* First, tell CombatSystem that action is terminating */
+			CombatMessage endAction = new CombatMessage
+					(
+							cm.getSource(),
+							null,
+							cm.getAction(),
+							CombatSystem.Action.END_ACTION,
+							null
+					);
 			//TODO: "Unclick" ie reset action box. By now, interpreter should have changed turn states
+		} /* end if */
+		else
+		{
+			/* re-activate ability */
+			activate();
 		} /* end if */
 	} /* end sendToInterpreter method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
-	public CombatSystem.ActionTypes getActionType()
+	public CombatSystem.ActionType getActionType()
 	{
 		return(actionType);
 	} /* end getAbilityType method */
@@ -139,6 +153,11 @@ public abstract class Ability extends RenderComponent
 	{
 		return(description);
 	} /* end getDescription method */
+	
+	public boolean done()
+	{
+		return done;
+	} /* end done method */
 
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************

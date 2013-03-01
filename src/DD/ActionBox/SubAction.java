@@ -2,6 +2,7 @@ package DD.ActionBox;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 import DD.Character.Abilities.Ability;
@@ -50,7 +51,7 @@ public class SubAction extends RenderComponent
 		/* This method should be called upon click */
 	} /* end activate method */
 	
-	public void click()
+	public void click() throws SlickException
 	{ /* set abilityClicked to true and activate ability. Furthermore, unclick any other clicked SubActions*/ 
 		this.unclickSubActions();
 		clicked = true;

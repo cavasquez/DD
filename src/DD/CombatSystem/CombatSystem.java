@@ -2,6 +2,7 @@ package DD.CombatSystem;
 
 import java.util.ArrayList;
 import DD.CombatSystem.Interpreter.*;
+import DD.CombatSystem.Interpreter.Move.I_Move;
 import DD.CombatSystem.Interpreter.Standard.*;
 import DD.MapTool.Map;
 import DD.Message.CombatMessage;
@@ -31,9 +32,11 @@ public class CombatSystem
 	public static enum Action
 	{
 		STANDARD_ATTACK (I++),
-		MOVE(I++);
+		MOVE(I++),
+		END_ACTION(I++);
 		
 		public final int index;
+		public static final int NUM_OF_INTERPRETERS = I;
 		
 		Action (int index)
 		{
@@ -41,15 +44,16 @@ public class CombatSystem
 		} /* end TargetCount index */
 		
 	} /* end Action enum */
-	public static int NUM_OF_INTERPRETERS = I;
 	
-	public static enum ActionTypes
+	public static enum ActionType
 	{
 		FREE,
 		FULL_ROUND,
+		FULL_ROUND_ENDSTART,
 		IMMEDIATE,
 		MOVE,
-		STANDARD;
+		STANDARD,
+		SWIFT;
 	} /* end ActionTypes enum */
 	
 	/************************************ Class Attributes *************************************/
@@ -60,10 +64,12 @@ public class CombatSystem
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
 	{
-		system = new CombatInterpreter[NUM_OF_INTERPRETERS];
+		system = new CombatInterpreter[Action.NUM_OF_INTERPRETERS];
 		
 		/* First, we need to create the system */
 		system[Action.STANDARD_ATTACK.index] = new I_StandardAttack();
+		system[Action.MOVE.index] = new I_Move();
+		system[Action.END_ACTION.index] = new I_EndAction();
 	} /* end CombatSystem constructor */
 	
 	public CombatValidationMessage process(CombatMessage cm)

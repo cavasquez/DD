@@ -39,17 +39,18 @@ import DD.SlickTools.Component;
 public class ActionBox extends BoxInterface 
 {
 	/************************************ Class Constants *************************************/
-	private static int actionCount= 0;
-	public static enum Action
+	private static int I= 0;
+	private static enum Action
 	{
-		STANDARD_ACTION (actionCount++),
-		MOVE_ACTION(actionCount++),
-		FULL_ROUND_ACTION (actionCount++),
-		SWIFT_ACTION (actionCount++),
-		IMMEDIATE_ACTION (actionCount++),
-		FREE_ACTION (actionCount++);
+		STANDARD_ACTION (I++),
+		MOVE_ACTION(I++),
+		FULL_ROUND_ACTION (I++),
+		SWIFT_ACTION (I++),
+		IMMEDIATE_ACTION (I++),
+		FREE_ACTION (I++);
 		
-		private final int index;
+		public final int index;
+		public static final int NUM_OF_ACTIONS = I;
 		
 		Action (int index)
 		{
@@ -62,8 +63,7 @@ public class ActionBox extends BoxInterface
 		} /* end index for enum */
 		
 	} /* end Action enum */
-	public static final int NUM_OF_ACTIONS = actionCount;
-	
+
 	/************************************ Class Attributes *************************************/
 	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
 	protected static DDCharacter character = null;	/* The character performing the actions */

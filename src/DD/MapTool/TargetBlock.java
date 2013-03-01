@@ -33,39 +33,56 @@ public class TargetBlock extends Objects
 	private static TargetingSystem.TargetCount targetCount = null;	/* Used by targetBlock to check if it will call TargetingSystems targetSelected method */
 	private static TargetingSystem.TargetSelection targetSelection = null;
 	private static Integer numOfTargets = null;
+	private ObjectsPriorityStack stack;
 	
-	/************************************ Class Methods 
-	 * @throws SlickException *************************************/
-	public TargetBlock(Map owner) throws SlickException
+	/************************************ Class Methods *************************************/
+	public TargetBlock(String name, Image image, Map owner)
 	{
-		super("Target Block", new Image(imagePath), owner);
-		super.movePenalty = 0;
-		super.lightPenalty = 0;
+		super(name, image, owner);
+		movePenalty = 0;
+		lightPenalty = 0;
 		this.target = null;
 		selected = false; 		/* start off as not selected */
-		super.priority = 9;			/* set to highest? priority */
+		priority = 9;			/* set to highest? priority */
+		
+		if (system == null) system = new TargetingSystem();
+	} /* end TargetBlock constructor */
+	
+	public TargetBlock(Map owner) throws SlickException
+	{
+		//super("Target Block", new Image(imagePath), owner);
+		super("|---|", null, owner); /* TODO: remove this after testing */
+		movePenalty = 0;
+		lightPenalty = 0;
+		this.target = null;
+		selected = false; 		/* start off as not selected */
+		priority = 9;			/* set to highest? priority */
 		
 		if (system == null) system = new TargetingSystem();
 		
 	} /* end TargetBlock constructor */
 	
-	public void setTargetBlock(Coordinate coordinate, ObjectsPriorityStack stack)
+	public void setTargetBlock(Coordinate coordinate, ObjectsPriorityStack stack) throws SlickException
 	{
 		this.position = coordinate;
+		this.stack = stack;
 		
 		//TODO: TargetBlock will need to check the objects at this position for a Character.
 		// If a character exists, store it as a target.
 		if (targetCount == TargetingSystem.TargetCount.ALL) this.select(); /* We want to select this as a target */
 		target = system.getCharacter(stack); /* get the target */
+		stack.push(this);
+		stack.setHasTargetBlock(true);
 		
 	} /* end setTargetBlock method */
 	
 	public void cleanUp()
 	{/* cleanUp will remove the block from the map */
-		
+		stack.remove(this);
+		stack.setHasTargetBlock(false);
 	} /* end pickUp method */
 	
-	public void select()
+	public void select() throws SlickException
 	{
 		/* This method should be called by update when TargetBlock is clicked */
 		selected = true;

@@ -48,7 +48,7 @@ public class TargetBlock extends Objects
 		selected = false; 			/* start off as not selected */
 	} /* end TargetBlock constructor */
 	
-	public void setTargetBlock(Coordinate coordinate)
+	public void setTargetBlock(Coordinate coordinate) throws SlickException
 	{
 		this.position = coordinate;
 		
@@ -77,7 +77,7 @@ public class TargetBlock extends Objects
 		((Map)(this.owner)).objectsStack[position.x][position.y].pop();
 	} /* end pickUp method */
 	
-	public void select()
+	public void select() throws SlickException
 	{
 		/* This method should be called by update when TargetBlock is clicked */
 		selected = true;
