@@ -5,6 +5,7 @@ import DD.ActionBox.Dice;
 import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.Character.Equipment.Weapon;
 import DD.SlickTools.*;
 
 /*****************************************************************************************************
@@ -112,7 +113,10 @@ public class DDCharacter extends Entity
 	 	TODO: check for flat-footed, etc. */
 		/* TODO: implement */
 		boolean returner = false;
-		
+		/*sheet.getACTotal();
+		sheet.getFlatfootTotal();
+		sheet.getTouchTotal();
+		*/
 		if (attack >= sheet.getACArmor())
 		{
 			returner = true;
@@ -194,28 +198,60 @@ public class DDCharacter extends Entity
 		return coordinate;
 	} /* end getCoordinate method */
 	
-	public int getWeaponReach()
-	{ /* TODO: Implement this method */
-		return 5;
+	//@brandon
+	//Returns the reach of both weapons if equipped
+	public int[] getWeaponReach()
+	{
+		ArrayList<Weapon> weapons = sheet.EquippedWeapon;
+		int[] reach = new int[weapons.size()];
+	
+		for (int i = 0; i < weapons.size(); i++) 
+		{
+			reach[i] = weapons.get(i).getRange();
+		}
+	
+	
+	
+	
+	
+	return reach;
 	} /* end getWeaponReach method */
 	
 	public Dice.DieSize getAttackDie()
-	{ /* TODO: Implement, this is dependent on equipment */
-		return Dice.DieSize.D6;
+	{ 
+		return Dice.DieSize.D20;
 	} /* end getAttackDie method */
 	
-	public Dice.DieSize getDamageDie()
-	{ /* TODO: Implement, this is dependent on equipment */
-		return Dice.DieSize.D6;
+	//@brandon
+	//returns weapons die both main hand and off hand
+	public Dice.DieSize[] getDamageDie()
+	{ 
+		
+		ArrayList<Weapon> weapons = sheet.EquippedWeapon;
+		Dice.DieSize[] dice = new Dice.DieSize[weapons.size()];
+		
+		for (int i = 0; i < weapons.size(); i++) 
+		{
+			dice[i] = weapons.get(i).getDamage();
+		}
+		
+		
+		
+		
+		
+		return dice;
 	} /* end getDamageDie method */
 	
+	//@brandon
+	//We cannot do this until we implement AttackModifiers
 	public int[] getAttack()
 	{ /* This should return an array with all the attack modifiers */
 		//TODO: Implement
 		return null;
 	} /* end getAttack method */
 	
-	public int[] getDamange()
+	//cannot do yet
+	public int[] getDamange()//dont worry now
 	{ /* This should return an array with all the damage modifiers */
 		//TODO: Implement
 		return null;

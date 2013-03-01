@@ -8,8 +8,9 @@ import DD.Character.CharacterSheet.Race.Human;
 import DD.Character.CharacterSheet.Race.Race;
 import DD.Character.CharacterSheet.Race.RaceContainer;
 import DD.Character.Equipment.Armor;
-import DD.Character.Equipment.ArmorContainer;
+import DD.Character.Equipment.Armory;
 import DD.Character.Equipment.Equipment;
+import DD.Character.Equipment.Weapon;
 
 
 /*****************************************************************************************************
@@ -1560,42 +1561,71 @@ public class CharacterSheet
 	}
 	
 	
+	
 	/**
 	 * ARMOR  
 	  **/
 	//HERE IS THE CONTAINER OF ALL ARMOR IN OUR GAME
-	ArmorContainer armorchest = new ArmorContainer();
+	Armory armory = new Armory();
 	
 	//This is what should be shown on the GUI, the ArrayList of Armor
-	//The character can have
-	ArrayList<Armor> armor = new ArrayList<Armor>(2);
+	//The character can have on him currently
+	ArrayList<Armor> EquippedArmor = new ArrayList<Armor>(2);
 	
 	//put armor in the arrayList and into the equipmentList
-	public void setArmor(Armor arm)
+	public void EquipArmor(Armor arm)
 	{
-		armor.add(arm);
-		equipmentList.add(arm);
+		EquippedArmor.add(arm);
+		//equipmentList.add(arm);
 	}
 	
 	//get the armor from the arraylist
-	public Armor getArmor(int index)
+	public Armor getEquippedArmor(int index)
 	{
-		return armor.get(index);
+		return EquippedArmor.get(index);
 	}
 	
 	/*
-	 * Look at ArmorContainer for list of all armor and their index
+	 * Look at Armory for list of all armor  and weapons and their index
 	 * this will help get the armor you want to put in the arrayList
 	 */
-	public Armor getArmorFromContainer(int index)
+	public Armor getArmorFromArmory(int index)
 	{
-		return armorchest.getArmor(index);
+		return armory.armor.get(index);
 	}
 	
 	
+	//
+	public ArrayList<Weapon> EquippedWeapon = new ArrayList<Weapon>(2);
+	public ArrayList<Weapon> SheathedWeapon = new ArrayList<Weapon>(3);
 	
 	
+	//put armor in the arrayList and into the equipmentList
+	public void EquipWeapon(Weapon arm)
+	{
+		EquippedWeapon.add(arm);
+		//need to add to inventory if not there
+	}
 	
+	//get the armor from the arraylist
+	public Armor getEquippedWeapon(int index)
+	{
+		return EquippedArmor.get(index);
+	}
+	
+	/*
+	 * Look at Armory for list of all armor  and weapons and their index
+	 * this will help get the armor you want to put in the arrayList
+	 */
+	public Weapon getWeaponFromArmory(int index)
+	{
+		return armory.weapons.get(index);
+	}
+	
+	public void addToEquipment(Equipment e)
+	{
+		equipmentList.add(e);
+	}
 	
 	
 	

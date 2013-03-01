@@ -1,6 +1,6 @@
 package DD.Character.Equipment;
 
-public abstract class Armor extends Equipment{
+public class Armor extends Equipment{
 
 	
 	int enhance;
@@ -9,18 +9,65 @@ public abstract class Armor extends Equipment{
 	int penalty;
 	double spellFail; 
 	char type;//light medium or heavy
-
-	public Armor()
+	
+	public Armor(String name, int enhance, int acBonus, int maxDex,int penalty,double spellFail, char type, int weight)
 	{
+		 this.name = name;
+		 this.enhance = enhance; 
+		 this.acBonus = acBonus; 
+		 this.maxDex= maxDex;
+		this.penalty=penalty;
+		this.spellFail=spellFail; 
+		this.type=type; 
+		this.weight=weight;
 		
 	}
-	abstract public int getEnhance();
-	abstract public int getAcBonus();
-	abstract public int getMaxDex();
-	abstract public int getPenalty();
-	abstract public double getSpellFail();
-	abstract public char getType();
+
+	public int getEnhance() {
+		// TODO Auto-generated method stub
+		return enhance;
+	}
+
+
+	public int getAcBonus() {
+		// TODO Auto-generated method stub
+		return acBonus;
+	}
+
 	
+	public int getMaxDex() {
+		// TODO Auto-generated method stub
+		return maxDex;
+	}
+
 	
+	public int getPenalty() {
+		// TODO Auto-generated method stub
+		return penalty;
+	}
+
+	
+	public double getSpellFail() {
+		// TODO Auto-generated method stub
+		return spellFail;
+	}
+
+	
+	public char getType() {
+		// TODO Auto-generated method stub
+		return type;
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+
+	@Override
+	public int getWeight() {
+		// TODO Auto-generated method stub
+		return weight;
+	}
 	
 }
