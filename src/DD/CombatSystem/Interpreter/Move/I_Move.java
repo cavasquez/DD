@@ -66,7 +66,7 @@ public class I_Move implements CombatInterpreter
 			CombatSystem.getMap().placeObjects(cm.getBody()[X_COORDINATE], cm.getBody()[Y_COORDINATE], charObj);
 			
 			/* Finally, update the movers coordinates */
-			mover.setCoordiante(new Coordinate(cm.getBody()[X_COORDINATE], cm.getBody()[Y_COORDINATE])); /* set new coordinate */
+			mover.setCoordiante(new Coordinate(cm.getBody()[X_COORDINATE], cm.getBody()[Y_COORDINATE]));
 			
 		} /* end if */
 		

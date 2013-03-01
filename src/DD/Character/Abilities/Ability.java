@@ -116,7 +116,7 @@ public abstract class Ability extends RenderComponent
 		
 		//TODO: Check for validity of cvm
 		
-		if(done())
+		if(done)
 		{
 			/* First, tell CombatSystem that action is terminating */
 			CombatMessage endAction = new CombatMessage
@@ -161,7 +161,7 @@ public abstract class Ability extends RenderComponent
 		return(description);
 	} /* end getDescription method */
 	
-	public boolean done()
+	public boolean isDone()
 	{
 		return done;
 	} /* end done method */

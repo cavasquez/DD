@@ -90,6 +90,7 @@ public class DDCharacter extends Entity
 		hasTurn = true;
 		moved = false;
 		attackCount = 0;
+		currentSpeed = sheet.getSpeed(); // TODO: needs to get speed from character sheet. defaulting to 30
 		
 		hasStandardAction = true;
 		hasMoveAction = true;

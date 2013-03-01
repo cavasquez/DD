@@ -53,7 +53,7 @@ public class StandardAttack extends Ability
 					TargetingSystem.TargetSelection.SELECTED,
 					false,
 					character.getCoordinate(),
-					character.getWeaponReach(),
+					character.getWeaponReach()[0], /* TODO: use constants */
 					this
 				);
 		ts.chooseTarget(tcm);
@@ -64,7 +64,7 @@ public class StandardAttack extends Ability
 	public void obtainTarget(TargetSelectedMessage tsm) throws SlickException
 	{ 
 		Dice attackRoll = new Dice(character.getAttackDie().size);
-		Dice damageRoll = new Dice(character.getDamageDie().size);
+		Dice damageRoll = new Dice(character.getDamageDie()[0].size); /* TODO: make into constant for offhand and mainhand */
 		int attack = attackRoll.roll(1);				/* This variable will hold the roll and the sum of the attack bonuses */
 		int damage = damageRoll.roll(1);				/* This variable will hold the roll and sum of the damage bonuses */
 		

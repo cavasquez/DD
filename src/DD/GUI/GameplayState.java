@@ -73,7 +73,8 @@ public class GameplayState extends BasicGameState {
 		//Vector2f characterPosition = new Vector2f(0f, 0f);
 		warrior = new DDCharacter(stateID);
 		warrior.setCharacterSheet(sheet);
-		actionBox = new ActionBox(stateID, 300, 200, warrior);
+		actionBox = new ActionBox(stateID, 300, 200);
+		actionBox.setCharacter(warrior);
 		
 		Image characters = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
 		//System.out.println("Image height: " + characters.getHeight());

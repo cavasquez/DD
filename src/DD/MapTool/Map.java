@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.Stack;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
+
+import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
+import DD.CombatSystem.CombatSystem;
 import DD.SlickTools.*;
 
 

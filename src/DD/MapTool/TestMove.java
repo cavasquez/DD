@@ -1,19 +1,24 @@
 package DD.MapTool;
 
-import java.util.Iterator;
 import org.newdawn.slick.SlickException;
+
+import DD.ActionBox.ActionBox;
 import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.DDCharacter;
+import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.CombatSystem.CombatSystem;
 import DD.Message.ChooseTargetMessage;
 
-//@author Carlos Vasquez
+// @author Carlos Vasquez
 
-public class TestTargeting {
+public class TestMove 
+{
 	public static void main(String[] args) throws SlickException {
 		TargetingSystem ts = new TargetingSystem();
 		CombatSystem cs = new CombatSystem();
+		ActionBox ab = new ActionBox(5, 0, 0);
 		
 		/*
 		 * IMPORTANT: for this main to work, mapSize needs to be 21 or larger due to hardcodes massPlaceObjectsLine values.
@@ -58,36 +63,35 @@ public class TestTargeting {
 		world.world[0][0].removeObjects(7, 10);
 		//System.out.println(world.world[0][0].toString());
 				
-		DDCharacter character = new DDCharacter(0);
+		int i = 0; // component and entity ids
+		DDCharacter character = new DDCharacter(i++);
 		int x = 6;
 		int y = 5;
 		CharacterObjects charObj = new CharacterObjects("*****", null, world.world[0][0], character);
 		world.world[0][0].placeObjects(x, y, charObj); /* place character */
 		character.setCoordiante(new Coordinate(x,y));
-		character.setCharacterID(0);
+		character.setCharacterID(i++);
+		Ability.setOwnerCharacter(character); /* set the character who is performing the abilities. This should happen somewhere in ActionBox */
 		
-		ChooseTargetMessage ctm = new ChooseTargetMessage
-				(
-						TargetingSystem.TargetCount.SINGLE,
-						TargetingSystem.TargetShape.MOVE,
-						TargetingSystem.TargetSelection.SELECTED,
-						false,
-						character.getCoordinate(),
-						5,
-						null
-				);
-		ObjectsPriorityStack[][] stack = world.world[0][0].objectsStack;
-		ts.chooseTarget(ctm);
+		Move move = new Move(i++);
+		move.activate();
+//		
+//		ChooseTargetMessage ctm = new ChooseTargetMessage
+//				(
+//						TargetingSystem.TargetCount.SINGLE,
+//						TargetingSystem.TargetShape.MOVE,
+//						TargetingSystem.TargetSelection.SELECTED,
+//						false,
+//						character.getCoordinate(),
+//						5,
+//						null
+//				);
+//		ObjectsPriorityStack[][] stack = world.world[0][0].objectsStack;
+//		ts.chooseTarget(ctm);
 	
 		System.out.println(character.getMovedDiagonal());
 		System.out.println(world.world[0][0].toString());
 		
-		/* Test the clearTargets() method */
-		System.out.println("Testing clearTargets method");
-		ts.clearTargets();
-		System.out.println(world.world[0][0].toString());
-		ts.clearTargets();
-		System.out.println(world.world[0][0].toString());
 		
 		/*
 		System.out.println("****************************************************");

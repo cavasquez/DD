@@ -76,11 +76,10 @@ public class ActionBox extends BoxInterface
 	Image standardAction = null;
 	Image swiftAction = null;
 	
-	public ActionBox(int id, float length, float width, DDCharacter character) throws SlickException
+	public ActionBox(int id, float length, float width) throws SlickException
 	{
 		super(id, length, width);
 		components = new ArrayList<Component>();
-		ActionBox.character = character;
 		subActions = null;
 		
 		freeAction = new Image("Images/ActionBox/FreeAction.png");

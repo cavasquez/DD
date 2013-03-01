@@ -88,11 +88,5 @@ public class Move extends Ability
 		sendToInterpreter(cm);
 		
 	} /* end obtainTarget method */
-	
-	protected void doneMoving()
-	{/* Should be used by the "done" button. */
-		done = true;
-		ts.clearTargets();
-	} /* end doneMoving method */
 
 } /* end Move class */
