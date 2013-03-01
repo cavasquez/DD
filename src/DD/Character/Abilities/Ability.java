@@ -136,6 +136,13 @@ public abstract class Ability extends RenderComponent
 		} /* end if */
 	} /* end sendToInterpreter method */
 	
+	public void done()
+	{
+		/* This action should be performed when the character clicks done */
+		done = true;
+		ts.clearTargets();
+	} /* end done method */
+	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
