@@ -1492,7 +1492,10 @@ public class CharacterSheet
 		
 	}
 	
-	
+	public int getSpeed()
+	{
+		return race.baseSpeed;
+	}
 	//NEED DR-DAMAGE REDUCTION
 	int damageReduction =0;
 	//NEED SR-SPELL RESIST
