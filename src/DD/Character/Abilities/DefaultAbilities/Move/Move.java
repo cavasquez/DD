@@ -86,7 +86,6 @@ public class Move extends Ability
 						CombatSystem.Action.MOVE,
 						body
 				);
-		System.out.println("Move speed: " + character.getCurrentSpeed());
 		this.sendToInterpreter(cm);
 		
 	} /* end obtainTarget method */
