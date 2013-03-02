@@ -30,6 +30,7 @@ public class Move extends Ability
 	{ /* This method needs to be used in update */
 		if ((character.getCurrentSpeed() <= 0 || !character.getHasMoveAction()))
 		{/* check to see that we can continue moving. In this case, we cannot */
+			
 			done = true;
 			CombatMessage cm = new CombatMessage
 					(
@@ -85,6 +86,7 @@ public class Move extends Ability
 						CombatSystem.Action.MOVE,
 						body
 				);
+		System.out.println("Move speed: " + character.getCurrentSpeed());
 		this.sendToInterpreter(cm);
 		
 	} /* end obtainTarget method */

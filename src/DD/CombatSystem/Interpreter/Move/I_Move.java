@@ -54,6 +54,7 @@ public class I_Move implements CombatInterpreter
 			/* Check for diagonal moves */
 			int diagonalPenalty = 1;
 			System.out.println("check: " + cm.getBody());
+			System.out.println("speed: " + mover.getCurrentSpeed());
 			if((mover.getCoordinate().x != cm.getBody()[X_COORDINATE]) && (mover.getCoordinate().y != cm.getBody()[Y_COORDINATE]))
 			{
 				if(!mover.getMovedDiagonal())

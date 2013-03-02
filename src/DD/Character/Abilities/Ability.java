@@ -128,7 +128,7 @@ public abstract class Ability extends RenderComponent
 					);
 			//TODO: "Unclick" ie reset action box. By now, interpreter should have changed turn states
 			//TODO: Check for validity of cvm
-			CombatValidationMessage cvm = cs.process(cm);
+			CombatValidationMessage cvm = cs.process(endAction);
 		} /* end if */
 		else
 		{
