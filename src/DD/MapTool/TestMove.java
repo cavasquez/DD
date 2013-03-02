@@ -1,6 +1,16 @@
 package DD.MapTool;
 
+import java.io.Console;
+
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+
+import slick.path2glory.SimpleGame.TestGame;
 
 import DD.ActionBox.ActionBox;
 import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
@@ -8,15 +18,29 @@ import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.DDCharacter;
 import DD.Character.Abilities.Ability;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
+import DD.Character.CharacterSheet.CharacterClass;
+import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.CombatSystem;
 import DD.Message.ChooseTargetMessage;
 
 // @author Carlos Vasquez
 
-public class TestMove 
+public class TestMove extends BasicGame
 {
-	public static void main(String[] args) throws SlickException {
-		TargetingSystem ts = new TargetingSystem();
+	public TestMove(String title) {
+		super(title);
+
+	}
+ 
+    public TestMove()
+    {
+        super("Slick2DPath2Glory - SimpleGame");
+    }
+ 
+    @Override
+    public void init(GameContainer gc) 
+			throws SlickException {
+    	TargetingSystem ts = new TargetingSystem();
 		CombatSystem cs = new CombatSystem();
 		ActionBox ab = new ActionBox(5, 0, 0);
 		
@@ -25,9 +49,10 @@ public class TestMove
 		 * other wise you will get nullpointers.
 		 */
 		
-		
+		/* VERY FREAKING IMPORTANT STUFF */
 		World world = new World("TESTME");
 		TargetingSystem.setMap(world.world[0][0]);
+		CombatSystem.setMap(world.world[0][0]);
 	
 		/*
 		 * proof of concept movement backend
@@ -65,13 +90,43 @@ public class TestMove
 				
 		int i = 0; // component and entity ids
 		DDCharacter character = new DDCharacter(i++);
+		CharacterSheet sheet = new CharacterSheet();
+		
+		/* ALSO VERY FREAKING IMPORTANT */
+		character.setCharacterID(i++);
+		CombatSystem.addCharacter(character);
+		
+		sheet.fillBasic("Max", 
+				"Bob", 
+				0, 
+				"Elvish, Common", 
+				0, 
+				1, 
+				5, 
+				150, 
+				200, 
+				"Chaotic Neutral", 
+				"Apple", 
+				"Noble", 
+				"Archer");
+			
+		sheet.fillAbilities();
+		CharacterClass barb = sheet.chooseClass(0);	//this is barbarian
+		sheet.fillRecorder(barb);
+		sheet.fillAttacksAndDefense(barb);
+		
+		character.setCharacterSheet(sheet);
+		ActionBox.setCharacter(character);
+		
+		
+		
 		int x = 6;
 		int y = 5;
 		CharacterObjects charObj = new CharacterObjects("*****", null, world.world[0][0], character);
 		world.world[0][0].placeObjects(x, y, charObj); /* place character */
 		character.setCoordiante(new Coordinate(x,y));
-		character.setCharacterID(i++);
 		Ability.setOwnerCharacter(character); /* set the character who is performing the abilities. This should happen somewhere in ActionBox */
+		character.startNewTurn();
 		
 		Move move = new Move(i++);
 		move.activate();
@@ -92,6 +147,57 @@ public class TestMove
 		System.out.println(character.getMovedDiagonal());
 		System.out.println(world.world[0][0].toString());
 		
+		/* Move down */
+		int newx = x; //x being moved to
+		int newy = y; //y being moved to
+		newy -=1;
+		ObjectsPriorityStack stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
+		((TargetBlock)stack.peek()).select();
+		System.out.println(world.world[0][0].toString());
+		System.out.println("Move to: " + newx + ", " + newy);
+		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println(character.getCurrentSpeed());
+		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
+		
+		newx -= 1;
+		newy +=1;
+		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
+		((TargetBlock)stack.peek()).select();
+		System.out.println(world.world[0][0].toString());
+		System.out.println("Move to: " + newx + ", " + newy);
+		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println(character.getCurrentSpeed());
+		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
+		
+		newx -= 1;
+		newy +=1;
+		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
+		((TargetBlock)stack.peek()).select();
+		System.out.println(world.world[0][0].toString());
+		System.out.println("Move to: " + newx + ", " + newy);
+		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println(character.getCurrentSpeed());
+		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
+		
+		newx -= 1;
+		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
+		((TargetBlock)stack.peek()).select();
+		System.out.println(world.world[0][0].toString());
+		System.out.println("Move to: " + newx + ", " + newy);
+		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println(character.getCurrentSpeed());
+		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
+		
+		newx -=1;
+		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
+		((TargetBlock)stack.peek()).select();
+		System.out.println(world.world[0][0].toString());
+		System.out.println("Move to: " + newx + ", " + newy);
+		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println(character.getCurrentSpeed());
+		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
+		
+		System.out.println("Character can move?: " + character.getHasMoveAction());
 		
 		/*
 		System.out.println("****************************************************");
@@ -113,5 +219,30 @@ public class TestMove
 				world.world[0][0].removeObjects(6,j);
 			}
 		*/
-	}
+    }
+ 
+    @Override
+    public void update(GameContainer gc, int delta) 
+			throws SlickException     
+    {
+
+    }
+ 
+    public void render(GameContainer gc, Graphics g) 
+			throws SlickException 
+    {
+
+    }
+ 
+    public static void main(String[] args) 
+			throws SlickException
+    {
+    	AppGameContainer app = 
+			new AppGameContainer(new TestMove());
+ 
+         //app.setDisplayMode(800, 600, false);
+         app.start();
+    }
+    
+    
 }

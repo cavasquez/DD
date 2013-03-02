@@ -30,7 +30,8 @@ public class I_StandardAttack implements CombatInterpreter
 	public CombatValidationMessage validate(CombatMessage cm) 
 	{
 		// TODO Auto-generated method stub
-		return null;
+		CombatValidationMessage returner = new CombatValidationMessage(true, null); // TODO: Check for validity
+		return returner;
 	} /* end validate method */
 
 	@Override

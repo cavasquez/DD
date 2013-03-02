@@ -138,7 +138,7 @@ public class TargetBlock extends Objects
 	public static void setNumOfTargets(Integer numOfTargets)
 	{
 		TargetBlock.numOfTargets = numOfTargets;
-	} /* end setTargetCount method */
+	} /* end setNumOfTargets method */
 	
 	public static void setTargetSelection(TargetingSystem.TargetSelection targetSelection)
 	{

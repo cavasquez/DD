@@ -137,15 +137,17 @@ public class TargetingSystem
 		ArrayList<DDCharacter> blockTargets = new ArrayList<DDCharacter>();
 		Coordinate movePosition = null;
 		TargetBlock block;
+		
 		while (blocks.peek() != null)
 		{
+			block = blocks.remove();
 			/* Get all Character targets that are not null */
-			if ((block = blocks.remove()).getTarget() != null && 
-					((selection == TargetSelection.SELECTED && block.getSelected() == true) || (selection == TargetSelection.UNSELECTED && block.getSelected() == false))) 
+			if ( 
+					((selection == TargetSelection.SELECTED && block.getSelected() == true)) || ((selection == TargetSelection.UNSELECTED && block.getSelected() == false))) 
 			{
-				blockTargets.add(block.getTarget());
+				if (block.getTarget() != null) blockTargets.add(block.getTarget());
+				movePosition = block.getPosition(); /* This should work because there is only one target in a move */
 			} /* end if */
-			movePosition = block.getPosition(); /* This should work because there is only one target in a move */
 			block.cleanUp();
 		} /* end while loop */
 		
@@ -167,14 +169,17 @@ public class TargetingSystem
 		{
 			case SINGLE:
 				TargetBlock.setNumOfTargets(1);
+				TargetBlock.setTargetCount(TargetCount.SINGLE);
 				break;
 				
 			case MULTIPLE:
 				TargetBlock.setNumOfTargets(ctm.getNumOfTargets());
+				TargetBlock.setTargetCount(TargetCount.MULTIPLE);
 				break;
 				
 			case ALL:
 				TargetBlock.setNumOfTargets(null);
+				TargetBlock.setTargetCount(TargetCount.ALL);
 				break;
 		} /* end switch case */
 		
@@ -182,7 +187,6 @@ public class TargetingSystem
 		switch(ctm.getTargetShape())
 		{
 			case CIRCLE:
-				Queue<Coordinate> stack = new LinkedList<Coordinate>();
 				placeCircle(ctm.getOrigin(), ctm.getLength());
 				break;
 				

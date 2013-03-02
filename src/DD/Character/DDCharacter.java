@@ -85,11 +85,12 @@ public class DDCharacter extends Entity
 	
 	/* Combat Related Methods */
 	
-	public void startTurn()
+	public void startNewTurn()
 	{ /* It is the start of the characters turn. Reset the appropriate variables. */
 		hasTurn = true;
 		moved = false;
 		attackCount = 0;
+		movedDiagonal = false;
 		currentSpeed = sheet.getSpeed(); // TODO: needs to get speed from character sheet. defaulting to 30
 		
 		hasStandardAction = true;
@@ -135,6 +136,11 @@ public class DDCharacter extends Entity
 		/* TODO: take care of damage reduction */
 		currentHP -= hit;
 	} /* end getHit method */
+	
+	public void movedDiagonal()
+	{
+		movedDiagonal = true;
+	} /* end movedDiagonal method */
 	
 	/************************************ Turn Mechanisms *************************************/
 	public void endHasStandardAction() 

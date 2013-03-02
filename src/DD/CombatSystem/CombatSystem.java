@@ -57,13 +57,14 @@ public class CombatSystem
 	} /* end ActionTypes enum */
 	
 	/************************************ Class Attributes *************************************/
-	static private ArrayList<DDCharacter> characterList;	/* A list of all the Characters in game so they may be modified */
-	static private Map map;									/* The game map that may need to be modified. */
-	static private CombatInterpreter[] system;				/* The core of CombatSystem */					
+	static private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
+	static private Map map;										/* The game map that may need to be modified. */
+	static private CombatInterpreter[] system;							/* The core of CombatSystem */					
 	
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
 	{
+		if(characterList == null) characterList = new ArrayList<DDCharacter>();
 		system = new CombatInterpreter[Action.NUM_OF_INTERPRETERS];
 		
 		/* First, we need to create the system */
@@ -106,9 +107,9 @@ public class CombatSystem
 		CombatValidationMessage returner = null;
 		
 		/* First, we check to make sure the message is of the correct type and the request is valid */
-		if(cm.getMessageType() != Message.COMBAT_VALIDATION_MESSAGE)
+		if(cm.getMessageType() != Message.COMBAT_MESSAGE)
 		{/* The message is invalid */
-			returner = new CombatValidationMessage(false, "Message is not a CombatValidationMessage.");
+			returner = new CombatValidationMessage(false, "Message is not a CombatMessage.");
 		} /* end if */
 		else if(cm.getRequest() == null)
 		{/* The message is invalid */
@@ -143,6 +144,11 @@ public class CombatSystem
 		return(found);
 	} /* end characterExists method */
 	
+	public static void addCharacter(DDCharacter character)
+	{
+		characterList.add(character);
+	} /* end addCharacter method */
+	
 	public void endAbility()
 	{
 		
@@ -155,6 +161,7 @@ public class CombatSystem
 	{/* return character with provided characterID */
 		DDCharacter returner = null;
 		int index = 0;
+		
 		while (returner == null)
 		{
 			if (characterList.get(index++).getCharacterID() == characterID )

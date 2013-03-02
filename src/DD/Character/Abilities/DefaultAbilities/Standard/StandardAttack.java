@@ -28,6 +28,7 @@ public class StandardAttack extends Ability
 	public StandardAttack(int id) 
 	{
 		super(id, CombatSystem.ActionType.STANDARD, "Standard Attack", "Perform an attack with main hand weapon as a standard action");
+		done = false;
 	} /* end StandardAttack constructor */
 
 	@Override
@@ -57,7 +58,6 @@ public class StandardAttack extends Ability
 					this
 				);
 		ts.chooseTarget(tcm);
-		
 	} /* end action method */
 	
 	@Override

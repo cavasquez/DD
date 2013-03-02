@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="ClientSystem-i-s.ucd - DD.Network.Client" id="{UMLID=_opbMgXPbEeKxEc6fhRehRQ,JavaID=DD.Network.Client}" metadata="uml2-1.0" initialized="true" scrolledY="201" tag="10" key="3230303730363239204444">
+  <children xsi:type="editmodel:ClassEditModel" name="ClientSystem" location="50,50" size="129,460" stereotype="" id="{UMLID=_opcaoHPbEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem}">
+    <children xsi:type="editmodel:CompartmentEditModel" size="74,151">
+      <children xsi:type="editmodel:AttributeEditModel" name="peerList" size="74,21" id="{UMLID=_57lwhHPeEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="system" size="70,21" id="{UMLID=_57j7UXPeEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="queue" size="65,21" id="{UMLID=_57itM3PeEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="listener" size="70,21" id="{UMLID=_57oMwHPeEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="sender" size="69,21" id="{UMLID=_57hfEHPeEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="clientID" size="63,16" id="{UMLID=_57nlsHPeEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="serverIP" size="69,16" id="{UMLID=_57oz0nPeEeKxEc6fhRehRQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="108,262">
+      <children xsi:type="editmodel:MethodEditModel" name="ClientSystem" size="102,16" id="{UMLID=_570aAHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#ClientSystem()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_57x9wnPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#interpret(ILDD.Message.NetworkMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="sendMessage" size="108,16" id="{UMLID=_57seMXPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#sendMessage(IILDD.Message.Message;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="validMessage" size="106,16" id="{UMLID=_57pa4nPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#validMessage(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addUser" size="81,16" id="{UMLID=_571oIHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#addUser(ILjava.lang.String;Ljava.net.InetAddress;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="removePeer" size="98,16" id="{UMLID=_57rQEXPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#removePeer(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getMessage" size="99,16" id="{UMLID=_574rcXPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#getMessage(ILDD.Message.NetworkMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getClientList" size="98,16" id="{UMLID=_578V0HPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#getClientList()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getClientID" size="90,16" id="{UMLID=_57qpAXPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#getClientID()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getServerIP" size="96,16" id="{UMLID=_57wvoHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#getServerIP()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setListener" size="100,21" id="{UMLID=_57vhgXPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#setListener(LDD.Network.Client.ClientListener;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setSender" size="96,21" id="{UMLID=_579j8HPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#setSender(LDD.Network.Client.ClientSender;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setClientID" size="90,16" id="{UMLID=_570aAXPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#setClientID(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setServerIP" size="96,16" id="{UMLID=_57xWsXPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSystem#setServerIP(Ljava.net.InetAddress;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_5_CGEHPeEeKxEc6fhRehRQ}" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="74,460" id="{UMLID=_5_CGEXPeEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="131,517" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="peerList" location="54,0" id="{UMLID=_57lwhHPeEeKxEc6fhRehRQ}" multiplicityLabel="//@children.0/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.2/@children.2" orderingLabel="//@children.0/@sourceConnections.0/@children.2/@children.0" scopeKind="1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="131,541" size="34,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="111,555" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- peerList" location="131,555" size="46,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_5_DUMHPeEeKxEc6fhRehRQ}" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.1/@children.2" label="//@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="129,52" id="{UMLID=_5_DUMXPeEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.1/@children.1/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="186,81" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="sender" location="14,32" id="{UMLID=_57hfEHPeEeKxEc6fhRehRQ}" multiplicityLabel="//@children.0/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.1/@children.2/@children.2" orderingLabel="//@children.0/@sourceConnections.1/@children.2/@children.0" scopeKind="1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="267,67" size="34,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="295,109" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- sender" location="260,81" size="41,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_5_CtInPeEeKxEc6fhRehRQ}" source="//@children.0" target="//@children.3" targetEnd="//@children.0/@sourceConnections.2/@children.2" label="//@children.0/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="129,304" id="{UMLID=_5_CtI3PeEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.2/@children.1/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="186,333" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="queue" location="0,88" id="{UMLID=_57itM3PeEeKxEc6fhRehRQ}" multiplicityLabel="//@children.0/@sourceConnections.2/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.2/@children.2/@children.2" orderingLabel="//@children.0/@sourceConnections.2/@children.2/@children.0" scopeKind="1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="265,319" size="34,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="293,361" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- queue" location="262,333" size="37,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_5_CtJHPeEeKxEc6fhRehRQ}" source="//@children.0" target="//@children.4" targetEnd="//@children.0/@sourceConnections.3/@children.2" label="//@children.0/@sourceConnections.3/@children.0" sourceEnd="//@children.0/@sourceConnections.3/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="129,145" id="{UMLID=_5_CtJXPeEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.3/@children.1/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="186,174" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="listener" location="0,41" id="{UMLID=_57oMwHPeEeKxEc6fhRehRQ}" multiplicityLabel="//@children.0/@sourceConnections.3/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.3/@children.2/@children.2" orderingLabel="//@children.0/@sourceConnections.3/@children.2/@children.0" scopeKind="1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="265,160" size="34,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="293,202" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- listener" location="257,174" size="42,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" id="{UMLID=_ClAn8HPgEeKxEc6fhRehRQ}" source="//@children.0" target="//@children.5" targetEnd="//@children.0/@sourceConnections.4/@children.2" label="//@children.0/@sourceConnections.4/@children.0" sourceEnd="//@children.0/@sourceConnections.4/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="system" location="129,440" id="{UMLID=_CklKIHPgEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.4/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.4/@children.1/@children.2" orderingLabel="//@children.0/@sourceConnections.4/@children.1/@children.0" scopeKind="1" navigable="true" flags="4">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="186,455" size="34,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="186,497" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="# system" location="186,469" size="44,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="system" location="107,0" id="{UMLID=_57j7UXPeEeKxEc6fhRehRQ}" multiplicityLabel="//@children.0/@sourceConnections.4/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.4/@children.2/@children.2" orderingLabel="//@children.0/@sourceConnections.4/@children.2/@children.0" aggregationKind="Composition" scopeKind="1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="894,541" size="34,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="876,555" size="4,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- system" location="894,555" size="42,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0" name="PeerTable" location="70,576" size="119,137" stereotype="" id="{UMLID=_57m-oHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/PeerTable}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="98,90">
+      <children xsi:type="editmodel:MethodEditModel" name="PeerTable" size="87,16" id="{UMLID=_CjHKgHPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/PeerTable#PeerTable()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addPeer" size="80,16" id="{UMLID=_CjIYo3PgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/PeerTable#addPeer(ILjava.lang.String;Ljava.net.InetAddress;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="removePeer" size="98,16" id="{UMLID=_CjFVUHPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/PeerTable#removePeer(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getPeerID" size="86,16" id="{UMLID=_CjDgIHPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/PeerTable#getPeerID(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getIP" size="63,16" id="{UMLID=_CjHKgXPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/PeerTable#getIP(I)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_Ckg4sHPgEeKxEc6fhRehRQ}" source="//@children.1" target="//@children.11" targetEnd="//@children.1/@sourceConnections.0/@children.2" label="//@children.1/@sourceConnections.0/@children.0" sourceEnd="//@children.1/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="69,137" id="{UMLID=_Ckg4sXPgEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.1/@sourceConnections.0/@children.1/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="146,720" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="peerList" location="48,0" id="{UMLID=_CjBq8HPgEeKxEc6fhRehRQ}" multiplicityLabel="//@children.1/@sourceConnections.0/@children.2/@children.0" roleLabel="//@children.1/@sourceConnections.0/@children.2/@children.1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="126,770" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- peerList" location="146,770" size="46,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.1" name="ClientSender" location="308,70" size="123,65" stereotype="" id="{UMLID=_57itMHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSender}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,18">
+      <children xsi:type="editmodel:MethodEditModel" name="ClientSender" size="101,16" id="{UMLID=_Cnbp0HPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientSender#ClientSender(Ljava.net.Socket;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.2 //@children.4/@sourceConnections.0 //@children.13/@sourceConnections.0" name="MessageQueue" location="306,266" size="223,178" stereotype="" id="{UMLID=_57jUQXPeEeKxEc6fhRehRQ,JavaID=DD.Network/MessageQueue}">
+    <children xsi:type="editmodel:CompartmentEditModel" size="91,54">
+      <children xsi:type="editmodel:AttributeEditModel" name="sleepTime" size="77,16" id="{UMLID=_ClLnEnPgEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="hasMessage" size="91,16" id="{UMLID=_ClKY8HPgEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="done" size="53,16" id="{UMLID=_ClMOIXPgEeKxEc6fhRehRQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="120,77">
+      <children xsi:type="editmodel:MethodEditModel" name="MessageQueue" size="116,16" id="{UMLID=_ClRtsXPgEeKxEc6fhRehRQ,JavaID=DD.Network/MessageQueue#MessageQueue()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getInstance" size="102,21" id="{UMLID=_ClSUwXPgEeKxEc6fhRehRQ,JavaID=DD.Network/MessageQueue#getInstance()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="run" location="3,135" size="56,16" id="{UMLID=_ClSUwHPgEeKxEc6fhRehRQ,JavaID=DD.Network/MessageQueue#run()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="enqueuMessage" size="120,16" id="{UMLID=_ClP4gXPgEeKxEc6fhRehRQ,JavaID=DD.Network/MessageQueue#enqueuMessage(ILDD.Message.NetworkMessage;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.3" name="ClientListener" location="306,154" size="128,83" stereotype="" id="{UMLID=_57oz0HPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientListener}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="105,36">
+      <children xsi:type="editmodel:MethodEditModel" name="ClientListener" size="105,16" id="{UMLID=_Cm43QHPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientListener#ClientListener(Ljava.net.Socket;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="run" size="56,16" id="{UMLID=_Cm4QMHPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/ClientListener#run()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" size="2,1" autoLocated="true" id="{UMLID=_CnRRwXPgEeKxEc6fhRehRQ}" source="//@children.4" target="//@children.3" targetEnd="//@children.4/@sourceConnections.0/@children.2" label="//@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="38,28" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="63,83" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="63,0"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.6/@sourceConnections.0 //@children.0/@sourceConnections.4" name="ClientInterpreter" location="780,576" size="219,83" stereotype="" id="{UMLID=_57lJcHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/ClientInterpreter}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="117,36">
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_Ckm_UHPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/ClientInterpreter#interpret(LDD.Message.NetworkMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setClientSystem" size="117,16" id="{UMLID=_CklxMXPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/ClientInterpreter#setClientSystem(LDD.Network.Client.ClientSystem;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="I_AddUserMessage" location="266,709" size="234,65" stereotype="" id="{UMLID=_58LmYHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_AddUserMessage}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="80,18">
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_KYUhUHPiEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_AddUserMessage#interpret(LDD.Message.NetworkMessage;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" targetConnections="//@children.7/@sourceConnections.0 //@children.8/@sourceConnections.0 //@children.9/@sourceConnections.0 //@children.10/@sourceConnections.0" size="2,1" autoLocated="true" id="{UMLID=_KYTTMHPiEeKxEc6fhRehRQ}" source="//@children.6" target="//@children.5" targetEnd="//@children.6/@sourceConnections.0/@children.1" sourceEnd="//@children.6/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="117,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="109,83" anchorKind="FixedAtEdge"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="I_ChatMessage" location="530,709" size="210,83" stereotype="" id="{UMLID=_58Gt4HPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_ChatMessage}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="114,36">
+      <children xsi:type="editmodel:MethodEditModel" name="I_ChatMessage" size="114,16" id="{UMLID=_KZ8R8XPiEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_ChatMessage#I_ChatMessage()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_KZ6cwXPiEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_ChatMessage#interpret(LDD.Message.NetworkMessage;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_KZxS0HPiEeKxEc6fhRehRQ}" source="//@children.7" target="//@children.6/@sourceConnections.0" targetEnd="//@children.7/@sourceConnections.0/@children.1" sourceEnd="//@children.7/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="105,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="I_CombatMessage" location="775,709" size="230,65" stereotype="" id="{UMLID=_58IjEHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_CombatMessage}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="80,18">
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_Kbme0HPiEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_CombatMessage#interpret(LDD.Message.NetworkMessage;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_KblQsHPiEeKxEc6fhRehRQ}" source="//@children.8" target="//@children.6/@sourceConnections.0" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="115,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="I_InitialMessage" location="1030,709" size="217,65" stereotype="" id="{UMLID=_58H8AHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_InitialMessage}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="80,18">
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_KcYh8HPiEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_InitialMessage#interpret(LDD.Message.NetworkMessage;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_KcX64HPiEeKxEc6fhRehRQ}" source="//@children.9" target="//@children.6/@sourceConnections.0" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="108,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="I_NewListenerMessage" location="1277,709" size="260,65" stereotype="" id="{UMLID=_58JxMHPeEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_NewListenerMessage}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="80,18">
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_KfXkgHPiEeKxEc6fhRehRQ,JavaID=DD.Network.Client.Interpreter/I_NewListenerMessage#interpret(LDD.Message.NetworkMessage;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_KfWWYHPiEeKxEc6fhRehRQ}" source="//@children.10" target="//@children.6/@sourceConnections.0" targetEnd="//@children.10/@sourceConnections.0/@children.1" sourceEnd="//@children.10/@sourceConnections.0/@children.0" connectionRouterKind="GeneralizationManhattan">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="130,0" anchorKind="FixedAtEdge" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.1/@sourceConnections.0" name="Peer" location="91,791" size="98,119" stereotype="" id="{UMLID=_CjC5EHPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/Peer}">
+    <children xsi:type="editmodel:CompartmentEditModel" size="77,54">
+      <children xsi:type="editmodel:AttributeEditModel" name="peerID" size="60,16" id="{UMLID=_CpeRMHPgEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="username" size="77,16" id="{UMLID=_CpdqIHPgEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="ip" size="37,16" id="{UMLID=_Cpe4QHPgEeKxEc6fhRehRQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="62,18">
+      <children xsi:type="editmodel:MethodEditModel" name="Peer" size="62,16" id="{UMLID=_CpffUHPgEeKxEc6fhRehRQ,JavaID=DD.Network.Client/Peer#Peer(ILjava.lang.String;Ljava.net.InetAddress;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="NetworkMessage" location="611,42" size="236,178" stereotype="" id="{UMLID=_opO_QHPbEeKxEc6fhRehRQ,JavaID=DD.Message/NetworkMessage}">
+    <children xsi:type="editmodel:CompartmentEditModel" size="69,36">
+      <children xsi:type="editmodel:AttributeEditModel" name="sender" size="63,16" id="{UMLID=_E_VcsHPdEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="receiver" size="69,16" id="{UMLID=_E_XR4HPdEeKxEc6fhRehRQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="125,95">
+      <children xsi:type="editmodel:MethodEditModel" name="NetworkMessage" size="125,16" id="{UMLID=_E_ZHEXPdEeKxEc6fhRehRQ,JavaID=DD.Message/NetworkMessage#NetworkMessage(IILDD.Message.Message;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getType" size="78,16" id="{UMLID=_E_a8QHPdEeKxEc6fhRehRQ,JavaID=DD.Message/NetworkMessage#getType()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getMessage" size="105,21" id="{UMLID=_E_XR4nPdEeKxEc6fhRehRQ,JavaID=DD.Message/NetworkMessage#getMessage()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSender" size="90,16" id="{UMLID=_E_bjUXPdEeKxEc6fhRehRQ,JavaID=DD.Message/NetworkMessage#getSender()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getReceiver" location="-7,154" size="98,16" id="{UMLID=_E_YgAHPdEeKxEc6fhRehRQ,JavaID=DD.Message/NetworkMessage#getReceiver()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_FAbB0HPdEeKxEc6fhRehRQ}" source="//@children.12" target="//@children.13" targetEnd="//@children.12/@sourceConnections.0/@children.2" label="//@children.12/@sourceConnections.0/@children.0" sourceEnd="//@children.12/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="message" location="118,178" id="{UMLID=_FAFqoHPdEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.12/@sourceConnections.0/@children.1/@children.0" roleLabel="//@children.12/@sourceConnections.0/@children.1/@children.1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="716,227" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- message" location="736,227" size="51,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="113,0" id="{UMLID=_FAbB0XPdEeKxEc6fhRehRQ}" multiplicityLabel="//@children.12/@sourceConnections.0/@children.2/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="736,258" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.12/@sourceConnections.0" name="QueueMessage" location="616,279" size="226,124" fontInfo="Omondo_Font_Default-8-0" stereotype="" id="{UMLID=_E5fTYXPdEeKxEc6fhRehRQ,JavaID=DD.Message/QueueMessage}">
+    <children xsi:type="editmodel:CompartmentEditModel" size="73,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="listenerID" size="73,16" id="{UMLID=_FAGRsHPdEeKxEc6fhRehRQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="116,59">
+      <children xsi:type="editmodel:MethodEditModel" name="QueueMessage" size="116,16" id="{UMLID=_FAIt8HPdEeKxEc6fhRehRQ,JavaID=DD.Message/QueueMessage#QueueMessage(ILDD.Message.NetworkMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getListenerID" size="103,16" id="{UMLID=_FAG4wHPdEeKxEc6fhRehRQ,JavaID=DD.Message/QueueMessage#getListenerID()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getMessage" size="105,21" id="{UMLID=_FAHf0XPdEeKxEc6fhRehRQ,JavaID=DD.Message/QueueMessage#getMessage()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_Cmz-wHPgEeKxEc6fhRehRQ}" source="//@children.13" target="//@children.3" targetEnd="//@children.13/@sourceConnections.0/@children.2" label="//@children.13/@sourceConnections.0/@children.0" sourceEnd="//@children.13/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="messageQueue" location="0,61" id="{UMLID=_ClM1MXPgEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.13/@sourceConnections.0/@children.1/@children.0" roleLabel="//@children.13/@sourceConnections.0/@children.1/@children.1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="1..*" location="593,347" size="16,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- messageQueue" location="526,319" size="83,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="223,74" id="{UMLID=_Cmz-wXPgEeKxEc6fhRehRQ}" multiplicityLabel="//@children.13/@sourceConnections.0/@children.2/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="536,319" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" level="4" properties="open=DD.Network.Client/ClientSystem;wireOptions=1"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="14,14" gridOrigin="0,210" rulerUnit="cm" gridShow="true">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" shortPackageNameFormat="true" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showMethods="true" showAttributes="true" showLiterlas="true" showInnerEntity="true"/>
+</editmodel:ClassDiagramEditModel>

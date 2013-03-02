@@ -7,6 +7,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import DD.ActionBox.SubAction;
 import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.*;
+import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.CombatSystem.CombatSystem;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
@@ -44,7 +45,7 @@ public abstract class Ability extends RenderComponent
 	protected final String name;
 	protected final String description;
 	protected boolean activated;				/* flag that establishes if an ability has been clicked. */
-	protected boolean done;						/* flag to check if player is done with ability */
+	protected boolean done;				/* flag to check if player is done with ability */
 	protected static TargetingSystem ts = null;	/* to be used by abilities that need a target */
 	protected static CombatSystem cs = null;	/* Used for combat */
 	
@@ -111,27 +112,29 @@ public abstract class Ability extends RenderComponent
 		/* First, send to network */
 		//TODO: send to network
 		
-		/* Second, sent to interpreter */
-		CombatValidationMessage cvm = cs.process(cm);
 		
-		//TODO: Check for validity of cvm
 		
 		if(done)
 		{
+			/* We are done, so we must reformat the message */
 			/* First, tell CombatSystem that action is terminating */
 			CombatMessage endAction = new CombatMessage
 					(
-							cm.getSource(),
-							null,
-							cm.getAction(),
-							CombatSystem.Action.END_ACTION,
-							null
+						cm.getSource(),
+						null,
+						cm.getAction(),
+						CombatSystem.Action.END_ACTION,
+						null
 					);
 			//TODO: "Unclick" ie reset action box. By now, interpreter should have changed turn states
+			//TODO: Check for validity of cvm
+			CombatValidationMessage cvm = cs.process(cm);
 		} /* end if */
 		else
 		{
 			/* re-activate ability */
+			//TODO: Check for validity of cvm
+			CombatValidationMessage cvm = cs.process(cm);
 			activate();
 		} /* end if */
 	} /* end sendToInterpreter method */

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="CombatSystem-a-s.ucd - DD.CombatSystem" id="{UMLID=_UHdH0HPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem}" metadata="uml2-1.0" initialized="true" scrolledX="1" tag="10" key="3230303730363239204444">
+  <children xsi:type="editmodel:ClassEditModel" name="CombatSystem" location="50,50" size="171,278" stereotype="" id="{UMLID=_YFRBMHPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem/CombatSystem}">
+    <children xsi:type="editmodel:CompartmentEditModel" size="150,123">
+      <children xsi:type="editmodel:AttributeEditModel" name="I" size="31,16" id="{UMLID=_YF4FM3PcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="STANDARD_ATTACK" size="131,16" id="{UMLID=_YF4sQXPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="NUM_OF_INTERPRETERS" size="150,16" id="{UMLID=_YF2QA3PcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="characterList" size="99,21" id="{UMLID=_YFyloXPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="map" size="55,21" id="{UMLID=_YF23EXPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="system" size="70,21" id="{UMLID=_YFwJYHPcEeKxEc6fhRehRQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="116,108">
+      <children xsi:type="editmodel:MethodEditModel" name="CombatSystem" size="112,16" id="{UMLID=_YF6hcXPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem/CombatSystem#CombatSystem()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="process" size="80,16" id="{UMLID=_YF-L0HPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem/CombatSystem#process(LDD.Message.CombatMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="validate" size="77,16" id="{UMLID=_YGBPIXPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem/CombatSystem#validate(LDD.Message.CombatMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_YGCdQnPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem/CombatSystem#interpret(LDD.Message.CombatMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="characterExists" size="116,16" id="{UMLID=_YF5TUXPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem/CombatSystem#characterExists(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getCharacter" size="103,16" id="{UMLID=_YF7IgHPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem/CombatSystem#getCharacter(I)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_YHmjgnPcEeKxEc6fhRehRQ}" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="171,54" id="{UMLID=_YHmjg3PcEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="228,83" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="system" location="0,48" id="{UMLID=_YFwJYHPcEeKxEc6fhRehRQ}" multiplicityLabel="//@children.0/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.2/@children.2" orderingLabel="//@children.0/@sourceConnections.0/@children.2/@children.0" scopeKind="1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="267,69" size="34,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="*" location="297,111" size="4,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- system" location="259,83" size="42,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_YHmjgHPcEeKxEc6fhRehRQ}" source="//@children.0" target="//@children.2" targetEnd="//@children.0/@sourceConnections.1/@children.2" label="//@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="171,219" id="{UMLID=_YHmjgXPcEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.1/@children.1/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="228,248" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="map" location="0,59" id="{UMLID=_YF23EXPcEeKxEc6fhRehRQ}" multiplicityLabel="//@children.0/@sourceConnections.1/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.1/@children.2/@children.2" orderingLabel="//@children.0/@sourceConnections.1/@children.2/@children.0" scopeKind="1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="281,234" size="34,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="309,276" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- map" location="288,248" size="27,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="{UMLID=_YHl8cHPcEeKxEc6fhRehRQ}" source="//@children.0" target="//@children.3" targetEnd="//@children.0/@sourceConnections.2/@children.2" label="//@children.0/@sourceConnections.2/@children.0" sourceEnd="//@children.0/@sourceConnections.2/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="ownedEnd" location="85,278" id="{UMLID=_YHl8cXPcEeKxEc6fhRehRQ}" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.2/@children.1/@children.0" flags="1">
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="142,335" size="6,14" fontInfo="Arial-8-0" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="characterList" location="85,0" id="{UMLID=_YFyloXPcEeKxEc6fhRehRQ}" multiplicityLabel="//@children.0/@sourceConnections.2/@children.2/@children.1" roleLabel="//@children.0/@sourceConnections.2/@children.2/@children.2" orderingLabel="//@children.0/@sourceConnections.2/@children.2/@children.0" scopeKind="1" navigable="true" flags="2">
+        <children xsi:type="editmodel:LabelEditModel" name="{order}" location="142,371" size="34,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="122,385" size="6,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="- characterList" location="142,385" size="71,14" fontInfo="Arial-8-0" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true" ShowInnerEntity="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@sourceConnections.0 //@children.4/@sourceConnections.0" name="CombatInterpreter" location="308,56" size="231,97" id="{UMLID=_YFx-kHPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem.Interpreter/CombatInterpreter}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="80,36">
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_ZMd50HPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem.Interpreter/CombatInterpreter#interpret(LDD.Message.CombatMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="validate" size="77,16" id="{UMLID=_ZMaPcHPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem.Interpreter/CombatInterpreter#validate(LDD.Message.CombatMessage;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.1" name="Map" location="322,210" size="170,430" stereotype="" id="{UMLID=_YF4FMHPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map}">
+    <children xsi:type="editmodel:CompartmentEditModel" size="111,90">
+      <children xsi:type="editmodel:AttributeEditModel" name="numTempObjects" size="111,16" id="{UMLID=_adGbQHPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="defImage" size="73,16" id="{UMLID=_adNwAXPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="hasTempObjects" size="109,16" id="{UMLID=_adNI83PcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="name" size="55,16" id="{UMLID=_adJekXPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="mapSize" size="70,16" id="{UMLID=_adKssXPcEeKxEc6fhRehRQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="149,293">
+      <children xsi:type="editmodel:MethodEditModel" name="Map" size="60,16" id="{UMLID=_adk8YXPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#Map(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="tempObjectsUpdate" size="134,16" id="{UMLID=_adbLYXPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#tempObjectsUpdate()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getObjectAtLocation" size="138,16" id="{UMLID=_adh5EnPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#getObjectAtLocation(II)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getTempAtLocation" size="132,16" id="{UMLID=_adSBcHPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#getTempAtLocation(II)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="updateComponentList" size="144,16" id="{UMLID=_adYIEXPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#updateComponentList()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="placeTempObject" size="122,16" id="{UMLID=_adnYoXPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#placeTempObject(IILDD.MapTool.TempObjects;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="removeTempObjects" size="144,21" id="{UMLID=_adjuQXPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#removeTempObjects(II)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="placeObjects" size="103,16" id="{UMLID=_adVr0HPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#placeObjects(IILDD.MapTool.Objects;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="massPlaceObjectsLine" size="149,16" id="{UMLID=_adYvIHPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#massPlaceObjectsLine(IIIILDD.MapTool.Objects;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getName" size="82,16" id="{UMLID=_admxkHPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#getName()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setName" size="82,16" id="{UMLID=_adUdsXPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#setName(Ljava.lang.String;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getDefImage" size="100,16" id="{UMLID=_adfc0XPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#getDefImage()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setDefImage" size="100,16" id="{UMLID=_adbycHPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#setDefImage(L/lib/slick.org.newdawn.slick.Image;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isHasTempObjects" size="129,16" id="{UMLID=_adQzU3PcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#isHasTempObjects()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setHasTempObjects" size="136,16" id="{UMLID=_adT2oHPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#setHasTempObjects(Z)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="toString" size="77,16" id="{UMLID=_adljcnPcEeKxEc6fhRehRQ,JavaID=DD.MapTool/Map#toString()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.2" name="DDCharacter" location="50,406" size="216,340" stereotype="" id="{UMLID=_YF2QAHPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter}">
+    <children xsi:type="editmodel:CompartmentEditModel" size="95,126">
+      <children xsi:type="editmodel:AttributeEditModel" name="hasTurn" size="69,16" id="{UMLID=_bRsg8HPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="currentHP" size="77,16" id="{UMLID=_bRvkQHPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="currentSpeed" size="95,16" id="{UMLID=_bRuWIXPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="moved" size="61,16" id="{UMLID=_bRo2kHPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="attackCount" size="86,16" id="{UMLID=_bRu9MHPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="maxAttacks" size="86,16" id="{UMLID=_bRnocHPcEeKxEc6fhRehRQ}"/>
+      <children xsi:type="editmodel:AttributeEditModel" name="engaged" size="71,16" id="{UMLID=_bRtvEHPcEeKxEc6fhRehRQ}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="113,167">
+      <children xsi:type="editmodel:MethodEditModel" name="DDCharacter" size="102,16" id="{UMLID=_bR0cwHPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#DDCharacter(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="resetCharacter" size="113,16" id="{UMLID=_bR4uMXPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#resetCharacter()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="addAbility" size="87,16" id="{UMLID=_bR1D0nPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#addAbility(LDD.Character.Abilities.Ability;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="startTurn" size="84,16" id="{UMLID=_bRz1snPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#startTurn()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="endTurn" size="80,16" id="{UMLID=_bR4uMHPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#endTurn()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="defend" size="74,16" id="{UMLID=_bR2R8HPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#defend(II)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getHit" size="67,16" id="{UMLID=_bR3gEnPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#getHit(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getAbilities" size="98,21" id="{UMLID=_bRxZcnPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#getAbilities(I)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getId" size="63,16" id="{UMLID=_bR5VQHPcEeKxEc6fhRehRQ,JavaID=DD.Character/DDCharacter#getId()}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" name="I_StandardAttack" location="560,56" size="289,101" stereotype="" id="{UMLID=_YGIj4HPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem.Interpreter.Standard/I_StandardAttack}">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="123,54">
+      <children xsi:type="editmodel:MethodEditModel" name="I_StandardAttack" size="123,16" id="{UMLID=_ktUG0XPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem.Interpreter.Standard/I_StandardAttack#I_StandardAttack()}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="validate" size="77,16" id="{UMLID=_ktRqkHPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem.Interpreter.Standard/I_StandardAttack#validate(LDD.Message.CombatMessage;)}"/>
+      <children xsi:type="editmodel:MethodEditModel" name="interpret" size="80,16" id="{UMLID=_ktP1YHPcEeKxEc6fhRehRQ,JavaID=DD.CombatSystem.Interpreter.Standard/I_StandardAttack#interpret(LDD.Message.CombatMessage;)}"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:InterfaceRealizationEditModel" size="2,1" autoLocated="true" id="{UMLID=_ktNZIHPcEeKxEc6fhRehRQ}" source="//@children.4" target="//@children.1" targetEnd="//@children.4/@sourceConnections.0/@children.2" label="//@children.4/@sourceConnections.0/@children.0" sourceEnd="//@children.4/@sourceConnections.0/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" fontInfo="Arial-8-0" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,48" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="231,48"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showMethods="true" showAttributes="true" showLiterals="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" level="4" properties="open=DD.CombatSystem/CombatSystem;wireOptions=2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="14,14" gridOrigin="14,0" rulerUnit="cm" gridShow="true">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" shortPackageNameFormat="true" showClassStereotype="true" showPackageStereotype="true" innerClassSorter="Natural" showPrivateAttributes="true" showProtectedAttributes="true" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showProtectedMethods="true" showPublicMethods="true" showPackageMethods="true" showPrivateMethods="true" showStaticMethods="true" showProtectedInnerClasses="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showPrivateInnerClasses="true" showStaticInnerClasses="true" showInterfaceStereotype="true" showMethods="true" showAttributes="true" showLiterlas="true" showInnerEntity="true"/>
+</editmodel:ClassDiagramEditModel>

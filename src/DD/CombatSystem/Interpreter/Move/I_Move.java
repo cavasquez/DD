@@ -31,9 +31,11 @@ public class I_Move implements CombatInterpreter
 	} /* end  I_Move constructor */
 
 	@Override
-	public CombatValidationMessage validate(CombatMessage cm) {
+	public CombatValidationMessage validate(CombatMessage cm) 
+	{
 		// TODO Auto-generated method stub
-		return null;
+		CombatValidationMessage returner = new CombatValidationMessage(true, null); // TODO: Check for validity
+		return returner;
 	} /* end validate method */
 
 	@Override
@@ -45,22 +47,33 @@ public class I_Move implements CombatInterpreter
 			//TODO: check for special blocks such as traps
 			
 			/* First, get the character to be moved */
-			CharacterObjects charObj = (CharacterObjects) CombatSystem.getMap().objectsStack[cm.getBody()[X_COORDINATE]][cm.getBody()[Y_COORDINATE]].peek();
-			DDCharacter mover = charObj.ddchar;
+			DDCharacter mover = CombatSystem.getCharacter(cm.getSource());
+			CharacterObjects charObj = (CharacterObjects) CombatSystem.getMap().objectsStack[mover.getCoordinate().x][mover.getCoordinate().y].peek();
 			
 			
 			/* Check for diagonal moves */
 			int diagonalPenalty = 1;
-			if(mover.getCoordinate().x != cm.getBody()[X_COORDINATE] && mover.getCoordinate().y != cm.getBody()[Y_COORDINATE]) diagonalPenalty = 2;
+			System.out.println("check: " + cm.getBody());
+			if((mover.getCoordinate().x != cm.getBody()[X_COORDINATE]) && (mover.getCoordinate().y != cm.getBody()[Y_COORDINATE]))
+			{
+				if(!mover.getMovedDiagonal())
+				{ /* Character has not moved diagonal yet, so we do not apply penalty and set flag */
+					mover.movedDiagonal();
+				} /* end if */
+				else
+				{ /* Character has moved diagonal, apply penalty */
+					diagonalPenalty = 2;
+				} /* end else */
+			} /* end if */
 			
-			/* decrement speed and place the character. */
+			/* Get speed penalty, decrement speed and place the character. */
 			ObjectsPriorityStack stack = CombatSystem.getMap().objectsStack[cm.getBody()[X_COORDINATE]][cm.getBody()[Y_COORDINATE]];
 			int movePenalty = stack.peek().getMovePenalty();
 			mover.setCurrentSpeed(mover.getCurrentSpeed() - (movePenalty * diagonalPenalty)); /* set new speed */
 			
 			/* Place the character */
 			/* Remove the characters container from its old position */
-			CombatSystem.getMap().objectsStack[cm.getBody()[X_COORDINATE]][cm.getBody()[Y_COORDINATE]].remove(charObj);
+			CombatSystem.getMap().objectsStack[mover.getCoordinate().x][mover.getCoordinate().y].remove(charObj);
 			
 			/* Next, place the charObj in the new position */
 			CombatSystem.getMap().placeObjects(cm.getBody()[X_COORDINATE], cm.getBody()[Y_COORDINATE], charObj);

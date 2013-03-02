@@ -21,25 +21,25 @@ public class Move extends Ability
 	/************************************ Class Methods *************************************/
 	public Move(int id) 
 	{
-		super(id, CombatSystem.ActionType.MOVE, "Move", "Move up do characters speed");
+		super(id, CombatSystem.ActionType.MOVE, "Move", "Move up to characters speed");
 		done = false;
 		// TODO Auto-generated constructor stub
 	} /* end move constructor */
 	
 	protected void action() throws SlickException
 	{ /* This method needs to be used in update */
-		
-		if ((character.getCurrentSpeed() <= 0 && !character.getHasMoveAction()))
-		{/* check to see that we can continue moving */
+		if ((character.getCurrentSpeed() <= 0 || !character.getHasMoveAction()))
+		{/* check to see that we can continue moving. In this case, we cannot */
 			done = true;
 			CombatMessage cm = new CombatMessage
 					(
-							character.getCharacterID(),
-							null, 
-							CombatSystem.ActionType.MOVE,
-							CombatSystem.Action.MOVE,
-							null
+						character.getCharacterID(),
+						null, 
+						CombatSystem.ActionType.MOVE,
+						CombatSystem.Action.MOVE,
+						null
 					);
+			
 			sendToInterpreter(cm);
 		} /* end if */
 		else
@@ -85,7 +85,7 @@ public class Move extends Ability
 						CombatSystem.Action.MOVE,
 						body
 				);
-		sendToInterpreter(cm);
+		this.sendToInterpreter(cm);
 		
 	} /* end obtainTarget method */
 
