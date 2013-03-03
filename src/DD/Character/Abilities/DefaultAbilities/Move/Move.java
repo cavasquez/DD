@@ -21,7 +21,7 @@ public class Move extends Ability
 	/************************************ Class Methods *************************************/
 	public Move(int id) 
 	{
-		super(id, CombatSystem.ActionType.MOVE, "Move", "Move up to characters speed");
+		super(id, CombatSystem.ActionType.MOVE, CombatSystem.Action.MOVE, "Move", "Move up to characters speed");
 		done = false;
 		// TODO Auto-generated constructor stub
 	} /* end move constructor */
@@ -36,8 +36,8 @@ public class Move extends Ability
 					(
 						character.getCharacterID(),
 						null, 
-						CombatSystem.ActionType.MOVE,
-						CombatSystem.Action.MOVE,
+						actionType,
+						action,
 						null
 					);
 			
@@ -82,8 +82,8 @@ public class Move extends Ability
 				(
 						character.getCharacterID(),
 						target, /* The target will be the null if there is no character in the square */
-						CombatSystem.ActionType.MOVE,
-						CombatSystem.Action.MOVE,
+						actionType,
+						action,
 						body
 				);
 		this.sendToInterpreter(cm);

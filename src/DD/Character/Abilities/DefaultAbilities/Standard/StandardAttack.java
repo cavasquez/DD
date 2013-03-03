@@ -27,7 +27,7 @@ public class StandardAttack extends Ability
 	/************************************ Class Methods *************************************/
 	public StandardAttack(int id) 
 	{
-		super(id, CombatSystem.ActionType.STANDARD, "Standard Attack", "Perform an attack with main hand weapon as a standard action");
+		super(id, CombatSystem.ActionType.STANDARD, CombatSystem.Action.STANDARD_ATTACK, "Standard Attack", "Perform an attack with main hand weapon as a standard action");
 		done = false;
 	} /* end StandardAttack constructor */
 

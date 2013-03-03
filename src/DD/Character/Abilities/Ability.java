@@ -42,6 +42,7 @@ public abstract class Ability extends RenderComponent
 	protected static DDCharacter character;
 	protected SubAction subAction;
 	protected final CombatSystem.ActionType actionType;
+	protected final CombatSystem.Action action;
 	protected final String name;
 	protected final String description;
 	protected boolean activated;				/* flag that establishes if an ability has been clicked. */
@@ -50,10 +51,11 @@ public abstract class Ability extends RenderComponent
 	protected static CombatSystem cs = null;	/* Used for combat */
 	
 	/************************************ Class Methods*************************************/
-	public Ability(int id, CombatSystem.ActionType actionType, String name, String description)
+	public Ability(int id, CombatSystem.ActionType actionType, CombatSystem.Action action, String name, String description)
 	{
 		super(id);
 		this.actionType = actionType;
+		this.action = action;
 		this.name = name;
 		this.description = description;
 		this.activated = false;
@@ -67,6 +69,13 @@ public abstract class Ability extends RenderComponent
 	
 	protected abstract void action() throws SlickException;
 	/* action will be the action performed by the ability */
+	
+	public void exit()
+	{
+		/* Can be called by an action to stop performing an action (only before the action has
+		 * been started). This is in case the player mis-clicked or changed his-her mind */
+		//TODO: implement
+	} /* end exit method */
 	
 	public void activate() throws SlickException
 	{ /* Activate ability and add it to the appropriate Character variable. */
@@ -120,9 +129,9 @@ public abstract class Ability extends RenderComponent
 			/* First, tell CombatSystem that action is terminating */
 			CombatMessage endAction = new CombatMessage
 					(
-						cm.getSource(),
+						character.getCharacterID(),
 						null,
-						cm.getAction(),
+						actionType,
 						CombatSystem.Action.END_ACTION,
 						null
 					);
@@ -139,11 +148,13 @@ public abstract class Ability extends RenderComponent
 		} /* end if */
 	} /* end sendToInterpreter method */
 	
-	public void done()
+	public void done() throws SlickException
 	{
 		/* This action should be performed when the character clicks done */
 		done = true;
 		ts.clearTargets();
+		CombatMessage cm = null;
+		sendToInterpreter(cm); /* this should send a message to the CombatSystem telling it we are done */
 	} /* end done method */
 	
 	/******************************************************************************

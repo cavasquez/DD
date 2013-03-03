@@ -199,26 +199,36 @@ public class TestMove extends BasicGame
 		
 		System.out.println("Character can move?: " + character.getHasMoveAction());
 		
-		/*
-		System.out.println("****************************************************");
-		System.out.println("Place a Character and start moving it around the map");
-		System.out.println("placeObjects(x, y, characterObjects)");
-		System.out.println("removeObjects(x, y)           vvvvv");
-		System.out.println("******************************     ******************");
-		*/
+		/* Test termination of move before speed */
+		character.startNewTurn();
+		move = new Move(i++);
+		System.out.println("New turn");
+		System.out.println(character.getCurrentSpeed());
+		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
 		
-		/*
-		System.out.println("*********************");
-		System.out.println("Movement down the map");
-		System.out.println("*********************");
-		*/
-		/*
-		for (int j = 0; j < 5; j++) {
-				world.world[0][0].placeObjects(6, j, charObj);
-				System.out.println(world.world[0][0].toString());
-				world.world[0][0].removeObjects(6,j);
-			}
-		*/
+		System.out.println("Character can move?: " + character.getHasMoveAction());
+		
+		newx -=1;
+		move.activate();
+		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
+		((TargetBlock)stack.peek()).select();
+		System.out.println(world.world[0][0].toString());
+		System.out.println("Move to: " + newx + ", " + newy);
+		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println(character.getCurrentSpeed());
+		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
+		
+		System.out.println("Character can move?: " + character.getHasMoveAction());
+		
+		move.done();
+		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
+		System.out.println(world.world[0][0].toString());
+		System.out.println("Move to: " + newx + ", " + newy);
+		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println(character.getCurrentSpeed());
+		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
+		
+		System.out.println("Character can move?: " + character.getHasMoveAction());
     }
  
     @Override
