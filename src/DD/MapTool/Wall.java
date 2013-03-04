@@ -18,7 +18,7 @@ public class Wall extends Objects implements Serializable
 {
 
 	/************************************ Class Constants *************************************/
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -8729861511362126379L;
 	
 	/************************************ Class Attributes *************************************/
 	

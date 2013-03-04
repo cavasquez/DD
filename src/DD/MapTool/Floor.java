@@ -34,9 +34,6 @@ public class Floor extends Objects{
 	public String toString(){	
 		String t="";
 		t += "Name: "+name+ ", movePenalty: "+ movePenalty+ ", lightPenalty: "+lightPenalty;
-		if(super.owner!=null){
-			t += super.owner;
-		}
 		return t; 
 				
 	}

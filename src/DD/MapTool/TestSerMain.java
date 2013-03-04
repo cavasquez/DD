@@ -10,7 +10,7 @@ public class TestSerMain {
 		 * un bulk comment all of phase 2 using ctrl+shift+c
 		 * run this main again.
 		 * Notice that Norrath after running the second time Norrath is loaded and s.o.p to your console
-		 * then the orginal world is loaded. 
+		 * then the original world is loaded. 
 		 */
 		
 		

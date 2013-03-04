@@ -43,7 +43,7 @@ public class Map extends Entity implements Serializable{
 		
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
-				//needs image                    VVV
+				//TODO:needs image                    VVV
 				Floor floor = new Floor("floor",null,5,5,this);
 				
 				addComponent(floor);
@@ -151,6 +151,26 @@ public class Map extends Entity implements Serializable{
 		}
 	}
 
+	
+	public void remove(int x, int y){
+		if(objectsStack[x][y].peek() instanceof TempObjects){
+			removeTempObjects(x, y);
+		}
+		else{
+			removeObjects(x, y);
+		}
+	}
+	
+	public void place(int x, int y, Objects obj){
+		if(obj instanceof TempObjects){
+			System.out.println("map.place IM HERE");
+			placeTempObject(x, y, (TempObjects) obj);
+		}
+		else{
+			placeObjects(x, y, obj);
+		}
+	}
+	
 	public void removeTempObjects(int x, int y) {
 		tempObjects[x][y] = null;
 		numTempObjects--;
@@ -184,13 +204,31 @@ public class Map extends Entity implements Serializable{
 	}
 	
 	
-	
+	/*
+	 * resetMap() returns currentMap to Default values
+	 * 		clears priority queues and new floor object
+	 * 		resets all tempObjects and any variable likewise.
+	 * 
+	 */
 	public void resetMap(){
-		//TODO: resets all arrays to default objects.
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				objectsStack[i][j].getPQueue().clear();
+				Floor floor = new  Floor("floor", null, 5, 5, this);
+				placeObjects(i, j, floor);
+			}
+		}
+		for (int i = 0; i < tempObjects.length; i++) {
+			for (int j = 0; j < tempObjects.length; j++) {
+				tempObjects[i][j]= null;
+			}
+		}		
+		numTempObjects=0;
+		defImage = null;
+		hasTempObjects = false;
 	}
 	
-	/*  TODO: i need to finish this for any type of input.
-	 *  massPlaceObjectsLine(int x1, int y1, int x2, int y2, Objects obj)
+	/*  massPlaceObjectsLine(int x1, int y1, int x2, int y2, Objects obj)
 	 *  takes in 2 locations x1,y1 x2,y2 places a deep copy of the
 	 *  object passed in from point to point(inclusive)
 	 *  

@@ -1,0 +1,100 @@
+*************
+MapTool Class
+*************
+used to load worlds.
+
+******************
+MapTool properties
+******************
+World world
+ArrayList<Objects> normList;
+ArrayList<Objects> tempList;
+LinkedList<Coordinate> selectedList;
+
+***************
+MapTool Methods
+***************
+public MapTool()
+	default constructor that makes a new world called "world".
+
+public void loadWorld(String name, String path) 
+	- takes in a .ser file and sets mapTool.world equal to the serialized world. 
+	- Takes in name of the world and the path to the folder that world is in
+	- example mapTool.loadWorld("world.ser", "C:/Users/mike/Desktop/save/")
+	****To save a world see world.writeMe("world.ser", "C:/Users/mike/Desktop/save/")
+	
+public Map getMapAtLocation(int x,int y)
+	- returns map of mapTool.world[x][y]
+	
+	
+	
+*********
+Map Class
+*********
+public ObjectsPriorityStack[][] objectsStack;
+	- customized priority queue used to hold all content of the stack
+
+TempObjects[][]  tempObjects;
+int numTempObjects;
+boolean hasTempObjects;
+	- used to keep track of tempObjects used in the game.
+Image defImage;
+String name;
+	- name of the map
+public final int mapSize = 21;
+	- size of the map
+
+
+***************
+MapTool Methods
+***************
+
+public Map()
+	- default constructor use for serialization
+
+public Map(String name)
+	- builds a map of floors with a empty tempObjects[][]
+	
+public void writeMe(String name, String path)
+	- this saves the map to a set location
+	- example: map.writeMe("map0.ser", "C:/Users/mike/Desktop/save/world/");
+	
+public void place(int x, int y, Objects obj)
+	- takes in an objects and checks its subclass
+	- updates tempObjects if needed
+	- otherwise places the object on the map.	
+	
+public void remove(int x, int y)
+	- removes the top object in the queue 
+	- updates tempObjects tracking properties if needed.
+	
+public void resetMap()
+	- clears priority queue and pushes new default floors to the queue
+	- resets all tempObject tracking properties
+
+public Objects[] getContent(int x, int y)
+	- returns an array of objects that are in the queue at x,y on the map.
+
+public CharacterObjects getDDCharacter(int x, int y)
+	- if the top objects on the queue at x,y is a CharacterObjects
+		return that character
+	- else 
+		return null
+
+public void tempObjectsUpdate()
+	- used to count down the time left on a tempObject on the current map.
+
+public Objects getObjectAtLocation(int x, int y)
+	- returns the Objects at x,y
+
+public TempObjects getTempAtLocation(int x, int y)
+	- returns the TempObjects at x,y;
+
+
+
+
+
+
+
+
+
