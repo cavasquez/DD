@@ -24,7 +24,7 @@ public class CharacterSheet
 	
 	public CharacterSheet()
 	{
-		String raceName = "";
+		String raceName = "Monster";
 		name = "";
 	    player = "";
 		race = new Human();
@@ -118,7 +118,7 @@ public class CharacterSheet
 	 */
 	
 	
-	private int[][] rawStats = new int[6][6];
+	public int[][] rawStats = new int[6][6];
 	int stat;
 	int base; 
 	int inher;
@@ -553,7 +553,7 @@ public class CharacterSheet
 	}
 	//END OF ABILITY
 	/********* HITPOINTS *********/
-	private int hitpoints;//work on this later
+	public int hitpoints;//work on this later
 	
 	//END OF HITPOINTS
 	
@@ -595,14 +595,27 @@ public class CharacterSheet
 	
 	int armorPenalty;
 	//AC
-	public void setACArmor(/*need armor Class to be made*/)
+	public void setACArmor()
 	{
-		armorClass[DEFENSE_AC][DEFENSE_ARMOR]= 0;
+		int armor = EquippedArmor.get(0).getAcBonus();
+		armorClass[DEFENSE_AC][DEFENSE_ARMOR]= armor;
 	}
-	public void setACShield(/*Need shield Class to be made*/)
+	
+	public void setACArmor(int total)//for monsters
 	{
-		armorClass[DEFENSE_AC][DEFENSE_SHIELD]= 0;
+		armorClass[DEFENSE_AC][DEFENSE_ARMOR]= total;
 	}
+	public void setACShield()
+	{
+		int shield = EquippedArmor.get(1).getAcBonus();
+		armorClass[DEFENSE_AC][DEFENSE_SHIELD]= shield;
+	}
+	public void setACShield(int total)//used by monsters
+	{
+		armorClass[DEFENSE_AC][DEFENSE_SHIELD]= total;
+	}
+	
+	
 	public void setACDex()
 	{
 		dex = rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER];
@@ -627,6 +640,10 @@ public class CharacterSheet
 	{
 		
 		armorClass[DEFENSE_AC][DEFENSE_DEFLECT]= 0;
+	}
+	public void setACTotal(int total)//used for monsters
+	{
+		armorClass[DEFENSE_AC][DEFENSE_TOTAL]= total;
 	}
 	public void setACTotal()
 	{
@@ -719,6 +736,11 @@ public class CharacterSheet
 		int deflect = getTouchDeflect();
 		armorClass[DEFENSE_TOUCH][DEFENSE_TOTAL]= 10 + dodge + dex + size + deflect;
 	}
+	public void setTouchTotal(int total)//used for monsters
+	{
+		
+		armorClass[DEFENSE_TOUCH][DEFENSE_TOTAL]= total;
+	}
 	public int getTouchTotal()
 	{
 		
@@ -751,19 +773,36 @@ public class CharacterSheet
 	}
 	
 	//FlatFoot
-	public void setFlatfootArmor(/*need armor Class to be made*/)
+	public void setFlatfootArmor()
 	{
-		armorClass[DEFENSE_FLATFOOT][DEFENSE_ARMOR]= 0;
+		int armor = EquippedArmor.get(0).getAcBonus();
+		armorClass[DEFENSE_FLATFOOT][DEFENSE_ARMOR]= armor;
 	}
-	public void setFlatfootShield(/*Need shield Class to be made*/)
+	
+	public void setFlatfootArmor(int total)//for monsters
 	{
-		armorClass[DEFENSE_FLATFOOT][DEFENSE_SHIELD]= 0;
+		armorClass[DEFENSE_FLATFOOT][DEFENSE_ARMOR]= total;
+	}
+	public void setFlatfootShield()
+	{
+		int shield = EquippedArmor.get(1).getAcBonus();
+		armorClass[DEFENSE_FLATFOOT][DEFENSE_SHIELD]= shield;
+	}
+	public void setFlatfootShield(int total)//used by monsters
+	{
+		armorClass[DEFENSE_FLATFOOT][DEFENSE_SHIELD]= total;
 	}
 	public void setFlatfootSize()
 	{
 		 size = race.getSize();
 		armorClass[DEFENSE_FLATFOOT][DEFENSE_SIZE]= size;
 	}
+	public void setFlatfootSize(int size)//for monsters
+	{
+		 
+		armorClass[DEFENSE_FLATFOOT][DEFENSE_SIZE]= size;
+	}
+	
 	public void setFlatfootNaturalArmor(Race race/*need Skills and feats Class also*/)
 	{
 		
@@ -784,6 +823,12 @@ public class CharacterSheet
 		int deflect = getFlatfootDeflect();
 		armorClass[DEFENSE_FLATFOOT][DEFENSE_TOTAL]= 10 + armor + shield  + size  + deflect + natural;
 	}
+	public void setFlatfootTotal(int total)//used for monsters
+	{
+		
+		armorClass[DEFENSE_FLATFOOT][DEFENSE_TOTAL]= total;
+	}
+	
 	public int getFlatfootTotal()
 	{
 		
@@ -888,6 +933,11 @@ public class CharacterSheet
 		stat = base + ability + enhance;
 		savingthrows[SAVE_FORT][ SAVE_TOTAL] = stat;
 	}
+	public void setFortTotal(int total)//for monsters
+	{
+		
+		savingthrows[SAVE_FORT][ SAVE_TOTAL] = total;
+	}
 	
 	
 	//Getters
@@ -942,7 +992,11 @@ public class CharacterSheet
 			stat = base + ability + enhance;
 			savingthrows[SAVE_REF][ SAVE_TOTAL] = stat;
 		}
-		
+		public void setRefTotal(int total)//used by monsters
+		{
+			
+			savingthrows[SAVE_REF][ SAVE_TOTAL] = total;
+		}
 		
 		//Getters
 		public int getRefBase()
@@ -995,7 +1049,11 @@ public class CharacterSheet
 			stat = base + ability + enhance;
 			savingthrows[SAVE_WILL][ SAVE_TOTAL] = stat;
 		}
-		
+		public void setWillTotal(int total)//for monsters
+		{
+			
+			savingthrows[SAVE_WILL][ SAVE_TOTAL] = total;
+		}
 		
 		//Getters
 		public int getWillBase()
@@ -1055,8 +1113,9 @@ public class CharacterSheet
 		public static final int ATTACK_BABFIFTH = 4;
 		public static final int ATTACK_ABILITY = 5;
 		public static final int ATTACK_SIZE = 6; 
+		public static final int ATTACK_TOTAL = 7;
 		
-	private int[][] attacks = new int[4][7];
+	public int[][] attacks = new int[4][7];
 	//Melee
 	public void setMeleeBab(CharacterClass clas)
 	{
@@ -1283,21 +1342,35 @@ public class CharacterSheet
 		
 	}
 	//not attack value, passing in if it's the first attack or send or so on
+	
+	public void setCmdTotal(int total)//mostly used for monsters, use getCmdTotal for characters
+	{
+		attacks[ATTACK_CMD][ATTACK_TOTAL]= total;
+	}
 	public int getCmdTotal(int attack)
 	{
 		int r = 10 + attacks[ATTACK_CMD][attack-1]+rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER]+rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER] + getCmdSize();
 		return r;
 	}
 	
+	public void setCmbTotal(int total)//mostly used for monsters, use getCmbTotal for characters
+	{
+		attacks[ATTACK_CMB][ATTACK_TOTAL]= total;
+	}
 	public int getCmbTotal(int attack)
 	{
 		int r = attacks[ATTACK_CMB][attack-1]+rawStats[ABILITY_STRENGTH][ABILITY_MODIFIER] + getCmbSize();
 		return r;
 	}
+	
 	public int getRangedTotal(int attack)
 	{
 		int r = attacks[ATTACK_RANGED][attack-1]+rawStats[ABILITY_DEXTERITY][ABILITY_MODIFIER] + getCmbSize();
 		return r;
+	}
+	public void setMeleeTotal(int total)//mostly used for monsters, use getCmdTotal for characters
+	{
+		attacks[ATTACK_MELEE][ATTACK_TOTAL]= total;
 	}
 	public int getMeleeTotal(int attack)
 	{
@@ -1482,6 +1555,8 @@ public class CharacterSheet
 	private int xpTotalLvl;
 	
 	//NEED INIT
+	
+	public int init;
 	public int getInit()
 	{
 		int dex = rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL];
@@ -1576,9 +1651,17 @@ public class CharacterSheet
 	ArrayList<Armor> EquippedArmor = new ArrayList<Armor>(2);
 	
 	//put armor in the arrayList and into the equipmentList
+	
+	//WHEN EQUIPING ARMOR, INDEX 0 IS ARMOR INDEX 1 IS SHIELD
 	public void EquipArmor(Armor arm)
 	{
-		EquippedArmor.add(arm);
+		EquippedArmor.add(0,arm);
+		//equipmentList.add(arm);
+	}
+	
+	public void EquipShield(Armor arm)
+	{
+		EquippedArmor.add(1,arm);
 		//equipmentList.add(arm);
 	}
 	
@@ -1729,8 +1812,8 @@ public class CharacterSheet
 	
 	public void fillAttacksAndDefense(CharacterClass clas)
 	{
-		setACArmor();
-		setACShield();
+		//setACArmor();
+		//setACShield();
 		setACDex();
 		setACSize();
 		setACDodge();
@@ -1744,8 +1827,9 @@ public class CharacterSheet
 		setTouchDeflect();
 		setTouchTotal();
 		
-		setFlatfootArmor();
-		setFlatfootShield();
+		
+		//setFlatfootArmor();
+		//setFlatfootShield();
 		setFlatfootSize();
 		setFlatfootNaturalArmor(race);
 		setFlatfootDeflect();
@@ -1784,6 +1868,23 @@ public class CharacterSheet
 		
 	}
 	
+	//Call the EquipArmor(Armor armor) Method
+	//should look like this: 
+	
+	//EquipArmor(armor);
+	//EquipShield(shield);
+	
+	//where armor and shield are chosen by the user and added to the arraylist, remember index 0 is armor and 
+	//index 1 is shield, this is already implemented in code so you don't have to worry about setting it.
+	
+	public void applyArmorAndShield()
+	{
+		setACArmor();
+		setACShield();
+		setFlatfootArmor();
+		setFlatfootShield();
+	}
+	
 	public String toString()
 	{
 		ClassRecorder clas = recorder.get(0);
@@ -1812,4 +1913,8 @@ public class CharacterSheet
 		return hp;
 	} /* end getHP method */
 	
+	public void setHP(int hp) //for monsters
+	{
+		hitpoints = hp + dice.roll(1,10);
+	}
 } /* end CharacterSheet method */
