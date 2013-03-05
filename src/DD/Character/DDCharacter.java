@@ -2,10 +2,10 @@ package DD.Character;
 
 import java.util.ArrayList;
 import DD.ActionBox.Dice;
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.Character.Equipment.Weapon;
+import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.SlickTools.*;
 
 /*****************************************************************************************************
@@ -73,7 +73,7 @@ public class DDCharacter extends Entity
 	
 	public void resetCharacter()
 	{ /* TODO: generate */
-		
+		currentHP = sheet.getHP();
 	} /* end resetCharacter method */
 	
 	public void addAbility(Ability ability)
@@ -119,8 +119,10 @@ public class DDCharacter extends Entity
 		sheet.getFlatfootTotal();
 		sheet.getTouchTotal();
 		*/
-		if (attack >= sheet.getACArmor())
+		System.out.println("Attack roll: " + attack + " Damage: " + damage + " ~~~~~~~~~~~~~~~~~~");
+		if (attack >= getAC())
 		{
+			System.out.println("ENEMY HIT HECK YESS!!!!!!!!!!!!!!!!!!!!!!!");
 			returner = true;
 			getHit(damage);
 		} /* end if */
@@ -214,7 +216,7 @@ public class DDCharacter extends Entity
 	
 		for (int i = 0; i < weapons.size(); i++) 
 		{
-			reach[i] = weapons.get(i).getRange();
+			reach[i] = weapons.get(i).getReach();
 		}
 	
 	
@@ -233,7 +235,6 @@ public class DDCharacter extends Entity
 	//returns weapons die both main hand and off hand
 	public Dice.DieSize[] getDamageDie()
 	{ 
-		
 		ArrayList<Weapon> weapons = sheet.EquippedWeapon;
 		Dice.DieSize[] dice = new Dice.DieSize[weapons.size()];
 		
@@ -241,10 +242,6 @@ public class DDCharacter extends Entity
 		{
 			dice[i] = weapons.get(i).getDamage();
 		}
-		
-		
-		
-		
 		
 		return dice;
 	} /* end getDamageDie method */
@@ -263,6 +260,19 @@ public class DDCharacter extends Entity
 		//TODO: Implement
 		return null;
 	} /* end getAttack method */
+	
+	public int[] getCritRange()
+	{
+		ArrayList<Weapon> weapons = sheet.EquippedWeapon;
+		int returner[] = new int[weapons.size()];
+		
+		for (int i = 0; i < weapons.size(); i++) 
+		{
+			returner[i] = weapons.get(i).getCritRange();
+		}
+		
+		return returner;
+	} /* end getCritRange method */
 	
 	public int getCharacterID()
 	{
@@ -308,6 +318,21 @@ public class DDCharacter extends Entity
 	{
 		return hasStartEndFullRoundAction;
 	} /* end getHasStardEndFullAction method */
+	
+	public int getCurrentHP()
+	{
+		return currentHP;
+	} /* end getCurrentHP method */
+	
+	public int getAC()
+	{
+		return sheet.getACTotal();
+	}/* end getNormalAC method */
+	
+	public int getACArmor()
+	{
+		return sheet.getACArmor();
+	} /* end getArmorAC method */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************

@@ -2,10 +2,10 @@ package DD.MapTool;
 
 import java.util.Iterator;
 import org.newdawn.slick.SlickException;
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
-import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.DDCharacter;
 import DD.CombatSystem.CombatSystem;
+import DD.CombatSystem.TargetingSystem.Coordinate;
+import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
 
 //@author Carlos Vasquez

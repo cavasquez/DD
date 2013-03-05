@@ -34,7 +34,7 @@ public class Armory {
 		this.weight = weight;
 		 */
 		armor.add( new Armor("Padded",0,1,8,0,.05,'L',10 ));
-		weapons.add(new Weapon("Longsword",Dice.DieSize.D6,19*2,0,'M','S',"Note:",4));
+		weapons.add(new Weapon("Longsword",Dice.DieSize.D6,2,19,5,'M','S',"Note:",4));
 	}
 			
 		}

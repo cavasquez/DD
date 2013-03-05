@@ -1,6 +1,6 @@
 package DD.Message;
 
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
+import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.Character.DDCharacter;
 
 /*****************************************************************************************************

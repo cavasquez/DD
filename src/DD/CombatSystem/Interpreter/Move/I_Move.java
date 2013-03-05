@@ -1,9 +1,9 @@
 package DD.CombatSystem.Interpreter.Move;
 
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
 import DD.Character.DDCharacter;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
+import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.MapTool.CharacterObjects;
 import DD.MapTool.ObjectsPriorityStack;
 import DD.Message.CombatMessage;

@@ -3,9 +3,9 @@ package DD.MapTool;
 import java.util.Iterator;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
-import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.DDCharacter;
+import DD.CombatSystem.TargetingSystem.Coordinate;
+import DD.CombatSystem.TargetingSystem.TargetingSystem;
 
 /*****************************************************************************************************
  * TargetBlock will be a special block on the map reserved for use by the TargetSystem to find Targets

@@ -1805,4 +1805,11 @@ public class CharacterSheet
 		return r;
 	}
 	
+	public int getHP()
+	{
+		int hp = 0;
+		for (int i = 0; i < recorder.size(); i++) hp += recorder.get(i).hp;
+		return hp;
+	} /* end getHP method */
+	
 } /* end CharacterSheet method */

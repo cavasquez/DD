@@ -5,10 +5,10 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import DD.ActionBox.SubAction;
-import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.*;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.CombatSystem.CombatSystem;
+import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 import DD.Message.TargetSelectedMessage;
@@ -153,7 +153,15 @@ public abstract class Ability extends RenderComponent
 		/* This action should be performed when the character clicks done */
 		done = true;
 		ts.clearTargets();
-		CombatMessage cm = null;
+		done = true;
+		CombatMessage cm = new CombatMessage
+			(
+				character.getCharacterID(),
+				null, 
+				actionType,
+				action,
+				null
+			);
 		sendToInterpreter(cm); /* this should send a message to the CombatSystem telling it we are done */
 	} /* end done method */
 	

@@ -1,7 +1,7 @@
 package DD.Message;
 
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
-import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
+import DD.CombatSystem.TargetingSystem.Coordinate;
+import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.Abilities.Ability;
 
 /*****************************************************************************************************

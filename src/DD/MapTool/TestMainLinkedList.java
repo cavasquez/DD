@@ -1,6 +1,6 @@
 package DD.MapTool;
 
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
+import DD.CombatSystem.TargetingSystem.Coordinate;
 
 public class TestMainLinkedList {
 public static void main(String[] args) {

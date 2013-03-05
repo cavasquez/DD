@@ -9,15 +9,16 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
 import slick.path2glory.SimpleGame.TestGame;
-
 import DD.ActionBox.ActionBox;
+import DD.ActionBox.Dice;
 import DD.Character.DDCharacter;
 import DD.Character.Abilities.Ability;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
+import DD.Character.Abilities.DefaultAbilities.Standard.StandardAttack;
 import DD.Character.CharacterSheet.CharacterClass;
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.Character.Equipment.Weapon;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
@@ -25,14 +26,14 @@ import DD.Message.ChooseTargetMessage;
 
 // @author Carlos Vasquez
 
-public class TestMove extends BasicGame
+public class TestStandardAttack extends BasicGame
 {
-	public TestMove(String title) {
+	public TestStandardAttack(String title) {
 		super(title);
 
 	}
  
-    public TestMove()
+    public TestStandardAttack()
     {
         super("Slick2DPath2Glory - SimpleGame");
     }
@@ -90,11 +91,17 @@ public class TestMove extends BasicGame
 				
 		int i = 0; // component and entity ids
 		DDCharacter character = new DDCharacter(i++);
+		DDCharacter enemy = new DDCharacter(i++);
 		CharacterSheet sheet = new CharacterSheet();
+		sheet.EquipWeapon(new Weapon("Longsword",Dice.DieSize.D6,2,19,5,'M','S',"Note:",4));
 		
 		/* ALSO VERY FREAKING IMPORTANT */
 		character.setCharacterID(i++);
+		enemy.setCharacterID(i++);
 		CombatSystem.addCharacter(character);
+		CombatSystem.addCharacter(enemy);
+		character.setCharacterSheet(sheet);
+		enemy.setCharacterSheet(sheet);
 		
 		sheet.fillBasic("Max", 
 				"Bob", 
@@ -115,21 +122,28 @@ public class TestMove extends BasicGame
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
 		
-		character.setCharacterSheet(sheet);
-		ActionBox.setCharacter(character);
+		ActionBox.setCharacter(character); // Character is performing actions
 		
 		
 		
 		int x = 6;
 		int y = 5;
+		int enemyx = x;
+		int enemyy = y+1;
 		CharacterObjects charObj = new CharacterObjects("*****", null, world.world[0][0], character);
-		world.world[0][0].placeObjects(x, y, charObj); /* place character */
+		CharacterObjects enemyObj = new CharacterObjects("+++++", null, world.world[0][0], enemy);
+		world.world[0][0].placeObjects(x, y, charObj); /* place character onto map */
+		world.world[0][0].placeObjects(enemyx, enemyy, enemyObj); /* place enemy onto map */
 		character.setCoordiante(new Coordinate(x,y));
+		enemy.setCoordiante(new Coordinate(enemyx, enemyy));
 		Ability.setOwnerCharacter(character); /* set the character who is performing the abilities. This should happen somewhere in ActionBox */
+		character.resetCharacter();
+		enemy.resetCharacter();
 		character.startNewTurn();
 		
-		Move move = new Move(i++);
-		move.activate();
+//		Move move = new Move(i++);
+//		move.activate();
+		StandardAttack attack = new StandardAttack(i++);
 //		
 //		ChooseTargetMessage ctm = new ChooseTargetMessage
 //				(
@@ -144,91 +158,41 @@ public class TestMove extends BasicGame
 //		ObjectsPriorityStack[][] stack = world.world[0][0].objectsStack;
 //		ts.chooseTarget(ctm);
 	
-		System.out.println(character.getMovedDiagonal());
+		System.out.println("Players have been set");
 		System.out.println(world.world[0][0].toString());
+		System.out.println("Attack: " + enemyx + ", " + enemyy);
+		System.out.println("Character Position: " + character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println("Enemy Position: " + enemy.getCoordinate().x + ", " + enemy.getCoordinate().y);
+		System.out.println("Enemy hp: " + enemy.getCurrentHP());
+		System.out.println("Enemy AC: " + enemy.getAC());
+		System.out.println("Character can attack??: " + character.getHasStandardAction());
+		System.out.println("Weapon reach: " + character.getWeaponReach()[0]);
+
+		attack.activate();
 		
-		/* Move down */
-		int newx = x; //x being moved to
-		int newy = y; //y being moved to
-		newy -=1;
-		ObjectsPriorityStack stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
-		((TargetBlock)stack.peek()).select();
+		System.out.println("Character activates attack, should see target slection");
 		System.out.println(world.world[0][0].toString());
-		System.out.println("Move to: " + newx + ", " + newy);
-		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
-		System.out.println(character.getCurrentSpeed());
-		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
+		System.out.println("Attack: " + enemyx + ", " + enemyy);
+		System.out.println("Character Position: " + character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println("Enemy hp: " + enemy.getCurrentHP());
+		System.out.println("Enemy AC: " + enemy.getAC());
+		System.out.println("Enemy armor AC: " + enemy.getACArmor());
+		System.out.println("Enemy Position: " + enemy.getCoordinate().x + ", " + enemy.getCoordinate().y);
+		System.out.println("Character can attack??: " + character.getHasStandardAction());
 		
-		newx -= 1;
-		newy +=1;
-		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
-		((TargetBlock)stack.peek()).select();
+		
+		System.out.println("Character has selected enemy as an attack target");
+		ObjectsPriorityStack stack = world.world[0][0].objectsStack[enemyx][enemyy]; // where the character is trying to attack
+		System.out.println(ts.getTargetBlock(stack));
+		ts.getTargetBlock(stack).select();
+		
 		System.out.println(world.world[0][0].toString());
-		System.out.println("Move to: " + newx + ", " + newy);
-		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
-		System.out.println(character.getCurrentSpeed());
-		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
-		
-		newx -= 1;
-		newy +=1;
-		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
-		((TargetBlock)stack.peek()).select();
-		System.out.println(world.world[0][0].toString());
-		System.out.println("Move to: " + newx + ", " + newy);
-		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
-		System.out.println(character.getCurrentSpeed());
-		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
-		
-		newx -= 1;
-		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
-		((TargetBlock)stack.peek()).select();
-		System.out.println(world.world[0][0].toString());
-		System.out.println("Move to: " + newx + ", " + newy);
-		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
-		System.out.println(character.getCurrentSpeed());
-		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
-		
-		newx -=1;
-		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
-		((TargetBlock)stack.peek()).select();
-		System.out.println(world.world[0][0].toString());
-		System.out.println("Move to: " + newx + ", " + newy);
-		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
-		System.out.println(character.getCurrentSpeed());
-		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
-		
-		System.out.println("Character can move?: " + character.getHasMoveAction());
-		
-		/* Test termination of move before speed */
-		character.startNewTurn();
-		move = new Move(i++);
-		System.out.println("New turn");
-		System.out.println(character.getCurrentSpeed());
-		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
-		
-		System.out.println("Character can move?: " + character.getHasMoveAction());
-		
-		newx -=1;
-		move.activate();
-		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
-		((TargetBlock)stack.peek()).select();
-		System.out.println(world.world[0][0].toString());
-		System.out.println("Move to: " + newx + ", " + newy);
-		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
-		System.out.println(character.getCurrentSpeed());
-		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
-		
-		System.out.println("Character can move?: " + character.getHasMoveAction());
-		
-		move.done();
-		stack = world.world[0][0].objectsStack[newx][newy]; // where the character is trying to move
-		System.out.println(world.world[0][0].toString());
-		System.out.println("Move to: " + newx + ", " + newy);
-		System.out.println(character.getCoordinate().x + ", " + character.getCoordinate().y);
-		System.out.println(character.getCurrentSpeed());
-		System.out.println("has moved diagonal: " + character.getMovedDiagonal());
-		
-		System.out.println("Character can move?: " + character.getHasMoveAction());
+		System.out.println("Attack: " + enemyx + ", " + enemyy);
+		System.out.println("Character Position: " + character.getCoordinate().x + ", " + character.getCoordinate().y);
+		System.out.println("Enemy Position: " + enemy.getCoordinate().x + ", " + enemy.getCoordinate().y);
+		System.out.println("Enemy hp: " + enemy.getCurrentHP());
+		System.out.println("Enemy AC: " + enemy.getAC());
+		System.out.println("Character can attack?: " + character.getHasStandardAction());
     }
  
     @Override
@@ -248,7 +212,7 @@ public class TestMove extends BasicGame
 			throws SlickException
     {
     	AppGameContainer app = 
-			new AppGameContainer(new TestMove());
+			new AppGameContainer(new TestStandardAttack());
  
          //app.setDisplayMode(800, 600, false);
          app.start();

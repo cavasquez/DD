@@ -8,8 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
-
-import DD.ActionBox.CombatSystem.TargetingSystem.Coordinate;
+import DD.CombatSystem.TargetingSystem.Coordinate;
 
 
 //implements serializable ~

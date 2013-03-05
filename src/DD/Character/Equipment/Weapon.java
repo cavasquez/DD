@@ -10,19 +10,21 @@ public class Weapon extends Equipment{
 	int enchance;
 	//int[] attackMod;
 	Dice.DieSize damage;
+	int critRange;
 	int crit;
-	int range;
+	int reach;
 	char size;
 	char type;// slashing or piercing
 	String ammo_notes;
 	
-	public Weapon(String name, Dice.DieSize damage, int crit,int range,char size, char type ,String ammo_notes , int weight)
+	public Weapon(String name, Dice.DieSize damage, int crit, int critRange, int reach,char size, char type ,String ammo_notes , int weight)
 	{
 		 this.name = name;
 		// this.attackMod= attackMod; 
 		 this.damage = damage; 
 		 this.crit= crit;
-		this.range=range;
+		 this.critRange = critRange;
+		this.reach=reach;
 		this.size=size; 
 		this.type=type; 
 		this.ammo_notes=ammo_notes;
@@ -47,6 +49,11 @@ public class Weapon extends Equipment{
 		// TODO Auto-generated method stub
 		return damage;
 	}
+	
+	public int getCritRange()
+	{
+		return critRange;
+	} /* end getCritRange method */
 
 		public int getCrit() {
 		// TODO Auto-generated method stub
@@ -54,9 +61,9 @@ public class Weapon extends Equipment{
 	}
 
 	
-	public int getRange() {
+	public int getReach() {
 		// TODO Auto-generated method stub
-		return 0;
+		return reach;
 	}
 
 	

@@ -2,10 +2,10 @@ package DD.Character.Abilities.DefaultAbilities.Move;
 
 import org.newdawn.slick.SlickException;
 import DD.ActionBox.Dice;
-import DD.ActionBox.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Character.Abilities.Ability;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.Move.*;
+import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
 import DD.Message.CombatMessage;
 import DD.Message.TargetSelectedMessage;
@@ -28,7 +28,7 @@ public class Move extends Ability
 	
 	protected void action() throws SlickException
 	{ /* This method needs to be used in update */
-		if ((character.getCurrentSpeed() <= 0 || !character.getHasMoveAction()))
+		if (character.getCurrentSpeed() <= 0)
 		{/* check to see that we can continue moving. In this case, we cannot */
 			
 			done = true;
