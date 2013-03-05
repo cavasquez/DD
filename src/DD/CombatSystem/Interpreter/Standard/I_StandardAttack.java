@@ -39,15 +39,14 @@ public class I_StandardAttack implements CombatInterpreter
 	@Override
 	public void interpret(CombatMessage cm) 
 	{
-		System.out.println("INTERPRETER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		int attack = cm.getBody()[ATTACK_ROLL];	/* the attack against the opponent */
 		int damage = cm.getBody()[DAMAGE_ROLL];	/* the damage against the opponent */
 		
 		/* Add modifier to rolls */
 		int[] attackModifiers = CombatSystem.getCharacter(cm.getSource()).getAttack();
 		int[] damageModifiers = CombatSystem.getCharacter(cm.getSource()).getDamange();
-		for (int i = 0; i < attackModifiers.length; i++) attack += attackModifiers[i];
-		for (int i = 0; i < damageModifiers.length; i++) damage += damageModifiers[i];
+		if (attackModifiers != null) for (int i = 0; i < attackModifiers.length; i++) attack += attackModifiers[i];
+		if (damageModifiers != null) for (int i = 0; i < damageModifiers.length; i++) damage += damageModifiers[i];
 		
 		System.out.println("TARGET: " + cm.getTarget());
 		if (cm.getTarget() != null)CombatSystem.getCharacter(cm.getTarget()[0]).defend(attack, damage, DDCharacter.ACType.NORMAL);

@@ -119,10 +119,8 @@ public class DDCharacter extends Entity
 		sheet.getFlatfootTotal();
 		sheet.getTouchTotal();
 		*/
-		System.out.println("Attack roll: " + attack + " Damage: " + damage + " ~~~~~~~~~~~~~~~~~~");
 		if (attack >= getAC())
 		{
-			System.out.println("ENEMY HIT HECK YESS!!!!!!!!!!!!!!!!!!!!!!!");
 			returner = true;
 			getHit(damage);
 		} /* end if */
