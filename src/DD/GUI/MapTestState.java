@@ -18,10 +18,13 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MapTestState extends BasicGameState {
  
 	private int stateID = 0;
-    Image floor = null;
-    Image wall = null;
-    Image spriteSheet = null;
-    World world = null;
+	private Image floor = null;
+	private Image wall = null;
+	private Image playerImage = null;
+	private Image spriteSheet = null;
+	private World world = null;
+    private DDCharacter player;
+    private CharacterObjects playerObj;
     float x = 400;
     float y = 300;
     float scale = 1;
@@ -40,9 +43,15 @@ public class MapTestState extends BasicGameState {
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
     	// get the floor image
         floor = spriteSheet.getSubImage(1185, 416, 33, 34);
+        playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
+        player = new DDCharacter(stateID);      
         //wall = new Image("data/land.jpg");
       
         world = new World("TestGUIMap");
+        
+        playerObj = new CharacterObjects("Bob", playerImage, 100, 200, world.getMap(0, 0), player); 
+        world.getMap(0, 0).placeObjects(6, 6, playerObj);
+        
     }
  
     @Override
