@@ -1,9 +1,11 @@
  package DD.MapTool;
 
+import org.newdawn.slick.SlickException;
+
 import DD.Character.DDCharacter;
 
 public class TestMapMain {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SlickException {
 		
 		/*
 		 * IMPORTANT: for this main to work, mapSize needs to be 21 or larger due to hardcodes massPlaceObjectsLine values.

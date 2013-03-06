@@ -8,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.newdawn.slick.SlickException;
+
 import DD.SlickTools.*;
 
 public class World implements Serializable{
@@ -19,7 +21,7 @@ public class World implements Serializable{
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;//holds temp items like from spells
 	
-	public World(String name){
+	public World(String name) throws SlickException {
 		this.worldName = name;
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();

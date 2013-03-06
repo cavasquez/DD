@@ -8,6 +8,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import org.newdawn.slick.SlickException;
+
 import DD.CombatSystem.TargetingSystem.Coordinate;
 
 
@@ -19,7 +22,7 @@ public class MapTool implements Serializable{
 	ArrayList<Objects> tempList;
 	LinkedList<Coordinate> selectedList;
 	
-	public MapTool(){
+	public MapTool() throws SlickException {
 		world = new World("world");
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();

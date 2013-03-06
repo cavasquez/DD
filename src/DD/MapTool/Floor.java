@@ -1,22 +1,37 @@
 package DD.MapTool;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.state.StateBasedGame;
 
 
 public class Floor extends Objects{
 	
 	private static final long serialVersionUID = 4476115979010560425L;
+	private float x, y;
 
 	public Floor(){
 		super();
 		
 	}
 	
-	public Floor(String name, Image image, int move, int light, Map map){
+	public Floor(String name, Image image, float x, float y, int move, int light, Map map){
 		super(name, image, map);
 		super.movePenalty = move;
 		super.lightPenalty = light;
 		super.priority = 0;
+		this.x = x;
+		this.y = y;
+	}
+	
+	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
+		image.draw(x,y);
+		
+	}
+	
+	public void update(GameContainer gc, StateBasedGame sb, int delta) {
+		
 	}
 	
 	void checks() {

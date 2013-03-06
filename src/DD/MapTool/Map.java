@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList; 
 import java.util.Stack;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
 import DD.CombatSystem.CombatSystem;
@@ -24,7 +25,9 @@ public class Map extends Entity implements Serializable{
 	public ObjectsPriorityStack[][] objectsStack ; //ops<Objects>
 	TempObjects[][]  tempObjects;
 	int numTempObjects;
-	Image defImage;
+	Image defImage = null;
+	Image spriteSheet = null;
+	Image floorImage = null;
 	boolean hasTempObjects;
 	String name;
 	public final int mapSize = 21;
@@ -34,17 +37,21 @@ public class Map extends Entity implements Serializable{
 		
 	}
 	
-	public Map(String name){
+	public Map(String name) throws SlickException {
 		super(0);
 		this.name = name;
 		objectsStack =  new ObjectsPriorityStack[mapSize][mapSize];
 		tempObjects = new TempObjects[mapSize][mapSize];
 		super.components = new ArrayList<Component>();
 		
+		spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
+    	// get the floor image
+        floorImage = spriteSheet.getSubImage(1185, 416, 33, 34);
+		
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
 				//TODO:needs image                    VVV
-				Floor floor = new Floor("floor",null,5,5,this);
+				Floor floor = new Floor("floor", floorImage, (i + (floorImage.getHeight() * i)), (j + (floorImage.getWidth() * j)), 5 , 5, this);
 				
 				addComponent(floor);
 				objectsStack[i][j] =  new ObjectsPriorityStack();
@@ -214,7 +221,8 @@ public class Map extends Entity implements Serializable{
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
 				objectsStack[i][j].getPQueue().clear();
-				Floor floor = new  Floor("floor", null, 5, 5, this);
+				//Floor floor = new  Floor("floor", null, 5, 5, this);
+				Floor floor = new Floor("floor", floorImage, (i + (floorImage.getHeight() * i)), (j + (floorImage.getWidth() * j)), 5 , 5, this);
 				placeObjects(i, j, floor);
 			}
 		}
@@ -401,7 +409,7 @@ public class Map extends Entity implements Serializable{
 		updateComponentList();
 	}
 
-	public Object getComponents() {
+	public ArrayList<Component> getComponents() {
 		// TODO Auto-generated method stub
 		return super.components;
 	}
