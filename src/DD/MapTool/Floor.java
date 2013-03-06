@@ -26,7 +26,7 @@ public class Floor extends Objects{
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
-		image.draw(x,y);
+		image.draw(x, y);
 		
 	}
 	

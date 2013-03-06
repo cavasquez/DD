@@ -27,6 +27,7 @@ public class Map extends Entity implements Serializable{
 	int numTempObjects;
 	Image defImage = null;
 	Image spriteSheet = null;
+	Image floorSprite = null;
 	Image floorImage = null;
 	boolean hasTempObjects;
 	String name;
@@ -46,7 +47,8 @@ public class Map extends Entity implements Serializable{
 		
 		spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
     	// get the floor image
-        floorImage = spriteSheet.getSubImage(1185, 416, 33, 34);
+        floorSprite = spriteSheet.getSubImage(1185, 416, 33, 34);
+        floorImage = floorSprite.getScaledCopy(0.9f);
 		
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
