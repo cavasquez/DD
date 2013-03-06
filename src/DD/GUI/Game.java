@@ -1,5 +1,8 @@
 package DD.GUI;
 
+import java.io.File;
+
+import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -38,6 +41,11 @@ public class Game extends StateBasedGame
 	
 	public static void main(String[] args)
 	{
+		/* These 2 lines need to be the first lines in the main for us to be able to run a slick based game. 
+		 * Furthermore, the lwjgl.dll needs to be in lib/lwjgl.dll next to the jar when it is exported. */
+		System.setProperty("org.lwjgl.librarypath", new File(System.getProperty("user.dir"), "lib").getAbsolutePath());
+		System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
+		
 		AppGameContainer appgc;
 		try{
 			appgc = new AppGameContainer(new Game(gamename));
