@@ -1,11 +1,16 @@
 package DD.MapTool;
 
+import org.newdawn.slick.SlickException;
+
 import DD.CombatSystem.TargetingSystem.Coordinate;
 
 public class TestMainLinkedList {
 public static void main(String[] args) {
-	MapTool mt = new MapTool();
-	Floor flo1 = new Floor("floor1", null, 5, 5, mt.getMapAtLocation(0, 0));
+	MapTool mt;
+	try {
+		mt = new MapTool();
+
+	Floor flo1 = new Floor("floor1", null,0,0, 5, 5, mt.getMapAtLocation(0, 0));
 	mt.getMapAtLocation(0, 0).placeObjects(0, 0, flo1);
 	Coordinate cord = new Coordinate(0, 0);
 	
@@ -28,5 +33,10 @@ public static void main(String[] args) {
 	//System.out.println(mt.selectedList.remove(cord));
 	//System.out.println(mt.selectedList.getFirst().x);
 	//System.out.println(mt.selectedList.getFirst().y);
+
+	} catch (SlickException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 }
 }

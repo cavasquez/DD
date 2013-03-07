@@ -1,12 +1,14 @@
 package DD.MapTool;
 
+import org.newdawn.slick.SlickException;
+
 public class TestMainPriority {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SlickException {
 		MapTool mt = new MapTool();
 		
 		
 		
-		Floor floor1 = new Floor("floor1", null, 5, 5, mt.getMapAtLocation(0, 0));
+		Floor floor1 = new Floor("floor1", null,0,0, 5, 5, mt.getMapAtLocation(0, 0));
 		Obstacle wall1 = new Obstacle("wall1", null, 5, 5, mt.getMapAtLocation(0, 0));
 		Obstacle wall2 = new Obstacle("wall2", null, 5, 5, mt.getMapAtLocation(0, 0));
 		Obstacle wall3 = new Obstacle("wall3", null, 5, 5, mt.getMapAtLocation(0, 0));

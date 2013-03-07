@@ -130,8 +130,8 @@ public class TestStandardAttack extends BasicGame
 		int y = 5;
 		int enemyx = x;
 		int enemyy = y+1;
-		CharacterObjects charObj = new CharacterObjects("*****", null, world.world[0][0], character);
-		CharacterObjects enemyObj = new CharacterObjects("+++++", null, world.world[0][0], enemy);
+		CharacterObjects charObj = new CharacterObjects("*****", null,0,0, world.world[0][0], character);
+		CharacterObjects enemyObj = new CharacterObjects("+++++", null,0,0, world.world[0][0], enemy);
 		world.world[0][0].placeObjects(x, y, charObj); /* place character onto map */
 		world.world[0][0].placeObjects(enemyx, enemyy, enemyObj); /* place enemy onto map */
 		character.setCoordiante(new Coordinate(x,y));
