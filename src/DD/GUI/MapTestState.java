@@ -1,6 +1,6 @@
 package DD.GUI;
  
-import java.util.Iterator;
+import java.util.Iterator; 
 
 import DD.Character.*; 
 import DD.MapTool.*;
@@ -28,9 +28,11 @@ public class MapTestState extends BasicGameState {
 	private World world = null;
     private DDCharacter player;
     private CharacterObjects playerObj;
-    float x = 400;
-    float y = 300;
-    float scale = 1;
+    private String mousePos = " ";
+    Input mouse = new Input(650);
+    //private float x, y;
+    
+    
  
     public MapTestState(int stateID)
     {
@@ -52,69 +54,77 @@ public class MapTestState extends BasicGameState {
       
         world = new World("TestGUIMap");
         
-        playerObj = new CharacterObjects("Bob", playerImage, 100, 200, world.getMap(0, 0), player); 
+        playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
+        //playerObj.setPosition(6*30, 6*30);
         world.getMap(0, 0).placeObjects(6, 6, playerObj);
+        //playerObj.setPosition(6*30, 6*30);
         
     }
  
     @Override
     public void update(GameContainer gc, StateBasedGame sb, int delta) throws SlickException
     {
-    	/* go through ArrayList of Components to call their update methods */
-		RenderComponent renderComponent = null;
-		for (Component component : world.getMap(0, 0).getComponents())
-		{
-			if (RenderComponent.class.isInstance(component))
-			{
-				renderComponent = (RenderComponent) component;
-				renderComponent.update(gc, sb, delta);
-			}
-			
-		}
+    	int mouseX = mouse.getMouseX();
+    	int mouseY = mouse.getMouseY();
+    	
+    	RenderComponent renderComponent = null;
+    	for(int i = 0; i < world.getMap(0, 0).mapSize; i++) {
+    		for(int j = 0; j < world.getMap(0, 0).mapSize; j++) {
+    			Objects[] list = new Objects[world.getMap(0, 0).objectsStack[i][j].size()];
+    			System.arraycopy(world.getMap(0, 0).objectsStack[i][j].toArray(), 0, list, 0, world.getMap(0, 0).objectsStack[i][j].size());
+    			for(int k = 0; k < list.length; k++) {
+    				Component component = (Component)list[k];
+    				if (RenderComponent.class.isInstance(component))
+    				{
+    					renderComponent = (RenderComponent) component;
+    					renderComponent.update(gc, sb, delta);
+    				}
+    			}
+    		}
+    	}
 		
+    	mousePos = "Mouse Position x; " + mouseX + " y: " + mouseY;
 		
     }
-    
-    int counter = 0;
  
     public void render(GameContainer gc, StateBasedGame sb, Graphics g) throws SlickException
     {
     	RenderComponent renderComponent = null;
- 
-		for (Component component : world.getMap(0, 0).getComponents())
-		{
-			if (RenderComponent.class.isInstance(component))
-			{
-				renderComponent = (RenderComponent) component;
-				renderComponent.render(gc, sb, g);
-			}
-			
-		}
-	
-    
     	
+    
+    	/*
     	
     	for(int i = 0; i < world.getMap(0, 0).mapSize; i++) {
     		for(int j = 0; j < world.getMap(0, 0).mapSize; j++) {
-    			//while(world.getMap(0, 0).objectsStack[i][j].size() > 0) {
     			Iterator iterator = world.getMap(0, 0).objectsStack[i][j].getIterator();
     			while(iterator.hasNext()) {	
-    				System.out.println("Does this print " + counter);
-    				counter++;
     				Component component = (Component)iterator.next();
     				if (RenderComponent.class.isInstance(component))
     				{
-    				
     					renderComponent = (RenderComponent) component;
     					renderComponent.render(gc, sb, g);
     				}
     			}
-    			
-    			//}
-    		
+    		}
+    	}
+    	*/
+    	for(int i = 0; i < world.getMap(0, 0).mapSize; i++) {
+    		for(int j = 0; j < world.getMap(0, 0).mapSize; j++) {
+    			Objects[] list = new Objects[world.getMap(0, 0).objectsStack[i][j].size()];
+    			System.arraycopy(world.getMap(0, 0).objectsStack[i][j].toArray(), 0, list, 0, world.getMap(0, 0).objectsStack[i][j].size());
+    			for(int k = 0; k < list.length; k++) {
+    				Component component = (Component)list[k];
+    				if (RenderComponent.class.isInstance(component))
+    				{
+    					renderComponent = (RenderComponent) component;
+    					renderComponent.render(gc, sb, g);
+    				}
+    			}
     		}
     	}
     	
+    	//mouse position
+    	g.drawString(mousePos, 900, 0);
  
     }
 }

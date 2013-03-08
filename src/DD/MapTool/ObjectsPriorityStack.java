@@ -27,9 +27,19 @@ public class ObjectsPriorityStack implements Serializable{
 	 * this returns an array of Objects that are in increasing prior
 	 */
 	public Objects[] toArray(){
+		/*
 		PriorityQueue<Objects> foo = pQueue;
 		Objects[] bar = new Objects[foo.size()];
 		for (int i = 0; i < bar.length; i++) {
+			bar[i] = foo.poll();
+		}
+		return bar;
+		*/
+		//The above code doesn't work since you are setting foo as a reference to pQueue
+		//I made a new copy using the contructor with pQueue as a parameter
+		PriorityQueue<Objects> foo = new PriorityQueue<Objects>(pQueue);
+		Objects[] bar = new Objects[foo.size()];
+		for(int i = 0; i < size(); i++) {
 			bar[i] = foo.poll();
 		}
 		return bar;

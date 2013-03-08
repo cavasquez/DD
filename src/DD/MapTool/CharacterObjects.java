@@ -10,6 +10,14 @@ public class CharacterObjects extends Objects{
 	public DDCharacter ddchar;
 	private float x, y;
 	
+	public CharacterObjects(String name, Image image, Map owner, DDCharacter ddchar) {
+		super(name, image, owner);
+		this.ddchar = ddchar;
+		super.priority =10;
+		x = 0;
+		y = 0;
+	}
+	
 	public CharacterObjects(String name, Image image, float x, float y, Map owner, DDCharacter ddchar) {
 		super(name, image, owner);
 		this.ddchar = ddchar;
@@ -24,5 +32,10 @@ public class CharacterObjects extends Objects{
 	
 	public void update(GameContainer gc, StateBasedGame sb, Graphics gr) {
 		
+	}
+	
+	public void setPosition(float x, float y) {
+		this.x = x;
+		this.y = y;
 	}
 }
