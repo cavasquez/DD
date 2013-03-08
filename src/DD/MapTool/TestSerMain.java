@@ -1,7 +1,9 @@
 package DD.MapTool;
 
+import org.newdawn.slick.SlickException;
+
 public class TestSerMain {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SlickException {
 		String path = "C:/Users/mike/Desktop/save/";
 		/*
 		 * IMPORTANT: to see this working edit the path above to a new folder you create on you Desktop.

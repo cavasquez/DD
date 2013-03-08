@@ -1,7 +1,9 @@
 package DD.MapTool;
 
+import org.newdawn.slick.SlickException;
+
 public class TestMainTobjs {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SlickException {
 		MapTool mt = new MapTool();
 		System.out.println(mt.getMapAtLocation(0, 0));
 

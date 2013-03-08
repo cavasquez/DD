@@ -47,7 +47,7 @@ public class TestMapMain {
 		System.out.println(world.world[0][0].toString());
 				
 		DDCharacter ddchar = new DDCharacter(0);
-		CharacterObjects charObj = new CharacterObjects("*****", null, world.world[0][0], ddchar);
+		CharacterObjects charObj = new CharacterObjects("*****", null,0,0, world.world[0][0], ddchar);
 		System.out.println("****************************************************");
 		System.out.println("Place a Character and start moving it around the map");
 		System.out.println("placeObjects(x, y, characterObjects)");

@@ -61,7 +61,7 @@ public class TestTargeting {
 		DDCharacter character = new DDCharacter(0);
 		int x = 6;
 		int y = 5;
-		CharacterObjects charObj = new CharacterObjects("*****", null, world.world[0][0], character);
+		CharacterObjects charObj = new CharacterObjects("*****", null,0,0, world.world[0][0], character);
 		world.world[0][0].placeObjects(x, y, charObj); /* place character */
 		character.setCoordiante(new Coordinate(x,y));
 		character.setCharacterID(0);

@@ -122,7 +122,7 @@ public class TestMove extends BasicGame
 		
 		int x = 6;
 		int y = 5;
-		CharacterObjects charObj = new CharacterObjects("*****", null, world.world[0][0], character);
+		CharacterObjects charObj = new CharacterObjects("*****", null,0,0, world.world[0][0], character);
 		world.world[0][0].placeObjects(x, y, charObj); /* place character */
 		character.setCoordiante(new Coordinate(x,y));
 		Ability.setOwnerCharacter(character); /* set the character who is performing the abilities. This should happen somewhere in ActionBox */
