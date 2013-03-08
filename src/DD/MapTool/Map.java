@@ -31,7 +31,7 @@ public class Map extends Entity implements Serializable{
 	Image floorImage = null;
 	boolean hasTempObjects;
 	String name;
-	public final int mapSize = 21;
+	public final int mapSize = 20;
 
 	public Map(){
 		super();

@@ -1,8 +1,11 @@
 package DD.GUI;
+ 
+import java.util.Iterator;
 
-import DD.Character.*;
+import DD.Character.*; 
 import DD.MapTool.*;
 import DD.SlickTools.Component;
+import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
 
 import org.newdawn.slick.AppGameContainer;
@@ -68,11 +71,16 @@ public class MapTestState extends BasicGameState {
 			}
 			
 		}
+		
+		
     }
+    
+    int counter = 0;
  
     public void render(GameContainer gc, StateBasedGame sb, Graphics g) throws SlickException
     {
     	RenderComponent renderComponent = null;
+ 
 		for (Component component : world.getMap(0, 0).getComponents())
 		{
 			if (RenderComponent.class.isInstance(component))
@@ -82,6 +90,31 @@ public class MapTestState extends BasicGameState {
 			}
 			
 		}
+	
+    
+    	
+    	
+    	for(int i = 0; i < world.getMap(0, 0).mapSize; i++) {
+    		for(int j = 0; j < world.getMap(0, 0).mapSize; j++) {
+    			//while(world.getMap(0, 0).objectsStack[i][j].size() > 0) {
+    			Iterator iterator = world.getMap(0, 0).objectsStack[i][j].getIterator();
+    			while(iterator.hasNext()) {	
+    				System.out.println("Does this print " + counter);
+    				counter++;
+    				Component component = (Component)iterator.next();
+    				if (RenderComponent.class.isInstance(component))
+    				{
+    				
+    					renderComponent = (RenderComponent) component;
+    					renderComponent.render(gc, sb, g);
+    				}
+    			}
+    			
+    			//}
+    		
+    		}
+    	}
+    	
  
     }
 }
