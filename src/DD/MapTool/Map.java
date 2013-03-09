@@ -90,6 +90,15 @@ public class Map extends Entity implements Serializable{
 		return objectsStack[x][y].toArray();
 	}
 	
+	public String contentToString(int x, int y){
+		String t = "";
+		Objects[] foo = objectsStack[x][y].toArray();
+		for (int i = 0; i < foo.length; i++) {
+			t+= foo[i].toString();
+		}
+		return t;
+	}
+	
 	
 	public CharacterObjects getDDCharacter(int x, int y){
 		if(objectsStack[x][y].peek() instanceof CharacterObjects){

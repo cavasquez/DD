@@ -26,6 +26,10 @@ public class CharacterObjects extends Objects{
 		this.y = y;
 	}
 	
+	public String toString(){
+		return "DDcharToString:(~*-*)~\n";
+	}
+	
 	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
 		image.draw(x, y);
 	}
