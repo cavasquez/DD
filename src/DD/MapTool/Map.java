@@ -33,9 +33,8 @@ public class Map extends Entity implements Serializable{
 	String name;
 	public final int mapSize = 20;
 
-	public Map(){
+	public Map() {
 		super();
-		
 	}
 	
 	public Map(String name) throws SlickException {
@@ -48,13 +47,12 @@ public class Map extends Entity implements Serializable{
 		spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
     	// get the floor image
         floorSprite = spriteSheet.getSubImage(1185, 416, 33, 34);
+        //scale the floor image
         floorImage = floorSprite.getScaledCopy(0.9f);
 		
 		for (int i = 0; i < mapSize; i++) {
-			for (int j = 0; j < mapSize; j++) {
-				//TODO:needs image                    VVV
-				Floor floor = new Floor("floor", floorImage, (i + (floorImage.getHeight() * i)), (j + (floorImage.getWidth() * j)), 5 , 5, this);
-				
+			for (int j = 0; j < mapSize; j++) {				              
+				Floor floor = new Floor("floor", floorImage, (i + (floorImage.getHeight() * i)), (j + (floorImage.getWidth() * j)), 5 , 5, this);				
 				addComponent(floor);
 				objectsStack[i][j] =  new ObjectsPriorityStack();
 				objectsStack[i][j].push(floor);

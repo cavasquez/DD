@@ -23,6 +23,7 @@ public class MapTestState extends BasicGameState {
 	private int stateID = 0;
 	private Image floor = null;
 	private Image wall = null;
+	private Image scaledWall = null;
 	private Image playerImage = null;
 	private Image spriteSheet = null;
 	private World world = null;
@@ -46,18 +47,19 @@ public class MapTestState extends BasicGameState {
     @Override
     public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
-    	// get the floor image
-        floor = spriteSheet.getSubImage(1185, 416, 33, 34);
+        //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
         playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
         player = new DDCharacter(stateID);      
-        //wall = new Image("data/land.jpg");
-      
+        wall = spriteSheet.getSubImage(1280, 574, 33, 34);
+        scaledWall = wall.getScaledCopy(0.9f);
+        //Obstacle renderWall = new Obstacle("wall", scaledWall, 5, 5, world.getMap(0, 0));
         world = new World("TestGUIMap");
         
-        playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
-        //playerObj.setPosition(6*30, 6*30);
+        //playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
+        playerObj = new CharacterObjects("Bob", playerImage, world.getMap(0, 0), player); 
         world.getMap(0, 0).placeObjects(6, 6, playerObj);
-        //playerObj.setPosition(6*30, 6*30);
+        playerObj.setPosition(100, 100);
+        //world.getMap(0, 0).massPlaceObjectsLine(10, 11, 10, 19, renderWall);
         
     }
  

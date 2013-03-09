@@ -81,9 +81,9 @@ public class GameplayState extends BasicGameState {
 		//System.out.println("Image width: " + characters.getWidth());
 		
 		/*2 up from bottom, 16 across */
-		//Image warrior = characters.getSubImage(2530, 1440, 33, 34);
-		// coordinates for a wall
-		Image warrior = characters.getSubImage(1280, 574, 33, 34);
+		Image warrior = characters.getSubImage(2530, 1440, 33, 34);
+	
+		
 		
 		/* 16 across, 7 down */
 		enemy = characters.getSubImage(480, 194, 33, 34);
