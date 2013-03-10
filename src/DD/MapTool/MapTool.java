@@ -29,21 +29,42 @@ public class MapTool implements Serializable{
 		selectedList = new LinkedList<Coordinate>();
 	}
 	
-	/* TODO:updateNormList()  and tempList()
-	 * 
-	 * reads possible items via objects.ser files. add those items to an array that can be scanned each time.
-	 * posts those items to the gui.
-	 * clone/copy those items when they are selected to be placed.
-	 * 
-	 *  if a new items is placed.
-	 *    add that item to the list of possible premade items.
-	 *    
-	 *  
-	 */
-	
 
-    /*
-	 * loads world then maps then objects on the maps using .ser files.
+	public void addSelectedList(Coordinate coord){
+		if(selectedList.contains(coord)){
+		}
+		else
+			selectedList.add(coord);
+	}
+	
+	public void placeSelectedList(Objects obj, Map map){
+		for (Coordinate coord : selectedList) {
+			map.place(coord.x, coord.y, obj);
+		}
+	}
+	
+	public void removeSelectedList(Coordinate coord){
+		for (int i = 0; i < selectedList.size(); i++) {
+			if(selectedList.get(i).x == coord.x && selectedList.get(i).y == coord.y){
+				selectedList.remove(i);
+			}
+		}
+	}
+	
+	public void clearSelectedList(){
+		selectedList.clear();
+	}
+	
+	public String selectedToString(){
+		String t = "";
+		for (Coordinate coord : selectedList) {
+			t+= coord.x + ","+coord.y+"\n";
+		}
+		return t;
+	}
+	
+	/*
+	 * loads world from a .ser and sets that world to the this.world
 	 */
 	public void loadWorld(String name, String path){
 		World e = null;

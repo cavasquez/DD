@@ -413,11 +413,32 @@ public class Map extends Entity implements Serializable{
 		return t;
 	}
 
+//	public void removeObjects(int x, int y) {
+//		objectsStack[x][y].pop();
+//		updateComponentList();
+//	}
+
+	
 	public void removeObjects(int x, int y) {
-		objectsStack[x][y].pop();
+		if(objectsStack[x][y].peek() instanceof Floor){
+			float xCoord = ((Floor) objectsStack[x][y].peek()).getX();
+			float yCoord = ((Floor) objectsStack[x][y].peek()).getY();
+			objectsStack[x][y].pop();
+			if(objectsStack[x][y].getPQueue().isEmpty()){
+				Floor floor = new Floor("t(*-*t)", floorImage, (xCoord + (floorImage.getHeight() * xCoord)), (yCoord + (floorImage.getWidth() * yCoord)), 5 , 5, this);
+				place(x,y,floor);
+			}
+		}
+		else{
+			objectsStack[x][y].pop();
+		}
 		updateComponentList();
 	}
-
+	
+	
+	
+	
+	
 	public ArrayList<Component> getComponents() {
 		// TODO Auto-generated method stub
 		return super.components;

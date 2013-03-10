@@ -25,7 +25,25 @@ public void loadWorld(String name, String path)
 	
 public Map getMapAtLocation(int x,int y)
 	- returns map of mapTool.world[x][y]
+
+public void placeSelectedList(Objects obj, Map map)
+	- iterates the selectedList and calls map.place(x,y,obj) for each coord in the selectedList
 	
+public void addSelectedList(Coordinate coord)
+	- if the selected list dosen't have the coord passed in that coord is added to the selectedList
+
+
+public void removeSelectedList(Coordinate coord)
+	- removes the passed in coord from the selectedList
+
+public void clearSelectedList()
+	- clears the selectedList;
+
+public String selectedToString()
+	- mostly used for testing
+	- returns a String in the following format
+	  for each coord in the selectedList
+	    cord.x , cord.y + "/n"
 	
 	
 *********

@@ -46,6 +46,14 @@ public class Floor extends Objects{
 		
 	}
 	
+	public float getX(){
+		return x;
+	}
+	
+	public float getY(){
+		return y;
+	}
+	
 	public String getName(){
 		return name;
 	}
