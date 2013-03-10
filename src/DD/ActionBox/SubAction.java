@@ -30,7 +30,7 @@ public class SubAction extends RenderComponent
 	public SubAction(int id, Ability ability) 
 	{
 		super(id);
-		ability = ability;
+		this.ability = ability;
 		clicked = false;
 	} /* end SubAction constructor */
 	

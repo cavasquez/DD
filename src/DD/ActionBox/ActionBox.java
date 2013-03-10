@@ -75,6 +75,8 @@ public class ActionBox extends BoxInterface
 	Image moveAction = null;
 	Image standardAction = null;
 	Image swiftAction = null;
+	Image standardAttack = null;
+	Image move = null;
 	
 	public ActionBox(int id, float length, float width) throws SlickException
 	{
@@ -90,7 +92,7 @@ public class ActionBox extends BoxInterface
 		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
 		
 		int shift = freeAction.getHeight();
-		Vector2f boxPosition = new Vector2f(500f, 0f);
+		Vector2f boxPosition = new Vector2f(620f, 0f);
 		this.setPosition(boxPosition);
 		
 		/* To begin with, the basic ActionChoices need to be available. */
@@ -100,6 +102,7 @@ public class ActionBox extends BoxInterface
 		this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
 		this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
 		this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
+		
 		
 	} /* end ActionBox constructor */
 	

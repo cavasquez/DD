@@ -1,5 +1,6 @@
 package DD.MapTool;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -26,8 +27,11 @@ public class Floor extends Objects{
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
-		image.draw(x, y);
-		
+		Color myAlphaColor = new Color(1f, 1f, 1f, 0.5f);
+		image.draw(x, y, myAlphaColor);
+		//If opacity doesn't work then we could use another tile to represent clickable squares
+		//this.image.setAlpha(0.8f);
+		//this.image.draw(x, y);
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sb, int delta) {

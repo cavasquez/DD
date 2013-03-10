@@ -23,8 +23,8 @@ public class Game extends StateBasedGame
 		this.addState(new Play(play));
 		this.addState(new About(about));
 		this.addState(new CreateLob(createLob));
-		//this.addState(new GameplayState(gameplay));
-		this.addState(new MapTestState(gameplay));
+		this.addState(new GameplayState(gameplay));
+		//this.addState(new MapTestState(gameplay));
 	}
 	
 	public void initStatesList(GameContainer gc) throws SlickException
