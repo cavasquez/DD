@@ -34,6 +34,8 @@ public class TargetBlock extends Objects
 	private static TargetingSystem.TargetSelection targetSelection = null;
 	private static Integer numOfTargets = null;
 	private ObjectsPriorityStack stack;
+	private Image spriteSheet = null;
+	
 	
 	/************************************ Class Methods *************************************/
 	public TargetBlock(String name, Image image, Map owner)
@@ -43,20 +45,25 @@ public class TargetBlock extends Objects
 		lightPenalty = 0;
 		this.target = null;
 		selected = false; 		/* start off as not selected */
-		priority = 9;			/* set to highest? priority */
+		//priority = 9;			/* set to highest? priority */
+		priority = 11;
 		
 		if (system == null) system = new TargetingSystem();
 	} /* end TargetBlock constructor */
 	
 	public TargetBlock(Map owner) throws SlickException
 	{
-		//super("Target Block", new Image(imagePath), owner);
 		super("|---|", null, owner); /* TODO: remove this after testing */
+		//super("Target Block", new Image(imagePath), owner);
+		spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
+		Image targetBlock = spriteSheet.getSubImage(1473, 513, 33, 34);
+		super.setImage(targetBlock);
 		movePenalty = 0;
 		lightPenalty = 0;
 		this.target = null;
 		selected = false; 		/* start off as not selected */
-		priority = 9;			/* set to highest? priority */
+		//priority = 9;			/* set to highest? priority */
+		priority = 11;
 		
 		if (system == null) system = new TargetingSystem();
 		

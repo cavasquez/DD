@@ -12,6 +12,7 @@ public class ObjectsPriorityStack implements Serializable{
 	private  PriorityQueue<Objects> pQueue;
 	private OPSComparator opsc;
 	private boolean hasTargetBlock;
+	
 	public ObjectsPriorityStack() {
 		opsc = new OPSComparator();
 		pQueue = new PriorityQueue<Objects>(2,opsc);

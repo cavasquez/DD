@@ -36,4 +36,8 @@ public abstract class ImageRenderComponent extends RenderComponent
 		
 	} /* end render method */
 	
+	public void setImage(Image image) {
+		this.image = image;
+	}
+	
 } /* end ImageRenderComponent class */

@@ -76,7 +76,6 @@ public class ActionBox extends BoxInterface
 	Image standardAction = null;
 	Image swiftAction = null;
 	Image standardAttack = null;
-	Image move = null;
 	
 	public ActionBox(int id, float length, float width) throws SlickException
 	{

@@ -52,7 +52,7 @@ public class Map extends Entity implements Serializable{
 		
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {				              
-				Floor floor = new Floor("floor", floorImage, (i + (floorImage.getHeight() * i)), (j + (floorImage.getWidth() * j)), 5 , 5, this);				
+				Floor floor = new Floor("floor", floorImage, (i + (floorImage.getHeight() * i)), ((j+ 40) + (floorImage.getWidth() * j)), 5 , 5, this);				
 				addComponent(floor);
 				objectsStack[i][j] =  new ObjectsPriorityStack();
 				objectsStack[i][j].push(floor);

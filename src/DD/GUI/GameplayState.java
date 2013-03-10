@@ -99,8 +99,6 @@ public class GameplayState extends BasicGameState {
     @Override
     public void update(GameContainer gc, StateBasedGame sb, int delta) throws SlickException
     {
-    	int mouseX = mouse.getMouseX();
-    	int mouseY = mouse.getMouseY();
     	
     	//Update Map
     	RenderComponent renderComponent = null;
@@ -118,8 +116,6 @@ public class GameplayState extends BasicGameState {
     			}
     		}
     	}
-		
-    	//mousePos = "Mouse Position x; " + mouseX + " y: " + mouseY;
 		
     	//Update Action Box
     	/* go through ArrayList of Components to call their update methods */
@@ -140,10 +136,6 @@ public class GameplayState extends BasicGameState {
  
     public void render(GameContainer gc, StateBasedGame sb, Graphics g) throws SlickException
     {
-    	//Render Map
-    	RenderComponent renderComponent = null;
-    	
-    
     	/*
     	
     	for(int i = 0; i < world.getMap(0, 0).mapSize; i++) {
@@ -160,6 +152,10 @@ public class GameplayState extends BasicGameState {
     		}
     	}
     	*/
+    	
+    	//Render Map
+    	RenderComponent renderComponent = null;
+    	
     	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
     		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
     			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
@@ -175,8 +171,6 @@ public class GameplayState extends BasicGameState {
     		}
     	}
     	
-    	//mouse position
-    	//g.drawString(mousePos, 900, 0);
     	
     	//Render Action Box
     	renderComponent = null;

@@ -1,5 +1,7 @@
 package DD.ActionBox;
 
+import java.util.ArrayList;
+
 import org.newdawn.slick.Color; 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -41,6 +43,7 @@ public class ActionChoice extends ImageRenderComponent
 	String mousePos = " ";
 	float x, y;
 	Input mouse = new Input(650);
+	ArrayList<SubAction> subActions = new ArrayList<SubAction>();
 	
 	/************************************ Class Methods *************************************/
 	/* Remember, ID is the same as ActionType */

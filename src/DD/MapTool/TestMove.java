@@ -71,10 +71,10 @@ public class TestMove extends BasicGame
 		*/
 		Wall wall = new Wall("walll", null,0,0, world.world[0][0]);
 		world.world[0][0].massPlaceObjectsLine(0, 0, 10, 0, wall);
-		world.world[0][0].massPlaceObjectsLine(0, 1, 0, 20, wall);
+		world.world[0][0].massPlaceObjectsLine(0, 1, 0, 19, wall);
 		world.world[0][0].massPlaceObjectsLine(1, 10, 10, 10, wall);
 		world.world[0][0].massPlaceObjectsLine(10, 9, 10, 1, wall);
-		world.world[0][0].massPlaceObjectsLine(1, 20, 10, 20, wall);
+		world.world[0][0].massPlaceObjectsLine(1, 19, 10, 19, wall);
 		world.world[0][0].massPlaceObjectsLine(10, 11, 10, 19, wall);
 
 		/*
