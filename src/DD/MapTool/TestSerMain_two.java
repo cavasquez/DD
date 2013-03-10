@@ -39,7 +39,7 @@ public class TestSerMain_two extends BasicGame
 		MapTool mt = new MapTool();
 		
 		//***************************************************
-		//START PHASE1
+		//START PHASE1 - write the world
 		//***************************************************
 //		mt.world.writeMe(path);
 //		Obstacle wall1 = new Obstacle("wall1", null, 5, 5, null);
@@ -64,7 +64,7 @@ public class TestSerMain_two extends BasicGame
 		
 		
 		//***************************************************
-		//START PHASE2
+		//START PHASE2 - read the world
 		//***************************************************
 		mt.loadWorld("Norrath", path);
 		System.out.println("Norrath map0 and map24");

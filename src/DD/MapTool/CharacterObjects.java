@@ -7,6 +7,8 @@ import org.newdawn.slick.state.StateBasedGame;
 import DD.Character.*;
 
 public class CharacterObjects extends Objects{
+
+	private static final long serialVersionUID = -942204818115561142L;
 	public DDCharacter ddchar;
 	private float x, y;
 	

@@ -1,12 +1,14 @@
 package DD.Character.Equipment;
 
+import java.io.Serializable;
+
 import DD.ActionBox.Dice;
 import DD.ActionBox.Dice.DieSize;
 
 
-public class Weapon extends Equipment{
+public class Weapon extends Equipment implements Serializable{
 
-	
+	private static final long serialVersionUID = 1971467098042856701L;
 	int enchance;
 	//int[] attackMod;
 	Dice.DieSize damage;

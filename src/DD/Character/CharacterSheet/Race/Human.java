@@ -1,8 +1,10 @@
 package DD.Character.CharacterSheet.Race;
 
-public class Human extends Race {
+import java.io.Serializable;
+
+public class Human extends Race implements Serializable{
 	
-	
+	private static final long serialVersionUID = 7679156632774399340L;
 	/*
 	 * something annoying about humans is 
 	 * you get the choice of placing 2 points

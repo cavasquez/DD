@@ -1,12 +1,15 @@
 package DD.Character.Equipment;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import DD.ActionBox.Dice;
 import DD.ActionBox.Dice.DieSize;
 
-public class Armory {
+public class Armory implements Serializable{
 
+	private static final long serialVersionUID = 2758563872121747903L;
+	
 	public ArrayList<Armor> armor = new ArrayList<Armor>();
 	public ArrayList<Weapon> weapons = new ArrayList<Weapon>();
 	public Armory()

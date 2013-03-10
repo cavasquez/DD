@@ -1,5 +1,6 @@
 package DD.Character.CharacterSheet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /*****************************************************************************************************
@@ -7,12 +8,10 @@ import java.util.ArrayList;
  * HP gained from a particular class, levels in a particular class, etc.
  ******************************************************************************************************/
 
-public class ClassRecorder 
+public class ClassRecorder implements Serializable
 {
 	
-	
-	
-	
+	private static final long serialVersionUID = 6004536526725809028L;
 	String className;
 	int[] bab;
 	int skills;

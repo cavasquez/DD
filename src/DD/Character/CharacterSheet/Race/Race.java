@@ -1,7 +1,11 @@
 package DD.Character.CharacterSheet.Race;
 
-public abstract class  Race 
+import java.io.Serializable;
+
+public abstract class  Race  implements Serializable
 {
+
+	private static final long serialVersionUID = 3551099833072892648L;
 	public String raceName;
 	public int naturalArmor;
 	public int str;

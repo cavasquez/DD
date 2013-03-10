@@ -1,7 +1,9 @@
 package DD.Character.Equipment;
 
-public class Armor extends Equipment{
+import java.io.Serializable;
 
+public class Armor extends Equipment implements Serializable{
+	private static final long serialVersionUID = 5345532757085254659L;
 	
 	int enhance;
 	int acBonus;

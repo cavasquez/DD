@@ -1,5 +1,6 @@
 package DD.Character.CharacterSheet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -19,9 +20,10 @@ import DD.Character.Equipment.Weapon;
  * there might be some differing elements from other D&D games.
  ******************************************************************************************************/
 
-public class CharacterSheet 
+public class CharacterSheet implements Serializable
 {
-	
+	private static final long serialVersionUID = 3487802644679243707L;
+
 	public CharacterSheet()
 	{
 		String raceName = "Monster";
@@ -1884,6 +1886,11 @@ public class CharacterSheet
 		setFlatfootArmor();
 		setFlatfootShield();
 	}
+	
+	public String getName(){
+		return name;
+	}
+	
 	
 	public String toString()
 	{
