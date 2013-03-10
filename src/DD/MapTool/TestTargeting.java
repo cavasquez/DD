@@ -39,7 +39,7 @@ public class TestTargeting {
 		System.out.println("MassPlaceObjectsLine() --place some walls on my map0");
 		System.out.println("****************************************************");
 		*/
-		Wall wall = new Wall("walll", null, world.world[0][0]);
+		Wall wall = new Wall("walll", null,0,0, world.world[0][0]);
 		world.world[0][0].massPlaceObjectsLine(0, 0, 10, 0, wall);
 		world.world[0][0].massPlaceObjectsLine(0, 1, 0, 20, wall);
 		world.world[0][0].massPlaceObjectsLine(1, 10, 10, 10, wall);
