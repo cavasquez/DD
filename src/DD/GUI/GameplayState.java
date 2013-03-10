@@ -30,6 +30,7 @@ public class GameplayState extends BasicGameState {
 	private Image playerImage = null;
 	private Image spriteSheet = null;
 	private World world = null;
+	private MapTool maptool = null;
     private DDCharacter player;
     private CharacterObjects playerObj;
     private ActionBox actionBox;
@@ -79,17 +80,19 @@ public class GameplayState extends BasicGameState {
         actionBox = new ActionBox(stateID, 300, 200);
         actionBox.setCharacter(player);
         
-        
+        maptool = new MapTool();
         wall = spriteSheet.getSubImage(1280, 574, 33, 34);
         scaledWall = wall.getScaledCopy(0.9f);
-        //Obstacle renderWall = new Obstacle("wall", scaledWall, 5, 5, world.getMap(0, 0));
-        world = new World("TestGUIMap");
+       // Obstacle renderWall = new Obstacle("wall", scaledWall, 5, 5, maptool.getMapAtLocation(0, 0));
+       // System.out.println(renderWall.toString());
+        //world = new World("TestGUIMap");
+        
         
         //playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
-        playerObj = new CharacterObjects("Bob", playerImage, world.getMap(0, 0), player); 
-        world.getMap(0, 0).placeObjects(6, 6, playerObj);
+        playerObj = new CharacterObjects("Bob", playerImage, maptool.getMapAtLocation(0, 0), player); 
+        maptool.getMapAtLocation(0, 0).placeObjects(6, 6, playerObj);
         playerObj.setPosition(400, 300);
-        //world.getMap(0, 0).massPlaceObjectsLine(10, 11, 10, 19, renderWall);
+       // maptool.getMapAtLocation(0, 0).massPlaceObjectsLine(10, 11, 10, 19, renderWall);
         
     }
  
@@ -101,10 +104,10 @@ public class GameplayState extends BasicGameState {
     	
     	//Update Map
     	RenderComponent renderComponent = null;
-    	for(int i = 0; i < world.getMap(0, 0).mapSize; i++) {
-    		for(int j = 0; j < world.getMap(0, 0).mapSize; j++) {
-    			Objects[] list = new Objects[world.getMap(0, 0).objectsStack[i][j].size()];
-    			System.arraycopy(world.getMap(0, 0).objectsStack[i][j].toArray(), 0, list, 0, world.getMap(0, 0).objectsStack[i][j].size());
+    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
+    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
+    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
+    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
     			for(int k = 0; k < list.length; k++) {
     				Component component = (Component)list[k];
     				if (RenderComponent.class.isInstance(component))
@@ -157,10 +160,10 @@ public class GameplayState extends BasicGameState {
     		}
     	}
     	*/
-    	for(int i = 0; i < world.getMap(0, 0).mapSize; i++) {
-    		for(int j = 0; j < world.getMap(0, 0).mapSize; j++) {
-    			Objects[] list = new Objects[world.getMap(0, 0).objectsStack[i][j].size()];
-    			System.arraycopy(world.getMap(0, 0).objectsStack[i][j].toArray(), 0, list, 0, world.getMap(0, 0).objectsStack[i][j].size());
+    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
+    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
+    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
+    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
     			for(int k = list.length; k > 0; k--) {
     				Component component = (Component)list[k-1];
     				if (RenderComponent.class.isInstance(component))
