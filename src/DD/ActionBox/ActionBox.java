@@ -7,6 +7,7 @@ import org.newdawn.slick.geom.Vector2f;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
+import DD.Character.Abilities.DefaultAbilities.Standard.StandardAttack;
 import DD.SlickTools.BoxInterface;
 import DD.SlickTools.Component;
 
@@ -97,8 +98,8 @@ public class ActionBox extends BoxInterface
 		
 		/* To begin with, the basic ActionChoices need to be available. */
 	
-		
-		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y));
+		StandardAttack standardAttack = new StandardAttack(this.id);
+		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y, standardAttack));
 		Move move = new Move(this.id);
 		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift, move));
 		this.addComponent(new ActionChoice(this.id, Action.FULL_ROUND_ACTION.index, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));

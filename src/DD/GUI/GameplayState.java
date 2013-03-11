@@ -3,10 +3,13 @@ package DD.GUI;
 import java.util.Iterator;  
 
 import DD.ActionBox.ActionBox;
+import DD.ActionBox.Dice;
 import DD.Character.*; 
 import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterClass;
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.Character.CharacterSheet.Monster.Goblin;
+import DD.Character.Equipment.Weapon;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
@@ -70,6 +73,10 @@ public class GameplayState extends BasicGameState {
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
         playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
         player = new DDCharacter(stateID++);  
+        //make goblins
+        DDCharacter goblin1 = new DDCharacter(stateID++);
+        DDCharacter goblin2 = new DDCharacter(stateID++);
+        Goblin goblin = new Goblin();
         /* character creation process */
 		sheet.fillBasic("Max", 
 			"Bob", 
@@ -89,17 +96,25 @@ public class GameplayState extends BasicGameState {
 		CharacterClass barb = sheet.chooseClass(0);	//this is barbarian
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
+		sheet.EquipWeapon(new Weapon("Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4));
         player.setCharacterSheet(sheet);
         
+        
         player.setCharacterID(stateID++);
+        goblin1.setCharacterID(stateID++);
+        goblin2.setCharacterID(stateID++);
+        
         CombatSystem.addCharacter(player);
+        CombatSystem.addCharacter(goblin1);
+        CombatSystem.addCharacter(goblin2);
+        
         
         actionBox = new ActionBox(stateID, 300, 200);
         ActionBox.setCharacter(player);
        
         
-        wall = spriteSheet.getSubImage(1280, 574, 33, 34);
-        scaledWall = wall.getScaledCopy(0.9f);
+        //wall = spriteSheet.getSubImage(1280, 574, 33, 34);
+        //scaledWall = wall.getScaledCopy(0.9f);
        // Obstacle renderWall = new Obstacle("wall", scaledWall, 5, 5, maptool.getMapAtLocation(0, 0));
        // System.out.println(renderWall.toString());
         //world = new World("TestGUIMap");
