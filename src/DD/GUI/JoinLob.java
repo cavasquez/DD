@@ -2,9 +2,22 @@ package DD.GUI;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.gui.TextField;
+
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+
+import java.awt.Font;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
+import org.newdawn.slick.gui.ComponentListener;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+
 public class JoinLob extends BasicGameState
 {
 	
@@ -14,8 +27,8 @@ public class JoinLob extends BasicGameState
 	//Image play;
 	Sound button;
 	//Music dungeon;
-	
-	
+	UnicodeFont font;
+	TextField textbox;
 	ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
 	
 	public JoinLob(int state)
@@ -31,11 +44,12 @@ public class JoinLob extends BasicGameState
 		
 		//play = new Image("Images/Menus/play button.png");
 		//options = new Image("res/options button.png");
-		
-
+		//font = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF,java.awt.Font.BOLD,8),false);
+		font = getNewFont("Arial" , 16);
 		button = new Sound("Audio/dunSound.wav");
 		//dungeon = new Music("Audio/dunEffect1.wav");
 		//dungeon.loop();
+		textbox = new TextField(gc, font, 100, 266, 250 , 50);
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
@@ -48,6 +62,13 @@ public class JoinLob extends BasicGameState
 		g.drawString("LobbyIP: 123.43.345", 82, 266);
 		g.drawString("LOGIN", 190, 604);
 		g.drawString("BACK", 190, 552);
+		g.setFont(font);
+		
+		
+		textbox.render(gc, g);
+		textbox.setCursorVisible(true);
+		textbox.setText("Test");
+		
 		
 	}
 	
@@ -55,7 +76,7 @@ public class JoinLob extends BasicGameState
 	{
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
-		
+		//font.loadGlyphs();
 		//BACK button
 		if((posX > 185 && posX < 240) && (posY > 80 && posY < 100))
 		{
@@ -76,7 +97,7 @@ public class JoinLob extends BasicGameState
 			}
 		}
 				
-		
+		//String input = textbox.getText();
 		
 		
 		
@@ -86,6 +107,14 @@ public class JoinLob extends BasicGameState
 
 		
 	}
+	
+	public UnicodeFont getNewFont(String fontName , int fontSize)
+    {
+        font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
+        font.addGlyphs("@");
+        //font.getEffects().add(new ColorEffect(java.awt.Color.white));
+        return (font);
+    }
 	
 	public int getID()
 	{
