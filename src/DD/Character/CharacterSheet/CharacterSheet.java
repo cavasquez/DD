@@ -1920,9 +1920,12 @@ public class CharacterSheet implements Serializable
 		return hp;
 	} /* end getHP method */
 	
+	public int getMonHP()
+	{
+		return hitpoints;
+	}
 	
-	
-	public int getHP(int hp) //for monsters
+	public int setHP(int hp) //for monsters
 	{
 		hitpoints = hp + dice.roll(1,10);
 		return hitpoints;
