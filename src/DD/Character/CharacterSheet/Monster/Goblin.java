@@ -1,6 +1,8 @@
 package DD.Character.CharacterSheet.Monster;
 
+import DD.ActionBox.Dice;
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.Character.Equipment.Weapon;
 
 public class Goblin {
 
@@ -36,7 +38,9 @@ public class Goblin {
 		sheet.setHP(6);
 		
 		sheet.init = sheet.getInit() + 6;
-	
+		
+		sheet.EquipWeapon(new Weapon("Cutlass",Dice.DieSize.D6,2,18,5,'M','S',"Note:",4));
+		
 		 XP = 135;
 	}
 	
@@ -99,5 +103,10 @@ public class Goblin {
 	public int getInit()
 	{
 		return sheet.init;
+	}
+	
+	public Weapon getWeapon()
+	{
+		return sheet.getEquippedWeapon(0);
 	}
 }
