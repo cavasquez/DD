@@ -1,6 +1,9 @@
 package DD.Character.CharacterSheet;
 
-public class SkillsList {
+import java.io.Serializable;
+
+public class SkillsList implements Serializable{
+	private static final long serialVersionUID = 7876338012984496061L;
 	public final int ACROBATICS = 0;
 	public final int APPRAISE = 1;
 	public final int BLUFF = 2;

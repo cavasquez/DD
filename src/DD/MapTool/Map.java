@@ -15,6 +15,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 
+import DD.Character.DDCharacter;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.SlickTools.*;
@@ -395,6 +396,28 @@ public class Map extends Entity implements Serializable{
 		this.hasTempObjects = hasTempObjects;
 	}
 
+	public DDCharacter loadCharacter(String path, String charName){
+		DDCharacter e = null;
+	      try
+	      {
+	         FileInputStream fileIn =
+	                          new FileInputStream(path+"/"+charName+".ser");
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         e = (DDCharacter) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         
+	      }catch(ClassNotFoundException c)
+	      {
+	         c.printStackTrace();
+	         
+	      }
+	      return e;
+	}
+	
 	/*
 	 * debuging toString
 	 * only used in testMapMain.

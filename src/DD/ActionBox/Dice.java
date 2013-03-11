@@ -1,5 +1,6 @@
 package DD.ActionBox;
 
+import java.io.Serializable;
 import java.util.Random;
 
 /*****************************************************************************************************
@@ -8,8 +9,10 @@ import java.util.Random;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class Dice 
+public class Dice implements Serializable
 {
+	private static final long serialVersionUID = 524436983057308321L;
+
 	/************************************ Class Constants*************************************/
 	public static enum DieSize
 	{

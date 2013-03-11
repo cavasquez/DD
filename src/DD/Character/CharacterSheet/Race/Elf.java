@@ -1,7 +1,10 @@
 package DD.Character.CharacterSheet.Race;
 
-public class Elf extends Race{
+import java.io.Serializable;
 
+public class Elf extends Race implements Serializable{
+
+	private static final long serialVersionUID = 2871670282082301008L;
 	//starting stats
 	int str;
 	int dex;

@@ -9,6 +9,8 @@ import DD.Character.*;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 
 public class CharacterObjects extends Objects{
+
+	private static final long serialVersionUID = -942204818115561142L;
 	public DDCharacter ddchar;
 	
 	public CharacterObjects(String name, Image image, Map owner, DDCharacter ddchar) throws SlickException {

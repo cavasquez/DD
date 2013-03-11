@@ -1,8 +1,10 @@
 package DD.Character.CharacterSheet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public abstract class CharacterClass {
+public abstract class CharacterClass implements Serializable{
+	private static final long serialVersionUID = 7415726862203976335L;
 	String className;
 	int[] bab = new int[5];
 	int[] fortSave = new int[20];

@@ -11,8 +11,8 @@ public class Game extends StateBasedGame
 	public static final String gamename = "Dungeons & Dragons!";
 	
 	public static final int menu = 0;
-	public static final int play = 1;
-	public static final int about = 2;
+	public static final int JoinLob = 1;
+	public static final int LobbyRoom = 2;
 	public static final int createLob = 3;
 	public static final int gameplay = 4;
 	
@@ -20,8 +20,8 @@ public class Game extends StateBasedGame
 	{
 		super(gamename);
 		this.addState(new Menu(menu));
-		this.addState(new Play(play));
-		this.addState(new About(about));
+		this.addState(new JoinLob(JoinLob));
+		this.addState(new LobbyRoom(LobbyRoom));
 		this.addState(new CreateLob(createLob));
 		this.addState(new GameplayState(gameplay));
 		//this.addState(new MapTestState(gameplay));
@@ -30,8 +30,8 @@ public class Game extends StateBasedGame
 	public void initStatesList(GameContainer gc) throws SlickException
 	{
 		this.getState(menu).init(gc, this);
-		this.getState(play).init(gc, this);
-		this.getState(about).init(gc, this);
+		this.getState(JoinLob).init(gc, this);
+		this.getState(LobbyRoom).init(gc, this);
 		this.getState(createLob).init(gc, this);
 		this.getState(gameplay).init(gc, this);
 		

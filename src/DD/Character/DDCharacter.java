@@ -1,5 +1,10 @@
 package DD.Character;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import DD.ActionBox.Dice;
 import DD.Character.Abilities.Ability;
@@ -16,8 +21,10 @@ import DD.SlickTools.*;
  * needed to keep up the game.
  ******************************************************************************************************/
 
-public class DDCharacter extends Entity
+public class DDCharacter extends Entity implements Serializable
 {
+	private static final long serialVersionUID = -3339921524023083469L;
+
 	/************************************ Class Constants *************************************/
 	public static enum ACType
 	{
@@ -60,6 +67,27 @@ public class DDCharacter extends Entity
 		movedDiagonal = true;
 		
 	} /* end Character Constructor */
+	
+	public void writeMe(String path){
+		File theDir = new File(path+"Characters");
+		
+		if (!theDir.exists())
+		{
+			theDir.mkdir();  
+		}		
+		try{
+			FileOutputStream fileOut = new FileOutputStream(path+"/"+"Characters"+"/"+sheet.getName()+".ser");
+			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
+			out.writeObject(this);
+			out.close();
+			fileOut.close();
+		}
+		catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	
 	
 	public CharacterSheet getCharacterSheet() 
 	{

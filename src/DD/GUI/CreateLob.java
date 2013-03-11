@@ -1,4 +1,5 @@
 package DD.GUI;
+import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
@@ -9,7 +10,9 @@ public class CreateLob extends BasicGameState
 	Image screen;
 	private String mouse = "No input yet!";
 	Music dungeon;
-	//Sound button;
+	Sound button;
+	ArrayList<Lobby> newLobby = new ArrayList<Lobby>();
+	
 	
 	
 	public CreateLob(int state)
@@ -21,10 +24,10 @@ public class CreateLob extends BasicGameState
 	{
 		screen = new Image("Images/Menus/lobby.jpg");
 		
-		dungeon = new Music("Audio/Gauntlet.wav");
-		dungeon.loop();
+		//dungeon = new Music("Audio/dunEffect1.wav");
+		//dungeon.loop();
 		
-		//button = new Sound("res/button-9.wav");
+		button = new Sound("Audio/dunSound.wav");
 		
 		
 		
@@ -38,7 +41,9 @@ public class CreateLob extends BasicGameState
 		
 		g.drawString(mouse, 100, 100);
 		
-		g.drawString("BACK",130,434);
+		g.drawString("CREATE LOBBY",540,222);
+		
+		g.drawString("BACK",540,434);
 		
 	}
 	
@@ -46,16 +51,30 @@ public class CreateLob extends BasicGameState
 	{
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
+
+		//CREATE LOBBY
 		
-		//Back button
-		if((posX > 125 && posX < 170) && (posY > 199 && posY < 219))
+		if((posX > 540 && posX < 650) && (posY > 405 && posY < 430))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				//button.play();
+				button.play();
+				sbg.enterState(2);
+			}
+		}
+		
+		
+		
+		//Back button
+		if((posX > 540 && posX < 590) && (posY > 196 && posY < 222))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
 				sbg.enterState(0);
 			}
 		}
+		
 		
 		
 		

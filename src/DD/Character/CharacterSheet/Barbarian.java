@@ -1,13 +1,18 @@
 package DD.Character.CharacterSheet;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import DD.ActionBox.Dice;
 import DD.SlickTools.Component;
 
-public class Barbarian extends CharacterClass  {
+public class Barbarian extends CharacterClass implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7891712802724053413L;
 	//import class of skills
 	private final int FIRSTATTACK = 0;
 	private final int SECONDATTACK = 1;
