@@ -39,10 +39,12 @@ public class GameplayState extends BasicGameState {
 	private World world = null;
 	private MapTool maptool = null;
     private DDCharacter player;
+    private DDCharacter goblin1;
     private CharacterObjects playerObj;
     private ActionBox actionBox;
     private CharacterSheet sheet = new CharacterSheet();
     private String charToString = " ";
+    private String goblinHP = " ";
     //private String mousePos = " ";
     Input mouse = new Input(650);
     //private float x, y;
@@ -72,10 +74,11 @@ public class GameplayState extends BasicGameState {
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
         playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
+        Image goblinImage = spriteSheet.getSubImage(98, 65, 33, 34);
+    	
         player = new DDCharacter(stateID++);  
         //make goblins
-        DDCharacter goblin1 = new DDCharacter(stateID++);
-        DDCharacter goblin2 = new DDCharacter(stateID++);
+        goblin1 = new DDCharacter(stateID++);
         Goblin goblin = new Goblin();
         /* character creation process */
 		sheet.fillBasic("Max", 
@@ -98,15 +101,14 @@ public class GameplayState extends BasicGameState {
 		sheet.fillAttacksAndDefense(barb);
 		sheet.EquipWeapon(new Weapon("Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4));
         player.setCharacterSheet(sheet);
-        
+        goblin1.setCharacterSheet(goblin.getCharacterSheet());
         
         player.setCharacterID(stateID++);
         goblin1.setCharacterID(stateID++);
-        goblin2.setCharacterID(stateID++);
-        
+       
         CombatSystem.addCharacter(player);
         CombatSystem.addCharacter(goblin1);
-        CombatSystem.addCharacter(goblin2);
+      
         
         
         actionBox = new ActionBox(stateID, 300, 200);
@@ -119,14 +121,26 @@ public class GameplayState extends BasicGameState {
        // System.out.println(renderWall.toString());
         //world = new World("TestGUIMap");
         
-        int x = 15;
-        int y = 6;
+        int playerx = 15;
+        int playery = 6;
+        int goblinx = 13;
+        int gobliny = 6;
         //playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
-        playerObj = new CharacterObjects("Bob", playerImage,x,y, maptool.getMapAtLocation(0, 0), player); 
-        maptool.getMapAtLocation(0, 0).placeObjects(x, y, playerObj);
-        player.setCoordiante(new Coordinate(x,y));
+        playerObj = new CharacterObjects("Bob", playerImage, playerx, playery, maptool.getMapAtLocation(0, 0), player);
+        CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinImage, goblinx, gobliny, maptool.getMapAtLocation(0, 0), goblin1); 
+        
+        maptool.getMapAtLocation(0, 0).placeObjects(playerx, playery, playerObj);
+        maptool.getMapAtLocation(0, 0).placeObjects(goblinx, gobliny, goblinObj);
+        
+        player.setCoordiante(new Coordinate(playerx, playery));
+        goblin1.setCoordiante(new Coordinate(goblinx, gobliny));
+        
        // maptool.getMapAtLocation(0, 0).massPlaceObjectsLine(10, 11, 10, 19, renderWall);
         Ability.setOwnerCharacter(player);
+        
+        player.resetCharacter();
+        goblin1.resetCharacter();
+        
         player.startNewTurn();
         System.out.println("GS:" + player);
         
@@ -172,6 +186,7 @@ public class GameplayState extends BasicGameState {
 		
 		//Character sheet
 		charToString = "CHARACTER SHEET: \n" + player.getCharacterSheet().toString();
+		goblinHP = "Goblin HP: " + goblin1.getCurrentHP();
     }
  
     public void render(GameContainer gc, StateBasedGame sb, Graphics g) throws SlickException
@@ -225,5 +240,6 @@ public class GameplayState extends BasicGameState {
 		}
  
 		g.drawString(charToString, 950, 30);
+		g.drawString(goblinHP, 950, 400);
     }
 }

@@ -48,7 +48,6 @@ public class I_StandardAttack implements CombatInterpreter
 		if (attackModifiers != null) for (int i = 0; i < attackModifiers.length; i++) attack += attackModifiers[i];
 		if (damageModifiers != null) for (int i = 0; i < damageModifiers.length; i++) damage += damageModifiers[i];
 		
-		System.out.println("TARGET: " + cm.getTarget());
 		if (cm.getTarget() != null)CombatSystem.getCharacter(cm.getTarget()[0]).defend(attack, damage, DDCharacter.ACType.NORMAL);
 		/* if cmTarget is null, player attacked the air */
 	} /* end interpret method */

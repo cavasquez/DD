@@ -78,6 +78,8 @@ public class ActionBox extends BoxInterface
 	Image standardAction = null;
 	Image swiftAction = null;
 	Image standardAttack = null;
+	Image endMove = null;
+	//Image startNewTurn = null;
 	
 	public ActionBox(int id, float length, float width) throws SlickException
 	{
@@ -91,6 +93,8 @@ public class ActionBox extends BoxInterface
 		moveAction = new Image("Images/ActionBox/MoveAction.png");
 		standardAction = new Image("Images/ActionBox/StandardAction.png");
 		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
+		endMove = new Image("Images/ActionBox/EndMove.png");
+		//tartNewTurn = new Image("Images/ActionBox/startNewTurn.png");
 		
 		int shift = freeAction.getHeight();
 		Vector2f boxPosition = new Vector2f(660f, 10f);
@@ -107,7 +111,8 @@ public class ActionBox extends BoxInterface
 		this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
 		this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
 		
-		
+		this.addComponent(new ActionChoice(this.id, 1000, "End Move", endMove, position.x, position.y + shift*6, move));
+		//this.addComponent(new ActionChoice(this.id, 2000, "Start New Turn", startNewTurn, position.x, position.y + shift*6));
 		
 	} /* end ActionBox constructor */
 	

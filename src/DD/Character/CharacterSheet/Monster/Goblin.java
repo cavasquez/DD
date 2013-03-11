@@ -109,4 +109,8 @@ public class Goblin {
 	{
 		return sheet.getEquippedWeapon(0);
 	}
+	
+	public CharacterSheet getCharacterSheet() {
+		return sheet;
+	}
 }

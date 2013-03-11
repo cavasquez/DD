@@ -106,9 +106,16 @@ public class ActionChoice extends ImageRenderComponent
 			{
 				System.out.println("You are clicking " + display);
 				message = "You are clicking " + display;
-				if(ability != null) {
-					ability.activate();
+				if(actionType == 1000) {
+					ability.done();
 				}
+				else {
+					if(ability != null) {
+						ability.activate();
+					}
+				}
+				
+				
 				
 			}
 		}

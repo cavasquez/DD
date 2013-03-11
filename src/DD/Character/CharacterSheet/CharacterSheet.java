@@ -1117,7 +1117,7 @@ public class CharacterSheet implements Serializable
 		public static final int ATTACK_SIZE = 6; 
 		public static final int ATTACK_TOTAL = 7;
 		
-	public int[][] attacks = new int[4][7];
+	public int[][] attacks = new int[4][8];
 	//Melee
 	public void setMeleeBab(CharacterClass clas)
 	{
