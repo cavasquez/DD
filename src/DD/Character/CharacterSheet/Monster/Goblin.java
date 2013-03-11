@@ -5,7 +5,7 @@ import DD.Character.CharacterSheet.CharacterSheet;
 import DD.Character.Equipment.Weapon;
 
 public class Goblin {
-
+	int hp;
 	CharacterSheet sheet = new CharacterSheet();
 	int XP = 135;
 	
@@ -35,7 +35,7 @@ public class Goblin {
 		
 		//sheet has a hitpoints variable that holds the hp of the monster or person this sets it to 6 + rolls
 		//a 1d10 die to determine the hp
-		sheet.setHP(6);
+		hp =sheet.setHP(6);
 		
 		sheet.init = sheet.getInit() + 6;
 		
@@ -50,7 +50,7 @@ public class Goblin {
 	}
 	public int getHP()
 	{
-		return sheet.hitpoints;
+		return hp;
 	}
 	public int getMelee()
 	{
