@@ -41,7 +41,9 @@ public class CreateLob extends BasicGameState
 		
 		g.drawString(mouse, 100, 100);
 		
-		g.drawString("BACK",130,434);
+		g.drawString("CREATE LOBBY",540,222);
+		
+		g.drawString("BACK",540,434);
 		
 	}
 	
@@ -49,9 +51,22 @@ public class CreateLob extends BasicGameState
 	{
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
+
+		//CREATE LOBBY
+		
+		if((posX > 540 && posX < 650) && (posY > 405 && posY < 430))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
+				sbg.enterState(2);
+			}
+		}
+		
+		
 		
 		//Back button
-		if((posX > 125 && posX < 170) && (posY > 199 && posY < 219))
+		if((posX > 540 && posX < 590) && (posY > 196 && posY < 222))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -59,6 +74,7 @@ public class CreateLob extends BasicGameState
 				sbg.enterState(0);
 			}
 		}
+		
 		
 		
 		

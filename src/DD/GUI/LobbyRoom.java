@@ -4,33 +4,34 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
-public class About extends BasicGameState
+public class LobbyRoom extends BasicGameState
 {
 	
 	private String mouse = "No input yet!";
-	Image about;
+	Image roomScreen;
 	Sound button;
 	
 	
 	
-	public About(int state)
+	public LobbyRoom(int state)
 	{
 		
 	}
 	
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
-		about = new Image("Images/Menus/protoAbout.jpg");
+		roomScreen = new Image("Images/Menus/menuscreen2.jpg");
 		button = new Sound("Audio/dunSound.wav");
 			
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
 	{
-		about.draw(110,50);
+		roomScreen.draw(110,50);
 		//g.drawRect(100, 100, 200, 60);
-		g.drawString("BACK", 122, 633);
+		g.drawString("BACK", 122, 64);
 		g.drawString(mouse, 100, 10);
+		g.drawString("PLAY GAME", 1025, 64);
 		
 	}
 	
@@ -40,14 +41,25 @@ public class About extends BasicGameState
 		int posY = Mouse.getY();
 		
 		//back button
-		if((posX > 120 && posX < 163) && (posY > 2 && posY < 15))
+		if((posX > 114 && posX < 166) && (posY > 564 && posY < 588))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
-				sbg.enterState(1);
+				sbg.enterState(0);
 			}
 		}
+		
+		//PLAY GAME BUTTON
+		if((posX > 1020 && posX < 1112) && (posY > 564 && posY < 588))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
+				sbg.enterState(4);
+			}
+		}
+		
 		
 		
 		

@@ -5,16 +5,15 @@ import java.util.ArrayList;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
-public class JoinLob extends BasicGameState{
+public class JoinLob extends BasicGameState
+{
 	
 	
 	Image screen;
 	private String mouse = "No input yet!";
-	Image play;
-	Image options;
-	Image about;
+	//Image play;
 	Sound button;
-	Music dungeon;
+	//Music dungeon;
 	
 	
 	ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
@@ -30,9 +29,9 @@ public class JoinLob extends BasicGameState{
 		screen = new Image("Images/Menus/DD1.jpg");
 		
 		
-		play = new Image("Images/Menus/play button.png");
+		//play = new Image("Images/Menus/play button.png");
 		//options = new Image("res/options button.png");
-		about = new Image("Images/Menus/about button.png");
+		
 
 		button = new Sound("Audio/dunSound.wav");
 		//dungeon = new Music("Audio/dunEffect1.wav");
@@ -42,10 +41,13 @@ public class JoinLob extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
 	{
 		screen.draw(0,0);
-		play.draw(100,100);
+		//play.draw(100,100);
 		//options.draw(100, 200);
-		about.draw(100, 300);
+		//about.draw(100, 300);
 		g.drawString(mouse, 100, 400);
+		g.drawString("LobbyIP: 123.43.345", 82, 266);
+		g.drawString("LOGIN", 190, 604);
+		g.drawString("BACK", 190, 552);
 		
 	}
 	
@@ -54,8 +56,8 @@ public class JoinLob extends BasicGameState{
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
 		
-		//play now button
-		if((posX > 100 && posX < 244) && (posY > 497 && posY < 549))
+		//BACK button
+		if((posX > 185 && posX < 240) && (posY > 80 && posY < 100))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -63,8 +65,9 @@ public class JoinLob extends BasicGameState{
 				sbg.enterState(0);
 			}
 		}
-		//about
-		if((posX > 100 && posX < 241) && (posY > 310 && posY < 349))
+		
+		//LOGIN button
+		if((posX > 185 && posX < 247) && (posY > 28 && posY < 47))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -72,6 +75,9 @@ public class JoinLob extends BasicGameState{
 				sbg.enterState(2);
 			}
 		}
+				
+		
+		
 		
 		
 		 
