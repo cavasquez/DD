@@ -360,6 +360,14 @@ public class DDCharacter extends Entity implements Serializable
 		return sheet.getACArmor();
 	} /* end getArmorAC method */
 	
+	public int getMonHP() {
+		return sheet.getMonHP();
+	}
+	
+	public boolean getHasTurn() {
+		return hasTurn;
+	}
+	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/

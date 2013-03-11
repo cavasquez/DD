@@ -105,7 +105,7 @@ public class ActionChoice extends ImageRenderComponent
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				System.out.println("You are clicking " + display);
-				message = "You are clicking " + display;
+				//message = "You are clicking " + display;
 				if(actionType == 1000) {
 					ability.done();
 				}

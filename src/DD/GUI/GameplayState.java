@@ -186,7 +186,11 @@ public class GameplayState extends BasicGameState {
 		
 		//Character sheet
 		charToString = "CHARACTER SHEET: \n" + player.getCharacterSheet().toString();
-		goblinHP = "Goblin HP: " + goblin1.getCurrentHP();
+		goblinHP = "Goblin HP: " + goblin1.getMonHP();
+		
+		if(!player.getHasTurn()) {
+			player.startNewTurn();
+		}
     }
  
     public void render(GameContainer gc, StateBasedGame sb, Graphics g) throws SlickException
