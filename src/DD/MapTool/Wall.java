@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
 /*****************************************************************************************************
@@ -29,9 +30,9 @@ public class Wall extends Objects implements Serializable
 	/************************************ Class Methods *************************************/
 	public Wall() {super();}
 	
-	public Wall(String name, Image image, float x, float y, Map map)
+	public Wall(String name, Image image, int x, int y, Map map) throws SlickException
 	{
-		super(name, image, map);
+		super(name, image, map, x, y);
 		super.movePenalty = Integer.MAX_VALUE/2; 	/* Divide by 2 to avoid overflow when adding but maintain high value */
 		super.lightPenalty = Integer.MAX_VALUE/2; 	/* Divide by 2 to avoid overflow when adding but maintain high value */
 		super.priority = 10;

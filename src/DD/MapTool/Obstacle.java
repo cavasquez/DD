@@ -3,12 +3,13 @@ package DD.MapTool;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import DD.SlickTools.*;
 
 public class Obstacle extends Objects{
-	public Obstacle(String name , Image image, int move, int light,Map map){
-		super(name, image, map);
+	public Obstacle(String name , Image image, int move, int light,Map map) throws SlickException{
+		super(name, image, map, null, null); //TODO: needs position
 		super.movePenalty = move;
 		super.lightPenalty = light;
 		super.priority = 2;

@@ -57,7 +57,7 @@ public class Move extends Ability
 					);
 			ts.chooseTarget(tcm);
 		} /* end else */
-		
+
 	} /* end action method */
 	
 	@Override

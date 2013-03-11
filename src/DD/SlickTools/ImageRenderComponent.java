@@ -6,6 +6,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.MapTool.CharacterObjects;
+import DD.MapTool.Objects;
+import DD.MapTool.TargetBlock;
+
 /*****************************************************************************************************
  * @author Carlos Vasquez
  ******************************************************************************************************/
@@ -31,7 +35,6 @@ public abstract class ImageRenderComponent extends RenderComponent
 	{
 		Vector2f pos = owner.getPosition();
 		float scale = owner.getScale();
-		
 		image.draw(pos.x, pos.y, scale);
 		
 	} /* end render method */

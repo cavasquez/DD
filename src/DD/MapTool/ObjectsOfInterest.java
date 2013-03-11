@@ -3,6 +3,7 @@ package DD.MapTool;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import DD.SlickTools.*;
 
@@ -11,8 +12,8 @@ public class ObjectsOfInterest extends Objects{
 	String toolTipContent;
 	
 	//@brandon
-	public ObjectsOfInterest(String name, String toolTipContent, Image image, int move, int light, Map map){
-		super(name,image,map);
+	public ObjectsOfInterest(String name, String toolTipContent, Image image, int move, int light, Map map) throws SlickException{
+		super(name,image,map, null, null); //TODO: needs position
 		this.toolTipContent = toolTipContent;
 		
 		super.movePenalty = move;

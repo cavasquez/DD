@@ -1,6 +1,6 @@
 package DD.ActionBox;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 
 import org.newdawn.slick.Color; 
 import org.newdawn.slick.GameContainer;
@@ -14,7 +14,9 @@ import org.newdawn.slick.TrueTypeFont;
 import org.lwjgl.input.Mouse;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
+import DD.SlickTools.Component;
 import DD.SlickTools.ImageRenderComponent;
+import DD.SlickTools.RenderComponent;
 
 /*****************************************************************************************************
  * The ActionChoice class will represent the many actions available to the player in the ActionBox class.
@@ -42,8 +44,10 @@ public class ActionChoice extends ImageRenderComponent
 	String message = " ";
 	String mousePos = " ";
 	float x, y;
+	Ability ability;	//REMOVE IN SPRINT 3
+	//boolean renderSubActions = false;
 	Input mouse = new Input(650);
-	ArrayList<SubAction> subActions = new ArrayList<SubAction>();
+	//ArrayList<Component> subActions = new ArrayList<Component>();
 	
 	/************************************ Class Methods *************************************/
 	/* Remember, ID is the same as ActionType */
@@ -55,8 +59,27 @@ public class ActionChoice extends ImageRenderComponent
 		actionPerformed = false;
 		this.x = x;
 		this.y = y;
+		this.ability = null;
 		
 	} /* end ActionChoice constructor */
+	
+	public ActionChoice(int id, int actionType, String display, Image image, float x, float y, Ability ability )
+	{
+		super(id, image);
+		this.actionType = actionType;
+		this.display = display;
+		actionPerformed = false;
+		this.x = x;
+		this.y = y;
+		this.ability = ability;
+		
+	} /* end ActionChoice constructor */
+	
+	/*
+	public void addSubAction(int id, Image image, Ability ability) {
+		subActions.add(new SubActionButtons(id, image, ability, x, y+this.image.getHeight()));
+	}
+	*/
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
@@ -67,7 +90,7 @@ public class ActionChoice extends ImageRenderComponent
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException 
 	{ 	 
 		/* get mouse coordinates */
 		int mouseX = mouse.getMouseX();
@@ -83,6 +106,10 @@ public class ActionChoice extends ImageRenderComponent
 			{
 				System.out.println("You are clicking " + display);
 				message = "You are clicking " + display;
+				if(ability != null) {
+					ability.activate();
+				}
+				
 			}
 		}
 		mousePos = "Mouse Position x: " + mouseX + " y: " + mouseY;

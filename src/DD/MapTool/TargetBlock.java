@@ -1,8 +1,13 @@
 package DD.MapTool;
 
 import java.util.Iterator;
+
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
 import DD.Character.DDCharacter;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
@@ -25,7 +30,6 @@ public class TargetBlock extends Objects
 	private static final long serialVersionUID = 1L;
 	
 	/************************************ Class Attributes *************************************/
-	private Coordinate position = null;
 	private static final String imagePath = "";
 	private DDCharacter target = null;
 	private boolean selected;
@@ -34,13 +38,14 @@ public class TargetBlock extends Objects
 	private static TargetingSystem.TargetSelection targetSelection = null;
 	private static Integer numOfTargets = null;
 	private ObjectsPriorityStack stack;
-	private Image spriteSheet = null;
+	private Input mouse = new Input(650);
 	
 	
-	/************************************ Class Methods *************************************/
-	public TargetBlock(String name, Image image, Map owner)
+	/************************************ Class Methods 
+	 * @throws SlickException *************************************/
+	public TargetBlock(String name, Image image, Map owner) throws SlickException
 	{
-		super(name, image, owner);
+		super(name, image, owner, null, null);
 		movePenalty = 0;
 		lightPenalty = 0;
 		this.target = null;
@@ -53,18 +58,14 @@ public class TargetBlock extends Objects
 	
 	public TargetBlock(Map owner) throws SlickException
 	{
-		super("|---|", null, owner); /* TODO: remove this after testing */
-		//super("Target Block", new Image(imagePath), owner);
-		spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
-		Image targetBlock = spriteSheet.getSubImage(1473, 513, 33, 34);
-		super.setImage(targetBlock);
+		super("|---|", spriteSheet.getSubImage(1473, 513, 33, 34), owner, null, null); /* TODO: remove this after testing */
+
 		movePenalty = 0;
 		lightPenalty = 0;
 		this.target = null;
 		selected = false; 		/* start off as not selected */
 		//priority = 9;			/* set to highest? priority */
 		priority = 11;
-		
 		if (system == null) system = new TargetingSystem();
 		
 	} /* end TargetBlock constructor */
@@ -89,6 +90,7 @@ public class TargetBlock extends Objects
 		stack.setHasTargetBlock(false);
 	} /* end pickUp method */
 	
+	@Override
 	public void select() throws SlickException
 	{
 		/* This method should be called by update when TargetBlock is clicked */
@@ -115,6 +117,7 @@ public class TargetBlock extends Objects
 		} /* end switch */
 		
 	} /* end select method */
+	
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

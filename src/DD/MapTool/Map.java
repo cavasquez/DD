@@ -31,7 +31,7 @@ public class Map extends Entity implements Serializable{
 	Image floorImage = null;
 	boolean hasTempObjects;
 	String name;
-	public final int mapSize = 20;
+	public final int mapSize = 21;
 
 	public Map() {
 		super();
@@ -52,7 +52,7 @@ public class Map extends Entity implements Serializable{
 		
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {				              
-				Floor floor = new Floor("floor", floorImage, (i + (floorImage.getHeight() * i)), ((j+ 40) + (floorImage.getWidth() * j)), 5 , 5, this);				
+				Floor floor = new Floor("floor", floorImage, i, j, 5 , 5, this);				
 				addComponent(floor);
 				objectsStack[i][j] =  new ObjectsPriorityStack();
 				objectsStack[i][j].push(floor);
@@ -168,7 +168,7 @@ public class Map extends Entity implements Serializable{
 	}
 
 	
-	public void remove(int x, int y){
+	public void remove(int x, int y) throws SlickException{
 		if(objectsStack[x][y].peek() instanceof TempObjects){
 			removeTempObjects(x, y);
 		}
@@ -200,6 +200,7 @@ public class Map extends Entity implements Serializable{
 	//places single object on x,y
 	public void placeObjects(int x,int y,Objects obj) {
 		super.components.add(obj);
+		obj.setPosition(x, y);
 		placeObjectHelper(x, y, obj);
 		objectsStack[x][y].push(obj);
 		updateComponentList();		
@@ -226,7 +227,7 @@ public class Map extends Entity implements Serializable{
 	 * 		resets all tempObjects and any variable likewise.
 	 * 
 	 */
-	public void resetMap(){
+	public void resetMap() throws SlickException{
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
 				objectsStack[i][j].getPQueue().clear();
@@ -419,10 +420,10 @@ public class Map extends Entity implements Serializable{
 //	}
 
 	
-	public void removeObjects(int x, int y) {
+	public void removeObjects(int x, int y) throws SlickException {
 		if(objectsStack[x][y].peek() instanceof Floor){
-			float xCoord = ((Floor) objectsStack[x][y].peek()).getX();
-			float yCoord = ((Floor) objectsStack[x][y].peek()).getY();
+			int xCoord = ((Floor) objectsStack[x][y].peek()).getX();
+			int yCoord = ((Floor) objectsStack[x][y].peek()).getY();
 			objectsStack[x][y].pop();
 			if(objectsStack[x][y].getPQueue().isEmpty()){
 				Floor floor = new Floor("t(*-*t)", floorImage, (xCoord + (floorImage.getHeight() * xCoord)), (yCoord + (floorImage.getWidth() * yCoord)), 5 , 5, this);

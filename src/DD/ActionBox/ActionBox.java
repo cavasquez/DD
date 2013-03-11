@@ -1,11 +1,12 @@
 package DD.ActionBox;
-
-import java.util.ArrayList; 
+ 
+import java.util.ArrayList;  
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.SlickTools.BoxInterface;
 import DD.SlickTools.Component;
 
@@ -91,16 +92,20 @@ public class ActionBox extends BoxInterface
 		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
 		
 		int shift = freeAction.getHeight();
-		Vector2f boxPosition = new Vector2f(620f, 0f);
+		Vector2f boxPosition = new Vector2f(660f, 10f);
 		this.setPosition(boxPosition);
 		
 		/* To begin with, the basic ActionChoices need to be available. */
+	
+		
 		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y));
-		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift));
+		Move move = new Move(this.id);
+		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift, move));
 		this.addComponent(new ActionChoice(this.id, Action.FULL_ROUND_ACTION.index, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
 		this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
 		this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
 		this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
+		
 		
 		
 	} /* end ActionBox constructor */

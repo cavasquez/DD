@@ -1,11 +1,15 @@
 package DD.GUI;
  
-import java.util.Iterator; 
+import java.util.Iterator;  
 
 import DD.ActionBox.ActionBox;
 import DD.Character.*; 
+import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterClass;
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.CombatSystem.CombatSystem;
+import DD.CombatSystem.TargetingSystem.Coordinate;
+import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.MapTool.*;
 import DD.SlickTools.Component;
 import DD.SlickTools.ImageRenderComponent;
@@ -53,10 +57,19 @@ public class GameplayState extends BasicGameState {
     
     @Override
     public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
+    	maptool = new MapTool();
+    	
+//    	maptool.getMapAtLocation(0, 0).setPosition(position);
+    	TargetingSystem ts = new TargetingSystem();
+    	CombatSystem cs = new CombatSystem();
+    	
+    	TargetingSystem.setMap(maptool.getMapAtLocation(0, 0));
+    	CombatSystem.setMap(maptool.getMapAtLocation(0, 0));
+    	
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
         playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
-        player = new DDCharacter(stateID);  
+        player = new DDCharacter(stateID++);  
         /* character creation process */
 		sheet.fillBasic("Max", 
 			"Bob", 
@@ -77,22 +90,31 @@ public class GameplayState extends BasicGameState {
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
         player.setCharacterSheet(sheet);
-        actionBox = new ActionBox(stateID, 300, 200);
-        actionBox.setCharacter(player);
         
-        maptool = new MapTool();
+        player.setCharacterID(stateID++);
+        CombatSystem.addCharacter(player);
+        
+        actionBox = new ActionBox(stateID, 300, 200);
+        ActionBox.setCharacter(player);
+       
+        
         wall = spriteSheet.getSubImage(1280, 574, 33, 34);
         scaledWall = wall.getScaledCopy(0.9f);
        // Obstacle renderWall = new Obstacle("wall", scaledWall, 5, 5, maptool.getMapAtLocation(0, 0));
        // System.out.println(renderWall.toString());
         //world = new World("TestGUIMap");
         
-        
+        int x = 15;
+        int y = 6;
         //playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
-        playerObj = new CharacterObjects("Bob", playerImage, maptool.getMapAtLocation(0, 0), player); 
-        maptool.getMapAtLocation(0, 0).placeObjects(6, 6, playerObj);
-        playerObj.setPosition(400, 300);
+        playerObj = new CharacterObjects("Bob", playerImage,x,y, maptool.getMapAtLocation(0, 0), player); 
+        maptool.getMapAtLocation(0, 0).placeObjects(x, y, playerObj);
+        player.setCoordiante(new Coordinate(x,y));
        // maptool.getMapAtLocation(0, 0).massPlaceObjectsLine(10, 11, 10, 19, renderWall);
+        Ability.setOwnerCharacter(player);
+        player.startNewTurn();
+        System.out.println("GS:" + player);
+        
         
     }
  
@@ -110,12 +132,15 @@ public class GameplayState extends BasicGameState {
     				Component component = (Component)list[k];
     				if (RenderComponent.class.isInstance(component))
     				{
+    					
     					renderComponent = (RenderComponent) component;
     					renderComponent.update(gc, sb, delta);
     				}
     			}
     		}
     	}
+    	
+    	
 		
     	//Update Action Box
     	/* go through ArrayList of Components to call their update methods */

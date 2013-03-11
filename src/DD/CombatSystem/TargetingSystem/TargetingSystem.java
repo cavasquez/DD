@@ -322,6 +322,7 @@ public class TargetingSystem
 		/* Similar to placing a circle. However, the radius of the circle is 5 feet
 		 * and the block should differ slightly and return a coordinate as opposed 
 		 * a character. Furthermore, we care about the movePenalty of the Objects */
+		System.out.println(origin.x + ", " + origin.y);
 		boolean diagonal = getCharacter(origin).getMovedDiagonal();
 
 		Coordinate movePosition = null;
@@ -466,6 +467,7 @@ public class TargetingSystem
 	{
 		/* Note that when checking for movement speed, we assume that the top Objects 
 		 * in the stack has the most significant movement penalty */
+		//System.out.println("");
 		return map.objectsStack[position.x][position.y].peek().getMovePenalty();
 	} /* end getMovePenalty method */
 	

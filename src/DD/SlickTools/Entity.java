@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -79,7 +80,7 @@ public class Entity
 		
 	} /* end AddComponent method */
 	
-	public void update(GameContainer gc, StateBasedGame sbg, int delta)
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
 		updateComponents(gc, sbg, delta);
 	} /* end update method */
@@ -89,7 +90,7 @@ public class Entity
 		renderComponents(gc, sbg, gr);
 	} /* end render method */
 	
-	protected void updateComponents(GameContainer gc, StateBasedGame sbg, int delta)
+	protected void updateComponents(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
 		for (Component component : components)
 		{

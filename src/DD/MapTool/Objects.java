@@ -5,28 +5,40 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.SlickTools.*;
 
 public class Objects extends ImageRenderComponent implements Serializable{//figure out comp.
 	private static final long serialVersionUID = 7499478093741949923L;
 	protected int movePenalty;
 	protected int lightPenalty;
+	protected Coordinate position = null;
 	String name;
 	int priority;
-	
+	static protected Image spriteSheet = null;
+	static protected Map owner = null;
+	protected static Input mouse = new Input(650);
 
-	public Objects(String name, Image image, Map owner) {
+	public Objects(String name, Image image, Map owner, Integer x, Integer y) throws SlickException {
 		
 		super(0, image);
+		if (spriteSheet == null) spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
 		this.name = name;
+		this.position = new Coordinate(x,y);
 		// TODO
-		if(owner!=null)
-			owner.addComponent(this);
+		Objects.owner = owner;
+		if(owner!=null) owner.addComponent(this);
 	}
+	public void select() throws SlickException {};
+	
 	public int getMovePenalty(){
 		return movePenalty;
 	}
@@ -66,11 +78,64 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		}
 	}
 	
-	
 	@Override
-	public void update(GameContainer gc, StateBasedGame sbg, int delta) {
-		// TODO Auto-generated method stub
+	public void update(GameContainer gc, StateBasedGame sb, int delta) {
+		int mouseX = mouse.getMouseX();
+		int mouseY = mouse.getMouseY();
 		
+		float x = position.x;
+		float y = position.y + 1;
+		
+//		System.out.println("x: " + position.x);
+//		System.out.println("y: " + position.y);
+//		
+		if( (mouseX >= x*30.85 && mouseX <= x*30.85 + image.getWidth() ) &&
+				(mouseY >= y*30 && mouseY <= y*30 + image.getHeight() ) )
+		{
+			/* You are inside the button */
+			
+			//if(mouse.isMousePressed(Input.MOUSE_LEFT_BUTTON)) 
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				String message = "You are clicking " + position.x + ", " + position.y;
+				//System.out.println(message);
+				try {
+					select();
+					System.out.println(message);
+				} catch (SlickException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		}
 	}
 	
+	@Override
+	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
+		Color myAlphaColor = new Color(1f, 1f, 1f, 1f);
+		float x = position.x;
+		float y = position.y;
+
+		if(!Wall.class.isInstance(this) && 
+				!Floor.class.isInstance(this))
+		{
+			float xCorrection = 30.85f;
+			float yCorrection = 30;
+			image.draw(x*xCorrection, (y+1)*yCorrection);
+		}
+		else {
+			image.draw((x + (image.getHeight() * x)), ((y+ 40) + (image.getWidth() * y)));
+		}
+		//if(CharacterObjects.class.isInstance(this)) System.out.println("x: " + (x + (image.getHeight() * x)) + ", y: " + (y + (image.getHeight() * y)));
+		//gr.drawString(message, 110, 10);
+		//If opacity doesn't work then we could use another tile to represent clickable squares
+		//this.image.setAlpha(0.8f);
+		//this.image.draw(x, y);
+	}
+	
+	public void setPosition(int x, int y)
+	{
+		position = new Coordinate(x,y);
+	}
 }

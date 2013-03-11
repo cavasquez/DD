@@ -50,7 +50,6 @@ public class I_Move implements CombatInterpreter
 			DDCharacter mover = CombatSystem.getCharacter(cm.getSource());
 			CharacterObjects charObj = (CharacterObjects) CombatSystem.getMap().objectsStack[mover.getCoordinate().x][mover.getCoordinate().y].peek();
 			
-			
 			/* Check for diagonal moves */
 			int diagonalPenalty = 1;
 			if((mover.getCoordinate().x != cm.getBody()[X_COORDINATE]) && (mover.getCoordinate().y != cm.getBody()[Y_COORDINATE]))
@@ -79,7 +78,7 @@ public class I_Move implements CombatInterpreter
 			
 			/* Finally, update the movers coordinates */
 			mover.setCoordiante(new Coordinate(cm.getBody()[X_COORDINATE], cm.getBody()[Y_COORDINATE]));
-			
+
 		} /* end if */
 		
 	} /* end interpret method */

@@ -1,6 +1,6 @@
 package DD.MapTool;
 
-import java.io.Console;
+import java.io.Console; 
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
