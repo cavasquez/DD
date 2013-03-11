@@ -1,4 +1,5 @@
 package DD.GUI;
+import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
@@ -9,7 +10,9 @@ public class CreateLob extends BasicGameState
 	Image screen;
 	private String mouse = "No input yet!";
 	Music dungeon;
-	//Sound button;
+	Sound button;
+	ArrayList<Lobby> newLobby = new ArrayList<Lobby>();
+	
 	
 	
 	public CreateLob(int state)
@@ -21,10 +24,10 @@ public class CreateLob extends BasicGameState
 	{
 		screen = new Image("Images/Menus/lobby.jpg");
 		
-		dungeon = new Music("Audio/Gauntlet.wav");
-		dungeon.loop();
+		//dungeon = new Music("Audio/dunEffect1.wav");
+		//dungeon.loop();
 		
-		//button = new Sound("res/button-9.wav");
+		button = new Sound("Audio/dunSound.wav");
 		
 		
 		
@@ -52,7 +55,7 @@ public class CreateLob extends BasicGameState
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				//button.play();
+				button.play();
 				sbg.enterState(0);
 			}
 		}

@@ -10,7 +10,7 @@ public class Menu extends BasicGameState
 	Image screen;
 	private String mouse = "No input yet!";
 	Music dungeon;
-	//Sound button;
+	Sound button;
 	
 	
 	public Menu(int state)
@@ -20,13 +20,14 @@ public class Menu extends BasicGameState
 	
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
+		dungeon = new Music("Audio/dunEffect2.wav");
+		dungeon.loop();
 		screen = new Image("Images/Menus/menuscreen5.jpg");
 		playNow = new Image("Images/Menus/MenuButtons.png");
 		
-		dungeon = new Music("Audio/Gauntlet.wav");
-		dungeon.loop();
 		
-		//button = new Sound("res/button-9.wav");
+		
+		button = new Sound("Audio/dunSound.wav");
 		
 	}
 	
@@ -50,7 +51,7 @@ public class Menu extends BasicGameState
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				//button.play();
+				button.play();
 				sbg.enterState(1);
 			}
 		}
@@ -60,7 +61,7 @@ public class Menu extends BasicGameState
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				//button.play();
+				button.play();
 				sbg.enterState(3);
 			}
 		}
@@ -70,7 +71,7 @@ public class Menu extends BasicGameState
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				//button.play();
+				button.play();
 				sbg.enterState(4);
 			}
 		}
@@ -80,7 +81,7 @@ public class Menu extends BasicGameState
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				//button.play();
+				button.play();
 				System.exit(0);
 			}
 		}

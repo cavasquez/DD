@@ -20,7 +20,7 @@ public class Game extends StateBasedGame
 	{
 		super(gamename);
 		this.addState(new Menu(menu));
-		this.addState(new Play(play));
+		this.addState(new JoinLob(play));
 		this.addState(new About(about));
 		this.addState(new CreateLob(createLob));
 		this.addState(new GameplayState(gameplay));

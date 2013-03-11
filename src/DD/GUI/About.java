@@ -9,7 +9,7 @@ public class About extends BasicGameState
 	
 	private String mouse = "No input yet!";
 	Image about;
-	//Sound button;
+	Sound button;
 	
 	
 	
@@ -21,7 +21,7 @@ public class About extends BasicGameState
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
 		about = new Image("Images/Menus/protoAbout.jpg");
-		//button = new Sound("res/button-9.wav");
+		button = new Sound("Audio/dunSound.wav");
 			
 	}
 	
@@ -44,7 +44,7 @@ public class About extends BasicGameState
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
-				//button.play();
+				button.play();
 				sbg.enterState(1);
 			}
 		}
