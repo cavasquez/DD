@@ -19,21 +19,25 @@ public class Game extends StateBasedGame
 	public Game(String gamename)
 	{
 		super(gamename);
+	}
+	
+	public void initStatesList(GameContainer gc) throws SlickException
+	{
 		this.addState(new Menu(menu));
 		this.addState(new JoinLob(JoinLob));
 		this.addState(new LobbyRoom(LobbyRoom));
 		this.addState(new CreateLob(createLob));
 		this.addState(new GameplayState(gameplay));
 		//this.addState(new MapTestState(gameplay));
-	}
-	
-	public void initStatesList(GameContainer gc) throws SlickException
-	{
-		this.getState(menu).init(gc, this);
-		this.getState(JoinLob).init(gc, this);
-		this.getState(LobbyRoom).init(gc, this);
-		this.getState(createLob).init(gc, this);
-		this.getState(gameplay).init(gc, this);
+		
+		/* Note that initStatesList is where we ADD states. Slick will get them for us. If we have addState
+		 * in the constructor and getState in the initStatesList, then we will run the states twice (and maybe even
+		 * have two instances of the state) */
+//		this.getState(menu).init(gc, this);
+//		this.getState(JoinLob).init(gc, this);
+//		this.getState(LobbyRoom).init(gc, this);
+//		this.getState(createLob).init(gc, this);
+//		this.getState(gameplay).init(gc, this);
 		
 		this.enterState(menu);
 		
