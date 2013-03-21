@@ -215,25 +215,39 @@ public class TargetingSystem
 		Queue<CircleStackElement> stack = new LinkedList<CircleStackElement>();
 		stack.add(new CircleStackElement(origin, distance));
 		
+		boolean placeBlock = false;
+		boolean lookForMoreBlocks = false;
+		int diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
+		
+		Coordinate top;
+		Coordinate bottom;
+		Coordinate left;
+		Coordinate right;
+		
+		Coordinate topLeft;
+		Coordinate bottomLeft;
+		Coordinate topRight;
+		Coordinate bottomRight;
+		
 		while(stack.peek() != null)
 		{
 			CircleStackElement next = stack.poll();
 			position = next.getPosition();
 			distance = next.getDistance();
 			
-			boolean placeBlock = false;
-			boolean lookForMoreBlocks = false;
-			int diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
+			placeBlock = false;
+			lookForMoreBlocks = false;
+			diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
 			
-			Coordinate top = new Coordinate(position.x, position.y + 1);
-			Coordinate bottom = new Coordinate(position.x, position.y - 1);
-			Coordinate left = new Coordinate(position.x - 1, position.y);
-			Coordinate right = new Coordinate(position.x + 1, position.y);
+			top = new Coordinate(position.x, position.y + 1);
+			bottom = new Coordinate(position.x, position.y - 1);
+			left = new Coordinate(position.x - 1, position.y);
+			right = new Coordinate(position.x + 1, position.y);
 			
-			Coordinate topLeft = new Coordinate(position.x - 1, position.y + 1);
-			Coordinate bottomLeft = new Coordinate(position.x - 1, position.y - 1);
-			Coordinate topRight = new Coordinate(position.x + 1, position.y + 1);
-			Coordinate bottomRight = new Coordinate(position.x + 1, position.y - 1);
+			topLeft = new Coordinate(position.x - 1, position.y + 1);
+			bottomLeft = new Coordinate(position.x - 1, position.y - 1);
+			topRight = new Coordinate(position.x + 1, position.y + 1);
+			bottomRight = new Coordinate(position.x + 1, position.y - 1);
 			
 			/* First, make sure we are in bounds. Thus must happen first so we do not get array outofbounds errors*/
 			if (positionExists(position))
