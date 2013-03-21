@@ -8,6 +8,7 @@ import DD.MapTool.Map;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 import DD.Message.Message;
+import DD.System.DDSystem;
 import DD.Character.*;
 
 /*****************************************************************************************************
@@ -25,7 +26,7 @@ import DD.Character.*;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class CombatSystem 
+public class CombatSystem extends DDSystem
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;
@@ -33,7 +34,8 @@ public class CombatSystem
 	{
 		STANDARD_ATTACK (I++),
 		MOVE(I++),
-		END_ACTION(I++);
+		END_ACTION(I++),
+		START_COMBAT_PHASE(I++);
 		
 		public final int index;
 		public static final int NUM_OF_INTERPRETERS = I;
@@ -59,11 +61,14 @@ public class CombatSystem
 	/************************************ Class Attributes *************************************/
 	static private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
 	static private Map map;										/* The game map that may need to be modified. */
-	static private CombatInterpreter[] system;							/* The core of CombatSystem */					
+	static private CombatInterpreter[] system;					/* The core of CombatSystem */
 	
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
 	{
+		CombatInterpreter.setCombatSystem(cs);
+		CombatInterpreter.setTargetingSystem(ts);
+		
 		if(characterList == null) characterList = new ArrayList<DDCharacter>();
 		system = new CombatInterpreter[Action.NUM_OF_INTERPRETERS];
 		
@@ -178,6 +183,11 @@ public class CombatSystem
 	{
 		return map;
 	} /* end getMap method */
+	
+	public static DDCharacter[] getCharacterList()
+	{
+		return characterList.toArray(new DDCharacter[characterList.size()]);
+	} /* end getCharacterList method */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************

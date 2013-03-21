@@ -4,6 +4,7 @@ import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.Client.ClientSystem;
 import DD.Network.Server.ServerSystem;
+import DD.System.DDSystem;
 
 
 /*****************************************************************************************************
@@ -14,7 +15,7 @@ import DD.Network.Server.ServerSystem;
 * @author Carlos Vasquez
 ******************************************************************************************************/
 
-public class NetworkSystem implements Network
+public class NetworkSystem extends DDSystem implements Network
 {
 	/************************************ Class Constants *************************************/
 	private static int NUM_OF_NETWORKS = 0;

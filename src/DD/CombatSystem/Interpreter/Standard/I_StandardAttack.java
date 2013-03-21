@@ -12,7 +12,7 @@ import DD.Message.CombatValidationMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class I_StandardAttack implements CombatInterpreter
+public class I_StandardAttack extends CombatInterpreter
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;

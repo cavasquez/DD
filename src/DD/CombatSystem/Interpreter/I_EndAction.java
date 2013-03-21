@@ -16,7 +16,7 @@ import DD.Message.CombatValidationMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class I_EndAction implements CombatInterpreter
+public class I_EndAction extends CombatInterpreter
 {
 	
 	/************************************ Class Methods *************************************/

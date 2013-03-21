@@ -15,7 +15,7 @@ import DD.Message.CombatValidationMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class I_Move implements CombatInterpreter
+public class I_Move extends CombatInterpreter
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;

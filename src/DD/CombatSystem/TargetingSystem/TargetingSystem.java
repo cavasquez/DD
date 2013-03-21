@@ -15,6 +15,7 @@ import DD.MapTool.TargetBlock;
 import DD.MapTool.Wall;
 import DD.Message.ChooseTargetMessage;
 import DD.Message.TargetSelectedMessage;
+import DD.System.DDSystem;
 
 /*****************************************************************************************************
  * TargettingSystem will be used by Ability to place a TargetBlock on the Map object. The target blocks
@@ -46,7 +47,7 @@ import DD.Message.TargetSelectedMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class TargetingSystem 
+public class TargetingSystem extends DDSystem
 {
 	/************************************ Class Constants*************************************/
 	public static final int blockSize = 5; /* distance of block (5 feet) */
