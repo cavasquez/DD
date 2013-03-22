@@ -39,6 +39,9 @@ public class I_StartCombatPhase extends CombatInterpreter
 		if(ab.hasCharacter(temp[0])) ab.setCharacter(cs.getCharacter(temp[0]));
 		else ab.setCharacter(null); /* If player does not have turn, set character to null */
 		
+		/* Give the first player their turn */
+		cs.getCharacter(temp[0]).startNewTurn();
+		
 	} /* end interpret method */
 
 } /* end I_StartCombatPhase class */

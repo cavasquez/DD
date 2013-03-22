@@ -34,12 +34,13 @@ public class I_EndTurn extends CombatInterpreter
 		cs.setTurn(turn + 1);
 		
 		/* Part 2 */
-		int currentCharacterID = cs.getOrder().get(turn);
+		int numOfPlayers = cs.getCharacterList().length;
+		int currentCharacterID = cs.getOrder().get(turn % numOfPlayers);
 		DDCharacter currentCharacter = cs.getCharacter(currentCharacterID);
 		currentCharacter.endTurn();
 		
 		/* Part 3 */
-		currentCharacterID = cs.getOrder().get(turn + 1);
+		currentCharacterID = cs.getOrder().get((turn + 1) % numOfPlayers);
 		currentCharacter = cs.getCharacter(currentCharacterID);
 		currentCharacter.startNewTurn();
 		

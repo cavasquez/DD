@@ -62,8 +62,8 @@ public class CombatSystem extends DDSystem
 	
 	/************************************ Class Attributes *************************************/
 	private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
-	static private Map map;										/* The game map that may need to be modified. */
-	static private CombatInterpreter[] system;					/* The core of CombatSystem */
+	private static Map map;										/* The game map that may need to be modified. */
+	private static CombatInterpreter[] system;					/* The core of CombatSystem */
 	private int turn;											/* the current turn count */
 	private ArrayList<Integer> order;							/* The order of  */
 	

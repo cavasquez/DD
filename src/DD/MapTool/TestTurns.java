@@ -42,12 +42,28 @@ public class TestTurns extends BasicGame
 				
 		int i = 0; // component and entity ids
 		int cid = 0; // character ids
-		DDCharacter character = new DDCharacter(i++);
+		DDCharacter c1 = new DDCharacter(i++);
+		DDCharacter c2 = new DDCharacter(i++);
+		DDCharacter c3 = new DDCharacter(i++);
+		DDCharacter c4 = new DDCharacter(i++);
+		
 		CharacterSheet sheet = new CharacterSheet();
 		
 		/* ALSO VERY FREAKING IMPORTANT */
-		character.setCharacterID(i++);
-		system.cs.addCharacter(character);
+		c1.setCharacterID(cid++);
+		c2.setCharacterID(cid++);
+		c3.setCharacterID(cid++);
+		c4.setCharacterID(cid++);
+		
+		system.cs.addCharacter(c1);
+		system.cs.addCharacter(c2);
+		system.cs.addCharacter(c3);
+		system.cs.addCharacter(c4);
+		
+		ab.addCharacter(c1.getCharacterID());
+		ab.addCharacter(c2.getCharacterID());
+		ab.addCharacter(c3.getCharacterID());
+		ab.addCharacter(c4.getCharacterID());
 		
 		sheet.fillBasic("Max", 
 				"Bob", 
@@ -68,40 +84,106 @@ public class TestTurns extends BasicGame
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
 		
-		character.setCharacterSheet(sheet);
-		ab.setCharacter(character);
-		
-		
-		
-		int x = 6;
-		int y = 5;
-		CharacterObjects charObj = new CharacterObjects("*****", null,0,0, world.world[0][0], character);
-		world.world[0][0].placeObjects(x, y, charObj); /* place character */
-		character.setCoordiante(new Coordinate(x,y));
-		Ability.setOwnerCharacter(character); /* set the character who is performing the abilities. This should happen somewhere in ActionBox */
-		character.startNewTurn();
-		
-		Move move = new Move(i++);
-		move.activate();
+		c1.setCharacterSheet(sheet);
+		c2.setCharacterSheet(sheet);
+		c3.setCharacterSheet(sheet);
+		c4.setCharacterSheet(sheet);
 		
 		StartCombatPhase scp = new StartCombatPhase(i++);
 		EndTurn end = new EndTurn(i++);
-//		
-//		ChooseTargetMessage ctm = new ChooseTargetMessage
-//				(
-//						TargetingSystem.TargetCount.SINGLE,
-//						TargetingSystem.TargetShape.MOVE,
-//						TargetingSystem.TargetSelection.SELECTED,
-//						false,
-//						character.getCoordinate(),
-//						5,
-//						null
-//				);
-//		ObjectsPriorityStack[][] stack = world.world[0][0].objectsStack;
-//		system.ts.chooseTarget(ctm);
-	
-		System.out.println(character.getMovedDiagonal());
-		System.out.println(world.world[0][0].toString());
+		
+		int turn = 1;
+		/* Start test */
+		scp.activate();
+		System.out.println("Starting CharacterID: " + ab.getCharacter().getCharacterID());
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		/* Test turn switches: */
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
+		
+		end.activate();
+		System.out.println("Test switching turns");
+		System.out.println("Turn number " + turn++);
+		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
+		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
+		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
+		System.out.println( "c4( " + c4.getCharacterID() + ") has turn?" + c4.getHasTurn());
+		System.out.println();
 		
     }
  
