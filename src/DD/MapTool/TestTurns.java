@@ -97,6 +97,7 @@ public class TestTurns extends BasicGame
 		scp.activate();
 		System.out.println("Starting CharacterID: " + ab.getCharacter().getCharacterID());
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -107,6 +108,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -116,6 +118,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -125,6 +128,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -134,6 +138,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -143,6 +148,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -152,6 +158,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -161,6 +168,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -170,6 +178,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
@@ -179,6 +188,7 @@ public class TestTurns extends BasicGame
 		end.activate();
 		System.out.println("Test switching turns");
 		System.out.println("Turn number " + turn++);
+		System.out.println("ActionBox's current character: " + ab.getCharacter().getCharacterID());
 		System.out.println( "11( " + c1.getCharacterID() + ") has turn?" + c1.getHasTurn());
 		System.out.println( "c2( " + c2.getCharacterID() + ") has turn?" + c2.getHasTurn());
 		System.out.println( "c3( " + c3.getCharacterID() + ") has turn?" + c3.getHasTurn());
