@@ -23,6 +23,7 @@ import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
+import DD.System.DDSystem;
 
 // @author Carlos Vasquez
 
@@ -41,8 +42,7 @@ public class TestStandardAttack extends BasicGame
     @Override
     public void init(GameContainer gc) 
 			throws SlickException {
-    	TargetingSystem ts = new TargetingSystem();
-		CombatSystem cs = new CombatSystem();
+    	DDSystem system = new DDSystem();
 		ActionBox ab = new ActionBox(5, 0, 0);
 		
 		/*
@@ -98,8 +98,8 @@ public class TestStandardAttack extends BasicGame
 		/* ALSO VERY FREAKING IMPORTANT */
 		character.setCharacterID(i++);
 		enemy.setCharacterID(i++);
-		CombatSystem.addCharacter(character);
-		CombatSystem.addCharacter(enemy);
+		system.cs.addCharacter(character);
+		system.cs.addCharacter(enemy);
 		character.setCharacterSheet(sheet);
 		enemy.setCharacterSheet(sheet);
 		
@@ -122,7 +122,7 @@ public class TestStandardAttack extends BasicGame
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
 		
-		ActionBox.setCharacter(character); // Character is performing actions
+		ab.setCharacter(character); // Character is performing actions
 		
 		
 		
@@ -156,7 +156,7 @@ public class TestStandardAttack extends BasicGame
 //						null
 //				);
 //		ObjectsPriorityStack[][] stack = world.world[0][0].objectsStack;
-//		ts.chooseTarget(ctm);
+//		system.ts.chooseTarget(ctm);
 	
 		System.out.println("Players have been set");
 		System.out.println(world.world[0][0].toString());
@@ -183,8 +183,8 @@ public class TestStandardAttack extends BasicGame
 		
 		System.out.println("Character has selected enemy as an attack target");
 		ObjectsPriorityStack stack = world.world[0][0].objectsStack[enemyx][enemyy]; // where the character is trying to attack
-		System.out.println(ts.getTargetBlock(stack));
-		ts.getTargetBlock(stack).select();
+		System.out.println(system.ts.getTargetBlock(stack));
+		system.ts.getTargetBlock(stack).select();
 		
 		System.out.println(world.world[0][0].toString());
 		System.out.println("Attack: " + enemyx + ", " + enemyy);

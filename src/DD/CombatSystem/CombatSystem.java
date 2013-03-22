@@ -35,7 +35,8 @@ public class CombatSystem extends DDSystem
 		STANDARD_ATTACK (I++),
 		MOVE(I++),
 		END_ACTION(I++),
-		START_COMBAT_PHASE(I++);
+		START_COMBAT_PHASE(I++),
+		END_TURN(I++);
 		
 		public final int index;
 		public static final int NUM_OF_INTERPRETERS = I;
@@ -55,20 +56,20 @@ public class CombatSystem extends DDSystem
 		IMMEDIATE,
 		MOVE,
 		STANDARD,
-		SWIFT;
+		SWIFT,
+		SYSTEM;
 	} /* end ActionTypes enum */
 	
 	/************************************ Class Attributes *************************************/
-	static private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
+	private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
 	static private Map map;										/* The game map that may need to be modified. */
 	static private CombatInterpreter[] system;					/* The core of CombatSystem */
+	private int turn;											/* the current turn count */
+	private ArrayList<Integer> order;							/* The order of  */
 	
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
-	{
-		CombatInterpreter.setCombatSystem(cs);
-		CombatInterpreter.setTargetingSystem(ts);
-		
+	{	
 		if(characterList == null) characterList = new ArrayList<DDCharacter>();
 		system = new CombatInterpreter[Action.NUM_OF_INTERPRETERS];
 		
@@ -76,6 +77,8 @@ public class CombatSystem extends DDSystem
 		system[Action.STANDARD_ATTACK.index] = new I_StandardAttack();
 		system[Action.MOVE.index] = new I_Move();
 		system[Action.END_ACTION.index] = new I_EndAction();
+		system[Action.START_COMBAT_PHASE.index] = new I_StartCombatPhase();
+		system[Action.END_TURN.index] = new I_EndTurn();
 	} /* end CombatSystem constructor */
 	
 	public CombatValidationMessage process(CombatMessage cm)
@@ -133,7 +136,7 @@ public class CombatSystem extends DDSystem
 		system[cm.getRequest().index].interpret(cm);
 	} /* end interpret method */
 	
-	public static boolean characterExists(int characterID)
+	public boolean characterExists(int characterID)
 	{/* check to see if a character with the provided ID exists */
 		boolean found = false;
 		int index = 0;
@@ -149,20 +152,15 @@ public class CombatSystem extends DDSystem
 		return(found);
 	} /* end characterExists method */
 	
-	public static void addCharacter(DDCharacter character)
+	public void addCharacter(DDCharacter character)
 	{
 		characterList.add(character);
 	} /* end addCharacter method */
 	
-	public void endAbility()
-	{
-		
-	} /* end endAbility method */
-	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public static DDCharacter getCharacter(int characterID)
+	public DDCharacter getCharacter(int characterID)
 	{/* return character with provided characterID */
 		DDCharacter returner = null;
 		int index = 0;
@@ -184,10 +182,20 @@ public class CombatSystem extends DDSystem
 		return map;
 	} /* end getMap method */
 	
-	public static DDCharacter[] getCharacterList()
+	public DDCharacter[] getCharacterList()
 	{
 		return characterList.toArray(new DDCharacter[characterList.size()]);
 	} /* end getCharacterList method */
+	
+	public int getTurn()
+	{
+		return turn;
+	} /* end getTurn method */
+	
+	public ArrayList<Integer> getOrder()
+	{
+		return order;
+	} /* end getOrder method */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
@@ -196,5 +204,15 @@ public class CombatSystem extends DDSystem
 	{
 		CombatSystem.map = map;
 	} /* end setMap method */
+	
+	public void setTurn(int turn)
+	{
+		this.turn= turn;
+	} /* end setTurn method*/
+	
+	public void setOrder(ArrayList<Integer> order)
+	{
+		this.order = order;
+	} /* end setOrder method */
 	
 } /* end CombatSystem class */

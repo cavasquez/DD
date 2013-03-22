@@ -31,7 +31,7 @@ public class I_EndAction extends CombatInterpreter
 	@Override
 	public void interpret(CombatMessage cm) 
 	{
-		DDCharacter character = CombatSystem.getCharacter(cm.getSource());
+		DDCharacter character = cs.getCharacter(cm.getSource());
 		
 		switch(cm.getAction())
 		{
@@ -66,6 +66,8 @@ public class I_EndAction extends CombatInterpreter
 				break;
 	
 		} /* end switch */
+		
+		//TODO: Check to see that there are any actions left. if not, end turn.
 		
 	} /* end interpret method */
 	

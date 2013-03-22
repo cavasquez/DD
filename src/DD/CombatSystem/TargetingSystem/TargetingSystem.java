@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import org.newdawn.slick.SlickException;
 import DD.Character.DDCharacter;
-import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.TargetAbility;
 import DD.MapTool.CharacterObjects;
 import DD.MapTool.Map;
 import DD.MapTool.Objects;
@@ -88,7 +88,7 @@ public class TargetingSystem extends DDSystem
 	
 	/************************************ Class Attributes *************************************/
 	public static Map map = null;						/* Map on which we are placing TargetBlocks */
-	private static Ability caller = null;				/* keeps track of Ability that called TargetSystem */
+	private static TargetAbility caller = null;				/* keeps track of Ability that called TargetSystem */
 	private static TargetSelection selection = null;	/* keeps track of type of TargetSelection so targetSelected know which Characters to return */
 	private static Queue<TargetBlock> blocks = null;	/* this stack will be used to keep track of placed blocks */
 	private static boolean self;						/* determine whether or not target can choose self */

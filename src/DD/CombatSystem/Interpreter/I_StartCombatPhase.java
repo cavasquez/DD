@@ -1,9 +1,6 @@
 package DD.CombatSystem.Interpreter;
 
-import DD.ActionBox.Dice;
-import DD.Character.DDCharacter;
-import DD.Character.CharacterSheet.CharacterSheet;
-import DD.CombatSystem.CombatSystem;
+import java.util.ArrayList;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 
@@ -24,25 +21,23 @@ public class I_StartCombatPhase extends CombatInterpreter
 	public CombatValidationMessage validate(CombatMessage cm) 
 	{
 		// TODO Auto-generated method stub
-		return null;
+		CombatValidationMessage returner = new CombatValidationMessage(true, null); // TODO: Check for validity
+		return returner;
 	} /* end validate method */
 
 	@Override
 	public void interpret(CombatMessage cm) 
 	{
-		DDCharacter[] list = CombatSystem.getCharacterList();
-		Dice dice = new Dice(20);
+		/* Reset the CombatSystems turn to 0 and give it the new order. */
+		cs.setTurn(0);
+		Integer[] temp = cm.getBody(); 
+		ArrayList<Integer> order = new ArrayList<Integer>();
+		for(int i = 0; i < temp.length; i++) order.add(i, temp[i]);
+		cs.setOrder(order);
 		
-		if (list.length > 0)
-		{
-			BinarySearchTree head = new BinarySearchTree(list[0].getCharacterID(), dice.roll(1), list[0].getCharacterSheet().rawStats[CharacterSheet.ABILITY_DEXTERITY][CharacterSheet.ABILITY_MODIFIER]);
-			
-			/* Now, create the tree/order */
-			for (int i = 1; i < list.length; i++)
-			{
-				head.add(list[i].getCharacterID(), dice.roll(1), list[i].getCharacterSheet().rawStats[CharacterSheet.ABILITY_DEXTERITY][CharacterSheet.ABILITY_MODIFIER]);
-			} /* end for loop */
-		} /* end if */
+		/* Lastly, give the first character their turn via ActionBox */
+		if(ab.hasCharacter(temp[0])) ab.setCharacter(cs.getCharacter(temp[0]));
+		else ab.setCharacter(null); /* If player does not have turn, set character to null */
 		
 	} /* end interpret method */
 

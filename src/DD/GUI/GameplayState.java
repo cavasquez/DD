@@ -17,6 +17,7 @@ import DD.MapTool.*;
 import DD.SlickTools.Component;
 import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
+import DD.System.DDSystem;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
@@ -65,8 +66,7 @@ public class GameplayState extends BasicGameState {
     	maptool = new MapTool();
     	
 //    	maptool.getMapAtLocation(0, 0).setPosition(position);
-    	TargetingSystem ts = new TargetingSystem();
-    	CombatSystem cs = new CombatSystem();
+    	DDSystem system = new DDSystem();
     	
     	TargetingSystem.setMap(maptool.getMapAtLocation(0, 0));
     	CombatSystem.setMap(maptool.getMapAtLocation(0, 0));
@@ -106,13 +106,14 @@ public class GameplayState extends BasicGameState {
         player.setCharacterID(stateID++);
         goblin1.setCharacterID(stateID++);
        
-        CombatSystem.addCharacter(player);
-        CombatSystem.addCharacter(goblin1);
+        DDSystem.cs.addCharacter(player);
+        DDSystem.cs.addCharacter(goblin1);
       
         
         
         actionBox = new ActionBox(stateID, 300, 200);
-        ActionBox.setCharacter(player);
+        system.linkBoxes(actionBox, null);
+        actionBox.setCharacter(player);
        
         
         //wall = spriteSheet.getSubImage(1280, 574, 33, 34);

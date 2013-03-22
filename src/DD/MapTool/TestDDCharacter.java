@@ -68,7 +68,7 @@ public class TestDDCharacter extends BasicGame
 		
 		/* ALSO VERY FREAKING IMPORTANT */
 		character.setCharacterID(1);
-		CombatSystem.addCharacter(character);
+		cs.addCharacter(character);
 		character.setCharacterSheet(sheet);
 		
 		System.out.println("character address: " + character);

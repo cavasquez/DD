@@ -2,7 +2,7 @@ package DD.Message;
 
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
-import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.TargetAbility;
 
 /*****************************************************************************************************
  * ChooseTargetMessage will be used by an Ability to tell the TargetingSystem that a target(s) needs to
@@ -21,7 +21,7 @@ public class ChooseTargetMessage extends Message
 	private Coordinate origin;				/* Point of origin for the Target */
 	private int length;						/* the radius of the circle or length of the cone or speed of the character */
 	private boolean self;					/* Refers to whether or not the ability allows the character to target himself */
-	private Ability caller;					/* ability calling the TargetingSystem to select a target */
+	private TargetAbility caller;			/* ability calling the TargetingSystem to select a target */
 	
 	/************************************ Class Methods *************************************/
 	public ChooseTargetMessage
@@ -32,7 +32,7 @@ public class ChooseTargetMessage extends Message
 		boolean self,
 		Coordinate origin,
 		int length,
-		Ability caller
+		TargetAbility caller
 	) 
 	{
 		super(Message.CHOOSE_TARGET_MESSAGE);
@@ -84,7 +84,7 @@ public class ChooseTargetMessage extends Message
 		return length;
 	} /* end getLength method */
 	
-	public Ability getCaller()
+	public TargetAbility getCaller()
 	{
 		return caller;
 	} /* end getCaller method */

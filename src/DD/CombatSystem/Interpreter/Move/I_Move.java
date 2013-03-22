@@ -47,7 +47,7 @@ public class I_Move extends CombatInterpreter
 			//TODO: check for special blocks such as traps
 			
 			/* First, get the character to be moved */
-			DDCharacter mover = CombatSystem.getCharacter(cm.getSource());
+			DDCharacter mover = cs.getCharacter(cm.getSource());
 			CharacterObjects charObj = (CharacterObjects) CombatSystem.getMap().objectsStack[mover.getCoordinate().x][mover.getCoordinate().y].peek();
 			
 			/* Check for diagonal moves */

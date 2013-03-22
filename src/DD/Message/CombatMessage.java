@@ -27,7 +27,7 @@ public class CombatMessage extends Message
 	private Integer target[];				/* The target, if any, of the request */
 	private CombatSystem.ActionType action;	/* Type of action being performed */
 	private CombatSystem.Action request;	/* The requested action, ability, or spell to be performed */
-	private int[] body;						/* An array that will contain well defined data */
+	private Integer[] body;						/* An array that will contain well defined data */
 	
 	/************************************ Class Methods *************************************/
 	public CombatMessage
@@ -36,7 +36,7 @@ public class CombatMessage extends Message
 			Integer target[], 	/* This should be the ID of the target DDCharacter */
 			CombatSystem.ActionType action,
 			CombatSystem.Action request,
-			int[] body
+			Integer[] body
 	)
 	{
 		super(Message.COMBAT_MESSAGE);
@@ -70,7 +70,7 @@ public class CombatMessage extends Message
 		return request;
 	} /* end getRequest method */
 
-	public int[] getBody() 
+	public Integer[] getBody() 
 	{
 		return body;
 	} /* end getBody method */

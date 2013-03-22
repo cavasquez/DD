@@ -43,12 +43,12 @@ public class I_StandardAttack extends CombatInterpreter
 		int damage = cm.getBody()[DAMAGE_ROLL];	/* the damage against the opponent */
 		
 		/* Add modifier to rolls */
-		int[] attackModifiers = CombatSystem.getCharacter(cm.getSource()).getAttack();
-		int[] damageModifiers = CombatSystem.getCharacter(cm.getSource()).getDamange();
+		int[] attackModifiers = cs.getCharacter(cm.getSource()).getAttack();
+		int[] damageModifiers = cs.getCharacter(cm.getSource()).getDamange();
 		if (attackModifiers != null) for (int i = 0; i < attackModifiers.length; i++) attack += attackModifiers[i];
 		if (damageModifiers != null) for (int i = 0; i < damageModifiers.length; i++) damage += damageModifiers[i];
 		
-		if (cm.getTarget() != null)CombatSystem.getCharacter(cm.getTarget()[0]).defend(attack, damage, DDCharacter.ACType.NORMAL);
+		if (cm.getTarget() != null) cs.getCharacter(cm.getTarget()[0]).defend(attack, damage, DDCharacter.ACType.NORMAL);
 		/* if cmTarget is null, player attacked the air */
 	} /* end interpret method */
 	

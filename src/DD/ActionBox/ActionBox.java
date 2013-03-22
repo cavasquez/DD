@@ -1,6 +1,8 @@
 package DD.ActionBox;
  
 import java.util.ArrayList;  
+import java.util.Set;
+import java.util.TreeSet;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
@@ -68,7 +70,8 @@ public class ActionBox extends BoxInterface
 
 	/************************************ Class Attributes *************************************/
 	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
-	protected static DDCharacter character = null;	/* The character performing the actions */
+	protected DDCharacter character = null;	/* The character performing the actions */
+	protected Set<Integer> playersCharacters = null;/* A set that contains the players characters */
 	
 	/************************************ Button Images *************************************/
 	Image freeAction = null;
@@ -86,6 +89,7 @@ public class ActionBox extends BoxInterface
 		super(id, length, width);
 		components = new ArrayList<Component>();
 		subActions = null;
+		playersCharacters = new TreeSet<Integer>();
 		
 		freeAction = new Image("Images/ActionBox/FreeAction.png");
 		fullRoundAction = new Image("Images/ActionBox/FullRoundAction.png");
@@ -148,20 +152,38 @@ public class ActionBox extends BoxInterface
 		
 	} /* end unclickSubACtions method */
 	
+	public void addCharacter(int id)
+	{
+		/* Add characters id to set */
+		playersCharacters.add(id);
+	}/* end addCharacter method */
+	
+	public void removeCharacter(int id)
+	{
+		playersCharacters.remove(id);
+	} /* end removeCharacter method */
+	
+	public boolean hasCharacter(int id)
+	{
+		/* Check to see if ActionBox "owns" character */
+		return playersCharacters.contains(id);
+	} /* end hasCharacter method */
+	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public static DDCharacter getCharacter()
+	public DDCharacter getCharacter()
 	{
-		return ActionBox.character;
+		return this.character;
 	} /* end getCharacter method */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/
-	public static void setCharacter(DDCharacter character)
+	public void setCharacter(DDCharacter character)
 	{
-		ActionBox.character = character;
+		this.character = character;
 		Ability.setOwnerCharacter(character);
 	} /* end setCharacter method */
+	
 } /* end ActionBox method */

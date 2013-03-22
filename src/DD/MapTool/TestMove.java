@@ -9,9 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
-
 import slick.path2glory.SimpleGame.TestGame;
-
 import DD.ActionBox.ActionBox;
 import DD.Character.DDCharacter;
 import DD.Character.Abilities.Ability;
@@ -22,6 +20,7 @@ import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
+import DD.System.DDSystem;
 
 // @author Carlos Vasquez
 
@@ -40,9 +39,9 @@ public class TestMove extends BasicGame
     @Override
     public void init(GameContainer gc) 
 			throws SlickException {
-    	TargetingSystem ts = new TargetingSystem();
-		CombatSystem cs = new CombatSystem();
-		ActionBox ab = new ActionBox(5, 0, 0);
+    	DDSystem system = new DDSystem();
+    	ActionBox ab = new ActionBox(0, 0, 0);
+    	system.linkBoxes(ab, null);
 		
 		/*
 		 * IMPORTANT: for this main to work, mapSize needs to be 21 or larger due to hardcodes massPlaceObjectsLine values.
@@ -94,7 +93,7 @@ public class TestMove extends BasicGame
 		
 		/* ALSO VERY FREAKING IMPORTANT */
 		character.setCharacterID(i++);
-		CombatSystem.addCharacter(character);
+		system.cs.addCharacter(character);
 		
 		sheet.fillBasic("Max", 
 				"Bob", 
@@ -116,7 +115,7 @@ public class TestMove extends BasicGame
 		sheet.fillAttacksAndDefense(barb);
 		
 		character.setCharacterSheet(sheet);
-		ActionBox.setCharacter(character);
+		ab.setCharacter(character);
 		
 		
 		
@@ -142,7 +141,7 @@ public class TestMove extends BasicGame
 //						null
 //				);
 //		ObjectsPriorityStack[][] stack = world.world[0][0].objectsStack;
-//		ts.chooseTarget(ctm);
+//		system.ts.chooseTarget(ctm);
 	
 		System.out.println(character.getMovedDiagonal());
 		System.out.println(world.world[0][0].toString());

@@ -23,6 +23,7 @@ import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
+import DD.System.DDSystem;
 
 // @author Carlos Vasquez
 
@@ -41,8 +42,7 @@ public class TestTargeting extends BasicGame
     @Override
     public void init(GameContainer gc) 
 			throws SlickException {
-    	TargetingSystem ts = new TargetingSystem();
-		CombatSystem cs = new CombatSystem();
+    	DDSystem system = new DDSystem();
 		
 		/*
 		 * IMPORTANT: for this main to work, mapSize needs to be 21 or larger due to hardcodes massPlaceObjectsLine values.
@@ -106,16 +106,16 @@ public class TestTargeting extends BasicGame
 						null
 				);
 		ObjectsPriorityStack[][] stack = world.world[0][0].objectsStack;
-		ts.chooseTarget(ctm);
+		system.ts.chooseTarget(ctm);
 	
 		System.out.println(character.getMovedDiagonal());
 		System.out.println(world.world[0][0].toString());
 		
 		/* Test the clearTargets() method */
 		System.out.println("Testing clearTargets method");
-		ts.clearTargets();
+		system.ts.clearTargets();
 		System.out.println(world.world[0][0].toString());
-		ts.clearTargets();
+		system.ts.clearTargets();
 		System.out.println(world.world[0][0].toString());
 		
 		/*
