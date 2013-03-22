@@ -74,7 +74,7 @@ public class I_Move extends CombatInterpreter
 			CombatSystem.getMap().objectsStack[mover.getCoordinate().x][mover.getCoordinate().y].remove(charObj);
 			
 			/* Next, place the charObj in the new position */
-			CombatSystem.getMap().placeObjects(cm.getBody()[X_COORDINATE], cm.getBody()[Y_COORDINATE], charObj);
+			CombatSystem.getMap().place(cm.getBody()[X_COORDINATE], cm.getBody()[Y_COORDINATE], charObj);
 			
 			/* Finally, update the movers coordinates */
 			mover.setCoordiante(new Coordinate(cm.getBody()[X_COORDINATE], cm.getBody()[Y_COORDINATE]));
