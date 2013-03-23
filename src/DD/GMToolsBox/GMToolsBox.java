@@ -48,7 +48,7 @@ public class GMToolsBox extends BoxInterface
 		
 	} /* end Action enum */
 	
-	private static enum Holder
+	public static enum Holder
 	{
 		/* The enum that will correlate with the holder ArrayList */
 		MOB(I++),
@@ -73,7 +73,7 @@ public class GMToolsBox extends BoxInterface
 	private int characterID; 							/* Unique ID's for each character */
 	private Queue<Integer> recycledCIDs;				/* ID's of objects that have given up their id (thus the ID can be used again */
 	private ArrayList<ArrayList<CharacterSheet>> holder;/* The holder array will hold either mob characters or player characters NOT on the field*/
-	private Set<Integer> charactersInPlay;				/* A set containing the ID's of all the characters in play */
+	private Set<Integer> charactersInPlay;				/* A set containing the ID's of all the characters in play. It should mirror the one in the CombatSystem */
 	
 	/************************************ Button Images *************************************/
 	Image startCombatPhaseButton= null;

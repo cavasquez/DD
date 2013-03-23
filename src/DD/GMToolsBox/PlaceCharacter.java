@@ -1,6 +1,9 @@
 package DD.GMToolsBox;
 
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
 import DD.Character.Abilities.TargetAbility;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.CombatSystem;
@@ -23,17 +26,37 @@ public class PlaceCharacter extends TargetAbility
 	/************************************ Class Attributes *************************************/
 	private CharacterSheet sheet;	/* characters data */
 	private GMToolsBox gmt;			/* Give PlaceCharacter access tot he GMToolBox */
+	private boolean delete;
+	private boolean place;
+	private GMToolsBox.Holder type;
 	
 	/************************************ Class Methods *************************************/
-	public PlaceCharacter(int id, CharacterSheet sheet, GMToolsBox gmt) 
+	public PlaceCharacter(int id, CharacterSheet sheet, GMToolsBox gmt, GMToolsBox.Holder type) 
 	{
 		super(id, CombatSystem.ActionType.SYSTEM, CombatSystem.Action.PLACE_CHARACTER, sheet.getName(), "place");
 		this.sheet = sheet;
 		this.gmt = gmt;
+		this.type = type;
+		delete = false;
+		place = false;
 	} /* end PlaceCharacter class */
 
 	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta)
+	{
+		
+	} /* end update method */
+	
+	@Override
 	protected void action() throws SlickException 
+	{
+		/* delete or action should be flagged during update (ie, this will have to override update).
+		 * The PlaceCharacter button should really be thought of as 2 buttons */
+		if (place) place();
+		else if(delete) delete();
+	} /* end action method */
+	
+	private void place()
 	{
 		ChooseTargetMessage tcm = new ChooseTargetMessage
 				(
@@ -45,27 +68,55 @@ public class PlaceCharacter extends TargetAbility
 					0,
 					this
 				);
-		ts.chooseTarget(tcm);
-	} /* end action method */
+		try 
+		{
+			ts.chooseTarget(tcm);
+		} /* end try */
+		catch (SlickException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
+	} /* end place method */
 
+	private void delete()
+	{
+		/* remove character from holder */
+		gmt.removeCharacter(type, sheet);
+		
+		/* remove PlaceCharacter object from the list in GMToolsBox */
+		gmt.removeComponent(this.id);
+		
+		
+		//TODO: save sheet? give to corresponding player to save? tell corresponding player to save?
+	} /* end delete method */
+	
 	@Override
 	public void obtainTarget(TargetSelectedMessage tsm) throws SlickException 
 	{
-		Integer[] body = new Integer[I_StandardAttack.BODY_SIZE];
-		body[I_PlaceCharacter.CHARACTER_ID] = gmt.getNewCharacterID();
-		body[I_PlaceCharacter.POS_X] = tsm.getPosition().x;
-		body[I_PlaceCharacter.POS_Y] = tsm.getPosition().y;
-		CombatMessage cm = new CombatMessage
-				(
-					character.getCharacterID(),
-					null,
-					CombatSystem.ActionType.STANDARD,
-					CombatSystem.Action.STANDARD_ATTACK,
-					sheet,
-					body
-				);
-		sendToInterpreter(cm);
-		done();
+		if (tsm.getTargets() == null)
+		{
+			/* We can only place a character on a nonempty square */
+			Integer[] body = new Integer[I_StandardAttack.BODY_SIZE];
+			body[I_PlaceCharacter.CHARACTER_ID] = gmt.getNewCharacterID();
+			body[I_PlaceCharacter.POS_X] = tsm.getPosition().x;
+			body[I_PlaceCharacter.POS_Y] = tsm.getPosition().y;
+			CombatMessage cm = new CombatMessage
+					(
+						character.getCharacterID(),
+						null,
+						CombatSystem.ActionType.STANDARD,
+						CombatSystem.Action.STANDARD_ATTACK,
+						sheet,
+						body
+					);
+			sendToInterpreter(cm);
+			
+			/* remove the character from the holder */
+			gmt.removeCharacter(type, sheet);
+			
+			done();
+		} /* end if */
 		
 	} /* end obtainTarget method */
 

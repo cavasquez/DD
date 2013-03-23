@@ -377,7 +377,7 @@ public class TargetingSystem extends DDSystem
 		{
 			for (int j = 0; j < map.mapSize; i++)
 			{
-				if(!wallExists(new Coordinate(i,j)) && !characterExists(new Coordinate(i,j))) placeTargetBlock(new Coordinate(i,j));
+				if(!wallExists(new Coordinate(i,j))) placeTargetBlock(new Coordinate(i,j));
 			} /* end for loop */
 		} /* end for loop */
 	} /* end placeAll method */
