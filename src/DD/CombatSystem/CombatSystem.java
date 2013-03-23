@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import DD.CombatSystem.Interpreter.*;
 import DD.CombatSystem.Interpreter.Move.I_Move;
 import DD.CombatSystem.Interpreter.Standard.*;
+import DD.CombatSystem.Interpreter.System.I_EndTurn;
+import DD.CombatSystem.Interpreter.System.I_PlaceCharacter;
+import DD.CombatSystem.Interpreter.System.I_StartCombatPhase;
 import DD.MapTool.Map;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
@@ -36,7 +39,8 @@ public class CombatSystem extends DDSystem
 		MOVE(I++),
 		END_ACTION(I++),
 		START_COMBAT_PHASE(I++),
-		END_TURN(I++);
+		END_TURN(I++),
+		PLACE_CHARACTER(I++);
 		
 		public final int index;
 		public static final int NUM_OF_INTERPRETERS = I;
@@ -62,7 +66,7 @@ public class CombatSystem extends DDSystem
 	
 	/************************************ Class Attributes *************************************/
 	private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
-	private static Map map;										/* The game map that may need to be modified. */
+	private Map map;										/* The game map that may need to be modified. */
 	private static CombatInterpreter[] system;					/* The core of CombatSystem */
 	private int turn;											/* the current turn count */
 	private ArrayList<Integer> order;							/* The order of  */
@@ -79,6 +83,7 @@ public class CombatSystem extends DDSystem
 		system[Action.END_ACTION.index] = new I_EndAction();
 		system[Action.START_COMBAT_PHASE.index] = new I_StartCombatPhase();
 		system[Action.END_TURN.index] = new I_EndTurn();
+		system[Action.PLACE_CHARACTER.index] = new I_PlaceCharacter();
 	} /* end CombatSystem constructor */
 	
 	public CombatValidationMessage process(CombatMessage cm)
@@ -157,6 +162,12 @@ public class CombatSystem extends DDSystem
 		characterList.add(character);
 	} /* end addCharacter method */
 	
+	public void addToOrder(int id, int place)
+	{
+		/* Add the new character to the provided place in the order */
+		order.add(place, id);
+	} /* int end addToOrder method */
+	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
@@ -177,7 +188,7 @@ public class CombatSystem extends DDSystem
 		return (returner);
 	} /* end getCharacter method */
 	
-	public static Map getMap()
+	public Map getMap()
 	{
 		return map;
 	} /* end getMap method */
@@ -197,12 +208,18 @@ public class CombatSystem extends DDSystem
 		return order;
 	} /* end getOrder method */
 	
+	public int getNetID()
+	{
+		/* returns network id */
+		return ns.getNetID();
+	} /* end getNetID method */
+	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/
-	public static void setMap(Map map)
+	public void setMap(Map map)
 	{
-		CombatSystem.map = map;
+		map = map;
 	} /* end setMap method */
 	
 	public void setTurn(int turn)

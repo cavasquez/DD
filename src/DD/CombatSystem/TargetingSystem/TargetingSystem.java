@@ -76,6 +76,7 @@ public class TargetingSystem extends DDSystem
 	{
 		CIRCLE,
 		CONE,
+		ALL,
 		MOVE;	/* A circle, but the placement differs slightly */
 		
 	} /* end TargetShape enum */
@@ -193,6 +194,9 @@ public class TargetingSystem extends DDSystem
 				placeCone(ctm.getOrigin(), ctm.getLength());
 				break;
 				
+			case ALL:
+				placeAll();
+				break;
 			case MOVE:
 				placeMove(ctm.getOrigin(), ctm.getLength());
 				break;
@@ -363,6 +367,21 @@ public class TargetingSystem extends DDSystem
 		
 	} /* end placeMove method */
 	
+	/******************************************************************************
+	 ************************* PlaceAll Related Methods  **************************
+	 ******************************************************************************/
+	private void placeAll() throws SlickException
+	{
+		/* Target everything that is not an obstacle (wall or character) */
+		for (int i = 0; i < map.mapSize; i++)
+		{
+			for (int j = 0; j < map.mapSize; i++)
+			{
+				if(!wallExists(new Coordinate(i,j)) && !characterExists(new Coordinate(i,j))) placeTargetBlock(new Coordinate(i,j));
+			} /* end for loop */
+		} /* end for loop */
+	} /* end placeAll method */
+	
 	/************************************ Methods used by class *************************************/	
 	private void placeTargetBlock(Coordinate position) throws SlickException
 	{
@@ -387,6 +406,19 @@ public class TargetingSystem extends DDSystem
 		while (returner == false && obj.hasNext())
 		{
 			if(Wall.class.isInstance(obj.next())) returner = true;
+		} /* end while loop */
+		
+		return returner;
+	} /* end wallExists method */
+	
+	private boolean characterExists( Coordinate position )
+	{/* Check if there is a wall at the position */
+		boolean returner = false;
+		Iterator<Objects> obj = map.objectsStack[position.x][position.y].getIterator();
+		
+		while (returner == false && obj.hasNext())
+		{
+			if(CharacterObjects.class.isInstance(obj.next())) returner = true;
 		} /* end while loop */
 		
 		return returner;

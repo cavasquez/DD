@@ -23,12 +23,11 @@ public class NetworkSystem extends DDSystem implements Network
 	public static final int CLIENT = NUM_OF_NETWORKS++;
 	
 	/************************************ Class Attributes *************************************/
-	private static int networkType;
-	private static Network network;
+	private int networkType;
+	private Network network;
 	
 	/************************************ Class Methods *************************************/
-	public NetworkSystem() 
-	{}
+	public NetworkSystem() {}
 	
 	@Override
 	public boolean sendMessage(int sender, int receiver, Message message)
@@ -58,7 +57,7 @@ public class NetworkSystem extends DDSystem implements Network
 		
 	} /* end getMessage method */
 	
-	public int getUserID()
+	public int getNetID()
 	{
 		Integer id = null;
 		if (networkType == SERVER) id = Network.GM_USER_ID;
@@ -70,7 +69,7 @@ public class NetworkSystem extends DDSystem implements Network
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public static boolean setNetworkType(int type)
+	public boolean setNetworkType(int type)
 	{
 		boolean exists = false;
 		if (networkTypeExists(type))

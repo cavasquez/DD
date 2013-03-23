@@ -18,11 +18,11 @@ import DD.Message.TargetSelectedMessage;
 public abstract class TargetAbility extends Ability
 {
 
-	public TargetAbility(int id, ActionType actionType, Action action,
-			String name, String description) {
+	public TargetAbility(int id, ActionType actionType, Action action, String name, String description) 
+	{
 		super(id, actionType, action, name, description);
 		// TODO Auto-generated constructor stub
-	}
+	} /* end TargetAbility constructor */
 	
 	public abstract void obtainTarget(TargetSelectedMessage tsm) throws SlickException;
 	/* obtainTarget will be called on by the TargetSystem signaling that a target(s) has
@@ -41,7 +41,7 @@ public abstract class TargetAbility extends Ability
 			/* First, tell CombatSystem that action is terminating */
 			CombatMessage endAction = new CombatMessage
 				(
-					character.getCharacterID(),
+					cm.getSource(),
 					null,
 					actionType,
 					CombatSystem.Action.END_ACTION,
@@ -64,17 +64,23 @@ public abstract class TargetAbility extends Ability
 	public void done() throws SlickException
 	{
 		/* This action should be performed when the character clicks done */
+		done(character.getCharacterID());
+	} /* end done method */
+	
+	public void done(Integer characterID) throws SlickException
+	{
+		/* This action should be performed when the character clicks done */
 		done = true;
 		ts.clearTargets();
 		CombatMessage cm = new CombatMessage
 			(
-				character.getCharacterID(),
+				characterID,
 				null, 
 				actionType,
 				action,
 				null
 			);
 		sendToInterpreter(cm); /* this should send a message to the CombatSystem telling it we are done */
-	} /* end done method */
+	} /* end done */
 
 } /* end TargetAbility method */

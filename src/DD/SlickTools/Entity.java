@@ -30,7 +30,6 @@ public class Entity
 	protected float scale;
 	protected ArrayList<Component> components = null;
 	
-	
 	/************************************ Class Methods *************************************/
 	public Entity (int id)
 	{

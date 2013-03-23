@@ -31,7 +31,7 @@ public class MessageBox extends Entity
 
 	public void sendMessage(String message)
 	{/* Get user input and send the message wrapped in ChatMessage to ChatSystem */
-		ChatMessage cm = new ChatMessage(network.getUserID(), Network.EVERYONE, ChatSystem.PROCESS_MESSAGE, message);
+		ChatMessage cm = new ChatMessage(network.getNetID(), Network.EVERYONE, ChatSystem.PROCESS_MESSAGE, message);
 		chat.process(cm);
 		
 	} /* end sendMessage method */

@@ -9,13 +9,13 @@ import DD.ActionBox.ActionBox;
 import DD.Character.DDCharacter;
 import DD.Character.Abilities.Ability;
 import DD.Character.Abilities.EndTurn;
-import DD.Character.Abilities.StartCombatPhase;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.Character.CharacterSheet.CharacterClass;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
+import DD.GMToolsBox.StartCombatPhase;
 import DD.System.DDSystem;
 
 // @author Carlos Vasquez

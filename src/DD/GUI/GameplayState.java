@@ -69,7 +69,7 @@ public class GameplayState extends BasicGameState {
     	DDSystem system = new DDSystem();
     	
     	TargetingSystem.setMap(maptool.getMapAtLocation(0, 0));
-    	CombatSystem.setMap(maptool.getMapAtLocation(0, 0));
+    	system.cs.setMap(maptool.getMapAtLocation(0, 0));
     	
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);

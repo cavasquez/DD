@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.EndTurn;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.Character.Abilities.DefaultAbilities.Standard.StandardAttack;
 import DD.SlickTools.BoxInterface;
@@ -51,7 +52,8 @@ public class ActionBox extends BoxInterface
 		FULL_ROUND_ACTION (I++),
 		SWIFT_ACTION (I++),
 		IMMEDIATE_ACTION (I++),
-		FREE_ACTION (I++);
+		FREE_ACTION (I++),
+		END_TURN(I++);
 		
 		public final int index;
 		public static final int NUM_OF_ACTIONS = I;
@@ -82,13 +84,12 @@ public class ActionBox extends BoxInterface
 	Image swiftAction = null;
 	Image standardAttack = null;
 	Image endMove = null;
-	//Image startNewTurn = null;
+	Image endTurnButton = null;
 	
 	public ActionBox(int id, float length, float width) throws SlickException
 	{
 		super(id, length, width);
-		components = new ArrayList<Component>();
-		subActions = null;
+		subActions = new ArrayList<Integer>();
 		playersCharacters = new TreeSet<Integer>();
 		
 		freeAction = new Image("Images/ActionBox/FreeAction.png");
@@ -98,7 +99,7 @@ public class ActionBox extends BoxInterface
 		standardAction = new Image("Images/ActionBox/StandardAction.png");
 		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
 		endMove = new Image("Images/ActionBox/EndMove.png");
-		//tartNewTurn = new Image("Images/ActionBox/startNewTurn.png");
+		endTurnButton = new Image("Images/ActionBox/EndMove.png"); //TODO: make button
 		
 		int shift = freeAction.getHeight();
 		Vector2f boxPosition = new Vector2f(660f, 10f);
@@ -106,24 +107,19 @@ public class ActionBox extends BoxInterface
 		
 		/* To begin with, the basic ActionChoices need to be available. */
 	
-		StandardAttack standardAttack = new StandardAttack(this.id);
-		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y, standardAttack));
+		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y, new StandardAttack(this.id)));
 		Move move = new Move(this.id);
 		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift, move));
 		this.addComponent(new ActionChoice(this.id, Action.FULL_ROUND_ACTION.index, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
 		this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
 		this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
 		this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
+		this.addComponent(new ActionChoice(this.id, Action.END_TURN.index, "End Turn", endTurnButton, position.x, position.y + shift*5, new EndTurn(this.id)));
 		
 		this.addComponent(new ActionChoice(this.id, 1000, "End Move", endMove, position.x, position.y + shift*6, move));
 		//this.addComponent(new ActionChoice(this.id, 2000, "Start New Turn", startNewTurn, position.x, position.y + shift*6));
 		
 	} /* end ActionBox constructor */
-	
-	public ArrayList<Component> getComponentList() 
-	{
-		return components;
-	}
 	
 	public void addSubAction(Ability ability)
 	{ /* Convert the provided Ability into a SubAction and add it to the components ArrayList*/

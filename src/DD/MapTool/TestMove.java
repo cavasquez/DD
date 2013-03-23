@@ -51,7 +51,7 @@ public class TestMove extends BasicGame
 		/* VERY FREAKING IMPORTANT STUFF */
 		World world = new World("TESTME");
 		TargetingSystem.setMap(world.world[0][0]);
-		CombatSystem.setMap(world.world[0][0]);
+		system.cs.setMap(world.world[0][0]);
 	
 		/*
 		 * proof of concept movement backend

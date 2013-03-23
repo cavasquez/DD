@@ -86,6 +86,8 @@ public class CharacterSheet implements Serializable
 	private String deity;
 	private String background;
 	private String occupation;
+	private String image = null;
+	private int netID;  //TODO: should not be serialized. 
 	
 	/********* Ability *********/
 	
@@ -1930,4 +1932,25 @@ public class CharacterSheet implements Serializable
 		hitpoints = hp + dice.roll(1,10);
 		return hitpoints;
 	}
+	
+	public void setNetID(int netID)
+	{
+		this.netID = netID;
+	}
+	
+	public int getNetID()
+	{
+		return netID;
+	}
+	
+	public String getImage()
+	{
+		return image;
+	}
+	
+	public void setImage(String image)
+	{
+		this.image = image;
+	} /* end setImage method */
+	
 } /* end CharacterSheet method */
