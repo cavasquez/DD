@@ -88,7 +88,7 @@ public class TargetingSystem extends DDSystem
 	} /* end Target enum */
 	
 	/************************************ Class Attributes *************************************/
-	public static Map map = null;						/* Map on which we are placing TargetBlocks */
+	public Map map = null;						/* Map on which we are placing TargetBlocks */
 	private static TargetAbility caller = null;				/* keeps track of Ability that called TargetSystem */
 	private static TargetSelection selection = null;	/* keeps track of type of TargetSelection so targetSelected know which Characters to return */
 	private static Queue<TargetBlock> blocks = null;	/* this stack will be used to keep track of placed blocks */
@@ -446,9 +446,9 @@ public class TargetingSystem extends DDSystem
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public static void setMap(Map map)
+	public void setMap(Map map)
 	{
-		TargetingSystem.map = map;
+		this.map = map;
 	} /* end setMap method */
 	
 	/******************************************************************************

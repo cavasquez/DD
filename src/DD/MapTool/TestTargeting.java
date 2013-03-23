@@ -51,7 +51,7 @@ public class TestTargeting extends BasicGame
 		
 		
 		World world = new World("TESTME");
-		TargetingSystem.setMap(world.world[0][0]);
+		system.setMap(world.world[0][0]);
 	
 		/*
 		 * proof of concept movement backend

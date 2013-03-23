@@ -6,6 +6,7 @@ import DD.CombatSystem.Interpreter.Move.I_Move;
 import DD.CombatSystem.Interpreter.Standard.*;
 import DD.CombatSystem.Interpreter.System.I_EndTurn;
 import DD.CombatSystem.Interpreter.System.I_PlaceCharacter;
+import DD.CombatSystem.Interpreter.System.I_RemoveCharacter;
 import DD.CombatSystem.Interpreter.System.I_StartCombatPhase;
 import DD.MapTool.Map;
 import DD.Message.CombatMessage;
@@ -40,7 +41,8 @@ public class CombatSystem extends DDSystem
 		END_ACTION(I++),
 		START_COMBAT_PHASE(I++),
 		END_TURN(I++),
-		PLACE_CHARACTER(I++);
+		PLACE_CHARACTER(I++),
+		REMOVE_CHARACTER(I++);
 		
 		public final int index;
 		public static final int NUM_OF_INTERPRETERS = I;
@@ -84,6 +86,7 @@ public class CombatSystem extends DDSystem
 		system[Action.START_COMBAT_PHASE.index] = new I_StartCombatPhase();
 		system[Action.END_TURN.index] = new I_EndTurn();
 		system[Action.PLACE_CHARACTER.index] = new I_PlaceCharacter();
+		system[Action.REMOVE_CHARACTER.index] = new I_RemoveCharacter();
 	} /* end CombatSystem constructor */
 	
 	public CombatValidationMessage process(CombatMessage cm)
@@ -162,11 +165,32 @@ public class CombatSystem extends DDSystem
 		characterList.add(character);
 	} /* end addCharacter method */
 	
+	public void removeCharacter(DDCharacter character)
+	{
+		characterList.remove(character);
+	} /* end removeCharacter */
+	
+	public void removeCharacter(int id)
+	{
+		removeCharacter(getCharacter(id));
+	} /* end removeCharacter */
+	
 	public void addToOrder(int id, int place)
 	{
 		/* Add the new character to the provided place in the order */
 		order.add(place, id);
-	} /* int end addToOrder method */
+	} /* end addToOrder method */
+	
+	public void addToOrder(int id)
+	{
+		/* Place the new character at the "end" of the list */
+		order.add(0, id);
+	} /* end addToOrder method */
+	
+	public void removeFromOder(int id)
+	{
+		order.remove(id);
+	} /* end removeFromOrder */
 	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
@@ -219,7 +243,7 @@ public class CombatSystem extends DDSystem
 	 ****************************************************************************************/
 	public void setMap(Map map)
 	{
-		map = map;
+		this.map = map;
 	} /* end setMap method */
 	
 	public void setTurn(int turn)

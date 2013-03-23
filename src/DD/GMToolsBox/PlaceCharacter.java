@@ -56,7 +56,7 @@ public class PlaceCharacter extends TargetAbility
 		else if(delete) delete();
 	} /* end action method */
 	
-	private void place()
+	private void place() throws SlickException
 	{
 		ChooseTargetMessage tcm = new ChooseTargetMessage
 				(
@@ -68,15 +68,7 @@ public class PlaceCharacter extends TargetAbility
 					0,
 					this
 				);
-		try 
-		{
-			ts.chooseTarget(tcm);
-		} /* end try */
-		catch (SlickException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /* end catch */
+		ts.chooseTarget(tcm);
 	} /* end place method */
 
 	private void delete()
@@ -103,7 +95,7 @@ public class PlaceCharacter extends TargetAbility
 			body[I_PlaceCharacter.POS_Y] = tsm.getPosition().y;
 			CombatMessage cm = new CombatMessage
 					(
-						character.getCharacterID(),
+						null,
 						null,
 						CombatSystem.ActionType.STANDARD,
 						CombatSystem.Action.STANDARD_ATTACK,

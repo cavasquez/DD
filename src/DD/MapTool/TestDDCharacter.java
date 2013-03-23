@@ -23,6 +23,7 @@ import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
+import DD.System.DDSystem;
 
 // @author Carlos Vasquez
 
@@ -41,8 +42,7 @@ public class TestDDCharacter extends BasicGame
     @Override
     public void init(GameContainer gc) 
 			throws SlickException {
-    	TargetingSystem ts = new TargetingSystem();
-		CombatSystem cs = new CombatSystem();
+    	DDSystem system = new DDSystem();
 		ActionBox ab = new ActionBox(5, 0, 0);
 		
 		/*
@@ -52,8 +52,7 @@ public class TestDDCharacter extends BasicGame
 		
 		/* VERY FREAKING IMPORTANT STUFF */
 		World world = new World("TESTME");
-		TargetingSystem.setMap(world.world[0][0]);
-		cs.setMap(world.world[0][0]);
+		system.setMap(world.world[0][0]);
 	
 		/*
 		 * proof of concept movement backend
@@ -68,7 +67,7 @@ public class TestDDCharacter extends BasicGame
 		
 		/* ALSO VERY FREAKING IMPORTANT */
 		character.setCharacterID(1);
-		cs.addCharacter(character);
+		system.cs.addCharacter(character);
 		character.setCharacterSheet(sheet);
 		
 		System.out.println("character address: " + character);

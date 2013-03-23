@@ -368,6 +368,11 @@ public class DDCharacter extends Entity implements Serializable
 		return hasTurn;
 	}
 	
+	public CharacterSheet getSheet()
+	{
+		return sheet;
+	}
+	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/

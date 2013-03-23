@@ -7,6 +7,7 @@ import DD.Chat.ChatSystem;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
+import DD.MapTool.Map;
 import DD.Network.NetworkSystem;
 
 /*****************************************************************************************************
@@ -64,4 +65,10 @@ public class DDSystem
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/
+	public void setMap(Map map)
+	{
+		cs.setMap(map);
+		ts.setMap(map);
+	} /* end setMap method */
+	
 } /* end System class */

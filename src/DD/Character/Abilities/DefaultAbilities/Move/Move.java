@@ -30,18 +30,7 @@ public class Move extends TargetAbility
 	{ /* This method needs to be used in update */
 		if (character.getCurrentSpeed() <= 0)
 		{/* check to see that we can continue moving. In this case, we cannot */
-			
-			done = true;
-			CombatMessage cm = new CombatMessage
-					(
-						character.getCharacterID(),
-						null, 
-						actionType,
-						action,
-						null
-					);
-			
-			sendToInterpreter(cm);
+			done();
 		} /* end if */
 		else
 		{
