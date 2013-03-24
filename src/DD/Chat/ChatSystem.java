@@ -14,7 +14,7 @@ import DD.System.DDSystem;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class ChatSystem extends DDSystem
+public class ChatSystem
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;

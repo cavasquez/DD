@@ -22,40 +22,57 @@ import DD.Network.NetworkSystem;
 
 public class DDSystem 
 {
-	/************************************ Class Constants *************************************/
-	
 	/************************************ Class Attributes *************************************/
-	public static final CombatSystem cs = new CombatSystem();
-	public static final TargetingSystem ts = new TargetingSystem();
-	public static final NetworkSystem ns = new NetworkSystem();
-	public static final ChatSystem chat = new ChatSystem();
-	
-	private static boolean initialized = false;	/* flag used to check if system has been initialized yet  */
+	public final CombatSystem cs;
+	public final TargetingSystem ts;
+	public final NetworkSystem ns;
+	public final ChatSystem chat;
 	
 	/************************************ Class Methods *************************************/
 	public DDSystem()
-	{
-		/* Check to see if any of the necessary parts have had their systems set. 
-		 * If not, set them */
-		if (!initialized)
-		{
-			initialized = true;
-			
-			/* Provide the CombatInterpreter the necessary systems */
-			CombatInterpreter.setCombatSystem(cs);
-			CombatInterpreter.setTargetingSystem(ts);
-			
-			/* Provide the CombatInterpreter the necessary systems */
-			Ability.setCombatSystem(cs);
-			Ability.setTargetingSystem(ts);
-		} /* end if */
+	{	
+		cs = new CombatSystem();
+		ts = new TargetingSystem();
+		ns = new NetworkSystem();
+		chat = new ChatSystem();
+		
+		/* Provide the CombatSystem the necessary systems */
+		cs.setNetworkSystem(ns);
+		
+		/* Provide the CombatInterpreter the necessary systems */
+		CombatInterpreter.setCombatSystem(cs);
+		CombatInterpreter.setTargetingSystem(ts);
+		
+		/* Provide the CombatInterpreter the necessary systems */
+		Ability.setCombatSystem(cs);
+		Ability.setTargetingSystem(ts);
+		
 	} /* end System constructor */
 	
 	public void linkBoxes(ActionBox ab, ChatBox cb)
 	{
 		/* linkBoxes will pass on the Games Boxes to the appropriate objects. */
+		linkBoxes(ab);
+		linkBoxes(cb);
+		
+	} /* end linkBoxes method */
+	
+	public void linkBoxes(ActionBox ab)
+	{
+		/* linkBoxes will pass on the Games Boxes to the appropriate objects. */
 		CombatInterpreter.setActionBox(ab);
 	} /* end linkBoxes method */
+	
+	public void linkBoxes(ChatBox cb)
+	{
+		/* linkBoxes will pass on the Games Boxes to the appropriate objects. */
+		
+	} /* end linkBoxes method */
+	
+	public void client()
+	{
+		ns.setNetworkType(NetworkSystem.NetworkType.CLIENT);
+	} /* end client() */
 	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************

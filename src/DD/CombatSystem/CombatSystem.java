@@ -12,6 +12,7 @@ import DD.MapTool.Map;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 import DD.Message.Message;
+import DD.Network.NetworkSystem;
 import DD.System.DDSystem;
 import DD.Character.*;
 
@@ -30,7 +31,7 @@ import DD.Character.*;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class CombatSystem extends DDSystem
+public class CombatSystem
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;
@@ -72,6 +73,7 @@ public class CombatSystem extends DDSystem
 	private static CombatInterpreter[] system;					/* The core of CombatSystem */
 	private int turn;											/* the current turn count */
 	private ArrayList<Integer> order;							/* The order of  */
+	private NetworkSystem ns;
 	
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
@@ -255,5 +257,10 @@ public class CombatSystem extends DDSystem
 	{
 		this.order = order;
 	} /* end setOrder method */
+	
+	public void setNetworkSystem(NetworkSystem ns)
+	{
+		this.ns = ns;
+	} /* end setNetworkSystem method */
 	
 } /* end CombatSystem class */

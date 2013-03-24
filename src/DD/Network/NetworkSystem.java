@@ -15,15 +15,19 @@ import DD.System.DDSystem;
 * @author Carlos Vasquez
 ******************************************************************************************************/
 
-public class NetworkSystem extends DDSystem implements Network
+public class NetworkSystem implements Network
 {
 	/************************************ Class Constants *************************************/
-	private static int NUM_OF_NETWORKS = 0;
-	public static final int SERVER = NUM_OF_NETWORKS++;
-	public static final int CLIENT = NUM_OF_NETWORKS++;
+	private static int I = 0;
+	public static enum NetworkType
+	{
+		CLIENT(),
+		SERVER();
+		
+	} /* end Action enum */
 	
 	/************************************ Class Attributes *************************************/
-	private int networkType;
+	private NetworkType networkType;
 	private Network network;
 	
 	/************************************ Class Methods *************************************/
@@ -34,18 +38,6 @@ public class NetworkSystem extends DDSystem implements Network
 	{
 		return network.sendMessage(sender, receiver, message);
 	} /* end sendMessage method */
-	
-	private static boolean networkTypeExists(int networkType)
-	{
-		boolean exists = false;
-		if ( networkType == SERVER ||
-				networkType == CLIENT)
-		{
-			exists = true;
-		} /* end if */
-		
-		return exists;
-	} /* end networkTypeExists method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
@@ -60,26 +52,35 @@ public class NetworkSystem extends DDSystem implements Network
 	public int getNetID()
 	{
 		Integer id = null;
-		if (networkType == SERVER) id = Network.GM_USER_ID;
-		else if (networkType == CLIENT) id = ((ClientSystem)network).getClientID();
-		
+		switch(networkType)
+		{
+			case SERVER:
+				id = Network.GM_USER_ID;
+				break;
+			case CLIENT:
+				id = ((ClientSystem)network).getClientID();
+				break;
+		} /* end switch */
+
 		return id;
 	} /* end getUserID */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public boolean setNetworkType(int type)
+	public void setNetworkType(NetworkType type)
 	{
-		boolean exists = false;
-		if (networkTypeExists(type))
+		this.networkType = type;
+		switch(networkType)
 		{
-			networkType = type;
-			if (networkType == SERVER) network = new ServerSystem();
-			else if (networkType == CLIENT) network = new ClientSystem();
-		}
-		
-		return exists;
+			case SERVER:
+				network = new ServerSystem();
+				break;
+			case CLIENT:
+				network = new ClientSystem();
+				break;
+		} /* end switch */
+
 	} /* end setNetworkType */
 	
 } /* end Network class */

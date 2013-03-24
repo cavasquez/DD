@@ -1,12 +1,14 @@
-package DD.CombatSystem.TargetingSystem;
+package DD.ActionBox.CombatSystem.TargetingSystem;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
+
 import org.newdawn.slick.SlickException;
+
 import DD.Character.DDCharacter;
-import DD.Character.Abilities.TargetAbility;
+import DD.Character.Abilities.Ability;
 import DD.MapTool.CharacterObjects;
 import DD.MapTool.Map;
 import DD.MapTool.Objects;
@@ -15,7 +17,6 @@ import DD.MapTool.TargetBlock;
 import DD.MapTool.Wall;
 import DD.Message.ChooseTargetMessage;
 import DD.Message.TargetSelectedMessage;
-import DD.System.DDSystem;
 
 /*****************************************************************************************************
  * TargettingSystem will be used by Ability to place a TargetBlock on the Map object. The target blocks
@@ -47,7 +48,7 @@ import DD.System.DDSystem;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class TargetingSystem
+public class TargetingSystem 
 {
 	/************************************ Class Constants*************************************/
 	public static final int blockSize = 5; /* distance of block (5 feet) */
@@ -76,7 +77,6 @@ public class TargetingSystem
 	{
 		CIRCLE,
 		CONE,
-		ALL,
 		MOVE;	/* A circle, but the placement differs slightly */
 		
 	} /* end TargetShape enum */
@@ -88,8 +88,8 @@ public class TargetingSystem
 	} /* end Target enum */
 	
 	/************************************ Class Attributes *************************************/
-	public Map map = null;						/* Map on which we are placing TargetBlocks */
-	private static TargetAbility caller = null;				/* keeps track of Ability that called TargetSystem */
+	private static Map map = null;						/* Map on which we are placing TargetBlocks */
+	private static Ability caller = null;				/* keeps track of Ability that called TargetSystem */
 	private static TargetSelection selection = null;	/* keeps track of type of TargetSelection so targetSelected know which Characters to return */
 	private static Queue<TargetBlock> blocks = null;	/* this stack will be used to keep track of placed blocks */
 	private static boolean self;						/* determine whether or not target can choose self */
@@ -137,22 +137,20 @@ public class TargetingSystem
 		ArrayList<DDCharacter> blockTargets = new ArrayList<DDCharacter>();
 		Coordinate movePosition = null;
 		TargetBlock block;
-		
 		while (blocks.peek() != null)
 		{
-			block = blocks.remove();
 			/* Get all Character targets that are not null */
-			if ( 
-					((selection == TargetSelection.SELECTED && block.getSelected() == true)) || ((selection == TargetSelection.UNSELECTED && block.getSelected() == false))) 
+			if ((block = blocks.remove()).getTarget() != null && 
+					((selection == TargetSelection.SELECTED && block.getSelected() == true) || (selection == TargetSelection.UNSELECTED && block.getSelected() == false))) 
 			{
-				if (block.getTarget() != null) blockTargets.add(block.getTarget());
-				movePosition = block.getPosition(); /* This should work because there is only one target in a move */
+				blockTargets.add(block.getTarget());
 			} /* end if */
+			movePosition = block.getPosition(); /* This should work because there is only one target in a move */
 			block.cleanUp();
 		} /* end while loop */
 		
 		DDCharacter[] targets = null;
-		if (blockTargets.size() > 0) targets = blockTargets.toArray(new DDCharacter[blockTargets.size()]);
+		if (blockTargets.size() > 0) targets = blockTargets.toArray(targets);
 		
 		TargetSelectedMessage tsm = new TargetSelectedMessage(targets, movePosition);
 		caller.obtainTarget(tsm); /* here, we tell the ability the target */
@@ -169,17 +167,14 @@ public class TargetingSystem
 		{
 			case SINGLE:
 				TargetBlock.setNumOfTargets(1);
-				TargetBlock.setTargetCount(TargetCount.SINGLE);
 				break;
 				
 			case MULTIPLE:
 				TargetBlock.setNumOfTargets(ctm.getNumOfTargets());
-				TargetBlock.setTargetCount(TargetCount.MULTIPLE);
 				break;
 				
 			case ALL:
 				TargetBlock.setNumOfTargets(null);
-				TargetBlock.setTargetCount(TargetCount.ALL);
 				break;
 		} /* end switch case */
 		
@@ -187,16 +182,13 @@ public class TargetingSystem
 		switch(ctm.getTargetShape())
 		{
 			case CIRCLE:
-				placeCircle(ctm.getOrigin(), ctm.getLength());
+				placeCircle(ctm.getOrigin(), ctm.getLength(), false);
 				break;
 				
 			case CONE:
 				placeCone(ctm.getOrigin(), ctm.getLength());
 				break;
 				
-			case ALL:
-				placeAll();
-				break;
 			case MOVE:
 				placeMove(ctm.getOrigin(), ctm.getLength());
 				break;
@@ -205,125 +197,85 @@ public class TargetingSystem
 		
 	} /* end placeTargetBlocks method */
 	
-	/******************************************************************************
-	 ************************ PlaceCircle Related Methods ************************
-	 ******************************************************************************/
-	
-	private void placeCircle(Coordinate origin, int distance) throws SlickException
+	private void placeCircle(Coordinate position, int distance, boolean originDealtWith) throws SlickException
 	{
 		/* Place a circular shaped area of TargetBlocks centered at the origin.
 		 * Exclude any blocks with walls, outside of the boundary, or set at the origin
 		 * (unless the character is allowed to select self)
 		 */
-		Coordinate position = null;
-		boolean originDealtWith = false;
-		Queue<CircleStackElement> stack = new LinkedList<CircleStackElement>();
-		stack.add(new CircleStackElement(origin, distance));
-		
 		boolean placeBlock = false;
 		boolean lookForMoreBlocks = false;
 		int diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
 		
-		Coordinate top;
-		Coordinate bottom;
-		Coordinate left;
-		Coordinate right;
-		
-		Coordinate topLeft;
-		Coordinate bottomLeft;
-		Coordinate topRight;
-		Coordinate bottomRight;
-		
-		while(stack.peek() != null)
+		/* First, make sure we are in bounds. Thus must happen first so we do not get array outofbounds errors*/
+		if 
+		(
+			( position.x < map.mapSize && position.x >= 0 ) && 	/* check x bounds */
+			( position.y < map.mapSize && position.y >= 0 )		/* check y bounds */
+		)
 		{
-			CircleStackElement next = stack.poll();
-			position = next.getPosition();
-			distance = next.getDistance();
-			
-			placeBlock = false;
-			lookForMoreBlocks = false;
-			diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
-			
-			top = new Coordinate(position.x, position.y + 1);
-			bottom = new Coordinate(position.x, position.y - 1);
-			left = new Coordinate(position.x - 1, position.y);
-			right = new Coordinate(position.x + 1, position.y);
-			
-			topLeft = new Coordinate(position.x - 1, position.y + 1);
-			bottomLeft = new Coordinate(position.x - 1, position.y - 1);
-			topRight = new Coordinate(position.x + 1, position.y + 1);
-			bottomRight = new Coordinate(position.x + 1, position.y - 1);
-			
-			/* First, make sure we are in bounds. Thus must happen first so we do not get array outofbounds errors*/
-			if (positionExists(position))
+			/* Second, check to see if a TargetBlock exists at the position. If it does not,
+			 * then place it there and continue. If one does exist, then stop and do not
+			 * place another one. If there is a TargetBlock, it will always be at the top
+			 * due to it's priority */
+			if (!TargetBlock.class.isInstance(map.objectsStack[position.x][position.y].peek()))
 			{
-				/* Second, check to see if a TargetBlock exists at the position. If it does not,
-				 * then place it there and continue. If one does exist, then stop and do not
-				 * place another one. If there is a TargetBlock, it will always be at the top
-				 * due to it's priority */
-				if (!positionHasTargetBlock(position))
+				/* Second, check if we are at the origin and check if it can be selected.
+				 * If it can't we do not place a block in the spot. If we do, (or this is  */
+				if ( position.x == origin.x && position.y == origin.y ) 
 				{
-					/* Second, check if we are at the origin and check if it can be selected.
-					 * If it can't we do not place a block in the spot. If we do, (or this is  */
-					if ( position.x == origin.x && position.y == origin.y ) 
+					if (!originDealtWith)
 					{
-						if (!originDealtWith)
-						{
-							/* Since the origin has not been dealt with, we should branch 
-							 * from the origin to look for more blocks that could be potential targets. */
-							lookForMoreBlocks = true;
-							diagonalPenalty = 1;		/* We have not had the chance to take a diagonal yet, no penalty */
-							originDealtWith = true;
-							if (self == true) placeBlock = true; /* since this is a self target, we can place a block at this position */
-						} /* end if */
+						/* Since the origin has not been dealt with, we should branch 
+						 * from the origin to look for more blocks that could be potential targets. */
+						lookForMoreBlocks = true;
+						diagonalPenalty = 1;		/* We have not had the chance to take a diagonal yet, no penalty */
+						if (self == true) placeBlock = true; /* since this is a self target, we can place a block at this position */
 					} /* end if */
-					
-					/* Lastly, check to see that we are within the radius (0 is still valid) and check to see that
-					 * there are no walls */
-					else if (distance >= 0	&& !wallExists(position))
-					{
-						placeBlock = true;
-						if (distance > 0 )lookForMoreBlocks = true;
-					} /* end else if */
-				} /* end if */
+				} /* end else */
+				/* Lastly, check to see that we are within the radius (0 is still valid) and check to see that
+				 * there are no walls */
+				else if (distance >= 0	&& !hasWall(position))
+				{
+					placeBlock = true;
+					if (distance > 0 )lookForMoreBlocks = true;
+				} /* end else if */
 			} /* end if */
+			/* If this position is a TargetBlock or wall, then we are done.  */
+		} /* end if */
+		
+		if (placeBlock)
+		{
+			placeTargetBlock(position);
+		} /* finish placing blocks */
+		
+		if (lookForMoreBlocks)
+		{
+			/* Recursion for the win! */
+			/* Deal with the sides */
+			/* Search for the next block one to the right */
+			placeCircle(new Coordinate(position.x + 1, position.y), distance - blockSize, true);
+			/* Search for the next block one block to the left */
+			placeCircle(new Coordinate(position.x - 1, position.y), distance - blockSize, true);
+			/* Search for the next block one block up */
+			placeCircle(new Coordinate(position.x, position.y + 1), distance - blockSize, true);
+			/* Search for the next block one block down */
+			placeCircle(new Coordinate(position.x, position.y - 1), distance - blockSize, true);
 			
-			if (placeBlock)
-			{
-				placeTargetBlock(position);
-			} /* finish placing blocks */
+			/* Deal with the diagonals */
+			/* Search for the next block to the top right*/
+			placeCircle(new Coordinate(position.x + 1, position.y + 1), distance - (blockSize * diagonalPenalty), true);
+			/* Search for the next block to the top left */
+			placeCircle(new Coordinate(position.x - 1, position.y + 1), distance - (blockSize * diagonalPenalty), true);
+			/* Search for the next block to the bottom right*/
+			placeCircle(new Coordinate(position.x + 1, position.y - 1), distance - (blockSize * diagonalPenalty), true);
+			/* Search for the next block to the bottom left */
+			placeCircle(new Coordinate(position.x - 1, position.y - 1), distance - (blockSize * diagonalPenalty), true);
 			
-			if (lookForMoreBlocks)
-			{
-				/* Recursion for the win! */
-				/* Deal with the sides */
-				/* Search for the next block one to the right */
-				stack.add(new CircleStackElement(right, distance - blockSize));
-				/* Search for the next block one block to the left */
-				stack.add(new CircleStackElement(left, distance - blockSize));
-				/* Search for the next block one block up */
-				stack.add(new CircleStackElement(top, distance - blockSize));
-				/* Search for the next block one block down */
-				stack.add(new CircleStackElement(bottom, distance - blockSize));
-				
-				/* Deal with the diagonals */
-				/* Search for the next block to the top right*/
-				stack.add(new CircleStackElement(topRight, distance - (blockSize * diagonalPenalty)));
-				/* Search for the next block to the top left */
-				stack.add(new CircleStackElement(topLeft, distance - (blockSize * diagonalPenalty)));
-				/* Search for the next block to the bottom right*/
-				stack.add(new CircleStackElement(bottomRight, distance - (blockSize * diagonalPenalty)));
-				/* Search for the next block to the bottom left */
-				stack.add(new CircleStackElement(bottomLeft, distance - (blockSize * diagonalPenalty)));
-			} /*  end if*/
-			
-		} /* end while loop */
+		} /* finish looking for more blocks */
 		
 	} /* end placeCircle method */
 	
-	/******************************************************************************
-	 ************************- PlaceCone Related Methods *************************
-	 ******************************************************************************/
 	private void placeCone(Coordinate position, Integer targetCount)
 	{
 		/* Place a cone shaped area of TargetBlocks centered at he origin.
@@ -333,15 +285,11 @@ public class TargetingSystem
 		 */
 	} /* end placeCone method */
 	
-	/******************************************************************************
-	 ************************* PlaceMove Related Methods *************************
-	 ******************************************************************************/
 	private void placeMove(Coordinate origin, int speed) throws SlickException
 	{
 		/* Similar to placing a circle. However, the radius of the circle is 5 feet
 		 * and the block should differ slightly and return a coordinate as opposed 
 		 * a character. Furthermore, we care about the movePenalty of the Objects */
-		System.out.println(origin.x + ", " + origin.y);
 		boolean diagonal = getCharacter(origin).getMovedDiagonal();
 
 		Coordinate movePosition = null;
@@ -367,22 +315,6 @@ public class TargetingSystem
 		
 	} /* end placeMove method */
 	
-	/******************************************************************************
-	 ************************* PlaceAll Related Methods  **************************
-	 ******************************************************************************/
-	private void placeAll() throws SlickException
-	{
-		/* Target everything that is not an obstacle (wall or character) */
-		for (int i = 0; i < map.mapSize; i++)
-		{
-			for (int j = 0; j < map.mapSize; i++)
-			{
-				if(!wallExists(new Coordinate(i,j))) placeTargetBlock(new Coordinate(i,j));
-			} /* end for loop */
-		} /* end for loop */
-	} /* end placeAll method */
-	
-	/************************************ Methods used by class *************************************/	
 	private void placeTargetBlock(Coordinate position) throws SlickException
 	{
 		/* Make sure blocks do not go out of bounds */
@@ -398,7 +330,7 @@ public class TargetingSystem
 		} /* end if */
 	} /* end placeTargetBlock method */
 	
-	private boolean wallExists( Coordinate position )
+	private boolean hasWall( Coordinate position )
 	{/* Check if there is a wall at the position */
 		boolean returner = false;
 		Iterator<Objects> obj = map.objectsStack[position.x][position.y].getIterator();
@@ -409,46 +341,13 @@ public class TargetingSystem
 		} /* end while loop */
 		
 		return returner;
-	} /* end wallExists method */
-	
-	private boolean characterExists( Coordinate position )
-	{/* Check if there is a wall at the position */
-		boolean returner = false;
-		Iterator<Objects> obj = map.objectsStack[position.x][position.y].getIterator();
-		
-		while (returner == false && obj.hasNext())
-		{
-			if(CharacterObjects.class.isInstance(obj.next())) returner = true;
-		} /* end while loop */
-		
-		return returner;
-	} /* end wallExists method */
-	
-	private boolean positionExists(Coordinate position)
-	{
-		boolean returner = false;
-		if
-		(
-			( position.x < map.mapSize && position.x >= 0 ) && 	/* check x bounds */
-			( position.y < map.mapSize && position.y >= 0 )		/* check y bounds */
-		)
-		{
-			returner = true;
-		}
-		return returner;
-	} /* end positionExists method */
-	
-	private boolean positionHasTargetBlock(Coordinate position)
-	{
-		return map.objectsStack[position.x][position.y].hasTargetBlock();
-	} /* end hasTargetBlock method */
-	
+	} /* end hasWall method */
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public void setMap(Map map)
+	public static void setMap(Map map)
 	{
-		this.map = map;
+		TargetingSystem.map = map;
 	} /* end setMap method */
 	
 	/******************************************************************************
@@ -481,28 +380,6 @@ public class TargetingSystem
 
 	} /* end getCharacter method */
 	
-	public TargetBlock getTargetBlock(ObjectsPriorityStack stack)
-	{
-		TargetBlock returner = null;
-		
-		/* Check if a character exists. If one does, add it to target */
-		Iterator<Objects> obj = stack.getIterator();
-		boolean targetBlockFound = false;
-		Objects potentialTargetBlock= null;
-		
-		while (targetBlockFound == false && obj.hasNext())
-		{
-			if(TargetBlock.class.isInstance(potentialTargetBlock = obj.next()))
-			{
-				returner = ((TargetBlock) potentialTargetBlock); 
-				targetBlockFound = true;
-			} /* end if */
-		} /* end while loop */
-		
-		return returner;
-
-	} /* end getCharacter method */
-	
 	private int getMovePenalty(Coordinate position, boolean diagonal)
 	{
 		int returner = getMovePenalty(position);
@@ -514,7 +391,6 @@ public class TargetingSystem
 	{
 		/* Note that when checking for movement speed, we assume that the top Objects 
 		 * in the stack has the most significant movement penalty */
-		//System.out.println("");
 		return map.objectsStack[position.x][position.y].peek().getMovePenalty();
 	} /* end getMovePenalty method */
 	
