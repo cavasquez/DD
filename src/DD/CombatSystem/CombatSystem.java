@@ -78,7 +78,8 @@ public class CombatSystem
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
 	{	
-		if(characterList == null) characterList = new ArrayList<DDCharacter>();
+		characterList = new ArrayList<DDCharacter>();
+		order = new ArrayList<Integer>();
 		system = new CombatInterpreter[Action.NUM_OF_INTERPRETERS];
 		
 		/* First, we need to create the system */
@@ -180,7 +181,9 @@ public class CombatSystem
 	public void addToOrder(int id, int place)
 	{
 		/* Add the new character to the provided place in the order */
-		order.add(place, id);
+		/* Check to make sure the id is not placed out of bounds */
+		if(place > order.size()) order.add(id);
+		else order.add(place, id);
 	} /* end addToOrder method */
 	
 	public void addToOrder(int id)

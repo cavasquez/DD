@@ -8,7 +8,6 @@ import java.util.TreeSet;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
-import DD.ActionBox.ActionChoice;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.SlickTools.BoxInterface;
 
@@ -121,7 +120,11 @@ public class GMToolsBox extends BoxInterface
 			if(holder.get(type.index).get(i).id == id) index = i;
 		} /* end for loop */
 
-		if (index != -1) holder.get(type.index).remove(index);
+		if (index != -1) 
+			{
+				System.out.println("removed holder");
+				holder.get(type.index).remove(index);
+			}
 
 	} /* end removeCharacter method */
 	

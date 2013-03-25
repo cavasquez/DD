@@ -60,7 +60,7 @@ public class I_PlaceCharacter extends CombatInterpreter
 				new CharacterObjects 
 				(
 					cm.getCharacterData().getName(), 
-					new Image(cm.getCharacterData().getImage()), 
+					cm.getCharacterData().getImage().makeImage(), 
 					cm.getBody()[POS_X], 
 					cm.getBody()[POS_Y], 
 					cs.getMap(), 

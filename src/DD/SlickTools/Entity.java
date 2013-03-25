@@ -64,14 +64,16 @@ public class Entity
 		boolean found = false;
 		int index = 0;
 		Component deleteMe = null;
-		
+
 		while (!found)
 		{
 			deleteMe = components.get(index++);
+			
 			if (deleteMe.getId() == id) 
 			{ /* component found. remove it */
 				found = true; 
-				components.remove(index);
+				System.out.println("removed comp: " + (index-1));
+				components.remove(index-1); // Recall that the index was incremented
 				recycledIds.offer(id); /* TODO: implement later */
 			} /* end if */
 			
@@ -122,6 +124,11 @@ public class Entity
 		
 		return(returner);
 	} /* end getComponent method */
+	
+	public Component[] getComponents()
+	{
+		return components.toArray(new Component[components.size()]);
+	}
 	
 	public Vector2f getPosition()
 	{

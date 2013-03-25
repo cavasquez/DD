@@ -31,7 +31,8 @@ public class I_EndAction extends CombatInterpreter
 	@Override
 	public void interpret(CombatMessage cm) 
 	{
-		DDCharacter character = cs.getCharacter(cm.getSource());
+		 DDCharacter character = null;
+		if (cm.getSource() != null) character = cs.getCharacter(cm.getSource());
 		
 		switch(cm.getAction())
 		{
@@ -64,6 +65,11 @@ public class I_EndAction extends CombatInterpreter
 			case SWIFT:
 				character.endHasSwiftAction();
 				break;
+			case SYSTEM:
+				/* Do noething */
+				break;
+		default:
+			break;
 	
 		} /* end switch */
 		

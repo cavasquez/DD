@@ -64,8 +64,8 @@ public class RemoveCharacter extends TargetAbility
 					(
 						null,
 						null,
-						CombatSystem.ActionType.STANDARD,
-						CombatSystem.Action.STANDARD_ATTACK,
+						CombatSystem.ActionType.SYSTEM,
+						CombatSystem.Action.REMOVE_CHARACTER,
 						body
 					);
 			sendToInterpreter(cm);
@@ -73,10 +73,11 @@ public class RemoveCharacter extends TargetAbility
 			/* Place the character into the holder. */
 			CharacterSheet sheet = cs.getCharacter(cm.getBody()[I_RemoveCharacter.CHARACTER_ID]).getSheet();
 			/* Note that the GM will only ever have mobs and no other player will have mobs */
-			if(sheet.getNetID() == Network.GM_USER_ID) gmt.removeCharacter(GMToolsBox.Holder.MOB, this.id);
-			else gmt.removeCharacter(GMToolsBox.Holder.PLAYER, this.id);
+			if(sheet.getNetID() == Network.GM_USER_ID) gmt.addCharacter(GMToolsBox.Holder.MOB, sheet);
+			else gmt.addCharacter(GMToolsBox.Holder.PLAYER, sheet);
 			
 			this.sendToInterpreter(cm);
+			done(null);
 		} /* end if */
 		
 	} /* end obtainTarget method */

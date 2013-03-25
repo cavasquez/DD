@@ -375,7 +375,7 @@ public class TargetingSystem
 		/* Target everything that is not an obstacle (wall or character) */
 		for (int i = 0; i < map.mapSize; i++)
 		{
-			for (int j = 0; j < map.mapSize; i++)
+			for (int j = 0; j < map.mapSize; j++)
 			{
 				if(!wallExists(new Coordinate(i,j))) placeTargetBlock(new Coordinate(i,j));
 			} /* end for loop */

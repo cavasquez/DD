@@ -3,7 +3,6 @@ package DD.Character.CharacterSheet;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-
 import DD.ActionBox.Dice;
 import DD.Character.CharacterSheet.Race.Human;
 import DD.Character.CharacterSheet.Race.Race;
@@ -12,6 +11,7 @@ import DD.Character.Equipment.Armor;
 import DD.Character.Equipment.Armory;
 import DD.Character.Equipment.Equipment;
 import DD.Character.Equipment.Weapon;
+import DD.SlickTools.DDImage;
 
 
 /*****************************************************************************************************
@@ -86,7 +86,7 @@ public class CharacterSheet implements Serializable
 	private String deity;
 	private String background;
 	private String occupation;
-	private String image = null;
+	private DDImage image = null;
 	private int netID;  //TODO: should not be serialized. 
 	
 	/********* Ability *********/
@@ -1943,12 +1943,12 @@ public class CharacterSheet implements Serializable
 		return netID;
 	}
 	
-	public String getImage()
+	public DDImage getImage()
 	{
 		return image;
 	}
 	
-	public void setImage(String image)
+	public void setImage(DDImage image)
 	{
 		this.image = image;
 	} /* end setImage method */

@@ -1,39 +1,50 @@
-package DD.GMToolsBox;
+package DD.MapTool;
+
+import java.io.Console; 
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import slick.path2glory.SimpleGame.TestGame;
 import DD.ActionBox.ActionBox;
 import DD.Character.DDCharacter;
 import DD.Character.Abilities.Ability;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.Character.CharacterSheet.CharacterClass;
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
-import DD.MapTool.Wall;
-import DD.MapTool.World;
+import DD.CombatSystem.TargetingSystem.TargetingSystem;
+import DD.GMToolsBox.GMToolsBox;
+import DD.GMToolsBox.HolderTuple;
+import DD.GMToolsBox.PlaceCharacter;
+import DD.Message.ChooseTargetMessage;
 import DD.Network.NetworkSystem;
 import DD.SlickTools.Component;
+import DD.SlickTools.DDImage;
 import DD.System.DDSystem;
 
 // @author Carlos Vasquez
 
-public class TestRemoveAddCharacter extends BasicGame
+public class TestGMPlace extends BasicGame
 {
-	public TestRemoveAddCharacter(String title) {
+	public TestGMPlace(String title) {
 		super(title);
 
 	}
  
-    public TestRemoveAddCharacter()
+    public TestGMPlace()
     {
         super("Slick2DPath2Glory - SimpleGame");
     }
  
     @Override
-    public void init(GameContainer gc) throws SlickException {
+    public void init(GameContainer gc) 
+			throws SlickException {
     	int i = 0; // component and entity ids
     	DDSystem system = new DDSystem();
     	ActionBox ab = new ActionBox(i++, 0, 0);
@@ -47,7 +58,6 @@ public class TestRemoveAddCharacter extends BasicGame
 		 */
 		
 		/* VERY FREAKING IMPORTANT STUFF */
-		World world = new World("TESTME");
 		
 		/* Initialize sheets */
 		int size = 10;
@@ -57,7 +67,7 @@ public class TestRemoveAddCharacter extends BasicGame
 		/* make sheets: */
 		for (int j = 0; j < size; j++)
 		{
-			sheet[j].fillBasic("Tiffany" + j, 
+			sheet[j].fillBasic("Name" + j, 
 					"Skanks-Worth", 
 					0, 
 					"Elvish, Common", 
@@ -75,6 +85,7 @@ public class TestRemoveAddCharacter extends BasicGame
 			sheet[j].fillRecorder(barb);
 			sheet[j].fillAttacksAndDefense(barb);
 			sheet[j].setNetID(NetworkSystem.GM_USER_ID);
+			sheet[j].setImage(new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png", 2530, 1440, 33, 34));
 		} /* end for loop */
 		
 		
@@ -106,12 +117,43 @@ public class TestRemoveAddCharacter extends BasicGame
 			
 			System.out.println("Components left:");
 			comp = gmt.getComponents();
-			for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
+			for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());;
 		}
 		
-		System.out.println("Now testing removal: ");
-		System.out.println("Removing character " + sheet[0].getName() + ": ");
-		place[0].testDelete();
+		/* VERY FREAKING IMPORTANT STUFF */
+		World world = new World("TESTME");
+		system.setMap(world.world[0][0]);
+	
+
+		Wall wall = new Wall("walll", null,0,0, world.world[0][0]);
+		world.world[0][0].massPlaceObjectsLine(0, 0, 10, 0, wall);
+		world.world[0][0].massPlaceObjectsLine(0, 1, 0, 19, wall);
+		world.world[0][0].massPlaceObjectsLine(1, 10, 10, 10, wall);
+		world.world[0][0].massPlaceObjectsLine(10, 9, 10, 1, wall);
+		world.world[0][0].massPlaceObjectsLine(1, 19, 10, 19, wall);
+		world.world[0][0].massPlaceObjectsLine(10, 11, 10, 19, wall);
+
+		world.world[0][0].removeObjects(6, 0);
+		world.world[0][0].removeObjects(7, 0);
+		world.world[0][0].removeObjects(6, 10);
+		world.world[0][0].removeObjects(7, 10);
+
+		System.out.println("The world: ");
+		System.out.println(world.world[0][0].toString());
+		
+		int x = 5;
+		int y = 6;
+		int k = 0;
+		
+		place[k] = gmt.addCharacter(GMToolsBox.Holder.MOB, sheet[k]);
+		System.out.println("Placing " + sheet[k].getName()  + " at " + x + ", " + y);
+		place[k].testPlace();
+		System.out.println("placement options:");
+		System.out.println(world.world[0][0].toString());
+		ObjectsPriorityStack stack = world.world[0][0].objectsStack[x][y]; // where the character is to be placed
+		((TargetBlock)stack.peek()).select();
+		System.out.println(world.world[0][0].toString());
+		
 		System.out.println("Characters in mob holder:");
 		holder = gmt.getHolder(GMToolsBox.Holder.MOB);
 		for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
@@ -128,10 +170,22 @@ public class TestRemoveAddCharacter extends BasicGame
 		
 		System.out.println("Components left:");
 		comp = gmt.getComponents();
-		for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());;		
+		for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
 		
-		System.out.println("Removing character " + sheet[5].getName() + ": ");
-		place[5].testDelete();
+		
+		
+		/* next character */
+		k = 5;
+		x+= 2;
+		place[k] = gmt.addCharacter(GMToolsBox.Holder.MOB, sheet[k]);
+		System.out.println("Placing " + sheet[k].getName()  + " at " + x + ", " + y);
+		place[k].testPlace();
+		System.out.println("placement options:");
+		System.out.println(world.world[0][0].toString());
+		stack = world.world[0][0].objectsStack[x][y]; // where the character is to be placed
+		((TargetBlock)stack.peek()).select();
+		System.out.println(world.world[0][0].toString());
+		
 		System.out.println("Characters in mob holder:");
 		holder = gmt.getHolder(GMToolsBox.Holder.MOB);
 		for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
@@ -149,9 +203,6 @@ public class TestRemoveAddCharacter extends BasicGame
 		System.out.println("Components left:");
 		comp = gmt.getComponents();
 		for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());;
-
-		
-		System.out.println("done");
     }
  
     @Override
@@ -171,7 +222,7 @@ public class TestRemoveAddCharacter extends BasicGame
 			throws SlickException
     {
     	AppGameContainer app = 
-			new AppGameContainer(new TestRemoveAddCharacter());
+			new AppGameContainer(new TestGMPlace());
  
          //app.setDisplayMode(800, 600, false);
          app.start();

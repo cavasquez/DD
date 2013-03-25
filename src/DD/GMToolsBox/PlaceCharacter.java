@@ -73,15 +73,19 @@ public class PlaceCharacter extends TargetAbility
 
 	private void delete()
 	{
+		remove();
+		
+		//TODO: save sheet? give to corresponding player to save? tell corresponding player to save?
+	} /* end delete method */
+	
+	private void remove()
+	{
 		/* remove character from holder */
 		gmt.removeCharacter(type, this.id);
 		
 		/* remove PlaceCharacter object from the list in GMToolsBox */
 		gmt.removeComponent(this.id);
-		
-		
-		//TODO: save sheet? give to corresponding player to save? tell corresponding player to save?
-	} /* end delete method */
+	} /* end remove method */
 	
 	@Override
 	public void obtainTarget(TargetSelectedMessage tsm) throws SlickException 
@@ -97,17 +101,17 @@ public class PlaceCharacter extends TargetAbility
 					(
 						null,
 						null,
-						CombatSystem.ActionType.STANDARD,
-						CombatSystem.Action.STANDARD_ATTACK,
+						CombatSystem.ActionType.SYSTEM,
+						CombatSystem.Action.PLACE_CHARACTER,
 						sheet,
 						body
 					);
 			sendToInterpreter(cm);
 			
 			/* remove the character from the holder */
-			gmt.removeCharacter(type, this.getId());
+			remove();
 			
-			done();
+			done(null);
 		} /* end if */
 		
 	} /* end obtainTarget method */
