@@ -145,7 +145,6 @@ public class TestGMPlace extends BasicGame
 		int y = 6;
 		int k = 0;
 		
-		place[k] = gmt.addCharacter(GMToolsBox.Holder.MOB, sheet[k]);
 		System.out.println("Placing " + sheet[k].getName()  + " at " + x + ", " + y);
 		place[k].testPlace();
 		System.out.println("placement options:");
@@ -177,7 +176,6 @@ public class TestGMPlace extends BasicGame
 		/* next character */
 		k = 5;
 		x+= 2;
-		place[k] = gmt.addCharacter(GMToolsBox.Holder.MOB, sheet[k]);
 		System.out.println("Placing " + sheet[k].getName()  + " at " + x + ", " + y);
 		place[k].testPlace();
 		System.out.println("placement options:");
