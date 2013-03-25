@@ -117,7 +117,7 @@ public class TestGMPlace extends BasicGame
 			
 			System.out.println("Components left:");
 			comp = gmt.getComponents();
-			for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());;
+			for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
 		}
 		
 		/* VERY FREAKING IMPORTANT STUFF */
