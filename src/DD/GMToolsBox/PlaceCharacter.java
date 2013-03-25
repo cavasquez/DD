@@ -74,7 +74,7 @@ public class PlaceCharacter extends TargetAbility
 	private void delete()
 	{
 		/* remove character from holder */
-		gmt.removeCharacter(type, sheet);
+		gmt.removeCharacter(type, this.id);
 		
 		/* remove PlaceCharacter object from the list in GMToolsBox */
 		gmt.removeComponent(this.id);
@@ -105,11 +105,20 @@ public class PlaceCharacter extends TargetAbility
 			sendToInterpreter(cm);
 			
 			/* remove the character from the holder */
-			gmt.removeCharacter(type, sheet);
+			gmt.removeCharacter(type, this.getId());
 			
 			done();
 		} /* end if */
 		
 	} /* end obtainTarget method */
+	
+	public void testDelete() throws SlickException
+	{
+		delete();
+	}
+	public void testPlace() throws SlickException
+	{
+		place();
+	}
 
 } /* end PlaceCharacter class */

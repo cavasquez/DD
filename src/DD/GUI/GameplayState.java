@@ -104,8 +104,8 @@ public class GameplayState extends BasicGameState {
         player.setCharacterID(stateID++);
         goblin1.setCharacterID(stateID++);
        
-        DDSystem.cs.addCharacter(player);
-        DDSystem.cs.addCharacter(goblin1);
+        system.cs.addCharacter(player);
+        system.cs.addCharacter(goblin1);
       
         
         

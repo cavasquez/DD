@@ -45,7 +45,7 @@ public class ActionBox extends BoxInterface
 {
 	/************************************ Class Constants *************************************/
 	private static int I= 0;
-	private static enum Action
+	public static enum Action
 	{
 		STANDARD_ACTION (I++),
 		MOVE_ACTION(I++),

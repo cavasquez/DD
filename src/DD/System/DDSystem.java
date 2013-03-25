@@ -74,6 +74,11 @@ public class DDSystem
 		ns.setNetworkType(NetworkSystem.NetworkType.CLIENT);
 	} /* end client() */
 	
+	public void server()
+	{
+		ns.setNetworkType(NetworkSystem.NetworkType.SERVER);
+	} /* end client() */
+	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
