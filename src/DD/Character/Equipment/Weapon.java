@@ -18,9 +18,10 @@ public class Weapon extends Equipment implements Serializable{
 	char size;
 	char type;// slashing or piercing
 	String ammo_notes;
-	
-	public Weapon(String name, Dice.DieSize damage, int crit, int critRange, int reach,char size, char type ,String ammo_notes , int weight)
+	int cost;
+	public Weapon(int cost,String name, Dice.DieSize damage, int crit, int critRange, int reach,char size, char type ,String ammo_notes , int weight)
 	{
+		this.cost = cost;
 		 this.name = name;
 		// this.attackMod= attackMod; 
 		 this.damage = damage; 
