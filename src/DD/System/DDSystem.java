@@ -8,6 +8,7 @@ import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.MapTool.Map;
+import DD.Network.Network;
 import DD.Network.NetworkSystem;
 
 /*****************************************************************************************************
@@ -78,6 +79,13 @@ public class DDSystem
 	{
 		ns.setNetworkType(NetworkSystem.NetworkType.SERVER);
 	} /* end client() */
+	
+	public boolean isGM()
+	{
+		boolean returner = false;
+		if(Network.GM_USER_ID == ns.getNetID()) returner = true;
+		return returner;
+	} /* end isGM method */
 	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************

@@ -37,20 +37,22 @@ public class CombatSystem
 	private static int I = 0;
 	public static enum Action
 	{
-		STANDARD_ATTACK (I++),
-		MOVE(I++),
-		END_ACTION(I++),
-		START_COMBAT_PHASE(I++),
-		END_TURN(I++),
-		PLACE_CHARACTER(I++),
-		REMOVE_CHARACTER(I++);
+		STANDARD_ATTACK (I++, "Images/CombatSystem/StandardAttack.png"),
+		MOVE(I++, "Images/CombatSystem/Move.png"),
+		END_ACTION(I++, "Images/CombatSystem/EndAction.png"),
+		START_COMBAT_PHASE(I++, "Images/CombatSystem/StartCombatPhase.png"),
+		END_TURN(I++, "Images/CombatSystem/EndTurn.png"),
+		PLACE_CHARACTER(I++, "Images/CombatSystem/PlaceCharacter.png"),
+		REMOVE_CHARACTER(I++, "Images/CombatSystem/RemoveCharacter.png");
 		
 		public final int index;
+		public final String image;
 		public static final int NUM_OF_INTERPRETERS = I;
 		
-		Action (int index)
+		Action (int index, String image)
 		{
 			this.index = index;
+			this.image = image;
 		} /* end TargetCount index */
 		
 	} /* end Action enum */

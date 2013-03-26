@@ -6,10 +6,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
-import DD.MapTool.CharacterObjects;
-import DD.MapTool.Objects;
-import DD.MapTool.TargetBlock;
-
 /*****************************************************************************************************
  * @author Carlos Vasquez
  ******************************************************************************************************/
@@ -22,6 +18,11 @@ public abstract class ImageRenderComponent extends RenderComponent
 	/************************************ Class Methods *************************************/
 	public ImageRenderComponent(){
 		super();
+	}
+	
+	public ImageRenderComponent(int id)
+	{
+		super(id);
 	}
 	
 	public ImageRenderComponent(int id, Image image)

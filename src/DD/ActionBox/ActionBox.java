@@ -85,6 +85,7 @@ public class ActionBox extends BoxInterface
 	Image standardAttack = null;
 	Image endMove = null;
 	Image endTurnButton = null;
+	int shift;
 	
 	public ActionBox(int id, float length, float width) throws SlickException
 	{
@@ -101,12 +102,14 @@ public class ActionBox extends BoxInterface
 		endMove = new Image("Images/ActionBox/EndMove.png");
 		endTurnButton = new Image("Images/ActionBox/EndMove.png"); //TODO: make button
 		
-		int shift = freeAction.getHeight();
+		shift = freeAction.getHeight();
 		Vector2f boxPosition = new Vector2f(660f, 10f);
 		this.setPosition(boxPosition);
 		
-		/* To begin with, the basic ActionChoices need to be available. */
+	} /* end ActionBox constructor */
 	
+	public void addActionChoice() 
+	{
 		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y, new StandardAttack(this.id)));
 		Move move = new Move(this.id);
 		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift, move));
@@ -118,8 +121,7 @@ public class ActionBox extends BoxInterface
 		
 		this.addComponent(new ActionChoice(this.id, 1000, "End Move", endMove, position.x, position.y + shift*6, move));
 		//this.addComponent(new ActionChoice(this.id, 2000, "Start New Turn", startNewTurn, position.x, position.y + shift*6));
-		
-	} /* end ActionBox constructor */
+	}
 	
 	public void addSubAction(Ability ability)
 	{ /* Convert the provided Ability into a SubAction and add it to the components ArrayList*/

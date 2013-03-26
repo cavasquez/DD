@@ -6,6 +6,8 @@ import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
+import DD.System.DDSystem;
+
 public class Game extends StateBasedGame
 {
 	public static final String gamename = "Dungeons & Dragons!";
@@ -15,6 +17,7 @@ public class Game extends StateBasedGame
 	public static final int LobbyRoom = 2;
 	public static final int createLob = 3;
 	public static final int gameplay = 4;
+	public static DDSystem system;
 	
 	public Game(String gamename)
 	{
@@ -50,6 +53,7 @@ public class Game extends StateBasedGame
 		 */
 		System.setProperty("org.lwjgl.librarypath", new File(System.getProperty("user.dir"), "lib").getAbsolutePath());
 		System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
+		system = new DDSystem();
 		
 		AppGameContainer appgc;
 		try{

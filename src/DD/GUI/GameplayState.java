@@ -19,6 +19,7 @@ import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
 import DD.System.DDSystem;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -50,7 +51,6 @@ public class GameplayState extends BasicGameState {
     Input mouse = new Input(650);
     //private float x, y;
     
-    
  
     public GameplayState(int stateID)
     {
@@ -66,8 +66,7 @@ public class GameplayState extends BasicGameState {
     	maptool = new MapTool();
     	
 //    	maptool.getMapAtLocation(0, 0).setPosition(position);
-    	DDSystem system = new DDSystem();
-    	system.setMap(maptool.getMapAtLocation(0, 0));
+    	Game.system.setMap(maptool.getMapAtLocation(0, 0));
     	
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
@@ -104,13 +103,14 @@ public class GameplayState extends BasicGameState {
         player.setCharacterID(stateID++);
         goblin1.setCharacterID(stateID++);
        
-        system.cs.addCharacter(player);
-        system.cs.addCharacter(goblin1);
+        Game.system.cs.addCharacter(player);
+        Game.system.cs.addCharacter(goblin1);
       
         
         
         actionBox = new ActionBox(stateID, 300, 200);
-        system.linkBoxes(actionBox, null);
+        actionBox.addActionChoice();
+        Game.system.linkBoxes(actionBox, null);
         actionBox.setCharacter(player);
        
         
@@ -184,11 +184,22 @@ public class GameplayState extends BasicGameState {
 		}
 		
 		//Character sheet
-		charToString = "CHARACTER SHEET: \n" + player.getCharacterSheet().toString();
-		goblinHP = "Goblin HP: " + goblin1.getMonHP();
+		//charToString = "CHARACTER SHEET: \n" + player.getCharacterSheet().toString();
+		//goblinHP = "Goblin HP: " + goblin1.getMonHP();
 		
 		if(!player.getHasTurn()) {
 			player.startNewTurn();
+		}
+		
+		int posX = mouse.getMouseX();
+		int posY = mouse.getMouseY();
+		
+		if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				sb.enterState(0);
+			}
 		}
     }
  
@@ -242,7 +253,9 @@ public class GameplayState extends BasicGameState {
 			
 		}
  
-		g.drawString(charToString, 950, 30);
-		g.drawString(goblinHP, 950, 400);
+		//g.drawString(charToString, 950, 30);
+		//g.drawString(goblinHP, 950, 400);
+		
+		g.drawString("BACK",1130,615);
     }
 }
