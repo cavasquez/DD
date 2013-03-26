@@ -105,10 +105,11 @@ public class TestRemoveAddCharacter extends BasicGame
 			System.out.println(temp);
 			
 			System.out.println("Components left:");
-			comp = gmt.getComponents();
+			comp = gmt.getComponentsArray();
 			for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
 		}
 		
+		/* Test removal */
 		System.out.println("Now testing removal: ");
 		System.out.println("Removing character " + sheet[0].getName() + ": ");
 		place[0].testDelete();
@@ -127,7 +128,7 @@ public class TestRemoveAddCharacter extends BasicGame
 		System.out.println(temp);
 		
 		System.out.println("Components left:");
-		comp = gmt.getComponents();
+		comp = gmt.getComponentsArray();
 		for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());;		
 		
 		System.out.println("Removing character " + sheet[5].getName() + ": ");
@@ -147,7 +148,7 @@ public class TestRemoveAddCharacter extends BasicGame
 		System.out.println(temp);
 		
 		System.out.println("Components left:");
-		comp = gmt.getComponents();
+		comp = gmt.getComponentsArray();
 		for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());;
 
 		

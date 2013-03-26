@@ -192,7 +192,7 @@ public class CombatSystem
 		order.add(0, id);
 	} /* end addToOrder method */
 	
-	public void removeFromOder(int id)
+	public void removeFromOder(Integer id)
 	{
 		order.remove(id);
 	} /* end removeFromOrder */

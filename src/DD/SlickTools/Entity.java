@@ -72,7 +72,6 @@ public class Entity
 			if (deleteMe.getId() == id) 
 			{ /* component found. remove it */
 				found = true; 
-				System.out.println("removed comp: " + (index-1));
 				components.remove(index-1); // Recall that the index was incremented
 				recycledIds.offer(id); /* TODO: implement later */
 			} /* end if */
@@ -125,7 +124,7 @@ public class Entity
 		return(returner);
 	} /* end getComponent method */
 	
-	public Component[] getComponents()
+	public Component[] getComponentsArray()
 	{
 		return components.toArray(new Component[components.size()]);
 	}

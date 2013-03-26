@@ -79,7 +79,7 @@ public class GMToolsBox extends BoxInterface
 	{
 		super(id, length, width);
 
-		recycledIds = new LinkedList<Integer>();
+		recycledCIDs = new LinkedList<Integer>();
 		charactersInPlay = new TreeSet<Integer>();
 		holder = new ArrayList<ArrayList<HolderTuple>>();
 		holder.add(Holder.MOB.index, new ArrayList<HolderTuple>());
@@ -93,7 +93,7 @@ public class GMToolsBox extends BoxInterface
 		
 		/* To begin with, the basic ActionChoices need to be available. */
 		this.addComponent(new StartCombatPhase(this.id));
-		this.addComponent(new RemoveCharacter(this.id));
+		this.addComponent(new RemoveCharacter(this.id, this));
 		
 	} /* end GMToolsBox constructor */
 	
@@ -120,11 +120,7 @@ public class GMToolsBox extends BoxInterface
 			if(holder.get(type.index).get(i).id == id) index = i;
 		} /* end for loop */
 
-		if (index != -1) 
-			{
-				System.out.println("removed holder");
-				holder.get(type.index).remove(index);
-			}
+		if (index != -1)  holder.get(type.index).remove(index);
 
 	} /* end removeCharacter method */
 	
@@ -141,7 +137,8 @@ public class GMToolsBox extends BoxInterface
 	public Integer getNewCharacterID()
 	{
 		Integer id = this.characterID;
-		if((id = recycledIds.poll()) == null) id = this.characterID++; /* Take a recycled id. If none exists, take an ID from id and increment it */
+		if((id = recycledCIDs.poll()) == null) id = this.characterID++; /* Take a recycled id. If none exists, take an ID from id and increment it */
+
 		charactersInPlay.add(id);
 		return id;
 	} /* end addCharacterToPlay method */

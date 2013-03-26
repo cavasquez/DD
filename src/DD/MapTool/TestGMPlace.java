@@ -22,6 +22,7 @@ import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.GMToolsBox.GMToolsBox;
 import DD.GMToolsBox.HolderTuple;
 import DD.GMToolsBox.PlaceCharacter;
+import DD.GMToolsBox.RemoveCharacter;
 import DD.Message.ChooseTargetMessage;
 import DD.Network.NetworkSystem;
 import DD.SlickTools.Component;
@@ -51,6 +52,8 @@ public class TestGMPlace extends BasicGame
     	GMToolsBox gmt = new GMToolsBox(i++,0,0);
     	system.linkBoxes(ab);
     	system.server();
+    	boolean test1 = false;
+    	boolean test2 = false;
 		
 		/*
 		 * IMPORTANT: for this main to work, mapSize needs to be 21 or larger due to hardcodes massPlaceObjectsLine values.
@@ -95,29 +98,31 @@ public class TestGMPlace extends BasicGame
 		Integer[] inPlay;
 		Component[] comp;
 		PlaceCharacter[] place = new PlaceCharacter[size];
+		int[] x = new int[size];
+		int[] y = new int[size];
 		String temp;
 		for (int k = 0; k < size; k++)
 		{
-			System.out.println("Adding character " + sheet[k].getName() + ": ");
+			if (test1)System.out.println("Adding character " + sheet[k].getName() + ": ");
 			place[k] = gmt.addCharacter(GMToolsBox.Holder.MOB, sheet[k]);
 			
-			System.out.println("Characters in mob holder:");
+			if (test1) System.out.println("Characters in mob holder:");
 			holder = gmt.getHolder(GMToolsBox.Holder.MOB);
-			for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
+			if (test1) for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
 			
-			System.out.println("Characters in player holder:");
+			if (test1) System.out.println("Characters in player holder:");
 			holder = gmt.getHolder(GMToolsBox.Holder.PLAYER);
-			for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
+			if (test1) for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
 			
-			System.out.println("Characters in play:");
+			if (test1) System.out.println("Characters in play:");
 			inPlay = gmt.getCharactersInPlay();
 			temp = "";
 			for (int j = 0; j < inPlay.length; j++) temp += (inPlay[j] + ", " );
-			System.out.println(temp);
+			if (test1) System.out.println(temp);
 			
-			System.out.println("Components left:");
-			comp = gmt.getComponents();
-			for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
+			if (test1) System.out.println("Components left:");
+			comp = gmt.getComponentsArray();
+			if (test1) for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
 		}
 		
 		/* VERY FREAKING IMPORTANT STUFF */
@@ -138,69 +143,102 @@ public class TestGMPlace extends BasicGame
 		world.world[0][0].removeObjects(6, 10);
 		world.world[0][0].removeObjects(7, 10);
 
-		System.out.println("The world: ");
-		System.out.println(world.world[0][0].toString());
+		if (test1) System.out.println("The world: ");
+		if (test1) System.out.println(world.world[0][0].toString());
 		
-		int x = 5;
-		int y = 6;
+		
 		int k = 0;
+		x[k] = 5;
+		y[k] = 6;
 		
-		System.out.println("Placing " + sheet[k].getName()  + " at " + x + ", " + y);
+		if (test1) System.out.println("Placing " + sheet[k].getName()  + " at " + x + ", " + y);
 		place[k].testPlace();
-		System.out.println("placement options:");
-		System.out.println(world.world[0][0].toString());
-		ObjectsPriorityStack stack = world.world[0][0].objectsStack[x][y]; // where the character is to be placed
+		if (test1) System.out.println("placement options:");
+		if (test1) System.out.println(world.world[0][0].toString());
+		ObjectsPriorityStack stack = world.world[0][0].objectsStack[x[k]][y[k]]; // where the character is to be placed
 		((TargetBlock)stack.peek()).select();
-		System.out.println(world.world[0][0].toString());
+		if (test1) System.out.println(world.world[0][0].toString());
 		
-		System.out.println("Characters in mob holder:");
+		if (test1) System.out.println("Characters in mob holder:");
 		holder = gmt.getHolder(GMToolsBox.Holder.MOB);
-		for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
+		if (test1) for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
 		
-		System.out.println("Characters in player holder:");
+		if (test1) System.out.println("Characters in player holder:");
 		holder = gmt.getHolder(GMToolsBox.Holder.PLAYER);
-		for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
+		if (test1) for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
 		
-		System.out.println("Characters in play:");
+		if (test1) System.out.println("Characters in play:");
 		inPlay = gmt.getCharactersInPlay();
 		temp = "";
 		for (int j = 0; j < inPlay.length; j++) temp += (inPlay[j] + ", " );
-		System.out.println(temp);
+		if (test1) System.out.println(temp);
 		
-		System.out.println("Components left:");
-		comp = gmt.getComponents();
-		for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
+		if (test1) System.out.println("Components left:");
+		comp = gmt.getComponentsArray();
+		if (test1) for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
 		
 		
 		
 		/* next character */
+		int prevk = k;
 		k = 5;
-		x+= 2;
-		System.out.println("Placing " + sheet[k].getName()  + " at " + x + ", " + y);
+		x[k] = x[prevk] + 2;
+		
+		if (test1) System.out.println("Placing " + sheet[k].getName()  + " at " + x + ", " + y);
 		place[k].testPlace();
-		System.out.println("placement options:");
-		System.out.println(world.world[0][0].toString());
-		stack = world.world[0][0].objectsStack[x][y]; // where the character is to be placed
+		if (test1) System.out.println("placement options:");
+		if (test1) System.out.println(world.world[0][0].toString());
+		stack = world.world[0][0].objectsStack[x[k]][y[k]]; // where the character is to be placed
 		((TargetBlock)stack.peek()).select();
-		System.out.println(world.world[0][0].toString());
+		if (test1) System.out.println(world.world[0][0].toString());
 		
-		System.out.println("Characters in mob holder:");
+		if (test1) System.out.println("Characters in mob holder:");
 		holder = gmt.getHolder(GMToolsBox.Holder.MOB);
-		for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
+		if (test1) for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
 		
-		System.out.println("Characters in player holder:");
+		if (test1) System.out.println("Characters in player holder:");
 		holder = gmt.getHolder(GMToolsBox.Holder.PLAYER);
-		for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
+		if (test1) for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
 		
-		System.out.println("Characters in play:");
+		if (test1) System.out.println("Characters in play:");
 		inPlay = gmt.getCharactersInPlay();
 		temp = "";
 		for (int j = 0; j < inPlay.length; j++) temp += (inPlay[j] + ", " );
-		System.out.println(temp);
+		if (test1) System.out.println(temp);
 		
-		System.out.println("Components left:");
-		comp = gmt.getComponents();
-		for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());;
+		if (test1) System.out.println("Components left:");
+		comp = gmt.getComponentsArray();
+		if (test1) for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
+		if (test1) System.out.println();
+		
+		/* Test character removal from the map */
+		System.out.println("Now testing character removal from the map:");
+		RemoveCharacter remove = new RemoveCharacter(i++, gmt);
+		
+		k = 5;
+		if (test2) System.out.println("removing k = " + k + " from the map" );
+		remove.activate();
+		if (test2) System.out.println(world.world[0][0].toString());
+		stack = world.world[0][0].objectsStack[x[k]][y[k]]; // where the character is to be placed
+		((TargetBlock)stack.peek()).select();
+		if (test2) System.out.println(world.world[0][0].toString());
+		
+		if (test2) System.out.println("Characters in mob holder:");
+		holder = gmt.getHolder(GMToolsBox.Holder.MOB);
+		if (test2) for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
+		
+		if (test2) System.out.println("Characters in player holder:");
+		holder = gmt.getHolder(GMToolsBox.Holder.PLAYER);
+		if (test2) for(int j = 0; j < holder.length; j++) System.out.println("Component ID: " + holder[j].id + " Name: " + holder[j].sheet.getName());
+		
+		if (test2) System.out.println("Characters in play:");
+		inPlay = gmt.getCharactersInPlay();
+		temp = "";
+		for (int j = 0; j < inPlay.length; j++) temp += (inPlay[j] + ", " );
+		if (test2) System.out.println(temp);
+		
+		
+		
     }
  
     @Override
