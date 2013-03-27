@@ -4,6 +4,7 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 
@@ -23,7 +24,7 @@ public class TestSerMain_two extends BasicGame
     @Override
     public void init(GameContainer gc) 
 			throws SlickException {
-    	String path = "C:/Users/mike/Desktop/save/";
+    	String path = "C:/Users/mike/Desktop/save1/";
 		/*
 		 * IMPORTANT: to see this working edit the path above to a new folder you create on you Desktop.
 		 * Run this main once to create the .ser files.
@@ -40,7 +41,7 @@ public class TestSerMain_two extends BasicGame
 		
 		//***************************************************
 		//START PHASE1 - write the world
-		//***************************************************
+		//***************************************************		
 //		mt.world.writeMe(path);
 //		Obstacle wall1 = new Obstacle("wall1", null, 5, 5, null);
 //
@@ -58,6 +59,7 @@ public class TestSerMain_two extends BasicGame
 //		mt.world.setWorldName("Norrath");
 //		//path/Norrath/Norrath.ser
 //		mt.world.writeMe(path);
+		
 		//***************************************************
 		//END PHASE1
 		//***************************************************
@@ -76,6 +78,11 @@ public class TestSerMain_two extends BasicGame
 		System.out.println("World map0 and map24");
 		System.out.println(mt.getMapAtLocation(0, 0));
 		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));
+		
+		System.out.println(mt.getMapAtLocation(0, 0).objectsStack[0][0].peek().getImage().BOTTOM_RIGHT);
+		System.out.println(mt.getMapAtLocation(0, 0).objectsStack[1][1].peek().getImage().BOTTOM_RIGHT);
+		
+		
 		//***************************************************
 		//END PHASE2
 		//***************************************************

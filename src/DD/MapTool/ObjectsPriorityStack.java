@@ -54,8 +54,8 @@ public class ObjectsPriorityStack implements Serializable{
 		return pQueue.iterator().next();
 	}
 	
-	public void pop(){
-		 pQueue.remove();
+	public Objects pop(){
+		return pQueue.remove();
 	}
 	
 	public Objects peek(){
