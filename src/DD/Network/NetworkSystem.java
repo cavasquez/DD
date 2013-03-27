@@ -1,5 +1,7 @@
 package DD.Network;
 
+import DD.Chat.ChatSystem;
+import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.Client.ClientSystem;
@@ -31,7 +33,10 @@ public class NetworkSystem implements Network
 	private Network network;
 	
 	/************************************ Class Methods *************************************/
-	public NetworkSystem() {}
+	public NetworkSystem() 
+	{
+		MessageQueue.getInstance().setNetworkSystem(this);
+	} /* end NetworkSystem constructor */
 	
 	@Override
 	public boolean sendMessage(int sender, int receiver, Message message)
@@ -65,6 +70,24 @@ public class NetworkSystem implements Network
 		return id;
 	} /* end getUserID */
 	
+	@Override
+	public void start() 
+	{
+		network.start();
+	} /* end start method */
+
+	@Override
+	public void stop() 
+	{
+		network.stop();
+	} /* end stop method */
+
+	@Override
+	public void terminate() 
+	{
+		network.terminate();
+	} /* end terminate method */
+	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
@@ -82,5 +105,26 @@ public class NetworkSystem implements Network
 		} /* end switch */
 
 	} /* end setNetworkType */
+
+	@Override
+	public boolean setServerIP(String ip) {
+		return false;
+		// TODO Auto-generated method stub
+		
+	} /* end setServerIP method */
+
+	@Override
+	public void setCombatSystem(CombatSystem cs) 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setCombatSystem method */
+
+	@Override
+	public void setChatSystem(ChatSystem chat) 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setChatSystem method */
 	
 } /* end Network class */

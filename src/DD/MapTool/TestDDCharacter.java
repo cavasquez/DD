@@ -63,7 +63,7 @@ public class TestDDCharacter extends BasicGame
 		int test = 0;
 		DDCharacter character = new DDCharacter(1);
 		CharacterSheet sheet = new CharacterSheet();
-		sheet.EquipWeapon(new Weapon("Longsword",Dice.DieSize.D6,2,19,5,'M','S',"Note:",4));
+		sheet.equipWeapon(new Weapon(15, "Longsword",Dice.DieSize.D6,2,19,5,'M','S',"Note:",4), 0);
 		
 		/* ALSO VERY FREAKING IMPORTANT */
 		character.setCharacterID(1);

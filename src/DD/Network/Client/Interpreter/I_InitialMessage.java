@@ -41,6 +41,7 @@ public class I_InitialMessage extends ClientInterpreter
 				Socket socket = new Socket(system.getServerIP(), Network.PORT);
 				ClientListener listener = new ClientListener(socket);
 				listener.run();
+				system.setListener(listener);
 			} /* end try */
 			catch (IOException e) 
 			{

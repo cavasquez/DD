@@ -1,5 +1,7 @@
 package DD.Network;
 
+import DD.Chat.ChatSystem;
+import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 
@@ -24,12 +26,29 @@ public interface Network
 	public static final int GM_USER_ID = -2;	/* GM (Server) will always have an ID of -1 */
 	public static final int SELF = -3;			/* Send message to self (for Clients) */
 	public static final int PORT = 8080;		/* Port that ServerSocket connects to */	
+
 	
 	/************************************ Class Methods *************************************/
 	/* Send message on part of some part of the system (ChatSystem, CombatSystem, etc.) */
 	public boolean sendMessage(int sender, int receiver, Message message);
 	
-	/* Get messaeg from server or client */
+	/* Get message from server or client */
 	public boolean getMessage(int listenerID, NetworkMessage message);
+	
+	/* Get the server or client to start listeners or senders */
+	public void start();
+	
+	/* Ideally for Server to stop ListenerSpawner */
+	public void stop();
+	
+	/* For both client and server to clean up */
+	public void terminate();
+	
+	/* Set the IP of the network */
+	public boolean setServerIP(String ip);
+	
+	public void setCombatSystem(CombatSystem cs);
+	
+	public void setChatSystem(ChatSystem chat);
 	
 } /* end Network class  */

@@ -20,7 +20,7 @@ public abstract class Listener extends NetworkSocket
 	public Listener(Socket socket)
 	{
 		super(socket);
-	} /* end Server constructor */
+	} /* end Listener constructor */
 	
 	public void run() {} /* end run method */
 	

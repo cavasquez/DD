@@ -1,12 +1,16 @@
 package DD.Network.Server;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import DD.Chat.ChatSystem;
+import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.MessageQueue;
 import DD.Network.Network;
+import DD.Network.Client.ClientSystem;
 import DD.Network.Server.Interpreter.I_ChatMessage;
 import DD.Network.Server.Interpreter.I_ClientListenerReadyMessage;
 import DD.Network.Server.Interpreter.I_CombatMessage;
@@ -27,11 +31,12 @@ import DD.Network.Server.Interpreter.ServerInterpreter;
 public class ServerSystem implements Network
 {	
 	/************************************ Class Attributes *************************************/
-	private static ClientTable clientList;
-	private static ServerInterpreter[] system = null;
-	private static int clientID;						/* Unique ID to be assigned to clients */
+	private ClientTable clientList;
+	private ServerInterpreter[] system = null;
+	private int clientID;						/* Unique ID to be assigned to clients */
 	@SuppressWarnings("unused")
-	private static MessageQueue queue = null;					/* reference to MessageQueue thread. Will need to be cleaned up */
+	private InetAddress serverIP;
+	private ListenerSpawner spawn;
 	
 	/************************************ Class Methods *************************************/
 	public ServerSystem() 
@@ -110,7 +115,7 @@ public class ServerSystem implements Network
 		return sent;
 	} /* end sendMessage method */
 	
-	public static boolean validMessage(int type)
+	public boolean validMessage(int type)
 	{
 		/* Check to see if the message is supported by the system. Used only for getMessage */
 		boolean valid = false;
@@ -129,6 +134,34 @@ public class ServerSystem implements Network
 		
 		return valid;
 	} /* end validMessage method */
+	
+	@Override
+	public void start() 
+	{
+		/* Start listening for new senders from clients. */
+		spawn = new ListenerSpawner();
+		spawn.startAccepting();
+		spawn.start();
+		
+	} /* end start method */
+
+	@Override
+	public void stop() 
+	{
+		/* Stop listening for new senders from clients. */
+		spawn.stopAccepting();
+		spawn.close();
+		
+	} /* end stop method */
+
+	@Override
+	public void terminate() 
+	{
+		/* 1. Send a termination message to all clients.
+		 * 2. Stop all threads currently working for the Server. */
+		MessageQueue.getInstance().close();
+		
+	} /* end terminate method */
 	
 	/************************************ clineList Related Methods ******************************/
 	public boolean removeClient(int clientID)
@@ -191,6 +224,46 @@ public class ServerSystem implements Network
 	{
 		return clientID++;
 	} /* end getNewClientID method */
+	
+	
+	/******************************************************************************
+	 ******************************* Setter Methods *******************************
+	 ******************************************************************************/
+	public void setServerIP(InetAddress serverIP)
+	{
+		this.serverIP = serverIP;
+	} /* end setServerIP method */
+	
+	public boolean setServerIP(String ip)
+	{
+		boolean returner = false;
+		try {
+			setServerIP(InetAddress.getByName(ip));
+			returner = true;
+		} /* end try */
+		catch (UnknownHostException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
+		
+		return returner;
+	} /* end setServerIP method */
+
+
+	@Override
+	public void setCombatSystem(CombatSystem cs) 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setCombatSystem method */
+
+	@Override
+	public void setChatSystem(ChatSystem chat)
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setChatSystem method */
 			
 	
 } /* end ServerSystem class */

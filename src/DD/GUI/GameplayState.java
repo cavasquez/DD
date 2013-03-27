@@ -96,7 +96,7 @@ public class GameplayState extends BasicGameState {
 		CharacterClass barb = sheet.chooseClass(0);	//this is barbarian
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
-		sheet.EquipWeapon(new Weapon("Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4));
+		sheet.equipWeapon(new Weapon(30, "Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4), 0);
         player.setCharacterSheet(sheet);
         goblin1.setCharacterSheet(goblin.getCharacterSheet());
         
