@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class Armor extends Equipment implements Serializable{
 	private static final long serialVersionUID = 5345532757085254659L;
 	
+	int cost;
 	int enhance;
 	int acBonus;
 	int maxDex;
@@ -12,8 +13,9 @@ public class Armor extends Equipment implements Serializable{
 	double spellFail; 
 	char type;//light medium or heavy
 	
-	public Armor(String name, int enhance, int acBonus, int maxDex,int penalty,double spellFail, char type, int weight)
+	public Armor(int cost, String name, int enhance, int acBonus, int maxDex,int penalty,double spellFail, char type, int weight)
 	{
+		this.cost = cost;
 		 this.name = name;
 		 this.enhance = enhance; 
 		 this.acBonus = acBonus; 
@@ -25,6 +27,11 @@ public class Armor extends Equipment implements Serializable{
 		
 	}
 
+	public int getCost() {
+		// TODO Auto-generated method stub
+		return enhance;
+	}
+	
 	public int getEnhance() {
 		// TODO Auto-generated method stub
 		return enhance;

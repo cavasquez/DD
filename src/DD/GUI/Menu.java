@@ -26,7 +26,6 @@ public class Menu extends BasicGameState
 		playNow = new Image("Images/Menus/MenuButtons.png");
 		
 		
-		
 		button = new Sound("Audio/dunSound.wav");
 		
 	}
@@ -53,6 +52,7 @@ public class Menu extends BasicGameState
 			{
 				button.play();
 				sbg.enterState(1);
+				
 			}
 		}
 		

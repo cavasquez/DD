@@ -2,6 +2,7 @@ package DD.Chat;
 
 import DD.Chat.Interpreter.*;
 import DD.Message.ChatMessage;
+import DD.System.DDSystem;
 
 /*****************************************************************************************************
  * ChatSystem will take in ChatMessages from the MessageBox, interpret it, and route it through the 
@@ -13,7 +14,7 @@ import DD.Message.ChatMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class ChatSystem 
+public class ChatSystem
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;

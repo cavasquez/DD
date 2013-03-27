@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import org.newdawn.slick.SlickException;
 import DD.Character.DDCharacter;
-import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.TargetAbility;
 import DD.MapTool.CharacterObjects;
 import DD.MapTool.Map;
 import DD.MapTool.Objects;
@@ -15,6 +15,7 @@ import DD.MapTool.TargetBlock;
 import DD.MapTool.Wall;
 import DD.Message.ChooseTargetMessage;
 import DD.Message.TargetSelectedMessage;
+import DD.System.DDSystem;
 
 /*****************************************************************************************************
  * TargettingSystem will be used by Ability to place a TargetBlock on the Map object. The target blocks
@@ -46,7 +47,7 @@ import DD.Message.TargetSelectedMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class TargetingSystem 
+public class TargetingSystem
 {
 	/************************************ Class Constants*************************************/
 	public static final int blockSize = 5; /* distance of block (5 feet) */
@@ -75,6 +76,7 @@ public class TargetingSystem
 	{
 		CIRCLE,
 		CONE,
+		ALL,
 		MOVE;	/* A circle, but the placement differs slightly */
 		
 	} /* end TargetShape enum */
@@ -86,8 +88,8 @@ public class TargetingSystem
 	} /* end Target enum */
 	
 	/************************************ Class Attributes *************************************/
-	public static Map map = null;						/* Map on which we are placing TargetBlocks */
-	private static Ability caller = null;				/* keeps track of Ability that called TargetSystem */
+	public Map map = null;						/* Map on which we are placing TargetBlocks */
+	private static TargetAbility caller = null;				/* keeps track of Ability that called TargetSystem */
 	private static TargetSelection selection = null;	/* keeps track of type of TargetSelection so targetSelected know which Characters to return */
 	private static Queue<TargetBlock> blocks = null;	/* this stack will be used to keep track of placed blocks */
 	private static boolean self;						/* determine whether or not target can choose self */
@@ -192,6 +194,9 @@ public class TargetingSystem
 				placeCone(ctm.getOrigin(), ctm.getLength());
 				break;
 				
+			case ALL:
+				placeAll();
+				break;
 			case MOVE:
 				placeMove(ctm.getOrigin(), ctm.getLength());
 				break;
@@ -215,25 +220,39 @@ public class TargetingSystem
 		Queue<CircleStackElement> stack = new LinkedList<CircleStackElement>();
 		stack.add(new CircleStackElement(origin, distance));
 		
+		boolean placeBlock = false;
+		boolean lookForMoreBlocks = false;
+		int diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
+		
+		Coordinate top;
+		Coordinate bottom;
+		Coordinate left;
+		Coordinate right;
+		
+		Coordinate topLeft;
+		Coordinate bottomLeft;
+		Coordinate topRight;
+		Coordinate bottomRight;
+		
 		while(stack.peek() != null)
 		{
 			CircleStackElement next = stack.poll();
 			position = next.getPosition();
 			distance = next.getDistance();
 			
-			boolean placeBlock = false;
-			boolean lookForMoreBlocks = false;
-			int diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
+			placeBlock = false;
+			lookForMoreBlocks = false;
+			diagonalPenalty = 2;		/* We double the speed when a diagonal is taken after it the first diagonal is taken */
 			
-			Coordinate top = new Coordinate(position.x, position.y + 1);
-			Coordinate bottom = new Coordinate(position.x, position.y - 1);
-			Coordinate left = new Coordinate(position.x - 1, position.y);
-			Coordinate right = new Coordinate(position.x + 1, position.y);
+			top = new Coordinate(position.x, position.y + 1);
+			bottom = new Coordinate(position.x, position.y - 1);
+			left = new Coordinate(position.x - 1, position.y);
+			right = new Coordinate(position.x + 1, position.y);
 			
-			Coordinate topLeft = new Coordinate(position.x - 1, position.y + 1);
-			Coordinate bottomLeft = new Coordinate(position.x - 1, position.y - 1);
-			Coordinate topRight = new Coordinate(position.x + 1, position.y + 1);
-			Coordinate bottomRight = new Coordinate(position.x + 1, position.y - 1);
+			topLeft = new Coordinate(position.x - 1, position.y + 1);
+			bottomLeft = new Coordinate(position.x - 1, position.y - 1);
+			topRight = new Coordinate(position.x + 1, position.y + 1);
+			bottomRight = new Coordinate(position.x + 1, position.y - 1);
 			
 			/* First, make sure we are in bounds. Thus must happen first so we do not get array outofbounds errors*/
 			if (positionExists(position))
@@ -348,6 +367,21 @@ public class TargetingSystem
 		
 	} /* end placeMove method */
 	
+	/******************************************************************************
+	 ************************* PlaceAll Related Methods  **************************
+	 ******************************************************************************/
+	private void placeAll() throws SlickException
+	{
+		/* Target everything that is not an obstacle (wall or character) */
+		for (int i = 0; i < map.mapSize; i++)
+		{
+			for (int j = 0; j < map.mapSize; j++)
+			{
+				if(!wallExists(new Coordinate(i,j))) placeTargetBlock(new Coordinate(i,j));
+			} /* end for loop */
+		} /* end for loop */
+	} /* end placeAll method */
+	
 	/************************************ Methods used by class *************************************/	
 	private void placeTargetBlock(Coordinate position) throws SlickException
 	{
@@ -377,6 +411,19 @@ public class TargetingSystem
 		return returner;
 	} /* end wallExists method */
 	
+	private boolean characterExists( Coordinate position )
+	{/* Check if there is a wall at the position */
+		boolean returner = false;
+		Iterator<Objects> obj = map.objectsStack[position.x][position.y].getIterator();
+		
+		while (returner == false && obj.hasNext())
+		{
+			if(CharacterObjects.class.isInstance(obj.next())) returner = true;
+		} /* end while loop */
+		
+		return returner;
+	} /* end wallExists method */
+	
 	private boolean positionExists(Coordinate position)
 	{
 		boolean returner = false;
@@ -399,9 +446,9 @@ public class TargetingSystem
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public static void setMap(Map map)
+	public void setMap(Map map)
 	{
-		TargetingSystem.map = map;
+		this.map = map;
 	} /* end setMap method */
 	
 	/******************************************************************************

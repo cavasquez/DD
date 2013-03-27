@@ -1,11 +1,14 @@
 package DD.ActionBox;
  
 import java.util.ArrayList;  
+import java.util.Set;
+import java.util.TreeSet;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.EndTurn;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.Character.Abilities.DefaultAbilities.Standard.StandardAttack;
 import DD.SlickTools.BoxInterface;
@@ -42,14 +45,15 @@ public class ActionBox extends BoxInterface
 {
 	/************************************ Class Constants *************************************/
 	private static int I= 0;
-	private static enum Action
+	public static enum Action
 	{
 		STANDARD_ACTION (I++),
 		MOVE_ACTION(I++),
 		FULL_ROUND_ACTION (I++),
 		SWIFT_ACTION (I++),
 		IMMEDIATE_ACTION (I++),
-		FREE_ACTION (I++);
+		FREE_ACTION (I++),
+		END_TURN(I++);
 		
 		public final int index;
 		public static final int NUM_OF_ACTIONS = I;
@@ -68,7 +72,8 @@ public class ActionBox extends BoxInterface
 
 	/************************************ Class Attributes *************************************/
 	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
-	protected static DDCharacter character = null;	/* The character performing the actions */
+	protected DDCharacter character = null;	/* The character performing the actions */
+	protected Set<Integer> playersCharacters = null;/* A set that contains the players characters */
 	
 	/************************************ Button Images *************************************/
 	Image freeAction = null;
@@ -79,13 +84,14 @@ public class ActionBox extends BoxInterface
 	Image swiftAction = null;
 	Image standardAttack = null;
 	Image endMove = null;
-	//Image startNewTurn = null;
+	Image endTurnButton = null;
+	int shift;
 	
 	public ActionBox(int id, float length, float width) throws SlickException
 	{
 		super(id, length, width);
-		components = new ArrayList<Component>();
-		subActions = null;
+		subActions = new ArrayList<Integer>();
+		playersCharacters = new TreeSet<Integer>();
 		
 		freeAction = new Image("Images/ActionBox/FreeAction.png");
 		fullRoundAction = new Image("Images/ActionBox/FullRoundAction.png");
@@ -94,31 +100,27 @@ public class ActionBox extends BoxInterface
 		standardAction = new Image("Images/ActionBox/StandardAction.png");
 		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
 		endMove = new Image("Images/ActionBox/EndMove.png");
-		//tartNewTurn = new Image("Images/ActionBox/startNewTurn.png");
+		endTurnButton = new Image("Images/ActionBox/EndMove.png"); //TODO: make button
 		
-		int shift = freeAction.getHeight();
+		shift = freeAction.getHeight();
 		Vector2f boxPosition = new Vector2f(660f, 10f);
 		this.setPosition(boxPosition);
 		
-		/* To begin with, the basic ActionChoices need to be available. */
+	} /* end ActionBox constructor */
 	
-		StandardAttack standardAttack = new StandardAttack(this.id);
-		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y, standardAttack));
+	public void addActionChoice() 
+	{
+		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y, new StandardAttack(this.id)));
 		Move move = new Move(this.id);
 		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift, move));
 		this.addComponent(new ActionChoice(this.id, Action.FULL_ROUND_ACTION.index, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
 		this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
 		this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
 		this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
+		this.addComponent(new ActionChoice(this.id, Action.END_TURN.index, "End Turn", endTurnButton, position.x, position.y + shift*5, new EndTurn(this.id)));
 		
 		this.addComponent(new ActionChoice(this.id, 1000, "End Move", endMove, position.x, position.y + shift*6, move));
 		//this.addComponent(new ActionChoice(this.id, 2000, "Start New Turn", startNewTurn, position.x, position.y + shift*6));
-		
-	} /* end ActionBox constructor */
-	
-	public ArrayList<Component> getComponentList() 
-	{
-		return components;
 	}
 	
 	public void addSubAction(Ability ability)
@@ -148,20 +150,38 @@ public class ActionBox extends BoxInterface
 		
 	} /* end unclickSubACtions method */
 	
+	public void addCharacter(int id)
+	{
+		/* Add characters id to set */
+		playersCharacters.add(id);
+	}/* end addCharacter method */
+	
+	public void removeCharacter(int id)
+	{
+		playersCharacters.remove(id);
+	} /* end removeCharacter method */
+	
+	public boolean hasCharacter(int id)
+	{
+		/* Check to see if ActionBox "owns" character */
+		return playersCharacters.contains(id);
+	} /* end hasCharacter method */
+	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public static DDCharacter getCharacter()
+	public DDCharacter getCharacter()
 	{
-		return ActionBox.character;
+		return this.character;
 	} /* end getCharacter method */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/
-	public static void setCharacter(DDCharacter character)
+	public void setCharacter(DDCharacter character)
 	{
-		ActionBox.character = character;
+		this.character = character;
 		Ability.setOwnerCharacter(character);
 	} /* end setCharacter method */
+	
 } /* end ActionBox method */

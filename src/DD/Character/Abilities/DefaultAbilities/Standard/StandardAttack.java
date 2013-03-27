@@ -5,7 +5,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 import DD.ActionBox.Dice;
-import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.TargetAbility;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.Standard.I_StandardAttack;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
@@ -22,7 +22,7 @@ import DD.Message.TargetSelectedMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class StandardAttack extends Ability
+public class StandardAttack extends TargetAbility
 {	
 	/************************************ Class Methods *************************************/
 	public StandardAttack(int id) 
@@ -85,7 +85,7 @@ public class StandardAttack extends Ability
 			critDamage += damageRoll.roll(1);
 		} /* end for loop */
 		
-		int[] body = new int[I_StandardAttack.BODY_SIZE];
+		Integer[] body = new Integer[I_StandardAttack.BODY_SIZE];
 		body[I_StandardAttack.ATTACK_ROLL] = attack;
 		body[I_StandardAttack.CONFIRM_ATTACK] = confirmCrit;
 		body[I_StandardAttack.DAMAGE_ROLL] = damage;

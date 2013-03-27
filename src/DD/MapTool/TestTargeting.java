@@ -1,19 +1,48 @@
 package DD.MapTool;
 
-import java.util.Iterator;
+import java.io.Console;
+
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import slick.path2glory.SimpleGame.TestGame;
+import DD.ActionBox.ActionBox;
+import DD.ActionBox.Dice;
 import DD.Character.DDCharacter;
+import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.DefaultAbilities.Move.Move;
+import DD.Character.Abilities.DefaultAbilities.Standard.StandardAttack;
+import DD.Character.CharacterSheet.CharacterClass;
+import DD.Character.CharacterSheet.CharacterSheet;
+import DD.Character.Equipment.Weapon;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
+import DD.System.DDSystem;
 
-//@author Carlos Vasquez
+// @author Carlos Vasquez
 
-public class TestTargeting {
-	public static void main(String[] args) throws SlickException {
-		TargetingSystem ts = new TargetingSystem();
-		CombatSystem cs = new CombatSystem();
+public class TestTargeting extends BasicGame
+{
+	public TestTargeting (String title) {
+		super(title);
+
+	}
+ 
+    public TestTargeting()
+    {
+        super("Slick2DPath2Glory - SimpleGame");
+    }
+ 
+    @Override
+    public void init(GameContainer gc) 
+			throws SlickException {
+    	DDSystem system = new DDSystem();
 		
 		/*
 		 * IMPORTANT: for this main to work, mapSize needs to be 21 or larger due to hardcodes massPlaceObjectsLine values.
@@ -22,7 +51,7 @@ public class TestTargeting {
 		
 		
 		World world = new World("TESTME");
-		TargetingSystem.setMap(world.world[0][0]);
+		system.setMap(world.world[0][0]);
 	
 		/*
 		 * proof of concept movement backend
@@ -77,16 +106,16 @@ public class TestTargeting {
 						null
 				);
 		ObjectsPriorityStack[][] stack = world.world[0][0].objectsStack;
-		ts.chooseTarget(ctm);
+		system.ts.chooseTarget(ctm);
 	
 		System.out.println(character.getMovedDiagonal());
 		System.out.println(world.world[0][0].toString());
 		
 		/* Test the clearTargets() method */
 		System.out.println("Testing clearTargets method");
-		ts.clearTargets();
+		system.ts.clearTargets();
 		System.out.println(world.world[0][0].toString());
-		ts.clearTargets();
+		system.ts.clearTargets();
 		System.out.println(world.world[0][0].toString());
 		
 		/*
@@ -109,5 +138,30 @@ public class TestTargeting {
 				world.world[0][0].removeObjects(6,j);
 			}
 		*/
-	}
+    }
+ 
+    @Override
+    public void update(GameContainer gc, int delta) 
+			throws SlickException     
+    {
+
+    }
+ 
+    public void render(GameContainer gc, Graphics g) 
+			throws SlickException 
+    {
+
+    }
+ 
+    public static void main(String[] args) 
+			throws SlickException
+    {
+    	AppGameContainer app = 
+			new AppGameContainer(new TestTargeting());
+ 
+         //app.setDisplayMode(800, 600, false);
+         app.start();
+    }
+    
+    
 }

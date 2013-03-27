@@ -16,7 +16,7 @@ import DD.Message.CombatValidationMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class I_EndAction implements CombatInterpreter
+public class I_EndAction extends CombatInterpreter
 {
 	
 	/************************************ Class Methods *************************************/
@@ -31,7 +31,8 @@ public class I_EndAction implements CombatInterpreter
 	@Override
 	public void interpret(CombatMessage cm) 
 	{
-		DDCharacter character = CombatSystem.getCharacter(cm.getSource());
+		 DDCharacter character = null;
+		if (cm.getSource() != null) character = cs.getCharacter(cm.getSource());
 		
 		switch(cm.getAction())
 		{
@@ -64,8 +65,15 @@ public class I_EndAction implements CombatInterpreter
 			case SWIFT:
 				character.endHasSwiftAction();
 				break;
+			case SYSTEM:
+				/* Do noething */
+				break;
+		default:
+			break;
 	
 		} /* end switch */
+		
+		//TODO: Check to see that there are any actions left. if not, end turn.
 		
 	} /* end interpret method */
 	

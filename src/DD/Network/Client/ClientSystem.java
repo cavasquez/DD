@@ -1,7 +1,10 @@
 package DD.Network.Client;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
+import DD.Chat.ChatSystem;
+import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.MessageQueue;
@@ -20,26 +23,28 @@ import DD.Network.Client.Interpreter.*;
 public class ClientSystem implements Network
 {	
 	/************************************ Class Attributes *************************************/
-	private static PeerTable peerList;
-	private static ClientInterpreter[] system = null;
+	private PeerTable peerList;
+	private ClientInterpreter[] system = null;
 	@SuppressWarnings("unused")
-	private static MessageQueue queue = null;			/* reference to MessageQueue thread. Will need to be cleaned up */
-	private static ClientListener listener = null;
-	private static ClientSender sender = null;
-	private static int clientID;						/* ID provided by server */
-	private static InetAddress serverIP = null;			/* ip address of the server */
+	private MessageQueue queue = null;			/* reference to MessageQueue thread. Will need to be cleaned up */
+	private ClientListener listener = null;
+	private ClientSender sender = null;
+	private int clientID;						/* ID provided by server */
+	private InetAddress serverIP = null;		/* ip address of the server */
+	
 	
 	/************************************ Class Methods *************************************/
 	public ClientSystem() 
 	{
 		peerList = new PeerTable();
+		ClientInterpreter.setClientSystem(this);
 		system = new ClientInterpreter[Message.NUM_OF_MESSAGES];
 		system[Message.COMBAT_MESSAGE] = new I_CombatMessage();
 		system[Message.CHAT_MESSAGE] = new I_ChatMessage();
 		system[Message.INITIAL_MESSAGE] = new I_InitialMessage();
 		system[Message.NEW_LISTENER_MESSAGE] = new I_NewListenerMessage();
 		system[Message.ADD_USER_MESSAGE] = new I_AddUserMessage();
-		system[Message.COMBAT_MESSAGE].setClientSystem(this);
+		
 
 	} /* end ServerSystem constructor */
 	
@@ -55,7 +60,7 @@ public class ClientSystem implements Network
 	{
 		/* Send message to Server. */
 		NetworkMessage send = new NetworkMessage(sender, receiver, message);
-		ClientSystem.sender.sendMessage(send);
+		this.sender.sendMessage(send);
 		return true;
 	} /* end sendMessage method */
 	
@@ -78,6 +83,28 @@ public class ClientSystem implements Network
 		
 		return valid;
 	} /* end validMessage method */
+	
+
+	@Override
+	public void start() 
+	{
+		/* Start a sender to attempt to connect to the server */
+		
+	} /* end start method */
+
+	@Override
+	public void stop() 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end stop method */
+
+	@Override
+	public void terminate() 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end terminate method */
 	
 	/************************************ peerList related methods**********************************/
 	public boolean addUser(int peerID, String username, InetAddress ip)
@@ -124,22 +151,53 @@ public class ClientSystem implements Network
 	 ******************************************************************************/
 	public void setListener(ClientListener listener)
 	{
-		ClientSystem.listener = listener;
+		this.listener = listener;
 	} /* end setListener method */
 	
 	public void setSender(ClientSender sender)
 	{
-		ClientSystem.sender = sender;
+		this.sender = sender;
 	} /* end setSender method */
 	
 	public void setClientID(int clientID)
 	{
-		ClientSystem.clientID = clientID;
+		this.clientID = clientID;
 	} /* end setSender method */
 	
 	public void setServerIP(InetAddress serverIP)
 	{
-		ClientSystem.serverIP = serverIP;
+		this.serverIP = serverIP;
 	} /* end setServerIP method */
+	
+	public boolean setServerIP(String ip)
+	{
+		boolean returner = false;
+		try {
+			setServerIP(InetAddress.getByName(ip));
+			returner = true;
+		} /* end try */
+		catch (UnknownHostException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
+		
+		return returner;
+	} /* end setServerIP method */
+
+
+	@Override
+	public void setCombatSystem(CombatSystem cs) 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setCombatSystem method */
+
+	@Override
+	public void setChatSystem(ChatSystem chat)
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setChatSystem method */
 	
 } /* end ServerSystem class */

@@ -41,6 +41,8 @@ public class TestSerChar extends BasicGame
  
     @Override
     public void init(GameContainer gc) throws SlickException {
+    	
+    	//phase 1
 //    	DDCharacter mike = new DDCharacter(0);
 //    	CharacterSheet cs = new CharacterSheet();
 //    	mike.setCharacterSheet(cs);
@@ -62,10 +64,10 @@ public class TestSerChar extends BasicGame
 //    	CharacterClass cc = mike.getCharacterSheet().chooseClass(0);
 //    	mike.getCharacterSheet().fillRecorder(cc);
 //    	mike.getCharacterSheet().fillAttacksAndDefense(cc);
-//    	mike.writeMe("C:/Users/mike/Desktop/save/");
+//    	mike.writeMe("C:/Users/Jin/Desktop/save/");
     	
     	MapTool mt = new MapTool();
-    	DDCharacter mike = mt.getMapAtLocation(0, 0).loadCharacter("C:/Users/mike/Desktop/save/Characters", "Max");
+    	DDCharacter mike = mt.getMapAtLocation(0, 0).loadCharacter("C:/Users/Jin/Desktop/save/Characters/", "Max");
     	CharacterObjects co = new CharacterObjects(mike.getCharacterSheet().getName(), null, 0, 0, null, mike);
     	
     	mt.getMapAtLocation(0, 0).place(0, 0,co);

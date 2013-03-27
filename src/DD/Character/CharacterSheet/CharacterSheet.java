@@ -3,7 +3,6 @@ package DD.Character.CharacterSheet;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
-
 import DD.ActionBox.Dice;
 import DD.Character.CharacterSheet.Race.Human;
 import DD.Character.CharacterSheet.Race.Race;
@@ -12,6 +11,7 @@ import DD.Character.Equipment.Armor;
 import DD.Character.Equipment.Armory;
 import DD.Character.Equipment.Equipment;
 import DD.Character.Equipment.Weapon;
+import DD.SlickTools.DDImage;
 
 
 /*****************************************************************************************************
@@ -86,6 +86,8 @@ public class CharacterSheet implements Serializable
 	private String deity;
 	private String background;
 	private String occupation;
+	private DDImage image = null;
+	private int netID;  //TODO: should not be serialized. 
 	
 	/********* Ability *********/
 	
@@ -1685,15 +1687,63 @@ public class CharacterSheet implements Serializable
 	
 	//
 	public ArrayList<Weapon> EquippedWeapon = new ArrayList<Weapon>(2);
-	public ArrayList<Weapon> SheathedWeapon = new ArrayList<Weapon>(3);
+	//public ArrayList<Weapon> SheathedWeapon = new ArrayList<Weapon>(3);
 	
 	
-	//put armor in the arrayList and into the equipmentList
-	public void EquipWeapon(Weapon arm)
+	//Select the which weapon goes into which hand, 0 main hand and 1 offhand
+	public void equipWeapon(Weapon w, int hand)
 	{
-		EquippedWeapon.add(arm);
+		
+		
+		EquippedWeapon.add(hand,w);
+		
+		
+		if(EquippedWeapon.size() > 2)
+		{
+			for(int i = 2; i < EquippedWeapon.size(); i++)
+			{
+				EquippedWeapon.remove(i);
+			}
+		}
+		for (int j = 0; j < equipmentList.size(); j++) {
+			
+		
+			if(w.getName().equals(equipmentList.get(j).getName()))
+			{
+				equipmentList.remove(j);
+				break;
+			}
+		}
+		
+	}
+	
+	
+	public void unequipWeapons()
+	{
+		
+		for (int i = 0; i < EquippedWeapon.size(); i++) {
+		
+			
+			equipmentList.add(EquippedWeapon.remove(0));
+			
+			
+		}
+		
+		//Equip both hands with unarmed
+		for (int i = 0; i < EquippedWeapon.size(); i++) {
+		
+			
+			EquippedWeapon.add(armory.weapons.get(0));
+			
+			
+		}
+		
+		
+		
+		
 		//need to add to inventory if not there
 	}
+	
 	
 	//get the armor from the arraylist
 	public Weapon getEquippedWeapon(int index)
@@ -1930,4 +1980,25 @@ public class CharacterSheet implements Serializable
 		hitpoints = hp + dice.roll(1,10);
 		return hitpoints;
 	}
+	
+	public void setNetID(int netID)
+	{
+		this.netID = netID;
+	}
+	
+	public int getNetID()
+	{
+		return netID;
+	}
+	
+	public DDImage getImage()
+	{
+		return image;
+	}
+	
+	public void setImage(DDImage image)
+	{
+		this.image = image;
+	} /* end setImage method */
+	
 } /* end CharacterSheet method */

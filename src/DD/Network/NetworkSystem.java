@@ -1,9 +1,12 @@
 package DD.Network;
 
+import DD.Chat.ChatSystem;
+import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.Client.ClientSystem;
 import DD.Network.Server.ServerSystem;
+import DD.System.DDSystem;
 
 
 /*****************************************************************************************************
@@ -17,35 +20,29 @@ import DD.Network.Server.ServerSystem;
 public class NetworkSystem implements Network
 {
 	/************************************ Class Constants *************************************/
-	private static int NUM_OF_NETWORKS = 0;
-	public static final int SERVER = NUM_OF_NETWORKS++;
-	public static final int CLIENT = NUM_OF_NETWORKS++;
+	private static int I = 0;
+	public static enum NetworkType
+	{
+		CLIENT(),
+		SERVER();
+		
+	} /* end Action enum */
 	
 	/************************************ Class Attributes *************************************/
-	private static int networkType;
-	private static Network network;
+	private NetworkType networkType;
+	private Network network;
 	
 	/************************************ Class Methods *************************************/
 	public NetworkSystem() 
-	{}
+	{
+		MessageQueue.getInstance().setNetworkSystem(this);
+	} /* end NetworkSystem constructor */
 	
 	@Override
 	public boolean sendMessage(int sender, int receiver, Message message)
 	{
 		return network.sendMessage(sender, receiver, message);
 	} /* end sendMessage method */
-	
-	private static boolean networkTypeExists(int networkType)
-	{
-		boolean exists = false;
-		if ( networkType == SERVER ||
-				networkType == CLIENT)
-		{
-			exists = true;
-		} /* end if */
-		
-		return exists;
-	} /* end networkTypeExists method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
@@ -57,29 +54,77 @@ public class NetworkSystem implements Network
 		
 	} /* end getMessage method */
 	
-	public int getUserID()
+	public int getNetID()
 	{
 		Integer id = null;
-		if (networkType == SERVER) id = Network.GM_USER_ID;
-		else if (networkType == CLIENT) id = ((ClientSystem)network).getClientID();
-		
+		switch(networkType)
+		{
+			case SERVER:
+				id = Network.GM_USER_ID;
+				break;
+			case CLIENT:
+				id = ((ClientSystem)network).getClientID();
+				break;
+		} /* end switch */
+
 		return id;
 	} /* end getUserID */
+	
+	@Override
+	public void start() 
+	{
+		network.start();
+	} /* end start method */
+
+	@Override
+	public void stop() 
+	{
+		network.stop();
+	} /* end stop method */
+
+	@Override
+	public void terminate() 
+	{
+		network.terminate();
+	} /* end terminate method */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public static boolean setNetworkType(int type)
+	public void setNetworkType(NetworkType type)
 	{
-		boolean exists = false;
-		if (networkTypeExists(type))
+		this.networkType = type;
+		switch(networkType)
 		{
-			networkType = type;
-			if (networkType == SERVER) network = new ServerSystem();
-			else if (networkType == CLIENT) network = new ClientSystem();
-		}
-		
-		return exists;
+			case SERVER:
+				network = new ServerSystem();
+				break;
+			case CLIENT:
+				network = new ClientSystem();
+				break;
+		} /* end switch */
+
 	} /* end setNetworkType */
+
+	@Override
+	public boolean setServerIP(String ip) {
+		return false;
+		// TODO Auto-generated method stub
+		
+	} /* end setServerIP method */
+
+	@Override
+	public void setCombatSystem(CombatSystem cs) 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setCombatSystem method */
+
+	@Override
+	public void setChatSystem(ChatSystem chat) 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setChatSystem method */
 	
 } /* end Network class */

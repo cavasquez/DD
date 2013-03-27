@@ -2,9 +2,7 @@ package DD.Network.Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
-
 import DD.Network.Network;
-
 
 /*****************************************************************************************************
  * ListenerSpawner will be responsible for creating ServerSocket's for every client while in the lobby.

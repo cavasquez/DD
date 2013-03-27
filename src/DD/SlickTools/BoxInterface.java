@@ -1,5 +1,7 @@
 package DD.SlickTools;
 
+import java.util.ArrayList;
+
 /*****************************************************************************************************
  * The BoxInterface class is an extension of Entity that focuses on representing a menu or other box in 
  * the interface. This could be the ChatBox, ActionBox, StatusBox, etc. The point being that the 
@@ -22,6 +24,12 @@ public abstract class BoxInterface extends Entity
 		super(id);
 		this.length = length;
 		this.width = width;
+		components = new ArrayList<Component>();
 	} /* end MenuBox constructor */
+	
+	public ArrayList<Component> getComponentList() 
+	{
+		return components;
+	} /* end getComponentList method */	
 
 } /* end MenuBox method */

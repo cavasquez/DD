@@ -2,17 +2,21 @@ package DD.Character.Abilities;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
+
+import DD.ActionBox.ActionBox;
 import DD.ActionBox.SubAction;
 import DD.Character.*;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.CombatSystem.CombatSystem;
+import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 import DD.Message.TargetSelectedMessage;
-import DD.SlickTools.RenderComponent;
+import DD.SlickTools.ImageRenderComponent;
 
 /*****************************************************************************************************
  * The Ability class will subclass the RenderComponent class. It will hold any possible player
@@ -36,7 +40,7 @@ import DD.SlickTools.RenderComponent;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public abstract class Ability extends RenderComponent
+public abstract class Ability extends ImageRenderComponent
 {
 	/************************************ Class Attributes *************************************/
 	protected static DDCharacter character;
@@ -46,7 +50,7 @@ public abstract class Ability extends RenderComponent
 	protected final String name;
 	protected final String description;
 	protected boolean activated;				/* flag that establishes if an ability has been clicked. */
-	protected boolean done;				/* flag to check if player is done with ability */
+	protected boolean done;						/* flag to check if player is done with ability */
 	protected static TargetingSystem ts = null;	/* to be used by abilities that need a target */
 	protected static CombatSystem cs = null;	/* Used for combat */
 	
@@ -59,13 +63,13 @@ public abstract class Ability extends RenderComponent
 		this.name = name;
 		this.description = description;
 		this.activated = false;
-		if (ts == null) ts = new TargetingSystem();
-		if (cs == null) cs = new CombatSystem();
+		try {
+			this.image = new Image(action.image);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	} /* end ability constructor */
-	
-	public abstract void obtainTarget(TargetSelectedMessage tsm) throws SlickException;
-	/* obtainTarget will be called on by the TargetSystem signaling that a target(s) has
- 	been chosen */
 	
 	protected abstract void action() throws SlickException;
 	/* action will be the action performed by the ability */
@@ -121,48 +125,15 @@ public abstract class Ability extends RenderComponent
 		/* First, send to network */
 		//TODO: send to network
 		
+		CombatValidationMessage cvm = cs.process(cm); //TODO: verify validation message
 		
-		
-		if(done)
-		{
-			/* We are done, so we must reformat the message */
-			/* First, tell CombatSystem that action is terminating */
-			CombatMessage endAction = new CombatMessage
-					(
-						character.getCharacterID(),
-						null,
-						actionType,
-						CombatSystem.Action.END_ACTION,
-						null
-					);
-			//TODO: "Unclick" ie reset action box. By now, interpreter should have changed turn states
-			//TODO: Check for validity of cvm
-			CombatValidationMessage cvm = cs.process(endAction);
-		} /* end if */
-		else
-		{
-			/* re-activate ability */
-			//TODO: Check for validity of cvm
-			CombatValidationMessage cvm = cs.process(cm);
-			activate();
-		} /* end if */
 	} /* end sendToInterpreter method */
 	
 	public void done() throws SlickException
 	{
 		/* This action should be performed when the character clicks done */
 		done = true;
-		ts.clearTargets();
-		done = true;
-		CombatMessage cm = new CombatMessage
-			(
-				character.getCharacterID(),
-				null, 
-				actionType,
-				action,
-				null
-			);
-		sendToInterpreter(cm); /* this should send a message to the CombatSystem telling it we are done */
+		
 	} /* end done method */
 	
 	/******************************************************************************
@@ -201,5 +172,14 @@ public abstract class Ability extends RenderComponent
 		this.subAction = subAction;
 	} /* end setOwnerCharacter method */
 	
+	public static void setCombatSystem(CombatSystem cs)
+	{
+		Ability.cs = cs;
+	} /* end setCombatSystem method */
+	
+	public static void setTargetingSystem(TargetingSystem ts)
+	{
+		Ability.ts = ts;
+	} /* end setCombatSystem method */
 	
 } /* end Ability class */

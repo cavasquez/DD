@@ -2,7 +2,7 @@ package DD.Character.Abilities.DefaultAbilities.Move;
 
 import org.newdawn.slick.SlickException;
 import DD.ActionBox.Dice;
-import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.TargetAbility;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.Move.*;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
@@ -16,7 +16,7 @@ import DD.Message.TargetSelectedMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class Move extends Ability
+public class Move extends TargetAbility
 {
 	/************************************ Class Methods *************************************/
 	public Move(int id) 
@@ -30,18 +30,7 @@ public class Move extends Ability
 	{ /* This method needs to be used in update */
 		if (character.getCurrentSpeed() <= 0)
 		{/* check to see that we can continue moving. In this case, we cannot */
-			
-			done = true;
-			CombatMessage cm = new CombatMessage
-					(
-						character.getCharacterID(),
-						null, 
-						actionType,
-						action,
-						null
-					);
-			
-			sendToInterpreter(cm);
+			done();
 		} /* end if */
 		else
 		{
@@ -73,7 +62,7 @@ public class Move extends Ability
 		
 		Dice dice = new Dice();
 		
-		int[] body = new int[I_Move.bodySize];
+		Integer[] body = new Integer[I_Move.bodySize];
 		body[I_Move.X_COORDINATE] = tsm.getPosition().x;
 		body[I_Move.Y_COORDINATE] = tsm.getPosition().y;
 		body[I_Move.ROLL] = dice.roll(Dice.DieSize.D20);	/* Roll a d20 just in case there is a special block that needs a check */

@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import DD.CombatSystem.Interpreter.*;
 import DD.CombatSystem.Interpreter.Move.I_Move;
 import DD.CombatSystem.Interpreter.Standard.*;
+import DD.CombatSystem.Interpreter.System.I_EndTurn;
+import DD.CombatSystem.Interpreter.System.I_PlaceCharacter;
+import DD.CombatSystem.Interpreter.System.I_RemoveCharacter;
+import DD.CombatSystem.Interpreter.System.I_StartCombatPhase;
 import DD.MapTool.Map;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 import DD.Message.Message;
+import DD.Network.NetworkSystem;
+import DD.System.DDSystem;
 import DD.Character.*;
 
 /*****************************************************************************************************
@@ -25,22 +31,28 @@ import DD.Character.*;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class CombatSystem 
+public class CombatSystem
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;
 	public static enum Action
 	{
-		STANDARD_ATTACK (I++),
-		MOVE(I++),
-		END_ACTION(I++);
+		STANDARD_ATTACK (I++, "Images/CombatSystem/StandardAttack.png"),
+		MOVE(I++, "Images/CombatSystem/Move.png"),
+		END_ACTION(I++, "Images/CombatSystem/EndAction.png"),
+		START_COMBAT_PHASE(I++, "Images/CombatSystem/StartCombatPhase.png"),
+		END_TURN(I++, "Images/CombatSystem/EndTurn.png"),
+		PLACE_CHARACTER(I++, "Images/CombatSystem/PlaceCharacter.png"),
+		REMOVE_CHARACTER(I++, "Images/CombatSystem/RemoveCharacter.png");
 		
 		public final int index;
+		public final String image;
 		public static final int NUM_OF_INTERPRETERS = I;
 		
-		Action (int index)
+		Action (int index, String image)
 		{
 			this.index = index;
+			this.image = image;
 		} /* end TargetCount index */
 		
 	} /* end Action enum */
@@ -53,24 +65,33 @@ public class CombatSystem
 		IMMEDIATE,
 		MOVE,
 		STANDARD,
-		SWIFT;
+		SWIFT,
+		SYSTEM;
 	} /* end ActionTypes enum */
 	
 	/************************************ Class Attributes *************************************/
-	static private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
-	static private Map map;										/* The game map that may need to be modified. */
-	static private CombatInterpreter[] system;							/* The core of CombatSystem */					
+	private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
+	private Map map;										/* The game map that may need to be modified. */
+	private static CombatInterpreter[] system;					/* The core of CombatSystem */
+	private int turn;											/* the current turn count */
+	private ArrayList<Integer> order;							/* The order of  */
+	private NetworkSystem ns;
 	
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
-	{
-		if(characterList == null) characterList = new ArrayList<DDCharacter>();
+	{	
+		characterList = new ArrayList<DDCharacter>();
+		order = new ArrayList<Integer>();
 		system = new CombatInterpreter[Action.NUM_OF_INTERPRETERS];
 		
 		/* First, we need to create the system */
 		system[Action.STANDARD_ATTACK.index] = new I_StandardAttack();
 		system[Action.MOVE.index] = new I_Move();
 		system[Action.END_ACTION.index] = new I_EndAction();
+		system[Action.START_COMBAT_PHASE.index] = new I_StartCombatPhase();
+		system[Action.END_TURN.index] = new I_EndTurn();
+		system[Action.PLACE_CHARACTER.index] = new I_PlaceCharacter();
+		system[Action.REMOVE_CHARACTER.index] = new I_RemoveCharacter();
 	} /* end CombatSystem constructor */
 	
 	public CombatValidationMessage process(CombatMessage cm)
@@ -128,7 +149,7 @@ public class CombatSystem
 		system[cm.getRequest().index].interpret(cm);
 	} /* end interpret method */
 	
-	public static boolean characterExists(int characterID)
+	public boolean characterExists(int characterID)
 	{/* check to see if a character with the provided ID exists */
 		boolean found = false;
 		int index = 0;
@@ -144,20 +165,44 @@ public class CombatSystem
 		return(found);
 	} /* end characterExists method */
 	
-	public static void addCharacter(DDCharacter character)
+	public void addCharacter(DDCharacter character)
 	{
 		characterList.add(character);
 	} /* end addCharacter method */
 	
-	public void endAbility()
+	public void removeCharacter(DDCharacter character)
 	{
-		
-	} /* end endAbility method */
+		characterList.remove(character);
+	} /* end removeCharacter */
+	
+	public void removeCharacter(int id)
+	{
+		removeCharacter(getCharacter(id));
+	} /* end removeCharacter */
+	
+	public void addToOrder(int id, int place)
+	{
+		/* Add the new character to the provided place in the order */
+		/* Check to make sure the id is not placed out of bounds */
+		if(place > order.size()) order.add(id);
+		else order.add(place, id);
+	} /* end addToOrder method */
+	
+	public void addToOrder(int id)
+	{
+		/* Place the new character at the "end" of the list */
+		order.add(0, id);
+	} /* end addToOrder method */
+	
+	public void removeFromOder(Integer id)
+	{
+		order.remove(id);
+	} /* end removeFromOrder */
 	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public static DDCharacter getCharacter(int characterID)
+	public DDCharacter getCharacter(int characterID)
 	{/* return character with provided characterID */
 		DDCharacter returner = null;
 		int index = 0;
@@ -174,17 +219,53 @@ public class CombatSystem
 		return (returner);
 	} /* end getCharacter method */
 	
-	public static Map getMap()
+	public Map getMap()
 	{
 		return map;
 	} /* end getMap method */
 	
+	public DDCharacter[] getCharacterList()
+	{
+		return characterList.toArray(new DDCharacter[characterList.size()]);
+	} /* end getCharacterList method */
+	
+	public int getTurn()
+	{
+		return turn;
+	} /* end getTurn method */
+	
+	public ArrayList<Integer> getOrder()
+	{
+		return order;
+	} /* end getOrder method */
+	
+	public int getNetID()
+	{
+		/* returns network id */
+		return ns.getNetID();
+	} /* end getNetID method */
+	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/
-	public static void setMap(Map map)
+	public void setMap(Map map)
 	{
-		CombatSystem.map = map;
+		this.map = map;
 	} /* end setMap method */
+	
+	public void setTurn(int turn)
+	{
+		this.turn= turn;
+	} /* end setTurn method*/
+	
+	public void setOrder(ArrayList<Integer> order)
+	{
+		this.order = order;
+	} /* end setOrder method */
+	
+	public void setNetworkSystem(NetworkSystem ns)
+	{
+		this.ns = ns;
+	} /* end setNetworkSystem method */
 	
 } /* end CombatSystem class */
