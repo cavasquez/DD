@@ -10,6 +10,7 @@ import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.MessageQueue;
 import DD.Network.Network;
+import DD.Network.NetworkInterface;
 import DD.Network.Client.ClientSystem;
 import DD.Network.Server.Interpreter.I_ChatMessage;
 import DD.Network.Server.Interpreter.I_ClientListenerReadyMessage;
@@ -28,14 +29,12 @@ import DD.Network.Server.Interpreter.ServerInterpreter;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class ServerSystem implements Network
+public class ServerSystem extends Network implements NetworkInterface 
 {	
 	/************************************ Class Attributes *************************************/
 	private ClientTable clientList;
 	private ServerInterpreter[] system = null;
 	private int clientID;						/* Unique ID to be assigned to clients */
-	@SuppressWarnings("unused")
-	private InetAddress serverIP;
 	private ListenerSpawner spawn;
 	
 	/************************************ Class Methods *************************************/
@@ -229,28 +228,6 @@ public class ServerSystem implements Network
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	public void setServerIP(InetAddress serverIP)
-	{
-		this.serverIP = serverIP;
-	} /* end setServerIP method */
-	
-	public boolean setServerIP(String ip)
-	{
-		boolean returner = false;
-		try {
-			setServerIP(InetAddress.getByName(ip));
-			returner = true;
-		} /* end try */
-		catch (UnknownHostException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /* end catch */
-		
-		return returner;
-	} /* end setServerIP method */
-
-
 	@Override
 	public void setCombatSystem(CombatSystem cs) 
 	{

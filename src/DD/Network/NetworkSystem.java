@@ -6,8 +6,6 @@ import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.Client.ClientSystem;
 import DD.Network.Server.ServerSystem;
-import DD.System.DDSystem;
-
 
 /*****************************************************************************************************
 * NetworkSystem will create a singleton and be the interface through which GameSystem and ChatSystem 
@@ -17,7 +15,7 @@ import DD.System.DDSystem;
 * @author Carlos Vasquez
 ******************************************************************************************************/
 
-public class NetworkSystem implements Network
+public class NetworkSystem extends Network implements NetworkInterface 
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;
@@ -47,7 +45,6 @@ public class NetworkSystem implements Network
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
-	@Override
 	public boolean getMessage(int listenerID, NetworkMessage message) 
 	{ /* Get message from client. (This is how client passes messages to NetworkSyste/ServerSystem to interpret). */
 		return network.getMessage(listenerID, message);
@@ -70,19 +67,16 @@ public class NetworkSystem implements Network
 		return id;
 	} /* end getUserID */
 	
-	@Override
 	public void start() 
 	{
 		network.start();
 	} /* end start method */
 
-	@Override
 	public void stop() 
 	{
 		network.stop();
 	} /* end stop method */
 
-	@Override
 	public void terminate() 
 	{
 		network.terminate();
@@ -107,24 +101,15 @@ public class NetworkSystem implements Network
 	} /* end setNetworkType */
 
 	@Override
-	public boolean setServerIP(String ip) {
-		return false;
-		// TODO Auto-generated method stub
-		
-	} /* end setServerIP method */
-
-	@Override
 	public void setCombatSystem(CombatSystem cs) 
 	{
-		// TODO Auto-generated method stub
-		
+		network.setCombatSystem(cs);		
 	} /* end setCombatSystem method */
 
 	@Override
 	public void setChatSystem(ChatSystem chat) 
 	{
-		// TODO Auto-generated method stub
-		
+		network.setChatSystem(chat);		
 	} /* end setChatSystem method */
 	
 } /* end Network class */

@@ -22,7 +22,7 @@ public abstract class Listener extends NetworkSocket
 		super(socket);
 	} /* end Listener constructor */
 	
-	public void run() {} /* end run method */
+	public abstract void run();
 	
 	protected NetworkMessage getSocketMessage()
 	{
@@ -34,14 +34,17 @@ public abstract class Listener extends NetworkSocket
 		} /* end try */
 		catch(IOException e)
 		{
+			System.out.println("IOException in Listener");
 			e.printStackTrace();
 		} /* end catch */
 		catch(ClassNotFoundException e)
 		{
+			System.out.println("ClassNotFoundException in Listener");
 			e.printStackTrace();
 		} /* end catch */
 		
 		return(message);
 	} /* end getSocketMessage method */
+
 
 } /* end Listener class */

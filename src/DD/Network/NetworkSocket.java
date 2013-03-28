@@ -31,7 +31,7 @@ public abstract class NetworkSocket extends Thread
 	{
 		super("DDSocketThread" + Integer.toHexString(nextID++));
 		this.socket = socket;
-		this.socketID = nextID;
+		this.socketID = nextID-1;
 		this.done = false;
 		this.working = true;
 	} /* end Server constructor */

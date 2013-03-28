@@ -1,6 +1,8 @@
 package DD.Network.Client;
 
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 
 import DD.Chat.ChatSystem;
@@ -9,6 +11,7 @@ import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.MessageQueue;
 import DD.Network.Network;
+import DD.Network.NetworkInterface;
 import DD.Network.Client.Interpreter.*;
 
 /*****************************************************************************************************
@@ -20,7 +23,7 @@ import DD.Network.Client.Interpreter.*;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class ClientSystem implements Network
+public class ClientSystem extends Network implements NetworkInterface 
 {	
 	/************************************ Class Attributes *************************************/
 	private PeerTable peerList;
@@ -45,7 +48,6 @@ public class ClientSystem implements Network
 		system[Message.NEW_LISTENER_MESSAGE] = new I_NewListenerMessage();
 		system[Message.ADD_USER_MESSAGE] = new I_AddUserMessage();
 		
-
 	} /* end ServerSystem constructor */
 	
 	public void interpret(int listenerID, NetworkMessage message)
@@ -88,7 +90,16 @@ public class ClientSystem implements Network
 	@Override
 	public void start() 
 	{
-		/* Start a sender to attempt to connect to the server */
+		try 
+		{
+			sender = new ClientSender(new Socket(serverIP, Network.PORT));
+		} /* end try */
+		catch (IOException e) 
+		{
+			/* failure to connect */
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
 		
 	} /* end start method */
 

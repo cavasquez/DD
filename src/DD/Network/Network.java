@@ -1,54 +1,61 @@
 package DD.Network;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import DD.Chat.ChatSystem;
 import DD.CombatSystem.CombatSystem;
-import DD.Message.Message;
-import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
-* Network will be an interface through which GameSystem, ChatSystem and any other System
-* will be able to communicate with ClientSystem or ServerSystem. It will also specify the methods
-* and attributes that ClientSystem and ServerSystem will need to support.
-* 
-* sendMessage() will be used by all the Systems to give NetworkSystem a message to send to the Client/
-* Server.
-* 
-* getMessage() will be used by the Socket threads to give NetworkSystem a NetworkSystem to interpret
-* and (if Server) send to all the other clients.
+* Network will contain all network related constants and provide some of the basic methods used by
+* ServerSystem, NetworkSystem, and ClientSystem
 * 
 * @author Carlos Vasquez
 ******************************************************************************************************/
 
-public interface Network
-{  
+public abstract class Network implements NetworkInterface
+{
 	/************************************ Class Constants *************************************/
 	public static final int EVERYONE = -1;		/* a message sent to EVERYONE will be to -1 */
 	public static final int GM_USER_ID = -2;	/* GM (Server) will always have an ID of -1 */
 	public static final int SELF = -3;			/* Send message to self (for Clients) */
 	public static final int PORT = 8080;		/* Port that ServerSocket connects to */	
 
+	/************************************ Class Attributes *************************************/
+	protected InetAddress serverIP;
+	protected CombatSystem cs;
+	protected ChatSystem chat;
 	
-	/************************************ Class Methods *************************************/
-	/* Send message on part of some part of the system (ChatSystem, CombatSystem, etc.) */
-	public boolean sendMessage(int sender, int receiver, Message message);
+	/************************************ Class Methods*************************************/
+	public void setServerIP(InetAddress serverIP)
+	{
+		this.serverIP = serverIP;
+	} /* end setServerIP method */
 	
-	/* Get message from server or client */
-	public boolean getMessage(int listenerID, NetworkMessage message);
+	public boolean setServerIP(String ip)
+	{
+		boolean returner = false;
+		try {
+			setServerIP(InetAddress.getByName(ip));
+			returner = true;
+		} /* end try */
+		catch (UnknownHostException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
+		
+		return returner;
+	} /* end setServerIP method */
 	
-	/* Get the server or client to start listeners or senders */
-	public void start();
+	public void setCombatSystem(CombatSystem cs)
+	{
+		this.cs = cs;
+	} /* end setCombatSystem method */
 	
-	/* Ideally for Server to stop ListenerSpawner */
-	public void stop();
+	public void setChatSystem(ChatSystem chat)
+	{
+		this.chat = chat;
+	} /* end setChatSystem method */
 	
-	/* For both client and server to clean up */
-	public void terminate();
-	
-	/* Set the IP of the network */
-	public boolean setServerIP(String ip);
-	
-	public void setCombatSystem(CombatSystem cs);
-	
-	public void setChatSystem(ChatSystem chat);
-	
-} /* end Network class  */
+} /* end Network class */

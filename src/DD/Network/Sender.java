@@ -11,7 +11,7 @@ import DD.Message.NetworkMessage;
 * @author Carlos Vasquez
 ******************************************************************************************************/
 
-public abstract class Sender extends NetworkSocket
+public class Sender extends NetworkSocket
 {
 	/************************************ Class Attributes *************************************/
 	protected static final int sleepTime = 200;		/* Time thread is spent sleeping */ 
@@ -22,8 +22,6 @@ public abstract class Sender extends NetworkSocket
 		super(socket);
 
 	} /* end Server constructor */
-	
-	public void run() {} /* end run method */
 	
 	protected void sendSocketMessage(NetworkMessage message)
 	{

@@ -43,5 +43,13 @@ public class ClientListener extends Listener
 		/* Done. Close streams. */
 		closeStreams();
 	} /* end run method */
+	
+	protected NetworkMessage test()
+	{
+		NetworkMessage returner = null;
+		createStreams();
+		returner = getSocketMessage();
+		return returner;
+	} /* end test method */
 
 } /* end ClientListener class */
