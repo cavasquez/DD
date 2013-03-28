@@ -128,7 +128,7 @@ public class CombatSystem
 		CombatValidationMessage returner = null;
 		
 		/* First, we check to make sure the message is of the correct type and the request is valid */
-		if(cm.getMessageType() != Message.COMBAT_MESSAGE)
+		if(cm.getMessageType() != Message.Type.COMBAT_MESSAGE)
 		{/* The message is invalid */
 			returner = new CombatValidationMessage(false, "Message is not a CombatMessage.");
 		} /* end if */

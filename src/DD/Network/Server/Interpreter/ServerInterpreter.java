@@ -17,7 +17,10 @@ public abstract class ServerInterpreter
 	protected static ServerSystem system;
 	
 	/************************************ Class Methods *************************************/
-	public void interpret(int listenerID, NetworkMessage message) {}
-	public void setServerSystem(ServerSystem system) {}
+	public abstract void interpret(int listenerID, NetworkMessage message);
+	public static void setServerSystem(ServerSystem system)
+	{
+		ServerInterpreter.system = system;
+	} /* end setServerSystem */
 
 } /* end ServerInterpreter class */

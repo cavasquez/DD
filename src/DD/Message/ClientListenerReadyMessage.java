@@ -16,7 +16,7 @@ public class ClientListenerReadyMessage extends Message
 	/************************************ Class Methods *************************************/
 	public ClientListenerReadyMessage(int playerID)
 	{
-		super(CLIENT_LISTENER_READY_MESSAGE);
+		super(Type.CLIENT_LISTENER_READY_MESSAGE);
 		this.playerID = playerID;
 	} /* end ClietnListenerReadyMessage constructor */
 	

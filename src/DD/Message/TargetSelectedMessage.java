@@ -18,7 +18,7 @@ public class TargetSelectedMessage extends Message
 	/************************************ Class Methods *************************************/
 	public TargetSelectedMessage(DDCharacter[] targets, Coordinate position)
 	{
-		super(Message.TARGET_SELECTED_MESSAGE);
+		super(Type.TARGET_SELECTED_MESSAGE);
 		this.targets = targets;
 		this.position = position;
 	} /* end TargetSelectedMessage constructor */

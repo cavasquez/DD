@@ -42,14 +42,14 @@ public class ServerSystem extends Network implements NetworkInterface
 	{
 		clientID = 0;
 		clientList = new ClientTable();
-		system = new ServerInterpreter[Message.NUM_OF_MESSAGES];
-		system[Message.COMBAT_MESSAGE] = new I_CombatMessage();
-		system[Message.CHAT_MESSAGE] = new I_ChatMessage();
-		system[Message.INITIAL_MESSAGE] = new I_InitialMessage();
-		system[Message.NEW_LISTENER_MESSAGE] = new I_NewListenerMessage();
-		system[Message.CLIENT_LISTENER_READY_MESSAGE] = new I_ClientListenerReadyMessage();
+		system = new ServerInterpreter[Message.Type.NUM_OF_MESSAGES];
+		system[Message.Type.COMBAT_MESSAGE.index] = new I_CombatMessage();
+		system[Message.Type.CHAT_MESSAGE.index] = new I_ChatMessage();
+		system[Message.Type.INITIAL_MESSAGE.index] = new I_InitialMessage();
+		system[Message.Type.NEW_LISTENER_MESSAGE.index] = new I_NewListenerMessage();
+		system[Message.Type.CLIENT_LISTENER_READY_MESSAGE.index] = new I_ClientListenerReadyMessage();
 		
-		system[Message.COMBAT_MESSAGE].setServerSystem(this);
+		ServerInterpreter.setServerSystem(this);
 		
 		/* TODO: get username from wherever it's made, and then:
 		 * addClient(Network.GEM_USER_ID, username, null); */
@@ -59,7 +59,7 @@ public class ServerSystem extends Network implements NetworkInterface
 	{
 		/* Assume all messages are of correct type and legally formatted.
 		 * In any case, messages are always given by the ServerListener */
-		system[message.getType()].interpret(listenerID, message);
+		system[message.getType().index].interpret(listenerID, message);
 	} /* end interpret */
 	
 	@Override
@@ -71,27 +71,24 @@ public class ServerSystem extends Network implements NetworkInterface
 		ArrayList<Client>clients = clientList.getClientList();
 		boolean sent = false;
 		
-		if (Message.messageExists(message))
-		{
-			if (receiver == Network.EVERYONE)
-			{/* send message to everyone */
-				for (Client client : clients)
-				{/* don't send it back to the server. in fact, you can't because it has no Server thread. */
-					if (client.clientID != Network.GM_USER_ID) (client.sender).sendMessage(send);
-				} /* end for loop */
-			} /* end if */
-			else
-			{ /* send to specific client */
-				
-				for (Client client : clients)
-				{
-					if (client.clientID == receiver) (client.sender).sendMessage(send);
-				} /* end for loop */
-			} /* end else */
-			
-			sent = true;
+		if (receiver == Network.EVERYONE)
+		{/* send message to everyone */
+			for (Client client : clients)
+			{/* don't send it back to the server. in fact, you can't because it has no Server thread. */
+				if (client.clientID != Network.GM_USER_ID) (client.sender).sendMessage(send);
+			} /* end for loop */
 		} /* end if */
+		else
+		{ /* send to specific client */
+			
+			for (Client client : clients)
+			{
+				if (client.clientID == receiver) (client.sender).sendMessage(send);
+			} /* end for loop */
+		} /* end else */
 		
+		sent = true;
+	
 		return sent;
 	} /* end sendMessage method */
 	
@@ -102,15 +99,12 @@ public class ServerSystem extends Network implements NetworkInterface
 		ArrayList<Client>clients = clientList.getClientList();
 		boolean sent = false;
 		
-		if (Message.messageExists(message))
-		{
-			for (Client client : clients)
-			{/* don't send it back to the server. in fact, you can't because it has no Server thread. */
-				if (client.clientID != Network.GM_USER_ID && client.clientID != exclude) (client.sender).sendMessage(send);
-			} /* end for loop */
-			sent = true;
-		} /* if */
-		
+		for (Client client : clients)
+		{/* don't send it back to the server. in fact, you can't because it has no Server thread. */
+			if (client.clientID != Network.GM_USER_ID && client.clientID != exclude) (client.sender).sendMessage(send);
+		} /* end for loop */
+		sent = true;
+
 		return sent;
 	} /* end sendMessage method */
 	
@@ -121,11 +115,11 @@ public class ServerSystem extends Network implements NetworkInterface
 		
 		if 
 		(
-			type == Message.COMBAT_MESSAGE ||
-			type == Message.CHAT_MESSAGE ||
-			type == Message.INITIAL_MESSAGE ||
-			type == Message.NEW_LISTENER_MESSAGE ||
-			type == Message.CLIENT_LISTENER_READY_MESSAGE
+			type == Message.Type.COMBAT_MESSAGE.index ||
+			type == Message.Type.CHAT_MESSAGE.index ||
+			type == Message.Type.INITIAL_MESSAGE.index ||
+			type == Message.Type.NEW_LISTENER_MESSAGE.index ||
+			type == Message.Type.CLIENT_LISTENER_READY_MESSAGE.index
 		)
 		{
 			valid = true;
@@ -208,7 +202,7 @@ public class ServerSystem extends Network implements NetworkInterface
 	{
 		boolean error = false;
 		/* get message from a client. Check for validity and if valid, interpret. */
-		if (validMessage(message.getType()) && message.getMessageType() == Message.NETWORK_MESSAGE) interpret(listenerID, message);
+		if (validMessage(message.getType().index) && message.getMessageType() == Message.Type.NETWORK_MESSAGE) interpret(listenerID, message);
 		else error = true;
 		
 		return error;

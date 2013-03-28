@@ -26,7 +26,7 @@ public class ClientListener extends Listener
 	public void run() 
 	{ 
 		/* Open stream */
-		createStreams(); 
+		if (input == null) createStreams(); 
 		
 		/* First, inform the client that a Listener was created  */
 		this.message = new NetworkMessage(Network.SELF, Network.SELF, new NewListenerMessage(this.socketID, this, this.socket.getInetAddress()));
@@ -43,12 +43,5 @@ public class ClientListener extends Listener
 		/* Done. Close streams. */
 		closeStreams();
 	} /* end run method */
-	
-	protected NetworkMessage test()
-	{
-		NetworkMessage returner = null;
-		returner = getSocketMessage();
-		return returner;
-	} /* end test method */
 
 } /* end ClientListener class */

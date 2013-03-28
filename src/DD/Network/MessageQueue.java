@@ -26,7 +26,7 @@ import DD.Message.QueueMessage;
 
 public class MessageQueue extends Thread
 {
-	/************************************ Class Attributes *************************************/
+	/************************************ Class Constants *************************************/
 	public static final int sleepTime = 100;		/* Thread sleeps for the provided milliseconds */  
 	
 	/************************************ Class Attributes *************************************/
@@ -62,7 +62,7 @@ public class MessageQueue extends Thread
 			
 			hasMessage = false;	/* flag to check that queue has message */
 			try {
-				sleep(sleepTime);
+				Thread.sleep(sleepTime);
 			} /* end try */
 			catch (InterruptedException e) 
 			{
@@ -77,7 +77,7 @@ public class MessageQueue extends Thread
 		
 	} /* end run method */
 	
-	public synchronized void enqueuMessage(int listenerID, NetworkMessage message)
+	public synchronized void enqueuMessage(int listenerID, NetworkMessage message) throws InterruptedException
 	{
 		/* enqueueMessage synchronizes access to the queue and provides threads a way
 		 * of putting messages into the queue */
@@ -85,7 +85,7 @@ public class MessageQueue extends Thread
 		hasMessage = true;
 	} /* end enqueueMessage method */
 	
-	public void close()
+	public void close() throws InterruptedException
 	{
 		messageQueue = null;
 		system = null;

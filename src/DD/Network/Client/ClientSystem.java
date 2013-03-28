@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-
 import DD.Chat.ChatSystem;
 import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
@@ -41,12 +40,12 @@ public class ClientSystem extends Network implements NetworkInterface
 	{
 		peerList = new PeerTable();
 		ClientInterpreter.setClientSystem(this);
-		system = new ClientInterpreter[Message.NUM_OF_MESSAGES];
-		system[Message.COMBAT_MESSAGE] = new I_CombatMessage();
-		system[Message.CHAT_MESSAGE] = new I_ChatMessage();
-		system[Message.INITIAL_MESSAGE] = new I_InitialMessage();
-		system[Message.NEW_LISTENER_MESSAGE] = new I_NewListenerMessage();
-		system[Message.ADD_USER_MESSAGE] = new I_AddUserMessage();
+		system = new ClientInterpreter[Message.Type.NUM_OF_MESSAGES];
+		system[Message.Type.COMBAT_MESSAGE.index] = new I_CombatMessage();
+		system[Message.Type.CHAT_MESSAGE.index] = new I_ChatMessage();
+		system[Message.Type.INITIAL_MESSAGE.index] = new I_InitialMessage();
+		system[Message.Type.NEW_LISTENER_MESSAGE.index] = new I_NewListenerMessage();
+		system[Message.Type.ADD_USER_MESSAGE.index] = new I_AddUserMessage();
 		
 	} /* end ServerSystem constructor */
 	
@@ -54,7 +53,7 @@ public class ClientSystem extends Network implements NetworkInterface
 	{
 		/* Assume all messages are of correct type and legally formatted.
 		 * In any case, messages are always given by the ClientListener */
-		system[message.getType()].interpret(message);
+		system[message.getType().index].interpret(message);
 	} /* end interpret */
 	
 	@Override
@@ -73,11 +72,11 @@ public class ClientSystem extends Network implements NetworkInterface
 		
 		if 
 		(
-			type == Message.COMBAT_MESSAGE ||
-			type == Message.CHAT_MESSAGE ||
-			type == Message.INITIAL_MESSAGE ||
-			type == Message.NEW_LISTENER_MESSAGE ||
-			type == Message.ADD_USER_MESSAGE
+			type == Message.Type.COMBAT_MESSAGE.index ||
+			type == Message.Type.CHAT_MESSAGE.index ||
+			type == Message.Type.INITIAL_MESSAGE.index ||
+			type == Message.Type.NEW_LISTENER_MESSAGE.index ||
+			type == Message.Type.ADD_USER_MESSAGE.index
 		)
 		{
 			valid = true;
@@ -136,7 +135,7 @@ public class ClientSystem extends Network implements NetworkInterface
 	{
 		boolean error = false;
 		/* get message from a client. Check for validity and if valid, interpret. */
-		if (validMessage(message.getType()) && message.getMessageType() == Message.NETWORK_MESSAGE) interpret(listenerID, message);
+		if (validMessage(message.getType().index) && message.getMessageType() == Message.Type.NETWORK_MESSAGE) interpret(listenerID, message);
 		else error = true;
 		
 		return error;

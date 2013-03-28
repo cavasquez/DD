@@ -12,6 +12,9 @@ import DD.Message.NetworkMessage;
 
 public abstract class NetworkSocket extends Thread
 {
+	/************************************ Class Constants *************************************/
+	public static final int sleepTime = 200;	/* Time for which thread will be asleep */
+	
 	/************************************ Class Attributes *************************************/
 	protected Socket socket = null;
 	protected int socketID;						/* Unique ID for thread */

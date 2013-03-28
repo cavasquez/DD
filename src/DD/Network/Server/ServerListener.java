@@ -27,7 +27,7 @@ public class ServerListener extends Listener
 	{ 
 		/* Before ServerListener does anything else, it must let ServerSystem know of it's existence. 
 		 * This is done by passing the message through MessageQueue. */
-		createStreams(); 
+		if (input == null) createStreams(); 
 		message = new NetworkMessage(NetworkSystem.GM_USER_ID, this.socketID, new NewListenerMessage(this.socketID, this, this.socket.getInetAddress()));
 		MessageQueue.getInstance().enqueuMessage(this.socketID, message);
 		

@@ -20,7 +20,7 @@ public class AddUserMessage extends Message
 	/************************************ Class Methods *************************************/
 	public AddUserMessage(int playerID, String username, InetAddress ip) 
 	{
-		super(Message.ADD_USER_MESSAGE);
+		super(Type.ADD_USER_MESSAGE);
 		this.playerID = playerID;
 		this.username = username;
 		this.ip = ip;

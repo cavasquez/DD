@@ -25,7 +25,7 @@ public class ChatMessage extends Message
 	/************************************ Class Methods *************************************/
 	public ChatMessage(int sender, int receiver, int action, String message) 
 	{
-		super(Message.CHAT_MESSAGE);
+		super(Type.CHAT_MESSAGE);
 		this.sender = sender;
 		this.receiver = receiver;
 		this.action = action;		/* Action to be performed in ChatSystem */

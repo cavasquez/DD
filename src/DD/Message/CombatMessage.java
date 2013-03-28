@@ -40,7 +40,7 @@ public class CombatMessage extends Message
 			Integer[] body
 	)
 	{
-		super(Message.COMBAT_MESSAGE);
+		super(Type.COMBAT_MESSAGE);
 		this.source = source;
 		this.target = target;
 		this.action = action;

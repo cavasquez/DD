@@ -17,7 +17,7 @@ public class QueueMessage extends Message
 	/************************************ Class Methods *************************************/
 	public QueueMessage(int listenerID, NetworkMessage message)
 	{
-		super(QUEUE_MESSAGE);
+		super(Type.QUEUE_MESSAGE);
 		this.listenerID = listenerID;
 		this.message = message;
 	} /* end QueueMessage constructor */

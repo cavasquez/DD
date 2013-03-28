@@ -17,7 +17,7 @@ public class CombatValidationMessage extends Message
 	/************************************ Class Methods *************************************/
 	public CombatValidationMessage(boolean valid, String error)
 	{
-		super(Message.COMBAT_VALIDATION_MESSAGE);
+		super(Type.COMBAT_VALIDATION_MESSAGE);
 		this.valid = valid;
 		this.error = error;
 		

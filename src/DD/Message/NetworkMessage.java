@@ -22,7 +22,7 @@ public class NetworkMessage extends Message
 	/************************************ Class Methods *************************************/
 	public NetworkMessage(int receiver, int sender, Message message)
 	{
-		super(Message.NETWORK_MESSAGE);
+		super(Type.NETWORK_MESSAGE);
 		this.receiver = receiver;
 		this.sender = sender;
 		this.message = message;
@@ -31,7 +31,7 @@ public class NetworkMessage extends Message
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
-	public int getType()
+	public Type getType()
 	{
 		return message.getMessageType();
 	} /* end getType */

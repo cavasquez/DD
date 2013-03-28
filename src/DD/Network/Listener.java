@@ -54,7 +54,7 @@ public abstract class Listener extends NetworkSocket
 	{
 		try 
 		{
-			input = new ObjectInputStream(socket.getInputStream());
+			if(input == null) input = new ObjectInputStream(socket.getInputStream());
 		} /* end try */ 
 		catch (IOException e) 
 		{
@@ -76,6 +76,11 @@ public abstract class Listener extends NetworkSocket
 		} /* end catch */
 		
 	} /* end closeServerSocket method */
+	
+	protected NetworkMessage test()
+	{
+		return getSocketMessage();
+	}
 
 
 } /* end Listener class */

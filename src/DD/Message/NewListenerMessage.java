@@ -22,7 +22,7 @@ public class NewListenerMessage extends Message
 	/************************************ Class Methods *************************************/
 	public NewListenerMessage(int listenerID, Listener listener, InetAddress ip)
 	{
-		super(NEW_LISTENER_MESSAGE);
+		super(Type.NEW_LISTENER_MESSAGE);
 		this.listenerID = listenerID;
 		this.listener = listener;
 		this.ip = ip;

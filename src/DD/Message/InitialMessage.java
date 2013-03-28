@@ -18,7 +18,7 @@ public class InitialMessage extends Message
 	/************************************ Class Methods *************************************/
 	public InitialMessage(String username, boolean valid, Integer id)
 	{
-		super(Message.INITIAL_MESSAGE);
+		super(Type.INITIAL_MESSAGE);
 		this.username = username;
 		this.valid = valid;
 		this.id = id;

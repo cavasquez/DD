@@ -36,7 +36,7 @@ public class ChooseTargetMessage extends Message
 		TargetAbility caller
 	) 
 	{
-		super(Message.CHOOSE_TARGET_MESSAGE);
+		super(Type.CHOOSE_TARGET_MESSAGE);
 		this.targetCount = targetCount;
 		this.targetShape = targetShape;
 		this.targetSelection = targetSelection;
