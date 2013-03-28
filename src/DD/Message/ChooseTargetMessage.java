@@ -11,8 +11,9 @@ import DD.Character.Abilities.TargetAbility;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class ChooseTargetMessage extends Message
+public class ChooseTargetMessage extends Message 
 {
+	private static final long serialVersionUID = -343710984491995095L;
 	/************************************ Class Attributes *************************************/
 	private TargetingSystem.TargetCount targetCount = null;
 	private TargetingSystem.TargetShape targetShape = null;

@@ -47,7 +47,6 @@ public class ClientListener extends Listener
 	protected NetworkMessage test()
 	{
 		NetworkMessage returner = null;
-		createStreams();
 		returner = getSocketMessage();
 		return returner;
 	} /* end test method */

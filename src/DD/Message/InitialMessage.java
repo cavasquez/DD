@@ -9,6 +9,7 @@ package DD.Message;
 
 public class InitialMessage extends Message
 {
+	private static final long serialVersionUID = 2758272292609763739L;
 	/************************************ Class Attributes *************************************/
 	private String username;
 	private boolean valid; 

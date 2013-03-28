@@ -1,8 +1,8 @@
 package DD.Network;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.Socket;
-
 import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
@@ -16,10 +16,14 @@ import DD.Message.NetworkMessage;
 
 public abstract class Listener extends NetworkSocket
 {	
+	/************************************ Class Attributes *************************************/
+	protected ObjectInputStream input = null;
+	
 	/************************************ Class Methods *************************************/
 	public Listener(Socket socket)
 	{
 		super(socket);
+		createStreams();
 	} /* end Listener constructor */
 	
 	public abstract void run();
@@ -45,6 +49,33 @@ public abstract class Listener extends NetworkSocket
 		
 		return(message);
 	} /* end getSocketMessage method */
+	
+	protected void createStreams()
+	{
+		try 
+		{
+			input = new ObjectInputStream(socket.getInputStream());
+		} /* end try */ 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
+	} /* end createStreams method */
+	
+	protected void closeStreams()
+	{
+		try 
+		{
+			input.close();
+		} /* end try */ 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
+		
+	} /* end closeServerSocket method */
 
 
 } /* end Listener class */

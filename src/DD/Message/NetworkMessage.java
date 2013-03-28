@@ -13,6 +13,7 @@ package DD.Message;
 
 public class NetworkMessage extends Message
 {
+	private static final long serialVersionUID = 82370103598007846L;
 	/************************************ Class Attributes *************************************/
 	private Message message;
 	private int sender;

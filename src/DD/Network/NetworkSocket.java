@@ -1,10 +1,6 @@
 package DD.Network;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-
 import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
@@ -18,8 +14,6 @@ public abstract class NetworkSocket extends Thread
 {
 	/************************************ Class Attributes *************************************/
 	protected Socket socket = null;
-	protected ObjectInputStream input = null;
-	protected ObjectOutputStream output = null;
 	protected int socketID;						/* Unique ID for thread */
 	protected boolean done;						/* Thread is done */
 	protected boolean working;					/* flag stating that socket is working */
@@ -36,42 +30,19 @@ public abstract class NetworkSocket extends Thread
 		this.working = true;
 	} /* end Server constructor */
 	
-	public void run() {} /* end run method */
-	
-	protected void createStreams()
-	{
-		try 
-		{
-			input = new ObjectInputStream(socket.getInputStream());
-			output = new ObjectOutputStream(socket.getOutputStream());
-		} /* end try */ 
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /* end catch */
-	} /* end createStreams method */
-
-	protected void closeStreams()
-	{
-		try 
-		{
-			input.close();
-			output.close();
-		} /* end try */ 
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /* end catch */
-		
-	} /* end closeServerSocket method */
-
 	public void close()
 	{
 		/* thread is done */
 		done = true;
 	} /* end close method */
+	
+	public abstract void run();
+	
+	protected abstract void createStreams();
+
+	protected abstract void closeStreams();
+
+	
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

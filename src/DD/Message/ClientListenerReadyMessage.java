@@ -9,6 +9,7 @@ package DD.Message;
 
 public class ClientListenerReadyMessage extends Message
 {
+	private static final long serialVersionUID = 1025917258358821686L;
 	/************************************ Class Attributes *************************************/
 	protected int playerID;
 	

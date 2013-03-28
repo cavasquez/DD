@@ -1,6 +1,7 @@
 package DD.Network.Client;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -15,6 +16,7 @@ public class TestClientSender
 		ClientSender sender = null;
 		try {
 			ip = InetAddress.getByName("10.69.5.11");
+			ip = InetAddress.getLocalHost();
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,6 +32,7 @@ public class TestClientSender
 		ChatMessage chat;
 		chat = new ChatMessage(0, 0, 0, "hey");
 		message = new NetworkMessage(0,0, chat);
+		System.out.println("ser? " + Serializable.class.isInstance(message));
 		sender.sendMessage(message);
 	}
 }

@@ -9,6 +9,7 @@ package DD.Message;
 
 public class QueueMessage extends Message
 {
+	private static final long serialVersionUID = 1246287758811541644L;
 	/************************************ Class Attributes *************************************/
 	private int listenerID;
 	private NetworkMessage message = null;

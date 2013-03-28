@@ -10,6 +10,7 @@ import DD.Character.DDCharacter;
 
 public class TargetSelectedMessage extends Message
 {
+	private static final long serialVersionUID = -5985019242948735601L;
 	/************************************ Class Attributes *************************************/
 	private DDCharacter[] targets;
 	private Coordinate position;	/* position of single target */

@@ -1,5 +1,7 @@
 package DD.Message;
 
+import java.io.Serializable;
+
 /*****************************************************************************************************
  * Message will be used to subclass into various messages that will need to be sent through the network.
  * Providing this class will allow for ease of storage in the NetworkMessage.
@@ -10,8 +12,9 @@ package DD.Message;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class Message 
+public class Message implements Serializable
 {
+	private static final long serialVersionUID = 1L;
 	/************************************ Class Constants *************************************/
 	private static int I = 0;
 	public static enum Type

@@ -13,6 +13,7 @@ import DD.Network.Listener;
 
 public class NewListenerMessage extends Message
 {
+	private static final long serialVersionUID = 1730504210099095543L;
 	/************************************ Class Attributes *************************************/
 	private int listenerID;
 	private Listener listener = null;

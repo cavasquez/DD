@@ -1,5 +1,7 @@
 package DD.Network;
 
+import DD.Message.NetworkMessage;
+
 /*****************************************************************************************************
  * MessageInterpreter will be used by ServerSystem and ClientSystem to interpret every message. 
  * CombatInterpreter will have two methods: validate and interpret. 
