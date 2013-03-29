@@ -41,12 +41,18 @@ public class TestDriver {
 //					mssg = bufferedReader.readLine();
 				
 				System.out.println("Waiting on listener");
-				while(listener.isAlive());
+				
+				mssg = bufferedReader.readLine();
+//					listener.interrupt();
+				listener.close();
+				
 				System.out.println("Listener is done");
+				System.out.println("is alive? " + listener.isAlive());
 				//System.out.println(listener.);
 					
 				
-		
+				
+				
 				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

@@ -52,7 +52,7 @@ public class TestClientListener extends ClientListener
 			{
 				NetworkMessage nm;
 				nm = getSocketMessage();
-				while(nm != null && !done)
+				while(nm != null )
 				{
 					System.out.println("input: " + input);
 					System.out.println("message received");
@@ -64,7 +64,10 @@ public class TestClientListener extends ClientListener
 						System.out.println("done is true");
 						done = true;
 					}
-					else nm = getSocketMessage();
+					
+						nm = getSocketMessage();
+					
+				
 				}
 				
 				try {
@@ -75,7 +78,7 @@ public class TestClientListener extends ClientListener
 				}
 				
 			}
-			
+			System.out.println("Thread is done!");
 //		
 		} /* end done loop */
 		
@@ -109,7 +112,7 @@ public class TestClientListener extends ClientListener
 					String mssg = "";
 					
 					
-					message = listener.test();
+					message = listener.getSocketMessage();
 					System.out.println("message received");
 					System.out.println("message " + message);
 					chat = (ChatMessage) message.getMessage();

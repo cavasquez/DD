@@ -13,7 +13,7 @@ import DD.Message.NetworkMessage;
 
 public class TestClientSender
 {
-	public static void main(String[] args)
+	public static void main(String[] args) throws InterruptedException
 	{
 		InetAddress ip = null;
 		ClientSender sender = null;
@@ -96,6 +96,14 @@ public class TestClientSender
 			try {
 				Thread.sleep(1000);
 			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+			try {
+				mssg = bufferedReader.readLine();
+			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

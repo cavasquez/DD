@@ -37,6 +37,7 @@ public abstract class NetworkSocket extends Thread
 	{
 		/* thread is done */
 		done = true;
+		closeStreams();
 	} /* end close method */
 	
 	public abstract void run();

@@ -26,7 +26,42 @@ public abstract class Listener extends NetworkSocket
 		createStreams();
 	} /* end Listener constructor */
 	
-	public abstract void run();
+	protected abstract void alertNetwork();
+	
+	public void run()
+	{
+		/* Open stream */
+		if (input == null) createStreams(); 
+		
+		/* First, inform the NetworkSystem that a Listener was created  */
+		alertNetwork();
+		
+		/* Now, listen for messages from the Server */
+		while (!done)
+		{/* Threads process */
+			this.message = getSocketMessage();
+			while(this.message != null)
+			{
+				MessageQueue.getInstance().enqueuMessage(this.socketID, message);
+				this.message = getSocketMessage();
+			} /* end message null loop */
+			
+			/* While the socket is doing nothing, sleep to preserver resources */
+			try 
+			{
+				Thread.sleep(sleepTime);
+			} /* end try */ 
+			catch (InterruptedException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} /* end catch */
+			
+		} /* end done loop */
+		
+		/* Done. Close streams. */
+		closeStreams();
+	} /* end run method */
 	
 	protected NetworkMessage getSocketMessage()
 	{
@@ -39,7 +74,9 @@ public abstract class Listener extends NetworkSocket
 		catch(IOException e)
 		{
 			System.out.println("IOException in Listener");
-			e.printStackTrace();
+			//e.printStackTrace();
+			System.out.println("Disconnected from sender");
+			return(null);
 		} /* end catch */
 		catch(ClassNotFoundException e)
 		{
@@ -76,11 +113,6 @@ public abstract class Listener extends NetworkSocket
 		} /* end catch */
 		
 	} /* end closeServerSocket method */
-	
-	protected NetworkMessage test()
-	{
-		return getSocketMessage();
-	}
 
 
 } /* end Listener class */

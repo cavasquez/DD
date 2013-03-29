@@ -23,25 +23,10 @@ public class ClientListener extends Listener
 		super(socket);
 	} /* end ClientListener constructor */
 	
-	public void run() 
-	{ 
-		/* Open stream */
-		if (input == null) createStreams(); 
-		
-		/* First, inform the client that a Listener was created  */
+	protected void alertNetwork()
+	{
 		this.message = new NetworkMessage(Network.SELF, Network.SELF, new NewListenerMessage(this.socketID, this, this.socket.getInetAddress()));
 		MessageQueue.getInstance().enqueuMessage(this.socketID, message);
-		
-		/* Now, listen for messages from the Server */
-		while (!done)
-		{/* Threads process */
-			this.message = getSocketMessage();
-			MessageQueue.getInstance().enqueuMessage(this.socketID, message);
-			
-		} /* end done loop */
-		
-		/* Done. Close streams. */
-		closeStreams();
-	} /* end run method */
+	} /* end alertNetwork method */
 
 } /* end ClientListener class */
