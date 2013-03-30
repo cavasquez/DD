@@ -76,10 +76,6 @@ public class Map extends Entity implements Serializable{
 	 */
 	
 	public void writeMeHelper(){
-//		defImage = null;
-//		spriteSheet = null;
-//		floorSprite = null;
-//		floorImage = null;
 		
 		Stack<Objects> stackHelper = new Stack<Objects>();
 		int[][] stackSize = new int[mapSize][mapSize];
@@ -241,6 +237,7 @@ public class Map extends Entity implements Serializable{
 		objectsStack[x][y].push(obj);
 		updateComponentList();		
 	}
+	
 	public void placeObjectHelper(int x, int y, Objects obj){
 		//check if there is an objects with the same priority. if so remove it.
 		Objects[] t = objectsStack[x][y].toArray(); //generates a sorted array based on the given priority queue
