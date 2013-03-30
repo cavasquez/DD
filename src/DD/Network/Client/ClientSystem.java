@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import DD.Chat.ChatSystem;
 import DD.CombatSystem.CombatSystem;
+import DD.Message.InitialMessage;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.MessageQueue;
@@ -39,7 +40,7 @@ public class ClientSystem extends Network implements NetworkInterface
 	public ClientSystem() 
 	{
 		peerList = new PeerTable();
-		ClientInterpreter.setClientSystem(this);
+		
 		system = new ClientInterpreter[Message.Type.NUM_OF_MESSAGES];
 		system[Message.Type.COMBAT_MESSAGE.index] = new I_CombatMessage();
 		system[Message.Type.CHAT_MESSAGE.index] = new I_ChatMessage();
@@ -89,15 +90,33 @@ public class ClientSystem extends Network implements NetworkInterface
 	@Override
 	public void start() 
 	{
+		/* First, get a listener ready for contact with the server */
 		try 
 		{
-			sender = new ClientSender(new Socket(serverIP, Network.PORT));
+			ListenerSpawner spawner = new ListenerSpawner();
+			spawner.start();
+			
+			while(spawner.getSocketReady() != true)
+			{
+				/* do nothing until listener is set up */
+				try 
+				{
+					Thread.sleep(100);
+				} /* end try */
+				catch (InterruptedException e) 
+				{
+					System.out.println("interrupted in ClientSysetm at start while waiting for listener");
+				} /* end catch */
+			} /* end while loop */
+			
+			/* Now try to connect to server */
+			sender = new ClientSender(new Socket(serverIP, Network.SERVER_PORT));
+			sender.sendMessage(new NetworkMessage(Network.GM_USER_ID, 0, new InitialMessage(username, false, clientID)));
 		} /* end try */
 		catch (IOException e) 
 		{
 			/* failure to connect */
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Failed to connecto to server");
 		} /* end catch */
 		
 	} /* end start method */

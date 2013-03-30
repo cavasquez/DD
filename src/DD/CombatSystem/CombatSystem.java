@@ -15,6 +15,7 @@ import DD.Message.Message;
 import DD.Network.NetworkSystem;
 import DD.System.DDSystem;
 import DD.Character.*;
+import DD.Character.Abilities.Ability;
 
 /*****************************************************************************************************
  * CombatSystem will be the controller for DD combat. It will take messages from ActionBox (the player)
@@ -82,6 +83,8 @@ public class CombatSystem
 	{	
 		characterList = new ArrayList<DDCharacter>();
 		order = new ArrayList<Integer>();
+		
+		/* Create the Interpreters */
 		system = new CombatInterpreter[Action.NUM_OF_INTERPRETERS];
 		
 		/* First, we need to create the system */

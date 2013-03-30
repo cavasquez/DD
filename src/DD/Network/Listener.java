@@ -20,9 +20,11 @@ public abstract class Listener extends NetworkSocket
 	protected ObjectInputStream input = null;
 	
 	/************************************ Class Methods *************************************/
-	public Listener(Socket socket)
+	public Listener(Socket socket) 
 	{
 		super(socket);
+		input = null;
+		done = false;
 		createStreams();
 	} /* end Listener constructor */
 	

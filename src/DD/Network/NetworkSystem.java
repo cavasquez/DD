@@ -5,7 +5,9 @@ import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.Client.ClientSystem;
+import DD.Network.Client.Interpreter.ClientInterpreter;
 import DD.Network.Server.ServerSystem;
+import DD.Network.Server.Interpreter.ServerInterpreter;
 
 /*****************************************************************************************************
 * NetworkSystem will create a singleton and be the interface through which GameSystem and ChatSystem 
@@ -15,7 +17,7 @@ import DD.Network.Server.ServerSystem;
 * @author Carlos Vasquez
 ******************************************************************************************************/
 
-public class NetworkSystem extends Network implements NetworkInterface 
+public class NetworkSystem extends Network
 {
 	/************************************ Class Constants *************************************/
 	private static int I = 0;
@@ -31,10 +33,7 @@ public class NetworkSystem extends Network implements NetworkInterface
 	private Network network;
 	
 	/************************************ Class Methods *************************************/
-	public NetworkSystem() 
-	{
-		MessageQueue.getInstance().setNetworkSystem(this);
-	} /* end NetworkSystem constructor */
+	public NetworkSystem() {} /* end NetworkSystem constructor */
 	
 	@Override
 	public boolean sendMessage(int sender, int receiver, Message message)
@@ -46,7 +45,7 @@ public class NetworkSystem extends Network implements NetworkInterface
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/
 	public boolean getMessage(int listenerID, NetworkMessage message) 
-	{ /* Get message from client. (This is how client passes messages to NetworkSyste/ServerSystem to interpret). */
+	{ /* Get message from sender. (This is how senders pass messages for ClientSystem/ServerSystem to interpret). */
 		return network.getMessage(listenerID, message);
 		
 	} /* end getMessage method */
@@ -69,12 +68,29 @@ public class NetworkSystem extends Network implements NetworkInterface
 	
 	public void start() 
 	{
+		if (network == null)
+		{
+			switch(networkType)
+			{
+				case SERVER:
+					network = new ServerSystem();
+					ServerInterpreter.setServerSystem((ServerSystem)network);
+					ClientInterpreter.setClientSystem(null);
+					break;
+				case CLIENT:
+					network = new ClientSystem();
+					ServerInterpreter.setServerSystem(null);
+					ClientInterpreter.setClientSystem((ClientSystem)network);
+					break;
+			} /* end switch */
+		} /* end if */
 		network.start();
 	} /* end start method */
 
 	public void stop() 
 	{
 		network.stop();
+		network = null;
 	} /* end stop method */
 
 	public void terminate() 
@@ -111,5 +127,12 @@ public class NetworkSystem extends Network implements NetworkInterface
 	{
 		network.setChatSystem(chat);		
 	} /* end setChatSystem method */
+	
+	@Override
+	public void setUsername(String username)
+	{
+		this.username = username;
+		network.setUsername(username);
+	} /* end setUsername */
 	
 } /* end Network class */

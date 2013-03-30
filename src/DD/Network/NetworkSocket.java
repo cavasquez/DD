@@ -26,16 +26,16 @@ public abstract class NetworkSocket extends Thread
 	/************************************ Class Methods *************************************/
 	public NetworkSocket(Socket socket)
 	{
-		super("DDSocketThread" + Integer.toHexString(nextID++));
-		this.socket = socket;
+		super("DDSocketThread" + Integer.toHexString(NetworkSocket.nextID++));
 		this.socketID = nextID-1;
+		this.socket = socket;
 		this.done = false;
 		this.working = true;
 	} /* end Server constructor */
 	
-	public void close()
+	public final void close()
 	{
-		/* thread is done */
+		/* Kill thread */
 		done = true;
 		closeStreams();
 	} /* end close method */

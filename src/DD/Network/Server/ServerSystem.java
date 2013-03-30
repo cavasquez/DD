@@ -142,8 +142,11 @@ public class ServerSystem extends Network implements NetworkInterface
 	public void stop() 
 	{
 		/* Stop listening for new senders from clients. */
-		spawn.stopAccepting();
-		spawn.close();
+		if (spawn != null )
+		{
+			spawn.close();
+			spawn = null;
+		} /* end if */
 		
 	} /* end stop method */
 
@@ -153,6 +156,7 @@ public class ServerSystem extends Network implements NetworkInterface
 		/* 1. Send a termination message to all clients.
 		 * 2. Stop all threads currently working for the Server. */
 		MessageQueue.getInstance().close();
+		stop();
 		
 	} /* end terminate method */
 	
@@ -165,8 +169,8 @@ public class ServerSystem extends Network implements NetworkInterface
 		if (client != null)
 		{ /* successfully removed client from list. Terminate socket and kill thread. */
 			success = true;
-			client.sender.close();
-			client.listener.close();
+			if(client.sender != null) client.sender.close();
+			if (client.listener != null) client.listener.close();
 		} /* end if */
 		
 		/* if client = null then clientID never existed */

@@ -75,13 +75,6 @@ public class Sender extends NetworkSocket
 		} /* end catch */
 		
 	} /* end closeServerSocket method */
-	
-	@Override
-	public void close()
-	{
-		done = true;
-		closeStreams();
-	} /* end close method */
 
 	@Override
 	public void run()  {} /* Sender should not be used as a thread */

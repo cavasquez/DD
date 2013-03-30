@@ -16,15 +16,18 @@ import DD.CombatSystem.CombatSystem;
 public abstract class Network implements NetworkInterface
 {
 	/************************************ Class Constants *************************************/
-	public static final int EVERYONE = -1;		/* a message sent to EVERYONE will be to -1 */
-	public static final int GM_USER_ID = -2;	/* GM (Server) will always have an ID of -1 */
-	public static final int SELF = -3;			/* Send message to self (for Clients) */
-	public static final int PORT = 8080;		/* Port that ServerSocket connects to */	
-
+	public static final int EVERYONE = -1;					/* a message sent to EVERYONE will be to -1 */
+	public static final int GM_USER_ID = -2;				/* GM (Server) will always have an ID of -1 */
+	public static final int SELF = -3;						/* Send message to self (for Clients) */
+	public static final int SERVER_PORT = 8080;				/* port used by server */
+	public static final int CLIENT_PORT = 8069;				/* port used by client */
+	
 	/************************************ Class Attributes *************************************/
 	protected InetAddress serverIP;
 	protected CombatSystem cs;
 	protected ChatSystem chat;
+	protected String username;
+		
 	
 	/************************************ Class Methods*************************************/
 	public void setServerIP(InetAddress serverIP)
@@ -57,5 +60,10 @@ public abstract class Network implements NetworkInterface
 	{
 		this.chat = chat;
 	} /* end setChatSystem method */
+	
+	public void setUsername(String username)
+	{
+		this.username = username;
+	} /* end setUsername method */
 	
 } /* end Network class */

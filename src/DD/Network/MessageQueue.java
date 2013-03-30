@@ -35,7 +35,7 @@ public class MessageQueue extends Thread
 	private boolean hasMessage;
 	private boolean done;
 	private static MessageQueue instance = null;
-	QueueMessage message = null;
+	private QueueMessage message = null;
 	
 	/************************************ Class Methods *************************************/
 	private MessageQueue()
@@ -58,10 +58,18 @@ public class MessageQueue extends Thread
 		
 		while(!done )
 		{
-			while(sendMessage()) /* loop through the queue and send the message */			
+			try
+			{
+				while(sendMessage()) {} /* loop through the queue and send the message */			
+			} /* end try */
+			catch(NullPointerException e)
+			{
+				
+			} /* end catch */			
 			
 			hasMessage = false;	/* flag to check that queue has message */
-			try {
+			try 
+			{
 				Thread.sleep(sleepTime);
 			} /* end try */
 			catch (InterruptedException e) 
@@ -75,7 +83,27 @@ public class MessageQueue extends Thread
 			
 		} /* end done loop */
 		
+		/* Done. Clean up */
+		message = null;
+		messageQueue = null;
+		instance = null;
+		system = null;
+	
 	} /* end run method */
+	
+	private synchronized boolean sendMessage()
+	{
+		/* sendMessage provides a way for MessQueue to synchronize access to the queue
+		 * and send a message to the NetworkSystem */
+		boolean returner = false;
+		if ((message = messageQueue.poll()) != null)
+		{
+			/* If there is a message to be send, tell the Network and then respond with true. */
+			system.getMessage(message.getListenerID(), message.getMessage());
+			returner = true;
+		} /* end if */
+		return returner;
+	} /* end sendMessage method */
 	
 	public synchronized void enqueuMessage(int listenerID, NetworkMessage message)
 	{
@@ -87,27 +115,15 @@ public class MessageQueue extends Thread
 	
 	public void close()
 	{
-		messageQueue = null;
-		system = null;
-		instance = null;
+		done = true;
 	} /* end close method */
 	
+	/******************************************************************************
+	 ******************************* Setter Methods *******************************
+	 ******************************************************************************/	
 	public void setNetworkSystem(NetworkSystem system)
 	{
 		this.system = system;
 	} /* end setNetworkSystem method */
-	
-	private synchronized boolean sendMessage()
-	{
-		/* sendMessage provides a way for MessQueue to synchronize access to the queue
-		 * and send a message to the NetworkSystem */
-		boolean returner = false;
-		if ((message = messageQueue.poll()) != null)
-		{
-			system.getMessage(message.getListenerID(), message.getMessage());
-			returner = true;
-		} /* end if */
-		return returner;
-	} /* end sendMessage method */
 	
 } /* end MessageQueue class */

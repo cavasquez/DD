@@ -39,7 +39,7 @@ public class I_InitialMessage extends ClientInterpreter
 			boolean success = true;
 			try 
 			{
-				ServerSocket serverSocket = new ServerSocket(Network.PORT);
+				ServerSocket serverSocket = new ServerSocket(Network.CLIENT_PORT);
 				ClientListener listener = new ClientListener(serverSocket.accept());
 				listener.start();
 				system.setListener(listener);
