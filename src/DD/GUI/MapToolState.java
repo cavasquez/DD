@@ -2,6 +2,7 @@ package DD.GUI;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -19,7 +20,7 @@ public class MapToolState extends BasicGameState {
 	private String mousePos;
 	private int x1, x2, y1, y2;
 	private boolean clicked = true;
-	Input mouse = new Input(690);
+	static Input mouse = new Input(650);
 	int posX;
 	int posY;
 	
@@ -39,7 +40,6 @@ public class MapToolState extends BasicGameState {
 		//Initialize Images
 		makeSelection = new Image("Images/MapTool/MakeSelection.png");
 		removeSelection = new Image("Images/MapTool/RemoveSelection.png");
-		
 		maptool = new MapTool();
 		
 	}
@@ -102,15 +102,21 @@ public class MapToolState extends BasicGameState {
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
+				//go back to main menu
 				sb.enterState(0);
 			}
 		}
-    	
+
     	//Clicking on map
-    	if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
+    	//if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
+    	if((posX > 40 && posX < 1200) && (posY > 40 && posY < 670)) {
     		//you are inside map area
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
-    			getMapCoord();
+	    		if(mouse.isMouseButtonDown(0)) {
+	    			getMapCoord();
+	    			//System.out.println("click");
+	    		}
+	    		//System.out.println("Over map");
     		}
     	}
     	
