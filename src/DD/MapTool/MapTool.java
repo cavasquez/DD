@@ -20,49 +20,18 @@ public class MapTool implements Serializable{
 	World world;
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;
-	LinkedList<Coordinate> selectedList;
+	SelectList selectedList;
+	Map currentMap;
 	
 	public MapTool() throws SlickException {
 		world = new World("world");
+		//TODO:
+		currentMap = new Map("default map");
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();
-		selectedList = new LinkedList<Coordinate>();
+		selectedList = new SelectList(currentMap);  
 	}
-	
-
-	public void addSelectedList(Coordinate coord){
-		if(selectedList.contains(coord)){
-		}
-		else
-			selectedList.add(coord);
-	}
-	
-	public void placeSelectedList(Objects obj, Map map){
-		for (Coordinate coord : selectedList) {
-			map.place(coord.x, coord.y, obj);
-		}
-	}
-	
-	public void removeSelectedList(Coordinate coord){
-		for (int i = 0; i < selectedList.size(); i++) {
-			if(selectedList.get(i).x == coord.x && selectedList.get(i).y == coord.y){
-				selectedList.remove(i);
-			}
-		}
-	}
-	
-	public void clearSelectedList(){
-		selectedList.clear();
-	}
-	
-	public String selectedToString(){
-		String t = "";
-		for (Coordinate coord : selectedList) {
-			t+= coord.x + ","+coord.y+"\n";
-		}
-		return t;
-	}
-	
+		
 	/*
 	 * loads world from a .ser and sets that world to the this.world
 	 */

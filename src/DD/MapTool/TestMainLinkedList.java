@@ -15,16 +15,16 @@ public static void main(String[] args) {
 	Coordinate cord = new Coordinate(0, 0);
 	
 	
-	mt.selectedList.add(cord);
+	mt.selectedList.addSelectedList(cord);
 	
-	System.out.println(mt.selectedList.getFirst().x);
-	System.out.println(mt.selectedList.getFirst().y);
+	System.out.println(mt.selectedList.list.getFirst().x);
+	System.out.println(mt.selectedList.list.getFirst().y);
 	
 	boolean getOut = false;
-	for (int i = 0 ; i < mt.selectedList.size(); i++) {
+	for (int i = 0 ; i < mt.selectedList.list.size(); i++) {
 		
-		if(mt.selectedList.get(i).x ==0 && mt.selectedList.get(i).y ==0){
-			System.out.println(mt.selectedList.remove(i));
+		if(mt.selectedList.list.get(i).x ==0 && mt.selectedList.list.get(i).y ==0){
+			System.out.println(mt.selectedList.list.remove(i));
 			//getOut = true;
 			break;
 		}
