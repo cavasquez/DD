@@ -13,6 +13,7 @@ import DD.Character.Equipment.Weapon;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
+import DD.GMToolsBox.GMToolsBox;
 import DD.MapTool.*;
 import DD.SlickTools.Component;
 import DD.SlickTools.ImageRenderComponent;
@@ -44,6 +45,7 @@ public class GameplayState extends BasicGameState {
     private DDCharacter goblin1;
     private CharacterObjects playerObj;
     private ActionBox actionBox;
+    private GMToolsBox gmToolsBox;
     private CharacterSheet sheet = new CharacterSheet();
     private String charToString = " ";
     private String goblinHP = " ";
@@ -107,10 +109,14 @@ public class GameplayState extends BasicGameState {
         Game.system.cs.addCharacter(goblin1);
       
         
-        
+        //Create ActionBox
         actionBox = new ActionBox(stateID, 300, 200);
+        //Create GMToolsBox for GM
+        gmToolsBox = new GMToolsBox(stateID, 300, 200);
+        //Fill in ActionBox with action choices
         actionBox.addActionChoice();
         Game.system.linkBoxes(actionBox, null);
+        //set ActionBox's character
         actionBox.setCharacter(player);
        
         
@@ -257,5 +263,6 @@ public class GameplayState extends BasicGameState {
 		//g.drawString(goblinHP, 950, 400);
 		
 		g.drawString("BACK",1130,615);
+		
     }
 }

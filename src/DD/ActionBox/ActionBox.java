@@ -100,7 +100,7 @@ public class ActionBox extends BoxInterface
 		standardAction = new Image("Images/ActionBox/StandardAction.png");
 		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
 		endMove = new Image("Images/ActionBox/EndMove.png");
-		endTurnButton = new Image("Images/ActionBox/EndMove.png"); //TODO: make button
+		//endTurnButton = new Image("Images/ActionBox/EndMove.png"); //TODO: make button
 		
 		shift = freeAction.getHeight();
 		Vector2f boxPosition = new Vector2f(660f, 10f);
@@ -117,7 +117,7 @@ public class ActionBox extends BoxInterface
 		this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
 		this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
 		this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
-		this.addComponent(new ActionChoice(this.id, Action.END_TURN.index, "End Turn", endTurnButton, position.x, position.y + shift*5, new EndTurn(this.id)));
+		//this.addComponent(new ActionChoice(this.id, Action.END_TURN.index, "End Turn", endTurnButton, position.x, position.y + shift*5, new EndTurn(this.id)));
 		
 		this.addComponent(new ActionChoice(this.id, 1000, "End Move", endMove, position.x, position.y + shift*6, move));
 		//this.addComponent(new ActionChoice(this.id, 2000, "Start New Turn", startNewTurn, position.x, position.y + shift*6));
