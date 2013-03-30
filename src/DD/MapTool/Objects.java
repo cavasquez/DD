@@ -107,10 +107,9 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				String message = "You are clicking " + position.x + ", " + position.y;
-				//System.out.println(message);
 				try {
 					select();
-					System.out.println(message);
+					//System.out.println(message);
 				} catch (SlickException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -134,7 +133,7 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 			image.draw(x*xCorrection, (y+1)*yCorrection);
 		}
 		else {
-			image.draw((x + (image.getHeight() * x)), ((y+5) + (image.getWidth() * y)));	//y offset by 5 to shift down a little
+			image.draw((x + (image.getHeight() * x)), ((y+40) + (image.getWidth() * y)));	//y offset by 40 to shift down a little
 		}
 		//if(CharacterObjects.class.isInstance(this)) System.out.println("x: " + (x + (image.getHeight() * x)) + ", y: " + (y + (image.getHeight() * y)));
 		//gr.drawString(message, 110, 10);

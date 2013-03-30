@@ -17,7 +17,11 @@ public class MapToolState extends BasicGameState {
 	private int stateID = 0;
 	private MapTool maptool = null;
 	private String mousePos;
-	Input mouse = new Input(650);
+	private int x1, x2, y1, y2;
+	private boolean clicked = true;
+	Input mouse = new Input(690);
+	int posX;
+	int posY;
 	
 	private Image makeSelection = null;
 	private Image removeSelection = null;
@@ -89,16 +93,52 @@ public class MapToolState extends BasicGameState {
     		}
     	}
 		
-    	int posX = mouse.getMouseX();
-		int posY = mouse.getMouseY();
+    	posX = mouse.getMouseX();
+    	posY = mouse.getMouseY();
 		mousePos = "Mouse position: " + posX + " " + posY;
 		
+		//Back button
     	if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				sb.enterState(0);
 			}
+		}
+    	
+    	//Clicking on map
+    	if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
+    		//you are inside map area
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			getMapCoord();
+    		}
+    	}
+    	
+    	//Make Selection Button
+    	if((posX > 660 && posX < 660 + makeSelection.getWidth()) && (posY > 0 && posY < makeSelection.getHeight())) {
+    		
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			
+    		}
+    	}
+
+	}
+	
+	
+	
+	public void getMapCoord() {
+		if(clicked) {
+			x1 = (int)(posX / 30.85);
+			y1 = (posY / 30) - 1;
+			System.out.println("x1: " + x1 + " y1: " + y1);
+			clicked = false;
+		}
+		else if(!clicked) {
+			x2 = (int)(posX / 30.85);
+			y2 = (posY / 30) - 1;
+			System.out.println("x2: " + x2 + " y2: " + y2);
+			clicked = true;
 		}
 	}
 
