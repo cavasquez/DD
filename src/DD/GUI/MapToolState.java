@@ -1,0 +1,110 @@
+package DD.GUI;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+
+import DD.MapTool.*;
+import DD.SlickTools.Component;
+import DD.SlickTools.RenderComponent;
+
+import org.newdawn.slick.*;
+
+public class MapToolState extends BasicGameState {
+	
+	private int stateID = 0;
+	private MapTool maptool = null;
+	private String mousePos;
+	Input mouse = new Input(650);
+	
+	private Image makeSelection = null;
+	private Image removeSelection = null;
+	
+	public MapToolState(int stateID) {
+		this.stateID = stateID;
+	}
+
+	@Override
+	public void init(GameContainer gc, StateBasedGame sb)
+			throws SlickException {
+		//don't show fps in top left corner
+		gc.setShowFPS(false);
+		
+		//Initialize Images
+		makeSelection = new Image("Images/MapTool/MakeSelection.png");
+		removeSelection = new Image("Images/MapTool/RemoveSelection.png");
+		
+		maptool = new MapTool();
+		
+	}
+
+	@Override
+	public void render(GameContainer gc, StateBasedGame sb, Graphics g)
+			throws SlickException {
+		//Render Map
+    	RenderComponent renderComponent = null;
+    	
+    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
+    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
+    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
+    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
+    			for(int k = list.length; k > 0; k--) {
+    				Component component = (Component)list[k-1];
+    				if (RenderComponent.class.isInstance(component))
+    				{
+    					renderComponent = (RenderComponent) component;
+    					renderComponent.render(gc, sb, g);
+    				}
+    			}
+    		}
+    	}
+		
+    	makeSelection.draw(660, 0);
+    	removeSelection.draw((670 + makeSelection.getWidth()), 0);
+    	
+    	g.drawString("BACK", 1130, 615);
+    	g.drawString(mousePos, 900, 0);
+	}
+
+	@Override
+	public void update(GameContainer gc, StateBasedGame sb, int delta)
+			throws SlickException {
+		///Update Map
+    	RenderComponent renderComponent = null;
+    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
+    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
+    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
+    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
+    			for(int k = 0; k < list.length; k++) {
+    				Component component = (Component)list[k];
+    				if (RenderComponent.class.isInstance(component))
+    				{
+    					
+    					renderComponent = (RenderComponent) component;
+    					renderComponent.update(gc, sb, delta);
+    				}
+    			}
+    		}
+    	}
+		
+    	int posX = mouse.getMouseX();
+		int posY = mouse.getMouseY();
+		mousePos = "Mouse position: " + posX + " " + posY;
+		
+    	if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				sb.enterState(0);
+			}
+		}
+	}
+
+	@Override
+	public int getID() {
+		return stateID;
+	}
+
+}

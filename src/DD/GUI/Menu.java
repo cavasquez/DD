@@ -8,9 +8,11 @@ public class Menu extends BasicGameState
 	Image playNow;
 	Image exitGame;
 	Image screen;
-	private String mouse = "No input yet!";
+	Image mapToolButton;
+	private String mousePos = "No input yet!";
 	Music dungeon;
 	Sound button;
+	Input mouse = new Input(650);
 	
 	
 	public Menu(int state)
@@ -24,7 +26,7 @@ public class Menu extends BasicGameState
 		dungeon.loop();
 		screen = new Image("Images/Menus/menuscreen5.jpg");
 		playNow = new Image("Images/Menus/MenuButtons.png");
-		
+		mapToolButton = new Image("Images/Menus/MapTool.png");
 		
 		button = new Sound("Audio/dunSound.wav");
 		
@@ -35,18 +37,18 @@ public class Menu extends BasicGameState
 		
 		screen.draw(0,0);
 		playNow.draw(100,140);
-		
-		g.drawString(mouse, 100, 100);
+		mapToolButton.draw(130, 550);
+		g.drawString(mousePos, 100, 100);
 		
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg,int delta)throws SlickException
 	{
-		int posX = Mouse.getX();
-		int posY = Mouse.getY();
+		int posX = mouse.getMouseX();
+		int posY = mouse.getMouseY();
 		
 		//Join Lobby button
-		if((posX > 130 && posX < 335) && (posY > 384 && posY < 450))
+		if((posX > 130 && posX < 335) && (posY > 200 && posY < 266))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -57,7 +59,7 @@ public class Menu extends BasicGameState
 		}
 		
 		//Create Lobby
-		if((posX > 130 && posX < 335) && (posY > 299 && posY < 365))
+		if((posX > 130 && posX < 335) && (posY > 285 && posY < 351))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -67,7 +69,7 @@ public class Menu extends BasicGameState
 		}
 		
 		//play game
-		if((posX > 130 && posX < 335) && (posY > 200 && posY < 280))
+		if((posX > 130 && posX < 335) && (posY > 370 && posY < 450))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -77,7 +79,7 @@ public class Menu extends BasicGameState
 		}
 		
 		//exit button
-		if((posX > 130 && posX < 335) && (posY > 118 && posY < 184))
+		if((posX > 130 && posX < 335) && (posY > 466 && posY < 532))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -86,8 +88,17 @@ public class Menu extends BasicGameState
 			}
 		}
 		
+		//map tool button
+		if((posX > 130 && posX < 335) && (posY > 550 && posY < 550 + mapToolButton.getHeight()))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
+				sbg.enterState(5);
+			}
+		}
 		 
-	      mouse = "Mouse position x: " + posX + " y: " + posY;
+	      mousePos = "Mouse position x: " + posX + " y: " + posY;
 	      
 
 		

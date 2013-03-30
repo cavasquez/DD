@@ -134,7 +134,7 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 			image.draw(x*xCorrection, (y+1)*yCorrection);
 		}
 		else {
-			image.draw((x + (image.getHeight() * x)), ((y+ 40) + (image.getWidth() * y)));
+			image.draw((x + (image.getHeight() * x)), ((y+5) + (image.getWidth() * y)));	//y offset by 5 to shift down a little
 		}
 		//if(CharacterObjects.class.isInstance(this)) System.out.println("x: " + (x + (image.getHeight() * x)) + ", y: " + (y + (image.getHeight() * y)));
 		//gr.drawString(message, 110, 10);
