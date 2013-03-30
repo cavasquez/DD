@@ -6,7 +6,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import org.newdawn.slick.SlickException;
 import DD.Character.DDCharacter;
+import DD.Character.Abilities.Ability;
 import DD.Character.Abilities.TargetAbility;
+import DD.CombatSystem.Interpreter.CombatInterpreter;
 import DD.MapTool.CharacterObjects;
 import DD.MapTool.Map;
 import DD.MapTool.Objects;
@@ -98,7 +100,8 @@ public class TargetingSystem
 	/************************************ Class Methods *************************************/
 	public TargetingSystem()
 	{
-		blocks = new LinkedList<TargetBlock>();
+		blocks = new LinkedList<TargetBlock>();		
+		
 	} /* end TargetingSystem constructor */
 	
 	

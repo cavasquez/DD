@@ -13,7 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public abstract class ImageRenderComponent extends RenderComponent
 {
 	/************************************ Class Constants *************************************/
-	protected Image image;
+	protected transient Image image;
 	
 	/************************************ Class Methods *************************************/
 	public ImageRenderComponent(){

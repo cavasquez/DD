@@ -2,9 +2,9 @@ package DD.Network.Server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.SocketException;
 
 import DD.Network.Network;
-
 
 /*****************************************************************************************************
  * ListenerSpawner will be responsible for creating ServerSocket's for every client while in the lobby.
@@ -15,10 +15,13 @@ import DD.Network.Network;
 
 public class ListenerSpawner extends Thread
 {
+	/************************************ Class Constants *************************************/
+	private static final int sleepTime = 1000;
+	
 	/************************************ Class Attributes *************************************/
 	private ServerSocket serverSocket = null;
-	private boolean acceptingConnections;		
-	private boolean closed;						/* flag to kill thread */
+	private boolean acceptingConnections;
+	private boolean closed;
 	
 	/************************************ Class Methods *************************************/
 	public ListenerSpawner()
@@ -30,7 +33,9 @@ public class ListenerSpawner extends Thread
 	
 	public void close()
 	{
+		/* put an end to this thread */
 		closed = true;
+		stopAccepting();
 		
 	} /* end close */
 	
@@ -41,37 +46,68 @@ public class ListenerSpawner extends Thread
 	
 	public void stopAccepting()
 	{
+		/* Stop the server from accepting new connections */
 		acceptingConnections = false;
+		try 
+		{
+			serverSocket.close();
+		} /* end try */
+		catch (IOException e) 
+		{
+			System.out.println("ServerSpawner: serverSocket does not exist");
+		} /* end catch */
 	} /* end stopAccepting method */
 	
 	/************************************ Important Method *************************************/
 	public void run()
 	{
-		try
-		{
-			serverSocket = new ServerSocket(Network.PORT);
-		} /* end try */
-		catch (IOException e)
-		{
-			System.out.println("Failed to listen on port: " + Integer.toString(Network.PORT));
-		} /* end catch */
-		
 		while (!closed)
 		{
-			while (acceptingConnections)
+			if (acceptingConnections)
+			{	
+				/* Accepting connections. Loop */
+				while (acceptingConnections)
+				{
+					/* First, make a new server socket to get a new client */
+					try
+					{
+						serverSocket = new ServerSocket(Network.SERVER_PORT);
+					} /* end try */
+					catch (IOException e)
+					{
+						System.out.println("Failed to listen on port: " + Integer.toString(Network.SERVER_PORT));
+						acceptingConnections = false;
+						closed = true;
+					} /* end catch */
+					
+					/* Now that the server socket has been made, wait for a connection
+					 * and then start a ServerListener. */
+					try 
+					{
+						new ServerListener(serverSocket.accept()).start();
+					} /* end try */ 
+					catch (IOException e) 
+					{
+						if(!acceptingConnections) System.out.println("Successfully stopped ListenerSpawner");
+					} /* end catch */
+					
+				} /* end acceptingConnections */
+				
+			} /* end if */
+			else
 			{
+				/* Not accepting connections, however not closed. Sleep */
 				try 
 				{
-					new ServerListener(serverSocket.accept()).run();
-				} /* end try */ 
-				catch (IOException e) 
+					Thread.sleep(sleepTime);
+				} /* end try */
+				catch (InterruptedException e) 
 				{
-					e.printStackTrace();
-					acceptingConnections = false;
-					closed = true;
+					System.out.println("ListenerSpawner Interrupted from sleep");
 				} /* end catch */
 				
-			} /* end acceptingConnections */
+			} /* end if */
+			
 			
 		} /* end while loop */
 		

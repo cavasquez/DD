@@ -1,6 +1,7 @@
 package DD.Network.Client.Interpreter;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 
 import DD.Message.InitialMessage;
@@ -38,9 +39,10 @@ public class I_InitialMessage extends ClientInterpreter
 			boolean success = true;
 			try 
 			{
-				Socket socket = new Socket(system.getServerIP(), Network.PORT);
-				ClientListener listener = new ClientListener(socket);
-				listener.run();
+				ServerSocket serverSocket = new ServerSocket(Network.CLIENT_PORT);
+				ClientListener listener = new ClientListener(serverSocket.accept());
+				listener.start();
+				system.setListener(listener);
 			} /* end try */
 			catch (IOException e) 
 			{

@@ -20,7 +20,7 @@ public class I_NewListenerMessage extends ClientInterpreter
 	{
 		NewListenerMessage nlm = (NewListenerMessage) message.getMessage();
 		
-		/* Tell give the ClientSystem the listener */
+		/* Give the ClientSystem the listener */
 		system.setListener((ClientListener)nlm.getListener());
 		
 		/* Send the ClientListenerReadyMessage to the server */

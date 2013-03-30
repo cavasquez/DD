@@ -13,6 +13,7 @@ import DD.Network.Listener;
 
 public class NewListenerMessage extends Message
 {
+	private static final long serialVersionUID = 1730504210099095543L;
 	/************************************ Class Attributes *************************************/
 	private int listenerID;
 	private Listener listener = null;
@@ -21,7 +22,7 @@ public class NewListenerMessage extends Message
 	/************************************ Class Methods *************************************/
 	public NewListenerMessage(int listenerID, Listener listener, InetAddress ip)
 	{
-		super(NEW_LISTENER_MESSAGE);
+		super(Type.NEW_LISTENER_MESSAGE);
 		this.listenerID = listenerID;
 		this.listener = listener;
 		this.ip = ip;

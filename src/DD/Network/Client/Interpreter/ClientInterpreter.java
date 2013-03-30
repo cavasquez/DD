@@ -19,6 +19,10 @@ public abstract class ClientInterpreter
 	
 	/************************************ Class Methods *************************************/
 	public void interpret(NetworkMessage message) {}
-	public void setClientSystem(ClientSystem system) {}
+	
+	public static void setClientSystem(ClientSystem system)
+	{
+		ClientInterpreter.system = system;
+	} /* end setClientSystem method */
 
 } /* end ClientInterpreter class */

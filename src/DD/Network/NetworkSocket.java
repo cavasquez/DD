@@ -1,10 +1,6 @@
 package DD.Network;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-
 import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
@@ -16,10 +12,11 @@ import DD.Message.NetworkMessage;
 
 public abstract class NetworkSocket extends Thread
 {
+	/************************************ Class Constants *************************************/
+	public static final int sleepTime = 200;	/* Time for which thread will be asleep */
+	
 	/************************************ Class Attributes *************************************/
 	protected Socket socket = null;
-	protected ObjectInputStream input = null;
-	protected ObjectOutputStream output = null;
 	protected int socketID;						/* Unique ID for thread */
 	protected boolean done;						/* Thread is done */
 	protected boolean working;					/* flag stating that socket is working */
@@ -29,49 +26,27 @@ public abstract class NetworkSocket extends Thread
 	/************************************ Class Methods *************************************/
 	public NetworkSocket(Socket socket)
 	{
-		super("DDSocketThread" + Integer.toHexString(nextID++));
+		super("DDSocketThread" + Integer.toHexString(NetworkSocket.nextID++));
+		this.socketID = nextID-1;
 		this.socket = socket;
-		this.socketID = nextID;
 		this.done = false;
 		this.working = true;
 	} /* end Server constructor */
 	
-	public void run() {} /* end run method */
-	
-	protected void createStreams()
+	public final void close()
 	{
-		try 
-		{
-			input = new ObjectInputStream(socket.getInputStream());
-			output = new ObjectOutputStream(socket.getOutputStream());
-		} /* end try */ 
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /* end catch */
-	} /* end createStreams method */
-
-	protected void closeStreams()
-	{
-		try 
-		{
-			input.close();
-			output.close();
-		} /* end try */ 
-		catch (IOException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} /* end catch */
-		
-	} /* end closeServerSocket method */
-
-	public void close()
-	{
-		/* thread is done */
+		/* Kill thread */
 		done = true;
+		closeStreams();
 	} /* end close method */
+	
+	public abstract void run();
+	
+	protected abstract void createStreams();
+
+	protected abstract void closeStreams();
+
+	
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

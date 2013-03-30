@@ -39,7 +39,7 @@ public class I_ClientListenerReadyMessage extends ServerInterpreter
 					Socket senderSocket = null;
 					try 
 					{
-						senderSocket = new Socket(client.ip, Network.PORT);
+						senderSocket = new Socket(client.ip, Network.CLIENT_PORT);
 					} /* end try */ 
 					catch (IOException e) 
 					{

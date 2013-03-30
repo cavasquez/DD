@@ -1,11 +1,17 @@
 package DD.Network.Client;
 
+import java.io.IOException;
 import java.net.InetAddress;
-
+import java.net.Socket;
+import java.net.UnknownHostException;
+import DD.Chat.ChatSystem;
+import DD.CombatSystem.CombatSystem;
+import DD.Message.InitialMessage;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Network.MessageQueue;
 import DD.Network.Network;
+import DD.Network.NetworkInterface;
 import DD.Network.Client.Interpreter.*;
 
 /*****************************************************************************************************
@@ -17,37 +23,38 @@ import DD.Network.Client.Interpreter.*;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class ClientSystem implements Network
+public class ClientSystem extends Network implements NetworkInterface 
 {	
 	/************************************ Class Attributes *************************************/
-	private static PeerTable peerList;
-	private static ClientInterpreter[] system = null;
+	private PeerTable peerList;
+	private ClientInterpreter[] system = null;
 	@SuppressWarnings("unused")
-	private static MessageQueue queue = null;			/* reference to MessageQueue thread. Will need to be cleaned up */
-	private static ClientListener listener = null;
-	private static ClientSender sender = null;
-	private static int clientID;						/* ID provided by server */
-	private static InetAddress serverIP = null;			/* ip address of the server */
+	private MessageQueue queue = null;			/* reference to MessageQueue thread. Will need to be cleaned up */
+	private ClientListener listener = null;
+	private ClientSender sender = null;
+	private int clientID;						/* ID provided by server */
+	private InetAddress serverIP = null;		/* ip address of the server */
+	
 	
 	/************************************ Class Methods *************************************/
 	public ClientSystem() 
 	{
 		peerList = new PeerTable();
-		system = new ClientInterpreter[Message.NUM_OF_MESSAGES];
-		system[Message.COMBAT_MESSAGE] = new I_CombatMessage();
-		system[Message.CHAT_MESSAGE] = new I_ChatMessage();
-		system[Message.INITIAL_MESSAGE] = new I_InitialMessage();
-		system[Message.NEW_LISTENER_MESSAGE] = new I_NewListenerMessage();
-		system[Message.ADD_USER_MESSAGE] = new I_AddUserMessage();
-		system[Message.COMBAT_MESSAGE].setClientSystem(this);
-
+		
+		system = new ClientInterpreter[Message.Type.NUM_OF_MESSAGES];
+		system[Message.Type.COMBAT_MESSAGE.index] = new I_CombatMessage();
+		system[Message.Type.CHAT_MESSAGE.index] = new I_ChatMessage();
+		system[Message.Type.INITIAL_MESSAGE.index] = new I_InitialMessage();
+		system[Message.Type.NEW_LISTENER_MESSAGE.index] = new I_NewListenerMessage();
+		system[Message.Type.ADD_USER_MESSAGE.index] = new I_AddUserMessage();
+		
 	} /* end ServerSystem constructor */
 	
 	public void interpret(int listenerID, NetworkMessage message)
 	{
 		/* Assume all messages are of correct type and legally formatted.
 		 * In any case, messages are always given by the ClientListener */
-		system[message.getType()].interpret(message);
+		system[message.getType().index].interpret(message);
 	} /* end interpret */
 	
 	@Override
@@ -55,7 +62,7 @@ public class ClientSystem implements Network
 	{
 		/* Send message to Server. */
 		NetworkMessage send = new NetworkMessage(sender, receiver, message);
-		ClientSystem.sender.sendMessage(send);
+		this.sender.sendMessage(send);
 		return true;
 	} /* end sendMessage method */
 	
@@ -66,11 +73,11 @@ public class ClientSystem implements Network
 		
 		if 
 		(
-			type == Message.COMBAT_MESSAGE ||
-			type == Message.CHAT_MESSAGE ||
-			type == Message.INITIAL_MESSAGE ||
-			type == Message.NEW_LISTENER_MESSAGE ||
-			type == Message.ADD_USER_MESSAGE
+			type == Message.Type.COMBAT_MESSAGE.index ||
+			type == Message.Type.CHAT_MESSAGE.index ||
+			type == Message.Type.INITIAL_MESSAGE.index ||
+			type == Message.Type.NEW_LISTENER_MESSAGE.index ||
+			type == Message.Type.ADD_USER_MESSAGE.index
 		)
 		{
 			valid = true;
@@ -78,6 +85,55 @@ public class ClientSystem implements Network
 		
 		return valid;
 	} /* end validMessage method */
+	
+
+	@Override
+	public void start() 
+	{
+		/* First, get a listener ready for contact with the server */
+		try 
+		{
+			ListenerSpawner spawner = new ListenerSpawner();
+			spawner.start();
+			
+			while(spawner.getSocketReady() != true)
+			{
+				/* do nothing until listener is set up */
+				try 
+				{
+					Thread.sleep(100);
+				} /* end try */
+				catch (InterruptedException e) 
+				{
+					System.out.println("interrupted in ClientSysetm at start while waiting for listener");
+				} /* end catch */
+			} /* end while loop */
+			
+			/* Now try to connect to server */
+			sender = new ClientSender(new Socket(serverIP, Network.SERVER_PORT));
+			sender.sendMessage(new NetworkMessage(Network.GM_USER_ID, 0, new InitialMessage(username, false, clientID)));
+		} /* end try */
+		catch (IOException e) 
+		{
+			/* failure to connect */
+			System.out.println("Failed to connecto to server");
+		} /* end catch */
+		
+	} /* end start method */
+
+	@Override
+	public void stop() 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end stop method */
+
+	@Override
+	public void terminate() 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end terminate method */
 	
 	/************************************ peerList related methods**********************************/
 	public boolean addUser(int peerID, String username, InetAddress ip)
@@ -98,7 +154,7 @@ public class ClientSystem implements Network
 	{
 		boolean error = false;
 		/* get message from a client. Check for validity and if valid, interpret. */
-		if (validMessage(message.getType()) && message.getMessageType() == Message.NETWORK_MESSAGE) interpret(listenerID, message);
+		if (validMessage(message.getType().index) && message.getMessageType() == Message.Type.NETWORK_MESSAGE) interpret(listenerID, message);
 		else error = true;
 		
 		return error;
@@ -124,22 +180,53 @@ public class ClientSystem implements Network
 	 ******************************************************************************/
 	public void setListener(ClientListener listener)
 	{
-		ClientSystem.listener = listener;
+		this.listener = listener;
 	} /* end setListener method */
 	
 	public void setSender(ClientSender sender)
 	{
-		ClientSystem.sender = sender;
+		this.sender = sender;
 	} /* end setSender method */
 	
 	public void setClientID(int clientID)
 	{
-		ClientSystem.clientID = clientID;
+		this.clientID = clientID;
 	} /* end setSender method */
 	
 	public void setServerIP(InetAddress serverIP)
 	{
-		ClientSystem.serverIP = serverIP;
+		this.serverIP = serverIP;
 	} /* end setServerIP method */
+	
+	public boolean setServerIP(String ip)
+	{
+		boolean returner = false;
+		try {
+			setServerIP(InetAddress.getByName(ip));
+			returner = true;
+		} /* end try */
+		catch (UnknownHostException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} /* end catch */
+		
+		return returner;
+	} /* end setServerIP method */
+
+
+	@Override
+	public void setCombatSystem(CombatSystem cs) 
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setCombatSystem method */
+
+	@Override
+	public void setChatSystem(ChatSystem chat)
+	{
+		// TODO Auto-generated method stub
+		
+	} /* end setChatSystem method */
 	
 } /* end ServerSystem class */

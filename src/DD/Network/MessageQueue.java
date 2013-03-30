@@ -26,15 +26,16 @@ import DD.Message.QueueMessage;
 
 public class MessageQueue extends Thread
 {
-	/************************************ Class Attributes *************************************/
+	/************************************ Class Constants *************************************/
 	public static final int sleepTime = 100;		/* Thread sleeps for the provided milliseconds */  
 	
 	/************************************ Class Attributes *************************************/
 	private NetworkSystem system = null;
-	private Queue<QueueMessage> messageQueue = null;
+	private volatile Queue<QueueMessage> messageQueue = null;
 	private boolean hasMessage;
 	private boolean done;
 	private static MessageQueue instance = null;
+	private QueueMessage message = null;
 	
 	/************************************ Class Methods *************************************/
 	private MessageQueue()
@@ -46,7 +47,7 @@ public class MessageQueue extends Thread
 		done = false;
 	} /* end MessageQueue constructor */
 	
-	public static MessageQueue getInstance()
+	public static synchronized MessageQueue getInstance()
 	{
 		if (instance == null) instance = new MessageQueue();
 		return instance;
@@ -54,17 +55,22 @@ public class MessageQueue extends Thread
 	
 	public void run()
 	{
-		QueueMessage message = null;
+		
 		while(!done )
 		{
-			while((message = messageQueue.poll()) != null)
+			try
 			{
-				system.getMessage(message.getListenerID(), message.getMessage());
-			} /* end loop for hasMessage */
+				while(sendMessage()) {} /* loop through the queue and send the message */			
+			} /* end try */
+			catch(NullPointerException e)
+			{
+				
+			} /* end catch */			
 			
 			hasMessage = false;	/* flag to check that queue has message */
-			try {
-				sleep(sleepTime);
+			try 
+			{
+				Thread.sleep(sleepTime);
 			} /* end try */
 			catch (InterruptedException e) 
 			{
@@ -77,12 +83,47 @@ public class MessageQueue extends Thread
 			
 		} /* end done loop */
 		
+		/* Done. Clean up */
+		message = null;
+		messageQueue = null;
+		instance = null;
+		system = null;
+	
 	} /* end run method */
 	
-	public void enqueuMessage(int listenerID, NetworkMessage message)
+	private synchronized boolean sendMessage()
 	{
+		/* sendMessage provides a way for MessQueue to synchronize access to the queue
+		 * and send a message to the NetworkSystem */
+		boolean returner = false;
+		if ((message = messageQueue.poll()) != null)
+		{
+			/* If there is a message to be send, tell the Network and then respond with true. */
+			system.getMessage(message.getListenerID(), message.getMessage());
+			returner = true;
+		} /* end if */
+		return returner;
+	} /* end sendMessage method */
+	
+	public synchronized void enqueuMessage(int listenerID, NetworkMessage message)
+	{
+		/* enqueueMessage synchronizes access to the queue and provides threads a way
+		 * of putting messages into the queue */
 		messageQueue.offer(new QueueMessage(listenerID, message));
 		hasMessage = true;
 	} /* end enqueueMessage method */
+	
+	public void close()
+	{
+		done = true;
+	} /* end close method */
+	
+	/******************************************************************************
+	 ******************************* Setter Methods *******************************
+	 ******************************************************************************/	
+	public void setNetworkSystem(NetworkSystem system)
+	{
+		this.system = system;
+	} /* end setNetworkSystem method */
 	
 } /* end MessageQueue class */

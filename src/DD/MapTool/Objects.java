@@ -23,7 +23,7 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 	protected Coordinate position = null;
 	String name;
 	int priority;
-	static protected Image spriteSheet = null;
+	static protected transient Image spriteSheet = null;
 	static protected Map owner = null;
 	protected static Input mouse = new Input(650);
 
@@ -38,6 +38,15 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		if(owner!=null) owner.addComponent(this);
 	}
 	public void select() throws SlickException {};
+	
+	
+	public Image getImage(){
+		return spriteSheet;
+	}
+	
+	public void setImage(Image image){
+		spriteSheet = image;
+	}	
 	
 	public int getMovePenalty(){
 		return movePenalty;

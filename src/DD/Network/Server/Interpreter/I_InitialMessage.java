@@ -47,7 +47,7 @@ public class I_InitialMessage extends ServerInterpreter
 			 * Then, remove Server from userList */
 			InitialMessage rejection = new InitialMessage(null, false, null);
 			system.sendMessage(Network.GM_USER_ID, newID, rejection);
-			system.removeClient(listenerID); /* removeUser kills the Server thread */
+			system.removeClient(listenerID); /* removeClient kills the Server thread */
 		} /* end else */
 		
 	} /* end interpret method */

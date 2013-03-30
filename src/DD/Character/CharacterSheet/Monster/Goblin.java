@@ -39,7 +39,7 @@ public class Goblin {
 		
 		sheet.init = sheet.getInit() + 6;
 		
-		sheet.EquipWeapon(new Weapon("Cutlass",Dice.DieSize.D6,2,18,5,'M','S',"Note:",4));
+		sheet.equipWeapon(new Weapon(15,"Cutlass",Dice.DieSize.D6,2,18,5,'M','S',"Note:",4),0);
 		
 		 XP = 135;
 	}

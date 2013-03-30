@@ -52,8 +52,8 @@ public class TestGMPlace extends BasicGame
     	GMToolsBox gmt = new GMToolsBox(i++,0,0);
     	system.linkBoxes(ab);
     	system.server();
-    	boolean test1 = false;
-    	boolean test2 = false;
+    	boolean test1 = true;
+    	boolean test2 = true;
 		
 		/*
 		 * IMPORTANT: for this main to work, mapSize needs to be 21 or larger due to hardcodes massPlaceObjectsLine values.
@@ -236,6 +236,11 @@ public class TestGMPlace extends BasicGame
 		temp = "";
 		for (int j = 0; j < inPlay.length; j++) temp += (inPlay[j] + ", " );
 		if (test2) System.out.println(temp);
+		if (test2) System.out.println();
+		
+		if (test2) System.out.println("Components left:");
+		comp = gmt.getComponentsArray();
+		if (test2) for (int j = 0; j < comp.length; j++) System.out.println("CompID: " + comp[j].getId());
 		
 		
 		

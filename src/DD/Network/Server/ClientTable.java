@@ -41,7 +41,7 @@ public class ClientTable
 		{
 			if (client.username != null)
 			{ /* there might be a null username from addServer */
-				if (client.username.compareTo(username) == 0) userExists = true;
+				if (client.username.matches(username) == true) userExists = true;
 			}
 		} /* end for loop */
 		
@@ -107,7 +107,7 @@ public class ClientTable
 		{
 			if (client.username != null)
 			{ /* there might be a null username from addServer */
-				if (client.username.compareTo(username) == 0) userExists = true;
+				if (client.username.matches(username) == true) userExists = true;
 			} /* end if */
 		} /* end for loop */
 		
