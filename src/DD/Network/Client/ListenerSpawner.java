@@ -33,6 +33,7 @@ public class ListenerSpawner extends Thread
 		try 
 		{
 			serverSocket = new ServerSocket(Network.CLIENT_PORT);
+			System.out.println("successfully opeened port " + serverSocket.getLocalPort());
 		} /* end try */
 		catch (IOException e) 
 		{
@@ -46,6 +47,7 @@ public class ListenerSpawner extends Thread
 			try 
 			{
 				listener = new ClientListener(serverSocket.accept());
+				System.out.println("sucecssfully listened");
 				listener.start();
 			}  /* end try */
 			catch (IOException e) 

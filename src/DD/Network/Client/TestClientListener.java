@@ -10,6 +10,7 @@ import java.net.Socket;
 import DD.Message.ChatMessage;
 import DD.Message.NetworkMessage;
 import DD.Message.Message;
+import DD.Network.Network;
 
 
 public class TestClientListener extends ClientListener
@@ -105,7 +106,7 @@ public class TestClientListener extends ClientListener
 			try {
 				if (test1)
 				{
-					sSocket = new ServerSocket(6546);
+					sSocket = new ServerSocket(Network.SERVER_PORT);
 					System.out.println("waiting for connection");
 					listener = new TestClientListener(sSocket.accept());
 					System.out.println("connected");
@@ -125,7 +126,7 @@ public class TestClientListener extends ClientListener
 				
 				else if(test2)
 				{
-					sSocket = new ServerSocket(6546);
+					sSocket = new ServerSocket(0);
 					System.out.println("waiting for connection");
 					listener = new TestClientListener(sSocket.accept());
 					System.out.println("connected");

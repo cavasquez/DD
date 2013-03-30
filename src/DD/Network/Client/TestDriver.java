@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import DD.Message.ChatMessage;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
+import DD.Network.Network;
 
 public class TestDriver {
 	
@@ -27,7 +28,7 @@ public class TestDriver {
 			System.out.println("is ser " + Serializable.class.isInstance(asd));
 			try {
 
-				sSocket = new ServerSocket(6546);
+				sSocket = new ServerSocket(Network.SERVER_PORT);
 				System.out.println("waiting for connection");
 				listener = new TestClientListener(sSocket.accept());
 				listener.setTest(test1, test2, test3);

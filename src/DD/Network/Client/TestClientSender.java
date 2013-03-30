@@ -10,6 +10,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import DD.Message.ChatMessage;
 import DD.Message.NetworkMessage;
+import DD.Network.Network;
 
 public class TestClientSender
 {
@@ -25,14 +26,17 @@ public class TestClientSender
 			e.printStackTrace();
 		}
 		try {
-			sender = new ClientSender(new Socket(ip, 6546));
+			sender = new ClientSender(new Socket(ip, Network.SERVER_PORT));
+			System.out.println("Succssfully connected to port: " + sender.getPort() + " and local port " + sender.getLocalPort());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		System.out.println("Sender? " + sender);
+		
 		boolean test1 = false;
-		boolean test2 = true;
+		boolean test2 = false;
 		
 		if(test1)
 		{
@@ -68,7 +72,7 @@ public class TestClientSender
 			ChatMessage chat;
 			chat = new ChatMessage(0, 0, 0, "hey");
 			message = new NetworkMessage(0,0, chat);
-			System.out.println("ser? " + Serializable.class.isInstance(message));
+			//System.out.println("ser? " + Serializable.class.isInstance(message));
 			sender.sendMessage(message);
 			String mssg;
 			
@@ -108,8 +112,24 @@ public class TestClientSender
 				e.printStackTrace();
 			}
 			
-		}
+		} /* end test 2 */
 			
+		else
+		{
+			/* loop until terminated */
+			System.out.println("Waiting for termination");
+			String mssg;
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+			
+			try {
+				mssg = bufferedReader.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//				listener.interrupt();
+			
+		} /* end default */
 		
 	}
 }

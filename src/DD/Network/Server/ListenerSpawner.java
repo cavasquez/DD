@@ -1,6 +1,7 @@
 package DD.Network.Server;
 
 import java.io.IOException;
+import java.net.BindException;
 import java.net.ServerSocket;
 import java.net.SocketException;
 
@@ -61,6 +62,7 @@ public class ListenerSpawner extends Thread
 	/************************************ Important Method *************************************/
 	public void run()
 	{
+		System.out.println("run");
 		while (!closed)
 		{
 			if (acceptingConnections)
@@ -71,11 +73,13 @@ public class ListenerSpawner extends Thread
 					/* First, make a new server socket to get a new client */
 					try
 					{
-						serverSocket = new ServerSocket(Network.SERVER_PORT);
+						System.out.println("trying to listen on port");
+						serverSocket = new ServerSocket(Network.SERVER_PORT, Network.BACKLOG);
+						System.out.println("Listening on port " + serverSocket.getLocalPort());
 					} /* end try */
 					catch (IOException e)
 					{
-						System.out.println("Failed to listen on port: " + Integer.toString(Network.SERVER_PORT));
+						System.out.println("Failed to listen on port: " + Integer.toString(serverSocket.getLocalPort()));
 						acceptingConnections = false;
 						closed = true;
 					} /* end catch */
@@ -85,15 +89,23 @@ public class ListenerSpawner extends Thread
 					try 
 					{
 						new ServerListener(serverSocket.accept()).start();
+						System.out.println("successfully connected");
 					} /* end try */ 
 					catch (IOException e) 
 					{
 						if(!acceptingConnections) System.out.println("Successfully stopped ListenerSpawner");
+						else 
+						{
+							/* unexpected behavior, terminate thread */
+							acceptingConnections = false;
+							closed = true;
+						} /* end else */
 					} /* end catch */
 					
 				} /* end acceptingConnections */
 				
 			} /* end if */
+			
 			else
 			{
 				/* Not accepting connections, however not closed. Sleep */

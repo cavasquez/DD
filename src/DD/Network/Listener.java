@@ -75,10 +75,13 @@ public abstract class Listener extends NetworkSocket
 		} /* end try */
 		catch(IOException e)
 		{
+			//System.out.println("input? " + input);
 			System.out.println("IOException in Listener");
 			//e.printStackTrace();
 			System.out.println("Disconnected from sender");
-			return(null);
+			System.out.println("Closing socket");
+			message = null;
+			close();
 		} /* end catch */
 		catch(ClassNotFoundException e)
 		{
