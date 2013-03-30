@@ -26,9 +26,15 @@
 				throws SlickException {
 	    	MapTool mt = new MapTool();
 	    	
-	    	mt.selectedList.massAddSelectedList(0, 0, 20, 20);
-	    	System.out.println(mt.selectedList.selectedToString());
+	    	System.out.println("massAddSelectedMap");
+	    	mt.selectedList.massAddSelectedList(0, 0, 20, 20);	    	
 	    	System.out.println(mt.currentMap.toString());
+	    	
+	    	System.out.println("removeSelectedOnMap");
+	    	mt.selectedList.removeSelectedListOnMap();
+         	System.out.println(mt.currentMap.toString());
+	    	
+	    	
          	mt.selectedList.massRemoveSelectedList(1, 1, 19, 19);
          	System.out.println(mt.currentMap.toString());
 	    	
@@ -39,7 +45,6 @@
 			System.out.println(mt.currentMap.toString());
 
 			mt.selectedList.massAddSelectedList(0, 0, 20, 20);
-	    	System.out.println(mt.selectedList.selectedToString());
 	    	System.out.println(mt.currentMap.toString());
          	mt.selectedList.massRemoveSelectedList(1, 1, 19, 19);
          	System.out.println(mt.currentMap.toString());
