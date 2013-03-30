@@ -27,13 +27,11 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 			y2 = y1;
 			y1 = t;
 		}
-		
 		//check for clicking in the same spot.
 		if(x1==x2 && y1==y2){
 			Coordinate coord  = new Coordinate(x1, y1);
 			addSelectedList(coord);
 		}
-		
 		else{
 			int x = x2-x1;
 			System.out.println("x: "+x);
@@ -59,13 +57,11 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 			y2 = y1;
 			y1 = t;
 		}
-		
 		//check for clicking in the same spot.
 		if(x1==x2 && y1==y2){
 			Coordinate coord  = new Coordinate(x1, y1);
 			removeSelectedList(coord);
 		}
-		
 		else{
 			int x = x2-x1;
 			System.out.println("x: "+x);
@@ -103,7 +99,7 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 		}
 	}
 	
-	///FOR BACK END ONLY
+	//************************FOR BACK END ONLY***************************
 	
 	public void addSelectedList(Coordinate coord) throws SlickException{
 		//if the coord is all ready in the list do nothing.
