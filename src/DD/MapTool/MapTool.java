@@ -57,10 +57,16 @@ public class MapTool implements Serializable{
 	      this.world = e;
 	 }
 	
+	public Map getCurrentMap() {
+		return currentMap;
+	}
 	public Map getMapAtLocation(int x,int y){
 		return world.world[x][y];
 	}
 	
+	public SelectList getSelectedList() {
+		return selectedList;
+	}
 	
 	public void addNormList(Objects o) {
 		// TODO deserialize a file of objects 

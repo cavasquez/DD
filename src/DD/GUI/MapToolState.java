@@ -50,10 +50,10 @@ public class MapToolState extends BasicGameState {
 		//Render Map
     	RenderComponent renderComponent = null;
     	
-    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
-    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
-    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
-    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
+    	for(int i = 0; i < maptool.getCurrentMap().mapSize; i++) {
+    		for(int j = 0; j < maptool.getCurrentMap().mapSize; j++) {
+    			Objects[] list = new Objects[maptool.getCurrentMap().objectsStack[i][j].size()];
+    			System.arraycopy(maptool.getCurrentMap().objectsStack[i][j].toArray(), 0, list, 0, maptool.getCurrentMap().objectsStack[i][j].size());
     			for(int k = list.length; k > 0; k--) {
     				Component component = (Component)list[k-1];
     				if (RenderComponent.class.isInstance(component))
@@ -66,7 +66,7 @@ public class MapToolState extends BasicGameState {
     	}
 		
     	makeSelection.draw(660, 0);
-    	removeSelection.draw((670 + makeSelection.getWidth()), 0);
+    	removeSelection.draw(830, 0);
     	
     	g.drawString("BACK", 1130, 615);
     	g.drawString(mousePos, 900, 0);
@@ -77,10 +77,10 @@ public class MapToolState extends BasicGameState {
 			throws SlickException {
 		///Update Map
     	RenderComponent renderComponent = null;
-    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
-    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
-    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
-    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
+    	for(int i = 0; i < maptool.getCurrentMap().mapSize; i++) {
+    		for(int j = 0; j < maptool.getCurrentMap().mapSize; j++) {
+    			Objects[] list = new Objects[maptool.getCurrentMap().objectsStack[i][j].size()];
+    			System.arraycopy(maptool.getCurrentMap().objectsStack[i][j].toArray(), 0, list, 0, maptool.getCurrentMap().objectsStack[i][j].size());
     			for(int k = 0; k < list.length; k++) {
     				Component component = (Component)list[k];
     				if (RenderComponent.class.isInstance(component))
@@ -119,13 +119,22 @@ public class MapToolState extends BasicGameState {
     		
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
-    			
+    			maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
+    			System.out.println("selection button");
+    		}
+    	}
+    	
+    	//Remove selection Button
+    	if((posX > 830 && posX < 830 + removeSelection.getWidth()) && (posY > 0 && posY < removeSelection.getHeight())) {
+    		
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			maptool.getSelectedList().massRemoveSelectedList(x1, y1, x2, y2);
+    			System.out.println("remove button");
     		}
     	}
 
 	}
-	
-	
 	
 	public void getMapCoord() {
 		if(clicked) {
