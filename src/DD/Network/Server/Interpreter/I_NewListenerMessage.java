@@ -19,4 +19,5 @@ public class I_NewListenerMessage extends ServerInterpreter
 		NewListenerMessage nlm = (NewListenerMessage) message.getMessage();
 		system.addListener(nlm.getListenerID(), (ServerListener)nlm.getListener(), nlm.getIp());
 	} /* end interpret method */
+	
 } /* end I_NewListenerMessage */

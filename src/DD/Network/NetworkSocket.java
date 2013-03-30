@@ -45,8 +45,6 @@ public abstract class NetworkSocket extends Thread
 	protected abstract void createStreams();
 
 	protected abstract void closeStreams();
-
-	
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
@@ -55,5 +53,15 @@ public abstract class NetworkSocket extends Thread
 	{
 		return socketID;
 	} /* end getID method */
+	
+	public int getPort()
+	{
+		return socket.getPort();
+	} /* end getPort method */
+	
+	public int getLocalPort()
+	{
+		return socket.getLocalPort();
+	} /* end getLocalPort method */
 	
 } /* end NetworkSocket class */
