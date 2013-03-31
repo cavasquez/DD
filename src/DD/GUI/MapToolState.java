@@ -45,8 +45,7 @@ public class MapToolState extends BasicGameState {
 	}
 
 	@Override
-	public void render(GameContainer gc, StateBasedGame sb, Graphics g)
-			throws SlickException {
+	public void render(GameContainer gc, StateBasedGame sb, Graphics g) throws SlickException {
 		//Render Map
     	RenderComponent renderComponent = null;
     	
@@ -65,6 +64,7 @@ public class MapToolState extends BasicGameState {
     		}
     	}
 		
+    	//draw Make Selection and Remove Selection buttons to screen
     	makeSelection.draw(660, 0);
     	removeSelection.draw(830, 0);
     	
@@ -74,20 +74,11 @@ public class MapToolState extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sb, int delta) throws SlickException {
+		posX = mouse.getMouseX();
+    	posY = mouse.getMouseY();
+		mousePos = "Mouse position: " + posX + " " + posY;
 		
-		//Clicking on map
-		//NOTE THIS NEEDS TO BE THE FIRST THING IN THIS METHOD!!!
-    	//if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
-    	if((posX > 40 && posX < 1200) && (posY > 40 && posY < 670)) {
-    		//you are inside map area
-    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
-	    		if(mouse.isMouseButtonDown(0)) {
-	    			getMapCoord();
-	    			//System.out.println("click");
-	    		}
-	    		//System.out.println("Over map");
-    		}
-    	}
+		clickMap(gc);
 		
 		///Update Map
     	RenderComponent renderComponent = null;
@@ -107,23 +98,27 @@ public class MapToolState extends BasicGameState {
     		}
     	}
 		
-    	posX = mouse.getMouseX();
-    	posY = mouse.getMouseY();
-		mousePos = "Mouse position: " + posX + " " + posY;
-		
-		//Back button
-    	if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
-		{
-			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-			{
-				//go back to main menu
-				sb.enterState(0);
-			}
-		}
+		//update buttons on screen
+		backButton(gc, sb);
+    	makeSelectionButton(gc);
+    	removeSelectionButton(gc);
 
-    
-    	
-    	//Make Selection Button
+	}
+	
+	//Clicking on map
+	public void clickMap(GameContainer gc) {
+		//NOTE THIS NEEDS TO BE THE FIRST THING IN UPDATE METHOD!!!
+    	if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
+    		//you are inside map area
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+	    		getMapCoord();
+    		}
+    	}
+	
+	}
+	
+	//Make Selection Button
+	public void makeSelectionButton(GameContainer gc) throws SlickException {
     	if((posX > 660 && posX < 660 + makeSelection.getWidth()) && (posY > 0 && posY < makeSelection.getHeight())) {
     		
     		//if you click on the button
@@ -132,8 +127,10 @@ public class MapToolState extends BasicGameState {
     			System.out.println("selection button");
     		}
     	}
-    	
-    	//Remove selection Button
+	}
+	
+	//Remove selection Button
+	public void removeSelectionButton(GameContainer gc) throws SlickException {
     	if((posX > 830 && posX < 830 + removeSelection.getWidth()) && (posY > 0 && posY < removeSelection.getHeight())) {
     		
     		//if you click on the button
@@ -142,7 +139,18 @@ public class MapToolState extends BasicGameState {
     			System.out.println("remove button");
     		}
     	}
-
+	}
+	
+	//Back Button
+	public void backButton(GameContainer gc, StateBasedGame sb) {
+    	if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				//go back to main menu
+				sb.enterState(0);
+			}
+		}
 	}
 	
 	public void getMapCoord() {
