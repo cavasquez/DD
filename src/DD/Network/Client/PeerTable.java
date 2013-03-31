@@ -63,6 +63,14 @@ public class PeerTable
 		return removed;
 	} /* end removePeer method */
 	
+	public void print()
+	{
+		for(Peer peer : peerList)
+		{
+			peer.print();
+		} /* end for loop */
+	} /* end print method */
+	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
 	 ******************************************************************************/

@@ -40,4 +40,9 @@ public class Client
 		this.ip = ip;
 	} /* end Client constructor */
 	
+	public void print()
+	{
+		System.out.println(clientID + " " + username + " " + senderID + " " + sender + " " + listenerID + " " + listener + " " + ip);
+	} /* end print method */
+	
 } /* end Client class */

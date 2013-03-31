@@ -1,13 +1,8 @@
 package DD.Network.Client.Interpreter;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-
 import DD.Message.InitialMessage;
 import DD.Message.NetworkMessage;
-import DD.Network.Network;
-import DD.Network.Client.ClientListener;
+
 
 /*****************************************************************************************************
  * I_InitialMessage will check to see if the username was correct and then add itself to the peerList
@@ -32,6 +27,7 @@ public class I_InitialMessage extends ClientInterpreter
 		{/* The sent username was valid. Add the provided ID to ClientSystem and the peerList */
 			system.setClientID(im.getID());
 			system.addUser(im.getID(), im.getUsername(), null); /* Client does not need to know it's ip */
+			System.out.println("I_InitialMessage: added the user " + im.getUsername() + " with uid " + im.getID());
 			
 		} /* end else */
 		

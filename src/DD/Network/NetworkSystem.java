@@ -1,5 +1,8 @@
 package DD.Network;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import DD.Chat.ChatSystem;
 import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
@@ -98,6 +101,11 @@ public class NetworkSystem extends Network
 		network.terminate();
 	} /* end terminate method */
 	
+	public void printUsers()
+	{
+		network.printUsers();		
+	} /* end printUsers method */
+	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
@@ -134,5 +142,17 @@ public class NetworkSystem extends Network
 		this.username = username;
 		network.setUsername(username);
 	} /* end setUsername */
+	
+	@Override
+	public void setServerIP(InetAddress serverIP)
+	{
+		network.setServerIP(serverIP);
+	} /* end setServerIP method */
+	
+	@Override
+	public boolean setServerIP(String ip)
+	{
+		return network.setServerIP(ip);
+	} /* end setServerIP method */
 	
 } /* end Network class */

@@ -41,7 +41,6 @@ public class ListenerSpawner extends Thread
 	} /* end stopAccepting method */
 	
 	/************************************ Important Method *************************************/
-	
 	public void run()
 	{
 		ServerSocket serverSocket = null;
@@ -70,6 +69,25 @@ public class ListenerSpawner extends Thread
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} /* end catch */
+			
+		} /* end if */
+		
+		if(serverSocket != null)
+		{
+			if(!serverSocket.isClosed())
+			{
+				try 
+				{
+					serverSocket.close();
+				} /* end try */ 
+				catch (IOException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} /* end catch */
+				
+			} /* end if */
+			serverSocket = null;
 		} /* end if */
 		
 	} /* end run method */

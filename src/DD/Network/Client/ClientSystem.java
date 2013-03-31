@@ -110,6 +110,7 @@ public class ClientSystem extends Network implements NetworkInterface
 			} /* end while loop */
 			
 			/* Now try to connect to server */
+			System.out.println("serverIP: " + serverIP);
 			sender = new ClientSender(new Socket(serverIP, Network.SERVER_PORT));
 			sender.sendMessage(new NetworkMessage(Network.GM_USER_ID, 0, new InitialMessage(username, false, clientID)));
 		} /* end try */
@@ -118,6 +119,9 @@ public class ClientSystem extends Network implements NetworkInterface
 			/* failure to connect */
 			System.out.println("Failed to connecto to server");
 		} /* end catch */
+		
+		/* Finally, start the MessageQueue */
+		MessageQueue.getInstance().start();
 		
 	} /* end start method */
 
@@ -147,6 +151,11 @@ public class ClientSystem extends Network implements NetworkInterface
 	{
 		return peerList.removePeer(peerID);
 	} /* end removePeer method*/
+	
+	public void printUsers()
+	{
+		peerList.print();
+	} /* end printUsers */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

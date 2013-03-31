@@ -33,24 +33,16 @@ public class I_InitialMessage extends ServerInterpreter
 		
 		if (clientList.addUsername(listenerID, newID, im.getUsername()))
 		{
-			/* Username was successfully added to userList. Now, give the client
-			 * it's new serverID, inform it's peers of their new brother. */
-			
-			/* Tell client it's serverID */
-			InitialMessage confirmation = new InitialMessage(im.getUsername(), true, newID);
-			system.sendMessage(Network.GM_USER_ID, newID, confirmation);
-			
-			/* Communicate to the peers their new brother */
-			AddUserMessage am = new AddUserMessage(newID, im.getUsername(), system.getListenerIP(listenerID));
-			system.sendMessage(Network.GM_USER_ID, Network.EVERYONE, am, newID);
-			
-			/* Now connect to the clients Listener */
+			/* Username was successfully added to userList. Now, connect to the clients listener,
+			 * give the clients it's new serverID, inform it's peers of their new brother. */
+			System.out.println("I_InitialMessage: added the user " + im.getUsername() + " with uid " + newID + " and listener " + listenerID);
+			/* Connect to clients listener */
 			Socket socket = null;
 			try 
 			{
 				socket = new Socket(system.getListenerIP(listenerID), Network.CLIENT_PORT);
 				ServerSender sender = new ServerSender(socket);
-				system.addSender(newID, sender.getID(), sender);
+				clientList.addSender(newID, sender.getID(), sender);
 				
 				/* Successfully connected to client listener */
 			} /* end try */
@@ -60,6 +52,14 @@ public class I_InitialMessage extends ServerInterpreter
 				System.out.println("Failed to connect to client listener");
 				//TODO: fix
 			} /* end catch */
+			
+			/* Tell client it's serverID */
+			InitialMessage confirmation = new InitialMessage(im.getUsername(), true, newID);
+			system.sendMessage(Network.GM_USER_ID, newID, confirmation);
+			
+			/* Communicate to the peers their new brother */
+			AddUserMessage am = new AddUserMessage(newID, im.getUsername(), system.getListenerIP(listenerID));
+			system.sendMessage(Network.GM_USER_ID, Network.EVERYONE, am, newID);
 			
 		} /* end if */
 		else
