@@ -73,8 +73,22 @@ public class MapToolState extends BasicGameState {
 	}
 
 	@Override
-	public void update(GameContainer gc, StateBasedGame sb, int delta)
-			throws SlickException {
+	public void update(GameContainer gc, StateBasedGame sb, int delta) throws SlickException {
+		
+		//Clicking on map
+		//NOTE THIS NEEDS TO BE THE FIRST THING IN THIS METHOD!!!
+    	//if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
+    	if((posX > 40 && posX < 1200) && (posY > 40 && posY < 670)) {
+    		//you are inside map area
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+	    		if(mouse.isMouseButtonDown(0)) {
+	    			getMapCoord();
+	    			//System.out.println("click");
+	    		}
+	    		//System.out.println("Over map");
+    		}
+    	}
+		
 		///Update Map
     	RenderComponent renderComponent = null;
     	for(int i = 0; i < maptool.getCurrentMap().mapSize; i++) {
@@ -107,18 +121,7 @@ public class MapToolState extends BasicGameState {
 			}
 		}
 
-    	//Clicking on map
-    	//if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
-    	if((posX > 40 && posX < 1200) && (posY > 40 && posY < 670)) {
-    		//you are inside map area
-    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
-	    		if(mouse.isMouseButtonDown(0)) {
-	    			getMapCoord();
-	    			//System.out.println("click");
-	    		}
-	    		//System.out.println("Over map");
-    		}
-    	}
+    
     	
     	//Make Selection Button
     	if((posX > 660 && posX < 660 + makeSelection.getWidth()) && (posY > 0 && posY < makeSelection.getHeight())) {
