@@ -25,36 +25,13 @@ public class I_InitialMessage extends ClientInterpreter
 		if (!im.getValid())
 		{/* The sent username was invalid (already exists). Kill sender */
 			//TODO: communicate to lobby (and then to user) that username was invalid and try again
-			system.setSender(null);
+			system.stop();
 			System.out.println("Username Exists!");
 		} /* end if */
 		else
 		{/* The sent username was valid. Add the provided ID to ClientSystem and the peerList */
 			system.setClientID(im.getID());
 			system.addUser(im.getID(), im.getUsername(), null); /* Client does not need to know it's ip */
-			
-			/* Phase 2: */
-			/* Now that the client knows it is a part of the system, it will need to set up a listener and 
-			 * tell the server that it's listener is ready. */
-			boolean success = true;
-			try 
-			{
-				ServerSocket serverSocket = new ServerSocket(Network.CLIENT_PORT);
-				ClientListener listener = new ClientListener(serverSocket.accept());
-				listener.start();
-				system.setListener(listener);
-			} /* end try */
-			catch (IOException e) 
-			{
-				// TODO Communicate to user that Client could not connect to Server
-				e.printStackTrace();
-				success = false;
-			} /* end catch */
-			
-			if (!success)
-			{/* Failed to connect to server */
-				//TODO: deal with error
-			} /*  end if*/
 			
 		} /* end else */
 		

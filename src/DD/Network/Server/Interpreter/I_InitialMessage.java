@@ -1,10 +1,14 @@
 package DD.Network.Server.Interpreter;
 
+import java.io.IOException;
+import java.net.Socket;
+
 import DD.Message.AddUserMessage;
 import DD.Message.InitialMessage;
 import DD.Message.NetworkMessage;
 import DD.Network.Network;
 import DD.Network.Server.ClientTable;
+import DD.Network.Server.ServerSender;
 
 /*****************************************************************************************************
  * I_InitialMessage will be used to interpret and process all InitialMessages sent to the Server.
@@ -39,6 +43,23 @@ public class I_InitialMessage extends ServerInterpreter
 			/* Communicate to the peers their new brother */
 			AddUserMessage am = new AddUserMessage(newID, im.getUsername(), system.getListenerIP(listenerID));
 			system.sendMessage(Network.GM_USER_ID, Network.EVERYONE, am, newID);
+			
+			/* Now connect to the clients Listener */
+			Socket socket = null;
+			try 
+			{
+				socket = new Socket(system.getListenerIP(listenerID), Network.CLIENT_PORT);
+				ServerSender sender = new ServerSender(socket);
+				system.addSender(newID, sender.getID(), sender);
+				
+				/* Successfully connected to client listener */
+			} /* end try */
+			catch (IOException e) 
+			{
+				/* Failed to connect to client */
+				System.out.println("Failed to connect to client listener");
+				//TODO: fix
+			} /* end catch */
 			
 		} /* end if */
 		else

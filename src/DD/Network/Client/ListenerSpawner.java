@@ -27,6 +27,21 @@ public class ListenerSpawner extends Thread
 		socketReady = false;
 	} /* end ListenerSpawner constructor */
 	
+	public void stopAccepting()
+	{
+		/* Stop the server from accepting new connections */
+		try 
+		{
+			serverSocket.close();
+		} /* end try */
+		catch (IOException e) 
+		{
+			System.out.println("ServerSpawner: serverSocket does not exist");
+		} /* end catch */
+	} /* end stopAccepting method */
+	
+	/************************************ Important Method *************************************/
+	
 	public void run()
 	{
 		ServerSocket serverSocket = null;

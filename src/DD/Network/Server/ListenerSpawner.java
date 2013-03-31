@@ -120,11 +120,10 @@ public class ListenerSpawner extends Thread
 				
 			} /* end if */
 			
-			
 		} /* end while loop */
 		
 		/* Done. Clean up */		
-		if (serverSocket != null)
+		if (serverSocket != null && !serverSocket.isClosed())
 		{
 			try 
 			{

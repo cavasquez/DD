@@ -34,7 +34,7 @@ public class ClientSystem extends Network implements NetworkInterface
 	private ClientSender sender = null;
 	private int clientID;						/* ID provided by server */
 	private InetAddress serverIP = null;		/* ip address of the server */
-	
+	private ListenerSpawner spawner;
 	
 	/************************************ Class Methods *************************************/
 	public ClientSystem() 
@@ -93,7 +93,7 @@ public class ClientSystem extends Network implements NetworkInterface
 		/* First, get a listener ready for contact with the server */
 		try 
 		{
-			ListenerSpawner spawner = new ListenerSpawner();
+			spawner = new ListenerSpawner();
 			spawner.start();
 			
 			while(spawner.getSocketReady() != true)
@@ -124,8 +124,10 @@ public class ClientSystem extends Network implements NetworkInterface
 	@Override
 	public void stop() 
 	{
-		// TODO Auto-generated method stub
-		
+		spawner.stopAccepting();
+		sender.close();
+		sender = null;
+		//TODO: finish
 	} /* end stop method */
 
 	@Override
