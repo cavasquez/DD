@@ -34,7 +34,7 @@ public class ClientSystem extends Network implements NetworkInterface
 	private ClientSender sender = null;
 	private int clientID;						/* ID provided by server */
 	private InetAddress serverIP = null;		/* ip address of the server */
-	
+	private ListenerSpawner spawner;
 	
 	/************************************ Class Methods *************************************/
 	public ClientSystem() 
@@ -93,7 +93,7 @@ public class ClientSystem extends Network implements NetworkInterface
 		/* First, get a listener ready for contact with the server */
 		try 
 		{
-			ListenerSpawner spawner = new ListenerSpawner();
+			spawner = new ListenerSpawner();
 			spawner.start();
 			
 			while(spawner.getSocketReady() != true)
@@ -110,6 +110,7 @@ public class ClientSystem extends Network implements NetworkInterface
 			} /* end while loop */
 			
 			/* Now try to connect to server */
+			System.out.println("serverIP: " + serverIP);
 			sender = new ClientSender(new Socket(serverIP, Network.SERVER_PORT));
 			sender.sendMessage(new NetworkMessage(Network.GM_USER_ID, 0, new InitialMessage(username, false, clientID)));
 		} /* end try */
@@ -119,13 +120,18 @@ public class ClientSystem extends Network implements NetworkInterface
 			System.out.println("Failed to connecto to server");
 		} /* end catch */
 		
+		/* Finally, start the MessageQueue */
+		MessageQueue.getInstance().start();
+		
 	} /* end start method */
 
 	@Override
 	public void stop() 
 	{
-		// TODO Auto-generated method stub
-		
+		spawner.stopAccepting();
+		sender.close();
+		sender = null;
+		//TODO: finish
 	} /* end stop method */
 
 	@Override
@@ -145,6 +151,11 @@ public class ClientSystem extends Network implements NetworkInterface
 	{
 		return peerList.removePeer(peerID);
 	} /* end removePeer method*/
+	
+	public void printUsers()
+	{
+		peerList.print();
+	} /* end printUsers */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

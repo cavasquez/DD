@@ -80,9 +80,9 @@ public class ServerSystem extends Network implements NetworkInterface
 		} /* end if */
 		else
 		{ /* send to specific client */
-			
 			for (Client client : clients)
 			{
+				System.out.println("clientID" + client.clientID + " sender " + client.sender);
 				if (client.clientID == receiver) (client.sender).sendMessage(send);
 			} /* end for loop */
 		} /* end else */
@@ -135,6 +135,7 @@ public class ServerSystem extends Network implements NetworkInterface
 		spawn = new ListenerSpawner();
 		spawn.startAccepting();
 		spawn.start();
+		MessageQueue.getInstance().start();
 		
 	} /* end start method */
 
@@ -197,6 +198,11 @@ public class ServerSystem extends Network implements NetworkInterface
 	{
 		return clientList.getListenerIP(listenerID);
 	} /* end getListenerIP method */
+	
+	public void printUsers()
+	{
+		clientList.print();
+	} /* end printClients method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

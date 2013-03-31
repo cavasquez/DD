@@ -27,6 +27,20 @@ public class ListenerSpawner extends Thread
 		socketReady = false;
 	} /* end ListenerSpawner constructor */
 	
+	public void stopAccepting()
+	{
+		/* Stop the server from accepting new connections */
+		try 
+		{
+			serverSocket.close();
+		} /* end try */
+		catch (IOException e) 
+		{
+			System.out.println("ServerSpawner: serverSocket does not exist");
+		} /* end catch */
+	} /* end stopAccepting method */
+	
+	/************************************ Important Method *************************************/
 	public void run()
 	{
 		ServerSocket serverSocket = null;
@@ -55,6 +69,25 @@ public class ListenerSpawner extends Thread
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} /* end catch */
+			
+		} /* end if */
+		
+		if(serverSocket != null)
+		{
+			if(!serverSocket.isClosed())
+			{
+				try 
+				{
+					serverSocket.close();
+				} /* end try */ 
+				catch (IOException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} /* end catch */
+				
+			} /* end if */
+			serverSocket = null;
 		} /* end if */
 		
 	} /* end run method */

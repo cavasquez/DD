@@ -62,7 +62,23 @@ public class ListenerSpawner extends Thread
 	/************************************ Important Method *************************************/
 	public void run()
 	{
-		System.out.println("run");
+		/* First, make a new server socket to get a new client */
+		try
+		{
+			System.out.println("trying to listen on port");
+			serverSocket = new ServerSocket(Network.SERVER_PORT, Network.BACKLOG);
+			System.out.println("Listening on port " + serverSocket.getLocalPort());
+		} /* end try */
+		catch (IOException e)
+		{
+			System.out.println("Failed to listen on port: " + Integer.toString(serverSocket.getLocalPort()));
+			System.out.println("Closing the ListenerSpawner");
+			closed = true;
+		} /* end catch */
+		
+		/* Now that the server socket has been made, wait for a connection
+		 * and then start a ServerListener. */
+		
 		while (!closed)
 		{
 			if (acceptingConnections)
@@ -70,26 +86,10 @@ public class ListenerSpawner extends Thread
 				/* Accepting connections. Loop */
 				while (acceptingConnections)
 				{
-					/* First, make a new server socket to get a new client */
-					try
-					{
-						System.out.println("trying to listen on port");
-						serverSocket = new ServerSocket(Network.SERVER_PORT, Network.BACKLOG);
-						System.out.println("Listening on port " + serverSocket.getLocalPort());
-					} /* end try */
-					catch (IOException e)
-					{
-						System.out.println("Failed to listen on port: " + Integer.toString(serverSocket.getLocalPort()));
-						acceptingConnections = false;
-						closed = true;
-					} /* end catch */
-					
-					/* Now that the server socket has been made, wait for a connection
-					 * and then start a ServerListener. */
 					try 
 					{
 						new ServerListener(serverSocket.accept()).start();
-						System.out.println("successfully connected");
+						System.out.println("Sender successfully connected");
 					} /* end try */ 
 					catch (IOException e) 
 					{
@@ -120,8 +120,22 @@ public class ListenerSpawner extends Thread
 				
 			} /* end if */
 			
-			
 		} /* end while loop */
+		
+		/* Done. Clean up */		
+		if (serverSocket != null && !serverSocket.isClosed())
+		{
+			try 
+			{
+				serverSocket.close();
+			} /* end try */ 
+			catch (IOException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} /* end catch */
+			serverSocket = null;
+		} /* end if */
 		
 	} /* end run method */
 	

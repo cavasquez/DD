@@ -28,9 +28,10 @@ public abstract class Network implements NetworkInterface
 	protected CombatSystem cs;
 	protected ChatSystem chat;
 	protected String username;
-		
 	
 	/************************************ Class Methods*************************************/
+	public abstract void printUsers();
+	
 	public void setServerIP(InetAddress serverIP)
 	{
 		this.serverIP = serverIP;

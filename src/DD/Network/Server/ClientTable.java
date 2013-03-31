@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ClientTable 
 {
 	/************************************ Class Attributes *************************************/
-	private static ArrayList<Client> clientList = null;
+	private ArrayList<Client> clientList = null;
 	
 	/************************************ Class Methods *************************************/
 	public ClientTable()
@@ -149,6 +149,12 @@ public class ClientTable
 	{
 		return(clientList);
 	} /* end getUserList */
+	
+	public void print()
+	{
+		System.out.println("CID\t username\t senderID\t sender \t listenerID\t listener\t ip");
+		for(Client client : clientList) client.print();
+	} /* end print method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************
