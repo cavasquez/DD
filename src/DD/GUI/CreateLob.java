@@ -11,7 +11,7 @@ public class CreateLob extends BasicGameState
 	private String mouse = "No input yet!";
 	Music dungeon;
 	Sound button;
-	ArrayList<Lobby> newLobby = new ArrayList<Lobby>();
+	ArrayList<Lobby> lobby = new ArrayList<Lobby>();
 	
 	
 	
@@ -59,6 +59,7 @@ public class CreateLob extends BasicGameState
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
+				
 				sbg.enterState(2);
 			}
 		}
