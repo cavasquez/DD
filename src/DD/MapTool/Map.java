@@ -26,10 +26,10 @@ public class Map extends Entity implements Serializable{
 	public ObjectsPriorityStack[][] objectsStack ; //ops<Objects>
 	TempObjects[][]  tempObjects;
 	int numTempObjects;
-	Image defImage = null;
-	Image spriteSheet = null;
-	Image floorSprite = null;
-	Image floorImage = null;
+	transient Image defImage = null;
+	transient Image spriteSheet = null;
+	transient Image floorSprite = null;
+	transient Image floorImage = null;
 	boolean hasTempObjects;
 	String name;
 	public final int mapSize = 21;
@@ -74,8 +74,39 @@ public class Map extends Entity implements Serializable{
 	 * after each player turn, decrement each temp object turn count.
 	 * 	if turn count == 0 after decremented, remove that temp item.
 	 */
+	
+	public void writeMeHelper(){
+		
+		Stack<Objects> stackHelper = new Stack<Objects>();
+		int[][] stackSize = new int[mapSize][mapSize];
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				stackSize[i][j] = objectsStack[i][j].getPQueue().size();
+			}
+		}
+		
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				for (int z = 0; z < objectsStack[i][j].getPQueue().size(); z++) {
+					stackHelper.push(objectsStack[i][j].pop());
+				}
+			}
+		}
+		
+		for (int i = 0; i < mapSize; i++) {
+			for (int j = 0; j < mapSize; j++) {
+				for (int z = 0; z < stackSize[i][j]; z++) {
+					stackHelper.peek().setImage(null);
+					place(i,j,stackHelper.pop());
+				}
+			}
+		}
+	}
+	
 	public void writeMe(String name, String path){
 		try{
+			//for each objects in map. make it's image null
+		
 			FileOutputStream fileOut = new FileOutputStream(path+name+".ser");
 			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
 			out.writeObject(this);
@@ -206,6 +237,7 @@ public class Map extends Entity implements Serializable{
 		objectsStack[x][y].push(obj);
 		updateComponentList();		
 	}
+	
 	public void placeObjectHelper(int x, int y, Objects obj){
 		//check if there is an objects with the same priority. if so remove it.
 		Objects[] t = objectsStack[x][y].toArray(); //generates a sorted array based on the given priority queue

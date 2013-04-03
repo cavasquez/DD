@@ -1,10 +1,14 @@
 package DD.Network.Server.Interpreter;
 
+import java.io.IOException;
+import java.net.Socket;
+
 import DD.Message.AddUserMessage;
 import DD.Message.InitialMessage;
 import DD.Message.NetworkMessage;
 import DD.Network.Network;
 import DD.Network.Server.ClientTable;
+import DD.Network.Server.ServerSender;
 
 /*****************************************************************************************************
  * I_InitialMessage will be used to interpret and process all InitialMessages sent to the Server.
@@ -29,8 +33,25 @@ public class I_InitialMessage extends ServerInterpreter
 		
 		if (clientList.addUsername(listenerID, newID, im.getUsername()))
 		{
-			/* Username was successfully added to userList. Now, give the client
-			 * it's new serverID, inform it's peers of their new brother. */
+			/* Username was successfully added to userList. Now, connect to the clients listener,
+			 * give the clients it's new serverID, inform it's peers of their new brother. */
+			System.out.println("I_InitialMessage: added the user " + im.getUsername() + " with uid " + newID + " and listener " + listenerID);
+			/* Connect to clients listener */
+			Socket socket = null;
+			try 
+			{
+				socket = new Socket(system.getListenerIP(listenerID), Network.CLIENT_PORT);
+				ServerSender sender = new ServerSender(socket);
+				clientList.addSender(newID, sender.getID(), sender);
+				
+				/* Successfully connected to client listener */
+			} /* end try */
+			catch (IOException e) 
+			{
+				/* Failed to connect to client */
+				System.out.println("Failed to connect to client listener");
+				//TODO: fix
+			} /* end catch */
 			
 			/* Tell client it's serverID */
 			InitialMessage confirmation = new InitialMessage(im.getUsername(), true, newID);
@@ -47,7 +68,7 @@ public class I_InitialMessage extends ServerInterpreter
 			 * Then, remove Server from userList */
 			InitialMessage rejection = new InitialMessage(null, false, null);
 			system.sendMessage(Network.GM_USER_ID, newID, rejection);
-			system.removeClient(listenerID); /* removeUser kills the Server thread */
+			system.removeClient(listenerID); /* removeClient kills the Server thread */
 		} /* end else */
 		
 	} /* end interpret method */

@@ -2,6 +2,7 @@ package DD.Character.Abilities;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -15,7 +16,7 @@ import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 import DD.Message.TargetSelectedMessage;
-import DD.SlickTools.RenderComponent;
+import DD.SlickTools.ImageRenderComponent;
 
 /*****************************************************************************************************
  * The Ability class will subclass the RenderComponent class. It will hold any possible player
@@ -39,7 +40,7 @@ import DD.SlickTools.RenderComponent;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public abstract class Ability extends RenderComponent
+public abstract class Ability extends ImageRenderComponent
 {
 	/************************************ Class Attributes *************************************/
 	protected static DDCharacter character;
@@ -62,6 +63,12 @@ public abstract class Ability extends RenderComponent
 		this.name = name;
 		this.description = description;
 		this.activated = false;
+		try {
+			this.image = new Image(action.image);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	} /* end ability constructor */
 	
 	protected abstract void action() throws SlickException;

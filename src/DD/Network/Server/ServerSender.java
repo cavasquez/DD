@@ -12,7 +12,6 @@ import DD.Network.Sender;
 
 public class ServerSender extends Sender
 {
-
 	public ServerSender(Socket socket) 
 	{
 		super(socket);

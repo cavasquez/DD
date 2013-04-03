@@ -1,6 +1,5 @@
 package DD.Message;
 
-
 /*****************************************************************************************************
  * Chat message will provide a way for MessageBox (the view) to communicate with ChatSystem (the controller)
  * and for the server to send chat messages to the ChatBox. It will contain the basic necessary
@@ -11,6 +10,9 @@ package DD.Message;
 
 public class ChatMessage extends Message
 {
+
+	private static final long serialVersionUID = 5367715987474342828L;
+
 	/************************************ Class Constants *************************************/
 	public static final int SEND_TO_ALL = -1;
 	
@@ -23,7 +25,7 @@ public class ChatMessage extends Message
 	/************************************ Class Methods *************************************/
 	public ChatMessage(int sender, int receiver, int action, String message) 
 	{
-		super(Message.CHAT_MESSAGE);
+		super(Type.CHAT_MESSAGE);
 		this.sender = sender;
 		this.receiver = receiver;
 		this.action = action;		/* Action to be performed in ChatSystem */

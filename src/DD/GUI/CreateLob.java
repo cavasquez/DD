@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+
+import DD.System.DDSystem;
 public class CreateLob extends BasicGameState
 {
 	
@@ -23,6 +25,7 @@ public class CreateLob extends BasicGameState
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
 		screen = new Image("Images/Menus/lobby.jpg");
+		
 		
 		//dungeon = new Music("Audio/dunEffect1.wav");
 		//dungeon.loop();

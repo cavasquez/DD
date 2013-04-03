@@ -27,10 +27,10 @@ public class RemoveCharacter extends TargetAbility
 	private GMToolsBox gmt;			/* Give PlaceCharacter access tot he GMToolBox */
 	
 	/************************************ Class Methods *************************************/
-	public RemoveCharacter(int id) 
+	public RemoveCharacter(int id, GMToolsBox gmt) 
 	{
 		super(id, CombatSystem.ActionType.SYSTEM, CombatSystem.Action.REMOVE_CHARACTER, "Remove Character", "Removes character from the map.");
-		// TODO Auto-generated constructor stub
+		this.gmt = gmt;
 	} /* end RemoveCharacter constructor */
 
 	@Override
@@ -57,7 +57,7 @@ public class RemoveCharacter extends TargetAbility
 		{
 			/* We can only remove an existing character */
 			Integer[] body = new Integer[I_StandardAttack.BODY_SIZE];
-			body[I_RemoveCharacter.CHARACTER_ID] = gmt.getNewCharacterID();
+			body[I_RemoveCharacter.CHARACTER_ID] = tsm.getTargets()[0].getCharacterID(); // There should only be one target
 			body[I_RemoveCharacter.POS_X] = tsm.getPosition().x;
 			body[I_RemoveCharacter.POS_Y] = tsm.getPosition().y;
 			CombatMessage cm = new CombatMessage
@@ -68,13 +68,13 @@ public class RemoveCharacter extends TargetAbility
 						CombatSystem.Action.REMOVE_CHARACTER,
 						body
 					);
-			sendToInterpreter(cm);
 			
 			/* Place the character into the holder. */
 			CharacterSheet sheet = cs.getCharacter(cm.getBody()[I_RemoveCharacter.CHARACTER_ID]).getSheet();
 			/* Note that the GM will only ever have mobs and no other player will have mobs */
 			if(sheet.getNetID() == Network.GM_USER_ID) gmt.addCharacter(GMToolsBox.Holder.MOB, sheet);
 			else gmt.addCharacter(GMToolsBox.Holder.PLAYER, sheet);
+			gmt.removeCharacterID(cm.getBody()[I_RemoveCharacter.CHARACTER_ID]);
 			
 			this.sendToInterpreter(cm);
 			done(null);

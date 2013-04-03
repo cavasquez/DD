@@ -1,9 +1,7 @@
 package DD.Message;
 
-import DD.ActionBox.ActionBox;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.CombatSystem;
-
 
 /*****************************************************************************************************
  * CombatMessage will provide a way for the View to communicate with CombatSystem. While CombatSystem
@@ -23,6 +21,7 @@ import DD.CombatSystem.CombatSystem;
 
 public class CombatMessage extends Message
 {
+	private static final long serialVersionUID = -5536130004546109256L;
 	/************************************ Class Attributes *************************************/
 	private Integer source;					/* The source of the request */
 	private Integer target[];				/* The target, if any, of the request */
@@ -41,7 +40,7 @@ public class CombatMessage extends Message
 			Integer[] body
 	)
 	{
-		super(Message.COMBAT_MESSAGE);
+		super(Type.COMBAT_MESSAGE);
 		this.source = source;
 		this.target = target;
 		this.action = action;

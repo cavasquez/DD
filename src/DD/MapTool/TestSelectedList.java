@@ -26,38 +26,32 @@
 				throws SlickException {
 	    	MapTool mt = new MapTool();
 	    	
-	    	for (int i = 0; i < mt.getMapAtLocation(0, 0).mapSize; i++) {
-				for (int j = 0; j < mt.getMapAtLocation(0, 0).mapSize; j++) {
-					if(i == j || i+j == 19){
-						Coordinate coord = new Coordinate(i, j);
-						mt.addSelectedList(coord);
-					}
-				}
-			}		
-	    	Obstacle wall = new Obstacle("t(*-*t)", null, 5, 5, mt.getMapAtLocation(0, 0));
-			mt.placeSelectedList(wall, mt.getMapAtLocation(0, 0));
-	    	System.out.println(mt.selectedToString());
-	    	System.out.println(mt.getMapAtLocation(0, 0).toString());
+	    	System.out.println("massAddSelectedMap");
+	    	mt.selectedList.massAddSelectedList(0, 0, 20, 20);	    	
+	    	System.out.println(mt.currentMap.toString());
+	    	
+	    	System.out.println("removeSelectedOnMap");
+	    	mt.selectedList.removeSelectedListOnMap();
+         	System.out.println(mt.currentMap.toString());
 	    	
 	    	
-	    	for (int i = 0; i < mt.getMapAtLocation(0, 0).mapSize; i++) {
-				for (int j = 0; j < mt.getMapAtLocation(0, 0).mapSize; j++) {
-					if(i == j || i+j == 19){
-						mt.getMapAtLocation(0, 0).remove(i, j);//removing t(*-*t)
-						Coordinate coord = new Coordinate(i, j);
-						mt.removeSelectedList(coord); //clearing selectedList one by one
-					}
-				}
-			}
+         	mt.selectedList.massRemoveSelectedList(1, 1, 19, 19);
+         	System.out.println(mt.currentMap.toString());
+	    	
 			Floor flo1 = new Floor("~(*-*~)", null, 0, 0, 5, 5, mt.getMapAtLocation(0, 0));
-			mt.placeSelectedList(flo1, mt.getMapAtLocation(0, 0)); //this should yield a map with all floors
-	    	System.out.println(mt.selectedToString());
-	    	System.out.println(mt.getMapAtLocation(0, 0).toString());
-	    	
-	    	mt.getMapAtLocation(0, 0).remove(0, 0);
-	    	System.out.println(mt.getMapAtLocation(0, 0).toString());
-	    	
-	    	
+			mt.selectedList.placeSelectedListOnMap(flo1); //this should yield a map with all floors
+			System.out.println(mt.currentMap.toString());
+			mt.selectedList.clearSelectedList();
+			System.out.println(mt.currentMap.toString());
+
+			mt.selectedList.massAddSelectedList(0, 0, 20, 20);
+	    	System.out.println(mt.currentMap.toString());
+         	mt.selectedList.massRemoveSelectedList(1, 1, 19, 19);
+         	System.out.println(mt.currentMap.toString());
+         	mt.selectedList.removeSelectedListOnMap();
+         	System.out.println(mt.currentMap.toString());
+    		mt.selectedList.clearSelectedList();
+			System.out.println(mt.currentMap.toString());
 	    }
 	 
 	    @Override

@@ -15,6 +15,7 @@ import DD.Message.Message;
 import DD.Network.NetworkSystem;
 import DD.System.DDSystem;
 import DD.Character.*;
+import DD.Character.Abilities.Ability;
 
 /*****************************************************************************************************
  * CombatSystem will be the controller for DD combat. It will take messages from ActionBox (the player)
@@ -37,20 +38,22 @@ public class CombatSystem
 	private static int I = 0;
 	public static enum Action
 	{
-		STANDARD_ATTACK (I++),
-		MOVE(I++),
-		END_ACTION(I++),
-		START_COMBAT_PHASE(I++),
-		END_TURN(I++),
-		PLACE_CHARACTER(I++),
-		REMOVE_CHARACTER(I++);
+		STANDARD_ATTACK (I++, "Images/CombatSystem/StandardAttack.png"),
+		MOVE(I++, "Images/CombatSystem/Move.png"),
+		END_ACTION(I++, "Images/CombatSystem/EndAction.png"),
+		START_COMBAT_PHASE(I++, "Images/CombatSystem/StartCombatPhase.png"),
+		END_TURN(I++, "Images/CombatSystem/EndTurn.png"),
+		PLACE_CHARACTER(I++, "Images/CombatSystem/PlaceCharacter.png"),
+		REMOVE_CHARACTER(I++, "Images/CombatSystem/RemoveCharacter.png");
 		
 		public final int index;
+		public final String image;
 		public static final int NUM_OF_INTERPRETERS = I;
 		
-		Action (int index)
+		Action (int index, String image)
 		{
 			this.index = index;
+			this.image = image;
 		} /* end TargetCount index */
 		
 	} /* end Action enum */
@@ -80,6 +83,8 @@ public class CombatSystem
 	{	
 		characterList = new ArrayList<DDCharacter>();
 		order = new ArrayList<Integer>();
+		
+		/* Create the Interpreters */
 		system = new CombatInterpreter[Action.NUM_OF_INTERPRETERS];
 		
 		/* First, we need to create the system */
@@ -126,7 +131,7 @@ public class CombatSystem
 		CombatValidationMessage returner = null;
 		
 		/* First, we check to make sure the message is of the correct type and the request is valid */
-		if(cm.getMessageType() != Message.COMBAT_MESSAGE)
+		if(cm.getMessageType() != Message.Type.COMBAT_MESSAGE)
 		{/* The message is invalid */
 			returner = new CombatValidationMessage(false, "Message is not a CombatMessage.");
 		} /* end if */
@@ -192,7 +197,7 @@ public class CombatSystem
 		order.add(0, id);
 	} /* end addToOrder method */
 	
-	public void removeFromOder(int id)
+	public void removeFromOder(Integer id)
 	{
 		order.remove(id);
 	} /* end removeFromOrder */

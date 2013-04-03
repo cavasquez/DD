@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ClientTable 
 {
 	/************************************ Class Attributes *************************************/
-	private static ArrayList<Client> clientList = null;
+	private ArrayList<Client> clientList = null;
 	
 	/************************************ Class Methods *************************************/
 	public ClientTable()
@@ -41,7 +41,7 @@ public class ClientTable
 		{
 			if (client.username != null)
 			{ /* there might be a null username from addServer */
-				if (client.username.compareTo(username) == 0) userExists = true;
+				if (client.username.matches(username) == true) userExists = true;
 			}
 		} /* end for loop */
 		
@@ -107,7 +107,7 @@ public class ClientTable
 		{
 			if (client.username != null)
 			{ /* there might be a null username from addServer */
-				if (client.username.compareTo(username) == 0) userExists = true;
+				if (client.username.matches(username) == true) userExists = true;
 			} /* end if */
 		} /* end for loop */
 		
@@ -149,6 +149,12 @@ public class ClientTable
 	{
 		return(clientList);
 	} /* end getUserList */
+	
+	public void print()
+	{
+		System.out.println("CID\t username\t senderID\t sender \t listenerID\t listener\t ip");
+		for(Client client : clientList) client.print();
+	} /* end print method */
 	
 	/******************************************************************************
 	 ******************************* Getter Methods *******************************

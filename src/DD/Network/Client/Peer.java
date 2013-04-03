@@ -24,4 +24,9 @@ public class Peer
 		this.ip = ip;
 	} /* end Peer constructor */
 	
+	public void print()
+	{
+		System.out.println(peerID + " " + username + " " + ip);
+	} /* end print method */
+	
 } /* end Peer class */

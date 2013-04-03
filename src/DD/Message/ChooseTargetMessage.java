@@ -11,8 +11,9 @@ import DD.Character.Abilities.TargetAbility;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class ChooseTargetMessage extends Message
+public class ChooseTargetMessage extends Message 
 {
+	private static final long serialVersionUID = -343710984491995095L;
 	/************************************ Class Attributes *************************************/
 	private TargetingSystem.TargetCount targetCount = null;
 	private TargetingSystem.TargetShape targetShape = null;
@@ -35,7 +36,7 @@ public class ChooseTargetMessage extends Message
 		TargetAbility caller
 	) 
 	{
-		super(Message.CHOOSE_TARGET_MESSAGE);
+		super(Type.CHOOSE_TARGET_MESSAGE);
 		this.targetCount = targetCount;
 		this.targetShape = targetShape;
 		this.targetSelection = targetSelection;

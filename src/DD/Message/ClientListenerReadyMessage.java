@@ -9,13 +9,14 @@ package DD.Message;
 
 public class ClientListenerReadyMessage extends Message
 {
+	private static final long serialVersionUID = 1025917258358821686L;
 	/************************************ Class Attributes *************************************/
 	protected int playerID;
 	
 	/************************************ Class Methods *************************************/
 	public ClientListenerReadyMessage(int playerID)
 	{
-		super(CLIENT_LISTENER_READY_MESSAGE);
+		super(Type.CLIENT_LISTENER_READY_MESSAGE);
 		this.playerID = playerID;
 	} /* end ClietnListenerReadyMessage constructor */
 	

@@ -6,6 +6,8 @@ import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
+import DD.System.DDSystem;
+
 public class Game extends StateBasedGame
 {
 	public static final String gamename = "Dungeons & Dragons!";
@@ -15,6 +17,8 @@ public class Game extends StateBasedGame
 	public static final int LobbyRoom = 2;
 	public static final int createLob = 3;
 	public static final int gameplay = 4;
+	public static final int maptool = 5;
+	public static DDSystem system;
 	
 	public Game(String gamename)
 	{
@@ -29,6 +33,7 @@ public class Game extends StateBasedGame
 		this.addState(new CreateLob(createLob));
 		this.addState(new GameplayState(gameplay));
 		//this.addState(new MapTestState(gameplay));
+		this.addState(new MapToolState(maptool));
 		
 		/* Note that initStatesList is where we ADD states. Slick will get them for us. If we have addState
 		 * in the constructor and getState in the initStatesList, then we will run the states twice (and maybe even
@@ -50,11 +55,13 @@ public class Game extends StateBasedGame
 		 */
 		System.setProperty("org.lwjgl.librarypath", new File(System.getProperty("user.dir"), "lib").getAbsolutePath());
 		System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
+		system = new DDSystem();
 		
 		AppGameContainer appgc;
 		try{
 			appgc = new AppGameContainer(new Game(gamename));
 			appgc.setDisplayMode(1200, 650, false);
+			appgc.setTargetFrameRate(60);
 			appgc.start();
 		}catch(SlickException e){
 			e.printStackTrace();

@@ -1687,15 +1687,63 @@ public class CharacterSheet implements Serializable
 	
 	//
 	public ArrayList<Weapon> EquippedWeapon = new ArrayList<Weapon>(2);
-	public ArrayList<Weapon> SheathedWeapon = new ArrayList<Weapon>(3);
+	//public ArrayList<Weapon> SheathedWeapon = new ArrayList<Weapon>(3);
 	
 	
-	//put armor in the arrayList and into the equipmentList
-	public void EquipWeapon(Weapon arm)
+	//Select the which weapon goes into which hand, 0 main hand and 1 offhand
+	public void equipWeapon(Weapon w, int hand)
 	{
-		EquippedWeapon.add(arm);
+		
+		
+		EquippedWeapon.add(hand,w);
+		
+		
+		if(EquippedWeapon.size() > 2)
+		{
+			for(int i = 2; i < EquippedWeapon.size(); i++)
+			{
+				EquippedWeapon.remove(i);
+			}
+		}
+		for (int j = 0; j < equipmentList.size(); j++) {
+			
+		
+			if(w.getName().equals(equipmentList.get(j).getName()))
+			{
+				equipmentList.remove(j);
+				break;
+			}
+		}
+		
+	}
+	
+	
+	public void unequipWeapons()
+	{
+		
+		for (int i = 0; i < EquippedWeapon.size(); i++) {
+		
+			
+			equipmentList.add(EquippedWeapon.remove(0));
+			
+			
+		}
+		
+		//Equip both hands with unarmed
+		for (int i = 0; i < EquippedWeapon.size(); i++) {
+		
+			
+			EquippedWeapon.add(armory.weapons.get(0));
+			
+			
+		}
+		
+		
+		
+		
 		//need to add to inventory if not there
 	}
+	
 	
 	//get the armor from the arraylist
 	public Weapon getEquippedWeapon(int index)

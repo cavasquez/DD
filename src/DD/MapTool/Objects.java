@@ -23,7 +23,7 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 	protected Coordinate position = null;
 	String name;
 	int priority;
-	static protected Image spriteSheet = null;
+	static protected transient Image spriteSheet = null;
 	static protected Map owner = null;
 	protected static Input mouse = new Input(650);
 
@@ -38,6 +38,15 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		if(owner!=null) owner.addComponent(this);
 	}
 	public void select() throws SlickException {};
+	
+	
+	public Image getImage(){
+		return spriteSheet;
+	}
+	
+	public void setImage(Image image){
+		spriteSheet = image;
+	}	
 	
 	public int getMovePenalty(){
 		return movePenalty;
@@ -98,10 +107,9 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				String message = "You are clicking " + position.x + ", " + position.y;
-				//System.out.println(message);
 				try {
 					select();
-					System.out.println(message);
+					//System.out.println(message);
 				} catch (SlickException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -125,7 +133,7 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 			image.draw(x*xCorrection, (y+1)*yCorrection);
 		}
 		else {
-			image.draw((x + (image.getHeight() * x)), ((y+ 40) + (image.getWidth() * y)));
+			image.draw((x + (image.getHeight() * x)), ((y+40) + (image.getWidth() * y)));	//y offset by 40 to shift down a little
 		}
 		//if(CharacterObjects.class.isInstance(this)) System.out.println("x: " + (x + (image.getHeight() * x)) + ", y: " + (y + (image.getHeight() * y)));
 		//gr.drawString(message, 110, 10);
