@@ -21,8 +21,8 @@ public class MapToolState extends BasicGameState {
 	private int stateID = 0;
 	private MapTool maptool = null;
 	private String mousePos;
-	private int x1, x2, y1, y2;
-	private Objects object = null;
+	private int x1, x2, y1, y2;	//coordinates for last two mouse clicks on map
+	private Objects object = null;	//object used to place Objects onto the map
 	private boolean clicked = true;
 	static Input mouse = new Input(650);
 	int posX;
@@ -35,6 +35,7 @@ public class MapToolState extends BasicGameState {
 	private Image placeOnMap = null;
 	private Image removeFromMap = null;
 	private Image goblinButton = null;
+	private Image wallButton = null;
 	
 	public MapToolState(int stateID) {
 		this.stateID = stateID;
@@ -53,6 +54,7 @@ public class MapToolState extends BasicGameState {
 		placeOnMap = new Image("Images/MapTool/PlaceOnMap.png");
 		removeFromMap = new Image("Images/MapTool/RemoveFromMap.png");
 		goblinButton = new Image("Images/MapTool/Goblin.png");
+		wallButton = new Image("Images/MapTool/Wall.png");
 		maptool = new MapTool();
 		
 	}
@@ -84,6 +86,7 @@ public class MapToolState extends BasicGameState {
     	removeFromMap.draw(830, 40);
     	g.drawString("Available To Place", 660, 80);
     	goblinButton.draw(660, 100);
+    	wallButton.draw(755, 100);
     	
     	g.drawString("BACK", 1130, 615);
     	g.drawString(mousePos, 900, 0);
@@ -122,6 +125,7 @@ public class MapToolState extends BasicGameState {
     	placeOnMapButton(gc);
     	removeFromMapButton(gc);
     	goblinButton(gc);
+    	wallButton(gc);
 	}
 	
 	//Clicking on map
@@ -196,6 +200,16 @@ public class MapToolState extends BasicGameState {
     		}
     	}
 	}
+	
+	public void wallButton(GameContainer gc) throws SlickException {
+		if((posX > 755 && posX < 755 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			System.out.println("chose wall");
+    		}
+    	}
+	}
+	
 	//Back Button
 	public void backButton(GameContainer gc, StateBasedGame sb) {
     	if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
