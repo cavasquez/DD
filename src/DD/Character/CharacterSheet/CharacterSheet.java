@@ -1670,9 +1670,9 @@ public class CharacterSheet implements Serializable
 	}
 	
 	//get the armor from the arraylist
-	public Armor getEquippedArmor(int index)
+	public Armor getEquippedArmor()
 	{
-		return EquippedArmor.get(index);
+		return EquippedArmor.get(0);
 	}
 	
 	/*
