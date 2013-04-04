@@ -2,11 +2,14 @@ package DD.GUI;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.Character.DDCharacter;
+import DD.Character.CharacterSheet.Monster.Goblin;
 import DD.MapTool.*;
 import DD.SlickTools.Component;
 import DD.SlickTools.RenderComponent;
@@ -19,13 +22,19 @@ public class MapToolState extends BasicGameState {
 	private MapTool maptool = null;
 	private String mousePos;
 	private int x1, x2, y1, y2;
+	private Objects object = null;
 	private boolean clicked = true;
 	static Input mouse = new Input(650);
 	int posX;
 	int posY;
 	
+	//Images
+	private Image spriteSheet = null;
 	private Image makeSelection = null;
 	private Image removeSelection = null;
+	private Image placeOnMap = null;
+	private Image removeFromMap = null;
+	private Image goblinButton = null;
 	
 	public MapToolState(int stateID) {
 		this.stateID = stateID;
@@ -38,8 +47,12 @@ public class MapToolState extends BasicGameState {
 		gc.setShowFPS(false);
 		
 		//Initialize Images
+		spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
 		makeSelection = new Image("Images/MapTool/MakeSelection.png");
 		removeSelection = new Image("Images/MapTool/RemoveSelection.png");
+		placeOnMap = new Image("Images/MapTool/PlaceOnMap.png");
+		removeFromMap = new Image("Images/MapTool/RemoveFromMap.png");
+		goblinButton = new Image("Images/MapTool/Goblin.png");
 		maptool = new MapTool();
 		
 	}
@@ -67,6 +80,10 @@ public class MapToolState extends BasicGameState {
     	//draw Make Selection and Remove Selection buttons to screen
     	makeSelection.draw(660, 0);
     	removeSelection.draw(830, 0);
+    	placeOnMap.draw(660, 40);
+    	removeFromMap.draw(830, 40);
+    	g.drawString("Available To Place", 660, 80);
+    	goblinButton.draw(660, 100);
     	
     	g.drawString("BACK", 1130, 615);
     	g.drawString(mousePos, 900, 0);
@@ -102,7 +119,9 @@ public class MapToolState extends BasicGameState {
 		backButton(gc, sb);
     	makeSelectionButton(gc);
     	removeSelectionButton(gc);
-
+    	placeOnMapButton(gc);
+    	removeFromMapButton(gc);
+    	goblinButton(gc);
 	}
 	
 	//Clicking on map
@@ -120,7 +139,6 @@ public class MapToolState extends BasicGameState {
 	//Make Selection Button
 	public void makeSelectionButton(GameContainer gc) throws SlickException {
     	if((posX > 660 && posX < 660 + makeSelection.getWidth()) && (posY > 0 && posY < makeSelection.getHeight())) {
-    		
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
@@ -132,15 +150,52 @@ public class MapToolState extends BasicGameState {
 	//Remove selection Button
 	public void removeSelectionButton(GameContainer gc) throws SlickException {
     	if((posX > 830 && posX < 830 + removeSelection.getWidth()) && (posY > 0 && posY < removeSelection.getHeight())) {
-    		
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			maptool.getSelectedList().massRemoveSelectedList(x1, y1, x2, y2);
-    			System.out.println("remove button");
+    			System.out.println("remove selection button");
     		}
     	}
 	}
 	
+	//Place on map button
+	public void placeOnMapButton(GameContainer gc) throws SlickException {
+		if((posX > 660 && posX < 660 + placeOnMap.getWidth()) && (posY > 40 && posY < (40 + placeOnMap.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			maptool.getSelectedList().placeSelectedListOnMap(object);
+    			System.out.println("place on map button");
+    		}
+    	}
+	}
+	
+	//Remove from map button
+	public void removeFromMapButton(GameContainer gc) throws SlickException {
+		if((posX > 830 && posX < 830 + removeFromMap.getWidth()) && (posY > 40 && posY < (40 + removeFromMap.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			//maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
+    			System.out.println("remove from map button");
+    		}
+    	}
+	}
+	
+	public void goblinButton(GameContainer gc) throws SlickException {
+		if((posX > 660 && posX < 660 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			DDCharacter goblinChar = new DDCharacter(stateID++);
+    			Goblin goblin = new Goblin();
+    			goblinChar.setCharacterSheet(goblin.getCharacterSheet());
+    			goblinChar.setCharacterID(stateID++);
+    			Image goblinImage = spriteSheet.getSubImage(98, 65, 33, 34);
+    			CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinImage, 0, 0, maptool.getMapAtLocation(0, 0), goblinChar);
+    			object = goblinObj;
+    			//maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
+    			System.out.println("chose goblin");
+    		}
+    	}
+	}
 	//Back Button
 	public void backButton(GameContainer gc, StateBasedGame sb) {
     	if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
