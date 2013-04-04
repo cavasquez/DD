@@ -73,12 +73,12 @@ public class PlaceCharacter extends TargetAbility
 
 	private void delete()
 	{
-		remove();
+		removeCharacter();
 		
 		//TODO: save sheet? give to corresponding player to save? tell corresponding player to save?
 	} /* end delete method */
 	
-	private void remove()
+	private void removeCharacter()
 	{
 		/* remove character from holder */
 		gmt.removeCharacter(type, this.id);
@@ -109,7 +109,7 @@ public class PlaceCharacter extends TargetAbility
 			sendToInterpreter(cm);
 			
 			/* remove the character from the holder */
-			remove();
+			removeCharacter();
 			
 			done(null);
 		} /* end if */

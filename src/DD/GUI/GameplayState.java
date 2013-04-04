@@ -1,5 +1,6 @@
 package DD.GUI;
  
+import java.util.ArrayList;
 import java.util.Iterator;  
 
 import DD.ActionBox.ActionBox;
@@ -73,7 +74,6 @@ public class GameplayState extends BasicGameState {
     	Game.system.ns.setNetworkType(NetworkType.SERVER);
 //    	maptool.getMapAtLocation(0, 0).setPosition(position);
     	Game.system.setMap(maptool.getMapAtLocation(0, 0));
-    	
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
         playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
@@ -225,23 +225,31 @@ public class GameplayState extends BasicGameState {
     	*/
     	
     	//Render Map
-//    	maptool.getMapAtLocation(0, 0).render(gc, sb, g);
-    	RenderComponent renderComponent = null;
-    	
-    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
-    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
-    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
-    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
-    			for(int k = list.length; k > 0; k--) {
-    				Component component = (Component)list[k-1];
-    				if (RenderComponent.class.isInstance(component))
-    				{
-    					renderComponent = (RenderComponent) component;
-    					renderComponent.render(gc, sb, g);
-    				}
-    			}
-    		}
-    	}
+    	maptool.getMapAtLocation(0, 0).render(gc, sb, g);
+//    	RenderComponent renderComponent = null;
+//    	ArrayList<CharacterObjects> characters = new ArrayList<CharacterObjects>();
+//    	
+//    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
+//    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
+//    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
+//    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
+//    			for(int k = list.length; k > 0; k--) {
+//    				Component component = (Component)list[k-1];
+//    				if (RenderComponent.class.isInstance(component))
+//    				{
+//    					if (RenderComponent.class.isInstance(component))
+//        				{
+//        					if(CharacterObjects.class.isInstance(component)) characters.add((CharacterObjects) component);
+//        					else
+//        					{
+//        						renderComponent = (RenderComponent) component;
+//            					renderComponent.render(gc, sb, g);
+//        					}
+//        				}
+//    				}
+//    			}
+//    		}
+//    	}
     	
     	
     	//Render Action Box

@@ -498,9 +498,10 @@ public class Map extends Entity implements Serializable{
 	/************************************ Slick Methods *************************************/
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
-		super.render(gc, sbg, gr);
+		//super.render(gc, sbg, gr);
 		
 		RenderComponent renderComponent = null;
+		ArrayList<CharacterObjects> characters = new ArrayList<CharacterObjects>();
     	
     	for(int i = 0; i < mapSize; i++) {
     		for(int j = 0; j < mapSize; j++) {
@@ -510,12 +511,18 @@ public class Map extends Entity implements Serializable{
     				Component component = (Component)list[k-1];
     				if (RenderComponent.class.isInstance(component))
     				{
-    					renderComponent = (RenderComponent) component;
-    					renderComponent.render(gc, sbg, gr);
+    					if(CharacterObjects.class.isInstance(component)) characters.add((CharacterObjects) component);
+    					else
+    					{
+    						renderComponent = (RenderComponent) component;
+        					renderComponent.render(gc, sbg, gr);
+    					}
     				}
     			}
     		}
     	}
+    	/* Render characters last */
+    	for(int i = 0; i < characters.size(); i++) characters.get(i).render(gc, sbg, gr);
 	} /* end render method */
 	
 	
