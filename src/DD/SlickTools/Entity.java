@@ -82,6 +82,11 @@ public class Entity
 		
 	} /* end AddComponent method */
 	
+	public void removeAllComponents()
+	{
+		components.clear();
+	} /* end removeAllComponents method */
+	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
 		updateComponents(gc, sbg, delta);

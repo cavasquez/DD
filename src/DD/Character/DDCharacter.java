@@ -103,7 +103,7 @@ public class DDCharacter extends CharacterEntity implements Serializable
 	} /* end resetCharacter method */
 	
 	public void addAbility(Ability ability)
-	{/* Character does have addComponent, however abilities have a specific purpose than 
+	{/* Character does have addComponent, however abilities have a more specific purpose than 
 	 	the standard component object. Thus, they have their own array and add method. */
 		ability.setOwnerEntity(this);
 		abilities.add(ability);	
@@ -144,6 +144,8 @@ public class DDCharacter extends CharacterEntity implements Serializable
 	 	TODO: check for flat-footed, etc. */
 		/* TODO: implement */
 		boolean returner = false;
+		boolean wasDying = isDying();
+		boolean wasDead = isDead();
 		/*sheet.getACTotal();
 		sheet.getFlatfootTotal();
 		sheet.getTouchTotal();
@@ -153,14 +155,13 @@ public class DDCharacter extends CharacterEntity implements Serializable
 			/* Character was hit */
 			returner = true;
 			getHit(damage);
-			this.addComponent(new CombatStatus(Integer.toString(damage)));
+			this.addComponent(new CombatStatus(Integer.toString(damage))); /* Alert players of damage */
 		} /* end if */
 		else
-		{
+		{/* Missed hit, print the  miss */
 			/* missed hit */
 			this.addComponent(new CombatStatus("missed"));
 		} /* end else */
-		
 		return(returner); /*  */
 	} /* end getAttacked method */
 	
@@ -379,6 +380,18 @@ public class DDCharacter extends CharacterEntity implements Serializable
 	{
 		return sheet;
 	}
+	
+	public boolean isDying()
+	{
+		return (currentHP < 0);
+	} /* end isDying method */
+	
+	public boolean isDead()
+	{
+		boolean returner = false;
+		if ((currentHP < 0) && ((currentHP * -1) >= sheet.getConInherent())) returner = true;
+		return returner;
+	} /* end isDead method */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************

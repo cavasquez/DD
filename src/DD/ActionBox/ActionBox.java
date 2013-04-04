@@ -8,6 +8,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
+import DD.Character.Abilities.Dying;
 import DD.Character.Abilities.EndTurn;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.Character.Abilities.DefaultAbilities.Standard.StandardAttack;
@@ -108,7 +109,7 @@ public class ActionBox extends BoxInterface
 		
 	} /* end ActionBox constructor */
 	
-	public void addActionChoice() 
+	public void addActionChoices() 
 	{
 		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y, new StandardAttack(this.id)));
 		Move move = new Move(this.id);
@@ -180,8 +181,42 @@ public class ActionBox extends BoxInterface
 	 ****************************************************************************************/
 	public void setCharacter(DDCharacter character)
 	{
+		/* This is done to start a characters turn */
 		this.character = character;
+		this.character.startNewTurn();
 		Ability.setOwnerCharacter(character);
+		
+		/* Decide which action to take */
+		if(this.character.isDead())
+		{
+			/* If character is dead, end turn. Character can't do anything */
+			EndTurn end = new EndTurn(0);
+			try 
+			{
+				end.activate();
+			} /* end try */
+			catch (SlickException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} /* end catch */
+		} /* end if */
+		else if(this.character.isDying())
+		{
+			EndTurn end = new EndTurn(0);
+			Dying dying = new Dying(1);
+			try 
+			{
+				dying.activate();
+				end.activate();
+			} /* end try */
+			catch (SlickException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} /* end catch */
+		} /* end else if */
+		else addActionChoices();
 	} /* end setCharacter method */
 	
 } /* end ActionBox method */

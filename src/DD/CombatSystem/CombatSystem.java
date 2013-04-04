@@ -44,7 +44,8 @@ public class CombatSystem
 		START_COMBAT_PHASE(I++, "Images/CombatSystem/StartCombatPhase.png"),
 		END_TURN(I++, "Images/CombatSystem/EndTurn.png"),
 		PLACE_CHARACTER(I++, "Images/CombatSystem/PlaceCharacter.png"),
-		REMOVE_CHARACTER(I++, "Images/CombatSystem/RemoveCharacter.png");
+		REMOVE_CHARACTER(I++, "Images/CombatSystem/RemoveCharacter.png"),
+		DYING(I++, null);
 		
 		public final int index;
 		public final String image;

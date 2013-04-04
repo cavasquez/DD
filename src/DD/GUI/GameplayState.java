@@ -119,7 +119,7 @@ public class GameplayState extends BasicGameState {
         //Create GMToolsBox for GM
         gmToolsBox = new GMToolsBox(stateID, 300, 200);
         //Fill in ActionBox with action choices
-        actionBox.addActionChoice();
+        actionBox.addActionChoices();
         Game.system.linkBoxes(actionBox, null);
         //set ActionBox's character
         actionBox.setCharacter(player);
