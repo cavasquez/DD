@@ -174,7 +174,7 @@ public class MapToolState extends BasicGameState {
 		if((posX > 830 && posX < 830 + removeFromMap.getWidth()) && (posY > 40 && posY < (40 + removeFromMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
-    			//maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
+    			maptool.getSelectedList().removeSelectedListOnMap();
     			System.out.println("remove from map button");
     		}
     	}
@@ -189,7 +189,7 @@ public class MapToolState extends BasicGameState {
     			goblinChar.setCharacterSheet(goblin.getCharacterSheet());
     			goblinChar.setCharacterID(stateID++);
     			Image goblinImage = spriteSheet.getSubImage(98, 65, 33, 34);
-    			CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinImage, 0, 0, maptool.getMapAtLocation(0, 0), goblinChar);
+    			CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinImage, 0, 0, maptool.getCurrentMap(), goblinChar);
     			object = goblinObj;
     			//maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
     			System.out.println("chose goblin");
