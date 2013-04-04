@@ -8,6 +8,7 @@ import DD.CombatSystem.CombatSystem.ActionType;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 import DD.Message.TargetSelectedMessage;
+import DD.Network.Network;
 
 /*****************************************************************************************************
  * TargetAbility is a more specialized ability that allows the player to target an object.
@@ -34,12 +35,13 @@ public abstract class TargetAbility extends Ability
 		/* Send the message to the proper interpreter and send it through the network */
 		/* First, send to network */
 		//TODO: send to network
+		CombatValidationMessage cvm;
 		
 		if(done)
 		{
 			/* We are done, so we must reformat the message */
 			/* First, tell CombatSystem that action is terminating */
-			CombatMessage endAction = new CombatMessage
+			cm = new CombatMessage
 				(
 					cm.getSource(),
 					null,
@@ -49,15 +51,17 @@ public abstract class TargetAbility extends Ability
 				);
 			//TODO: "Unclick" ie reset action box. By now, interpreter should have changed turn states
 			//TODO: Check for validity of cvm
-			CombatValidationMessage cvm = cs.process(endAction);
+			cvm = cs.process(cm);
 		} /* end if */
 		else
 		{
 			/* re-activate ability */
 			//TODO: Check for validity of cvm
-			CombatValidationMessage cvm = cs.process(cm);
+			cvm = cs.process(cm);
 			activate();
 		} /* end if */
+		
+		if(cvm.getValid()) ns.sendMessage(ns.getNetID(), Network.EVERYONE, cm);
 	} /* end sendToInterpreter method */
 	
 	@Override

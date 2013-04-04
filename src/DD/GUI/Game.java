@@ -1,8 +1,6 @@
 package DD.GUI;
 
 import java.io.File;
-
-import org.lwjgl.LWJGLUtil;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 

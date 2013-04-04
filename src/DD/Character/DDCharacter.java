@@ -21,7 +21,7 @@ import DD.SlickTools.*;
  * needed to keep up the game.
  ******************************************************************************************************/
 
-public class DDCharacter extends Entity implements Serializable
+public class DDCharacter extends CharacterEntity implements Serializable
 {
 	private static final long serialVersionUID = -3339921524023083469L;
 
@@ -87,8 +87,6 @@ public class DDCharacter extends Entity implements Serializable
 		}
 	}
 	
-	
-	
 	public CharacterSheet getCharacterSheet() 
 	{
 		return sheet;
@@ -136,6 +134,9 @@ public class DDCharacter extends Entity implements Serializable
 		hasTurn = false;
 	} /* end endTurn method */
 	
+	/************************************ Slick Mechanisms *************************************/
+	
+	
 	/************************************ Combat Mechanisms *************************************/
 	public boolean defend(int attack, int damage, ACType attackType)
 	{/* The character must attempt to defend against an attack.
@@ -149,9 +150,16 @@ public class DDCharacter extends Entity implements Serializable
 		*/
 		if (attack >= getAC())
 		{
+			/* Character was hit */
 			returner = true;
 			getHit(damage);
+			this.addComponent(new CombatStatus(Integer.toString(damage)));
 		} /* end if */
+		else
+		{
+			/* missed hit */
+			this.addComponent(new CombatStatus("missed"));
+		} /* end else */
 		
 		return(returner); /*  */
 	} /* end getAttacked method */
@@ -160,7 +168,6 @@ public class DDCharacter extends Entity implements Serializable
 	{ /* The character is hit. Deal with calculations, checks, and damage reduction. */
 		/* TODO: implement */
 		/* TODO: if hp drops to 0 or less, apply conditions. */
-		/* TODO: send message from here */
 		/* TODO: take care of damage reduction */
 		currentHP -= hit;
 	} /* end getHit method */

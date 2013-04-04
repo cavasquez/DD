@@ -32,6 +32,22 @@ public abstract class Network implements NetworkInterface
 	/************************************ Class Methods*************************************/
 	public abstract void printUsers();
 	
+	/****************************************************************************************
+	 ************************************ Getter Methods ************************************
+	 ****************************************************************************************/
+	public CombatSystem getCombatSystem()
+	{
+		return this.cs;
+	} /* end getCombatSystem method */
+	
+	public ChatSystem getChatSystem()
+	{
+		return this.chat;
+	} /* end getChatSystem method */
+	
+	/****************************************************************************************
+	 ************************************ Setter Methods ************************************
+	 ****************************************************************************************/	
 	public void setServerIP(InetAddress serverIP)
 	{
 		this.serverIP = serverIP;

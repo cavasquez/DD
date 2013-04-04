@@ -16,6 +16,8 @@ import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
 import DD.Message.TargetSelectedMessage;
+import DD.Network.Network;
+import DD.Network.NetworkSystem;
 import DD.SlickTools.ImageRenderComponent;
 
 /*****************************************************************************************************
@@ -53,6 +55,7 @@ public abstract class Ability extends ImageRenderComponent
 	protected boolean done;						/* flag to check if player is done with ability */
 	protected static TargetingSystem ts = null;	/* to be used by abilities that need a target */
 	protected static CombatSystem cs = null;	/* Used for combat */
+	protected static NetworkSystem ns = null;	/* Used to Communicate to peers the new actions */
 	
 	/************************************ Class Methods*************************************/
 	public Ability(int id, CombatSystem.ActionType actionType, CombatSystem.Action action, String name, String description)
@@ -126,6 +129,8 @@ public abstract class Ability extends ImageRenderComponent
 		//TODO: send to network
 		
 		CombatValidationMessage cvm = cs.process(cm); //TODO: verify validation message
+		/* if valid, tell peers */
+		if(cvm.getValid()) ns.sendMessage(ns.getNetID(), Network.EVERYONE, cm);
 		
 	} /* end sendToInterpreter method */
 	
@@ -181,5 +186,10 @@ public abstract class Ability extends ImageRenderComponent
 	{
 		Ability.ts = ts;
 	} /* end setCombatSystem method */
+	
+	public static void setNetworkSystem(NetworkSystem ns)
+	{
+		Ability.ns = ns;
+	} /* end setNetworkSystem method */
 	
 } /* end Ability class */

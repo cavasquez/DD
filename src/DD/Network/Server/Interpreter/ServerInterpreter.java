@@ -1,7 +1,9 @@
 package DD.Network.Server.Interpreter;
 
 import DD.Message.NetworkMessage;
+import DD.Network.NetworkSystem;
 import DD.Network.Server.ServerSystem;
+import DD.Trash.NetworkInterpreter;
 
 /*****************************************************************************************************
  * ServerInterpreter will be used by ServerSystem to interpret every NetworkMessage. 
@@ -11,13 +13,14 @@ import DD.Network.Server.ServerSystem;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public abstract class ServerInterpreter 
+public abstract class ServerInterpreter
 {
 	/************************************ Class Attributes *************************************/
 	protected static ServerSystem system;
 	
 	/************************************ Class Methods *************************************/
 	public abstract void interpret(int listenerID, NetworkMessage message);
+	
 	public static void setServerSystem(ServerSystem system)
 	{
 		ServerInterpreter.system = system;

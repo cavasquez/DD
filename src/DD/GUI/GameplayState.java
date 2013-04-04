@@ -15,6 +15,7 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.GMToolsBox.GMToolsBox;
 import DD.MapTool.*;
+import DD.Network.NetworkSystem.NetworkType;
 import DD.SlickTools.Component;
 import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
@@ -67,6 +68,9 @@ public class GameplayState extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
     	maptool = new MapTool();
     	
+    	//BY DEFAULT, SET NETWORK AS SERVER
+    	//TODO: THE ABOVE NEEDS TO BE CHANGED
+    	Game.system.ns.setNetworkType(NetworkType.SERVER);
 //    	maptool.getMapAtLocation(0, 0).setPosition(position);
     	Game.system.setMap(maptool.getMapAtLocation(0, 0));
     	
@@ -178,16 +182,8 @@ public class GameplayState extends BasicGameState {
 		
     	//Update Action Box
     	/* go through ArrayList of Components to call their update methods */
-		renderComponent = null;
-		for (Component component : actionBox.getComponentList())
-		{
-			if (RenderComponent.class.isInstance(component))
-			{
-				renderComponent = (RenderComponent) component;
-				renderComponent.update(gc, sb, delta);
-			}
-			
-		}
+		actionBox.update(gc, sb, delta);
+
 		
 		//Character sheet
 		//charToString = "CHARACTER SHEET: \n" + player.getCharacterSheet().toString();
@@ -229,6 +225,7 @@ public class GameplayState extends BasicGameState {
     	*/
     	
     	//Render Map
+//    	maptool.getMapAtLocation(0, 0).render(gc, sb, g);
     	RenderComponent renderComponent = null;
     	
     	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
@@ -248,16 +245,7 @@ public class GameplayState extends BasicGameState {
     	
     	
     	//Render Action Box
-    	renderComponent = null;
-		for (Component component : actionBox.getComponentList())
-		{
-			if (RenderComponent.class.isInstance(component))
-			{
-				renderComponent = (RenderComponent) component;
-				renderComponent.render(gc, sb, g);
-			}
-			
-		}
+    	actionBox.render(gc, sb, g);
  
 		//g.drawString(charToString, 950, 30);
 		//g.drawString(goblinHP, 950, 400);
