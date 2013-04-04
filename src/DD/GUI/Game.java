@@ -44,7 +44,7 @@ public class Game extends StateBasedGame
 //		this.getState(createLob).init(gc, this);
 //		this.getState(gameplay).init(gc, this);
 		
-		this.enterState(gameplay);
+		this.enterState(menu);
 		
 	}
 	
