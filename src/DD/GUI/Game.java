@@ -16,6 +16,7 @@ public class Game extends StateBasedGame
 	public static final int createLob = 3;
 	public static final int gameplay = 4;
 	public static final int maptool = 5;
+	//public static final int cc = 6; //this is for character creation
 	public static DDSystem system;
 	
 	public Game(String gamename)
@@ -32,6 +33,7 @@ public class Game extends StateBasedGame
 		this.addState(new GameplayState(gameplay));
 		//this.addState(new MapTestState(gameplay));
 		this.addState(new MapToolState(maptool));
+		//this.addState(new CharCreate(cc)); //this is for char create
 		
 		/* Note that initStatesList is where we ADD states. Slick will get them for us. If we have addState
 		 * in the constructor and getState in the initStatesList, then we will run the states twice (and maybe even
