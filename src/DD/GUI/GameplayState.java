@@ -71,6 +71,7 @@ public class GameplayState extends BasicGameState {
     	
     	//BY DEFAULT, SET NETWORK AS SERVER
     	//TODO: THE ABOVE NEEDS TO BE CHANGED
+    	System.out.println("system? " + Game.system);
     	Game.system.ns.setNetworkType(NetworkType.SERVER);
 //    	maptool.getMapAtLocation(0, 0).setPosition(position);
     	Game.system.setMap(maptool.getMapAtLocation(0, 0));
