@@ -34,10 +34,13 @@ public abstract class ImageRenderComponent extends RenderComponent
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
-		Vector2f pos = owner.getPosition();
+		render(gc, sbg, gr, owner.getPosition());		
+	} /* end render method */
+	
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr, Vector2f pos)
+	{
 		float scale = owner.getScale();
 		image.draw(pos.x, pos.y, scale);
-		
 	} /* end render method */
 	
 	public void setImage(Image image) {

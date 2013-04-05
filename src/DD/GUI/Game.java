@@ -33,6 +33,7 @@ public class Game extends StateBasedGame
 		this.addState(new GameplayState(gameplay));
 		//this.addState(new MapTestState(gameplay));
 		this.addState(new MapToolState(maptool));
+
 		//this.addState(new CharCreate(cc)); //this is for char create
 		
 		/* Note that initStatesList is where we ADD states. Slick will get them for us. If we have addState

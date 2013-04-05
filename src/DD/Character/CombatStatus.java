@@ -1,16 +1,10 @@
 package DD.Character;
 
-import java.util.ArrayList;
-import java.util.Queue;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
-
 import DD.SlickTools.CharacterRenderComponent;
-import DD.SlickTools.Component;
 
 /*****************************************************************************************************
  * CombatStatus will provide the character with the ability to communicate to players if an attack

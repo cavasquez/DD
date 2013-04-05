@@ -2,6 +2,8 @@ package DD.SlickTools;
 
 import java.util.ArrayList;
 
+import org.newdawn.slick.geom.Vector2f;
+
 /*****************************************************************************************************
  * The BoxInterface class is an extension of Entity that focuses on representing a menu or other box in 
  * the interface. This could be the ChatBox, ActionBox, StatusBox, etc. The point being that the 
@@ -15,21 +17,40 @@ import java.util.ArrayList;
 public abstract class BoxInterface extends Entity 
 {
 	/************************************ Class Constants *************************************/
-	float length;
-	float width;
+	private float length;
+	private float width;
 	
 	/************************************ Class Methods *************************************/
 	public BoxInterface(int id, float length, float width) 
 	{
+		this(id, length, width, new Vector2f(0,0));
+	} /* end MenuBox constructor */
+	
+	public BoxInterface(int id, float length, float width, Vector2f position)
+	{
 		super(id);
 		this.length = length;
 		this.width = width;
+		this.position = position;
 		components = new ArrayList<Component>();
-	} /* end MenuBox constructor */
+	} /* end BoxInterface method */
 	
 	public ArrayList<Component> getComponentList() 
 	{
 		return components;
 	} /* end getComponentList method */	
+	
+	/****************************************************************************************
+	 ************************************ Getter Methods ************************************
+	 ****************************************************************************************/
+	public float getWidth()
+	{
+		return width;
+	} /* end getWidth method */
+	
+	public float getLength()
+	{
+		return length;
+	} /* end getLength method */
 
 } /* end MenuBox method */

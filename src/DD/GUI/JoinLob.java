@@ -50,6 +50,8 @@ public class JoinLob extends BasicGameState
 		//dungeon = new Music("Audio/dunEffect1.wav");
 		//dungeon.loop();
 		textbox = new TextField(gc, font, 100, 266, 250 , 50);
+//		textbox.addListener(new KeyListener());
+		textbox.setText("Test");
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
@@ -66,8 +68,8 @@ public class JoinLob extends BasicGameState
 		
 		
 		textbox.render(gc, g);
-		textbox.setCursorVisible(true);
-		textbox.setText("Test");
+//		textbox.setCursorVisible(true);
+		
 		
 		
 	}
@@ -76,7 +78,7 @@ public class JoinLob extends BasicGameState
 	{
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
-		//font.loadGlyphs();
+		font.loadGlyphs();
 		//BACK button
 		if((posX > 185 && posX < 240) && (posY > 80 && posY < 100))
 		{
@@ -112,7 +114,7 @@ public class JoinLob extends BasicGameState
     {
         font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
         font.addGlyphs("@");
-        //font.getEffects().add(new ColorEffect(java.awt.Color.white));
+        font.getEffects().add(new ColorEffect(java.awt.Color.white));
         return (font);
     }
 	
