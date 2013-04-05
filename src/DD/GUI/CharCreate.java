@@ -98,7 +98,7 @@ public class CharCreate extends BasicGameState {
 			//			height.getText(), weight.getText(), age.getText(), alignments.getText(), deity.getText(), 
 				//		background.getText(), occupation.getText());
 		
-		sheet.fillAbilities();
+		//sheet.fillAbilities();
 		
 		//get class option button value
 		
