@@ -11,9 +11,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList; 
 import java.util.Stack;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
+import org.newdawn.slick.state.StateBasedGame;
 
 import DD.Character.DDCharacter;
 import DD.CombatSystem.CombatSystem;
@@ -491,8 +495,35 @@ public class Map extends Entity implements Serializable{
 		updateComponentList();
 	}
 	
-	
-	
+	/************************************ Slick Methods *************************************/
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
+	{
+		//super.render(gc, sbg, gr);
+		
+		RenderComponent renderComponent = null;
+		ArrayList<CharacterObjects> characters = new ArrayList<CharacterObjects>();
+    	
+    	for(int i = 0; i < mapSize; i++) {
+    		for(int j = 0; j < mapSize; j++) {
+    			Objects[] list = new Objects[objectsStack[i][j].size()];
+    			System.arraycopy(objectsStack[i][j].toArray(), 0, list, 0, objectsStack[i][j].size());
+    			for(int k = list.length; k > 0; k--) {
+    				Component component = (Component)list[k-1];
+    				if (RenderComponent.class.isInstance(component))
+    				{
+    					if(CharacterObjects.class.isInstance(component)) characters.add((CharacterObjects) component);
+    					else
+    					{
+    						renderComponent = (RenderComponent) component;
+        					renderComponent.render(gc, sbg, gr);
+    					}
+    				}
+    			}
+    		}
+    	}
+    	/* Render characters last */
+    	for(int i = 0; i < characters.size(); i++) characters.get(i).render(gc, sbg, gr);
+	} /* end render method */
 	
 	
 	public ArrayList<Component> getComponents() {

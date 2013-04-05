@@ -15,7 +15,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public abstract class Component 
 {
-	/************************************ Class Constants *************************************/
+	/************************************ Class Attributes *************************************/
 	protected int id;
 	protected Entity owner;
 	
@@ -31,6 +31,11 @@ public abstract class Component
 		// TODO Auto-generated constructor stub
 	}
 
+	public void remove()
+	{
+		owner.removeComponent(this.id);
+	} /* end remove method */
+	
 	public abstract void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException;
 	
 	/******************************************************************************

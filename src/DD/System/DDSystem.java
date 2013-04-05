@@ -45,9 +45,10 @@ public class DDSystem
 		CombatInterpreter.setCombatSystem(cs);
 		CombatInterpreter.setTargetingSystem(ts);
 		
-		/* Provide the CombatInterpreter the necessary systems */
+		/* Provide the Abilities the necessary systems */
 		Ability.setCombatSystem(cs);
 		Ability.setTargetingSystem(ts);
+		Ability.setNetworkSystem(ns);
 		
 		/* Provide the NetworkSystem to the MessageQueue */
 		MessageQueue.getInstance().setNetworkSystem(ns);

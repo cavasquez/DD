@@ -2,7 +2,6 @@ package DD.Network;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
 import DD.Message.NetworkMessage;
 import DD.Message.QueueMessage;
 

@@ -21,7 +21,7 @@ import DD.SlickTools.*;
  * needed to keep up the game.
  ******************************************************************************************************/
 
-public class DDCharacter extends Entity implements Serializable
+public class DDCharacter extends CharacterEntity implements Serializable
 {
 	private static final long serialVersionUID = -3339921524023083469L;
 
@@ -87,8 +87,6 @@ public class DDCharacter extends Entity implements Serializable
 		}
 	}
 	
-	
-	
 	public CharacterSheet getCharacterSheet() 
 	{
 		return sheet;
@@ -105,7 +103,7 @@ public class DDCharacter extends Entity implements Serializable
 	} /* end resetCharacter method */
 	
 	public void addAbility(Ability ability)
-	{/* Character does have addComponent, however abilities have a specific purpose than 
+	{/* Character does have addComponent, however abilities have a more specific purpose than 
 	 	the standard component object. Thus, they have their own array and add method. */
 		ability.setOwnerEntity(this);
 		abilities.add(ability);	
@@ -136,6 +134,9 @@ public class DDCharacter extends Entity implements Serializable
 		hasTurn = false;
 	} /* end endTurn method */
 	
+	/************************************ Slick Mechanisms *************************************/
+	
+	
 	/************************************ Combat Mechanisms *************************************/
 	public boolean defend(int attack, int damage, ACType attackType)
 	{/* The character must attempt to defend against an attack.
@@ -143,16 +144,24 @@ public class DDCharacter extends Entity implements Serializable
 	 	TODO: check for flat-footed, etc. */
 		/* TODO: implement */
 		boolean returner = false;
+		boolean wasDying = isDying();
+		boolean wasDead = isDead();
 		/*sheet.getACTotal();
 		sheet.getFlatfootTotal();
 		sheet.getTouchTotal();
 		*/
 		if (attack >= getAC())
 		{
+			/* Character was hit */
 			returner = true;
 			getHit(damage);
+			this.addComponent(new CombatStatus(Integer.toString(damage))); /* Alert players of damage */
 		} /* end if */
-		
+		else
+		{/* Missed hit, print the  miss */
+			/* missed hit */
+			this.addComponent(new CombatStatus("missed"));
+		} /* end else */
 		return(returner); /*  */
 	} /* end getAttacked method */
 	
@@ -160,7 +169,6 @@ public class DDCharacter extends Entity implements Serializable
 	{ /* The character is hit. Deal with calculations, checks, and damage reduction. */
 		/* TODO: implement */
 		/* TODO: if hp drops to 0 or less, apply conditions. */
-		/* TODO: send message from here */
 		/* TODO: take care of damage reduction */
 		currentHP -= hit;
 	} /* end getHit method */
@@ -372,6 +380,18 @@ public class DDCharacter extends Entity implements Serializable
 	{
 		return sheet;
 	}
+	
+	public boolean isDying()
+	{
+		return (currentHP < 0);
+	} /* end isDying method */
+	
+	public boolean isDead()
+	{
+		boolean returner = false;
+		if ((currentHP < 0) && ((currentHP * -1) >= sheet.getConInherent())) returner = true;
+		return returner;
+	} /* end isDead method */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************

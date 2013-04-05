@@ -1,14 +1,17 @@
 package DD.GUI;
 
 import java.io.File;
-import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
+
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 import DD.System.DDSystem;
 
-public class Game extends StateBasedGame
+public class TestGame extends StateBasedGame
 {
-	public static final String gamename = "Dungeons & Dragons!";
+public static final String gamename = "Dungeons & Dragons!";
 	
 	public static final int menu = 0;
 	public static final int JoinLob = 1;
@@ -19,7 +22,7 @@ public class Game extends StateBasedGame
 	//public static final int cc = 6; //this is for character creation
 	public static DDSystem system;
 	
-	public Game(String gamename)
+	public TestGame(String gamename)
 	{
 		super(gamename);
 	}
@@ -32,10 +35,7 @@ public class Game extends StateBasedGame
 		this.addState(new CreateLob(createLob));
 		this.addState(new GameplayState(gameplay));
 		//this.addState(new MapTestState(gameplay));
-
-//		this.addState(new MapToolState(maptool));
-
-
+		this.addState(new MapToolState(maptool));
 		//this.addState(new CharCreate(cc)); //this is for char create
 		
 		/* Note that initStatesList is where we ADD states. Slick will get them for us. If we have addState
@@ -47,7 +47,7 @@ public class Game extends StateBasedGame
 //		this.getState(createLob).init(gc, this);
 //		this.getState(gameplay).init(gc, this);
 		
-		this.enterState(menu);
+		this.enterState(gameplay);
 		
 	}
 	
@@ -62,7 +62,7 @@ public class Game extends StateBasedGame
 		
 		AppGameContainer appgc;
 		try{
-			appgc = new AppGameContainer(new Game(gamename));
+			appgc = new AppGameContainer(new TestGame(gamename));
 			appgc.setDisplayMode(1200, 650, false);
 			appgc.setTargetFrameRate(60);
 			appgc.start();
@@ -70,5 +70,4 @@ public class Game extends StateBasedGame
 			e.printStackTrace();
 		}
 	}
-
 }

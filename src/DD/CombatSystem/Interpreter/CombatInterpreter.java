@@ -5,6 +5,7 @@ import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.CombatMessage;
 import DD.Message.CombatValidationMessage;
+import DD.Network.NetworkSystem;
 
 /*****************************************************************************************************
  * CombatInterpreter will be used by CombatSystem to interpret every action. CombatInterpreter will
@@ -43,6 +44,6 @@ public abstract class CombatInterpreter
 	public static void setActionBox(ActionBox ab)
 	{
 		CombatInterpreter.ab = ab;
-	} /* end setActionBox method */
+	} /* end setActionBox method */	
 	
 } /* end CombatInterpreter class */

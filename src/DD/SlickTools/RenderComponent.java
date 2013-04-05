@@ -16,17 +16,16 @@ public abstract class RenderComponent extends Component
 {
 	
 	/************************************ Class Methods *************************************/
-	public RenderComponent() {
+	public RenderComponent() 
+	{
 		super();
-		// TODO Auto-generated constructor stub
-	}
+	} /* end RenderComponent constructor */
+	
 	public RenderComponent (int id)
 	{
 		super(id);
 	} /* end RenderComponent constructor */
 	
-
-
 	public abstract void render(GameContainer gc, StateBasedGame sbg, Graphics gr);
 	
 } /* end RenderComponent method */

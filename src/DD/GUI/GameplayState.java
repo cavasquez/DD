@@ -1,5 +1,6 @@
 package DD.GUI;
  
+import java.util.ArrayList;
 import java.util.Iterator;  
 
 import DD.ActionBox.ActionBox;
@@ -15,6 +16,7 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.GMToolsBox.GMToolsBox;
 import DD.MapTool.*;
+import DD.Network.NetworkSystem.NetworkType;
 import DD.SlickTools.Component;
 import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
@@ -67,9 +69,12 @@ public class GameplayState extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
     	maptool = new MapTool();
     	
+    	//BY DEFAULT, SET NETWORK AS SERVER
+    	//TODO: THE ABOVE NEEDS TO BE CHANGED
+    	System.out.println("system? " + Game.system);
+    	Game.system.ns.setNetworkType(NetworkType.SERVER);
 //    	maptool.getMapAtLocation(0, 0).setPosition(position);
     	Game.system.setMap(maptool.getMapAtLocation(0, 0));
-    	
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
         playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
@@ -114,7 +119,7 @@ public class GameplayState extends BasicGameState {
         //Create GMToolsBox for GM
         gmToolsBox = new GMToolsBox(stateID, 300, 200);
         //Fill in ActionBox with action choices
-        actionBox.addActionChoice();
+        actionBox.addActionChoices();
         Game.system.linkBoxes(actionBox, null);
         //set ActionBox's character
         actionBox.setCharacter(player);
@@ -178,16 +183,8 @@ public class GameplayState extends BasicGameState {
 		
     	//Update Action Box
     	/* go through ArrayList of Components to call their update methods */
-		renderComponent = null;
-		for (Component component : actionBox.getComponentList())
-		{
-			if (RenderComponent.class.isInstance(component))
-			{
-				renderComponent = (RenderComponent) component;
-				renderComponent.update(gc, sb, delta);
-			}
-			
-		}
+		actionBox.update(gc, sb, delta);
+
 		
 		//Character sheet
 		//charToString = "CHARACTER SHEET: \n" + player.getCharacterSheet().toString();
@@ -229,35 +226,35 @@ public class GameplayState extends BasicGameState {
     	*/
     	
     	//Render Map
-    	RenderComponent renderComponent = null;
-    	
-    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
-    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
-    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
-    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
-    			for(int k = list.length; k > 0; k--) {
-    				Component component = (Component)list[k-1];
-    				if (RenderComponent.class.isInstance(component))
-    				{
-    					renderComponent = (RenderComponent) component;
-    					renderComponent.render(gc, sb, g);
-    				}
-    			}
-    		}
-    	}
+    	maptool.getMapAtLocation(0, 0).render(gc, sb, g);
+//    	RenderComponent renderComponent = null;
+//    	ArrayList<CharacterObjects> characters = new ArrayList<CharacterObjects>();
+//    	
+//    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
+//    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
+//    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
+//    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
+//    			for(int k = list.length; k > 0; k--) {
+//    				Component component = (Component)list[k-1];
+//    				if (RenderComponent.class.isInstance(component))
+//    				{
+//    					if (RenderComponent.class.isInstance(component))
+//        				{
+//        					if(CharacterObjects.class.isInstance(component)) characters.add((CharacterObjects) component);
+//        					else
+//        					{
+//        						renderComponent = (RenderComponent) component;
+//            					renderComponent.render(gc, sb, g);
+//        					}
+//        				}
+//    				}
+//    			}
+//    		}
+//    	}
     	
     	
     	//Render Action Box
-    	renderComponent = null;
-		for (Component component : actionBox.getComponentList())
-		{
-			if (RenderComponent.class.isInstance(component))
-			{
-				renderComponent = (RenderComponent) component;
-				renderComponent.render(gc, sb, g);
-			}
-			
-		}
+    	actionBox.render(gc, sb, g);
  
 		//g.drawString(charToString, 950, 30);
 		//g.drawString(goblinHP, 950, 400);

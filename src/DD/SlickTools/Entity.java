@@ -26,6 +26,7 @@ public class Entity
 	protected int id;								/* entities ID */
 	protected int componentId;						/* id used to keep track of component ID's (currently holds the NEXT component ID) */
 	protected Queue<Integer> recycledIds;			/* ID's of objects that have given up their id (thus the ID can be used again */
+	protected Queue<Component> trash;				/* temporary holding spot for components that will be deleted. This is to deal with the ConcurrentModificationException */
 	protected Vector2f position;
 	protected float scale;
 	protected ArrayList<Component> components = null;
@@ -34,6 +35,7 @@ public class Entity
 	public Entity (int id)
 	{
 		this.id = id;
+		trash = new LinkedList<Component>();
 		components = new ArrayList<Component>();
 		recycledIds = new LinkedList<Integer>();
 	} /* end Entity constructor */
@@ -80,6 +82,11 @@ public class Entity
 		
 	} /* end AddComponent method */
 	
+	public void removeAllComponents()
+	{
+		components.clear();
+	} /* end removeAllComponents method */
+	
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
 		updateComponents(gc, sbg, delta);
@@ -92,23 +99,19 @@ public class Entity
 	
 	protected void updateComponents(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException
 	{
-		for (Component component : components)
-		{
-			component.update(gc, sbg, delta);
-		} /* end for loop */
+		for(int i = 0; i < components.size(); i++) components.get(i).update(gc, sbg, delta);
 	} /* end updateComponents method */
 	
 	protected void renderComponents(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
 		RenderComponent renderComponent = null;
-		for (Component component : components)
+		for(int i = 0; i < components.size(); i++)
 		{
-			if (RenderComponent.class.isInstance(component))
+			if (RenderComponent.class.isInstance(components.get(i)))
 			{
-				renderComponent = (RenderComponent) component;
+				renderComponent = (RenderComponent) components.get(i);
 				renderComponent.render(gc, sbg, gr);
 			} /* end if */
-			
 		} /* end for loop */
 		
 	} /* end renderComponents method */
