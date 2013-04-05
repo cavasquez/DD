@@ -81,9 +81,9 @@ public class MapTestState extends BasicGameState {
 		//System.out.println("Image width: " + characters.getWidth());
 		
 		/*2 up from bottom, 16 across */
-		//Image warrior = characters.getSubImage(2530, 1440, 33, 34);
+		Image warrior = characters.getSubImage(2530, 1440, 33, 34);
 		//Goblin image
-		Image warrior = characters.getSubImage(98, 65, 33, 34);
+		//Image warrior = characters.getSubImage(98, 65, 33, 34);
 	
 		
 		
