@@ -19,6 +19,8 @@ public class Menu extends BasicGameState
 	Input mouse = new Input(650);
 	private TextField username;
 	
+	private Image charCreate = null;
+	
 	//Scanner input = new Scanner(System.in);
 	//String create = "";
 	//TrueTypeFont trueTypeFont;
@@ -37,6 +39,8 @@ public class Menu extends BasicGameState
 		screen = new Image("Images/Menus/menuscreen5.jpg");
 		playNow = new Image("Images/Menus/MenuButtons.png");
 		mapToolButton = new Image("Images/Menus/MapTool.png");
+		
+		charCreate = new Image("Images/Menus/charCreate.png");
 		
 		button = new Sound("Audio/dunSound.wav");
 		
@@ -88,6 +92,8 @@ public class Menu extends BasicGameState
 		playNow.draw(100,140);
 		mapToolButton.draw(130, 550);
 		g.drawString(mousePos, 100, 100);
+		
+		charCreate.draw(400, 375);
 		
 		//g.drawString(create, 90, 90);
 		

@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 import org.newdawn.slick.SlickException;
 
+import DD.Character.DDCharacter;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 
 
@@ -26,12 +27,16 @@ public class MapTool implements Serializable{
 	public MapTool() throws SlickException {
 		world = new World("world");
 		//TODO:
-		currentMap = new Map("default map");
+		currentMap = world.getMap(0, 0);
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();
 		selectedList = new SelectList(currentMap);  
 	}
 		
+	
+	public World getWorld(){
+		return world;
+	}
 	/*
 	 * loads world from a .ser and sets that world to the this.world
 	 */
@@ -55,11 +60,36 @@ public class MapTool implements Serializable{
 	         
 	      }
 	      this.world = e;
+	      
+	      for (int i = 0; i < world.worldSize; i++) {
+			for (int j = 0; j < world.worldSize; j++) {
+				if(world.getMap(i,j).serMapHelper.size()!=0){
+					for (SerMapCharHelper serHelper : world.getMap(i, j).serMapHelper) {
+						System.out.println("im here"+ i + j);
+						DDCharacter temp = new DDCharacter(i*j);
+						temp.setCharacterSheet(serHelper.cs);
+						 CharacterObjects ddChar;
+						try {
+							ddChar = new CharacterObjects(temp.getCharacterSheet().getName(), null, getMapAtLocation(i, j), temp);
+							 world.getMap(i, j).place(serHelper.coord.x, serHelper.coord.y, ddChar);
+						} catch (SlickException e1) {
+						
+							e1.printStackTrace();
+						} 
+					}
+				}
+			}
+		} 
 	 }
 	
 	public Map getCurrentMap() {
 		return currentMap;
 	}
+	
+	public void setCurrentMap(int x, int y){
+		currentMap = world.getMap(x, y);
+	}
+	
 	public Map getMapAtLocation(int x,int y){
 		return world.world[x][y];
 	}

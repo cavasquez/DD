@@ -56,7 +56,7 @@ public class JoinLob extends BasicGameState
 		ip = new TextField(gc, font, 100, 260, 180, 25);
 		jlsb = new JoinLobbyStartButton(username, ip, Game.system, new Vector2f(190, 600));
 //		textbox.addListener(new KeyListener());
-		username.setText("useranme");
+		username.setText("username");
 		ip.setText("ip address");
 		font.loadGlyphs();
 	}
@@ -102,6 +102,7 @@ public class JoinLob extends BasicGameState
 			}
 		}
 		
+		//System.out.println(username.getText());
 		//LOGIN button
 //		if((posX > 185 && posX < 247) && (posY > 28 && posY < 47))
 //		{

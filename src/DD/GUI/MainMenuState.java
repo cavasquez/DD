@@ -15,9 +15,12 @@ public class MainMenuState extends BasicGameState {
 	private Image background = null;
 	private Image startOption = null;
 	private Image exitOption = null;
+	
 	private float startOptionScale = 1.0f;
 	private float exitOptionScale = 1.0f;
 	private float scaleStep = 0.0001f;
+	
+	
 	
 	public MainMenuState(int stateID) {
 		this.stateID = stateID;
@@ -30,6 +33,8 @@ public class MainMenuState extends BasicGameState {
 	public void init(GameContainer arg0, StateBasedGame arg1) throws SlickException {
 		background = new Image("Images/Test/titleBackground.png");
 		Image menuOptions = new Image("Images/Test/options.png");
+		
+		
 		
 		startOption = menuOptions.getSubImage(0, 0, 377, 71);
 		exitOption = menuOptions.getSubImage(0, 71, 377, 71);
@@ -92,5 +97,6 @@ public class MainMenuState extends BasicGameState {
 		background.draw(0, 0, 1.3f);
 		startOption.draw(400, 350, startOptionScale);
 		exitOption.draw(400, 425, exitOptionScale);
+		
 	}
 }
