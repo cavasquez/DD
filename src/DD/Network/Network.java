@@ -56,7 +56,8 @@ public abstract class Network implements NetworkInterface
 	public boolean setServerIP(String ip)
 	{
 		boolean returner = false;
-		try {
+		try 
+		{
 			setServerIP(InetAddress.getByName(ip));
 			returner = true;
 		} /* end try */
