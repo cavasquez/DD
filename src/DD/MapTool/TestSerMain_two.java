@@ -24,13 +24,10 @@ public class TestSerMain_two extends BasicGame
     @Override
     public void init(GameContainer gc) 
 			throws SlickException {
-<<<<<<< HEAD
-    	String path = "C:/Users/Christopher/Desktop/save/";
-=======
 
     	String path = "C:/Users/mike/Desktop/save1/";
 
->>>>>>> a0cb4ca9024cb65f68d5cab4cb608fefef32c62a
+
 		/*
 		 * IMPORTANT: to see this working edit the path above to a new folder you create on you Desktop.
 		 * Run this main once to create the .ser files.
