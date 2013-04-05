@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.*;
@@ -13,8 +14,8 @@ import org.newdawn.slick.gui.TextField;
 import java.util.Scanner;
 
 public class CharCreate implements ComponentListener, GameState {
-	
-	private TextField username;
+	UnicodeFont font;
+	TextField playerName;
 	Scanner input = new Scanner(System.in);
 	String create = "";
 	
@@ -25,7 +26,11 @@ public class CharCreate implements ComponentListener, GameState {
 	
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
-		username = new TextField(gc, gc.getDefaultFont(), 500, 500, 200, 20);
+		playerName = new TextField(gc, font, 100, 230, 180, 25);
+		
+		
+		
+		font.loadGlyphs();
 		
 	}
 	
@@ -33,11 +38,16 @@ public class CharCreate implements ComponentListener, GameState {
 	{
 		create = input.nextLine();
 		g.drawString(create, 100, 100);
+		g.setFont(font);
+		
+		
+		playerName.render(gc, g);
+	
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg,int delta)throws SlickException
 	{
-		
+		font.loadGlyphs();
 				
 			
 		
