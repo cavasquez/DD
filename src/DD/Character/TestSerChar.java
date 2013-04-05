@@ -82,6 +82,8 @@ public class TestSerChar extends BasicGame
 //    	mt.getWorld().writeMe("C:/Users/mike/Desktop/save1/");
     	
     	mt.loadWorld("world", "C:/Users/mike/Desktop/save1/");
+    	mt.setCurrentMap(0, 0);
+    	
     	System.out.println(mt.getCurrentMap().toString());
     	
     }

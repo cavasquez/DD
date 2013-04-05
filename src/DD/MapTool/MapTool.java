@@ -11,6 +11,7 @@ import java.util.LinkedList;
 
 import org.newdawn.slick.SlickException;
 
+import DD.Character.DDCharacter;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 
 
@@ -60,21 +61,25 @@ public class MapTool implements Serializable{
 	      }
 	      this.world = e;
 	      
-//	      for (int i = 0; i < world.worldSize; i++) {
-//			for (int j = 0; j < world.worldSize; j++) {
-//				for (int m = 0; m < world.getMap(i, i).mapSize; m++) {
-//					for (int z = 0; z < world.getMap(i, i).mapSize; z++) {
-//						for (SerMapCharHelper serHelper : world.getMap(i, j).serMapHelper) {
-//							 CharacterObjects ddchar = new 
-//							 world.getMap(i, i).place(m, z, ddChar);
-//						}
-//					}
-//				}
-//			}
-//		}
-	      
-	      
-	      
+	      for (int i = 0; i < world.worldSize; i++) {
+			for (int j = 0; j < world.worldSize; j++) {
+				if(world.getMap(i,j).serMapHelper.size()!=0){
+					for (SerMapCharHelper serHelper : world.getMap(i, j).serMapHelper) {
+						System.out.println("im here"+ i + j);
+						DDCharacter temp = new DDCharacter(i*j);
+						temp.setCharacterSheet(serHelper.cs);
+						 CharacterObjects ddChar;
+						try {
+							ddChar = new CharacterObjects(temp.getCharacterSheet().getName(), null, getMapAtLocation(i, j), temp);
+							 world.getMap(i, j).place(serHelper.coord.x, serHelper.coord.y, ddChar);
+						} catch (SlickException e1) {
+						
+							e1.printStackTrace();
+						} 
+					}
+				}
+			}
+		} 
 	 }
 	
 	public Map getCurrentMap() {
