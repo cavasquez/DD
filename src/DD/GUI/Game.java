@@ -16,7 +16,7 @@ public class Game extends StateBasedGame
 	public static final int createLob = 3;
 	public static final int gameplay = 4;
 	public static final int maptool = 5;
-	//public static final int cc = 6; //this is for character creation
+	public static final int cc = 6; //this is for character creation
 	public static DDSystem system;
 	
 	public Game(String gamename)

@@ -5,17 +5,45 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.gui.AbstractComponent;
 import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
+
+import DD.Character.CharacterSheet.CharacterSheet;
+
 import java.util.Scanner;
 
-public class CharCreate implements ComponentListener, GameState {
+public class CharCreate extends BasicGameState {
+	CharacterSheet sheet;
 	UnicodeFont font;
 	TextField playerName;
+	TextField characterName;
+	//clickable button for choosing race
+	TextField languages;
+	//clickable button for choosing size
+	//clickable button for choosing gender
+	TextField height;
+	TextField weight;
+	TextField age;
+	TextField alignments;
+	TextField deity;
+	TextField background;
+	TextField occupation;
+	
+	//clickable button to choose which class to pick
+	
+	
+	
+	//AFTER FILLING BASIC INFO WE WILL THEN NEED TO PASS TO A NEW STATE
+	/*
+	 * (String name,String player,int race,String languages, int size,
+						  int gender,int height,int weight,int age,String alignments,
+						  String deity,String background,String occupation)
+	*/
 	Scanner input = new Scanner(System.in);
 	String create = "";
 	
@@ -54,6 +82,35 @@ public class CharCreate implements ComponentListener, GameState {
 		//TextField tx = new TextField(gc, 14, 100,100, 10,10, mouseButtonDown(0));
 		
 	}
+
+	@Override
+	public int getID() {
+		return 6;
+	}
+	
+	
+	//this is what the button should do then move to the next
+	public void setCharacterSheet()
+	{
+		
+		//fix with buttons
+		//sheet.fillBasic(characterName.getText(), playerName.getText(), race, languages.getText(), size, gender, 
+			//			height.getText(), weight.getText(), age.getText(), alignments.getText(), deity.getText(), 
+				//		background.getText(), occupation.getText());
+		
+		sheet.fillAbilities();
+		
+		//get class option button value
+		
+		
+		//sheet.fillRecorder(sheet.chooseClass(class button value here)/*This needs the class option from button */);
+		
+		//sheet.fillAttacksAndDefense(/* the class option*/);
+		
+		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
+	
+	}
+	
 	
 	/*
 	
@@ -63,210 +120,6 @@ public class CharCreate implements ComponentListener, GameState {
 	}
 	*/
 
-	@Override
-	public void componentActivated(AbstractComponent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseClicked(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseDragged(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseMoved(int arg0, int arg1, int arg2, int arg3) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseReleased(int arg0, int arg1, int arg2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseWheelMoved(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void inputEnded() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void inputStarted() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isAcceptingInput() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void setInput(Input arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyPressed(int arg0, char arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void keyReleased(int arg0, char arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerButtonPressed(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerButtonReleased(int arg0, int arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerDownPressed(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerDownReleased(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerLeftPressed(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerLeftReleased(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerRightPressed(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerRightReleased(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerUpPressed(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void controllerUpReleased(int arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isRenderPaused() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isUpdatePaused() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void pauseRender() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pauseUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setRenderPaused(boolean arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setUpdatePaused(boolean arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unpauseRender() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void unpauseUpdate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void enter(GameContainer arg0, StateBasedGame arg1)
-			throws SlickException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getID() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void leave(GameContainer arg0, StateBasedGame arg1)
-			throws SlickException {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
