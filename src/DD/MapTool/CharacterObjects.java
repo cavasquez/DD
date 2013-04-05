@@ -26,6 +26,10 @@ public class CharacterObjects extends Objects{
 
 	}
 	
+	public CharacterObjects() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public String toString(){
 		return "DDcharToString:(~*-*)~\n";
 	}
@@ -41,6 +45,10 @@ public class CharacterObjects extends Objects{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} /* end catch */
+	}
+	
+	public DDCharacter getDdchar(){
+		return ddchar;
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)

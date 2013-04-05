@@ -37,6 +37,7 @@ public class Map extends Entity implements Serializable{
 	boolean hasTempObjects;
 	String name;
 	public final int mapSize = 21;
+	protected ArrayList<SerMapCharHelper> serMapHelper = new ArrayList<SerMapCharHelper>();
 
 	public Map() {
 		super();
@@ -79,29 +80,47 @@ public class Map extends Entity implements Serializable{
 	 * 	if turn count == 0 after decremented, remove that temp item.
 	 */
 	
-	public void writeMeHelper(){
-		
-		Stack<Objects> stackHelper = new Stack<Objects>();
-		int[][] stackSize = new int[mapSize][mapSize];
+//	public void writeMeHelper(){		
+//		
+//		Stack<Objects> stackHelper = new Stack<Objects>();
+//		int[][] stackSize = new int[mapSize][mapSize];
+//		for (int i = 0; i < mapSize; i++) {
+//			for (int j = 0; j < mapSize; j++) {
+//				stackSize[i][j] = objectsStack[i][j].getPQueue().size();
+//			}
+//		}
+//		
+//		for (int i = 0; i < mapSize; i++) {
+//			for (int j = 0; j < mapSize; j++) {
+//				for (int z = 0; z < objectsStack[i][j].getPQueue().size(); z++) {
+//					stackHelper.push(objectsStack[i][j].pop());
+//				}
+//			}
+//		}
+//		
+//		for (int i = 0; i < mapSize; i++) {
+//			for (int j = 0; j < mapSize; j++) {
+//				for (int z = 0; z < stackSize[i][j]; z++) {
+//					stackHelper.peek().setImage(null);
+//					place(i,j,stackHelper.pop());
+//				}
+//			}
+//		}
+//	}
+	
+	public void serMapHelperMethod() throws SlickException{
 		for (int i = 0; i < mapSize; i++) {
 			for (int j = 0; j < mapSize; j++) {
-				stackSize[i][j] = objectsStack[i][j].getPQueue().size();
-			}
-		}
-		
-		for (int i = 0; i < mapSize; i++) {
-			for (int j = 0; j < mapSize; j++) {
-				for (int z = 0; z < objectsStack[i][j].getPQueue().size(); z++) {
-					stackHelper.push(objectsStack[i][j].pop());
-				}
-			}
-		}
-		
-		for (int i = 0; i < mapSize; i++) {
-			for (int j = 0; j < mapSize; j++) {
-				for (int z = 0; z < stackSize[i][j]; z++) {
-					stackHelper.peek().setImage(null);
-					place(i,j,stackHelper.pop());
+				if(objectsStack[i][j].peek() instanceof CharacterObjects){
+					CharacterObjects workDamnYou;
+					workDamnYou = new CharacterObjects();
+						workDamnYou = (CharacterObjects) objectsStack[i][j].peek();
+					serMapHelper.add(new SerMapCharHelper(new Coordinate(i, j), workDamnYou.ddchar.getCharacterSheet()));
+					try {
+						remove(i,j);
+					} catch (SlickException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}
@@ -113,6 +132,14 @@ public class Map extends Entity implements Serializable{
 		
 			FileOutputStream fileOut = new FileOutputStream(path+name+".ser");
 			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
+			
+			try {
+				serMapHelperMethod();
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			out.writeObject(this);
 			out.close();
 			fileOut.close();

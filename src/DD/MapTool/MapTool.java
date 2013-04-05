@@ -26,12 +26,16 @@ public class MapTool implements Serializable{
 	public MapTool() throws SlickException {
 		world = new World("world");
 		//TODO:
-		currentMap = new Map("default map");
+		currentMap = world.getMap(0, 0);
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();
 		selectedList = new SelectList(currentMap);  
 	}
 		
+	
+	public World getWorld(){
+		return world;
+	}
 	/*
 	 * loads world from a .ser and sets that world to the this.world
 	 */
@@ -55,11 +59,32 @@ public class MapTool implements Serializable{
 	         
 	      }
 	      this.world = e;
+	      
+//	      for (int i = 0; i < world.worldSize; i++) {
+//			for (int j = 0; j < world.worldSize; j++) {
+//				for (int m = 0; m < world.getMap(i, i).mapSize; m++) {
+//					for (int z = 0; z < world.getMap(i, i).mapSize; z++) {
+//						for (SerMapCharHelper serHelper : world.getMap(i, j).serMapHelper) {
+//							 CharacterObjects ddchar = new 
+//							 world.getMap(i, i).place(m, z, ddChar);
+//						}
+//					}
+//				}
+//			}
+//		}
+	      
+	      
+	      
 	 }
 	
 	public Map getCurrentMap() {
 		return currentMap;
 	}
+	
+	public void setCurrentMap(int x, int y){
+		currentMap = world.getMap(x, y);
+	}
+	
 	public Map getMapAtLocation(int x,int y){
 		return world.world[x][y];
 	}

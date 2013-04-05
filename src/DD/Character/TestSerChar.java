@@ -64,14 +64,25 @@ public class TestSerChar extends BasicGame
 //    	CharacterClass cc = mike.getCharacterSheet().chooseClass(0);
 //    	mike.getCharacterSheet().fillRecorder(cc);
 //    	mike.getCharacterSheet().fillAttacksAndDefense(cc);
-//    	mike.writeMe("C:/Users/Jin/Desktop/save/");
-    	
+//    	mike.writeMe("C:/Users/mike/Desktop/save1/");
+//    	
     	MapTool mt = new MapTool();
-    	DDCharacter mike = mt.getMapAtLocation(0, 0).loadCharacter("C:/Users/Jin/Desktop/save/Characters/", "Max");
-    	CharacterObjects co = new CharacterObjects(mike.getCharacterSheet().getName(), null, 0, 0, null, mike);
     	
-    	mt.getMapAtLocation(0, 0).place(0, 0,co);
-    	System.out.println(mt.getMapAtLocation(0, 0));
+//    	mt.setCurrentMap(0, 0);
+//    	
+//    	DDCharacter mike = mt.getCurrentMap().loadCharacter("C:/Users/mike/Desktop/save1/Characters/", "Max");
+//    	CharacterObjects co = new CharacterObjects(mike.getCharacterSheet().getName(), null, 0, 0, null, mike);
+// 	
+//    	mt.getCurrentMap().place(0, 0,co);
+//    	System.out.println(mt.getCurrentMap().toString());
+    	
+//    	
+    	
+    	
+//    	mt.getWorld().writeMe("C:/Users/mike/Desktop/save1/");
+    	
+    	mt.loadWorld("world", "C:/Users/mike/Desktop/save1/");
+    	System.out.println(mt.getCurrentMap().toString());
     	
     }
  
