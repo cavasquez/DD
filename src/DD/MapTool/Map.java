@@ -34,7 +34,7 @@ public class Map extends Entity implements Serializable{
 	transient Image floorImage = null;
 	boolean hasTempObjects;
 	String name;
-	public final int mapSize = 21;
+	public final int mapSize = 20;
 	protected ArrayList<SerMapCharHelper> serMapHelper = new ArrayList<SerMapCharHelper>();
 
 	public Map() {
@@ -112,7 +112,7 @@ public class Map extends Entity implements Serializable{
 				if(objectsStack[i][j].peek() instanceof CharacterObjects){
 					CharacterObjects workDamnYou;
 					workDamnYou = new CharacterObjects();
-						workDamnYou = (CharacterObjects) objectsStack[i][j].peek();
+					workDamnYou = (CharacterObjects) objectsStack[i][j].peek();
 					serMapHelper.add(new SerMapCharHelper(new Coordinate(i, j), workDamnYou.ddchar.getCharacterSheet()));
 					try {
 						remove(i,j);

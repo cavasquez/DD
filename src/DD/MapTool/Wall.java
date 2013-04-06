@@ -40,7 +40,21 @@ public class Wall extends Objects implements Serializable
 		this.y = y;
 	} /* end constructor */
 	
+	public Wall(String name, Map map) throws SlickException
+	{
+		super(name, map);
+		super.movePenalty = Integer.MAX_VALUE/2; 	/* Divide by 2 to avoid overflow when adding but maintain high value */
+		super.lightPenalty = Integer.MAX_VALUE/2; 	/* Divide by 2 to avoid overflow when adding but maintain high value */
+		super.priority = 10;
+		this.x = 0;
+		this.y = 0;
+		Image temp = super.spriteSheet.getSubImage(1470, 577, 33, 34);	//standard wall image
+		image = temp.getScaledCopy(0.9f);
+	}
+	
+	/*
 	public void render(GameContainer gc, StateBasedGame sb, Graphics gr) {
 		image.draw(x, y);
 	}
+	*/
 } /* end Wall class */

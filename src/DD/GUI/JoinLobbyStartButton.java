@@ -35,11 +35,9 @@ public class JoinLobbyStartButton extends RenderComponent
 	private BasicGameState bgs;
 	
 	/************************************ Class Methods *************************************/
-	public JoinLobbyStartButton(TextField username, TextField ip, DDSystem system, Vector2f position)
+	public JoinLobbyStartButton(DDSystem system, Vector2f position)
 	{
 		super();
-		this.username = username;
-		this.ip = ip;
 		this.system = system;
 		this.position = position;
 		length = 20;
@@ -87,5 +85,11 @@ public class JoinLobbyStartButton extends RenderComponent
 	{
 		this.bgs = bgs;
 	} /* end setBasicGameState */
+	
+	public void setTextField(TextField username, TextField ip)
+	{
+		this.username = username;
+		this.ip = ip;
+	} /* end setTextField method */
 
 } /* end JoinLobbyStartButton class */

@@ -193,7 +193,6 @@ public class MapToolState extends BasicGameState {
     			goblinChar.setCharacterID(stateID++);
     			CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinChar.getImage(), 0, 0, maptool.getCurrentMap(), goblinChar);
     			object = goblinObj;
-    			//maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
     			System.out.println("chose goblin");
     		}
     	}
@@ -203,6 +202,8 @@ public class MapToolState extends BasicGameState {
 		if((posX > 755 && posX < 755 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			Wall wall = new Wall("Wall", maptool.getCurrentMap());
+    			object = wall;
     			System.out.println("chose wall");
     		}
     	}
