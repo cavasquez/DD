@@ -251,13 +251,13 @@ public class MapToolState extends BasicGameState {
 	public void getMapCoord() {
 		if(clicked) {
 			x1 = (int)(posX / 30.85);
-			y1 = (posY / 30) - 1;
+			y1 = (int)(posY / 30) - 1;
 			System.out.println("x1: " + x1 + " y1: " + y1);
 			clicked = false;
 		}
 		else if(!clicked) {
 			x2 = (int)(posX / 30.85);
-			y2 = (posY / 30) - 1;
+			y2 = (int)(posY / 30) - 1;
 			System.out.println("x2: " + x2 + " y2: " + y2);
 			clicked = true;
 		}
