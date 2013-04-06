@@ -149,8 +149,8 @@ public class JoinLob extends BasicGameState
 	public void killTextFields()
 	{
 		/* put username and passible onto an inaccessible part of the gui */
-		username.setLocation(2000, 2000);
-		ip.setLocation(2000, 2000);
+		username.setLocation(Game.Xsize + 100, Game.Ysize - 100);
+		ip.setLocation(Game.Xsize + 100, Game.Ysize - 100);
 	} /* end killTextFields method */
 
 }

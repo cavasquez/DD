@@ -1948,7 +1948,6 @@ public class CharacterSheet implements Serializable
 	
 	public String toString()
 	{
-		ClassRecorder clas = recorder.get(0);
 		String r = "Name: " +name + " \n" +
 				   "Player Name: " + player + " \n" +
 				   "Race: " + raceName + " \n" +
@@ -1961,9 +1960,14 @@ public class CharacterSheet implements Serializable
 				   "Int: " + rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL] + "\n" +
 				   "Wis: " + rawStats[ABILITY_WISDOM][ABILITY_TOTAL] + "\n" +
 				   "Cha: " + rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] + "\n\n" +
-					
-				   "Class: " + clas.className + "\n" +
-				   "Hp: " + clas.hp;
+					"AC: " + this.getACTotal() + " \n\n";
+		if (recorder.size() > 0)
+		{
+			ClassRecorder clas = recorder.get(0);
+			r += "Class: " + clas.className + "\n" +
+					   "Hp: " + clas.hp;
+		} /* end if */
+		
 		return r;
 	}
 	

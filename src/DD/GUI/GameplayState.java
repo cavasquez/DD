@@ -18,6 +18,7 @@ import DD.GMToolsBox.GMToolsBox;
 import DD.MapTool.*;
 import DD.Network.NetworkSystem.NetworkType;
 import DD.SlickTools.Component;
+import DD.SlickTools.DDImage;
 import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
 import DD.System.DDSystem;
@@ -39,8 +40,8 @@ public class GameplayState extends BasicGameState {
 	private Image floor = null;
 	private Image wall = null;
 	private Image scaledWall = null;
-	private Image playerImage = null;
-	private Image spriteSheet = null;
+//	private Image playerImage = null;
+//	private Image spriteSheet = null;
 	private World world = null;
 	private MapTool maptool = null;
     private DDCharacter player;
@@ -75,7 +76,7 @@ public class GameplayState extends BasicGameState {
     	Game.system.ns.setNetworkType(NetworkType.SERVER);
 //    	maptool.getMapAtLocation(0, 0).setPosition(position);
     	Game.system.setMap(maptool.getMapAtLocation(0, 0));
-    	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
+//    	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
 //        playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
 //        Image goblinImage = spriteSheet.getSubImage(98, 65, 33, 34);
@@ -104,6 +105,7 @@ public class GameplayState extends BasicGameState {
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
 		sheet.equipWeapon(new Weapon(30, "Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4), 0);
+		sheet.setImage(new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png", 2530, 1440, 33, 34 ));
         player.setCharacterSheet(sheet);
         goblin.setCharacterSheet(new Goblin());
 //        goblin1.setCharacterSheet(goblin.getCharacterSheet());
@@ -137,7 +139,7 @@ public class GameplayState extends BasicGameState {
         int goblinx = 13;
         int gobliny = 6;
         //playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
-        playerObj = new CharacterObjects("Bob", playerImage, playerx, playery, maptool.getMapAtLocation(0, 0), player);
+        playerObj = new CharacterObjects("Bob", player.getImage(), playerx, playery, maptool.getMapAtLocation(0, 0), player);
         CharacterObjects goblinObj = new CharacterObjects("Goblin", goblin.getImage(), goblinx, gobliny, maptool.getMapAtLocation(0, 0), goblin); 
         
         maptool.getMapAtLocation(0, 0).placeObjects(playerx, playery, playerObj);

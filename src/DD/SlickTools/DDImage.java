@@ -54,7 +54,6 @@ public class DDImage implements Serializable
 			e.printStackTrace();
 		} /* end catch */
 		
-		
 		return returner;
 	} /* end makeImage method */
 	

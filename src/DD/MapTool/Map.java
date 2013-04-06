@@ -11,14 +11,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList; 
 import java.util.Stack;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
-
 import DD.Character.DDCharacter;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
@@ -549,7 +547,10 @@ public class Map extends Entity implements Serializable{
     		}
     	}
     	/* Render characters last */
-    	for(int i = 0; i < characters.size(); i++) characters.get(i).render(gc, sbg, gr);
+    	for(int i = 0; i < characters.size(); i++)
+		{
+    		characters.get(i).render(gc, sbg, gr);
+		}
 	} /* end render method */
 	
 	

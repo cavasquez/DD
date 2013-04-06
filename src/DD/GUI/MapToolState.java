@@ -189,11 +189,9 @@ public class MapToolState extends BasicGameState {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			DDCharacter goblinChar = new DDCharacter(stateID++);
-    			Goblin goblin = new Goblin();
-    			goblinChar.setCharacterSheet(goblin.getCharacterSheet());
+    			goblinChar.setCharacterSheet(new Goblin());
     			goblinChar.setCharacterID(stateID++);
-    			Image goblinImage = spriteSheet.getSubImage(98, 65, 33, 34);
-    			CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinImage, 0, 0, maptool.getCurrentMap(), goblinChar);
+    			CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinChar.getImage(), 0, 0, maptool.getCurrentMap(), goblinChar);
     			object = goblinObj;
     			//maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
     			System.out.println("chose goblin");

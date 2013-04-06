@@ -7,12 +7,7 @@ import DD.Character.Equipment.Weapon;
 import DD.SlickTools.DDImage;
 
 public class Goblin extends MonsterSheet
-{
-	//int hp;
-	//CharacterSheet sheet = new CharacterSheet();
-	private int XP = 135;
-	private int hp;
-	
+{	
 	public Goblin()
 	{
 		super();

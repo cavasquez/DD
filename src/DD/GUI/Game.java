@@ -9,6 +9,8 @@ import DD.System.DDSystem;
 public class Game extends StateBasedGame
 {
 	public static final String gamename = "Dungeons & Dragons!";
+	public static final int Xsize = 1200;
+	public static final int Ysize = 650;
 	
 	public static final int menu = 0;
 	public static final int JoinLob = 1;
@@ -31,7 +33,7 @@ public class Game extends StateBasedGame
 		this.addState(new JoinLob(JoinLob));
 		this.addState(new LobbyRoom(LobbyRoom));
 		this.addState(new CreateLob(createLob));
-//		this.addState(new GameplayState(gameplay));
+		this.addState(new GameplayState(gameplay));
 		this.addState(new CharCreate(cc)); //this is for char create
 		//this.addState(new MapTestState(gameplay));
 
