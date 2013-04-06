@@ -25,7 +25,7 @@ public class MapTool implements Serializable{
 	Map currentMap;
 	String userPath =  System.getProperties().getProperty("user.home");
 	
-	String ddPath = userPath +"/Documents/DD";
+	String ddPath = "C:/Program Files (x86)/DD/";
 	//TODO:fix
 	//String gamePath = userPath+"/Documents/DD"
 	

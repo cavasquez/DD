@@ -34,7 +34,7 @@ public class CharacterStats extends CharacterRenderComponent
 		gr.drawString(((DDCharacter)owner).getSheet().getName(),x,y - distanceAbove);
 		
 		/* Second, render the health */
-		String health = Integer.toString(((DDCharacter)owner).getCurrentHP()) + "/" + Integer.toString(((DDCharacter)owner).getSheet().getHP());
+		String health = Integer.toString(((DDCharacter)owner).getCurrentHP());
 		gr.drawString(health, x, y - distanceAbove + delta);
 		
 		/* Thirdly, check if dying or dead and print */
