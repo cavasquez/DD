@@ -7,6 +7,7 @@ import DD.CombatSystem.Interpreter.Standard.*;
 import DD.CombatSystem.Interpreter.System.I_EndTurn;
 import DD.CombatSystem.Interpreter.System.I_PlaceCharacter;
 import DD.CombatSystem.Interpreter.System.I_RemoveCharacter;
+import DD.CombatSystem.Interpreter.System.I_SetMap;
 import DD.CombatSystem.Interpreter.System.I_StartCombatPhase;
 import DD.MapTool.Map;
 import DD.Message.CombatMessage;
@@ -45,7 +46,8 @@ public class CombatSystem
 		END_TURN(I++, "Images/CombatSystem/EndTurn.png"),
 		PLACE_CHARACTER(I++, "Images/CombatSystem/PlaceCharacter.png"),
 		REMOVE_CHARACTER(I++, "Images/CombatSystem/RemoveCharacter.png"),
-		DYING(I++, null);
+		DYING(I++, null),
+		SET_MAP(I++, null);
 		
 		public final int index;
 		public final String image;
@@ -96,6 +98,7 @@ public class CombatSystem
 		system[Action.END_TURN.index] = new I_EndTurn();
 		system[Action.PLACE_CHARACTER.index] = new I_PlaceCharacter();
 		system[Action.REMOVE_CHARACTER.index] = new I_RemoveCharacter();
+		system[Action.SET_MAP.index] = new I_SetMap();
 	} /* end CombatSystem constructor */
 	
 	public CombatValidationMessage process(CombatMessage cm)
