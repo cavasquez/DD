@@ -131,7 +131,7 @@ public class MapToolState extends BasicGameState {
 	//Clicking on map
 	public void clickMap(GameContainer gc) {
 		//NOTE THIS NEEDS TO BE THE FIRST THING IN UPDATE METHOD!!!
-    	if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
+    	if((posX > 0 && posX < 620) && (posY > 40 && posY < 640)) {
     		//you are inside map area
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
 	    		getMapCoord();
