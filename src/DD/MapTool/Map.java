@@ -34,7 +34,7 @@ public class Map extends Entity implements Serializable{
 	transient Image floorImage = null;
 	boolean hasTempObjects;
 	String name;
-	public final int mapSize = 21;
+	public final int mapSize = 20;
 	protected ArrayList<SerMapCharHelper> serMapHelper = new ArrayList<SerMapCharHelper>();
 
 	public Map() {

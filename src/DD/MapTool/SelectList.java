@@ -83,6 +83,7 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 			owner.place(coord.x, coord.y, obj);
 			TargetBlock tarBlock = new TargetBlock(owner);
 			owner.place(coord.x, coord.y , tarBlock);
+			//System.out.println("object place " + coord.x + " " + coord.y);
 		}
 	}	
 	public void removeSelectedListOnMap(){

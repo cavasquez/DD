@@ -37,6 +37,18 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		Objects.owner = owner;
 		if(owner!=null) owner.addComponent(this);
 	}
+	
+	public Objects(String name, Map owner) throws SlickException
+	{
+		super(0);
+		if (spriteSheet == null) spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
+		this.name = name;
+		this.position = new Coordinate(0,0);
+		// TODO
+		Objects.owner = owner;
+		if(owner!=null) owner.addComponent(this);
+	}
+	
 	public void select() throws SlickException {};
 	
 	
@@ -126,7 +138,7 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		float y = position.y;
 
 		if(!Wall.class.isInstance(this) && 
-				!Floor.class.isInstance(this))
+				!Floor.class.isInstance(this) && !TargetBlock.class.isInstance(this))
 		{
 			float xCorrection = 30.85f;
 			float yCorrection = 30;

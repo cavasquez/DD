@@ -37,9 +37,9 @@ public class Game extends StateBasedGame
 		this.addState(new CharCreate(cc)); //this is for char create
 		System.out.println("System properties" + System.getProperties());
 		System.out.println("User home folder " + System.getProperties().getProperty("user.home"));
-		//this.addState(new MapTestState(gameplay));
+		//this.addState(new MapTestState(gameplay));	//for testing only
 
-//		this.addState(new MapToolState(maptool));
+		this.addState(new MapToolState(maptool));
 
 
 		

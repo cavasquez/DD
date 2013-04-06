@@ -57,8 +57,8 @@ public class TargetBlock extends Objects
 	} /* end TargetBlock constructor */
 	
 	public TargetBlock(Map owner) throws SlickException
-	{
-		super("|---|", spriteSheet.getSubImage(1473, 513, 33, 34), owner, null, null); /* TODO: remove this after testing */
+	{	
+		super("|---|", spriteSheet.getSubImage(1473, 510, 33, 34).getScaledCopy(0.9f), owner, null, null); /* TODO: remove this after testing */
 
 		movePenalty = 0;
 		lightPenalty = 0;
