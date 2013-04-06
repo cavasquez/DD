@@ -93,7 +93,7 @@ public class PlaceCharacter extends TargetAbility
 		if (tsm.getTargets() == null)
 		{
 			/* We can only place a character on a nonempty square */
-			Integer[] body = new Integer[I_StandardAttack.BODY_SIZE];
+			Integer[] body = new Integer[I_PlaceCharacter.BODY_SIZE];
 			body[I_PlaceCharacter.CHARACTER_ID] = gmt.getNewCharacterID();
 			body[I_PlaceCharacter.POS_X] = tsm.getPosition().x;
 			body[I_PlaceCharacter.POS_Y] = tsm.getPosition().y;

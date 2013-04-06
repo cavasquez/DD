@@ -2,6 +2,7 @@ package DD.Message;
 
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.CombatSystem;
+import DD.MapTool.Map;
 
 /*****************************************************************************************************
  * CombatMessage will provide a way for the View to communicate with CombatSystem. While CombatSystem
@@ -27,8 +28,12 @@ public class CombatMessage extends Message
 	private Integer target[];				/* The target, if any, of the request */
 	private CombatSystem.ActionType action;	/* Type of action being performed */
 	private CombatSystem.Action request;	/* The requested action, ability, or spell to be performed */
-	private CharacterSheet characterData;	/* Character Data explicitly used by GMTools */
 	private Integer[] body;					/* An array that will contain well defined data */
+	private Object[] bodyData;
+	
+	/* System related stuff. Will have to figure out a better way to migrate them */
+	private CharacterSheet characterData;	/* Character Data explicitly used by GMTools */
+	private Map mapData;					/* The map that will be used in combat system */
 	
 	/************************************ Class Methods *************************************/
 	public CombatMessage
@@ -62,6 +67,24 @@ public class CombatMessage extends Message
 		this(source, target, action, request, body);
 		this.characterData = characterData;
 	} /* end Constructor */
+	
+	public CombatMessage
+	(
+			Integer source,		/* This should be the ID of the source DDCharacter */
+			Integer target[], 	/* This should be the ID of the target DDCharacter */
+			CombatSystem.ActionType action,
+			CombatSystem.Action request,
+			Object[] body
+	)
+	{
+		super(Type.COMBAT_MESSAGE);
+		this.source = source;
+		this.target = target;
+		this.action = action;
+		this.request = request;
+		this.bodyData = body;
+		this.characterData = null;
+	} /* end Constructor */
 
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
@@ -90,6 +113,11 @@ public class CombatMessage extends Message
 	{
 		return characterData;
 	} /* end getCharacterData method */
+	
+	public Object[] getBodyData() 
+	{
+		return bodyData;
+	} /* end getBody method */
 
 	public Integer[] getBody() 
 	{
