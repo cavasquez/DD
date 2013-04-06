@@ -59,13 +59,6 @@ public class MapToolState extends BasicGameState {
 		saveMap = new Image("Images/MapTool/SaveMap.png");
 		
 		maptool = new MapTool();
-		
-		for (int i = 0; i < maptool.getCurrentMap().mapSize; i++) {
-			for (int j = 0; j < maptool.getCurrentMap().mapSize; j++) {
-				//TODO:
-			}
-		}
-		
 	}
 
 	@Override
@@ -230,7 +223,7 @@ public class MapToolState extends BasicGameState {
 		if((posX > 630 && posX < 630 + saveMap.getWidth()) && (posY > 610 && posY < (610 + saveMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
-    			//ser stuff
+    			maptool.getWorld().writeMe();
     			System.out.println("save map");
     		}
     	}
