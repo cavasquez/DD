@@ -4,6 +4,8 @@ import java.util.LinkedList;
 
 import org.newdawn.slick.SlickException;
 
+import DD.Character.DDCharacter;
+import DD.Character.CharacterSheet.Monster.Goblin;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 
 	public class SelectList {
@@ -79,12 +81,32 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 	
 	public void placeSelectedListOnMap(Objects obj) throws SlickException{
 		for (Coordinate coord : list) {
-			owner.remove(coord.x, coord.y);
-			owner.place(coord.x, coord.y, obj);
-			TargetBlock tarBlock = new TargetBlock(owner);
-			owner.place(coord.x, coord.y , tarBlock);
-			//System.out.println("object place " + coord.x + " " + coord.y);
+			
+			System.out.println("object place " + coord.x + " " + coord.y);
+			
+			if(obj instanceof Wall){
+				Wall obj2 = new Wall("wall",owner); 
+				owner.remove(coord.x, coord.y);
+				owner.place(coord.x, coord.y, obj2);
+				System.out.println(owner.toString());
+				TargetBlock tarBlock = new TargetBlock(owner);
+				owner.place(coord.x, coord.y , tarBlock);
+			}
+			else if(obj instanceof CharacterObjects){
+				DDCharacter goblinChar = new DDCharacter(0);
+    			goblinChar.setCharacterSheet(new Goblin());
+    			goblinChar.setCharacterID(0);
+    			goblinChar.resetCharacter();
+    			CharacterObjects obj2 = new CharacterObjects("Goblin", goblinChar.getImage(), 0, 0, owner, goblinChar);
+    			owner.remove(coord.x, coord.y);
+    			owner.place(coord.x, coord.y, obj2);
+    			System.out.println(owner.toString());
+    			TargetBlock tarBlock = new TargetBlock(owner);
+    			owner.place(coord.x, coord.y , tarBlock);
+			}			
+		
 		}
+		
 	}	
 	public void removeSelectedListOnMap(){
 		for (Coordinate coord : list) {

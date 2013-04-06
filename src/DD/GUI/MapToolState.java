@@ -36,6 +36,7 @@ public class MapToolState extends BasicGameState {
 	private Image removeFromMap = null;
 	private Image goblinButton = null;
 	private Image wallButton = null;
+	private Image saveMap = null;
 	
 	public MapToolState(int stateID) {
 		this.stateID = stateID;
@@ -55,8 +56,9 @@ public class MapToolState extends BasicGameState {
 		removeFromMap = new Image("Images/MapTool/RemoveFromMap.png");
 		goblinButton = new Image("Images/MapTool/Goblin.png");
 		wallButton = new Image("Images/MapTool/Wall.png");
-		maptool = new MapTool();
+		saveMap = new Image("Images/MapTool/SaveMap.png");
 		
+		maptool = new MapTool();
 	}
 
 	@Override
@@ -81,12 +83,13 @@ public class MapToolState extends BasicGameState {
 		
     	//draw Make Selection and Remove Selection buttons to screen
     	makeSelection.draw(660, 0);
-    	removeSelection.draw(830, 0);
+    	removeSelection.draw(860, 0);
     	placeOnMap.draw(660, 40);
-    	removeFromMap.draw(830, 40);
+    	removeFromMap.draw(840, 40);
     	g.drawString("Available To Place", 660, 80);
     	goblinButton.draw(660, 100);
-    	wallButton.draw(755, 100);
+    	wallButton.draw(770, 100);
+    	saveMap.draw(630, 610);
     	
     	g.drawString("BACK", 1130, 615);
     	g.drawString(mousePos, 900, 0);
@@ -126,12 +129,13 @@ public class MapToolState extends BasicGameState {
     	removeFromMapButton(gc);
     	goblinButton(gc);
     	wallButton(gc);
+    	saveMapButton(gc);
 	}
 	
 	//Clicking on map
 	public void clickMap(GameContainer gc) {
 		//NOTE THIS NEEDS TO BE THE FIRST THING IN UPDATE METHOD!!!
-    	if((posX > 0 && posX < 648) && (posY > 40 && posY < 670)) {
+    	if((posX > 0 && posX < 620) && (posY > 40 && posY < 640)) {
     		//you are inside map area
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
 	    		getMapCoord();
@@ -153,7 +157,7 @@ public class MapToolState extends BasicGameState {
 	
 	//Remove selection Button
 	public void removeSelectionButton(GameContainer gc) throws SlickException {
-    	if((posX > 830 && posX < 830 + removeSelection.getWidth()) && (posY > 0 && posY < removeSelection.getHeight())) {
+    	if((posX > 860 && posX < 860 + removeSelection.getWidth()) && (posY > 0 && posY < removeSelection.getHeight())) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			maptool.getSelectedList().massRemoveSelectedList(x1, y1, x2, y2);
@@ -180,7 +184,7 @@ public class MapToolState extends BasicGameState {
 	
 	//Remove from map button
 	public void removeFromMapButton(GameContainer gc) throws SlickException {
-		if((posX > 830 && posX < 830 + removeFromMap.getWidth()) && (posY > 40 && posY < (40 + removeFromMap.getHeight()))) {
+		if((posX > 840 && posX < 840 + removeFromMap.getWidth()) && (posY > 40 && posY < (40 + removeFromMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			maptool.getSelectedList().removeSelectedListOnMap();
@@ -205,12 +209,22 @@ public class MapToolState extends BasicGameState {
 	}
 	
 	public void wallButton(GameContainer gc) throws SlickException {
-		if((posX > 755 && posX < 755 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
+		if((posX > 770 && posX < 770 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			Wall wall = new Wall("Wall", maptool.getCurrentMap());
     			object = wall;
     			System.out.println("chose wall");
+    		}
+    	}
+	}
+	
+	public void saveMapButton(GameContainer gc) {
+		if((posX > 630 && posX < 630 + saveMap.getWidth()) && (posY > 610 && posY < (610 + saveMap.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			maptool.getWorld().writeMe();
+    			System.out.println("save map");
     		}
     	}
 	}
@@ -230,13 +244,13 @@ public class MapToolState extends BasicGameState {
 	public void getMapCoord() {
 		if(clicked) {
 			x1 = (int)(posX / 30.85);
-			y1 = (posY / 30) - 1;
+			y1 = (int)(posY / 30) - 1;
 			System.out.println("x1: " + x1 + " y1: " + y1);
 			clicked = false;
 		}
 		else if(!clicked) {
 			x2 = (int)(posX / 30.85);
-			y2 = (posY / 30) - 1;
+			y2 = (int)(posY / 30) - 1;
 			System.out.println("x2: " + x2 + " y2: " + y2);
 			clicked = true;
 		}
