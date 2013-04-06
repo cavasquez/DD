@@ -85,15 +85,11 @@ public class JoinLob extends BasicGameState
 		if(ip != null) ip.render(gc, g);
 		g.setFont(font);
 		
-		//LOAD A LOBBY
-		g.drawString("LOAD", 190, 520);
+		//LOAD A CHARACTER
+		g.drawString("LOAD CHARACTER", 144, 520);
 		
-		//SAVE A LOBBY
-		g.drawString("SAVE", 190, 488);
-		
-		
+		//BACK BUTTON
 		g.drawString("BACK", 190, 552);
-		
 		
 		
 //		textbox.render(gc, g);
@@ -135,23 +131,15 @@ public class JoinLob extends BasicGameState
 				
 		//String input = textbox.getText();
 		
-		//this parameter is used for the SAVE function
-		if((posX > 189 && posX < 234) && (posY > 145 && posY < 163))
-			{
-				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-				{
-					button.play();
-					sbg.enterState(0);
-				}
-			}
 		
-		//this parameter is used for the LOAD function
-		else if((posX > 187 && posX < 235) && (posY > 111 && posY < 132))
+		
+		//this parameter is used for the LOAD CHARACTER function
+		else if((posX > 141 && posX < 295) && (posY > 111 && posY < 132))
 					{
 						if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 						{
 							button.play();
-							sbg.enterState(0);
+							
 						}
 					}
 				 

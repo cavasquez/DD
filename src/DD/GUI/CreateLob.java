@@ -44,9 +44,17 @@ public class CreateLob extends BasicGameState
 		
 		g.drawString(mouse, 100, 100);
 		
-		g.drawString("CREATE LOBBY",540,222);
 		
-		g.drawString("BACK",540,434);
+		
+		g.drawString("LOAD MAP",540,330);
+		
+		g.drawString("CHOOSE WORLD",540,364);
+		
+		g.drawString("START SERVER",540,404);
+		
+		g.drawString("START GAME",540,440);
+		
+		g.drawString("BACK",540,480);
 		
 	}
 	
@@ -55,22 +63,62 @@ public class CreateLob extends BasicGameState
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
 
-		//CREATE LOBBY
+		//LOAD MAP
 		
-		if((posX > 540 && posX < 650) && (posY > 405 && posY < 430))
+		if((posX > 536 && posX < 616) && (posY > 303 && posY < 320))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
 				
-				sbg.enterState(2);
+				
+			}
+		}
+		
+		//CHOOSE WORLD
+		
+		if((posX > 538 && posX < 650) && (posY > 270 && posY < 282))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
+						
+				
+			}
+		}
+				
+				
+				
+		//START SERVER
+				
+		if((posX > 540 && posX < 650) && (posY > 228 && posY < 246))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
+				Game.system.server();
+						
+				
+			}
+		}
+				
+				
+		//START GAME
+				
+		if((posX > 540 && posX < 630) && (posY > 190 && posY < 211))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
+						
+				
 			}
 		}
 		
 		
 		
 		//Back button
-		if((posX > 540 && posX < 590) && (posY > 196 && posY < 222))
+		if((posX > 537 && posX < 580) && (posY > 151 && posY < 170))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
