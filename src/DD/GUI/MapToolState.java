@@ -36,6 +36,7 @@ public class MapToolState extends BasicGameState {
 	private Image removeFromMap = null;
 	private Image goblinButton = null;
 	private Image wallButton = null;
+	private Image saveMap = null;
 	
 	public MapToolState(int stateID) {
 		this.stateID = stateID;
@@ -55,6 +56,8 @@ public class MapToolState extends BasicGameState {
 		removeFromMap = new Image("Images/MapTool/RemoveFromMap.png");
 		goblinButton = new Image("Images/MapTool/Goblin.png");
 		wallButton = new Image("Images/MapTool/Wall.png");
+		saveMap = new Image("Images/MapTool/SaveMap.png");
+		
 		maptool = new MapTool();
 		
 	}
@@ -87,6 +90,7 @@ public class MapToolState extends BasicGameState {
     	g.drawString("Available To Place", 660, 80);
     	goblinButton.draw(660, 100);
     	wallButton.draw(755, 100);
+    	saveMap.draw(630, 610);
     	
     	g.drawString("BACK", 1130, 615);
     	g.drawString(mousePos, 900, 0);
@@ -126,6 +130,7 @@ public class MapToolState extends BasicGameState {
     	removeFromMapButton(gc);
     	goblinButton(gc);
     	wallButton(gc);
+    	saveMapButton(gc);
 	}
 	
 	//Clicking on map
@@ -211,6 +216,16 @@ public class MapToolState extends BasicGameState {
     			Wall wall = new Wall("Wall", maptool.getCurrentMap());
     			object = wall;
     			System.out.println("chose wall");
+    		}
+    	}
+	}
+	
+	public void saveMapButton(GameContainer gc) {
+		if((posX > 630 && posX < 630 + saveMap.getWidth()) && (posY > 610 && posY < (610 + saveMap.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			//ser stuff
+    			System.out.println("save map");
     		}
     	}
 	}
