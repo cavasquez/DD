@@ -39,7 +39,7 @@ public class Game extends StateBasedGame
 		System.out.println("User home folder " + System.getProperties().getProperty("user.home"));
 		//this.addState(new MapTestState(gameplay));
 
-//		this.addState(new MapToolState(maptool));
+		this.addState(new MapToolState(maptool));
 
 
 		

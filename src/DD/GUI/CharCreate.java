@@ -214,6 +214,8 @@ public class CharCreate extends BasicGameState
 	JoinLobbyStartButton jlsb;
 	Input inputMouse = new Input(650);
 	
+	int state = 0;
+	
 	public CharCreate(int state)
 	{
 		
@@ -221,7 +223,7 @@ public class CharCreate extends BasicGameState
 	
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
-		screen = new Image("Images/Menus/DD1.jpg");
+		screen = new Image("Images/Menus/menuscreen4.jpg");
 		
 		
 		//play = new Image("Images/Menus/play button.png");
@@ -282,9 +284,66 @@ public class CharCreate extends BasicGameState
 		g.drawString("inputMouse x " + inputMouse.getMouseX() + " y " + inputMouse.getMouseY(), 100, 420);
 //		g.drawString("LobbyIP: 123.43.345", 82, 266);
 //		g.drawString("LOGIN", 190, 604);
-		g.drawString("BACK", 190, 552);
+		
 //		jlsb.render(gc, sbg, g);
 		g.setFont(font2);
+		
+		
+		
+			g.drawString("BACK", 150, 552);
+		
+		if(state == 0)
+			g.drawString("CONTINUE", 135, 522);
+		
+		if(state == 1)
+		{
+			g.drawString("CHOOSE RACE", 853, 506);
+			g.drawString("PREVIOUS", 867, 546);
+			g.drawString("HUMAN", 782, 448);
+			g.drawString("ELF", 1005, 448);
+			
+			
+		}
+		
+		
+		if(state == 2)
+		{
+			g.drawString("CHOOSE CLASS", 853, 506);
+			g.drawString("PREVIOUS", 867, 546);
+			g.drawString("BARBARIAN", 782, 448);
+			//g.drawString("SOME OTHER CLASS WE DONT HAVE", 1005, 448);
+			
+			
+		}
+		
+		if(state == 3)
+		{
+			g.drawString("CHOOSE GENDER", 853, 506);
+			g.drawString("PREVIOUS", 867, 546);
+			g.drawString("MALE", 782, 448);
+			g.drawString("FEMALE", 1005, 448);
+			
+			
+		}
+		
+		if(state == 4)
+		{
+			g.drawString("CHOOSE SIZE", 853, 506);
+			g.drawString("PREVIOUS", 867, 546);
+			g.drawString("SMALL", 782, 448);
+			g.drawString("MEDIUM", 894, 448);
+			g.drawString("LARGE", 1005, 448);
+			
+			
+		}
+		
+		if(state == 5)
+		{
+			g.drawString("DONE", 887, 506);
+			g.drawString("PREVIOUS", 867, 546);
+		}
+		
+		
 		
 		
 //		textbox.render(gc, g);
@@ -302,6 +361,18 @@ public class CharCreate extends BasicGameState
 		g.setFont(font2);
 //		textbox.setCursorVisible(true);
 		
+//		g.drawString("CONTINUE", 190, 522);
+//		g.drawString("CONTINUE", 190, 522);
+//		
+//		g.drawString("CONTINUE", 190, 522);
+//		g.drawString("CONTINUE", 190, 522);
+//		
+//		g.drawString("CONTINUE", 190, 522);
+//		g.drawString("CONTINUE", 190, 522);
+//		
+//		g.drawString("CONTINUE", 190, 522);
+//		g.drawString("CONTINUE", 190, 522);
+		
 		
 		
 	}
@@ -314,7 +385,7 @@ public class CharCreate extends BasicGameState
 		font2.loadGlyphs();
 		//BACK button
 //		jlsb.update(gc, sbg, delta);
-		if((posX > 185 && posX < 240) && (posY > 80 && posY < 100))
+		if((posX > 146 && posX < 194) && (posY > 80 && posY < 100))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -333,6 +404,239 @@ public class CharCreate extends BasicGameState
 				occupation.setLocation(2000,2000);
 
 			}
+		}
+		
+		//IF STATE = 0 THEN GO TO STATE 1
+		if(state == 0)
+			if((posX > 132 && posX < 219) && (posY > 110 && posY < 132))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+		
+		
+		/**************RACE HUMAN OR ELF*****************/
+		//IF STATE = 1 AND IF CLICK HUMAN OR ELF THEN GO TO STATE 2 
+		//or 
+		//CLICK PREVIOUS AND GO BACK TO STATE 0
+		if(state == 1)
+		{
+			
+			/*********HUMAN HUMAN HUMAN HUMAN ***************/
+			if((posX > 780 && posX < 842) && (posY > 180 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+			
+			/*************ELF  ELF  ELF ************************/
+			else if((posX > 1002 && posX < 1036) && (posY > 185 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+			
+			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state--;
+				}
+				
+			}
+			
+			
+			
+		}
+		
+		
+		/**************CHOOSE CLASS*****************/
+		//IF STATE = 2 AND IF CLICK CLASS GO TO STATE 3 
+		//or 
+		//CLICK PREVIOUS AND GO BACK TO STATE 1
+		if(state == 2)
+		{
+			
+			/*********CHOOSE BARBARIAN ***************/
+			if((posX > 780 && posX < 874) && (posY > 180 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+			/*
+			/*************SOME OTHER CLASS WE DON'T HAVE ************************
+			else if((posX > 1002 && posX < 1036) && (posY > 185 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+			*/
+			
+			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state--;
+				}
+				
+			}
+			
+			
+			
+		}
+		
+		/**************GENDER MALE OR FEMALE*****************/
+		//IF STATE = 3 AND IF CLICK HUMAN OR ELF THEN GO TO STATE 4 
+		//or 
+		//CLICK PREVIOUS AND GO BACK TO STATE 2
+		if(state == 3)
+		{
+			
+			/*********MALE MALE MALE ***************/
+			if((posX > 776 && posX < 827) && (posY > 180 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+			
+			/*************FEMALE FEMALE FEMALE ************************/
+			else if((posX > 1002 && posX < 1073) && (posY > 185 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+			
+			/***************PREVIOUS PREVIOUS PREVIOUS **************/
+			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state--;
+				}
+				
+			}
+			
+			
+			
+		}
+		
+		
+		/**************SIZE OF CHARACTER*****************/
+		//IF STATE = 4 AND IF CLICK SMALL, MEDIUM, OR LARGE THEN GO TO STATE 5 
+		//or 
+		//CLICK PREVIOUS AND GO BACK TO STATE 3
+		if(state == 4)
+		{
+			
+			/*********SMALL SMALL SMALL ***************/
+			if((posX > 780 && posX < 836) && (posY > 180 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+			
+			/*************MEDIUM MEDIUM MEDIUM ************************/
+			else if((posX > 890 && posX < 960) && (posY > 185 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+			
+			}
+			
+			/***************LARGE LARGE LARGE **************/
+			else if((posX > 1000 && posX < 1064) && (posY > 185 && posY < 204))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state++;
+				}
+				
+			}
+			
+			/***************PREVIOUS PREVIOUS PREVIOUS **************/
+			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state--;
+				}
+				
+			}
+		}
+			
+			
+			/**************DONE*****************/
+			//IF STATE = 5 AND IF CLICK DONE THEN GO TO MAIN MENU 
+			//or 
+			//CLICK PREVIOUS AND GO BACK TO STATE 4
+			if(state == 5)
+			{
+				
+				/*********CLICK DONE TO GO TO MAIN MENU***************/
+				if((posX > 883 && posX < 936) && (posY > 124 && posY < 149))
+				{
+					if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+					{
+						button.play();
+						state = 0;
+						sbg.enterState(0);
+					}
+				
+				}
+				
+				/***************PREVIOUS PREVIOUS PREVIOUS **************/
+				else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+				{
+					if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+					{
+						button.play();
+						state--;
+					}
+					
+				}
+			
+			
+			
 		}
 		
 		//System.out.println(username.getText());
