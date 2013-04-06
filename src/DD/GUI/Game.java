@@ -36,7 +36,7 @@ public class Game extends StateBasedGame
 //		this.addState(new MapToolState(maptool));
 
 
-		//this.addState(new CharCreate(cc)); //this is for char create
+		this.addState(new CharCreate(cc)); //this is for char create
 		
 		/* Note that initStatesList is where we ADD states. Slick will get them for us. If we have addState
 		 * in the constructor and getState in the initStatesList, then we will run the states twice (and maybe even
