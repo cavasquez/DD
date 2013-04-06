@@ -167,8 +167,13 @@ public class MapToolState extends BasicGameState {
 		if((posX > 660 && posX < 660 + placeOnMap.getWidth()) && (posY > 40 && posY < (40 + placeOnMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
-    			maptool.getSelectedList().placeSelectedListOnMap(object);
-    			System.out.println("place on map button");
+    			if(object == null) {
+    				
+    			}
+    			else {
+	    			maptool.getSelectedList().placeSelectedListOnMap(object);
+	    			System.out.println("place on map button");
+    			}
     		}
     	}
 	}
@@ -188,11 +193,12 @@ public class MapToolState extends BasicGameState {
 		if((posX > 660 && posX < 660 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			//Create a new goblin character
     			DDCharacter goblinChar = new DDCharacter(stateID++);
     			goblinChar.setCharacterSheet(new Goblin());
     			goblinChar.setCharacterID(stateID++);
     			CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinChar.getImage(), 0, 0, maptool.getCurrentMap(), goblinChar);
-    			object = goblinObj;
+    			object = goblinObj;	//set object to the goblin object to place into the map 
     			System.out.println("chose goblin");
     		}
     	}

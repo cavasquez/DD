@@ -85,7 +85,7 @@ public class GMToolsBox extends BoxInterface
 		holder.add(Holder.MOB.index, new ArrayList<HolderTuple>());
 		holder.add(Holder.PLAYER.index, new ArrayList<HolderTuple>());
 		
-		startCombatPhaseButton= new Image("Images/ActionBox/FreeAction.png"); //TODO: make image
+		startCombatPhaseButton= new Image("Images/GMTools/StartCombatPhase.png"); 
 		
 		shift = startCombatPhaseButton.getHeight();
 		Vector2f boxPosition = new Vector2f(660f, 10f);
