@@ -23,10 +23,14 @@ public class MapTool implements Serializable{
 	ArrayList<Objects> tempList;
 	SelectList selectedList;
 	Map currentMap;
+	String userPath =  System.getProperties().getProperty("user.home");
+	
+	String ddPath = userPath +"/Documents/DD";
+	//TODO:fix
+	//String gamePath = userPath+"/Documents/DD"
 	
 	public MapTool() throws SlickException {
 		world = new World("world");
-		//TODO:
 		currentMap = world.getMap(0, 0);
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();
@@ -40,12 +44,12 @@ public class MapTool implements Serializable{
 	/*
 	 * loads world from a .ser and sets that world to the this.world
 	 */
-	public void loadWorld(String name, String path){
+	public void loadWorld(String name){
 		World e = null;
 	      try
 	      {
 	         FileInputStream fileIn =
-	                          new FileInputStream(path+"/"+name+"/"+name+".ser");
+	                          new FileInputStream(ddPath+"/"+name+"/"+name+".ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         e = (World) in.readObject();
 	         in.close();

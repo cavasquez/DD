@@ -112,7 +112,7 @@ public class Map extends Entity implements Serializable{
 				if(objectsStack[i][j].peek() instanceof CharacterObjects){
 					CharacterObjects workDamnYou;
 					workDamnYou = new CharacterObjects();
-						workDamnYou = (CharacterObjects) objectsStack[i][j].peek();
+					workDamnYou = (CharacterObjects) objectsStack[i][j].peek();
 					serMapHelper.add(new SerMapCharHelper(new Coordinate(i, j), workDamnYou.ddchar.getCharacterSheet()));
 					try {
 						remove(i,j);
