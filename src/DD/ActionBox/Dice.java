@@ -3,6 +3,8 @@ package DD.ActionBox;
 import java.io.Serializable;
 import java.util.Random;
 
+import DD.ActionBox.Dice.DieSize;
+
 /*****************************************************************************************************
  * The Dice class will provide the basic dice rolling mechanics to the game.
  * 
@@ -32,6 +34,11 @@ public class Dice implements Serializable
 			this.size = size;
 		} /* end TargetCount index */
 		
+		public int size()
+		{
+			return size;
+		} /* end size method */
+		
 	} /* end Dice enum */
 	
 	/************************************ Class Attributes *************************************/
@@ -51,6 +58,11 @@ public class Dice implements Serializable
 		generator = new Random();
 	} /* end Dice constructor */
 	
+	public Dice(DieSize dieSize) 
+	{
+		this(dieSize.size());
+	} /* end constructor */
+
 	public int roll(DieSize dieSize)
 	{
 		return (generator.nextInt(dieSize.size) + 1);

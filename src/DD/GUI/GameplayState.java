@@ -44,7 +44,7 @@ public class GameplayState extends BasicGameState {
 	private World world = null;
 	private MapTool maptool = null;
     private DDCharacter player;
-    private DDCharacter goblin1;
+    private DDCharacter goblin;
     private CharacterObjects playerObj;
     private ActionBox actionBox;
     private GMToolsBox gmToolsBox;
@@ -77,13 +77,13 @@ public class GameplayState extends BasicGameState {
     	Game.system.setMap(maptool.getMapAtLocation(0, 0));
     	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
         //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
-        playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
-        Image goblinImage = spriteSheet.getSubImage(98, 65, 33, 34);
+//        playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
+//        Image goblinImage = spriteSheet.getSubImage(98, 65, 33, 34);
     	
         player = new DDCharacter(stateID++);  
         //make goblins
-        goblin1 = new DDCharacter(stateID++);
-        Goblin goblin = new Goblin();
+//        goblin1 = new DDCharacter(stateID++);
+        goblin = new DDCharacter(stateID++);
         /* character creation process */
 		sheet.fillBasic("Max", 
 			"Bob", 
@@ -105,13 +105,14 @@ public class GameplayState extends BasicGameState {
 		sheet.fillAttacksAndDefense(barb);
 		sheet.equipWeapon(new Weapon(30, "Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4), 0);
         player.setCharacterSheet(sheet);
-        goblin1.setCharacterSheet(goblin.getCharacterSheet());
+        goblin.setCharacterSheet(new Goblin());
+//        goblin1.setCharacterSheet(goblin.getCharacterSheet());
         
         player.setCharacterID(stateID++);
-        goblin1.setCharacterID(stateID++);
+        goblin.setCharacterID(stateID++);
        
         Game.system.cs.addCharacter(player);
-        Game.system.cs.addCharacter(goblin1);
+        Game.system.cs.addCharacter(goblin);
       
         
         //Create ActionBox
@@ -137,19 +138,19 @@ public class GameplayState extends BasicGameState {
         int gobliny = 6;
         //playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
         playerObj = new CharacterObjects("Bob", playerImage, playerx, playery, maptool.getMapAtLocation(0, 0), player);
-        CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinImage, goblinx, gobliny, maptool.getMapAtLocation(0, 0), goblin1); 
+        CharacterObjects goblinObj = new CharacterObjects("Goblin", goblin.getImage(), goblinx, gobliny, maptool.getMapAtLocation(0, 0), goblin); 
         
         maptool.getMapAtLocation(0, 0).placeObjects(playerx, playery, playerObj);
         maptool.getMapAtLocation(0, 0).placeObjects(goblinx, gobliny, goblinObj);
         
         player.setCoordiante(new Coordinate(playerx, playery));
-        goblin1.setCoordiante(new Coordinate(goblinx, gobliny));
+        goblin.setCoordiante(new Coordinate(goblinx, gobliny));
         
        // maptool.getMapAtLocation(0, 0).massPlaceObjectsLine(10, 11, 10, 19, renderWall);
         Ability.setOwnerCharacter(player);
         
         player.resetCharacter();
-        goblin1.resetCharacter();
+        goblin.resetCharacter();
         
         player.startNewTurn();
         System.out.println("GS:" + player);

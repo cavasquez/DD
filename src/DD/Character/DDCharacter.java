@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import org.newdawn.slick.Image;
+
 import DD.ActionBox.Dice;
 import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterSheet;
@@ -34,7 +37,7 @@ public class DDCharacter extends CharacterEntity implements Serializable
 		
 	} /* end ACType enum */
 	/************************************ Class Attributes *************************************/
-	private CharacterSheet sheet;
+	protected CharacterSheet sheet;
 	private boolean hasTurn = false;
 	private int currentHP;
 	private int currentSpeed;
@@ -368,11 +371,8 @@ public class DDCharacter extends CharacterEntity implements Serializable
 		return sheet.getACArmor();
 	} /* end getArmorAC method */
 	
-	public int getMonHP() {
-		return sheet.getMonHP();
-	}
-	
-	public boolean getHasTurn() {
+	public boolean getHasTurn() 
+	{
 		return hasTurn;
 	}
 	
@@ -392,6 +392,11 @@ public class DDCharacter extends CharacterEntity implements Serializable
 		if ((currentHP < 0) && ((currentHP * -1) >= sheet.getConInherent())) returner = true;
 		return returner;
 	} /* end isDead method */
+	
+	public Image getImage()
+	{
+		return sheet.getImage().makeImage();
+	} /* end getImage method */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************

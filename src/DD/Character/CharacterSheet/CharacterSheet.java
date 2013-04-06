@@ -1974,17 +1974,6 @@ public class CharacterSheet implements Serializable
 		return hp;
 	} /* end getHP method */
 	
-	public int getMonHP()
-	{
-		return hitpoints;
-	}
-	
-	public int setHP(int hp) //for monsters
-	{
-		hitpoints = hp + dice.roll(1,10);
-		return hitpoints;
-	}
-	
 	public void setNetID(int netID)
 	{
 		this.netID = netID;

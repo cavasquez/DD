@@ -1,5 +1,6 @@
 package DD.SlickTools;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import org.newdawn.slick.Image;
@@ -16,8 +17,11 @@ import DD.Network.NetworkSystem;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class DDImage 
+public class DDImage implements Serializable
 {
+	/************************************ Class Constants *************************************/
+	private static final long serialVersionUID = -7224331772028830679L;
+	
 	/************************************ Class Attributes *************************************/
 	private String spriteSheetPath;
 	private int x;
