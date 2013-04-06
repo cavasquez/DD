@@ -58,7 +58,7 @@ public class JoinLob extends BasicGameState
 //		textbox.addListener(new KeyListener());
 		username.setText("username");
 		ip.setText("ip address");
-		font.loadGlyphs();
+		//font.loadGlyphs();
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
