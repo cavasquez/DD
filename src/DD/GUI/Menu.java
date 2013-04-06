@@ -37,7 +37,7 @@ public class Menu extends BasicGameState
 		dungeon = new Music("Audio/Gauntlet.wav");
 		dungeon.loop();
 		screen = new Image("Images/Menus/menuscreen5.jpg");
-		playNow = new Image("Images/Menus/MenuButtons.png");
+		playNow = new Image("Images/Menus/MenuButtons.png"); // Contains the menu button options
 		mapToolButton = new Image("Images/Menus/MapTool.png");
 		
 		charCreate = new Image("Images/Menus/charCreate.png");
@@ -89,11 +89,11 @@ public class Menu extends BasicGameState
 	{
 		
 		screen.draw(0,0);
-		playNow.draw(100,140);
+		playNow.draw(100,140); // Image with the menu button options.
 		mapToolButton.draw(130, 550);
-		g.drawString(mousePos, 100, 100);
+		g.drawString(mousePos, 100, 10);
 		
-		charCreate.draw(400, 375);
+		charCreate.draw(130, 79);
 		
 		//g.drawString(create, 90, 90);
 		
@@ -164,6 +164,16 @@ public class Menu extends BasicGameState
 			{
 				button.play();
 				sbg.enterState(5);
+			}
+		}
+		
+		
+		if((posX > 130 && posX < 335) && (posY > 80 && posY < 165 + mapToolButton.getHeight()))
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
+				sbg.enterState(6);
 			}
 		}
 		 
