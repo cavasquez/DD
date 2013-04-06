@@ -321,11 +321,9 @@ public class CharCreate extends BasicGameState
 				button.play();
 				sbg.enterState(0);
 				/* kill the overlap */
-<<<<<<< HEAD
 				text1.setLocation(Game.Xsize + 100, Game.Ysize - 100);
 				text2.setLocation(Game.Xsize + 100, Game.Ysize - 100);
 				text3.setLocation(Game.Xsize + 100, Game.Ysize - 100);
-=======
 				characterName.setLocation(2000, 2000);
 				playerName.setLocation(2000,2000);
 				languages.setLocation(2000,2000);
@@ -336,8 +334,7 @@ public class CharCreate extends BasicGameState
 				deity.setLocation(2000,2000);
 				background.setLocation(2000,2000);
 				occupation.setLocation(2000,2000);
-			
->>>>>>> 22a8b3b82e185bb1f2d203d4815e4f63fccbdacf
+
 			}
 		}
 		
