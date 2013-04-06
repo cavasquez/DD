@@ -181,10 +181,12 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.Character.CharacterSheet.CharacterSheet;
+
 public class CharCreate extends BasicGameState
 {
 	
-	
+	CharacterSheet sheet;
 	Image screen;
 	private String mouse = "No input yet!";
 	//Image play;
@@ -196,6 +198,19 @@ public class CharCreate extends BasicGameState
 	TextField text2;
 	TextField text1;
 	TextField text3;
+	TextField playerName;
+	TextField characterName;
+	//clickable button for choosing race
+	TextField languages;
+	//clickable button for choosing size
+	//clickable button for choosing gender
+	TextField height;
+	TextField weight;
+	TextField age;
+	TextField alignments;
+	TextField deity;
+	TextField background;
+	TextField occupation;
 	JoinLobbyStartButton jlsb;
 	Input inputMouse = new Input(650);
 	
@@ -228,13 +243,32 @@ public class CharCreate extends BasicGameState
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
-		text2 = new TextField(gc, font2, 100, 229, 180, 25);
-		text1 = new TextField(gc, font2, 100, 259, 180, 25);
-		text3 = new TextField(gc, font2, 100, 290, 180, 25);
+		playerName = new TextField(gc, font2, 100, 100, 180, 25);
+		characterName = new TextField(gc, font2, 100, 130, 180, 25);
+		languages = new TextField(gc, font2, 100, 160, 180, 25);
+		height = new TextField(gc, font2, 100, 190, 180, 25);
+		weight = new TextField(gc, font2, 100, 220, 180, 25);
+		age = new TextField(gc, font2, 100, 250, 180, 25);
+		alignments = new TextField(gc, font2, 100, 280, 180, 25);
+		deity = new TextField(gc, font2, 100, 310, 180, 25);
+		background = new TextField(gc, font2, 100, 340, 180, 25);
+		occupation = new TextField(gc, font2, 100, 370, 180, 25);
 		
-		text2.setText("text2");
-		text1.setText("text1 address");
-		text3.setText("text3");
+		
+		playerName.setText("Your Name");
+		characterName.setText("Character Name");
+		languages.setText("Languages you Speak");
+		height.setText("How Tall are you");
+		weight.setText("How much do you weigh?");
+		age.setText("How Old are you");
+		alignments.setText("What Alignments");
+		deity.setText("What Deity");
+		background.setText("Your Background");
+		occupation.setText("Your Occupation");
+		
+		
+		
+		
 	}
 	
 	
@@ -254,9 +288,17 @@ public class CharCreate extends BasicGameState
 		
 		
 //		textbox.render(gc, g);
-		if(text2 != null) text2.render(gc, g);
-		if(text1 != null) text1.render(gc, g);
-		if(text3 != null) text3.render(gc, g);
+		if(playerName != null) playerName.render(gc, g);
+		if(characterName != null) characterName.render(gc, g);
+		if(languages != null) languages.render(gc, g);
+		if(height != null) height.render(gc, g);
+		if(weight != null) weight.render(gc, g);
+		if(age != null) age.render(gc, g);
+		if(alignments != null) alignments.render(gc, g);
+		if(deity != null) deity.render(gc, g);
+		if(background != null) background.render(gc, g);
+		if(occupation != null) occupation.render(gc, g);
+		
 		g.setFont(font2);
 //		textbox.setCursorVisible(true);
 		
@@ -279,9 +321,17 @@ public class CharCreate extends BasicGameState
 				button.play();
 				sbg.enterState(0);
 				/* kill the overlap */
-				text1.setLocation(2000, 2000);
-				text2.setLocation(2000,2000);
-				text3.setLocation(2000,2000);
+				characterName.setLocation(2000, 2000);
+				playerName.setLocation(2000,2000);
+				languages.setLocation(2000,2000);
+				height.setLocation(2000,2000);
+				weight.setLocation(2000,2000);
+				age.setLocation(2000,2000);
+				alignments.setLocation(2000,2000);
+				deity.setLocation(2000,2000);
+				background.setLocation(2000,2000);
+				occupation.setLocation(2000,2000);
+			
 			}
 		}
 		
@@ -319,5 +369,47 @@ public class CharCreate extends BasicGameState
 	{
 		return 6;
 	}
+	
+	//this is what the button should do then move to the next
+	public void setCharacterSheet(TextField username)
+	{
+		
+		
+		//CHRIS
+		/*
+		 * I NEED BUTTONS 
+		 * x2 race buttons 1 human 1 elf. the human button value set to 1 and elf to 0
+		 * x1 class button 1 barbarian barb button value set to 0
+		 *
+		 * x2 gender buttons 1M 1F
+		 * x3 size buttons sm med lrg (the values set to those are 1 for sm 0 for med and -1 for lrg)
+		 
+		 */
+		//fix with buttons
+		
+		//this method fills the characterSheet
+		sheet.fillBasic(characterName.getText(), playerName.getText(), race, languages.getText(), size, gender, 
+						height.getText(), weight.getText(), age.getText(), alignments.getText(), deity.getText(), 
+						background.getText(), occupation.getText());
+		
+		sheet.fillAbilities();
+		
+		//get class option button value
+		
+		
+		//sheet.fillRecorder(sheet.chooseClass(class button value here)/*This needs the class option from button */);
+		
+		//sheet.fillAttacksAndDefense(/* the class option*/);
+		
+		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
+	
+	}
+	
+	
+	
+
+	
+
+
 
 }
