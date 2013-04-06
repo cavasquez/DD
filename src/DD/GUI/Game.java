@@ -35,9 +35,13 @@ public class Game extends StateBasedGame
 		this.addState(new CreateLob(createLob));
 		this.addState(new GameplayState(gameplay));
 		this.addState(new CharCreate(cc)); //this is for char create
+<<<<<<< HEAD
 		System.out.println("System properties" + System.getProperties());
 		System.out.println("User home folder " + System.getProperties().getProperty("user.home"));
 		//this.addState(new MapTestState(gameplay));	//for testing only
+=======
+		//this.addState(new MapTestState(gameplay));
+>>>>>>> ser update
 
 		this.addState(new MapToolState(maptool));
 
@@ -66,8 +70,16 @@ public class Game extends StateBasedGame
 		System.setProperty("net.java.games.input.librarypath", System.getProperty("org.lwjgl.librarypath"));
 		system = new DDSystem();
 		
+		
 		AppGameContainer appgc;
 		try{
+			String userPath =  System.getProperties().getProperty("user.home");
+			String ddPath = userPath +"/Documents/DD";
+			File theDir = new File(ddPath);
+			if (!theDir.exists())
+			{
+				theDir.mkdir();  
+			}
 			appgc = new AppGameContainer(new Game(gamename));
 			appgc.setDisplayMode(1200, 650, false);
 			appgc.setTargetFrameRate(60);

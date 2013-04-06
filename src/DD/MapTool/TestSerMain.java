@@ -47,13 +47,13 @@ public class TestSerMain {
 		//***************************************************
 		//START PHASE2
 		//***************************************************
-		mt.loadWorld("Norrath", path);
+		mt.loadWorld("Norrath");
 		System.out.println("Norrath map0 and map24");
 		System.out.println(mt.getMapAtLocation(0, 0));
 		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));
 		
 		//load original world again
-		mt.loadWorld("world", path);
+		mt.loadWorld("world");
 		System.out.println("World map0 and map24");
 		System.out.println(mt.getMapAtLocation(0, 0));
 		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));

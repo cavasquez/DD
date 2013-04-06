@@ -21,6 +21,9 @@ public class World implements Serializable{
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;//holds temp items like from spells
 	
+	String userPath =  System.getProperties().getProperty("user.home");
+	String path = userPath +"/Documents/DD";
+		
 	public World(String name) throws SlickException {
 		this.worldName = name;
 		normList = new ArrayList<Objects>();
@@ -29,16 +32,6 @@ public class World implements Serializable{
 		for (int i = 0; i < world.length; i++) {
 			for (int j = 0; j < world.length; j++) {
 				world[i][j] = new Map("map"+(j+i*worldSize)); 
-				/*
-				 * 
-				 * files will be saved as id.ser  ie "map0.ser"
-				 * Lables map0-24
-				 * map0 map1 map2 map3 map4 
-				 * map5 map6 map7 map8 map9 
-				 * 	  .	   .	. 	.	  .
-				 *    .
-				 *    .
-				 */
 			}
 		}
 	}
@@ -67,8 +60,8 @@ public class World implements Serializable{
 		world[x][y] = null;
 	}
 	
-	public void writeMe(String path){
-		File theDir = new File(path+worldName);
+	public void writeMe(){
+		File theDir = new File(path+"/"+worldName);
 		// if it doesn't exist, make a directory with the name of the world
 		if (!theDir.exists())
 		{
@@ -95,7 +88,7 @@ public class World implements Serializable{
 	}
 	
 	
-	public Floor readFloor(String name, String path){
+	public Floor readFloor(String name){
 		Floor e = null;
 	      try
 	      {
@@ -117,7 +110,7 @@ public class World implements Serializable{
 	      return e;
 	 }
 	
-	public Obstacle readObstacle(String name, String path){
+	public Obstacle readObstacle(String name){
 		Obstacle e = null;
 	      try
 	      {
@@ -140,7 +133,7 @@ public class World implements Serializable{
 	 }
 	
 	
-	public Map readMap(String name, String path){
+	public Map readMap(String name){
 		Map e = null;
 	      try
 	      {
