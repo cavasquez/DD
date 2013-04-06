@@ -67,8 +67,7 @@ public class Game extends StateBasedGame
 		
 		AppGameContainer appgc;
 		try{
-			String userPath =  System.getProperties().getProperty("user.home");
-			String ddPath = userPath +"/Documents/DD";
+			String ddPath = "C:/Program Files (x86)/DD";
 			File theDir = new File(ddPath);
 			if (!theDir.exists())
 			{

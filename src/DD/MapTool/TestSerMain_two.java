@@ -42,7 +42,7 @@ public class TestSerMain_two extends BasicGame
 		//START PHASE1 - write the world
 
 		//***************************************************		
-//		mt.world.writeMe(path);
+		mt.world.writeMe();
 //		Obstacle wall1 = new Obstacle("wall1", null, 5, 5, null);
 //
 //		for (int i = 0; i < mt.world.worldSize; i++) {
@@ -58,7 +58,7 @@ public class TestSerMain_two extends BasicGame
 //		
 //		mt.world.setWorldName("Norrath");
 //		//path/Norrath/Norrath.ser
-//		mt.world.writeMe(path);
+//		mt.world.writeMe();
 		
 
 		//***************************************************
@@ -89,20 +89,20 @@ public class TestSerMain_two extends BasicGame
 		//START PHASE2 - read the world
 		//***************************************************
 
-		mt.loadWorld("Norrath");
-		System.out.println("Norrath map0 and map24");
-		System.out.println(mt.getMapAtLocation(0, 0));
-		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));
-		
-		//load original world again
-		mt.loadWorld("world");
-		System.out.println("World map0 and map24");
-		System.out.println(mt.getMapAtLocation(0, 0));
-		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));
-		
-		System.out.println(mt.getMapAtLocation(0, 0).objectsStack[0][0].peek().getImage().BOTTOM_RIGHT);
-		System.out.println(mt.getMapAtLocation(0, 0).objectsStack[1][1].peek().getImage().BOTTOM_RIGHT);
-		
+//		mt.loadWorld("Norrath");
+//		System.out.println("Norrath map0 and map24");
+//		System.out.println(mt.getMapAtLocation(0, 0));
+//		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));
+//		
+//		//load original world again
+//		mt.loadWorld("world");
+//		System.out.println("World map0 and map24");
+//		System.out.println(mt.getMapAtLocation(0, 0));
+//		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));
+//		
+//		System.out.println(mt.getMapAtLocation(0, 0).objectsStack[0][0].peek().getImage().BOTTOM_RIGHT);
+//		System.out.println(mt.getMapAtLocation(0, 0).objectsStack[1][1].peek().getImage().BOTTOM_RIGHT);
+//		
 		
 
 //		mt.loadWorld("Norrath", path);

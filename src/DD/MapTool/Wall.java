@@ -18,7 +18,7 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public class Wall extends Objects implements Serializable
+public class Wall extends Objects
 {
 
 	/************************************ Class Constants *************************************/

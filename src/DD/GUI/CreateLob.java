@@ -1,10 +1,14 @@
 package DD.GUI;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
+import DD.MapTool.Map;
+import DD.MapTool.World;
 import DD.System.DDSystem;
 public class CreateLob extends BasicGameState
 {
@@ -13,8 +17,9 @@ public class CreateLob extends BasicGameState
 	private String mouse = "No input yet!";
 	Music dungeon;
 	Sound button;
-	ArrayList<Lobby> lobby = new ArrayList<Lobby>();
-	
+	World world;
+	Map map;
+	private ArrayList<String> worldList;
 	
 	
 	public CreateLob(int state)
@@ -25,6 +30,7 @@ public class CreateLob extends BasicGameState
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
 		screen = new Image("Images/Menus/lobby.jpg");
+		worldList = new ArrayList<String>();
 		
 		
 		//dungeon = new Music("Audio/dunEffect1.wav");
@@ -32,6 +38,21 @@ public class CreateLob extends BasicGameState
 		
 		button = new Sound("Audio/dunSound.wav");
 		
+		ArrayList<String> worldChoices = new ArrayList<String>();
+		File file = new File(System.getProperties().getProperty("user.home") + "/Documents/DD");
+//		DD/DefaultWorld/
+		if (file.exists())
+		{
+			float delta = 10;
+			File[] list = file.listFiles();
+			for(int i = 0; i < list.length; i++)
+			{
+				if(list[i].isDirectory() && !list.toString().matches("Characters"))
+				{
+					
+				} /*  */
+			} /* end loop */
+		} /* end if */
 		
 		
 		
@@ -82,7 +103,7 @@ public class CreateLob extends BasicGameState
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
-						
+				GamePlayState
 				
 			}
 		}
@@ -110,6 +131,7 @@ public class CreateLob extends BasicGameState
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
+				Game.system.ns.stop();
 						
 				
 			}

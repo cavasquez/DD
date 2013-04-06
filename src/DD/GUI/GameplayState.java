@@ -43,7 +43,7 @@ public class GameplayState extends BasicGameState {
 //	private Image playerImage = null;
 //	private Image spriteSheet = null;
 	private World world = null;
-	private MapTool maptool = null;
+	public MapTool maptool = null;
     private DDCharacter player;
     private DDCharacter goblin;
     private CharacterObjects playerObj;

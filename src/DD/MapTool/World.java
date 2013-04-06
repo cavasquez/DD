@@ -21,8 +21,8 @@ public class World implements Serializable{
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;//holds temp items like from spells
 	
-	String userPath =  System.getProperties().getProperty("user.home");
-	String path = userPath +"/Documents/DD";
+//	String userPath =  System.getProperties().getProperty("user.home");
+	String path = "C:/Program Files (x86)/DD/";
 		
 	public World(String name) throws SlickException {
 		this.worldName = name;
@@ -61,18 +61,23 @@ public class World implements Serializable{
 	}
 	
 	public void writeMe(){
-		File theDir = new File(path+"/"+worldName);
+		System.out.println("1");
+		File theDir = new File(path +worldName);
+		System.out.println("2");
 		// if it doesn't exist, make a directory with the name of the world
 		if (!theDir.exists())
 		{
+			System.out.println("3");
 			theDir.mkdir();  
+			System.out.println("dir? " + theDir.toString());
+			System.out.println("4");
 		}
-		
-		for (int k = 0; k <worldSize; k++) {
-			for (int k2 = 0; k2 <worldSize; k2++) {
-				world[k][k2].writeMe(world[k][k2].name, path+"/"+worldName+"/");
-			}
-		}
+		System.out.println("5");
+//		for (int k = 0; k <worldSize; k++) {
+//			for (int k2 = 0; k2 <worldSize; k2++) {
+//				world[k][k2].writeMe(world[k][k2].name, path+"/"+worldName+"/");
+//			}
+//		}
 		
 		
 		try{
