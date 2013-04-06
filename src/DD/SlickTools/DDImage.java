@@ -12,7 +12,7 @@ import DD.MapTool.Map;
 import DD.Network.NetworkSystem;
 
 /*****************************************************************************************************
- * DDImage will contain all the necessarry information for a DD object to create a slick image;
+ * DDImage will contain all the necessary information for a DD object to create a slick image;
  * 
  * @author Carlos Vasquez
  ******************************************************************************************************/

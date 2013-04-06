@@ -79,11 +79,21 @@ public class JoinLob extends BasicGameState
 		g.drawString("inputMouse x " + inputMouse.getMouseX() + " y " + inputMouse.getMouseY(), 100, 420);
 //		g.drawString("LobbyIP: 123.43.345", 82, 266);
 //		g.drawString("LOGIN", 190, 604);
-		g.drawString("BACK", 190, 552);
+		
 		jlsb.render(gc, sbg, g);
 		if(username != null) username.render(gc, g);
 		if(ip != null) ip.render(gc, g);
 		g.setFont(font);
+		
+		//LOAD A LOBBY
+		g.drawString("LOAD", 190, 520);
+		
+		//SAVE A LOBBY
+		g.drawString("SAVE", 190, 488);
+		
+		
+		g.drawString("BACK", 190, 552);
+		
 		
 		
 //		textbox.render(gc, g);
@@ -125,8 +135,26 @@ public class JoinLob extends BasicGameState
 				
 		//String input = textbox.getText();
 		
+		//this parameter is used for the SAVE function
+		if((posX > 189 && posX < 234) && (posY > 145 && posY < 163))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					sbg.enterState(0);
+				}
+			}
 		
-		
+		//this parameter is used for the LOAD function
+		else if((posX > 187 && posX < 235) && (posY > 111 && posY < 132))
+					{
+						if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+						{
+							button.play();
+							sbg.enterState(0);
+						}
+					}
+				 
 		 
 	      mouse = "Mouse position x: " + posX + " y: " + posY;
 	      
