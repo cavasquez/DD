@@ -96,6 +96,7 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 				DDCharacter goblinChar = new DDCharacter(0);
     			goblinChar.setCharacterSheet(new Goblin());
     			goblinChar.setCharacterID(0);
+    			goblinChar.resetCharacter();
     			CharacterObjects obj2 = new CharacterObjects("Goblin", goblinChar.getImage(), 0, 0, owner, goblinChar);
     			owner.remove(coord.x, coord.y);
     			owner.place(coord.x, coord.y, obj2);

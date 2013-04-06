@@ -90,12 +90,12 @@ public class MapToolState extends BasicGameState {
 		
     	//draw Make Selection and Remove Selection buttons to screen
     	makeSelection.draw(660, 0);
-    	removeSelection.draw(830, 0);
+    	removeSelection.draw(860, 0);
     	placeOnMap.draw(660, 40);
-    	removeFromMap.draw(830, 40);
+    	removeFromMap.draw(840, 40);
     	g.drawString("Available To Place", 660, 80);
     	goblinButton.draw(660, 100);
-    	wallButton.draw(755, 100);
+    	wallButton.draw(770, 100);
     	saveMap.draw(630, 610);
     	
     	g.drawString("BACK", 1130, 615);
@@ -164,7 +164,7 @@ public class MapToolState extends BasicGameState {
 	
 	//Remove selection Button
 	public void removeSelectionButton(GameContainer gc) throws SlickException {
-    	if((posX > 830 && posX < 830 + removeSelection.getWidth()) && (posY > 0 && posY < removeSelection.getHeight())) {
+    	if((posX > 860 && posX < 860 + removeSelection.getWidth()) && (posY > 0 && posY < removeSelection.getHeight())) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			maptool.getSelectedList().massRemoveSelectedList(x1, y1, x2, y2);
@@ -191,7 +191,7 @@ public class MapToolState extends BasicGameState {
 	
 	//Remove from map button
 	public void removeFromMapButton(GameContainer gc) throws SlickException {
-		if((posX > 830 && posX < 830 + removeFromMap.getWidth()) && (posY > 40 && posY < (40 + removeFromMap.getHeight()))) {
+		if((posX > 840 && posX < 840 + removeFromMap.getWidth()) && (posY > 40 && posY < (40 + removeFromMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			maptool.getSelectedList().removeSelectedListOnMap();
@@ -216,7 +216,7 @@ public class MapToolState extends BasicGameState {
 	}
 	
 	public void wallButton(GameContainer gc) throws SlickException {
-		if((posX > 755 && posX < 755 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
+		if((posX > 770 && posX < 770 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			Wall wall = new Wall("Wall", maptool.getCurrentMap());
