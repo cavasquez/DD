@@ -60,6 +60,12 @@ public class MapToolState extends BasicGameState {
 		
 		maptool = new MapTool();
 		
+		for (int i = 0; i < maptool.getCurrentMap().mapSize; i++) {
+			for (int j = 0; j < maptool.getCurrentMap().mapSize; j++) {
+				//TODO:
+			}
+		}
+		
 	}
 
 	@Override
