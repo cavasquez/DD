@@ -40,7 +40,7 @@ public class JoinLob extends BasicGameState
 	
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
-screen = new Image("Images/Menus/DD1.jpg");
+		screen = new Image("Images/Menus/DD1.jpg");
 		
 		
 		//play = new Image("Images/Menus/play button.png");

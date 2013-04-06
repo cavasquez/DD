@@ -217,8 +217,8 @@ public class CharCreate extends BasicGameState
 		//dungeon = new Music("Audio/dunEffect1.wav");
 		//dungeon.loop();
 //		textbox = new TextField(gc, font2, 100, 266, 250 , 50);
-		text2 = new TextField(gc, font2, 100, 230, 180, 25);
-		text1 = new TextField(gc, font2, 100, 260, 180, 25);
+		text2 = new TextField(gc, font2, 100, 350, 180, 25);
+		text1 = new TextField(gc, font2, 100, 320, 180, 25);
 		text3 = new TextField(gc, font2, 100, 290, 180, 25);
 //		jlsb = new JoinLobbyStartButton(username, ip, Game.system, new Vector2f(190, 600));
 //		textbox.addListener(new KeyListener());
@@ -252,8 +252,8 @@ public class CharCreate extends BasicGameState
 		
 		
 //		textbox.render(gc, g);
-//		text2.render(gc, g);
-//		text1.render(gc, g);
+		text2.render(gc, g);
+		text1.render(gc, g);
 		text3.render(gc, g);
 		g.setFont(font2);
 //		textbox.setCursorVisible(true);
