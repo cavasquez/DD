@@ -40,8 +40,7 @@ public class JoinLob extends BasicGameState
 	
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
-		
-		screen = new Image("Images/Menus/DD1.jpg");
+screen = new Image("Images/Menus/DD1.jpg");
 		
 		
 		//play = new Image("Images/Menus/play button.png");
@@ -59,8 +58,15 @@ public class JoinLob extends BasicGameState
 		username.setText("username");
 		ip.setText("ip address");
 		//font.loadGlyphs();
+		
 	}
 	
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
+	{
+		
+	}
+
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
 	{
 		screen.draw(0,0);
@@ -73,12 +79,13 @@ public class JoinLob extends BasicGameState
 //		g.drawString("LOGIN", 190, 604);
 		g.drawString("BACK", 190, 552);
 		jlsb.render(gc, sbg, g);
+		username.render(gc, g);
+		ip.render(gc, g);
 		g.setFont(font);
 		
 		
 //		textbox.render(gc, g);
-		username.render(gc, g);
-		ip.render(gc, g);
+		
 		
 //		textbox.setCursorVisible(true);
 		

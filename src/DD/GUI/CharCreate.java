@@ -15,7 +15,7 @@
 //import org.newdawn.slick.Input;
 //import org.newdawn.slick.SlickException;
 //import org.newdawn.slick.UnicodeFont;
-//import org.newdawn.slick.font.effects.ColorEffect;
+//import org.newdawn.slick.font2.effects.ColorEffect;
 //import org.newdawn.slick.gui.ComponentListener;
 //import org.newdawn.slick.state.BasicGameState;
 //import org.newdawn.slick.state.StateBasedGame;
@@ -28,7 +28,7 @@
 //
 //public class CharCreate extends BasicGameState {
 //	CharacterSheet sheet;
-//	UnicodeFont font;
+//	UnicodeFont font2;
 //	private String mouse = "No input yet!";
 //	Input inputMouse = new Input(650);
 //	TextField playerName;
@@ -71,15 +71,15 @@
 //		
 //		
 //		bg_image = new Image ("Images/Menus/menuscreen4.jpg");
-//		font = getNewFont("Arial" , 16);
+//		font2 = getNewFont("Arial" , 16);
 //		
-//		playerName = new TextField(gc, font, 100, 230, 180, 25);
+//		playerName = new TextField(gc, font2, 100, 230, 180, 25);
 //		playerName.setText("username");
 //		
 //		
 //		
 //		
-//		font.loadGlyphs();
+//		font2.loadGlyphs();
 //		
 //	}
 //	
@@ -89,7 +89,7 @@
 //		g.drawString(mouse, 100, 400);
 //		g.drawString("inputMouse x " + inputMouse.getMouseX() + " y " + inputMouse.getMouseY(), 100, 420);
 //		g.drawString("BACK", 190, 552);
-//		g.setFont(font);
+//		g.setFont(font2);
 //		
 //		
 //		playerName.render(gc, g);
@@ -100,7 +100,7 @@
 //	{
 //		int posX = Mouse.getX();
 //		int posY = Mouse.getY();
-//		font.loadGlyphs();
+//		font2.loadGlyphs();
 //				
 //		 mouse = "Mouse position x: " + posX + " y: " + posY;
 //		
@@ -110,10 +110,10 @@
 //	
 //	public UnicodeFont getNewFont(String fontName , int fontSize)
 //    {
-//        font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
-////        font.addGlyphs("@");
-//        font.getEffects().add(new ColorEffect(java.awt.Color.white));
-//        return (font);
+//        font2 = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
+////        font2.addGlyphs("@");
+//        font2.getEffects().add(new ColorEffect(java.awt.Color.white));
+//        return (font2);
 //    }
 //
 //	@Override
@@ -147,7 +147,7 @@
 //	
 //	/*
 //	
-//	public TextField (GUIContext gc, Font font,  int x, int y, int width, int height, ComponentListener listener)
+//	public TextField (GUIContext gc, Font font2,  int x, int y, int width, int height, ComponentListener listener)
 //	{
 //		
 //	}
@@ -172,8 +172,10 @@ import org.newdawn.slick.*;
 import java.awt.Font;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
@@ -188,11 +190,12 @@ public class CharCreate extends BasicGameState
 	//Image play;
 	Sound button;
 	//Music dungeon;
-	UnicodeFont font;
+	UnicodeFont font2;
 	TextField textbox;
 	ArrayList<Lobby> lobbyList = new ArrayList<Lobby>();
-	TextField username;
-	TextField ip;
+	TextField text2;
+	TextField text1;
+	TextField text3;
 	JoinLobbyStartButton jlsb;
 	Input inputMouse = new Input(650);
 	
@@ -203,26 +206,35 @@ public class CharCreate extends BasicGameState
 	
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
-		
 		screen = new Image("Images/Menus/DD1.jpg");
 		
 		
 		//play = new Image("Images/Menus/play button.png");
 		//options = new Image("res/options button.png");
-		//font = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF,java.awt.Font.BOLD,8),false);
-		font = getNewFont("Arial" , 16);
+		//font2 = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF,java.awt.Font.BOLD,8),false);
+		font2 = getNewFont("Arial" , 16);
 		button = new Sound("Audio/dunSound.wav");
 		//dungeon = new Music("Audio/dunEffect1.wav");
 		//dungeon.loop();
-//		textbox = new TextField(gc, font, 100, 266, 250 , 50);
-		username = new TextField(gc, font, 100, 230, 180, 25);
-		ip = new TextField(gc, font, 100, 260, 180, 25);
-		jlsb = new JoinLobbyStartButton(username, ip, Game.system, new Vector2f(190, 600));
+//		textbox = new TextField(gc, font2, 100, 266, 250 , 50);
+		text2 = new TextField(gc, font2, 100, 230, 180, 25);
+		text1 = new TextField(gc, font2, 100, 260, 180, 25);
+		text3 = new TextField(gc, font2, 100, 290, 180, 25);
+//		jlsb = new JoinLobbyStartButton(username, ip, Game.system, new Vector2f(190, 600));
 //		textbox.addListener(new KeyListener());
-		username.setText("username");
-		ip.setText("ip address");
-		font.loadGlyphs();
+		text2.setText("text2");
+		text1.setText("text1 address");
+		text3.setText("text3");
+		font2.loadGlyphs();
+		
 	}
+	
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
+	{
+		
+	}
+	
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
 	{
@@ -235,27 +247,29 @@ public class CharCreate extends BasicGameState
 //		g.drawString("LobbyIP: 123.43.345", 82, 266);
 //		g.drawString("LOGIN", 190, 604);
 		g.drawString("BACK", 190, 552);
-		jlsb.render(gc, sbg, g);
-		g.setFont(font);
+//		jlsb.render(gc, sbg, g);
+		g.setFont(font2);
 		
 		
 //		textbox.render(gc, g);
-		username.render(gc, g);
-		ip.render(gc, g);
-		g.setFont(font);
+//		text2.render(gc, g);
+//		text1.render(gc, g);
+		text3.render(gc, g);
+		g.setFont(font2);
 //		textbox.setCursorVisible(true);
 		
 		
 		
 	}
 	
+	
 	public void update(GameContainer gc, StateBasedGame sbg,int delta)throws SlickException
 	{
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
-		font.loadGlyphs();
+		font2.loadGlyphs();
 		//BACK button
-		jlsb.update(gc, sbg, delta);
+//		jlsb.update(gc, sbg, delta);
 		if((posX > 185 && posX < 240) && (posY > 80 && posY < 100))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
@@ -289,10 +303,10 @@ public class CharCreate extends BasicGameState
 	
 	public UnicodeFont getNewFont(String fontName , int fontSize)
     {
-        font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
-//        font.addGlyphs("@");
-        font.getEffects().add(new ColorEffect(java.awt.Color.white));
-        return (font);
+        font2 = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
+//        font2.addGlyphs("@");
+        font2.getEffects().add(new ColorEffect(java.awt.Color.white));
+        return (font2);
     }
 	
 	public int getID()
