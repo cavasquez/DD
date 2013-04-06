@@ -7,6 +7,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.gui.TextField;
+import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import DD.SlickTools.RenderComponent;
@@ -31,6 +32,7 @@ public class JoinLobbyStartButton extends RenderComponent
 	private float width;
 	private Vector2f position;
 	private Input mouse = new Input(650);
+	private BasicGameState bgs;
 	
 	/************************************ Class Methods *************************************/
 	public JoinLobbyStartButton(TextField username, TextField ip, DDSystem system, Vector2f position)
@@ -68,6 +70,7 @@ public class JoinLobbyStartButton extends RenderComponent
 				if(connected)
 				{
 					system.ns.start();
+					((JoinLob)bgs).killTextFields();
 				} /* successfully connected */
 				else
 				{
@@ -79,5 +82,10 @@ public class JoinLobbyStartButton extends RenderComponent
 		} /* end position if */
 		
 	} /* end update method */
+	
+	public void setBasicGameState(BasicGameState bgs)
+	{
+		this.bgs = bgs;
+	} /* end setBasicGameState */
 
 } /* end JoinLobbyStartButton class */
