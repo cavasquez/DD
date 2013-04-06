@@ -51,7 +51,7 @@ public class JoinLob extends BasicGameState
 		//dungeon = new Music("Audio/dunEffect1.wav");
 		//dungeon.loop();
 //		textbox = new TextField(gc, font, 100, 266, 250 , 50);
-		jlsb = new JoinLobbyStartButton(username, ip, Game.system, new Vector2f(190, 600));
+		jlsb = new JoinLobbyStartButton(Game.system, new Vector2f(190, 600));
 		jlsb.setBasicGameState(this);
 //		textbox.addListener(new KeyListener());
 		
@@ -66,6 +66,7 @@ public class JoinLob extends BasicGameState
 		ip = new TextField(gc, font, 100, 260, 180, 25);
 		username.setText("username");
 		ip.setText("ip address");
+		jlsb.setTextField(username, ip);
 	}
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException

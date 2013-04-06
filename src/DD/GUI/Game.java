@@ -35,7 +35,8 @@ public class Game extends StateBasedGame
 		this.addState(new CreateLob(createLob));
 		this.addState(new GameplayState(gameplay));
 		this.addState(new CharCreate(cc)); //this is for char create
-		//this.addState(new MapTestState(gameplay));
+		//this.addState(new MapTestState(gameplay));	//for testing only
+
 
 		this.addState(new MapToolState(maptool));
 
