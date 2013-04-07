@@ -186,9 +186,9 @@ public class CreateLob extends BasicGameState
 					/* assume all SerMapCharHelper are mob */
 					gmt.addCharacter(GMToolsBox.Holder.MOB, character.cs, character.coord);
 				} /* end for loop */
-				
+				sbg.enterState(Game.gameplay);
 			}
-			sbg.enterState(Game.gameplay);
+			
 		}
 		
 		

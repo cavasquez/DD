@@ -5,13 +5,21 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Set;
 import java.util.TreeSet;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
+import org.newdawn.slick.state.StateBasedGame;
+
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.MapTool.MapTool;
 import DD.SlickTools.BoxInterface;
+import DD.SlickTools.ImageRenderComponent;
+import DD.SlickTools.RenderComponent;
 
 /*****************************************************************************************************
  * The GMToolsBox class will hold the GM abilities. It will provide the GM with many of his necessary
@@ -73,9 +81,12 @@ public class GMToolsBox extends BoxInterface
 	private Set<Integer> charactersInPlay;				/* A set containing the ID's of all the characters in play. It should mirror the one in the CombatSystem */
 	private MapTool maptool;							
 	private int shift;
+	private static Input mouse = new Input(650);
 	
 	/************************************ Button Images *************************************/
-	Image startCombatPhaseButton= null;
+	private Image startCombatPhaseButton= null;
+	//private Image placeCharacter = null;
+	//private Image removeCharacter = null;
 	
 	
 	public GMToolsBox(int id, float length, float width) throws SlickException
@@ -88,6 +99,8 @@ public class GMToolsBox extends BoxInterface
 		holder.add(Holder.PLAYER.index, new ArrayList<HolderTuple>());
 		
 		startCombatPhaseButton= new Image("Images/GMTools/StartCombatPhase.png"); 
+		//placeCharacter = new Image("Images/GMTools/PlaceCharacter.png");
+		//removeCharacter = new Image("Images/GMTools/RemoveCharacter.png");
 		
 		shift = startCombatPhaseButton.getHeight();
 		Vector2f boxPosition = new Vector2f(660f, 10f);
@@ -174,6 +187,53 @@ public class GMToolsBox extends BoxInterface
 		recycledCIDs.offer(id);
 		
 	} /* end removeCharacter method */
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
+	{
+		int posX = mouse.getMouseX();
+    	int posY = mouse.getMouseY();
+    	try {
+			super.update(gc, sbg, delta);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	} /* end update method */
+	
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) 
+	{
+		//render start combat phase and remove character buttons
+		ImageRenderComponent renderComponent = null;
+		int delta = 40;
+		for(int i = 0; i < components.size(); i++)
+		{
+			if (ImageRenderComponent.class.isInstance(components.get(i)))
+			{
+				renderComponent = (ImageRenderComponent) components.get(i);
+				if(components.get(i) instanceof PlaceCharacter)
+				{
+					System.out.println("before");
+					Vector2f pos = new Vector2f(950, 80 + delta );
+					delta += 40;
+					renderComponent.render(gc, sbg, gr, pos);
+					gr.drawString("here", 950, 120 + delta);
+					System.out.println("after");
+				} /* end if */
+				else
+				{
+					renderComponent.render(gc, sbg, gr);
+				} /* end else */
+				
+			} /* end if */
+		} /* end for loop */
+		
+		
+		
+	} /* end render method */
 	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************

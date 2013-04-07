@@ -73,7 +73,7 @@ public class CharacterSheet implements Serializable
 	
 	/******** Basic Info *********/
 	private String raceName;
-	private String name;
+	protected String name;
 	private String player;
 	Race race;
 	private String languages;

@@ -64,6 +64,13 @@ public class DDImage implements Serializable
 	public DDImage(String path)
 	{
 		spriteSheetPath = path;
+		try {
+			this.image = new Image(path);
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	} /* end DDImage constructor */
 	
 	

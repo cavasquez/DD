@@ -1,6 +1,10 @@
 package DD.GMToolsBox;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
 import DD.ActionBox.Dice;
 import DD.Character.DDCharacter;
@@ -10,6 +14,7 @@ import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.CombatSystem.Action;
 import DD.CombatSystem.CombatSystem.ActionType;
 import DD.Message.CombatMessage;
+import DD.SlickTools.DDImage;
 
 /*****************************************************************************************************
  * StartCombatPhase is a special ability that should only be provided to the GM(ie the server).
@@ -22,11 +27,14 @@ import DD.Message.CombatMessage;
 
 public class StartCombatPhase extends Ability 
 {
+	private static Input mouse = new Input(650);
+	private DDImage cancel;
 
 	public StartCombatPhase(int id) 
 	{
 		super(id, CombatSystem.ActionType.SYSTEM, CombatSystem.Action.START_COMBAT_PHASE, "Start Combat Phase", "Game will roll for initiative and order players accordingly.");
-		// TODO Auto-generated constructor stub
+		this.image = new DDImage("Images/GMTools/StartCombatPhase.png");
+		cancel = new DDImage("Images/GMTools/Cancel.png");
 	} /* end StartCombatPhase constructor */
 
 	@Override
@@ -63,5 +71,34 @@ public class StartCombatPhase extends Ability
 		} /* end if */
 		
 	} /* end action method */
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
+	{
+		int posX = mouse.getMouseX();
+    	int posY = mouse.getMouseY();
+		
+		//Start Combat Phase Button
+		if((posX > 936 && posX < 936 + this.image.getWidth()) && (posY > 80 && posY < (80 + this.image.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			try {
+					action();
+				} catch (SlickException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    			System.out.println("Start Combat Phase");
+    		}
+    	}
+		
+	} /* end update method */
+	
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) 
+	{
+		this.image.draw(936, 80);
+		
+	} /* end render method */
 
 } /* end StartCombatPhase method */
