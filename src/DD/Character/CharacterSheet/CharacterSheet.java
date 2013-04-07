@@ -89,6 +89,7 @@ public class CharacterSheet implements Serializable
 	private DDImage image = null;
 	private int netID;  //TODO: should not be serialized. 
 	
+	private int currency = 1000;
 	/********* Ability *********/
 	
 	public static final int ABILITY_STRENGTH = 0;
@@ -1675,6 +1676,11 @@ public class CharacterSheet implements Serializable
 		return EquippedArmor.get(0);
 	}
 	
+	public Armor getEquippedShield()
+	{
+		return EquippedArmor.get(1);
+	}
+	
 	/*
 	 * Look at Armory for list of all armor  and weapons and their index
 	 * this will help get the armor you want to put in the arrayList
@@ -1694,9 +1700,26 @@ public class CharacterSheet implements Serializable
 	public void equipWeapon(Weapon w, int hand)
 	{
 		
-		
-		EquippedWeapon.add(hand,w);
-		
+		if(hand == 1)
+		{
+			if(getEquippedShield() == null)
+			{
+				if(EquippedWeapon.get(hand) == armory.weapons.get(0))// if it is unarmed
+				{
+					
+					
+					
+					equipmentList.add(EquippedWeapon.remove(hand));
+					EquippedWeapon.add(hand,w);
+				}
+					
+			}
+			else
+			{
+				equipmentList.add(EquippedWeapon.remove(hand));
+				EquippedWeapon.add(hand,w);
+			}
+		}
 		
 		if(EquippedWeapon.size() > 2)
 		{
@@ -1730,7 +1753,7 @@ public class CharacterSheet implements Serializable
 		}
 		
 		//Equip both hands with unarmed
-		for (int i = 0; i < EquippedWeapon.size(); i++) {
+		for (int i = 0; i < 2; i++) {
 		
 			
 			EquippedWeapon.add(armory.weapons.get(0));

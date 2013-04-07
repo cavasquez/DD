@@ -16,6 +16,8 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.Character.CharacterSheet.CharacterSheet;
+
 public class JoinLob extends BasicGameState
 {
 	
@@ -32,6 +34,7 @@ public class JoinLob extends BasicGameState
 	TextField ip;
 	JoinLobbyStartButton jlsb;
 	Input inputMouse = new Input(650);
+	CharacterSheet sheet;
 	
 	public JoinLob(int state)
 	{
@@ -139,7 +142,8 @@ public class JoinLob extends BasicGameState
 						if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 						{
 							button.play();
-							
+							sheet = null;
+							jlsb.setCharacterSheet(sheet);
 						}
 					}
 				 
