@@ -90,6 +90,17 @@ public class CharacterSheet implements Serializable
 	private int netID;  //TODO: should not be serialized. 
 	
 	private int currency = 1000;
+	
+	
+	public void subCurrency(int money)
+	{
+			currency = currency - money;
+	}
+	
+	public int getCurrency()
+	{
+		return currency;
+	}
 	/********* Ability *********/
 	
 	public static final int ABILITY_STRENGTH = 0;
