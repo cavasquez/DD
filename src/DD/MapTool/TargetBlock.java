@@ -11,6 +11,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import DD.Character.DDCharacter;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
+import DD.SlickTools.DDImage;
 
 /*****************************************************************************************************
  * TargetBlock will be a special block on the map reserved for use by the TargetSystem to find Targets
@@ -43,7 +44,7 @@ public class TargetBlock extends Objects
 	
 	/************************************ Class Methods 
 	 * @throws SlickException *************************************/
-	public TargetBlock(String name, Image image, Map owner) throws SlickException
+	public TargetBlock(String name, DDImage image, Map owner) throws SlickException
 	{
 		super(name, image, owner, null, null);
 		movePenalty = 0;
@@ -58,7 +59,7 @@ public class TargetBlock extends Objects
 	
 	public TargetBlock(Map owner) throws SlickException
 	{	
-		super("|---|", spriteSheet.getSubImage(1473, 510, 33, 34).getScaledCopy(0.9f), owner, null, null); /* TODO: remove this after testing */
+		super("|---|", new DDImage(1473, 510)  .getScaledCopy(0.9f), owner, null, null); /* TODO: remove this after testing */
 
 		movePenalty = 0;
 		lightPenalty = 0;

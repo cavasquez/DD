@@ -14,14 +14,14 @@ public class CharacterObjects extends Objects{
 	private static final long serialVersionUID = -942204818115561142L;
 	public DDCharacter ddchar;
 	
-	public CharacterObjects(String name, Image image, int x, int y, Map owner, DDCharacter ddchar) throws SlickException {
+	public CharacterObjects(String name, DDImage image, int x, int y, Map owner, DDCharacter ddchar) throws SlickException {
 		super(name, image, owner, x, y);
 		this.ddchar = ddchar;
 		super.priority =10;
 		ddchar.addComponent(new CharacterStats());
 	}
 	
-	public CharacterObjects(String name, Image image, Map owner, DDCharacter ddchar) throws SlickException {
+	public CharacterObjects(String name, DDImage image, Map owner, DDCharacter ddchar) throws SlickException {
 		this(name, image, 0, 0, owner, ddchar);
 
 	}
@@ -57,7 +57,7 @@ public class CharacterObjects extends Objects{
 		float y = position.y;
 		float xCorrection = 30.85f;
 		float yCorrection = 30;
-		image.draw(x*xCorrection, (y+1)*yCorrection);
+		if(image != null) image.draw(x*xCorrection, (y+1)*yCorrection);
 		((CharacterEntity)ddchar).render(gc, sbg, gr, x*xCorrection, (y+1)*yCorrection);
 	} /* end render method */
 	

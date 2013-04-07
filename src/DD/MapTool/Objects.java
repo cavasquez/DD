@@ -26,8 +26,9 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 	static protected transient Image spriteSheet = null;
 	static protected Map owner = null;
 	protected static Input mouse = new Input(650);
+	
 
-	public Objects(String name, Image image, Map owner, Integer x, Integer y) throws SlickException {
+	public Objects(String name, DDImage image, Map owner, Integer x, Integer y) throws SlickException {
 		
 		super(0, image);
 		if (spriteSheet == null) spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
@@ -51,6 +52,9 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 	
 	public void select() throws SlickException {};
 	
+	public void makeDDImage(){
+		image.makeImage();
+	}
 	
 	public Image getImage(){
 		return spriteSheet;
@@ -109,24 +113,25 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		
 //		System.out.println("x: " + position.x);
 //		System.out.println("y: " + position.y);
-//		
-		if( (mouseX >= x*30.85 && mouseX <= x*30.85 + image.getWidth() ) &&
-				(mouseY >= y*30 && mouseY <= y*30 + image.getHeight() ) )
-		{
-			/* You are inside the button */
-			
-			//if(mouse.isMousePressed(Input.MOUSE_LEFT_BUTTON)) 
-			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+		if(image !=null){
+			if( (mouseX >= x*30.85 && mouseX <= x*30.85 + image.getWidth() ) &&
+					(mouseY >= y*30 && mouseY <= y*30 + image.getHeight() ) )
 			{
-				String message = "You are clicking " + position.x + ", " + position.y;
-				try {
-					select();
-					//System.out.println(message);
-				} catch (SlickException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				/* You are inside the button */
 				
+				//if(mouse.isMousePressed(Input.MOUSE_LEFT_BUTTON)) 
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					String message = "You are clicking " + position.x + ", " + position.y;
+					try {
+						select();
+						//System.out.println(message);
+					} catch (SlickException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
 			}
 		}
 	}
@@ -136,16 +141,19 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		Color myAlphaColor = new Color(1f, 1f, 1f, 1f);
 		float x = position.x;
 		float y = position.y;
-
+		
 		if(!Wall.class.isInstance(this) && 
 				!Floor.class.isInstance(this) && !TargetBlock.class.isInstance(this))
 		{
 			float xCorrection = 30.85f;
 			float yCorrection = 30;
-			image.draw(x*xCorrection, (y+1)*yCorrection);
+			if(image != null)image.draw(x*xCorrection, (y+1)*yCorrection);
+			
 		}
 		else {
-			image.draw((x + (image.getHeight() * x)), ((y+40) + (image.getWidth() * y)));	//y offset by 40 to shift down a little
+			//System.out.println("carlos' mother");
+			if(image != null)image.draw((x + (image.getHeight() * x)), ((y+40) + (image.getWidth() * y)));	//y offset by 40 to shift down a little
+			//System.out.println("chris' mother");
 		}
 		//if(CharacterObjects.class.isInstance(this)) System.out.println("x: " + (x + (image.getHeight() * x)) + ", y: " + (y + (image.getHeight() * y)));
 		//gr.drawString(message, 110, 10);

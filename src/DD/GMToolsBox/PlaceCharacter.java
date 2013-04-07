@@ -9,6 +9,7 @@ import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.Interpreter.Standard.I_StandardAttack;
 import DD.CombatSystem.Interpreter.System.I_PlaceCharacter;
+import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
 import DD.Message.CombatMessage;
@@ -26,8 +27,8 @@ public class PlaceCharacter extends TargetAbility
 	/************************************ Class Attributes *************************************/
 	private CharacterSheet sheet;	/* characters data */
 	private GMToolsBox gmt;			/* Give PlaceCharacter access tot he GMToolBox */
-	private boolean delete;
-	private boolean place;
+	protected boolean delete;
+	protected boolean place;
 	private GMToolsBox.Holder type;
 	
 	/************************************ Class Methods *************************************/
@@ -69,6 +70,29 @@ public class PlaceCharacter extends TargetAbility
 					this
 				);
 		ts.chooseTarget(tcm);
+	} /* end place method */
+	
+	protected void place(Coordinate position) throws SlickException
+	{
+		Integer[] body = new Integer[I_PlaceCharacter.BODY_SIZE];
+		body[I_PlaceCharacter.CHARACTER_ID] = gmt.getNewCharacterID();
+		body[I_PlaceCharacter.POS_X] = position.x;
+		body[I_PlaceCharacter.POS_Y] = position.y;
+		CombatMessage cm = new CombatMessage
+				(
+					null,
+					null,
+					CombatSystem.ActionType.SYSTEM,
+					CombatSystem.Action.PLACE_CHARACTER,
+					sheet,
+					body
+				);
+		sendToInterpreter(cm);
+		
+		/* remove the character from the holder */
+		removeCharacter();
+		
+		done(null);
 	} /* end place method */
 
 	private void delete()

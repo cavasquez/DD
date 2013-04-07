@@ -7,6 +7,8 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
+import DD.SlickTools.DDImage;
+
 
 
 public class TestSerMain_two extends BasicGame
@@ -24,6 +26,22 @@ public class TestSerMain_two extends BasicGame
     @Override
     public void init(GameContainer gc) 
 			throws SlickException {
+    	String spriteSheetPath = "Images/Test/DungeonCrawl_ProjectUtumnoTileset.png";
+    	DDImage image = new DDImage(spriteSheetPath, 1, 1, 33, 34);
+    	
+    	image.writeMe();
+    	
+    	
+    	Floor foobacca = new Floor("fooie", null,0, 0, 0, 0, null);
+    	
+    	foobacca.image = foobacca.loadDDImage("");
+    	
+    	System.out.println(foobacca.image.getHeight());
+    	
+    	
+    	
+    	
+    	
 		/*
 		 * IMPORTANT: to see this working edit the path above to a new folder you create on you Desktop.
 		 * Run this main once to create the .ser files.
@@ -36,13 +54,14 @@ public class TestSerMain_two extends BasicGame
 		
 		
 		//make a map tool and a world.
-		MapTool mt = new MapTool();
+//		MapTool mt = new MapTool();
 		
 		//***************************************************
 		//START PHASE1 - write the world
 
 		//***************************************************		
-		mt.world.writeMe();
+//		mt.world.writeMe();
+
 //		Obstacle wall1 = new Obstacle("wall1", null, 5, 5, null);
 //
 //		for (int i = 0; i < mt.world.worldSize; i++) {
@@ -57,7 +76,7 @@ public class TestSerMain_two extends BasicGame
 //		}
 //		
 //		mt.world.setWorldName("Norrath");
-//		//path/Norrath/Norrath.ser
+		//path/Norrath/Norrath.ser
 //		mt.world.writeMe();
 		
 
@@ -93,6 +112,8 @@ public class TestSerMain_two extends BasicGame
 //		System.out.println("Norrath map0 and map24");
 //		System.out.println(mt.getMapAtLocation(0, 0));
 //		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));
+
+		
 //		
 //		//load original world again
 //		mt.loadWorld("world");
@@ -111,7 +132,7 @@ public class TestSerMain_two extends BasicGame
 //		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));
 //		
 //		//load original world again
-//		mt.loadWorld("world", path);
+//		mt.loadWorld("world");
 //		System.out.println("World map0 and map24");
 //		System.out.println(mt.getMapAtLocation(0, 0));
 //		System.out.println(mt.getMapAtLocation(mt.world.worldSize-1, mt.world.worldSize-1));

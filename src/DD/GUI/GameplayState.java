@@ -23,12 +23,9 @@ import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
 import DD.System.DDSystem;
 
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -37,24 +34,21 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameplayState extends BasicGameState {
  
 	private int stateID = 0;
-	private Image floor = null;
-	private Image wall = null;
-	private Image scaledWall = null;
+	private DDImage floor = null;
+	private DDImage wall = null;
+	private DDImage scaledWall = null;
 //	private Image playerImage = null;
 //	private Image spriteSheet = null;
-	private World world = null;
+//	private World world = null;
 	public MapTool maptool = null;
     private DDCharacter player;
     private DDCharacter goblin;
     private CharacterObjects playerObj;
     private ActionBox actionBox;
-    private GMToolsBox gmToolsBox;
+    private GMToolsBox gmToolsBox = null;
     private CharacterSheet sheet = new CharacterSheet();
-    private String charToString = " ";
-    private String goblinHP = " ";
-    //private String mousePos = " ";
     Input mouse = new Input(650);
-    //private float x, y;
+
     
  
     public GameplayState(int stateID)
@@ -200,6 +194,7 @@ public class GameplayState extends BasicGameState {
 		int posX = mouse.getMouseX();
 		int posY = mouse.getMouseY();
 		
+		//Back button
 		if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
@@ -265,4 +260,16 @@ public class GameplayState extends BasicGameState {
 		g.drawString("BACK",1130,615);
 		
     }
+    
+    public GMToolsBox getGMToolsBox()
+    {
+    	if (gmToolsBox == null)
+			try {
+				gmToolsBox = new GMToolsBox();
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	return gmToolsBox;
+    } /* end getGMToolsBox */
 }

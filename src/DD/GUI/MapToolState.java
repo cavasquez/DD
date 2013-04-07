@@ -237,10 +237,11 @@ public class MapToolState extends BasicGameState {
     	}
 	}
 	
-	public void saveMapButton(GameContainer gc) {
+	public void saveMapButton(GameContainer gc) throws SlickException {
 		if((posX > 630 && posX < 630 + saveMap.getWidth()) && (posY > 610 && posY < (610 + saveMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			maptool.getSelectedList().clearSelectedList();
     			maptool.getWorld().writeMe();
     			System.out.println("save map");
     		}
@@ -251,8 +252,17 @@ public class MapToolState extends BasicGameState {
 		if((posX > 780 && posX < 780 + saveMap.getWidth()) && (posY > 610 && posY < (610 + saveMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
-    			maptool.loadWorld("world");
-    			System.out.println("load map");
+    			
+    			
+    			World world = maptool.loadWorld("world", true);
+    			//System.out.println(world.toString());
+    			
+    			System.out.println(world.getMap(0, 0).getObjectAtLocation(0, 0).image);
+    			maptool.world = world;
+    			maptool.setCurrentMap(0, 0);
+    			System.out.println("hi");
+    			maptool.selectedList.setOwner(maptool.getCurrentMap()) ;
+    			
     		}
     	}
 	}

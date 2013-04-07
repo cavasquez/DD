@@ -12,7 +12,7 @@ public class TempObjects extends Objects{
 	int turnCount; //numPlayers*Duration,
 	int id;
 	
-	public TempObjects(String name, int turnCont, Image image, int move, int light, Map map) throws SlickException{
+	public TempObjects(String name, int turnCont, DDImage image, int move, int light, Map map) throws SlickException{
 		super(name,image,map, null, null); //TODO: needs position
 		this.turnCount = turnCont;
 		super.movePenalty = move;

@@ -14,6 +14,7 @@ import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.Character.Abilities.DefaultAbilities.Standard.StandardAttack;
 import DD.SlickTools.BoxInterface;
 import DD.SlickTools.Component;
+import DD.SlickTools.DDImage;
 
 /*****************************************************************************************************
  * The ActionBox class represents the Action Box in the GUI. It will hold possible player actions as well
@@ -77,15 +78,15 @@ public class ActionBox extends BoxInterface
 	protected Set<Integer> playersCharacters = null;/* A set that contains the players characters */
 	
 	/************************************ Button Images *************************************/
-	Image freeAction = null;
-	Image fullRoundAction = null;
-	Image immediateAction = null;
-	Image moveAction = null;
-	Image standardAction = null;
-	Image swiftAction = null;
-	Image standardAttack = null;
-	Image endMove = null;
-	Image endTurnButton = null;
+	DDImage freeAction = new DDImage();
+	DDImage fullRoundAction = new DDImage();
+	DDImage immediateAction = new DDImage();
+	DDImage moveAction = new DDImage();
+	DDImage standardAction = new DDImage();
+	DDImage swiftAction = new DDImage();
+	DDImage standardAttack = new DDImage();
+	DDImage endMove = new DDImage();
+	DDImage endTurnButton = new DDImage();
 	int shift;
 	
 	public ActionBox(int id, float length, float width) throws SlickException
@@ -94,13 +95,15 @@ public class ActionBox extends BoxInterface
 		subActions = new ArrayList<Integer>();
 		playersCharacters = new TreeSet<Integer>();
 		
-		freeAction = new Image("Images/ActionBox/FreeAction.png");
-		fullRoundAction = new Image("Images/ActionBox/FullRoundAction.png");
-		immediateAction = new Image("Images/ActionBox/ImmediateAction.png");
-		moveAction = new Image("Images/ActionBox/MoveAction.png");
-		standardAction = new Image("Images/ActionBox/StandardAction.png");
-		swiftAction = new Image("Images/ActionBox/SwiftAction.png");
-		endMove = new Image("Images/ActionBox/EndMove.png");
+		
+		
+		freeAction.setImage(new Image("Images/ActionBox/FreeAction.png"));
+		fullRoundAction.setImage(new Image("Images/ActionBox/FullRoundAction.png"));
+		immediateAction.setImage(new Image("Images/ActionBox/ImmediateAction.png"));
+		moveAction.setImage(new Image("Images/ActionBox/MoveAction.png"));
+		standardAction.setImage(new Image("Images/ActionBox/StandardAction.png"));
+		swiftAction.setImage(new Image("Images/ActionBox/SwiftAction.png"));
+		endMove.setImage(new Image("Images/ActionBox/EndMove.png"));
 		//endTurnButton = new Image("Images/ActionBox/EndMove.png"); //TODO: make button
 		
 		shift = freeAction.getHeight();
