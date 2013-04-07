@@ -1706,14 +1706,17 @@ public class CharacterSheet implements Serializable
 			{
 				if(EquippedWeapon.get(hand) == armory.weapons.get(0))// if it is unarmed
 				{
-					EquippedWeapon.remove(hand);
+					
+					
+					
+					equipmentList.add(EquippedWeapon.remove(hand));
 					EquippedWeapon.add(hand,w);
 				}
 					
 			}
 			else
 			{
-				EquippedWeapon.remove(hand);
+				equipmentList.add(EquippedWeapon.remove(hand));
 				EquippedWeapon.add(hand,w);
 			}
 		}
