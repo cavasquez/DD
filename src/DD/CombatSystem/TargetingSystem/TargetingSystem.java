@@ -111,7 +111,7 @@ public class TargetingSystem
 	 	* a target is needed. It is here where TargetingSystem will interpret the 
 	 	* ChooseTargetMessage and place the TargetBlocks onto the map accordingly 
 	 	*/
-		
+		System.out.println(map);
 		caller = ctm.getCaller(); /* set the Caller */
 		TargetingSystem.selection = ctm.getTargetSelection();
 		TargetingSystem.self = ctm.getSelf();
@@ -345,6 +345,7 @@ public class TargetingSystem
 		 * and the block should differ slightly and return a coordinate as opposed 
 		 * a character. Furthermore, we care about the movePenalty of the Objects */
 		System.out.println(origin.x + ", " + origin.y);
+		System.out.println("TargetingSystem character? " + getCharacter(origin));
 		boolean diagonal = getCharacter(origin).getMovedDiagonal();
 
 		Coordinate movePosition = null;
@@ -520,5 +521,10 @@ public class TargetingSystem
 		//System.out.println("");
 		return map.objectsStack[position.x][position.y].peek().getMovePenalty();
 	} /* end getMovePenalty method */
+	
+	public Map getMap()
+	{
+		return map;
+	} /* end getMap method */
 	
 } /* end TargetingSystem class */

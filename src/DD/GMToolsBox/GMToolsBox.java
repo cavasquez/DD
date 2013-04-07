@@ -18,6 +18,7 @@ import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.MapTool.MapTool;
 import DD.SlickTools.BoxInterface;
+import DD.SlickTools.DDImage;
 import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
 
@@ -82,12 +83,10 @@ public class GMToolsBox extends BoxInterface
 	private MapTool maptool;							
 	private int shift;
 	private static Input mouse = new Input(650);
+	private DDImage clearSelection;
 	
 	/************************************ Button Images *************************************/
 	private Image startCombatPhaseButton= null;
-	//private Image placeCharacter = null;
-	//private Image removeCharacter = null;
-	
 	
 	public GMToolsBox(int id, float length, float width) throws SlickException
 	{
@@ -98,6 +97,7 @@ public class GMToolsBox extends BoxInterface
 		holder.add(Holder.MOB.index, new ArrayList<HolderTuple>());
 		holder.add(Holder.PLAYER.index, new ArrayList<HolderTuple>());
 		
+		clearSelection = new DDImage("Images/MapTool/ClearSelection.png");
 		startCombatPhaseButton= new Image("Images/GMTools/StartCombatPhase.png"); 
 		//placeCharacter = new Image("Images/GMTools/PlaceCharacter.png");
 		//removeCharacter = new Image("Images/GMTools/RemoveCharacter.png");
@@ -200,6 +200,19 @@ public class GMToolsBox extends BoxInterface
 			e.printStackTrace();
 		}
 		
+    	//clear selection button
+    	if((posX > 950 && posX < 950 + clearSelection.getWidth()) && (posY > 120 && posY < (120 + clearSelection.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			ClearSelection clear = new ClearSelection(0);
+    			try {
+					clear.action();
+				} catch (SlickException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		}
+    	}
 		
 	} /* end update method */
 	
@@ -208,7 +221,7 @@ public class GMToolsBox extends BoxInterface
 	{
 		//render start combat phase and remove character buttons
 		ImageRenderComponent renderComponent = null;
-		int delta = 40;
+		int delta = 50;
 		for(int i = 0; i < components.size(); i++)
 		{
 			if (ImageRenderComponent.class.isInstance(components.get(i)))
@@ -216,12 +229,9 @@ public class GMToolsBox extends BoxInterface
 				renderComponent = (ImageRenderComponent) components.get(i);
 				if(components.get(i) instanceof PlaceCharacter)
 				{
-					System.out.println("before");
-					Vector2f pos = new Vector2f(950, 80 + delta );
-					delta += 40;
+					Vector2f pos = new Vector2f(950, 110 + delta );
+					delta += 50;
 					renderComponent.render(gc, sbg, gr, pos);
-					gr.drawString("here", 950, 120 + delta);
-					System.out.println("after");
 				} /* end if */
 				else
 				{
@@ -231,7 +241,7 @@ public class GMToolsBox extends BoxInterface
 			} /* end if */
 		} /* end for loop */
 		
-		
+		clearSelection.draw(950, 120);
 		
 	} /* end render method */
 	

@@ -54,7 +54,6 @@ public class DDImage implements Serializable
 	public DDImage(int x, int y)
 	{
 		this("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png",x,y, 33, 34);
-		//System.out.println(spriteSheetPath);
 	} /* end DDImage constructor */
 	
 	public DDImage(Image image)
@@ -89,7 +88,6 @@ public class DDImage implements Serializable
 		{
 			spriteSheetPath ="Images/Test/DungeonCrawl_ProjectUtumnoTileset.png";
 			spriteSheet = new Image(spriteSheetPath);
-			System.out.println(spriteSheet);
 			returner = spriteSheet.getSubImage(x, y, width, height);
 		} /* end try */
 		catch (SlickException e) 

@@ -2,6 +2,7 @@ package DD.GMToolsBox;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
@@ -13,6 +14,7 @@ import DD.CombatSystem.Interpreter.Standard.I_StandardAttack;
 import DD.CombatSystem.Interpreter.System.I_PlaceCharacter;
 import DD.CombatSystem.TargetingSystem.Coordinate;
 import DD.CombatSystem.TargetingSystem.TargetingSystem;
+import DD.GUI.Game;
 import DD.Message.ChooseTargetMessage;
 import DD.Message.CombatMessage;
 import DD.Message.TargetSelectedMessage;
@@ -30,10 +32,10 @@ public class PlaceCharacter extends TargetAbility
 	/************************************ Class Attributes *************************************/
 	private CharacterSheet sheet;	/* characters data */
 	private GMToolsBox gmt;			/* Give PlaceCharacter access tot he GMToolBox */
-	protected boolean delete;
-	protected boolean place;
 	private GMToolsBox.Holder type;
-	
+	private DDImage cancel;
+	private Vector2f pos;
+	private static Input mouse = new Input(650);
 	
 	/************************************ Class Methods *************************************/
 	public PlaceCharacter(int id, CharacterSheet sheet, GMToolsBox gmt, GMToolsBox.Holder type) 
@@ -42,31 +44,54 @@ public class PlaceCharacter extends TargetAbility
 		this.sheet = sheet;
 		this.gmt = gmt;
 		this.type = type;
-		delete = false;
-		place = false;
+		this.pos = new Vector2f(Game.Xsize, Game.Ysize);
 		this.image = new DDImage("Images/GMTools/PlaceCharacter.png");
+		cancel = new DDImage("Images/GMTools/Cancel.png");
 	} /* end PlaceCharacter class */
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta)
 	{
+		int posX = mouse.getMouseX();
+    	int posY = mouse.getMouseY();
+    	
+    	if((posX > pos.x && posX < pos.x + this.image.getWidth()) && (posY > pos.y && posY < (pos.y + this.image.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			try {
+					place();
+				} catch (SlickException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    			System.out.println("Remove Character");
+    		}
+    	}
+		
+		//Cancel Button
+		if((posX > ((pos.x+this.image.getWidth()) + 5)  && posX < ((pos.x+this.image.getWidth()) + 5) + cancel.getWidth()) && (posY > pos.y && posY < (pos.y + cancel.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			delete();
+    		}
+    	}
 		
 	} /* end update method */
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr, Vector2f pos) 
 	{
+		this.pos = pos;
 		this.image.draw(pos.x, pos.y);
+		cancel.draw((pos.x+this.image.getWidth()) + 5, pos.y);
+		gr.drawString(sheet.getName(), pos.x+5, pos.y+10);
 		
 	} /* end render method */
 	
 	@Override
 	protected void action() throws SlickException 
 	{
-		/* delete or action should be flagged during update (ie, this will have to override update).
-		 * The PlaceCharacter button should really be thought of as 2 buttons */
-		if (place) place();
-		else if(delete) delete();
+		/* do nothing */
 	} /* end action method */
 	
 	private void place() throws SlickException
@@ -100,7 +125,7 @@ public class PlaceCharacter extends TargetAbility
 					body
 				);
 		sendToInterpreter(cm);
-		
+		System.out.println("removing");;
 		/* remove the character from the holder */
 		removeCharacter();
 		
@@ -110,7 +135,6 @@ public class PlaceCharacter extends TargetAbility
 	private void delete()
 	{
 		removeCharacter();
-		
 		//TODO: save sheet? give to corresponding player to save? tell corresponding player to save?
 	} /* end delete method */
 	
@@ -126,8 +150,10 @@ public class PlaceCharacter extends TargetAbility
 	@Override
 	public void obtainTarget(TargetSelectedMessage tsm) throws SlickException 
 	{
+		System.out.println("obtain target");
 		if (tsm.getTargets() == null)
 		{
+			System.out.println("obtain target: no character found");
 			/* We can only place a character on a nonempty square */
 			Integer[] body = new Integer[I_PlaceCharacter.BODY_SIZE];
 			body[I_PlaceCharacter.CHARACTER_ID] = gmt.getNewCharacterID();

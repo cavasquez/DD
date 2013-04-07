@@ -47,6 +47,8 @@ public class StandardAttack extends TargetAbility
 	protected void action() throws SlickException
 	{ /* This method needs to be used in update */
 		/* TODO: Check for sneak attacks, flat footed, etc. */
+		System.out.println("StandardAttack character " + character.getSheet().getName());
+		System.out.println("StandardAttack weapon" + character.getSheet().EquippedWeapon);
 		ChooseTargetMessage tcm = new ChooseTargetMessage
 				(
 					TargetingSystem.TargetCount.SINGLE,

@@ -1714,11 +1714,14 @@ public class CharacterSheet implements Serializable
 				}
 					
 			}
-			else
-			{
-				equipmentList.add(EquippedWeapon.remove(hand));
-				EquippedWeapon.add(hand,w);
-			}
+		}
+		else
+		{
+
+			equipmentList.add(EquippedWeapon.remove(hand));
+			EquippedWeapon.add(hand,w);
+			
+			
 		}
 		
 		if(EquippedWeapon.size() > 2)
