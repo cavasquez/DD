@@ -44,7 +44,7 @@ public class CharacterSheet implements Serializable
 		inher=0;
 		enhance=0;
 		misc=0;
-		
+		EquippedWeapon.add(new Weapon (0, "Unarmed",Dice.DieSize.D3,2,0,0,'M','B',"Note:",0));
 		
 	}
 	/*THE DICE!*/
@@ -1744,7 +1744,8 @@ public class CharacterSheet implements Serializable
 		}
 		for (int j = 0; j < equipmentList.size(); j++) {
 			
-		
+			System.out.println("w " + w);
+			System.out.println("list" + equipmentList.get(j).getName());
 			if(w.getName().equals(equipmentList.get(j).getName()))
 			{
 				equipmentList.remove(j);

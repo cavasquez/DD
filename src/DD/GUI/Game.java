@@ -39,7 +39,7 @@ public class Game extends StateBasedGame
 		//this.addState(new MapTestState(gameplay));	//for testing only
 //		this.addState(new GMGameplayState(gameplay));
 		this.addState(new MapToolState(maptool));
-//		this.addState(new GMGameplayState(gmGameplay));
+		this.addState(new GMGameplayState(gmGameplay));
 
 
 		
