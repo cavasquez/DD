@@ -2,6 +2,8 @@ package DD.GUI;
 import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
@@ -156,6 +158,21 @@ public class CreateLob extends BasicGameState
 			{
 				button.play();
 				Game.system.server();
+				Game.system.ns.setUsername("Game master bitches!");
+				try 
+				{
+					Game.system.ns.setServerIP(InetAddress.getLocalHost().getHostAddress());
+				} /* end try */
+				catch (UnknownHostException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} /* end catch */
+				Game.system.ns.start();
+				
+				GMToolsBox gmt;
+				gmt = ((GameplayState)sbg.getState(Game.gameplay)).getGMToolsBox();
+				Game.system.cs.setGMToolsBox(gmt);
 						
 				
 			}
@@ -188,7 +205,7 @@ public class CreateLob extends BasicGameState
 				} /* end for loop */
 				
 			}
-			sbg.enterState(Game.gameplay);
+//			sbg.enterState(Game.gameplay);
 		}
 		
 		
