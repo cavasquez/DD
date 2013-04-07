@@ -79,7 +79,7 @@ public class StartCombatPhase extends Ability
     	int posY = mouse.getMouseY();
 		
 		//Start Combat Phase Button
-		if((posX > 936 && posX < 936 + this.image.getWidth()) && (posY > 80 && posY < (80 + this.image.getHeight()))) {
+		if((posX > 950 && posX < 950 + this.image.getWidth()) && (posY > 80 && posY < (80 + this.image.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			try {
@@ -97,7 +97,7 @@ public class StartCombatPhase extends Ability
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) 
 	{
-		this.image.draw(936, 80);
+		this.image.draw(950, 80);
 		
 	} /* end render method */
 

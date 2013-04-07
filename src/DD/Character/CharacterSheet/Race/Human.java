@@ -10,7 +10,7 @@ public class Human extends Race implements Serializable{
 	 * you get the choice of placing 2 points
 	 * in any 1 stat
 	 */
-	int choice;
+	int choice=0;
 	/*int str;
 	int dex;
 	int intel;

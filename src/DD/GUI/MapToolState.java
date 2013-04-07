@@ -52,6 +52,8 @@ public class MapToolState extends BasicGameState {
 	private TextField loadWorldText = null;
 	UnicodeFont font = null;
 	
+	private boolean hotKeyActive = true;
+	
 	public MapToolState(int stateID) {
 		this.stateID = stateID;
 	}
@@ -94,20 +96,21 @@ public class MapToolState extends BasicGameState {
 		//Render Map
     	RenderComponent renderComponent = null;
     	
-    	for(int i = 0; i < maptool.getCurrentMap().mapSize; i++) {
-    		for(int j = 0; j < maptool.getCurrentMap().mapSize; j++) {
-    			Objects[] list = new Objects[maptool.getCurrentMap().objectsStack[i][j].size()];
-    			System.arraycopy(maptool.getCurrentMap().objectsStack[i][j].toArray(), 0, list, 0, maptool.getCurrentMap().objectsStack[i][j].size());
-    			for(int k = list.length; k > 0; k--) {
-    				Component component = (Component)list[k-1];
-    				if (RenderComponent.class.isInstance(component))
-    				{
-    					renderComponent = (RenderComponent) component;
-    					renderComponent.render(gc, sb, g);
-    				}
-    			}
-    		}
-    	}
+//    	for(int i = 0; i < maptool.getCurrentMap().mapSize; i++) {
+//    		for(int j = 0; j < maptool.getCurrentMap().mapSize; j++) {
+//    			Objects[] list = new Objects[maptool.getCurrentMap().objectsStack[i][j].size()];
+//    			System.arraycopy(maptool.getCurrentMap().objectsStack[i][j].toArray(), 0, list, 0, maptool.getCurrentMap().objectsStack[i][j].size());
+//    			for(int k = list.length; k > 0; k--) {
+//    				Component component = (Component)list[k-1];
+//    				if (RenderComponent.class.isInstance(component))
+//    				{
+//    					renderComponent = (RenderComponent) component;
+//    					renderComponent.render(gc, sb, g);
+//    				}
+//    			}
+//    		}
+//    	}
+    	maptool.getCurrentMap().render(gc, sb, g);
 		
     	//draw buttons to the screen
     	makeSelection.draw(625, 0);
@@ -136,6 +139,8 @@ public class MapToolState extends BasicGameState {
 		mousePos = "Mouse position: " + posX + " " + posY;
 		
 		clickMap(gc);
+		clickedTextBox(gc);
+		
 		
 		///Update Map
     	RenderComponent renderComponent = null;
@@ -147,7 +152,6 @@ public class MapToolState extends BasicGameState {
     				Component component = (Component)list[k];
     				if (RenderComponent.class.isInstance(component))
     				{
-    					
     					renderComponent = (RenderComponent) component;
     					renderComponent.update(gc, sb, delta);
     				}
@@ -168,7 +172,28 @@ public class MapToolState extends BasicGameState {
     	loadMapButton(gc);
     	loadWorldButton(gc);
     	
+    	
+    	//hotkeys
+    	makeSelectionHotKey(gc);
+    	makeRemoveHotKey(gc);
+    	makeClearListHotKey(gc);
+    	makePlaceOnMapHotKey(gc);
+    	makeRemoveOnMapHotKey(gc);
+    	goblinHotKey(gc);
+    	wallHotKey(gc);
+    	
+    	
 	}
+	
+	public void clickedTextBox(GameContainer gc){
+		if((posX > 940 && posX < 1125) && (posY > 565 && posY < 634)) {
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+	    		hotKeyActive = false;
+	    		System.out.println("hotKeyActive: "  +hotKeyActive);
+    		}
+		}
+	}
+	
 	
 	//Clicking on map
 	public void clickMap(GameContainer gc) {
@@ -176,11 +201,94 @@ public class MapToolState extends BasicGameState {
     	if((posX > 0 && posX < 620) && (posY > 40 && posY < 640)) {
     		//you are inside map area
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			hotKeyActive = true;
 	    		getMapCoord();
     		}
     	}
-	
 	}
+	
+	
+	
+	//hotkey methods
+	public void makeSelectionHotKey(GameContainer gc) throws SlickException{
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_W))
+        {
+			if(hotKeyActive){
+				maptool.getSelectedList().massAddSelectedList(x1, y1, x2, y2);
+				//System.out.println("selection hotkey");
+			}
+        }
+	} 
+	public void makeRemoveHotKey(GameContainer gc) throws SlickException{
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_E))
+        {
+			if(hotKeyActive){
+				maptool.getSelectedList().massRemoveSelectedList(x1, y1, x2, y2);
+				System.out.println("remove hotkey");
+			}
+        }
+	}
+	public void makeClearListHotKey(GameContainer gc) throws SlickException{
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_R))
+        {
+			if(hotKeyActive){
+				maptool.getSelectedList().clearSelectedList();
+				System.out.println("clearList hotkey");
+			}
+        }
+	}
+	public void makePlaceOnMapHotKey(GameContainer gc) throws SlickException{
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_S))
+        {
+			if(hotKeyActive){
+				maptool.getSelectedList().placeSelectedListOnMap(object);
+				System.out.println("placeOnMap HotKey");
+			}
+        }
+	}
+	public void makeRemoveOnMapHotKey(GameContainer gc) throws SlickException{
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_D))
+        {
+			if(hotKeyActive){
+				maptool.getSelectedList().removeSelectedListOnMap();
+				System.out.println("removeOnMap HotKey");
+			}
+        }
+	}
+	
+	public void goblinHotKey(GameContainer gc) throws SlickException{
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_1))
+        {
+			if(hotKeyActive){
+				DDCharacter goblinChar = new DDCharacter(stateID++);
+    			goblinChar.setCharacterSheet(new Goblin());
+    			goblinChar.setCharacterID(stateID++);
+    			CharacterObjects goblinObj = new CharacterObjects("Goblin", goblinChar.getImage(), 0, 0, maptool.getCurrentMap(), goblinChar);
+    			object = goblinObj;	//set object to the goblin object to place into the map 
+    			System.out.println("chose goblin");
+				System.out.println("goblin hotkey");
+			}
+        }
+	}
+	public void wallHotKey(GameContainer gc) throws SlickException{
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_2))
+        {
+			if(hotKeyActive){
+				Wall wall = new Wall("Wall", maptool.getCurrentMap());
+    			object = wall;
+				System.out.println("wall hotkey");
+			}
+        }
+	}
+	
+	
 	
 	//Make Selection Button
 	public void makeSelectionButton(GameContainer gc) throws SlickException {
@@ -280,7 +388,7 @@ public class MapToolState extends BasicGameState {
 	}
 	
 	public void loadMapButton(GameContainer gc) throws SlickException {
-		if((posX > 780 && posX < 780 + saveMap.getWidth()) && (posY > 610 && posY < (610 + saveMap.getHeight()))) {
+		if((posX > 780 && posX < 780 + loadMap.getWidth()) && (posY > 610 && posY < (610 + loadMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			for (int i = 0; i < maptool.world.getWorldSize(); i++) {
@@ -314,7 +422,7 @@ public class MapToolState extends BasicGameState {
 	}
 	
 	public void loadWorldButton(GameContainer gc) {
-		if((posX > 780 && posX < 780 + saveMap.getWidth()) && (posY > 570 && posY < (570 + saveMap.getHeight()))) {
+		if((posX > 780 && posX < 780 + loadWorld.getWidth()) && (posY > 570 && posY < (570 + loadWorld.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			

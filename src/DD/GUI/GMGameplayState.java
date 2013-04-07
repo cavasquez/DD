@@ -31,6 +31,12 @@ public class GMGameplayState extends BasicGameState {
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
+		
+		
+	}
+	
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
 		maptool = new MapTool();
 		gmToolsBox = new GMToolsBox(stateID, 300, 200);
 		
@@ -46,7 +52,7 @@ public class GMGameplayState extends BasicGameState {
 //		goblin2.setCharacterSheet(new Goblin());
 //		goblin1.setCharacterID(stateID++);
 //		goblin2.setCharacterID(stateID++);
-		
+	
 	}
 
 	@Override

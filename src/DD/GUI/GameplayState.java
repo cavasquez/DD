@@ -62,7 +62,13 @@ public class GameplayState extends BasicGameState {
     
     @Override
     public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
-    	maptool = new MapTool();
+    	
+        
+    }
+    
+    @Override
+    public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
+maptool = new MapTool();
     	
     	//BY DEFAULT, SET NETWORK AS SERVER
     	//TODO: THE ABOVE NEEDS TO BE CHANGED
@@ -98,7 +104,9 @@ public class GameplayState extends BasicGameState {
 		CharacterClass barb = sheet.chooseClass(0);	//this is barbarian
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
+		sheet.addToEquipment(new Weapon(30, "Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4));
 		sheet.equipWeapon(new Weapon(30, "Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4), 0);
+		System.out.println("gamplay" + sheet.EquippedWeapon.isEmpty());
 		sheet.setImage(new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png", 2530, 1440, 33, 34 ));
         player.setCharacterSheet(sheet);
         goblin.setCharacterSheet(new Goblin());
@@ -133,11 +141,11 @@ public class GameplayState extends BasicGameState {
         int goblinx = 13;
         int gobliny = 6;
         //playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
-        playerObj = new CharacterObjects("Bob", player.getImage(), playerx, playery, maptool.getMapAtLocation(0, 0), player);
-        CharacterObjects goblinObj = new CharacterObjects("Goblin", goblin.getImage(), goblinx, gobliny, maptool.getMapAtLocation(0, 0), goblin); 
+        playerObj = new CharacterObjects("Bob", player.getImage(), playerx, playery,  Game.system.cs.getMap(), player);
+        CharacterObjects goblinObj = new CharacterObjects("Goblin", goblin.getImage(), goblinx, gobliny,  Game.system.cs.getMap(), goblin); 
         
-        maptool.getMapAtLocation(0, 0).placeObjects(playerx, playery, playerObj);
-        maptool.getMapAtLocation(0, 0).placeObjects(goblinx, gobliny, goblinObj);
+        Game.system.cs.getMap().placeObjects(playerx, playery, playerObj);
+        Game.system.cs.getMap().placeObjects(goblinx, gobliny, goblinObj);
         
         player.setCoordiante(new Coordinate(playerx, playery));
         goblin.setCoordiante(new Coordinate(goblinx, gobliny));
@@ -149,11 +157,10 @@ public class GameplayState extends BasicGameState {
         goblin.resetCharacter();
         
         player.startNewTurn();
-        System.out.println("GS:" + player);
-        
-        
+//        System.out.println(Game.system.cs.getMap());
+        System.out.println(Game.system.ts.getMap());	
+    
     }
- 
     @Override
     public void update(GameContainer gc, StateBasedGame sb, int delta) throws SlickException
     {

@@ -31,7 +31,11 @@ public class CharacterStats extends CharacterRenderComponent
 	{
 		/* Display character health and name */
 		/* First render the name */
-		gr.drawString(((DDCharacter)owner).getSheet().getName(),x,y - distanceAbove);
+		if(!((DDCharacter)owner).getSheet().getName().matches("Goblin"))
+		{
+			gr.drawString(((DDCharacter)owner).getSheet().getName(),x,y - distanceAbove);
+		}
+		
 		
 		/* Second, render the health */
 		String health = Integer.toString(((DDCharacter)owner).getCurrentHP());

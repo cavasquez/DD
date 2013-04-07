@@ -44,7 +44,7 @@ public class CharacterSheet implements Serializable
 		inher=0;
 		enhance=0;
 		misc=0;
-		
+		EquippedWeapon.add(new Weapon (0, "Unarmed",Dice.DieSize.D3,2,0,0,'M','B',"Note:",0));
 		
 	}
 	/*THE DICE!*/
@@ -90,6 +90,17 @@ public class CharacterSheet implements Serializable
 	private int netID;  //TODO: should not be serialized. 
 	
 	private int currency = 1000;
+	
+	
+	public void subCurrency(int money)
+	{
+			currency = currency - money;
+	}
+	
+	public int getCurrency()
+	{
+		return currency;
+	}
 	/********* Ability *********/
 	
 	public static final int ABILITY_STRENGTH = 0;
@@ -1714,11 +1725,14 @@ public class CharacterSheet implements Serializable
 				}
 					
 			}
-			else
-			{
-				equipmentList.add(EquippedWeapon.remove(hand));
-				EquippedWeapon.add(hand,w);
-			}
+		}
+		else
+		{
+
+			equipmentList.add(EquippedWeapon.remove(hand));
+			EquippedWeapon.add(hand,w);
+			
+			
 		}
 		
 		if(EquippedWeapon.size() > 2)
@@ -1730,7 +1744,8 @@ public class CharacterSheet implements Serializable
 		}
 		for (int j = 0; j < equipmentList.size(); j++) {
 			
-		
+			System.out.println("w " + w);
+			System.out.println("list" + equipmentList.get(j).getName());
 			if(w.getName().equals(equipmentList.get(j).getName()))
 			{
 				equipmentList.remove(j);

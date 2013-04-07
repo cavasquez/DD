@@ -41,11 +41,11 @@ public class Weapon extends Equipment implements Serializable{
 		return 0;
 	}
 
-	
-	public int[] getAttackMod() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	
+//	public int[] getAttackMod() {
+//		// TODO Auto-generated method stub
+//		return ;
+//	}
 
 	
 	public DieSize getDamage() {
@@ -84,13 +84,13 @@ public class Weapon extends Equipment implements Serializable{
 	
 	public String getAmmo_Notes() {
 		// TODO Auto-generated method stub
-		return null;
+		return ammo_notes;
 	}
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
@@ -99,6 +99,4 @@ public class Weapon extends Equipment implements Serializable{
 		return 0;
 	}
 
-	
-	
 }
