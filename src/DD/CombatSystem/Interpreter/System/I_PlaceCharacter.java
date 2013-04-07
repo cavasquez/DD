@@ -1,6 +1,5 @@
 package DD.CombatSystem.Interpreter.System;
 
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import DD.Character.DDCharacter;
 import DD.CombatSystem.Interpreter.CombatInterpreter;
@@ -60,7 +59,7 @@ public class I_PlaceCharacter extends CombatInterpreter
 				new CharacterObjects 
 				(
 					cm.getCharacterData().getName(), 
-					cm.getCharacterData().getImage().makeImage(), 
+					cm.getCharacterData().getImage(), 
 					cm.getBody()[POS_X], 
 					cm.getBody()[POS_Y], 
 					cs.getMap(), 

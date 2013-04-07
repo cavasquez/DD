@@ -39,13 +39,13 @@ public class GameplayState extends BasicGameState {
 	private DDImage scaledWall = null;
 //	private Image playerImage = null;
 //	private Image spriteSheet = null;
-	private World world = null;
+//	private World world = null;
 	public MapTool maptool = null;
     private DDCharacter player;
     private DDCharacter goblin;
     private CharacterObjects playerObj;
     private ActionBox actionBox;
-    private GMToolsBox gmToolsBox;
+    private GMToolsBox gmToolsBox = null;
     private CharacterSheet sheet = new CharacterSheet();
     Input mouse = new Input(650);
 
@@ -260,4 +260,16 @@ public class GameplayState extends BasicGameState {
 		g.drawString("BACK",1130,615);
 		
     }
+    
+    public GMToolsBox getGMToolsBox()
+    {
+    	if (gmToolsBox == null)
+			try {
+				gmToolsBox = new GMToolsBox();
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	return gmToolsBox;
+    } /* end getGMToolsBox */
 }

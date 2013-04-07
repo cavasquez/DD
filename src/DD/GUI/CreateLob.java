@@ -10,8 +10,10 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.*;
 
+import DD.GMToolsBox.GMToolsBox;
 import DD.MapTool.Map;
 import DD.MapTool.MapTool;
+import DD.MapTool.SerMapCharHelper;
 import DD.MapTool.World;
 import DD.System.DDSystem;
 public class CreateLob extends BasicGameState
@@ -28,6 +30,7 @@ public class CreateLob extends BasicGameState
 	TextField mapX;
 	TextField mapY;
 	private ArrayList<String> worldList;
+	public MapTool maptool;
 	
 	
 	public CreateLob(int state)
@@ -40,6 +43,7 @@ public class CreateLob extends BasicGameState
 		font = getNewFont("Arial" , 16);
 		screen = new Image("Images/Menus/lobby.jpg");
 		worldList = new ArrayList<String>();
+		maptool = new MapTool();
 		
 		//dungeon = new Music("Audio/dunEffect1.wav");
 		//dungeon.loop();
@@ -72,9 +76,9 @@ public class CreateLob extends BasicGameState
 		worldField = new TextField(gc, font, 700, 320, 180, 25);
 		worldField.setText("World");
 		mapX = new TextField(gc, font, 700, 350, 180, 25);
-		mapX.setText("Map X Position");
+		mapX.setText("Map X Position (0-4)");
 		mapY = new TextField(gc, font,700, 380, 180, 25);
-		mapY.setText("Map Y Position");
+		mapY.setText("Map Y Position (0-4)");
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
@@ -123,8 +127,9 @@ public class CreateLob extends BasicGameState
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
-				
-				
+				maptool.setCurrentMap(Integer.parseInt(mapX.getText()), Integer.parseInt(mapY.getText()));
+    			maptool.selectedList.setOwner(maptool.getCurrentMap());
+    			map = maptool.getCurrentMap();
 			}
 		}
 		
@@ -135,7 +140,9 @@ public class CreateLob extends BasicGameState
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
-				
+				world = maptool.loadWorld(worldField.getText(), false);
+				maptool.world = world;
+    			
 			}
 		}
 				
@@ -163,9 +170,25 @@ public class CreateLob extends BasicGameState
 			{
 				button.play();
 				Game.system.ns.stop();
-						
+				GMToolsBox gmt;
+				gmt = ((GameplayState)sbg.getState(Game.gameplay)).getGMToolsBox();
+				/* Firstly, give the map to all the characters */
+				gmt.setMapTool(maptool);
+				gmt.setMap();
+				
+				/* Secondly, place characters onto the map */
+				
+				ArrayList<SerMapCharHelper> preMadeCharacters = new ArrayList<SerMapCharHelper>();
+				preMadeCharacters = map.serMapHelper;
+				
+				for(SerMapCharHelper character : preMadeCharacters)
+				{
+					/* assume all SerMapCharHelper are mob */
+					gmt.addCharacter(GMToolsBox.Holder.MOB, character.cs, character.coord);
+				} /* end for loop */
 				
 			}
+			sbg.enterState(Game.gameplay);
 		}
 		
 		
