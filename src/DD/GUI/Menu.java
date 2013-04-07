@@ -19,11 +19,7 @@ public class Menu extends BasicGameState
 	Input mouse = new Input(650);
 	private TextField username;
 	
-	private Image charCreate = null;
-	
-	//Scanner input = new Scanner(System.in);
-	//String create = "";
-	//TrueTypeFont trueTypeFont;
+	private Image exitButton = null;
 	
 	
 	public Menu(int state)
@@ -38,69 +34,21 @@ public class Menu extends BasicGameState
 		dungeon.loop();
 		screen = new Image("Images/Menus/menuscreen5.jpg");
 		playNow = new Image("Images/Menus/MenuButtons.png"); // Contains the menu button options
-		mapToolButton = new Image("Images/Menus/MapTool.png");
 		
-		charCreate = new Image("Images/Menus/charCreate.png");
+		exitButton = new Image("Images/Menus/exitButton.png");
 		
 		button = new Sound("Audio/dunSound.wav");
-		
-//		Font font = new TrueTypeFont(new java.awt.Font("Verdana", Font.PLAIN, 16), false);
-//		trueTypeFont = new TrueTypeFont((java.awt.Font) font, true);
-//		
-//		
-//		
-//		
-//		
-//		
-//		username = new TextField(gc, gc.getDefaultFont(), 500,500,200,20, new ComponentListener()
-//					{
-//						
-//			@Override
-//			public void componentActivated(AbstractComponent arg0) {
-//				// TODO Auto-generated method stub
-//				//System.out.println("Enter:" + username.getText());
-//				
-//				}
-//	
-//					}
-//				
-//				
-//				);
-//		
-		//username.getText();
-		//username.setTextColor(Color.white);
-		
-	//	username.setAcceptingInput(true);
-		//username.setCursorVisible(true);
-		
-//ComponentListener listener = new ComponentListener() {
-//			
-//			@Override
-//			public void componentActivated(AbstractComponent arg0) {
-//				// TODO Auto-generated method stub
-//				//System.out.println("Enter:" + username.getText());
-//				
-//			}
-//		};
-		
 	}
 	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
 	{
 		
 		screen.draw(0,0);
-		playNow.draw(100,140); // Image with the menu button options.
-		mapToolButton.draw(130, 550);
+		playNow.draw(100,50); // Image with the menu button options.
+		
 		g.drawString(mousePos, 100, 10);
 		
-		charCreate.draw(130, 79);
-		
-		//g.drawString(create, 90, 90);
-		
-//		username.render(gc, g);
-//		username.setFocus(true);
-
-	
+		exitButton.draw(142, 580);
 		
 	}
 	
@@ -109,15 +57,8 @@ public class Menu extends BasicGameState
 		int posX = mouse.getMouseX();
 		int posY = mouse.getMouseY();
 		
-		//create = input.nextLine();
-		
-		
-		
-		
-		
-		
 		//Join Lobby button
-		if((posX > 130 && posX < 335) && (posY > 200 && posY < 266))
+		if((posX > 130 && posX < 360) && (posY > 187 && posY < 254))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -128,7 +69,7 @@ public class Menu extends BasicGameState
 		}
 		
 		//Create Lobby
-		if((posX > 130 && posX < 335) && (posY > 285 && posY < 351))
+		if((posX > 130 && posX < 360) && (posY > 295 && posY < 360))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -137,8 +78,8 @@ public class Menu extends BasicGameState
 			}
 		}
 		
-		//play game
-		if((posX > 130 && posX < 335) && (posY > 370 && posY < 450))
+		//START game
+		if((posX > 130 && posX < 360) && (posY > 500 && posY < 566))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -148,7 +89,7 @@ public class Menu extends BasicGameState
 		}
 		
 		//exit button
-		if((posX > 130 && posX < 335) && (posY > 466 && posY < 532))
+		if((posX > 146 && posX < 338) && (posY > 584 && posY < 642))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -158,7 +99,7 @@ public class Menu extends BasicGameState
 		}
 		
 		//map tool button
-		if((posX > 130 && posX < 335) && (posY > 550 && posY < 550 + mapToolButton.getHeight()))
+		if((posX > 130 && posX < 362) && (posY > 400 && posY < 464))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -167,8 +108,9 @@ public class Menu extends BasicGameState
 			}
 		}
 		
+		//CREATE CHARACTER
 		
-		if((posX > 130 && posX < 335) && (posY > 80 && posY < 165 + mapToolButton.getHeight()))
+		if((posX > 128 && posX < 359) && (posY > 75 && posY < 145 ))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
