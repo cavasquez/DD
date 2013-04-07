@@ -1,10 +1,18 @@
 package DD.GUI;
 
+import java.awt.Font;
+
+
+import org.lwjgl.Sys;
+import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -38,10 +46,20 @@ public class MapToolState extends BasicGameState {
 	private Image wallButton = null;
 	private Image saveMap = null;
 	private Image loadMap = null;
+	private Image loadWorld = null;
 	private Image clearSelection = null;
+	private TextField loadMapText = null;
+	private TextField loadWorldText = null;
+	UnicodeFont font = null;
 	
 	public MapToolState(int stateID) {
 		this.stateID = stateID;
+	}
+	
+	@Override
+	public void enter(GameContainer gc , StateBasedGame sbg) throws SlickException{
+		loadMapText = new TextField(gc, font, 945, 610, 180, 25);
+		loadWorldText = new TextField(gc, font, 945, 570, 180, 25);
 	}
 
 	@Override
@@ -58,10 +76,16 @@ public class MapToolState extends BasicGameState {
 		removeFromMap = new Image("Images/MapTool/RemoveFromMap.png");
 		goblinButton = new Image("Images/MapTool/Goblin.png");
 		wallButton = new Image("Images/MapTool/Wall.png");
-		saveMap = new Image("Images/MapTool/SaveMap.png");
+		saveMap = new Image("Images/MapTool/SaveButton.png");
 		loadMap = new Image("Images/MapTool/LoadMap.png");
+		loadWorld = new Image("Images/MapTool/LoadWorld.png");
 		clearSelection = new Image("Images/MapTool/ClearSelection.png");
 		
+		font  = new UnicodeFont(new Font("Arial" , Font.PLAIN , 16));
+		font.getEffects().add(new ColorEffect(java.awt.Color.white));
+		font.loadGlyphs();
+		
+	
 		maptool = new MapTool();
 	}
 
@@ -96,13 +120,17 @@ public class MapToolState extends BasicGameState {
     	wallButton.draw(735, 100);
     	saveMap.draw(630, 610);
     	loadMap.draw(780, 610);
-    	
+    	loadWorld.draw(780,570);
+    	g.setFont(font);
+    	if(loadMapText!=null) (loadMapText).render(gc,g);
+    	if(loadWorldText!=null) (loadWorldText).render(gc,g);
     	g.drawString("BACK", 1130, 615);
     	g.drawString(mousePos, 900, 0);
 	}
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sb, int delta) throws SlickException {
+		font.loadGlyphs();
 		posX = mouse.getMouseX();
     	posY = mouse.getMouseY();
 		mousePos = "Mouse position: " + posX + " " + posY;
@@ -138,6 +166,8 @@ public class MapToolState extends BasicGameState {
     	wallButton(gc);
     	saveMapButton(gc);
     	loadMapButton(gc);
+    	loadWorldButton(gc);
+    	
 	}
 	
 	//Clicking on map
@@ -175,7 +205,7 @@ public class MapToolState extends BasicGameState {
 	}
 	
 	public void clearSelectionButton(GameContainer gc) throws SlickException {
-		if((posX > 1050 && posX < 1050 + removeSelection.getWidth()) && (posY > 0 && posY < removeSelection.getHeight())) {
+		if((posX > 1050 && posX < 1050 + clearSelection.getWidth()) && (posY > 0 && posY < clearSelection.getHeight())) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			maptool.getSelectedList().clearSelectedList();
@@ -184,6 +214,7 @@ public class MapToolState extends BasicGameState {
     	}
 	}
 	
+
 	//Place on map button
 	public void placeOnMapButton(GameContainer gc) throws SlickException {
 		if((posX > 625 && posX < 625 + placeOnMap.getWidth()) && (posY > 40 && posY < (40 + placeOnMap.getHeight()))) {
@@ -248,8 +279,42 @@ public class MapToolState extends BasicGameState {
     	}
 	}
 	
-	public void loadMapButton(GameContainer gc) {
+	public void loadMapButton(GameContainer gc) throws SlickException {
 		if((posX > 780 && posX < 780 + saveMap.getWidth()) && (posY > 610 && posY < (610 + saveMap.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			for (int i = 0; i < maptool.world.getWorldSize(); i++) {
+					for (int j = 0; j < maptool.world.getWorldSize(); j++) {
+						System.out.println("iteration j:"+ j +" input: "+loadMapText.getText().trim()+ " mapname: "+ maptool.world.getMap(i, j).getName());
+						if((loadMapText.getText().trim()).equals(maptool.world.getMap(i, j).getName())){
+					
+							maptool.setCurrentMap(i, j);
+							maptool.selectedList.clearSelectedList();
+							maptool.selectedList.setOwner(maptool.getCurrentMap());
+						}
+					}
+				}
+//    			World world = maptool.loadWorld("world", true);
+//    			//System.out.println(world.toString());
+//    			
+//    			System.out.println(world.getMap(0, 0).getObjectAtLocation(0, 0).image);
+//    			maptool.world = world;
+//    			maptool.setCurrentMap(0, 0);
+//    			System.out.println("hi");
+//    			maptool.selectedList.setOwner(maptool.getCurrentMap()) ;
+//    			try {
+//					maptool.selectedList.clearSelectedList();
+//				} 
+//    			catch (SlickException e) {
+//					e.printStackTrace();
+//				}
+    			
+    		}
+    	}
+	}
+	
+	public void loadWorldButton(GameContainer gc) {
+		if((posX > 780 && posX < 780 + saveMap.getWidth()) && (posY > 570 && posY < (570 + saveMap.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			
@@ -262,6 +327,12 @@ public class MapToolState extends BasicGameState {
     			maptool.setCurrentMap(0, 0);
     			System.out.println("hi");
     			maptool.selectedList.setOwner(maptool.getCurrentMap()) ;
+    			try {
+					maptool.selectedList.clearSelectedList();
+				} 
+    			catch (SlickException e) {
+					e.printStackTrace();
+				}
     			
     		}
     	}
@@ -275,6 +346,8 @@ public class MapToolState extends BasicGameState {
 			{
 				//go back to main menu
 				sb.enterState(0);
+				loadMapText.setLocation(2000, 2000);
+				loadWorldText.setLocation(2000, 2000);
 			}
 		}
 	}

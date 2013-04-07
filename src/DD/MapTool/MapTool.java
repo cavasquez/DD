@@ -47,7 +47,7 @@ public class MapTool implements Serializable {
 	public World loadWorld(String name, boolean loadChar) {
 		World world = null;
 		try {
-			FileInputStream fileIn = new FileInputStream(ddPath + "/" + name
+			FileInputStream fileIn = new FileInputStream(ddPath + "/world/" + name
 					+ "/" + name + ".ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			world = (World) in.readObject();
@@ -62,10 +62,10 @@ public class MapTool implements Serializable {
 		}
 //		this.world = e;
 		System.out.println(world.getMap(0, 0).toString());
-		System.out.println("size" + world.worldSize);
+		System.out.println("size" + world.getWorldSize());
 		System.out.println("ser " + world.getMap(0, 0).serMapHelper.size());
-		for (int i = 0; i < world.worldSize; i++) {
-			for (int j = 0; j < world.worldSize; j++) {
+		for (int i = 0; i < world.getWorldSize(); i++) {
+			for (int j = 0; j < world.getWorldSize(); j++) {
 				if (world.getMap(i, j).serMapHelper.size() != 0) {
 					for (SerMapCharHelper serHelper : world.getMap(i, j).serMapHelper) {
 						System.out.println("im here" + i + j);
@@ -87,8 +87,8 @@ public class MapTool implements Serializable {
 				}
 			}
 		}
-		for (int i = 0; i < world.worldSize; i++) {
-			for (int j = 0; j < world.worldSize; j++) {
+		for (int i = 0; i < world.getWorldSize(); i++) {
+			for (int j = 0; j < world.getWorldSize(); j++) {
 				for (int k = 0; k < world.getMap(i, j).mapSize; k++) {
 					for (int l = 0; l < world.getMap(i, j).mapSize; l++) {
 						Objects[] list = new Objects[world.getMap(i, j).objectsStack[k][l].size()];

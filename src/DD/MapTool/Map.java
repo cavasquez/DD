@@ -510,7 +510,7 @@ public class Map extends Entity implements Serializable{
 			int yCoord = ((Floor) objectsStack[x][y].peek()).getY();
 			objectsStack[x][y].pop();
 			if(objectsStack[x][y].getPQueue().isEmpty()){
-				Floor floor = new Floor("t(*-*t)", floorImage, (xCoord + (floorImage.getHeight() * xCoord)), (yCoord + (floorImage.getWidth() * yCoord)), 5 , 5, this);
+				Floor floor = new Floor("t(*-*t)", new DDImage(1185, 416).getScaledCopy(0.9f), (xCoord + (floorImage.getHeight() * xCoord)), (yCoord + (floorImage.getWidth() * yCoord)), 5 , 5, this);
 				place(x,y,floor);
 			}
 		}
