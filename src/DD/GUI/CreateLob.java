@@ -8,6 +8,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
 import DD.MapTool.Map;
+import DD.MapTool.MapTool;
 import DD.MapTool.World;
 import DD.System.DDSystem;
 public class CreateLob extends BasicGameState
@@ -39,7 +40,7 @@ public class CreateLob extends BasicGameState
 		button = new Sound("Audio/dunSound.wav");
 		
 		ArrayList<String> worldChoices = new ArrayList<String>();
-		File file = new File(System.getProperties().getProperty("user.home") + "/Documents/DD");
+		File file = new File(MapTool.ddPath + "World/");
 //		DD/DefaultWorld/
 		if (file.exists())
 		{
@@ -49,8 +50,8 @@ public class CreateLob extends BasicGameState
 			{
 				if(list[i].isDirectory() && !list.toString().matches("Characters"))
 				{
-					
-				} /*  */
+					worldList.add(list[i].getName());
+				} /* end if */
 			} /* end loop */
 		} /* end if */
 		
@@ -61,10 +62,18 @@ public class CreateLob extends BasicGameState
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
 	{
 		
+		
 		screen.draw(0,0);
+		int x = 100;
+		int y = 200;
+		int delta = 20;
+		g.drawString("World List: ",x , y);
+		for(int i = 0; i < worldList.size(); i++)
+		{
+			g.drawString(worldList.get(i),x ,y+=delta);
+		} /* end loop */
 		
 		g.drawString(mouse, 100, 100);
-		
 		
 		
 		g.drawString("LOAD MAP",540,330);
@@ -103,7 +112,6 @@ public class CreateLob extends BasicGameState
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
-				GamePlayState
 				
 			}
 		}
