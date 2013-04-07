@@ -544,9 +544,12 @@ public class CharCreate extends BasicGameState
 		//get class option button value
 		
 		
-		//sheet.fillRecorder(sheet.chooseClass(class button value here)/*This needs the class option from button */);
+		sheet.fillRecorder(sheet.chooseClass(char_class));
 		
-		//sheet.fillAttacksAndDefense(/* the class option*/);
+		sheet.fillAttacksAndDefense(sheet.chooseClass(char_class));
+		sheet.unequipWeapons(); //equips with unarmed weapons...
+		
+		
 		
 		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
 	
