@@ -8,7 +8,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import DD.SlickTools.*;
 
 public class Obstacle extends Objects{
-	public Obstacle(String name , Image image, int move, int light,Map map) throws SlickException{
+	public Obstacle(String name , DDImage image, int move, int light,Map map) throws SlickException{
 		super(name, image, map, null, null); //TODO: needs position
 		super.movePenalty = move;
 		super.lightPenalty = light;

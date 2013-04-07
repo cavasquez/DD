@@ -393,9 +393,9 @@ public class DDCharacter extends CharacterEntity implements Serializable
 		return returner;
 	} /* end isDead method */
 	
-	public Image getImage()
+	public DDImage getImage()
 	{
-		return sheet.getImage().makeImage();
+		return sheet.getImage();
 	} /* end getImage method */
 	
 	/******************************************************************************

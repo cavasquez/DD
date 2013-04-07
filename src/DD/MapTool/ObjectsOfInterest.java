@@ -12,7 +12,7 @@ public class ObjectsOfInterest extends Objects{
 	String toolTipContent;
 	
 	//@brandon
-	public ObjectsOfInterest(String name, String toolTipContent, Image image, int move, int light, Map map) throws SlickException{
+	public ObjectsOfInterest(String name, String toolTipContent, DDImage image, int move, int light, Map map) throws SlickException{
 		super(name,image,map, null, null); //TODO: needs position
 		this.toolTipContent = toolTipContent;
 		

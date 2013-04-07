@@ -1,5 +1,9 @@
 package DD.SlickTools;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+
 import org.newdawn.slick.GameContainer; 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -13,7 +17,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public abstract class ImageRenderComponent extends RenderComponent
 {
 	/************************************ Class Constants *************************************/
-	protected transient Image image;
+	public DDImage image;
 	
 	/************************************ Class Methods *************************************/
 	public ImageRenderComponent(){
@@ -25,11 +29,34 @@ public abstract class ImageRenderComponent extends RenderComponent
 		super(id);
 	}
 	
-	public ImageRenderComponent(int id, Image image)
+	public ImageRenderComponent(int id, DDImage image)
 	{
 		super(id);
 		this.image = image;
 	} /* end ImageRenderComponent constructor */
+	
+	public void loadImage(){
+		image.getImage();
+	}
+	
+	public DDImage loadDDImage(String name) {
+		DDImage e = null;
+		try {
+			FileInputStream fileIn = new FileInputStream("C:/Program Files (x86)/DD/test.ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			e = (DDImage) in.readObject();
+			in.close();
+			fileIn.close();
+		} catch (IOException i) {
+			i.printStackTrace();
+
+		} catch (ClassNotFoundException c) {
+			c.printStackTrace();
+
+		}
+		return e;
+		
+	}
 	
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
@@ -43,7 +70,7 @@ public abstract class ImageRenderComponent extends RenderComponent
 		image.draw(pos.x, pos.y, scale);
 	} /* end render method */
 	
-	public void setImage(Image image) {
+	public void setImage(DDImage image) {
 		this.image = image;
 	}
 	

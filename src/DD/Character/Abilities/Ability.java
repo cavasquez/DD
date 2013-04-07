@@ -66,12 +66,7 @@ public abstract class Ability extends ImageRenderComponent
 		this.name = name;
 		this.description = description;
 		this.activated = false;
-		try {
-			this.image = new Image(action.image);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	} /* end ability constructor */
 	
 	protected abstract void action() throws SlickException;

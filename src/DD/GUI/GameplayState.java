@@ -37,9 +37,9 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameplayState extends BasicGameState {
  
 	private int stateID = 0;
-	private Image floor = null;
-	private Image wall = null;
-	private Image scaledWall = null;
+	private DDImage floor = null;
+	private DDImage wall = null;
+	private DDImage scaledWall = null;
 //	private Image playerImage = null;
 //	private Image spriteSheet = null;
 	private World world = null;

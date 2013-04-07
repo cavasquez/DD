@@ -28,10 +28,10 @@ public class Map extends Entity implements Serializable{
 	public ObjectsPriorityStack[][] objectsStack ; //ops<Objects>
 	TempObjects[][]  tempObjects;
 	int numTempObjects;
-	transient Image defImage = null;
-	transient Image spriteSheet = null;
-	transient Image floorSprite = null;
-	transient Image floorImage = null;
+	DDImage defImage = null;
+	DDImage spriteSheet = null;
+	DDImage floorSprite = null;
+	DDImage floorImage = null;
 	boolean hasTempObjects;
 	String name;
 	public final int mapSize = 20;
@@ -48,7 +48,7 @@ public class Map extends Entity implements Serializable{
 		tempObjects = new TempObjects[mapSize][mapSize];
 		super.components = new ArrayList<Component>();
 		
-		spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
+		spriteSheet = new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
     	// get the floor image
         floorSprite = spriteSheet.getSubImage(1185, 416, 33, 34);
         //scale the floor image
@@ -441,11 +441,11 @@ public class Map extends Entity implements Serializable{
 		this.name = name;
 	}
 
-	public Image getDefImage() {
+	public DDImage getDefImage() {
 		return defImage;
 	}
 
-	public void setDefImage(Image defImage) {
+	public void setDefImage(DDImage defImage) {
 		this.defImage = defImage;
 	}
 

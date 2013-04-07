@@ -17,6 +17,15 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 		 this.owner = owner;
 	}
 		
+	
+	public Map getOwner(){
+		return owner;
+	}
+	
+	public void setOwner(Map map){
+		owner = map;
+	}
+	
 	public void massAddSelectedList(int x1, int y1, int x2, int y2) throws SlickException{
 		//fix my coords.
 		if(x1>x2){

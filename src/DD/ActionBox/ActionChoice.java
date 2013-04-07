@@ -15,6 +15,7 @@ import org.lwjgl.input.Mouse;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
 import DD.SlickTools.Component;
+import DD.SlickTools.DDImage;
 import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
 
@@ -51,7 +52,7 @@ public class ActionChoice extends ImageRenderComponent
 	
 	/************************************ Class Methods *************************************/
 	/* Remember, ID is the same as ActionType */
-	public ActionChoice(int id, int actionType, String display, Image image, float x, float y)
+	public ActionChoice(int id, int actionType, String display, DDImage image, float x, float y)
 	{
 		super(id, image);
 		this.actionType = actionType;
@@ -63,7 +64,7 @@ public class ActionChoice extends ImageRenderComponent
 		
 	} /* end ActionChoice constructor */
 	
-	public ActionChoice(int id, int actionType, String display, Image image, float x, float y, Ability ability )
+	public ActionChoice(int id, int actionType, String display, DDImage image, float x, float y, Ability ability )
 	{
 		super(id, image);
 		this.actionType = actionType;
