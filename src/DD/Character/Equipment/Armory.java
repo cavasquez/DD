@@ -44,7 +44,7 @@ public class Armory implements Serializable{
 		armor.add( new Armor(200,"Breastplate",0,6,3,-4,.25,'M',30 ));		//5
 		armor.add( new Armor(250,"Banded mail",0,7,1,-7,.4,'H',45 ));		//6
 		armor.add( new Armor(600,"Half-plate",0,8,0,-7,.4,'H',50 ));		//7
-		armor.add( new Armor(1000,"Full plate",0,9,1,-6,.35,'H',50 ));		//8
+		armor.add( new Armor(750,"Full plate",0,9,1,-6,.35,'H',50 ));		//8
 		armor.add( new Armor(20,"Heavy Steel Shield",0,2,0,-2,.15,'S',15 ));//9
 		armor.add( new Armor(5,"Buckler",0,1,0,-1,.05,'S',5 ));				//10
 		armor.add( new Armor(9,"Light Steel Shield",0,1,0,-2,.05,'S',7 ));	//11
