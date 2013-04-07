@@ -1,166 +1,3 @@
-//package DD.GUI;
-//
-//import java.util.ArrayList;
-//
-//import org.newdawn.slick.geom.Vector2f;
-//import org.newdawn.slick.gui.TextField;
-//
-//import org.lwjgl.input.Mouse;
-//import org.newdawn.slick.*;
-//import org.newdawn.slick.state.*;
-//
-//import java.awt.Font;
-//import org.newdawn.slick.GameContainer;
-//import org.newdawn.slick.Graphics;
-//import org.newdawn.slick.Input;
-//import org.newdawn.slick.SlickException;
-//import org.newdawn.slick.UnicodeFont;
-//import org.newdawn.slick.font2.effects.ColorEffect;
-//import org.newdawn.slick.gui.ComponentListener;
-//import org.newdawn.slick.state.BasicGameState;
-//import org.newdawn.slick.state.StateBasedGame;
-//
-//
-//import DD.Character.CharacterSheet.CharacterSheet;
-//
-//
-//
-//
-//public class CharCreate extends BasicGameState {
-//	CharacterSheet sheet;
-//	UnicodeFont font2;
-//	private String mouse = "No input yet!";
-//	Input inputMouse = new Input(650);
-//	TextField playerName;
-//	//TextField characterName;
-//	//clickable button for choosing race
-////	TextField languages;
-////	//clickable button for choosing size
-////	//clickable button for choosing gender
-////	TextField height;
-////	TextField weight;
-////	TextField age;
-////	TextField alignments;
-////	TextField deity;
-////	TextField background;
-////	TextField occupation;
-//	JoinLobbyStartButton jlsb;
-//	
-//	private Image bg_image = null;
-//	
-//	//clickable button to choose which class to pick
-//	
-//	
-//	
-//	//AFTER FILLING BASIC INFO WE WILL THEN NEED TO PASS TO A NEW STATE
-//	/*
-//	 * (String name,String player,int race,String languages, int size,
-//						  int gender,int height,int weight,int age,String alignments,
-//						  String deity,String background,String occupation)
-//	*/
-//
-//
-//	
-//	public CharCreate(int x)
-//	{
-//		
-//	}
-//	
-//	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
-//	{
-//		
-//		
-//		bg_image = new Image ("Images/Menus/menuscreen4.jpg");
-//		font2 = getNewFont("Arial" , 16);
-//		
-//		playerName = new TextField(gc, font2, 100, 230, 180, 25);
-//		playerName.setText("username");
-//		
-//		
-//		
-//		
-//		font2.loadGlyphs();
-//		
-//	}
-//	
-//	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
-//	{
-//		bg_image.draw(0,0);
-//		g.drawString(mouse, 100, 400);
-//		g.drawString("inputMouse x " + inputMouse.getMouseX() + " y " + inputMouse.getMouseY(), 100, 420);
-//		g.drawString("BACK", 190, 552);
-//		g.setFont(font2);
-//		
-//		
-//		playerName.render(gc, g);
-//	
-//	}
-//	
-//	public void update(GameContainer gc, StateBasedGame sbg,int delta)throws SlickException
-//	{
-//		int posX = Mouse.getX();
-//		int posY = Mouse.getY();
-//		font2.loadGlyphs();
-//				
-//		 mouse = "Mouse position x: " + posX + " y: " + posY;
-//		
-//		//TextField tx = new TextField(gc, 14, 100,100, 10,10, mouseButtonDown(0));
-//		
-//	}
-//	
-//	public UnicodeFont getNewFont(String fontName , int fontSize)
-//    {
-//        font2 = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
-////        font2.addGlyphs("@");
-//        font2.getEffects().add(new ColorEffect(java.awt.Color.white));
-//        return (font2);
-//    }
-//
-//	@Override
-//	public int getID() {
-//		return 6;
-//	}
-//	
-//	
-//	//this is what the button should do then move to the next
-//	public void setCharacterSheet(TextField username)
-//	{
-//		
-//		//fix with buttons
-//		//sheet.fillBasic(characterName.getText(), playerName.getText(), race, languages.getText(), size, gender, 
-//			//			height.getText(), weight.getText(), age.getText(), alignments.getText(), deity.getText(), 
-//				//		background.getText(), occupation.getText());
-//		
-//		//sheet.fillAbilities();
-//		
-//		//get class option button value
-//		
-//		
-//		//sheet.fillRecorder(sheet.chooseClass(class button value here)/*This needs the class option from button */);
-//		
-//		//sheet.fillAttacksAndDefense(/* the class option*/);
-//		
-//		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
-//	
-//	}
-//	
-//	
-//	/*
-//	
-//	public TextField (GUIContext gc, Font font2,  int x, int y, int width, int height, ComponentListener listener)
-//	{
-//		
-//	}
-//	*/
-//
-//	
-//
-//}
-
-
-
-
-
 package DD.GUI;
 
 import java.util.ArrayList;
@@ -213,6 +50,11 @@ public class CharCreate extends BasicGameState
 	TextField occupation;
 	JoinLobbyStartButton jlsb;
 	Input inputMouse = new Input(650);
+	int race;
+	int char_class;
+	int gender;
+	int size;
+	
 	
 	int state = 0;
 	
@@ -311,7 +153,7 @@ public class CharCreate extends BasicGameState
 			g.drawString("CHOOSE CLASS", 853, 506);
 			g.drawString("PREVIOUS", 867, 546);
 			g.drawString("BARBARIAN", 782, 448);
-			//g.drawString("SOME OTHER CLASS WE DONT HAVE", 1005, 448);
+			//g.drawString("SOME OTHER POSSIBLE CLASS", 1005, 448);
 			
 			
 		}
@@ -361,17 +203,7 @@ public class CharCreate extends BasicGameState
 		g.setFont(font2);
 //		textbox.setCursorVisible(true);
 		
-//		g.drawString("CONTINUE", 190, 522);
-//		g.drawString("CONTINUE", 190, 522);
-//		
-//		g.drawString("CONTINUE", 190, 522);
-//		g.drawString("CONTINUE", 190, 522);
-//		
-//		g.drawString("CONTINUE", 190, 522);
-//		g.drawString("CONTINUE", 190, 522);
-//		
-//		g.drawString("CONTINUE", 190, 522);
-//		g.drawString("CONTINUE", 190, 522);
+
 		
 		
 		
@@ -432,6 +264,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
+					race = 1;
 					state++;
 				}
 			
@@ -443,11 +276,13 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
+					race = 0;
 					state++;
 				}
 			
 			}
 			
+			/*********************PREVIOUS ******************/
 			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
@@ -476,12 +311,13 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
+					char_class = 0;
 					state++;
 				}
 			
 			}
 			/*
-			/*************SOME OTHER CLASS WE DON'T HAVE ************************
+			/************* OTHER POSSIBLE CLASS ************************
 			else if((posX > 1002 && posX < 1036) && (posY > 185 && posY < 205))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
@@ -493,6 +329,7 @@ public class CharCreate extends BasicGameState
 			}
 			*/
 			
+			/*********************PREVIOUS PREVIOUS PREVIOUS**************/
 			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
@@ -513,13 +350,14 @@ public class CharCreate extends BasicGameState
 		//CLICK PREVIOUS AND GO BACK TO STATE 2
 		if(state == 3)
 		{
-			
+			//GENDER IS 1 FOR MALE AND 0 FOR FEMALE
 			/*********MALE MALE MALE ***************/
 			if((posX > 776 && posX < 827) && (posY > 180 && posY < 205))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
+					gender = 1;  //MALE 
 					state++;
 				}
 			
@@ -531,6 +369,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
+					gender = 0; //FEMALE
 					state++;
 				}
 			
@@ -558,6 +397,7 @@ public class CharCreate extends BasicGameState
 		//CLICK PREVIOUS AND GO BACK TO STATE 3
 		if(state == 4)
 		{
+			//1 for small 0 for medium and -1 for large
 			
 			/*********SMALL SMALL SMALL ***************/
 			if((posX > 780 && posX < 836) && (posY > 180 && posY < 205))
@@ -565,6 +405,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
+					size = 1;
 					state++;
 				}
 			
@@ -576,6 +417,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
+					size = 0;
 					state++;
 				}
 			
@@ -587,6 +429,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
+					size = -1;
 					state++;
 				}
 				
@@ -693,7 +536,7 @@ public class CharCreate extends BasicGameState
 		
 		//this method fills the characterSheet
 		sheet.fillBasic(characterName.getText(), playerName.getText(), race, languages.getText(), size, gender, 
-						height.getText(), weight.getText(), age.getText(), alignments.getText(), deity.getText(), 
+						Integer.parseInt(height.getText()), Integer.parseInt(weight.getText()), Integer.parseInt(age.getText()), alignments.getText(), deity.getText(), 
 						background.getText(), occupation.getText());
 		
 		sheet.fillAbilities();

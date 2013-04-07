@@ -24,12 +24,10 @@ public class MapTool implements Serializable {
 	ArrayList<Objects> tempList;
 	public SelectList selectedList;
 	Map currentMap;
-	String userPath = System.getProperties().getProperty("user.home");
-
-	String ddPath = "C:/Program Files (x86)/DD/";
-
-	// TODO:fix
-	// String gamePath = userPath+"/Documents/DD"
+	
+	public static final String ddPath = "C:/Program Files (x86)/DD/";
+	//TODO:fix
+	//String gamePath = userPath+"/Documents/DD"
 
 	public MapTool() throws SlickException {
 		world = new World("world");

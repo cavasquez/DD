@@ -23,12 +23,9 @@ import DD.SlickTools.ImageRenderComponent;
 import DD.SlickTools.RenderComponent;
 import DD.System.DDSystem;
 
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
@@ -50,11 +47,8 @@ public class GameplayState extends BasicGameState {
     private ActionBox actionBox;
     private GMToolsBox gmToolsBox;
     private CharacterSheet sheet = new CharacterSheet();
-    private String charToString = " ";
-    private String goblinHP = " ";
-    //private String mousePos = " ";
     Input mouse = new Input(650);
-    //private float x, y;
+
     
  
     public GameplayState(int stateID)
@@ -200,6 +194,7 @@ public class GameplayState extends BasicGameState {
 		int posX = mouse.getMouseX();
 		int posY = mouse.getMouseY();
 		
+		//Back button
 		if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
