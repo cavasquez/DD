@@ -1,10 +1,13 @@
 package DD.GUI;
+import java.awt.Font;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
+import org.newdawn.slick.font.effects.ColorEffect;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.*;
 
 import DD.MapTool.Map;
@@ -20,6 +23,10 @@ public class CreateLob extends BasicGameState
 	Sound button;
 	World world;
 	Map map;
+	UnicodeFont font;
+	TextField worldField;
+	TextField mapX;
+	TextField mapY;
 	private ArrayList<String> worldList;
 	
 	
@@ -30,9 +37,9 @@ public class CreateLob extends BasicGameState
 	
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
+		font = getNewFont("Arial" , 16);
 		screen = new Image("Images/Menus/lobby.jpg");
 		worldList = new ArrayList<String>();
-		
 		
 		//dungeon = new Music("Audio/dunEffect1.wav");
 		//dungeon.loop();
@@ -59,6 +66,17 @@ public class CreateLob extends BasicGameState
 		
 	}
 	
+	@Override
+	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
+	{
+		worldField = new TextField(gc, font, 700, 320, 180, 25);
+		worldField.setText("World");
+		mapX = new TextField(gc, font, 700, 350, 180, 25);
+		mapX.setText("Map X Position");
+		mapY = new TextField(gc, font,700, 380, 180, 25);
+		mapY.setText("Map Y Position");
+	}
+	
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
 	{
 		
@@ -72,6 +90,10 @@ public class CreateLob extends BasicGameState
 		{
 			g.drawString(worldList.get(i),x ,y+=delta);
 		} /* end loop */
+		if(worldField != null) worldField.render(gc, g);
+		if(mapX != null) mapX.render(gc, g);
+		if(mapY!= null) mapY.render(gc, g);
+		g.setFont(font);
 		
 		g.drawString(mouse, 100, 100);
 		
@@ -92,7 +114,8 @@ public class CreateLob extends BasicGameState
 	{
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
-
+		font.loadGlyphs();
+		
 		//LOAD MAP
 		
 		if((posX > 536 && posX < 616) && (posY > 303 && posY < 320))
@@ -172,4 +195,18 @@ public class CreateLob extends BasicGameState
 		return 3;
 	}
 
+	public UnicodeFont getNewFont(String fontName , int fontSize)
+    {
+        font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
+//        font.addGlyphs("@");
+        font.getEffects().add(new ColorEffect(java.awt.Color.white));
+        return (font);
+    }
+	public void killTextFields()
+	{
+		/* put username and passible onto an inaccessible part of the gui */
+		worldField.setLocation(Game.Xsize + 100, Game.Ysize - 100);
+		mapX.setLocation(Game.Xsize + 100, Game.Ysize - 100);
+		mapY.setLocation(Game.Xsize + 100, Game.Ysize - 100);
+	} /* end killTextFields method */
 }
