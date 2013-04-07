@@ -117,17 +117,23 @@ public abstract class Ability extends ImageRenderComponent
 		
 	} /* end render method */
 	
-	public void sendToInterpreter(CombatMessage cm) throws SlickException
+	private void sendToInterpreter(CombatMessage cm, int reciever) throws SlickException
 	{
-		/* Send the message to the proper interpreter and send it through the network */
-		/* First, send to network */
-		//TODO: send to network
-		
 		CombatValidationMessage cvm = cs.process(cm); //TODO: verify validation message
 		/* if valid, tell peers */
-		if(cvm.getValid()) ns.sendMessage(ns.getNetID(), Network.EVERYONE, cm);
+		if(cvm.getValid()) ns.sendMessage(ns.getNetID(), reciever, cm);
+	} /* end sendToInterpreter */
+	
+	public void sendToInterpreter(CombatMessage cm) throws SlickException
+	{
+		sendToInterpreter(cm, Network.EVERYONE);
 		
 	} /* end sendToInterpreter method */
+	
+	public void sendToServer(CombatMessage cm) throws SlickException
+	{
+		sendToInterpreter(cm, Network.GM_USER_ID);
+	} /* end sendToServer */
 	
 	public void done() throws SlickException
 	{

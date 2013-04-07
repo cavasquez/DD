@@ -1,7 +1,9 @@
 package DD.GMToolsBox;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.StateBasedGame;
 
 import DD.Character.Abilities.TargetAbility;
@@ -14,6 +16,7 @@ import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.Message.ChooseTargetMessage;
 import DD.Message.CombatMessage;
 import DD.Message.TargetSelectedMessage;
+import DD.SlickTools.DDImage;
 
 /*****************************************************************************************************
  * PlaceCharacter will five the GM the ability to place the held character as well as remove the character
@@ -31,6 +34,7 @@ public class PlaceCharacter extends TargetAbility
 	protected boolean place;
 	private GMToolsBox.Holder type;
 	
+	
 	/************************************ Class Methods *************************************/
 	public PlaceCharacter(int id, CharacterSheet sheet, GMToolsBox gmt, GMToolsBox.Holder type) 
 	{
@@ -40,6 +44,7 @@ public class PlaceCharacter extends TargetAbility
 		this.type = type;
 		delete = false;
 		place = false;
+		this.image = new DDImage("Images/GMTools/PlaceCharacter.png");
 	} /* end PlaceCharacter class */
 
 	@Override
@@ -47,6 +52,13 @@ public class PlaceCharacter extends TargetAbility
 	{
 		
 	} /* end update method */
+	
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr, Vector2f pos) 
+	{
+		this.image.draw(pos.x, pos.y);
+		
+	} /* end render method */
 	
 	@Override
 	protected void action() throws SlickException 

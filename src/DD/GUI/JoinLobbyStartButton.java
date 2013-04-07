@@ -9,7 +9,8 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-
+import DD.Character.CharacterSheet.CharacterSheet;
+import DD.GMToolsBox.AddCharacter;
 import DD.SlickTools.RenderComponent;
 import DD.System.DDSystem;
 
@@ -33,6 +34,7 @@ public class JoinLobbyStartButton extends RenderComponent
 	private Vector2f position;
 	private Input mouse = new Input(650);
 	private BasicGameState bgs;
+	private CharacterSheet sheet;
 	
 	/************************************ Class Methods *************************************/
 	public JoinLobbyStartButton(DDSystem system, Vector2f position)
@@ -69,6 +71,17 @@ public class JoinLobbyStartButton extends RenderComponent
 				{
 					system.ns.start();
 					((JoinLob)bgs).killTextFields();
+					System.out.println(system.ns.getNetID());
+					
+					/* assume sheet exists */
+					if(sheet != null)
+					{
+						/* give the sheet to the server */
+						int netID = Game.system.ns.getNetID();
+						sheet.setNetID(netID);
+						AddCharacter add = new AddCharacter(0, sheet);
+						add.action();
+					}
 				} /* successfully connected */
 				else
 				{
@@ -91,5 +104,10 @@ public class JoinLobbyStartButton extends RenderComponent
 		this.username = username;
 		this.ip = ip;
 	} /* end setTextField method */
+	
+	public void setCharacterSheet(CharacterSheet sheet)
+	{
+		this.sheet = sheet;
+	} /* end setCharacterSheet method */
 
 } /* end JoinLobbyStartButton class */

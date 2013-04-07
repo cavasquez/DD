@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import DD.CombatSystem.Interpreter.*;
 import DD.CombatSystem.Interpreter.Move.I_Move;
 import DD.CombatSystem.Interpreter.Standard.*;
+import DD.CombatSystem.Interpreter.System.I_AddCharacter;
 import DD.CombatSystem.Interpreter.System.I_EndTurn;
 import DD.CombatSystem.Interpreter.System.I_PlaceCharacter;
 import DD.CombatSystem.Interpreter.System.I_RemoveCharacter;
@@ -17,6 +18,7 @@ import DD.Network.NetworkSystem;
 import DD.System.DDSystem;
 import DD.Character.*;
 import DD.Character.Abilities.Ability;
+import DD.GMToolsBox.GMToolsBox;
 
 /*****************************************************************************************************
  * CombatSystem will be the controller for DD combat. It will take messages from ActionBox (the player)
@@ -47,7 +49,8 @@ public class CombatSystem
 		PLACE_CHARACTER(I++, "Images/CombatSystem/PlaceCharacter.png"),
 		REMOVE_CHARACTER(I++, "Images/CombatSystem/RemoveCharacter.png"),
 		DYING(I++, null),
-		SET_MAP(I++, null);
+		SET_MAP(I++, null),
+		ADD_CHARACTER(I++, null);
 		
 		public final int index;
 		public final String image;
@@ -76,10 +79,11 @@ public class CombatSystem
 	/************************************ Class Attributes *************************************/
 	private ArrayList<DDCharacter> characterList = null;	/* A list of all the Characters in game so they may be modified */
 	private Map map;										/* The game map that may need to be modified. */
-	private static CombatInterpreter[] system;					/* The core of CombatSystem */
-	private int turn;											/* the current turn count */
-	private ArrayList<Integer> order;							/* The order of  */
+	private static CombatInterpreter[] system;				/* The core of CombatSystem */
+	private int turn;										/* the current turn count */
+	private ArrayList<Integer> order;						/* The order of  */
 	private NetworkSystem ns;
+	private GMToolsBox gmtb;								/* Strictly for server use */								
 	
 	/************************************ Class Methods *************************************/
 	public CombatSystem()
@@ -99,6 +103,7 @@ public class CombatSystem
 		system[Action.PLACE_CHARACTER.index] = new I_PlaceCharacter();
 		system[Action.REMOVE_CHARACTER.index] = new I_RemoveCharacter();
 		system[Action.SET_MAP.index] = new I_SetMap();
+		system[Action.ADD_CHARACTER.index] = new I_AddCharacter();
 	} /* end CombatSystem constructor */
 	
 	public CombatValidationMessage process(CombatMessage cm)
@@ -252,6 +257,11 @@ public class CombatSystem
 		return ns.getNetID();
 	} /* end getNetID method */
 	
+	public GMToolsBox getGMToolsBox()
+	{
+		return gmtb;
+	} /* end getGMToolsBox */
+	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/
@@ -274,5 +284,10 @@ public class CombatSystem
 	{
 		this.ns = ns;
 	} /* end setNetworkSystem method */
+	
+	public void setGMToolsBox(GMToolsBox gmtb)
+	{
+		this.gmtb = gmtb;
+	} /* end setGMToolsBox */
 	
 } /* end CombatSystem class */

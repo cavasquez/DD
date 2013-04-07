@@ -224,7 +224,7 @@ public class GameplayState extends BasicGameState {
     	*/
     	
     	//Render Map
-    	maptool.getMapAtLocation(0, 0).render(gc, sb, g);
+    	Game.system.getMap().render(gc, sb, g);
 //    	RenderComponent renderComponent = null;
 //    	ArrayList<CharacterObjects> characters = new ArrayList<CharacterObjects>();
 //    	

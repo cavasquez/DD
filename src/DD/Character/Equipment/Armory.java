@@ -36,18 +36,18 @@ public class Armory implements Serializable{
 		this.ammo_notes=ammo_notes;
 		this.weight = weight;
 		 */
-		armor.add( new Armor(5,"Padded",0,1,8,0,.05,'L',10 ));
-		armor.add( new Armor(10,"Leather",0,2,6,0,.1,'L',15 ));
-		armor.add( new Armor(100,"Chain Shirt",0,4,4,-2,.2,'L',25 ));
-		armor.add( new Armor(50,"Scale mail",0,5,3,-4,.25,'M',30 ));
-		armor.add( new Armor(150,"Chainmail",0,6,2,-5,.3,'M',40 ));
-		armor.add( new Armor(200,"Breastplate",0,6,3,-4,.25,'M',30 ));
-		armor.add( new Armor(250,"Banded mail",0,7,1,-7,.4,'H',45 ));
-		armor.add( new Armor(600,"Half-plate",0,8,0,-7,.4,'H',50 ));
-		armor.add( new Armor(1000,"Full plate",0,9,1,-6,.35,'H',50 ));
-		armor.add( new Armor(20,"Heavy Steel Shield",0,2,0,-2,.15,'S',15 ));
-		armor.add( new Armor(5,"Buckler",0,1,0,-1,.05,'S',5 ));
-		armor.add( new Armor(9,"Light Steel Shield",0,1,0,-2,.05,'S',7 ));
+		armor.add( new Armor(5,"Padded",0,1,8,0,.05,'L',10 ));				//0
+		armor.add( new Armor(10,"Leather",0,2,6,0,.1,'L',15 ));				//1
+		armor.add( new Armor(100,"Chain Shirt",0,4,4,-2,.2,'L',25 ));		//2
+		armor.add( new Armor(50,"Scale mail",0,5,3,-4,.25,'M',30 ));		//3
+		armor.add( new Armor(150,"Chainmail",0,6,2,-5,.3,'M',40 ));			//4
+		armor.add( new Armor(200,"Breastplate",0,6,3,-4,.25,'M',30 ));		//5
+		armor.add( new Armor(250,"Banded mail",0,7,1,-7,.4,'H',45 ));		//6
+		armor.add( new Armor(600,"Half-plate",0,8,0,-7,.4,'H',50 ));		//7
+		armor.add( new Armor(750,"Full plate",0,9,1,-6,.35,'H',50 ));		//8
+		armor.add( new Armor(20,"Heavy Steel Shield",0,2,0,-2,.15,'S',15 ));//9
+		armor.add( new Armor(5,"Buckler",0,1,0,-1,.05,'S',5 ));				//10
+		armor.add( new Armor(9,"Light Steel Shield",0,1,0,-2,.05,'S',7 ));	//11
 		
 		
 		

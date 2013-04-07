@@ -16,7 +16,7 @@ public class World implements Serializable{
 	private static final long serialVersionUID = 2853246324745729078L;
 	Map[][] world;
 	String worldName;
-	int worldSize = 5;
+	private int worldSize = 5;
 	//normList is an Array of all Possible Objects?
 	ArrayList<Objects> normList;
 	ArrayList<Objects> tempList;//holds temp items like from spells
@@ -28,10 +28,10 @@ public class World implements Serializable{
 		this.worldName = name;
 		normList = new ArrayList<Objects>();
 		tempList = new ArrayList<Objects>();
-		world = new Map[worldSize][worldSize];
+		world = new Map[getWorldSize()][getWorldSize()];
 		for (int i = 0; i < world.length; i++) {
 			for (int j = 0; j < world.length; j++) {
-				world[i][j] = new Map("map"+(j+i*worldSize)); 
+				world[i][j] = new Map("map"+(j+i*getWorldSize())); 
 			}
 		}
 	}
@@ -162,9 +162,9 @@ public class World implements Serializable{
 	
 	public String toString(){
 		String t = worldName+"\n";
-		for (int i = 0; i < worldSize; i++) {
-			for (int j = 0; j < worldSize; j++) {
-				if(j == worldSize-1)
+		for (int i = 0; i < getWorldSize(); i++) {
+			for (int j = 0; j < getWorldSize(); j++) {
+				if(j == getWorldSize()-1)
 				{
 					t += world[i][j].name+"\n";
 				}
@@ -177,8 +177,8 @@ public class World implements Serializable{
 		
 		t += "\n";
 		
-		for (int i = 0; i < worldSize; i++) {
-			for (int j = 0; j < worldSize; j++) {
+		for (int i = 0; i < getWorldSize(); i++) {
+			for (int j = 0; j < getWorldSize(); j++) {
 				t += "***********************\n";
 				t += "\t"+world[i][j].name+"\n";
 				t += "***********************\n";
@@ -186,6 +186,14 @@ public class World implements Serializable{
 			}
 		}
 		return t;
+	}
+
+	public int getWorldSize() {
+		return worldSize;
+	}
+
+	public void setWorldSize(int worldSize) {
+		this.worldSize = worldSize;
 	}
 	
 }
