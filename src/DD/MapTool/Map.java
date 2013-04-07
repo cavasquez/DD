@@ -35,7 +35,7 @@ public class Map extends Entity implements Serializable{
 	boolean hasTempObjects;
 	String name;
 	public final int mapSize = 20;
-	protected ArrayList<SerMapCharHelper> serMapHelper = new ArrayList<SerMapCharHelper>();
+	public ArrayList<SerMapCharHelper> serMapHelper = new ArrayList<SerMapCharHelper>();
 
 	public Map() {
 		super();
