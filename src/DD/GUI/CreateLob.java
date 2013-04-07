@@ -103,7 +103,7 @@ public class CreateLob extends BasicGameState
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				button.play();
-				GamePlayState
+				
 				
 			}
 		}
