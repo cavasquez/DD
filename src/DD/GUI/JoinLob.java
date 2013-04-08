@@ -156,6 +156,7 @@ public class JoinLob extends BasicGameState
 														
 							sheet = temp1;
 							jlsb.setCharacterSheet(sheet);
+							
 						}
 					}
 				 
