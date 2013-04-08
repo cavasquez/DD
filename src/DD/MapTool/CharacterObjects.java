@@ -63,5 +63,6 @@ public class CharacterObjects extends Objects{
 	
 	public void setPosition(int x, int y) {
 		this.position = new Coordinate(x,y);
+		this.ddchar.setCoordiante(new Coordinate(x,y));
 	}
 }
