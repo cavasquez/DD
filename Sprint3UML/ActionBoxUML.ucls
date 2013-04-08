@@ -1,0 +1,65 @@
+<class-diagram version="1.0.11" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="DD.ActionBox.ActionChoice" project="DD" 
+    file="/DD/src/DD/ActionBox/ActionChoice.java" binary="false">    
+    <position height="282" width="294" x="68" y="-81"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="2" corner="BOTTOM_RIGHT" language="java" name="DD.ActionBox.Dice.DieSize" project="DD" 
+    file="/DD/src/DD/ActionBox/Dice.java" binary="false">    
+    <position height="248" width="117" x="957" y="360"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="DD.ActionBox.ActionBox" project="DD" 
+    file="/DD/src/DD/ActionBox/ActionBox.java" binary="false">    
+    <position height="401" width="181" x="402" y="-81"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="DD.ActionBox.SubAction" project="DD" 
+    file="/DD/src/DD/ActionBox/SubAction.java" binary="false">    
+    <position height="231" width="294" x="623" y="-81"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="5" corner="BOTTOM_RIGHT" language="java" name="DD.ActionBox.ActionBox.Action" project="DD" 
+    file="/DD/src/DD/ActionBox/ActionBox.java" binary="false">    
+    <position height="248" width="171" x="402" y="360"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="DD.ActionBox.Dice" project="DD" 
+    file="/DD/src/DD/ActionBox/Dice.java" binary="false">    
+    <position height="231" width="129" x="957" y="-81"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <nesting id="7">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <nesting id="8">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
