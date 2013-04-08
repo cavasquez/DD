@@ -18,13 +18,16 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.Character.DDCharacter;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.Character.Equipment.Armor;
 import DD.Character.Equipment.Weapon;
+import DD.MapTool.MapTool;
 
 public class CharCreate extends BasicGameState
 {
 	
+	DDCharacter newchar = new DDCharacter(0);
 	CharacterSheet sheet = new CharacterSheet();
 	Image screen;
 	private String mouse = "No input yet!";
@@ -61,7 +64,9 @@ public class CharCreate extends BasicGameState
 	int state = 0;
 	
 	Armor newArmor = null;
-	Weapon newWep = null;
+	Weapon offHand = null;
+	Weapon mainHand = null;
+	
 	Armor  shield = null;
 	
 	String myMoney = Integer.toString(sheet.getCurrency());
@@ -365,6 +370,87 @@ public class CharCreate extends BasicGameState
 			
 		}
 		
+		if(state == 13)
+		{
+			
+			String mainweapon=mainHand.getName();
+			String offweapon=null;
+			if(offHand == null)
+			{
+				offweapon = "None";
+			}
+			else
+			{
+				offweapon=offHand.getName();
+			}
+			String myshield = null;
+			if(shield == null)
+			{
+				myshield = "No Shield";
+			}
+			else
+			{
+				myshield = shield.getName();
+			}
+			
+			String myarmor=newArmor.getName();
+			String racename = null;
+			String sSize = null;
+			String gen = null;
+			if(race == 0)
+			{
+				racename= "Elf";
+			}
+			else
+			{
+				racename = "Human";
+			}
+			
+			if(size == 0)
+			{
+				sSize = "Medium";
+			}
+			else if(size == 1)
+			{
+				sSize = "Small";
+			}
+			else
+			{
+				sSize = "Large";
+			}
+			
+			if(gender == 0)
+			{
+				gen = "Female";
+			}
+			else
+			{
+				gen = "Male";
+			}
+			
+			g.drawString("Your Selections", 796, 170);
+			g.drawString("Main Hand: " + mainweapon, 785, 245);
+			g.drawString("OffHand: " + offweapon, 785, 270);
+			g.drawString("Shield: " + myshield, 785, 295);
+			g.drawString("Armor: " + myarmor, 785, 320);
+			g.drawString("Race: " + racename, 785, 345);
+			g.drawString("Size: " + sSize, 785, 370);
+			g.drawString("Gender: " + gen, 785, 395);
+			
+			g.drawString("DONE", 765, 495);
+			g.drawString("START OVER", 890, 495);
+
+				
+		}
+		
+		
+		if(state == 14)
+		{
+			g.drawString("CHARACTER SAVED!", 778, 320);
+			g.drawString("JOIN LOBBY", 800, 375);
+		}
+		
+		
 //		textbox.render(gc, g);
 		if(playerName != null) playerName.render(gc, g);
 		if(characterName != null) characterName.render(gc, g);
@@ -379,10 +465,7 @@ public class CharCreate extends BasicGameState
 		
 		g.setFont(font2);
 //		textbox.setCursorVisible(true);
-		
-
-		
-		
+	
 		
 	}
 	
@@ -400,6 +483,7 @@ public class CharCreate extends BasicGameState
 			{
 				button.play();
 				sbg.enterState(0);
+				
 				/* kill the overlap */
 				characterName.setLocation(2000, 2000);
 				playerName.setLocation(2000,2000);
@@ -411,6 +495,8 @@ public class CharCreate extends BasicGameState
 				deity.setLocation(2000,2000);
 				background.setLocation(2000,2000);
 				occupation.setLocation(2000,2000);
+				
+				state = 0;
 
 			}
 		}
@@ -987,7 +1073,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(1);
+					offHand = sheet.getWeaponFromArmory(1);
 					sheet.subCurrency(15);
 					state= 12;
 				}
@@ -1000,7 +1086,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(2);
+					mainHand = sheet.getWeaponFromArmory(2);
 					sheet.subCurrency(10);
 					state = 13;
 				}
@@ -1013,7 +1099,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(3);
+					offHand = sheet.getWeaponFromArmory(3);
 					sheet.subCurrency(15);
 					state = 12;
 				}
@@ -1026,7 +1112,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(4);
+					offHand = sheet.getWeaponFromArmory(4);
 					sheet.subCurrency(12);
 					state= 12;
 				}
@@ -1039,7 +1125,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(5);
+					mainHand = sheet.getWeaponFromArmory(5);
 					sheet.subCurrency(8);
 					state = 13;
 				}
@@ -1052,7 +1138,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(6);
+					offHand = sheet.getWeaponFromArmory(6);
 					sheet.subCurrency(20);
 					state = 12;
 				}
@@ -1065,7 +1151,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(7);
+					mainHand = sheet.getWeaponFromArmory(7);
 					sheet.subCurrency(12);
 					state = 13;
 				}
@@ -1078,7 +1164,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(0);
+					offHand = sheet.getWeaponFromArmory(0);
 					state = 12;
 				}
 			
@@ -1103,7 +1189,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(1);
+					mainHand = sheet.getWeaponFromArmory(1);
 					sheet.subCurrency(10);
 					state= 13;
 				}
@@ -1116,7 +1202,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(3);
+					mainHand = sheet.getWeaponFromArmory(3);
 					sheet.subCurrency(15);
 					state = 13;
 				}
@@ -1129,7 +1215,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(4);
+					mainHand = sheet.getWeaponFromArmory(4);
 					sheet.subCurrency(12);
 					state = 13;
 				}
@@ -1142,7 +1228,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(6);
+					mainHand = sheet.getWeaponFromArmory(6);
 					sheet.subCurrency(20);
 					state= 13;
 				}
@@ -1155,7 +1241,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(0);
+					mainHand = sheet.getWeaponFromArmory(0);
 					state = 13;
 				}
 			
@@ -1174,28 +1260,55 @@ public class CharCreate extends BasicGameState
 			/*********CHOOSE WEAPON***************/
 			
 			
-			/****************LONGSWORD*******************/
-			if((posX > 738 && posX < 826) && (posY > 330 && posY < 347))
+			/****************WILL GO TO STATE 14 DONE BUTTON*******************/
+			if((posX > 763 && posX < 814) && (posY > 136 && posY < 158))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(1);
-					sheet.subCurrency(10);
-					state= 13;
+					setCharacterSheet();
+					state= 14;
 				}
 			
 			}
 			
-			/********************CUTLASS***************/
-			if((posX > 738 && posX < 866) && (posY > 309 && posY < 323))
+			/***********************START OVER**************************/
+			if((posX > 887 && posX < 992) && (posY > 138 && posY < 153))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(3);
-					sheet.subCurrency(15);
-					state = 13;
+					offHand = null;
+					shield = null;
+					
+					
+					sheet.setCurrency(1000);
+					state = 1;
+				}
+			
+			}
+		}
+		
+		
+		/**************************CHARACTER IS SAVED GO TO LOBBY*************/
+		//IF STATE = 14 CHARACTER IS SAVED AND OPTION TO GO TO LOBBY  
+				
+		if(state == 14)
+		{
+			
+			
+			/****************WILL GO TO LOBBY AND DISPLAY CHARACTER SAVED*******************/
+			
+			
+			//JOIN LOBBY OPTION
+			
+			if((posX > 789 && posX < 900) && (posY > 258 && posY < 278))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					sbg.enterState(1);
+					state = 0;
 				}
 			
 			}
@@ -1224,21 +1337,11 @@ public class CharCreate extends BasicGameState
 	}
 	
 	//this is what the button should do then move to the next
-	public void setCharacterSheet(TextField username)
+	public void setCharacterSheet() throws SlickException
 	{
 		
+		MapTool map = new MapTool();
 		
-		//CHRIS
-		/*
-		 * I NEED BUTTONS 
-		 * x2 race buttons 1 human 1 elf. the human button value set to 1 and elf to 0
-		 * x1 class button 1 barbarian barb button value set to 0
-		 *
-		 * x2 gender buttons 1M 1F
-		 * x3 size buttons sm med lrg (the values set to those are 1 for sm 0 for med and -1 for lrg)
-		 
-		 */
-		//fix with buttons
 		
 		//this method fills the characterSheet
 		sheet.fillBasic(characterName.getText(), playerName.getText(), race, languages.getText(), size, gender, 
@@ -1253,10 +1356,33 @@ public class CharCreate extends BasicGameState
 		sheet.fillRecorder(sheet.chooseClass(char_class));
 		
 		sheet.fillAttacksAndDefense(sheet.chooseClass(char_class));
-		sheet.unequipWeapons(); //equips with unarmed weapons...
+		//sheet.unequipWeapons(); //equips with unarmed weapons...
+		System.out.println(mainHand.getName());
 		
 		
+		sheet.equipWeapon(mainHand, 0);
 		
+		
+		if(offHand != null)
+		{
+			sheet.equipWeapon(offHand, 1);
+			
+			
+		}
+		
+		
+		sheet.EquipArmor(newArmor);
+		
+		if(shield != null)
+		{
+			sheet.EquipShield(shield);
+		}
+		
+		sheet.applyArmorAndShield();
+		
+		newchar.setCharacterSheet(sheet);
+		
+		newchar.writeMe(map.ddPath);
 		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
 	
 	}
