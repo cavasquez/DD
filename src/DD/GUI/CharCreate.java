@@ -396,11 +396,11 @@ public class CharCreate extends BasicGameState
 			String gen = null;
 			if(race == 0)
 			{
-				racename= "Human";
+				racename= "Elf";
 			}
 			else
 			{
-				racename = "Elf";
+				racename = "Human";
 			}
 			
 			if(size == 0)
@@ -1336,10 +1336,26 @@ public class CharCreate extends BasicGameState
 		sheet.fillRecorder(sheet.chooseClass(char_class));
 		
 		sheet.fillAttacksAndDefense(sheet.chooseClass(char_class));
-		sheet.unequipWeapons(); //equips with unarmed weapons...
+		//sheet.unequipWeapons(); //equips with unarmed weapons...
+		System.out.println(mainHand.getName());
 		
 		
+		sheet.equipWeapon(mainHand, 0);
 		
+		
+		if(offHand != null)
+		{
+			sheet.equipWeapon(offHand, 1);
+		}
+		
+		
+		sheet.EquipArmor(newArmor);
+		if(shield != null)
+		{
+			sheet.EquipShield(shield);
+		}
+		
+		sheet.applyArmorAndShield();
 		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
 	
 	}
