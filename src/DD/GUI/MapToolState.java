@@ -116,6 +116,8 @@ public class MapToolState extends BasicGameState {
 //    		}
 //    	}
     	maptool.getCurrentMap().render(gc, sb, g);
+    	
+    	g.drawString("MAP TOOL", 0, 0);
 		
     	//draw buttons to the screen
     	makeSelection.draw(625, 0);
@@ -145,6 +147,25 @@ public class MapToolState extends BasicGameState {
     	g.drawString("Goblin (1)", 975, 325);
     	g.drawString("Wall (2)", 975, 350);
     	g.drawString("Grass (3)", 975, 375);
+    	
+    	String instructions = "";
+    	instructions += "Map Tool Instructions: \n";
+    	instructions += "1.) Click on two squares and click 'Make\n" + 
+    					"Selection' to select squares\n";
+    	instructions += "2.) You can click 'Remove Selection'\n" +
+    					"to deselect the squares. You\n" +
+    					"can also click 'Clear Selection'\n" +
+    					"to remove all selection boxes\n";
+    	instructions += "3.) With the squares selected, click on\n" +
+    					"one of the objects in the 'Available\n" +
+    					"To Place' list\n";
+    	instructions += "4.) Click on 'Place On Map' to place\n" +
+    					"the selected object on the map\n";
+    	instructions += "5.) To remove objects from the map,\n" +
+    					"repeat step 1 and click 'Remove\n" +
+    					"From Map' to remove the object\n";
+    	
+    	g.drawString(instructions, 625, 175);
     	
 	}
 
