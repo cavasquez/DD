@@ -94,6 +94,7 @@ public class RemoveCharacter extends TargetAbility
 			
 			this.sendToInterpreter(cm);
 			done(null);
+			done = false;
 		} /* end if */
 		
 	} /* end obtainTarget method */
