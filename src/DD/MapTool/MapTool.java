@@ -74,11 +74,13 @@ public class MapTool implements Serializable {
 						System.out.println("cs image " +serHelper.cs.getImage());
 						CharacterObjects ddChar;
 						try {
+							System.out.println("*******************************************");
 							ddChar = new CharacterObjects(temp
 									.getCharacterSheet().getName(), serHelper.cs.getImage(),
 									getMapAtLocation(i, j), temp);
 							world.getMap(i, j).place(serHelper.coord.x,
 									serHelper.coord.y, ddChar);
+							
 						} catch (SlickException e1) {
 
 							e1.printStackTrace();
@@ -120,7 +122,7 @@ public class MapTool implements Serializable {
 									else
 									{
 										DDCharacter ddc = ((CharacterObjects) list[m]).getDdchar();
-										world.getMap(i, j).serMapHelper.add(new SerMapCharHelper(ddc.getCoordinate(), ddc.getSheet()));
+										world.getMap(i, j).serMapHelper.add(new SerMapCharHelper(new Coordinate(k,l), ddc.getSheet()));
 									}
 								}
 							}

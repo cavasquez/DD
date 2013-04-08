@@ -165,6 +165,11 @@ public abstract class Ability extends ImageRenderComponent
 		return done;
 	} /* end done method */
 
+	public static NetworkSystem getNetworkSystem()
+	{
+		return Ability.ns;
+	} /* end getNetworkSystem */
+	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/

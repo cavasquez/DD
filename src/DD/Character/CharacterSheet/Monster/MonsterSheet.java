@@ -1,6 +1,7 @@
 package DD.Character.CharacterSheet.Monster;
 
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.Network.Network;
 
 /*****************************************************************************************************
  * The Character class will act as an interface to CharacterSheet as well as play the role of the Model
@@ -21,6 +22,7 @@ public class MonsterSheet extends CharacterSheet
 	public MonsterSheet()
 	{
 		super();
+		this.netID = Network.GM_USER_ID;
 	}
 	
 	public int getXP()

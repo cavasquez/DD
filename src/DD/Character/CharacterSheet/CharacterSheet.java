@@ -87,7 +87,7 @@ public class CharacterSheet implements Serializable
 	private String background;
 	private String occupation;
 	private DDImage image = null;
-	private int netID;  //TODO: should not be serialized. 
+	protected int netID;  //TODO: should not be serialized. 
 	
 	private int currency = 1000;
 	

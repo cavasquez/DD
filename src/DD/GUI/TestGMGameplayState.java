@@ -1,7 +1,5 @@
 package DD.GUI;
 
-import java.util.Set;
-
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -9,7 +7,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import DD.ActionBox.ActionBox;
 import DD.Character.DDCharacter;
 import DD.Character.CharacterSheet.Monster.Goblin;
 import DD.GMToolsBox.GMToolsBox;
@@ -18,34 +15,44 @@ import DD.Network.NetworkSystem.NetworkType;
 import DD.SlickTools.Component;
 import DD.SlickTools.RenderComponent;
 
-public class GMGameplayState extends BasicGameState {
+public class TestGMGameplayState extends BasicGameState {
 	
-	public int stateID = 0;
+	private int stateID = 0;
 	private MapTool maptool;
 	private GMToolsBox gmToolsBox;
-	public ActionBox actionBox;
-	private 
 	Input mouse = new Input(650);
 	
 	private DDCharacter goblin1, goblin2;
 	
 	
-	public GMGameplayState(int stateID) {
+	public TestGMGameplayState(int stateID) {
 		this.stateID = stateID;
 	}
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
+		
+		
 	}
 	
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
 		maptool = new MapTool();
-
 		gmToolsBox = new GMToolsBox(stateID, 300, 200);
-		Set<Integer> stuff = actionBox.getCharacters();
 		
-		System.out.println("GMState " + stuff.size());
+		Game.system.ns.setNetworkType(NetworkType.SERVER);
+		Game.system.setMap(maptool.getMapAtLocation(0, 0));
+		
+		gmToolsBox.addCharacter(GMToolsBox.Holder.MOB, new Goblin());
+		gmToolsBox.addCharacter(GMToolsBox.Holder.MOB, new Goblin());
+		
+//		DDCharacter goblin1 = new DDCharacter(stateID++);
+//		DDCharacter goblin2 = new DDCharacter(stateID++);
+//		goblin1.setCharacterSheet(new Goblin());
+//		goblin2.setCharacterSheet(new Goblin());
+//		goblin1.setCharacterID(stateID++);
+//		goblin2.setCharacterID(stateID++);
+	
 	}
 
 	@Override
@@ -53,7 +60,6 @@ public class GMGameplayState extends BasicGameState {
 		Game.system.getMap().render(gc, sb, g);
 		gmToolsBox.render(gc, sb, g);
 		g.drawString("BACK",1130,615);
-		actionBox.render(gc, sb, g);
 	}
 
 	@Override
@@ -79,7 +85,6 @@ public class GMGameplayState extends BasicGameState {
     	
     	//Update GMToolsBox
     	gmToolsBox.update(gc, sb, delta);
-    	actionBox.update(gc, sb, delta);
 
 		int posX = mouse.getMouseX();
 		int posY = mouse.getMouseY();

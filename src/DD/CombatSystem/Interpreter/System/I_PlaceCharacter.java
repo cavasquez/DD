@@ -22,6 +22,7 @@ public class I_PlaceCharacter extends CombatInterpreter
 	public static final int CHARACTER_ID = I++;		/* Characters ID */
 	public static final int POS_X = I++;			/* X coordinate */
 	public static final int POS_Y = I++;			/* Y Coordinate */
+	public static final int RESET = I++;			/* reset or not to reset character */
 	public static final int BODY_SIZE = I;
 	
 	/************************************ Class Methods *************************************/
@@ -48,7 +49,9 @@ public class I_PlaceCharacter extends CombatInterpreter
 		
 		/* Give to the player that owns the character */
 		if(cs.getNetID() == cm.getCharacterData().getNetID()) ab.addCharacter(cm.getBody()[CHARACTER_ID]);
-		
+
+		/* Check for reset */
+		if(cm.getBody()[RESET] == 1) newCharacter.resetCharacter();
 		/* now place character on map */
 		try 
 		{

@@ -127,8 +127,10 @@ public class ActionBox extends BoxInterface
 		Move move = new Move(this.id);
 		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift, move));
 		this.addComponent(new ActionChoice(this.id, 1000, "End Move", endMove, position.x, position.y + shift*2, move));
-		this.addComponent(new ActionChoice(this.id, 2000, "End Turn", endTurn, position.x, position.y + shift*3, new EndTurn(this.id)));
-		
+		EndTurn end= new EndTurn(this.id);
+		end.setOwnerEntity(this);
+		this.addComponent(new ActionChoice(this.id, 2000, "End Turn", endTurn, position.x, position.y + shift*3, end));
+		System.out.println("ActionBox " + this.components.toString());
 		//this.addComponent(new ActionChoice(this.id, Action.FULL_ROUND_ACTION.index, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
 		//this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
 		//this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
@@ -189,47 +191,57 @@ public class ActionBox extends BoxInterface
 		return this.character;
 	} /* end getCharacter method */
 	
+	public Set<Integer> getCharacters()
+	{
+		return playersCharacters;
+	} /* end getCharacters method */
+	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/
 	public void setCharacter(DDCharacter character)
 	{
+		System.out.println("AB setchar char " + character);
 		/* This is done to start a characters turn */
 		this.character = character;
-		this.character.startNewTurn();
-		Ability.setOwnerCharacter(character);
-		
-		/* Decide which action to take */
-		if(this.character.isDead())
+		if(this.character != null)
 		{
-			/* If character is dead, end turn. Character can't do anything */
-			EndTurn end = new EndTurn(0);
-			try 
+			this.character.startNewTurn();
+			Ability.setOwnerCharacter(character);
+			
+			/* Decide which action to take */
+			if(this.character.isDead())
 			{
-				end.activate();
-			} /* end try */
-			catch (SlickException e) 
+				/* If character is dead, end turn. Character can't do anything */
+				EndTurn end = new EndTurn(0);
+				try 
+				{
+					end.activate();
+				} /* end try */
+				catch (SlickException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} /* end catch */
+			} /* end if */
+			else if(this.character.isDying())
 			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} /* end catch */
+				EndTurn end = new EndTurn(0);
+				Dying dying = new Dying(1);
+				try 
+				{
+					dying.activate();
+					end.activate();
+				} /* end try */
+				catch (SlickException e) 
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} /* end catch */
+			} /* end else if */
+			else addActionChoices();
 		} /* end if */
-		else if(this.character.isDying())
-		{
-			EndTurn end = new EndTurn(0);
-			Dying dying = new Dying(1);
-			try 
-			{
-				dying.activate();
-				end.activate();
-			} /* end try */
-			catch (SlickException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} /* end catch */
-		} /* end else if */
-		else addActionChoices();
+		else removeAllComponents();
 	} /* end setCharacter method */
 	
 } /* end ActionBox method */
