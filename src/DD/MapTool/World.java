@@ -22,7 +22,7 @@ public class World implements Serializable{
 	ArrayList<Objects> tempList;//holds temp items like from spells
 	
 //	String userPath =  System.getProperties().getProperty("user.home");
-	String path = MapTool.ddPath + "World/";
+	String path = MapTool.ddPath;
 		
 	public World(String name) throws SlickException {
 		this.worldName = name;
@@ -63,6 +63,7 @@ public class World implements Serializable{
 	public void writeMe(){
 		System.out.println("1");
 		File theDir = new File(path +worldName);
+		System.out.println("world writeme path " + path);
 		System.out.println("2");
 		// if it doesn't exist, make a directory with the name of the world
 		if (!theDir.exists())
