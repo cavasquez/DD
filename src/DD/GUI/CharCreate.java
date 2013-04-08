@@ -60,7 +60,10 @@ public class CharCreate extends BasicGameState
 	int gender;
 	int size;
 	
-	
+	//boolean printerror = false;
+	boolean agecheck = true;
+	boolean heightcheck= true; 
+	boolean weightcheck= true;
 	int state = 0;
 	
 	Armor newArmor = null;
@@ -150,14 +153,46 @@ public class CharCreate extends BasicGameState
 			g.drawString("BACK", 150, 552);
 		
 		if(state == 0)
-			g.drawString("CONTINUE", 135, 522);
-		
+		{
+			if(agecheck && weightcheck && heightcheck)
+			{
+			
+				g.drawString("CONTINUE", 135, 522);
+			}
+			else
+			{
+				g.drawString("CONTINUE", 135, 522);
+				if(!agecheck)
+				{
+					g.drawString("Please input an Integer", 286, 263);
+				}
+				if(!heightcheck)
+				{
+					g.drawString("Please input an Integer", 286, 202);
+				}
+				if(!weightcheck)
+				{
+					g.drawString("Please input an Integer", 286, 230);
+				}
+			}
+		}
 		if(state == 1)
 		{
 			g.drawString("CHOOSE RACE", 853, 506);
 			g.drawString("PREVIOUS", 867, 546);
 			g.drawString("HUMAN", 782, 448);
 			g.drawString("ELF", 1005, 448);
+			
+			characterName.setLocation(2000, 2000);
+			playerName.setLocation(2000,2000);
+			languages.setLocation(2000,2000);
+			height.setLocation(2000,2000);
+			weight.setLocation(2000,2000);
+			age.setLocation(2000,2000);
+			alignments.setLocation(2000,2000);
+			deity.setLocation(2000,2000);
+			background.setLocation(2000,2000);
+			occupation.setLocation(2000,2000);
 			
 			
 		}
@@ -507,8 +542,52 @@ public class CharCreate extends BasicGameState
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
-					button.play();
-					state++;
+					boolean isGood;
+					try
+					{
+						
+						Integer.parseInt(height.getText());
+						isGood = true;
+					}
+					
+					catch(Exception e)
+					{
+						isGood = false;
+						heightcheck = false;
+					}
+					
+					try
+					{
+						
+						Integer.parseInt(weight.getText());
+						isGood = true;
+					}
+					
+					catch(Exception e)
+					{
+						isGood = false;
+						weightcheck = false;
+					}
+					
+					try
+					{
+						
+						Integer.parseInt(age.getText());
+						isGood = true;
+					}
+					
+					catch(Exception e)
+					{
+						isGood = false;
+						agecheck = false;
+					}
+					
+					if(isGood)
+					{
+						button.play();
+						state++;
+					}
+					
 				}
 			
 			}

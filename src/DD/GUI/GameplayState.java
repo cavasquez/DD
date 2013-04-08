@@ -47,9 +47,7 @@ public class GameplayState extends BasicGameState {
     private DDImage offhand;
     private DDImage armor;
     private DDImage shield;
-    //private DDImage characterSheetButton;
     
- 
     public GameplayState(int stateID)
     {
         this.stateID = stateID;
@@ -69,7 +67,6 @@ public class GameplayState extends BasicGameState {
     public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
     	
     	maptool = new MapTool();
-    	//characterSheetButton = new DDImage("Images/ActionBox/CharacterSheet.png");
     	//BY DEFAULT, SET NETWORK AS SERVER
     	//TODO: THE ABOVE NEEDS TO BE CHANGED
     	System.out.println("system? " + Game.system);
@@ -97,6 +94,7 @@ public class GameplayState extends BasicGameState {
 			"Noble", 
 			"Archer");
 		
+		//filling out character sheet
 		sheet.fillAbilities();
 		CharacterClass barb = sheet.chooseClass(0);	//this is barbarian
 		sheet.fillRecorder(barb);
@@ -112,11 +110,6 @@ public class GameplayState extends BasicGameState {
 		System.out.println("gamplay" + sheet.EquippedWeapon.isEmpty());
 		sheet.setImage(new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png", 2530, 1440, 33, 34 ));
 		
-		weapon = sheet.getImage().getSubImage(1090, 895, 33, 34).getScaledCopy(0.8f);
-		offhand = sheet.getImage().getSubImage(675, 1505, 33, 34).getScaledCopy(0.8f);
-		armor = sheet.getImage().getSubImage(990, 670, 33, 34).getScaledCopy(0.8f);
-		shield = sheet.getImage().getSubImage(1410, 1410, 33, 34).getScaledCopy(0.8f);
-		
 		//set character sheets for player and goblin
         player.setCharacterSheet(sheet);
         goblin.setCharacterSheet(new Goblin());
@@ -127,6 +120,10 @@ public class GameplayState extends BasicGameState {
         Game.system.cs.addCharacter(player);
         Game.system.cs.addCharacter(goblin);
       
+    	weapon = sheet.getImage().getSubImage(1090, 895, 33, 34).getScaledCopy(0.8f);
+		offhand = sheet.getImage().getSubImage(675, 1505, 33, 34).getScaledCopy(0.8f);
+		armor = sheet.getImage().getSubImage(990, 670, 33, 34).getScaledCopy(0.8f);
+		shield = sheet.getImage().getSubImage(1410, 1410, 33, 34).getScaledCopy(0.8f);
         
         //Create ActionBox
         actionBox = new ActionBox(stateID, 300, 200);
@@ -196,15 +193,6 @@ public class GameplayState extends BasicGameState {
 		int posX = mouse.getMouseX();
 		int posY = mouse.getMouseY();
 		
-		//Character Sheet button
-//		if((posX > 1055 && posX < (1055+characterSheetButton.getWidth())) && (posY > 560 && posY < (560+characterSheetButton.getHeight())))
-//		{
-//			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-//			{
-//				sb.enterState(8);
-//			}
-//		}
-		
 		//Back button
 		if((posX > 1110 && posX < 1195) && (posY > 615 && posY < 630))
 		{
@@ -224,8 +212,6 @@ public class GameplayState extends BasicGameState {
  	
     	//Render Action Box
     	actionBox.render(gc, sb, g);
-    	
-    	//characterSheetButton.draw(1055, 560);
 		
     	characterSheet(g);
     	weapon.draw(855, 220);
