@@ -101,6 +101,11 @@ public class CharacterSheet implements Serializable
 	{
 		return currency;
 	}
+	
+	public void setCurrency(int value)
+	{
+		currency = 1000;
+	}
 	/********* Ability *********/
 	
 	public static final int ABILITY_STRENGTH = 0;

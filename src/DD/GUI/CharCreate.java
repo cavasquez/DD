@@ -61,7 +61,9 @@ public class CharCreate extends BasicGameState
 	int state = 0;
 	
 	Armor newArmor = null;
-	Weapon newWep = null;
+	Weapon offHand = null;
+	Weapon mainHand = null;
+	
 	Armor  shield = null;
 	
 	String myMoney = Integer.toString(sheet.getCurrency());
@@ -365,6 +367,85 @@ public class CharCreate extends BasicGameState
 			
 		}
 		
+		if(state == 13)
+		{
+			
+			String mainweapon=mainHand.getName();
+			String offweapon=null;
+			if(offHand == null)
+			{
+				offweapon = "None";
+			}
+			else
+			{
+				offweapon=offHand.getName();
+			}
+			String myshield = null;
+			if(shield == null)
+			{
+				myshield = "No Shield";
+			}
+			else
+			{
+				myshield = shield.getName();
+			}
+			
+			String myarmor=newArmor.getName();
+			String racename = null;
+			String sSize = null;
+			String gen = null;
+			if(race == 0)
+			{
+				racename= "Human";
+			}
+			else
+			{
+				racename = "Elf";
+			}
+			
+			if(size == 0)
+			{
+				sSize = "Medium";
+			}
+			else if(size == 1)
+			{
+				sSize = "Small";
+			}
+			else
+			{
+				sSize = "Large";
+			}
+			
+			if(gender == 0)
+			{
+				gen = "Female";
+			}
+			else
+			{
+				gen = "Male";
+			}
+			
+			g.drawString("Your Selections", 800, 220);
+			g.drawString("Your Main Hand: " + mainweapon, 785, 245);
+			g.drawString("Your OffHand: " + offweapon, 785, 270);
+			g.drawString("Your Shield: " + myshield, 785, 295);
+			g.drawString("Your Armor: " + myarmor, 785, 320);
+			g.drawString("Your Race: " + racename, 785, 345);
+			g.drawString("Your Size: " + sSize, 785, 370);
+			g.drawString("Your Gender: " + gen, 785, 395);
+			
+			g.drawString("DONE", 725, 495);
+			g.drawString("START OVER", 850, 495);
+
+			
+			
+			
+			
+			
+			
+			
+			
+		}
 //		textbox.render(gc, g);
 		if(playerName != null) playerName.render(gc, g);
 		if(characterName != null) characterName.render(gc, g);
@@ -987,7 +1068,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(1);
+					offHand = sheet.getWeaponFromArmory(1);
 					sheet.subCurrency(15);
 					state= 12;
 				}
@@ -1000,7 +1081,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(2);
+					mainHand = sheet.getWeaponFromArmory(2);
 					sheet.subCurrency(10);
 					state = 13;
 				}
@@ -1013,7 +1094,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(3);
+					offHand = sheet.getWeaponFromArmory(3);
 					sheet.subCurrency(15);
 					state = 12;
 				}
@@ -1026,7 +1107,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(4);
+					offHand = sheet.getWeaponFromArmory(4);
 					sheet.subCurrency(12);
 					state= 12;
 				}
@@ -1039,7 +1120,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(5);
+					mainHand = sheet.getWeaponFromArmory(5);
 					sheet.subCurrency(8);
 					state = 13;
 				}
@@ -1052,7 +1133,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(6);
+					offHand = sheet.getWeaponFromArmory(6);
 					sheet.subCurrency(20);
 					state = 12;
 				}
@@ -1065,7 +1146,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(7);
+					mainHand = sheet.getWeaponFromArmory(7);
 					sheet.subCurrency(12);
 					state = 13;
 				}
@@ -1078,7 +1159,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(0);
+					offHand = sheet.getWeaponFromArmory(0);
 					state = 12;
 				}
 			
@@ -1103,7 +1184,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(1);
+					mainHand = sheet.getWeaponFromArmory(1);
 					sheet.subCurrency(10);
 					state= 13;
 				}
@@ -1116,7 +1197,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(3);
+					mainHand = sheet.getWeaponFromArmory(3);
 					sheet.subCurrency(15);
 					state = 13;
 				}
@@ -1129,7 +1210,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(4);
+					mainHand = sheet.getWeaponFromArmory(4);
 					sheet.subCurrency(12);
 					state = 13;
 				}
@@ -1142,7 +1223,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(6);
+					mainHand = sheet.getWeaponFromArmory(6);
 					sheet.subCurrency(20);
 					state= 13;
 				}
@@ -1155,7 +1236,7 @@ public class CharCreate extends BasicGameState
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(0);
+					mainHand = sheet.getWeaponFromArmory(0);
 					state = 13;
 				}
 			
@@ -1174,28 +1255,30 @@ public class CharCreate extends BasicGameState
 			/*********CHOOSE WEAPON***************/
 			
 			
-			/****************LONGSWORD*******************/
-			if((posX > 738 && posX < 826) && (posY > 330 && posY < 347))
+			/****************WILL GO TO STATE 14 DONE BUTTON*******************/
+			if((posX > 722 && posX < 775) && (posY > 136 && posY < 158))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(1);
-					sheet.subCurrency(10);
-					state= 13;
+					setCharacterSheet();
+					state= 14;
 				}
 			
 			}
 			
-			/********************CUTLASS***************/
-			if((posX > 738 && posX < 866) && (posY > 309 && posY < 323))
+			/***********************START OVER**************************/
+			if((posX > 843 && posX < 943) && (posY > 138 && posY < 153))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
 					button.play();
-					newWep = sheet.getWeaponFromArmory(3);
-					sheet.subCurrency(15);
-					state = 13;
+					offHand = null;
+					shield = null;
+					
+					
+					sheet.setCurrency(1000);
+					state = 1;
 				}
 			
 			}
@@ -1224,7 +1307,7 @@ public class CharCreate extends BasicGameState
 	}
 	
 	//this is what the button should do then move to the next
-	public void setCharacterSheet(TextField username)
+	public void setCharacterSheet()
 	{
 		
 		
