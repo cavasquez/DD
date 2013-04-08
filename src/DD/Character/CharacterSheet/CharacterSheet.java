@@ -1694,7 +1694,14 @@ public class CharacterSheet implements Serializable
 	
 	public Armor getEquippedShield()
 	{
-		return EquippedArmor.get(1);
+		if(EquippedArmor.size() < 2)
+		{
+			return null;
+		}
+		else
+		{
+			return EquippedArmor.get(1);
+		}
 	}
 	
 	/*
@@ -1733,7 +1740,7 @@ public class CharacterSheet implements Serializable
 		}
 		else
 		{
-
+			
 			equipmentList.add(EquippedWeapon.remove(hand));
 			EquippedWeapon.add(hand,w);
 			
