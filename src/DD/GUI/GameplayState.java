@@ -113,9 +113,9 @@ public class GameplayState extends BasicGameState {
 		sheet.setImage(new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png", 2530, 1440, 33, 34 ));
 		
 		weapon = sheet.getImage().getSubImage(1090, 895, 33, 34).getScaledCopy(0.8f);
-		offhand = sheet.getImage().getSubImage(1090, 1500, 33, 34).getScaledCopy(0.8f);
-		armor = sheet.getImage().getSubImage(1090, 895, 33, 34).getScaledCopy(0.8f);
-		shield = sheet.getImage().getSubImage(1090, 895, 33, 34).getScaledCopy(0.8f);
+		offhand = sheet.getImage().getSubImage(675, 1505, 33, 34).getScaledCopy(0.8f);
+		armor = sheet.getImage().getSubImage(990, 670, 33, 34).getScaledCopy(0.8f);
+		shield = sheet.getImage().getSubImage(1410, 1410, 33, 34).getScaledCopy(0.8f);
 		
 		//set character sheets for player and goblin
         player.setCharacterSheet(sheet);
@@ -231,7 +231,7 @@ public class GameplayState extends BasicGameState {
     	weapon.draw(855, 220);
     	offhand.draw(855, 245);
     	armor.draw(855, 275);
-    	shield.draw(855, 300);
+    	shield.draw(855, 310);
 		g.drawString("MAIN MENU",1110,615);
 		g.drawString(mousePos, 900, 0);
 		
