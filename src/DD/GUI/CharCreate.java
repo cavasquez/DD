@@ -425,17 +425,17 @@ public class CharCreate extends BasicGameState
 				gen = "Male";
 			}
 			
-			g.drawString("Your Selections", 800, 220);
-			g.drawString("Your Main Hand: " + mainweapon, 785, 245);
-			g.drawString("Your OffHand: " + offweapon, 785, 270);
-			g.drawString("Your Shield: " + myshield, 785, 295);
-			g.drawString("Your Armor: " + myarmor, 785, 320);
-			g.drawString("Your Race: " + racename, 785, 345);
-			g.drawString("Your Size: " + sSize, 785, 370);
-			g.drawString("Your Gender: " + gen, 785, 395);
+			g.drawString("Your Selections", 796, 170);
+			g.drawString("Main Hand: " + mainweapon, 785, 245);
+			g.drawString("OffHand: " + offweapon, 785, 270);
+			g.drawString("Shield: " + myshield, 785, 295);
+			g.drawString("Armor: " + myarmor, 785, 320);
+			g.drawString("Race: " + racename, 785, 345);
+			g.drawString("Size: " + sSize, 785, 370);
+			g.drawString("Gender: " + gen, 785, 395);
 			
-			g.drawString("DONE", 725, 495);
-			g.drawString("START OVER", 850, 495);
+			g.drawString("DONE", 765, 495);
+			g.drawString("START OVER", 890, 495);
 
 			
 			
@@ -1256,7 +1256,7 @@ public class CharCreate extends BasicGameState
 			
 			
 			/****************WILL GO TO STATE 14 DONE BUTTON*******************/
-			if((posX > 722 && posX < 775) && (posY > 136 && posY < 158))
+			if((posX > 763 && posX < 814) && (posY > 136 && posY < 158))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
@@ -1268,7 +1268,7 @@ public class CharCreate extends BasicGameState
 			}
 			
 			/***********************START OVER**************************/
-			if((posX > 843 && posX < 943) && (posY > 138 && posY < 153))
+			if((posX > 887 && posX < 992) && (posY > 138 && posY < 153))
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
