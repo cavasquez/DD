@@ -17,6 +17,7 @@ public class Goblin extends MonsterSheet
 		this.rawStats[CharacterSheet.ABILITY_INTELLIGENCE][CharacterSheet.ABILITY_TOTAL] = 10;
 		this.rawStats[CharacterSheet.ABILITY_WISDOM][CharacterSheet.ABILITY_TOTAL] = 9;
 		this.rawStats[CharacterSheet.ABILITY_CHARISMA][CharacterSheet.ABILITY_TOTAL] = 6;
+		name = "Goblin";
 		
 		//this.attacks[CharacterSheet.ATTACK_MELEE][CharacterSheet.ATTACK_TOTAL]= 1;
 		this.setMeleeTotal(1);

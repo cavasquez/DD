@@ -35,7 +35,7 @@ public class Map extends Entity implements Serializable{
 	boolean hasTempObjects;
 	String name;
 	public final int mapSize = 20;
-	protected ArrayList<SerMapCharHelper> serMapHelper = new ArrayList<SerMapCharHelper>();
+	public ArrayList<SerMapCharHelper> serMapHelper = new ArrayList<SerMapCharHelper>();
 
 	public Map() {
 		super();
@@ -462,7 +462,7 @@ public class Map extends Entity implements Serializable{
 	      try
 	      {
 	         FileInputStream fileIn =
-	                          new FileInputStream(path+"/"+charName+".ser");
+	                          new FileInputStream(path+"/"+"Characters/"+charName+".ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         e = (DDCharacter) in.readObject();
 	         in.close();
@@ -510,7 +510,7 @@ public class Map extends Entity implements Serializable{
 			int yCoord = ((Floor) objectsStack[x][y].peek()).getY();
 			objectsStack[x][y].pop();
 			if(objectsStack[x][y].getPQueue().isEmpty()){
-				Floor floor = new Floor("t(*-*t)", floorImage, (xCoord + (floorImage.getHeight() * xCoord)), (yCoord + (floorImage.getWidth() * yCoord)), 5 , 5, this);
+				Floor floor = new Floor("t(*-*t)", new DDImage(1185, 416).getScaledCopy(0.9f), (xCoord + (floorImage.getHeight() * xCoord)), (yCoord + (floorImage.getWidth() * yCoord)), 5 , 5, this);
 				place(x,y,floor);
 			}
 		}

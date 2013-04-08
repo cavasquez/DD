@@ -44,7 +44,7 @@ public class CharacterSheet implements Serializable
 		inher=0;
 		enhance=0;
 		misc=0;
-		
+		EquippedWeapon.add(new Weapon (0, "Unarmed",Dice.DieSize.D3,2,0,0,'M','B',"Note:",0));
 		
 	}
 	/*THE DICE!*/
@@ -73,7 +73,7 @@ public class CharacterSheet implements Serializable
 	
 	/******** Basic Info *********/
 	private String raceName;
-	private String name;
+	protected String name;
 	private String player;
 	Race race;
 	private String languages;
@@ -87,8 +87,25 @@ public class CharacterSheet implements Serializable
 	private String background;
 	private String occupation;
 	private DDImage image = null;
-	private int netID;  //TODO: should not be serialized. 
+	protected int netID;  //TODO: should not be serialized. 
 	
+	private int currency = 1000;
+	
+	
+	public void subCurrency(int money)
+	{
+			currency = currency - money;
+	}
+	
+	public int getCurrency()
+	{
+		return currency;
+	}
+	
+	public void setCurrency(int value)
+	{
+		currency = 1000;
+	}
 	/********* Ability *********/
 	
 	public static final int ABILITY_STRENGTH = 0;
@@ -1675,6 +1692,18 @@ public class CharacterSheet implements Serializable
 		return EquippedArmor.get(0);
 	}
 	
+	public Armor getEquippedShield()
+	{
+		if(EquippedArmor.size() < 2)
+		{
+			return null;
+		}
+		else
+		{
+			return EquippedArmor.get(1);
+		}
+	}
+	
 	/*
 	 * Look at Armory for list of all armor  and weapons and their index
 	 * this will help get the armor you want to put in the arrayList
@@ -1694,9 +1723,33 @@ public class CharacterSheet implements Serializable
 	public void equipWeapon(Weapon w, int hand)
 	{
 		
-		
-		EquippedWeapon.add(hand,w);
-		
+		if(hand == 1)
+		{
+			if(getEquippedShield() == null)
+			{
+				System.out.println(EquippedWeapon.size());
+				if(EquippedWeapon.size() < 2)
+				{
+					EquippedWeapon.add(hand,w);
+				}
+				
+				else if(EquippedWeapon.get(hand) == armory.weapons.get(0))// if it is unarmed
+				{
+					
+					equipmentList.add(EquippedWeapon.remove(hand));
+					EquippedWeapon.add(hand,w);
+				}
+					
+			}
+		}
+		else
+		{
+			
+			equipmentList.add(EquippedWeapon.remove(hand));
+			EquippedWeapon.add(hand,w);
+			
+			
+		}
 		
 		if(EquippedWeapon.size() > 2)
 		{
@@ -1707,7 +1760,8 @@ public class CharacterSheet implements Serializable
 		}
 		for (int j = 0; j < equipmentList.size(); j++) {
 			
-		
+			System.out.println("w " + w);
+			System.out.println("list" + equipmentList.get(j).getName());
 			if(w.getName().equals(equipmentList.get(j).getName()))
 			{
 				equipmentList.remove(j);
@@ -1730,7 +1784,7 @@ public class CharacterSheet implements Serializable
 		}
 		
 		//Equip both hands with unarmed
-		for (int i = 0; i < EquippedWeapon.size(); i++) {
+		for (int i = 0; i < 2; i++) {
 		
 			
 			EquippedWeapon.add(armory.weapons.get(0));
@@ -1931,10 +1985,17 @@ public class CharacterSheet implements Serializable
 	
 	public void applyArmorAndShield()
 	{
-		setACArmor();
-		setACShield();
-		setFlatfootArmor();
-		setFlatfootShield();
+		
+		if(getEquippedShield() != null)
+		{
+			setACShield();
+			setFlatfootShield();
+		}
+		if(getEquippedArmor() != null)
+		{
+			setFlatfootArmor();
+			setACArmor();
+		}
 	}
 	
 	public String getName(){
@@ -1951,22 +2012,24 @@ public class CharacterSheet implements Serializable
 		String r = "Name: " +name + " \n" +
 				   "Player Name: " + player + " \n" +
 				   "Race: " + raceName + " \n" +
-				   "Gender: " + gender + " \n" +
-				   "Age: " + age + " \n\n" +
+				   //"Gender: " + gender + " \n" +
+				   "Age: " + age + " \n\n";
 				   
+					if (recorder.size() > 0)
+					{
+						ClassRecorder clas = recorder.get(0);
+						r += "Class: " + clas.className + "\n" +
+								   "Hp:  " + clas.hp + "\n";
+					} /* end if */
+					
+				r += 	
 				   "Str: " + rawStats[ABILITY_STRENGTH][ABILITY_TOTAL] + "\n" +
 				   "Dex: " + rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] + "\n" +
 				   "Con: " + rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL] + "\n" +
 				   "Int: " + rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL] + "\n" +
 				   "Wis: " + rawStats[ABILITY_WISDOM][ABILITY_TOTAL] + "\n" +
-				   "Cha: " + rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] + "\n\n" +
+				   "Cha: " + rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] + "\n" +
 					"AC: " + this.getACTotal() + " \n\n";
-		if (recorder.size() > 0)
-		{
-			ClassRecorder clas = recorder.get(0);
-			r += "Class: " + clas.className + "\n" +
-					   "Hp: " + clas.hp;
-		} /* end if */
 		
 		return r;
 	}

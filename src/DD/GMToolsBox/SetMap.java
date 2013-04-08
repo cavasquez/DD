@@ -26,9 +26,15 @@ public class SetMap extends Ability
 	private Map map;	/* characters data */
 	
 	/************************************ Class Methods *************************************/
-	public SetMap(int id, ActionType actionType, Action action, String name,String description) 
+	public SetMap(int id) 
 	{
-		super(id, ActionType.SYSTEM, Action.SET_MAP, "Set Map", "");
+		this(id, null);
+	} /* end constructor */
+	
+	public SetMap(int id, Map map) 
+	{
+		super(id, ActionType.SYSTEM, Action.SET_MAP, "Set Map", "Gives map to CombatSystem");
+		this.map = map;
 	} /* end constructor */
 
 	@Override
@@ -43,7 +49,7 @@ public class SetMap extends Ability
 						null,
 						null,
 						CombatSystem.ActionType.SYSTEM,
-						CombatSystem.Action.PLACE_CHARACTER,
+						CombatSystem.Action.SET_MAP,
 						body
 					);
 			sendToInterpreter(cm);

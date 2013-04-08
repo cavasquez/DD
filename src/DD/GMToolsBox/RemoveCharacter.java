@@ -1,6 +1,11 @@
 package DD.GMToolsBox;
 
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
+
 import DD.Character.Abilities.TargetAbility;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.CombatSystem;
@@ -11,6 +16,7 @@ import DD.Message.ChooseTargetMessage;
 import DD.Message.CombatMessage;
 import DD.Message.TargetSelectedMessage;
 import DD.Network.Network;
+import DD.SlickTools.DDImage;
 
 /*****************************************************************************************************
  * RemoveCharacter will give the GM the ability to remove a Character from the board (ie form play) and
@@ -25,12 +31,17 @@ public class RemoveCharacter extends TargetAbility
 {
 	/************************************ Class Attributes *************************************/
 	private GMToolsBox gmt;			/* Give PlaceCharacter access tot he GMToolBox */
+	private DDImage cancel;
+	private static Input mouse = new Input(650);
+	private String mousePos;
 	
 	/************************************ Class Methods *************************************/
 	public RemoveCharacter(int id, GMToolsBox gmt) 
 	{
 		super(id, CombatSystem.ActionType.SYSTEM, CombatSystem.Action.REMOVE_CHARACTER, "Remove Character", "Removes character from the map.");
 		this.gmt = gmt;
+		this.image = new DDImage("Images/GMTools/RemoveCharacter.png");
+		cancel = new DDImage("Images/GMTools/Cancel.png");
 	} /* end RemoveCharacter constructor */
 
 	@Override
@@ -49,6 +60,11 @@ public class RemoveCharacter extends TargetAbility
 		ts.chooseTarget(tcm);
 		
 	} /* end action method */
+	
+	public void cancel()
+	{
+		ts.clearTargets();
+	} /* end cancel method */
 
 	@Override
 	public void obtainTarget(TargetSelectedMessage tsm) throws SlickException 
@@ -78,8 +94,50 @@ public class RemoveCharacter extends TargetAbility
 			
 			this.sendToInterpreter(cm);
 			done(null);
+			done = false;
 		} /* end if */
 		
 	} /* end obtainTarget method */
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame sbg, int delta) 
+	{
+		int posX = mouse.getMouseX();
+    	int posY = mouse.getMouseY();
+		mousePos = "Mouse position: " + posX + " " + posY;
+		
+		//Remove Button
+		if((posX > 950 && posX < 950 + this.image.getWidth()) && (posY > 40 && posY < (40 + this.image.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			try {
+					action();
+				} catch (SlickException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    			System.out.println("Remove Character");
+    		}
+    	}
+		
+		//Cancel Button
+		if((posX > 1145 && posX < 1145 + cancel.getWidth()) && (posY > 40 && posY < (40 + cancel.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			cancel();
+    			System.out.println("Cancel");
+    		}
+    	}
+		
+	} /* end update method */
+	
+	@Override
+	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr) 
+	{
+		gr.drawString(mousePos, 0, 0);
+		this.image.draw(950, 40);
+		cancel.draw(1145, 40);
+		
+	} /* end render method */
 
 } /* end RemoveCharacter class */

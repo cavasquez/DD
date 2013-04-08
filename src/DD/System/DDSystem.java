@@ -37,7 +37,6 @@ public class DDSystem
 		ts = new TargetingSystem();
 		ns = new NetworkSystem();
 		chat = new ChatSystem();
-		
 		/* Provide the CombatSystem the necessary systems */
 		cs.setNetworkSystem(ns);
 		
@@ -83,6 +82,7 @@ public class DDSystem
 	public void server()
 	{
 		ns.setNetworkType(NetworkSystem.NetworkType.SERVER);
+		System.out.println("DDSystem" + ns.getNetwork() + " " + Ability.getNetworkSystem().getNetwork());
 	} /* end client() */
 	
 	public boolean isGM()
@@ -95,7 +95,10 @@ public class DDSystem
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	
+	public Map getMap()
+	{
+		return cs.getMap();
+	} /* end getMap method */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************

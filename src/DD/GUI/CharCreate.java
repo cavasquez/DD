@@ -18,12 +18,17 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.Character.DDCharacter;
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.Character.Equipment.Armor;
+import DD.Character.Equipment.Weapon;
+import DD.MapTool.MapTool;
 
 public class CharCreate extends BasicGameState
 {
 	
-	CharacterSheet sheet;
+	DDCharacter newchar = new DDCharacter(0);
+	CharacterSheet sheet = new CharacterSheet();
 	Image screen;
 	private String mouse = "No input yet!";
 	//Image play;
@@ -55,8 +60,19 @@ public class CharCreate extends BasicGameState
 	int gender;
 	int size;
 	
-	
+	//boolean printerror = false;
+	boolean agecheck = true;
+	boolean heightcheck= true; 
+	boolean weightcheck= true;
 	int state = 0;
+	
+	Armor newArmor = null;
+	Weapon offHand = null;
+	Weapon mainHand = null;
+	
+	Armor  shield = null;
+	
+	String myMoney = Integer.toString(sheet.getCurrency());
 	
 	public CharCreate(int state)
 	{
@@ -132,17 +148,51 @@ public class CharCreate extends BasicGameState
 		
 		
 		
+		
+		
 			g.drawString("BACK", 150, 552);
 		
 		if(state == 0)
-			g.drawString("CONTINUE", 135, 522);
-		
+		{
+			if(agecheck && weightcheck && heightcheck)
+			{
+			
+				g.drawString("CONTINUE", 135, 522);
+			}
+			else
+			{
+				g.drawString("CONTINUE", 135, 522);
+				if(!agecheck)
+				{
+					g.drawString("Please input an Integer", 286, 263);
+				}
+				if(!heightcheck)
+				{
+					g.drawString("Please input an Integer", 286, 202);
+				}
+				if(!weightcheck)
+				{
+					g.drawString("Please input an Integer", 286, 230);
+				}
+			}
+		}
 		if(state == 1)
 		{
 			g.drawString("CHOOSE RACE", 853, 506);
 			g.drawString("PREVIOUS", 867, 546);
 			g.drawString("HUMAN", 782, 448);
 			g.drawString("ELF", 1005, 448);
+			
+			characterName.setLocation(2000, 2000);
+			playerName.setLocation(2000,2000);
+			languages.setLocation(2000,2000);
+			height.setLocation(2000,2000);
+			weight.setLocation(2000,2000);
+			age.setLocation(2000,2000);
+			alignments.setLocation(2000,2000);
+			deity.setLocation(2000,2000);
+			background.setLocation(2000,2000);
+			occupation.setLocation(2000,2000);
 			
 			
 		}
@@ -179,13 +229,261 @@ public class CharCreate extends BasicGameState
 			
 		}
 		
+
 		if(state == 5)
 		{
-			g.drawString("DONE", 887, 506);
+			g.drawString("CHOOSE ARMOR", 853, 506);
 			g.drawString("PREVIOUS", 867, 546);
+			g.drawString("LIGHT", 782, 448);
+			g.drawString("MEDIUM", 894, 448);
+			g.drawString("HEAVY", 1005, 448);
+			
+			
+		}
+		
+		if(state == 6)
+		{
+			g.drawString("CHOOSE LIGHT ARMOR", 833, 506);
+			g.drawString("PREVIOUS", 867, 546);
+			g.drawString("ARMOR NAME", 740, 250);
+			g.drawString("PRICE", 980, 250);
+			g.drawString("CURRENCY", 860, 200);
+			g.drawString(myMoney, 975, 200);
+			
+			
+			//Armor Name 
+			g.drawString("Padded", 740, 300);
+			g.drawString("Leather", 740, 325);
+			g.drawString("Chain Shirt", 740, 350);
+			
+			//Armor pricing
+			g.drawString("5", 980, 300);
+			g.drawString("10", 980, 325);
+			g.drawString("100", 980, 350);
+				
+			
 		}
 		
 		
+		if(state == 7)
+		{
+			g.drawString("CHOOSE MEDIUM ARMOR", 833, 506);
+			g.drawString("PREVIOUS", 867, 546);
+			g.drawString("ARMOR NAME", 740, 250);
+			g.drawString("PRICE", 980, 250);
+			g.drawString("CURRENCY", 860, 200);
+			g.drawString(myMoney, 975, 200);
+			
+			//Armor Name 
+			g.drawString("Scale Mail", 740, 300);
+			g.drawString("Chain Mail", 740, 325);
+			g.drawString("Breast Plate", 740, 350);
+			
+			//Armor pricing
+			g.drawString("50", 980, 300);
+			g.drawString("150", 980, 325);
+			g.drawString("200", 980, 350);
+				
+			
+		}
+		
+		if(state == 8)
+		{
+			g.drawString("CHOOSE HEAVY ARMOR", 833, 506);
+			g.drawString("PREVIOUS", 867, 546);
+			g.drawString("ARMOR NAME", 740, 250);
+			g.drawString("PRICE", 980, 250);
+			g.drawString("CURRENCY", 860, 200);
+			g.drawString(myMoney, 975, 200);
+			
+			//Armor Name 
+			g.drawString("Banded Mail", 740, 300);
+			g.drawString("Half-Plate", 740, 325);
+			g.drawString("Full Plate", 740, 350);
+			
+			//Armor pricing
+			g.drawString("250", 980, 300);
+			g.drawString("600", 980, 325);
+			g.drawString("750", 980, 350);
+				
+			
+		}
+		
+		
+		if(state == 9)
+		{
+			g.drawString("EQUIP A SHIELD?", 833, 506);
+			
+			//GO BACK TO STATE 5
+			g.drawString("PREVIOUS", 867, 546);
+			
+			//GO TO STATE 10!!!
+			g.drawString("YES", 782, 448);
+			
+			//SKIP TO STATE 11
+			g.drawString("NO", 1005, 448);
+		}
+		
+		if(state == 10)
+		{
+			
+			g.drawString("CHOOSE SHIELD", 833, 506);
+			g.drawString("SHIELD NAME", 740, 250);
+			g.drawString("PRICE", 980, 250);
+			g.drawString("CURRENCY", 860, 200);
+			g.drawString(myMoney, 975, 200);
+			
+			//SHIELD Name 
+			g.drawString("Buckler", 740, 300);
+			g.drawString("Light Steel Shield", 740, 325);
+			g.drawString("Heavy Steel Shield", 740, 350);
+			
+			//SHIELD pricing
+			g.drawString("5", 980, 300);
+			g.drawString("9", 980, 325);
+			g.drawString("20", 980, 350);
+
+			
+		}
+		
+		// IF WE CLICK NO SHIELD
+		if(state == 11)
+		{
+			
+			g.drawString("CHOOSE WEAPON", 833, 506);
+			g.drawString("PRICE", 980, 250);
+			g.drawString("CURRENCY", 860, 200);
+			g.drawString(myMoney, 975, 200);
+			g.drawString("WEAPON NAME", 740, 250);
+			
+			
+			//WEAPON NAME 
+			g.drawString("Longsword(1h)", 740, 300);
+			g.drawString("Battleaxe(2h)", 740, 325);
+			g.drawString("Cutlass(1h)", 740, 350);
+			g.drawString("Klar(1h)", 740, 375);
+			g.drawString("Heavy Pick(2h)", 740, 400);
+			g.drawString("Rapier(1h)", 740, 425);
+			g.drawString("Warhammer(2h)", 740, 450);
+			g.drawString("No Weapon(1h)", 740, 475);
+			
+			//WEAPON pricing
+			g.drawString("15", 980, 300);
+			g.drawString("10", 980, 325);
+			g.drawString("15", 980, 350);
+			g.drawString("12", 980, 375);
+			g.drawString("8", 980, 400);
+			g.drawString("20", 980, 425);
+			g.drawString("12", 980, 450);
+			g.drawString("0", 980, 475);
+			
+		}
+		
+		//ONE HANDED WEAPONS
+		if(state == 12)
+		{
+			
+			g.drawString("CHOOSE WEAPON", 833, 506);
+			g.drawString("PRICE", 980, 250);
+			g.drawString("CURRENCY", 860, 200);
+			g.drawString(myMoney, 975, 200);
+			g.drawString("WEAPON NAME", 740, 250);
+			
+			//WEAPON Name 
+			g.drawString("Longsword(1h)", 740, 300);
+			g.drawString("Cutlass(1h)", 740, 325);
+			g.drawString("Klar(1h)", 740, 350);
+			g.drawString("Rapier(1h)", 740, 375);
+			g.drawString("No Weapon(1h)", 740, 400);
+			
+			//weapon pricing
+			g.drawString("15", 980, 300);
+			g.drawString("15", 980, 325);
+			g.drawString("12", 980, 350);
+			g.drawString("20", 980, 375);
+			g.drawString("0", 980, 400);
+			
+		}
+		
+		if(state == 13)
+		{
+			
+			String mainweapon=mainHand.getName();
+			String offweapon=null;
+			if(offHand == null)
+			{
+				offweapon = "None";
+			}
+			else
+			{
+				offweapon=offHand.getName();
+			}
+			String myshield = null;
+			if(shield == null)
+			{
+				myshield = "No Shield";
+			}
+			else
+			{
+				myshield = shield.getName();
+			}
+			
+			String myarmor=newArmor.getName();
+			String racename = null;
+			String sSize = null;
+			String gen = null;
+			if(race == 0)
+			{
+				racename= "Elf";
+			}
+			else
+			{
+				racename = "Human";
+			}
+			
+			if(size == 0)
+			{
+				sSize = "Medium";
+			}
+			else if(size == 1)
+			{
+				sSize = "Small";
+			}
+			else
+			{
+				sSize = "Large";
+			}
+			
+			if(gender == 0)
+			{
+				gen = "Female";
+			}
+			else
+			{
+				gen = "Male";
+			}
+			
+			g.drawString("Your Selections", 796, 170);
+			g.drawString("Main Hand: " + mainweapon, 785, 245);
+			g.drawString("OffHand: " + offweapon, 785, 270);
+			g.drawString("Shield: " + myshield, 785, 295);
+			g.drawString("Armor: " + myarmor, 785, 320);
+			g.drawString("Race: " + racename, 785, 345);
+			g.drawString("Size: " + sSize, 785, 370);
+			g.drawString("Gender: " + gen, 785, 395);
+			
+			g.drawString("DONE", 765, 495);
+			g.drawString("START OVER", 890, 495);
+
+				
+		}
+		
+		
+		if(state == 14)
+		{
+			g.drawString("CHARACTER SAVED!", 778, 320);
+			g.drawString("JOIN LOBBY", 800, 375);
+		}
 		
 		
 //		textbox.render(gc, g);
@@ -202,10 +500,7 @@ public class CharCreate extends BasicGameState
 		
 		g.setFont(font2);
 //		textbox.setCursorVisible(true);
-		
-
-		
-		
+	
 		
 	}
 	
@@ -223,6 +518,7 @@ public class CharCreate extends BasicGameState
 			{
 				button.play();
 				sbg.enterState(0);
+				
 				/* kill the overlap */
 				characterName.setLocation(2000, 2000);
 				playerName.setLocation(2000,2000);
@@ -234,6 +530,8 @@ public class CharCreate extends BasicGameState
 				deity.setLocation(2000,2000);
 				background.setLocation(2000,2000);
 				occupation.setLocation(2000,2000);
+				
+				state = 0;
 
 			}
 		}
@@ -244,8 +542,52 @@ public class CharCreate extends BasicGameState
 			{
 				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
-					button.play();
-					state++;
+					boolean isGood;
+					try
+					{
+						
+						Integer.parseInt(height.getText());
+						isGood = true;
+					}
+					
+					catch(Exception e)
+					{
+						isGood = false;
+						heightcheck = false;
+					}
+					
+					try
+					{
+						
+						Integer.parseInt(weight.getText());
+						isGood = true;
+					}
+					
+					catch(Exception e)
+					{
+						isGood = false;
+						weightcheck = false;
+					}
+					
+					try
+					{
+						
+						Integer.parseInt(age.getText());
+						isGood = true;
+					}
+					
+					catch(Exception e)
+					{
+						isGood = false;
+						agecheck = false;
+					}
+					
+					if(isGood)
+					{
+						button.play();
+						state++;
+					}
+					
 				}
 			
 			}
@@ -448,61 +790,617 @@ public class CharCreate extends BasicGameState
 		}
 			
 			
-			/**************DONE*****************/
-			//IF STATE = 5 AND IF CLICK DONE THEN GO TO MAIN MENU 
-			//or 
-			//CLICK PREVIOUS AND GO BACK TO STATE 4
-			if(state == 5)
+		/**************ARMOR RATING*****************/
+		//IF STATE = 5 AND IF CLICK LIGHT, MEDIUM, HEAVY THEN GO TO CORRESPONDING STATE 
+		//or 
+		//CLICK PREVIOUS AND GO BACK TO STATE 4
+		if(state == 5)
+		{
+			
+			//1 for small 0 for medium and -1 for large
+			
+			/*********LIGHT LIGHT LIGHT ***************/
+			if((posX > 721 && posX < 829) && (posY > 180 && posY < 205))
 			{
-				
-				/*********CLICK DONE TO GO TO MAIN MENU***************/
-				if((posX > 883 && posX < 936) && (posY > 124 && posY < 149))
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 				{
-					if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-					{
-						button.play();
-						state = 0;
-						sbg.enterState(0);
-					}
-				
-				}
-				
-				/***************PREVIOUS PREVIOUS PREVIOUS **************/
-				else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
-				{
-					if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-					{
-						button.play();
-						state--;
-					}
+					button.play();
 					
+					state++;
 				}
 			
+			}
 			
+			/*************MEDIUM MEDIUM MEDIUM ************************/
+			else if((posX > 890 && posX < 960) && (posY > 185 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					
+					state = 7;
+				}
 			
+			}
+			
+			/***************HEAVY HEAVY HEAVY **************/
+			else if((posX > 1000 && posX < 1060) && (posY > 185 && posY < 204))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					
+					state = 8;
+				}
+				
+			}
+			
+			/***************PREVIOUS PREVIOUS PREVIOUS **************/
+			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state --;
+				}
+				
+			}
 		}
 		
-		//System.out.println(username.getText());
-		//LOGIN button
-//		if((posX > 185 && posX < 247) && (posY > 28 && posY < 47))
-//		{
-//			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-//			{
-//				button.play();
-//				sbg.enterState(2);
-//			}
-//		}
+		
+		
+		/**************LIGHT ARMOR STATE*****************/
+		//IF STATE = 6 AND IF CLICK ARMOR TYPE THEN GO TO CORRESPONDING STATE 
+		//or 
+		//CLICK PREVIOUS AND GO BACK TO STATE 5
+		if(state == 6)
+		{
+			
+			
+			/*********WHENEVER AN ARMOR TYPE IS CHOSEN ***************/
+			
+			
+			/********************PADDED ARMOR IS CHOSEN***************/
+			if((posX > 737 && posX < 797) && (posY > 336 && posY < 348))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(0);
+					sheet.subCurrency(5);
+					state = 9;
+				}
+			
+			}
+			
+			/********************LEATHER ARMOR IS CHOSEN***************/
+			if((posX > 737 && posX < 797) && (posY > 310 && posY < 321))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(1);
+					sheet.subCurrency(10);
+					state = 9;
+				}
+			
+			}
+			
+			/********************CHAIN SHIRT ARMOR IS CHOSEN***************/
+			if((posX > 737 && posX < 797) && (posY > 283 && posY < 297))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(2);
+					sheet.subCurrency(100);
+					state = 9;
+				}
+			
+			}
+			
+			/***************PREVIOUS PREVIOUS PREVIOUS **************/
+			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state = 5;
+				}
 				
-		//String input = textbox.getText();
+			}
+		}
 		
 		
 		
-		 
+		
+		
+		/**************MEDIUM ARMOR STATE*****************/
+		//IF STATE = 7 AND IF CLICK ARMOR TYPE THEN GO TO  STATE = 9 
+		//or 
+		//CLICK PREVIOUS AND GO BACK TO STATE 5
+		if(state == 7)
+		{
+			
+			
+			/*********WHENEVER AN ARMOR TYPE IS CHOSEN ***************/
+			
+			
+			/********************SCALE MAIL ARMOR IS CHOSEN***************/
+			if((posX > 737 && posX < 816) && (posY > 336 && posY < 348))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(3);
+					sheet.subCurrency(50);
+					state = 9;
+				}
+			
+			}
+			
+			/********************CHAIN MAIL ARMOR IS CHOSEN***************/
+			if((posX > 737 && posX < 816) && (posY > 310 && posY < 321))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(4);
+					sheet.subCurrency(150);
+					state = 9;
+				}
+			
+			}
+			
+			/********************BREAST PLATE ARMOR IS CHOSEN***************/
+			if((posX > 737 && posX < 816) && (posY > 283 && posY < 297))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(5);
+					sheet.subCurrency(200);
+					state = 9;
+				}
+			
+			}
+			
+			/***************PREVIOUS PREVIOUS PREVIOUS **************/
+			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					
+					state = 5;
+				}
+				
+			}
+		}
+			
+		
+		
+		/**************HEAVY ARMOR STATE*****************/
+		//IF STATE = 8 AND IF CLICK ARMOR TYPE THEN GO TO STATE = 9 
+		//or 
+		//CLICK PREVIOUS AND GO BACK TO STATE 5
+		if(state == 8)
+		{
+			
+			
+			/*********WHENEVER AN ARMOR TYPE IS CHOSEN ***************/
+			
+			
+			/********************BANDED MAIL ARMOR IS CHOSEN***************/
+			if((posX > 737 && posX < 831) && (posY > 336 && posY < 348))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(6);
+					sheet.subCurrency(250);
+					state = 9;
+				}
+			
+			}
+			
+			/********************HALF PLATE ARMOR IS CHOSEN***************/
+			if((posX > 737 && posX < 812) && (posY > 310 && posY < 321))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(7);
+					sheet.subCurrency(600);
+					state = 9;
+				}
+			
+			}
+			
+			/********************FULL PLATE ARMOR IS CHOSEN***************/
+			//IF STATE = 9 AND IF CLICK ARMOR TYPE THEN GO TO STATE = 10 
+			//or 
+			//CLICK PREVIOUS AND GO BACK TO STATE 5
+			
+			if((posX > 737 && posX < 812) && (posY > 283 && posY < 297))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					newArmor = sheet.getArmorFromArmory(8);
+					sheet.subCurrency(750);
+					state++;
+				}
+			
+			}
+			
+			/***************PREVIOUS PREVIOUS PREVIOUS **************/
+			else if((posX > 867 && posX < 952) && (posY > 85 && posY < 105))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					state = 5;
+				}
+				
+			}
+		}
+		
+		
+		/**************************CHOICE OF WHETHER OR NOT TO EQUIP SHIELD*************/
+		//IF STATE = 9 AND IF CLICK YES THEN GO TO STATE = 10 
+				//or 
+				//CLICK PREVIOUS AND GO BACK TO STATE 5
+				
+		if(state == 9)
+		{
+			
+			
+			/*********WHEN YES IS CHOSEN ***************/
+			
+			
+			/***********************************/
+			if((posX > 780 && posX < 816) && (posY > 184 && posY < 201))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					
+					state++;
+				}
+			
+			}
+			
+			/********************NO IS CHOSEN***************/
+			if((posX > 1001 && posX < 1031) && (posY > 186 && posY < 205))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					
+					state = 11;
+				}
+			
+			}
+		}
+			
+			/**************************CHOOSE SHIELD*************/
+			//IF STATE = 10 AND ONCE SHIELD IS CHOSEN GO TO STATE = 11 
+					
+			if(state == 10)
+			{
+				
+				
+				/*********CHOOSE SHIELD TYPE***************/
+				
+				
+				/****************BUCKLER*******************/
+				if((posX > 738 && posX < 794) && (posY > 334 && posY < 347))
+				{
+					if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+					{
+						button.play();
+						shield = sheet.getArmorFromArmory(10);
+						sheet.subCurrency(5);
+						state= 12;
+					}
+				
+				}
+				
+				/********************LIGHT STEEL SHIELD***************/
+				if((posX > 738 && posX < 866) && (posY > 309 && posY < 323))
+				{
+					if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+					{
+						button.play();
+						shield = sheet.getArmorFromArmory(11);
+						sheet.subCurrency(9);
+						state = 12;
+					}
+				
+				}
+				
+				/********************HEAVY STEEL SHIELD***************/
+				if((posX > 738 && posX < 877) && (posY > 283 && posY < 299))
+				{
+					if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+					{
+						button.play();
+						shield = sheet.getArmorFromArmory(9);
+						sheet.subCurrency(20);
+						state = 12;
+					}
+				
+				}
+				
+			
+		}
+	
+		/**************************CHOOSE ALL WEAPONS*************/
+		//IF STATE = 11 AND ONCE WEAPON IS CHOSEN GO TO STATE = 12 OR 13 (DEPENDS 1 HAND OR 2 HAND) 
+				
+		if(state == 11)
+		{
+			
+			
+			/*********CHOOSE WEAPON***************/
+			
+			
+			/****************LONGSWORD*******************/
+			if((posX > 738 && posX < 826) && (posY > 330 && posY < 347))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					offHand = sheet.getWeaponFromArmory(1);
+					sheet.subCurrency(15);
+					state= 12;
+				}
+			
+			}
+			
+			/********************BATTLEAXE***************/
+			if((posX > 738 && posX < 866) && (posY > 309 && posY < 323))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					mainHand = sheet.getWeaponFromArmory(2);
+					sheet.subCurrency(10);
+					state = 13;
+				}
+			
+			}
+			
+			/********************CUTLASS***************/
+			if((posX > 738 && posX < 802) && (posY > 283 && posY < 299))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					offHand = sheet.getWeaponFromArmory(3);
+					sheet.subCurrency(15);
+					state = 12;
+				}
+			
+			}
+			
+			/****************KLAR*******************/
+			if((posX > 738 && posX < 775) && (posY > 256 && posY < 273))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					offHand = sheet.getWeaponFromArmory(4);
+					sheet.subCurrency(12);
+					state= 12;
+				}
+			
+			}
+			
+			/********************HEAVY PICK***************/
+			if((posX > 738 && posX < 829) && (posY > 234 && posY < 245))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					mainHand = sheet.getWeaponFromArmory(5);
+					sheet.subCurrency(8);
+					state = 13;
+				}
+			
+			}
+			
+			/********************RAPIER***************/
+			if((posX > 738 && posX < 792) && (posY > 208 && posY < 222))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					offHand = sheet.getWeaponFromArmory(6);
+					sheet.subCurrency(20);
+					state = 12;
+				}
+			
+			}
+			
+			/********************WARHAMMER***************/
+			if((posX > 738 && posX < 836) && (posY > 180 && posY < 199))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					mainHand = sheet.getWeaponFromArmory(7);
+					sheet.subCurrency(12);
+					state = 13;
+				}
+			
+			}
+			
+			/********************NO WEAPON***************/
+			if((posX > 738 && posX < 827) && (posY > 154 && posY < 173))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					offHand = sheet.getWeaponFromArmory(0);
+					state = 12;
+				}
+			
+			}
+			
+		
+	}
+	
+		/**************************CHOOSE 1 HANDED WEAPONS*************/
+		//IF STATE = 12 AND ONCE WEAPON IS CHOSEN GO TO STATE = 13  
+				
+		if(state == 12)
+		{
+			
+			
+			/*********CHOOSE WEAPON***************/
+			
+			
+			/****************LONGSWORD*******************/
+			if((posX > 738 && posX < 826) && (posY > 330 && posY < 347))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					mainHand = sheet.getWeaponFromArmory(1);
+					sheet.subCurrency(10);
+					state= 13;
+				}
+			
+			}
+			
+			/********************CUTLASS***************/
+			if((posX > 738 && posX < 866) && (posY > 309 && posY < 323))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					mainHand = sheet.getWeaponFromArmory(3);
+					sheet.subCurrency(15);
+					state = 13;
+				}
+			
+			}
+			
+			/********************KLAR***************/
+			if((posX > 738 && posX < 802) && (posY > 283 && posY < 299))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					mainHand = sheet.getWeaponFromArmory(4);
+					sheet.subCurrency(12);
+					state = 13;
+				}
+			
+			}
+			
+			/****************RAPIER*******************/
+			if((posX > 738 && posX < 775) && (posY > 256 && posY < 273))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					mainHand = sheet.getWeaponFromArmory(6);
+					sheet.subCurrency(20);
+					state= 13;
+				}
+			
+			}
+			
+			/********************UNARMED***************/
+			if((posX > 738 && posX < 829) && (posY > 234 && posY < 245))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					mainHand = sheet.getWeaponFromArmory(0);
+					state = 13;
+				}
+			
+			}
+			
+		
+	}
+		
+		/**************************DISPLAY CHARACTER INFORMATION*************/
+		//IF STATE = 13 AND WHEN BACK IS PRESSED  
+				
+		if(state == 13)
+		{
+			
+			
+			/*********CHOOSE WEAPON***************/
+			
+			
+			/****************WILL GO TO STATE 14 DONE BUTTON*******************/
+			if((posX > 763 && posX < 814) && (posY > 136 && posY < 158))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					setCharacterSheet();
+					state= 14;
+				}
+			
+			}
+			
+			/***********************START OVER**************************/
+			if((posX > 887 && posX < 992) && (posY > 138 && posY < 153))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					offHand = null;
+					shield = null;
+					
+					
+					sheet.setCurrency(1000);
+					state = 1;
+				}
+			
+			}
+		}
+		
+		
+		/**************************CHARACTER IS SAVED GO TO LOBBY*************/
+		//IF STATE = 14 CHARACTER IS SAVED AND OPTION TO GO TO LOBBY  
+				
+		if(state == 14)
+		{
+			
+			
+			/****************WILL GO TO LOBBY AND DISPLAY CHARACTER SAVED*******************/
+			
+			
+			//JOIN LOBBY OPTION
+			
+			if((posX > 789 && posX < 900) && (posY > 258 && posY < 278))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					sbg.enterState(1);
+					state = 0;
+				}
+			
+			}
+		}
+			
+		
+		  myMoney = Integer.toString( sheet.getCurrency());		 
 	      mouse = "Mouse position x: " + posX + " y: " + posY;
 	      
 
+}
 		
-	}
+	
 	
 	public UnicodeFont getNewFont(String fontName , int fontSize)
     {
@@ -518,21 +1416,11 @@ public class CharCreate extends BasicGameState
 	}
 	
 	//this is what the button should do then move to the next
-	public void setCharacterSheet(TextField username)
+	public void setCharacterSheet() throws SlickException
 	{
 		
+		MapTool mt = new MapTool();
 		
-		//CHRIS
-		/*
-		 * I NEED BUTTONS 
-		 * x2 race buttons 1 human 1 elf. the human button value set to 1 and elf to 0
-		 * x1 class button 1 barbarian barb button value set to 0
-		 *
-		 * x2 gender buttons 1M 1F
-		 * x3 size buttons sm med lrg (the values set to those are 1 for sm 0 for med and -1 for lrg)
-		 
-		 */
-		//fix with buttons
 		
 		//this method fills the characterSheet
 		sheet.fillBasic(characterName.getText(), playerName.getText(), race, languages.getText(), size, gender, 
@@ -544,10 +1432,36 @@ public class CharCreate extends BasicGameState
 		//get class option button value
 		
 		
-		//sheet.fillRecorder(sheet.chooseClass(class button value here)/*This needs the class option from button */);
+		sheet.fillRecorder(sheet.chooseClass(char_class));
 		
-		//sheet.fillAttacksAndDefense(/* the class option*/);
+		sheet.fillAttacksAndDefense(sheet.chooseClass(char_class));
+		//sheet.unequipWeapons(); //equips with unarmed weapons...
+		System.out.println(mainHand.getName());
 		
+		
+		sheet.equipWeapon(mainHand, 0);
+		
+		
+		if(offHand != null)
+		{
+			sheet.equipWeapon(offHand, 1);
+			
+			
+		}
+		
+		
+		sheet.EquipArmor(newArmor);
+		
+		if(shield != null)
+		{
+			sheet.EquipShield(shield);
+		}
+		
+		sheet.applyArmorAndShield();
+		
+		newchar.setCharacterSheet(sheet);
+		
+		newchar.writeMe(mt.ddPath);
 		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
 	
 	}

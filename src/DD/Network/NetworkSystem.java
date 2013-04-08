@@ -3,6 +3,7 @@ package DD.Network;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import DD.Character.Abilities.Ability;
 import DD.Chat.ChatSystem;
 import DD.CombatSystem.CombatSystem;
 import DD.Message.Message;
@@ -92,9 +93,14 @@ public class NetworkSystem extends Network
 
 	public void stop() 
 	{
-		network.stop();
-		network = null;
+		if(network != null) network.stop();
 	} /* end stop method */
+	
+	public void close()
+	{
+		stop();
+		network = null;
+	} /* end close method */
 
 	public void terminate() 
 	{
@@ -105,6 +111,14 @@ public class NetworkSystem extends Network
 	{
 		network.printUsers();		
 	} /* end printUsers method */
+	
+	/******************************************************************************
+	 ******************************* Setter Methods *******************************
+	 ******************************************************************************/
+	public Network getNetwork()
+	{
+		return network;
+	} /* end getNetowrk method */
 	
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************

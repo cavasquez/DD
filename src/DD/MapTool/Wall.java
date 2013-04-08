@@ -41,7 +41,7 @@ public class Wall extends Objects
 		super(name, image, map, x, y);
 		super.movePenalty = Integer.MAX_VALUE/2; 	/* Divide by 2 to avoid overflow when adding but maintain high value */
 		super.lightPenalty = Integer.MAX_VALUE/2; 	/* Divide by 2 to avoid overflow when adding but maintain high value */
-		super.priority = 10;
+		super.priority = 9;
 		this.x = x;
 		this.y = y;
 	} /* end constructor */
@@ -51,7 +51,7 @@ public class Wall extends Objects
 		super(name, map);
 		super.movePenalty = Integer.MAX_VALUE/2; 	/* Divide by 2 to avoid overflow when adding but maintain high value */
 		super.lightPenalty = Integer.MAX_VALUE/2; 	/* Divide by 2 to avoid overflow when adding but maintain high value */
-		super.priority = 10;
+		super.priority = 9;
 		this.x = 0;
 		this.y = 0;
 		
