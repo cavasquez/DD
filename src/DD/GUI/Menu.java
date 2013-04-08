@@ -31,7 +31,7 @@ public class Menu extends BasicGameState
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
 		dungeon = new Music("Audio/Gauntlet.wav");
-		//dungeon.loop();
+		dungeon.loop();
 		screen = new Image("Images/Menus/menuscreen5.jpg");
 		playNow = new Image("Images/Menus/MenuButtons.png"); // Contains the menu button options
 		

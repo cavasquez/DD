@@ -49,14 +49,9 @@ public class JoinLob extends BasicGameState
 		screen = new Image("Images/Menus/DD1.jpg");
 		
 		
-		//play = new Image("Images/Menus/play button.png");
-		//options = new Image("res/options button.png");
-		//font = new TrueTypeFont(new java.awt.Font(java.awt.Font.SERIF,java.awt.Font.BOLD,8),false);
 		font = getNewFont("Arial" , 16);
 		button = new Sound("Audio/dunSound.wav");
-		//dungeon = new Music("Audio/dunEffect1.wav");
-		//dungeon.loop();
-//		textbox = new TextField(gc, font, 100, 266, 250 , 50);
+	
 		jlsb = new JoinLobbyStartButton(Game.system, new Vector2f(190, 600));
 		jlsb.setBasicGameState(this);
 //		textbox.addListener(new KeyListener());
@@ -78,9 +73,7 @@ public class JoinLob extends BasicGameState
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g)throws SlickException
 	{
 		screen.draw(0,0);
-		//play.draw(100,100);
-		//options.draw(100, 200);
-		//about.draw(100, 300);
+		
 		g.drawString(mouse, 100, 400);
 		g.drawString("inputMouse x " + inputMouse.getMouseX() + " y " + inputMouse.getMouseY(), 100, 420);
 //		g.drawString("LobbyIP: 123.43.345", 82, 266);
@@ -98,10 +91,7 @@ public class JoinLob extends BasicGameState
 		g.drawString("BACK", 190, 552);
 		
 		
-//		textbox.render(gc, g);
-		
-		
-//		textbox.setCursorVisible(true);
+
 		
 		
 		
@@ -125,19 +115,7 @@ public class JoinLob extends BasicGameState
 			}
 		}
 		
-		//System.out.println(username.getText());
-		//LOGIN button
-//		if((posX > 185 && posX < 247) && (posY > 28 && posY < 47))
-//		{
-//			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-//			{
-//				button.play();
-//				sbg.enterState(2);
-//			}
-//		}
-				
-		//String input = textbox.getText();
-		
+
 		
 		
 		//this parameter is used for the LOAD CHARACTER function
