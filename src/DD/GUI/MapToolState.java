@@ -490,7 +490,7 @@ public class MapToolState extends BasicGameState {
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			
     			
-    			World world = maptool.loadWorld("world", false);
+    			World world = maptool.loadWorld("world", true);
     			//System.out.println(world.toString());
     			
     			System.out.println(world.getMap(0, 0).getObjectAtLocation(0, 0).image);
