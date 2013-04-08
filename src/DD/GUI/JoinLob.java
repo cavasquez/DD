@@ -16,7 +16,10 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.Character.DDCharacter;
 import DD.Character.CharacterSheet.CharacterSheet;
+import DD.MapTool.Map;
+import DD.MapTool.MapTool;
 
 public class JoinLob extends BasicGameState
 {
@@ -143,7 +146,15 @@ public class JoinLob extends BasicGameState
 						if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 						{
 							button.play();
-							sheet = null;
+							DDCharacter temp = new DDCharacter(0);
+							CharacterSheet temp1 = new CharacterSheet();
+							
+							MapTool mt = new MapTool();
+
+							temp = mt.getCurrentMap().loadCharacter(mt.ddPath, username.getText().trim());
+							temp1 = temp.getCharacterSheet();
+														
+							sheet = temp1;
 							jlsb.setCharacterSheet(sheet);
 						}
 					}

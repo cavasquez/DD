@@ -92,22 +92,20 @@ public class MapTool implements Serializable {
 				for (int k = 0; k < world.getMap(i, j).mapSize; k++) {
 					for (int l = 0; l < world.getMap(i, j).mapSize; l++) {
 						Objects[] list = new Objects[world.getMap(i, j).objectsStack[k][l].size()];
-//						System.out.println("SIZE: "+world.getMap(i, j).objectsStack[i][j].size());
 						System.arraycopy(world.getMap(i, j).objectsStack[k][l].toArray(),0, list, 0,world.getMap(i, j).objectsStack[k][l].size());
 						for (int m = 0; m < list.length; m++) {
-							try {//System.out.println("1: "+list[m]);
+							try {
 								if(list[m] instanceof Floor){
-									
-										//System.out.println("floor");
-									Floor flo = new Floor("floor",k,l,5,5,world.getMap(i, j));
-										
-									 world.getMap(i, j).place(k,l ,flo);
-
+									if(list[m] instanceof Grass){
+										Grass grass = new Grass("grass", k, l, 5, 5, world.getMap(i, j));
+										world.getMap(i, j).place(k,l ,grass);
+									}
+									else{
+										Floor flo = new Floor("floor",k,l,5,5,world.getMap(i, j));	
+										world.getMap(i, j).place(k,l ,flo);
+									}
 								}
-									//make a wall image
-								
 								if(list[m] instanceof Wall){
-//									System.out.println("wall");
 									Wall wall =  new Wall("wall", world.getMap(i, j));
 									world.getMap(i, j).place(k, l, wall);
 								}
@@ -115,7 +113,6 @@ public class MapTool implements Serializable {
 								{
 									if(loadChar)
 									{
-//										System.out.println("image " + ((CharacterObjects)list[m]).getDdchar().getSheet().getImage().getWidth());
 										DDCharacter ddc = ((CharacterObjects) list[m]).getDdchar();
 										CharacterObjects co = new CharacterObjects(ddc.getSheet().getName(), ddc.getSheet().getImage(), world.getMap(i, j), ddc);
 										world.getMap(i, j).place(k, l, co);
@@ -125,16 +122,11 @@ public class MapTool implements Serializable {
 										DDCharacter ddc = ((CharacterObjects) list[m]).getDdchar();
 										world.getMap(i, j).serMapHelper.add(new SerMapCharHelper(new Coordinate(k,l), ddc.getSheet()));
 									}
-//									
 								}
-								
-//								 System.out.println(world.getMap(i, j).getObjectAtLocation(k, l).image.toString());
 							}
 							catch (SlickException e1) {
-									// TODO Auto-generated catch block
 									e1.printStackTrace();
-								}
-							//System.out.println(list[m].image);
+							}
 						}
 					}
 				}

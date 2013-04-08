@@ -22,6 +22,7 @@ public class MonsterSheet extends CharacterSheet
 	public MonsterSheet()
 	{
 		super();
+		this.netID = Network.GM_USER_ID;
 	}
 	
 	public int getXP()

@@ -19,7 +19,6 @@ public class Floor extends Objects{
 	public Floor() {
 		
 		super();
-		System.out.println("fuck a duck");
 		image = new DDImage(1185, 416).getScaledCopy(0.9f);
 	}
 
@@ -33,9 +32,7 @@ public class Floor extends Objects{
 		super(name, image, map, x, y);
 		super.movePenalty = move;
 		super.lightPenalty = light;
-		super.priority = 0;
-		
-		
+		super.priority = 0;	
 	}
 
 	public void setImage(DDImage image) {
