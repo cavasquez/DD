@@ -4,7 +4,6 @@ import java.awt.Font;
 
 
 import org.lwjgl.Sys;
-import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -427,7 +426,7 @@ public class MapToolState extends BasicGameState {
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			
     			
-    			World world = maptool.loadWorld("world", true);
+    			World world = maptool.loadWorld("world", false);
     			//System.out.println(world.toString());
     			
     			System.out.println(world.getMap(0, 0).getObjectAtLocation(0, 0).image);

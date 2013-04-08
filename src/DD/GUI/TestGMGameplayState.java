@@ -15,7 +15,7 @@ import DD.Network.NetworkSystem.NetworkType;
 import DD.SlickTools.Component;
 import DD.SlickTools.RenderComponent;
 
-public class GMGameplayState extends BasicGameState {
+public class TestGMGameplayState extends BasicGameState {
 	
 	private int stateID = 0;
 	private MapTool maptool;
@@ -25,7 +25,7 @@ public class GMGameplayState extends BasicGameState {
 	private DDCharacter goblin1, goblin2;
 	
 	
-	public GMGameplayState(int stateID) {
+	public TestGMGameplayState(int stateID) {
 		this.stateID = stateID;
 	}
 
@@ -39,7 +39,19 @@ public class GMGameplayState extends BasicGameState {
 	public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
 		maptool = new MapTool();
 		gmToolsBox = new GMToolsBox(stateID, 300, 200);
-
+		
+		Game.system.ns.setNetworkType(NetworkType.SERVER);
+		Game.system.setMap(maptool.getMapAtLocation(0, 0));
+		
+		gmToolsBox.addCharacter(GMToolsBox.Holder.MOB, new Goblin());
+		gmToolsBox.addCharacter(GMToolsBox.Holder.MOB, new Goblin());
+		
+//		DDCharacter goblin1 = new DDCharacter(stateID++);
+//		DDCharacter goblin2 = new DDCharacter(stateID++);
+//		goblin1.setCharacterSheet(new Goblin());
+//		goblin2.setCharacterSheet(new Goblin());
+//		goblin1.setCharacterID(stateID++);
+//		goblin2.setCharacterID(stateID++);
 	
 	}
 

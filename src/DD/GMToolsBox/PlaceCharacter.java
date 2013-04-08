@@ -109,12 +109,14 @@ public class PlaceCharacter extends TargetAbility
 		ts.chooseTarget(tcm);
 	} /* end place method */
 	
-	protected void place(Coordinate position) throws SlickException
+	protected void place(Coordinate position, boolean reset) throws SlickException
 	{
 		Integer[] body = new Integer[I_PlaceCharacter.BODY_SIZE];
 		body[I_PlaceCharacter.CHARACTER_ID] = gmt.getNewCharacterID();
 		body[I_PlaceCharacter.POS_X] = position.x;
 		body[I_PlaceCharacter.POS_Y] = position.y;
+		if(reset) body[I_PlaceCharacter.RESET] = 1;
+		else body[I_PlaceCharacter.RESET] = 0;
 		CombatMessage cm = new CombatMessage
 				(
 					null,
@@ -159,6 +161,8 @@ public class PlaceCharacter extends TargetAbility
 			body[I_PlaceCharacter.CHARACTER_ID] = gmt.getNewCharacterID();
 			body[I_PlaceCharacter.POS_X] = tsm.getPosition().x;
 			body[I_PlaceCharacter.POS_Y] = tsm.getPosition().y;
+			body[I_PlaceCharacter.POS_Y] = tsm.getPosition().y;
+			body[I_PlaceCharacter.RESET] = 0; /* do not reset */
 			CombatMessage cm = new CombatMessage
 					(
 						null,

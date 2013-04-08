@@ -98,15 +98,15 @@ public class ClientSystem extends Network implements NetworkInterface
 			
 			while(spawner.getSocketReady() != true)
 			{
-				/* do nothing until listener is set up */
-				try 
-				{
-					Thread.sleep(100);
-				} /* end try */
-				catch (InterruptedException e) 
-				{
-					System.out.println("interrupted in ClientSysetm at start while waiting for listener");
-				} /* end catch */
+//				/* do nothing until listener is set up */
+//				try 
+//				{
+//					Thread.sleep(100);
+//				} /* end try */
+//				catch (InterruptedException e) 
+//				{
+//					System.out.println("interrupted in ClientSysetm at start while waiting for listener");
+//				} /* end catch */
 			} /* end while loop */
 			
 			/* Now try to connect to server */

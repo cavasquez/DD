@@ -16,6 +16,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.CombatSystem.TargetingSystem.Coordinate;
+import DD.GUI.Game;
 import DD.MapTool.MapTool;
 import DD.SlickTools.BoxInterface;
 import DD.SlickTools.DDImage;
@@ -130,12 +131,12 @@ public class GMToolsBox extends BoxInterface
 		
 	} /* end addCharacter method */
 	
-	public PlaceCharacter addCharacter(Holder type, CharacterSheet sheet, Coordinate position)
+	public PlaceCharacter addCharacter(Holder type, CharacterSheet sheet, Coordinate position, boolean reset)
 	{
 		PlaceCharacter returner = addCharacter(type, sheet);
 		try 
 		{
-			returner.place(position);
+			returner.place(position, reset);
 		} /* end try */ 
 		catch 
 		(SlickException e) 
@@ -293,7 +294,7 @@ public class GMToolsBox extends BoxInterface
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} /* end catch */
-			
+
 		} /* end if */
 		return returner;
 	} /* end setMap method */

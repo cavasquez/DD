@@ -115,7 +115,6 @@ public class MapTool implements Serializable {
 								{
 									if(loadChar)
 									{
-										System.out.println("cs " + ((CharacterObjects)list[m]).getDdchar().getSheet().toString());
 //										System.out.println("image " + ((CharacterObjects)list[m]).getDdchar().getSheet().getImage().getWidth());
 										DDCharacter ddc = ((CharacterObjects) list[m]).getDdchar();
 										CharacterObjects co = new CharacterObjects(ddc.getSheet().getName(), ddc.getSheet().getImage(), world.getMap(i, j), ddc);
@@ -124,7 +123,7 @@ public class MapTool implements Serializable {
 									else
 									{
 										DDCharacter ddc = ((CharacterObjects) list[m]).getDdchar();
-										world.getMap(i, j).serMapHelper.add(new SerMapCharHelper(ddc.getCoordinate(), ddc.getSheet()));
+										world.getMap(i, j).serMapHelper.add(new SerMapCharHelper(new Coordinate(k,l), ddc.getSheet()));
 									}
 //									
 								}

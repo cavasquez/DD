@@ -117,6 +117,7 @@ public class JoinLob extends BasicGameState
 			{
 				button.play();
 				sbg.enterState(0);
+				Game.system.ns.stop();
 				this.killTextFields();
 			}
 		}
