@@ -7,6 +7,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.ActionBox.ActionBox;
 import DD.Character.DDCharacter;
 import DD.Character.CharacterSheet.Monster.Goblin;
 import DD.GMToolsBox.GMToolsBox;
@@ -20,6 +21,8 @@ public class GMGameplayState extends BasicGameState {
 	private int stateID = 0;
 	private MapTool maptool;
 	private GMToolsBox gmToolsBox;
+	private ActionBox actionBox;
+	private 
 	Input mouse = new Input(650);
 	
 	private DDCharacter goblin1, goblin2;
@@ -32,26 +35,22 @@ public class GMGameplayState extends BasicGameState {
 	@Override
 	public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
 		
-		
 	}
 	
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
 		maptool = new MapTool();
-		gmToolsBox = new GMToolsBox(stateID, 300, 200);
-		
 		Game.system.ns.setNetworkType(NetworkType.SERVER);
 		Game.system.setMap(maptool.getMapAtLocation(0, 0));
 		
+		gmToolsBox = new GMToolsBox(stateID, 300, 200);
+		actionBox = new ActionBox(stateID, 300, 200);
+		actionBox.addActionChoices();
+		Game.system.linkBoxes(actionBox, null);
+		
 		gmToolsBox.addCharacter(GMToolsBox.Holder.MOB, new Goblin());
 		gmToolsBox.addCharacter(GMToolsBox.Holder.MOB, new Goblin());
 		
-//		DDCharacter goblin1 = new DDCharacter(stateID++);
-//		DDCharacter goblin2 = new DDCharacter(stateID++);
-//		goblin1.setCharacterSheet(new Goblin());
-//		goblin2.setCharacterSheet(new Goblin());
-//		goblin1.setCharacterID(stateID++);
-//		goblin2.setCharacterID(stateID++);
 	
 	}
 
@@ -60,6 +59,7 @@ public class GMGameplayState extends BasicGameState {
 		Game.system.getMap().render(gc, sb, g);
 		gmToolsBox.render(gc, sb, g);
 		g.drawString("BACK",1130,615);
+		actionBox.render(gc, sb, g);
 	}
 
 	@Override
@@ -85,6 +85,7 @@ public class GMGameplayState extends BasicGameState {
     	
     	//Update GMToolsBox
     	gmToolsBox.update(gc, sb, delta);
+    	actionBox.update(gc, sb, delta);
 
 		int posX = mouse.getMouseX();
 		int posY = mouse.getMouseY();

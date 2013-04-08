@@ -93,6 +93,16 @@ import DD.CombatSystem.TargetingSystem.Coordinate;
 			
 			System.out.println("object place " + coord.x + " " + coord.y);
 			
+			if(obj instanceof Grass ){
+				Grass obj2= new Grass("grass",owner); 
+				owner.remove(coord.x, coord.y);
+				owner.place(coord.x, coord.y, obj2);
+				System.out.println(owner.toString());
+				TargetBlock tarBlock = new TargetBlock(owner);
+				owner.place(coord.x, coord.y , tarBlock);
+			}
+			
+			
 			if(obj instanceof Wall){
 				Wall obj2 = new Wall("wall",owner); 
 				owner.remove(coord.x, coord.y);

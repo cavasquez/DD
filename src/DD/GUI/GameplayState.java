@@ -34,12 +34,6 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameplayState extends BasicGameState {
  
 	private int stateID = 0;
-	private DDImage floor = null;
-	private DDImage wall = null;
-	private DDImage scaledWall = null;
-//	private Image playerImage = null;
-//	private Image spriteSheet = null;
-//	private World world = null;
 	public MapTool maptool = null;
     private DDCharacter player;
     private DDCharacter goblin;
@@ -47,8 +41,13 @@ public class GameplayState extends BasicGameState {
     private ActionBox actionBox;
     private GMToolsBox gmToolsBox = null;
     private CharacterSheet sheet = new CharacterSheet();
-    Input mouse = new Input(650);
-
+    private static Input mouse = new Input(650);
+    private String mousePos;
+    private DDImage weapon;
+    private DDImage offhand;
+    private DDImage armor;
+    private DDImage shield;
+    //private DDImage characterSheetButton;
     
  
     public GameplayState(int stateID)
@@ -68,23 +67,21 @@ public class GameplayState extends BasicGameState {
     
     @Override
     public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
-maptool = new MapTool();
     	
+    	maptool = new MapTool();
+    	//characterSheetButton = new DDImage("Images/ActionBox/CharacterSheet.png");
     	//BY DEFAULT, SET NETWORK AS SERVER
     	//TODO: THE ABOVE NEEDS TO BE CHANGED
     	System.out.println("system? " + Game.system);
     	Game.system.ns.setNetworkType(NetworkType.SERVER);
-//    	maptool.getMapAtLocation(0, 0).setPosition(position);
     	Game.system.setMap(maptool.getMapAtLocation(0, 0));
-//    	spriteSheet = new Image("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
-        //floor = spriteSheet.getSubImage(1185, 416, 33, 34);
-//        playerImage = spriteSheet.getSubImage(2530, 1440, 33, 34);
-//        Image goblinImage = spriteSheet.getSubImage(98, 65, 33, 34);
     	
+    	//make character
         player = new DDCharacter(stateID++);  
+        
         //make goblins
-//        goblin1 = new DDCharacter(stateID++);
         goblin = new DDCharacter(stateID++);
+        
         /* character creation process */
 		sheet.fillBasic("Max", 
 			"Bob", 
@@ -104,13 +101,25 @@ maptool = new MapTool();
 		CharacterClass barb = sheet.chooseClass(0);	//this is barbarian
 		sheet.fillRecorder(barb);
 		sheet.fillAttacksAndDefense(barb);
+		
 		sheet.addToEquipment(new Weapon(30, "Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4));
+		sheet.addToEquipment(sheet.getArmorFromArmory(6));
+		sheet.addToEquipment(sheet.getArmorFromArmory(9));	//shield
 		sheet.equipWeapon(new Weapon(30, "Longsword", Dice.DieSize.D6, 2, 19, 5, 'M', 'S', "Note:", 4), 0);
+		sheet.EquipArmor(sheet.getArmorFromArmory(6));
+		sheet.EquipShield(sheet.getArmorFromArmory(9));		//equip shield
+		
 		System.out.println("gamplay" + sheet.EquippedWeapon.isEmpty());
 		sheet.setImage(new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png", 2530, 1440, 33, 34 ));
+		
+		weapon = sheet.getImage().getSubImage(1090, 895, 33, 34).getScaledCopy(0.8f);
+		offhand = sheet.getImage().getSubImage(675, 1505, 33, 34).getScaledCopy(0.8f);
+		armor = sheet.getImage().getSubImage(990, 670, 33, 34).getScaledCopy(0.8f);
+		shield = sheet.getImage().getSubImage(1410, 1410, 33, 34).getScaledCopy(0.8f);
+		
+		//set character sheets for player and goblin
         player.setCharacterSheet(sheet);
         goblin.setCharacterSheet(new Goblin());
-//        goblin1.setCharacterSheet(goblin.getCharacterSheet());
         
         player.setCharacterID(stateID++);
         goblin.setCharacterID(stateID++);
@@ -128,19 +137,12 @@ maptool = new MapTool();
         Game.system.linkBoxes(actionBox, null);
         //set ActionBox's character
         actionBox.setCharacter(player);
-       
-        
-        //wall = spriteSheet.getSubImage(1280, 574, 33, 34);
-        //scaledWall = wall.getScaledCopy(0.9f);
-       // Obstacle renderWall = new Obstacle("wall", scaledWall, 5, 5, maptool.getMapAtLocation(0, 0));
-       // System.out.println(renderWall.toString());
-        //world = new World("TestGUIMap");
         
         int playerx = 15;
         int playery = 6;
         int goblinx = 13;
         int gobliny = 6;
-        //playerObj = new CharacterObjects("Bob", playerImage, 210, 25, world.getMap(0, 0), player); 
+
         playerObj = new CharacterObjects("Bob", player.getImage(), playerx, playery,  Game.system.cs.getMap(), player);
         CharacterObjects goblinObj = new CharacterObjects("Goblin", goblin.getImage(), goblinx, gobliny,  Game.system.cs.getMap(), goblin); 
         
@@ -150,15 +152,13 @@ maptool = new MapTool();
         player.setCoordiante(new Coordinate(playerx, playery));
         goblin.setCoordiante(new Coordinate(goblinx, gobliny));
         
-       // maptool.getMapAtLocation(0, 0).massPlaceObjectsLine(10, 11, 10, 19, renderWall);
         Ability.setOwnerCharacter(player);
         
         player.resetCharacter();
         goblin.resetCharacter();
         
         player.startNewTurn();
-//        System.out.println(Game.system.cs.getMap());
-        System.out.println(Game.system.ts.getMap());	
+        //System.out.println(Game.system.ts.getMap());	
     
     }
     @Override
@@ -188,11 +188,6 @@ maptool = new MapTool();
     	//Update Action Box
     	/* go through ArrayList of Components to call their update methods */
 		actionBox.update(gc, sb, delta);
-
-		
-		//Character sheet
-		//charToString = "CHARACTER SHEET: \n" + player.getCharacterSheet().toString();
-		//goblinHP = "Goblin HP: " + goblin1.getMonHP();
 		
 		if(!player.getHasTurn()) {
 			player.startNewTurn();
@@ -201,71 +196,90 @@ maptool = new MapTool();
 		int posX = mouse.getMouseX();
 		int posY = mouse.getMouseY();
 		
+		//Character Sheet button
+//		if((posX > 1055 && posX < (1055+characterSheetButton.getWidth())) && (posY > 560 && posY < (560+characterSheetButton.getHeight())))
+//		{
+//			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+//			{
+//				sb.enterState(8);
+//			}
+//		}
+		
 		//Back button
-		if((posX > 1130 && posX < 1170) && (posY > 615 && posY < 630))
+		if((posX > 1110 && posX < 1195) && (posY > 615 && posY < 630))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				sb.enterState(0);
 			}
 		}
+		
+		mousePos = "Mouse position: " + posX + " " + posY;
     }
  
     public void render(GameContainer gc, StateBasedGame sb, Graphics g) throws SlickException
     {
-    	/*
-    	
-    	for(int i = 0; i < world.getMap(0, 0).mapSize; i++) {
-    		for(int j = 0; j < world.getMap(0, 0).mapSize; j++) {
-    			Iterator iterator = world.getMap(0, 0).objectsStack[i][j].getIterator();
-    			while(iterator.hasNext()) {	
-    				Component component = (Component)iterator.next();
-    				if (RenderComponent.class.isInstance(component))
-    				{
-    					renderComponent = (RenderComponent) component;
-    					renderComponent.render(gc, sb, g);
-    				}
-    			}
-    		}
-    	}
-    	*/
-    	
     	//Render Map
     	Game.system.getMap().render(gc, sb, g);
-//    	RenderComponent renderComponent = null;
-//    	ArrayList<CharacterObjects> characters = new ArrayList<CharacterObjects>();
-//    	
-//    	for(int i = 0; i < maptool.getMapAtLocation(0, 0).mapSize; i++) {
-//    		for(int j = 0; j < maptool.getMapAtLocation(0, 0).mapSize; j++) {
-//    			Objects[] list = new Objects[maptool.getMapAtLocation(0, 0).objectsStack[i][j].size()];
-//    			System.arraycopy(maptool.getMapAtLocation(0, 0).objectsStack[i][j].toArray(), 0, list, 0, maptool.getMapAtLocation(0, 0).objectsStack[i][j].size());
-//    			for(int k = list.length; k > 0; k--) {
-//    				Component component = (Component)list[k-1];
-//    				if (RenderComponent.class.isInstance(component))
-//    				{
-//    					if (RenderComponent.class.isInstance(component))
-//        				{
-//        					if(CharacterObjects.class.isInstance(component)) characters.add((CharacterObjects) component);
-//        					else
-//        					{
-//        						renderComponent = (RenderComponent) component;
-//            					renderComponent.render(gc, sb, g);
-//        					}
-//        				}
-//    				}
-//    			}
-//    		}
-//    	}
-    	
-    	
+ 	
     	//Render Action Box
     	actionBox.render(gc, sb, g);
- 
-		//g.drawString(charToString, 950, 30);
-		//g.drawString(goblinHP, 950, 400);
+    	
+    	//characterSheetButton.draw(1055, 560);
 		
-		g.drawString("BACK",1130,615);
+    	characterSheet(g);
+    	weapon.draw(855, 220);
+    	offhand.draw(855, 245);
+    	armor.draw(855, 275);
+    	shield.draw(855, 310);
+		g.drawString("MAIN MENU",1110,615);
+		g.drawString(mousePos, 900, 0);
 		
+    }
+    
+    public void characterSheet(Graphics g) {
+    	int shift = 200;
+    	g.drawString("Character Sheet:", 630, shift);
+    	shift += 30;
+    	
+    	g.drawString(sheet.toString(), 630, shift);
+    	g.drawString("Speed: " + sheet.getSpeed(), 630, 509);
+    	
+    	shift = 227;
+    	g.drawString("Equipped Weapon: " + sheet.getEquippedWeapon(0).getName(), 880, shift);
+    	shift += 27;
+    	
+    	if(sheet.EquippedWeapon.size() > 2) {
+    		if(sheet.getEquippedWeapon(1) == null) {
+        		g.drawString("No offhand weapon", 880, shift);
+        	}
+        	else {
+        		g.drawString("Offhand Weapon: " + sheet.getEquippedWeapon(1).getName(), 880, shift);
+        	}
+        	shift += 27;
+    	}
+    	else {
+    		g.drawString("No offhand weapon", 880, shift);
+    	}
+    	shift += 27;
+    	
+    	if(sheet.getEquippedArmor() == null) {
+    		g.drawString("No armor equipped", 880, shift);
+    	}
+    	else {
+    		g.drawString("Equipped Armor: " + sheet.getEquippedArmor().getName(), 880, shift);
+        	shift += 27;
+    	}
+    	
+    	if(sheet.getEquippedShield() == null) {
+    		g.drawString("No shield equipped", 880, shift);
+    	}
+    	else {
+    		g.drawString("Equipped Shield: " + sheet.getEquippedShield().getName(), 880, shift);
+    	}
+    	shift += 27;
+    	
+    	
     }
     
     public GMToolsBox getGMToolsBox()

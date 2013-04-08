@@ -1408,7 +1408,7 @@ public class CharCreate extends BasicGameState
 	public void setCharacterSheet() throws SlickException
 	{
 		
-		MapTool map = new MapTool();
+		MapTool mt = new MapTool();
 		
 		
 		//this method fills the characterSheet
@@ -1450,7 +1450,7 @@ public class CharCreate extends BasicGameState
 		
 		newchar.setCharacterSheet(sheet);
 		
-		newchar.writeMe(map.ddPath);
+		newchar.writeMe(mt.ddPath);
 		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
 	
 	}

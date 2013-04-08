@@ -28,13 +28,13 @@ public class TestMapMain {
 		System.out.println("****************************************************");
 		System.out.println("MassPlaceObjectsLine() --place some walls on my map0");
 		System.out.println("****************************************************");
-		Obstacle wall = new Obstacle("walll", null, 5, 5, world.world[0][0]);
-		world.world[0][0].massPlaceObjectsLine(0, 0, 10, 0, wall);
-		world.world[0][0].massPlaceObjectsLine(0, 1, 0, 20, wall);
-		world.world[0][0].massPlaceObjectsLine(1, 10, 10, 10, wall);
-		world.world[0][0].massPlaceObjectsLine(10, 9, 10, 1, wall);
-		world.world[0][0].massPlaceObjectsLine(1, 20, 10, 20, wall);
-		world.world[0][0].massPlaceObjectsLine(10, 11, 10, 19, wall);
+		Grass grass = new Grass("grass", world.getMap(0, 0));
+		world.world[0][0].massPlaceObjectsLine(0, 0, 10, 0, grass);
+		world.world[0][0].massPlaceObjectsLine(0, 1, 0, 20, grass);
+		world.world[0][0].massPlaceObjectsLine(1, 10, 10, 10, grass);
+		world.world[0][0].massPlaceObjectsLine(10, 9, 10, 1, grass);
+		world.world[0][0].massPlaceObjectsLine(1, 20, 10, 20, grass);
+		world.world[0][0].massPlaceObjectsLine(10, 11, 10, 19, grass);
 		System.out.println(world.world[0][0].toString());
 		
 		System.out.println("********************************");

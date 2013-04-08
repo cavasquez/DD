@@ -42,13 +42,9 @@ public class ActionChoice extends ImageRenderComponent
 	int actionType;			/* Number that refers to the type of action this ActionChoice represents (standard, move, etc.) */
 	String display;
 	boolean actionPerformed;
-	String message = " ";
-	String mousePos = " ";
 	float x, y;
 	Ability ability;	//REMOVE IN SPRINT 3
-	//boolean renderSubActions = false;
 	Input mouse = new Input(650);
-	//ArrayList<Component> subActions = new ArrayList<Component>();
 	
 	/************************************ Class Methods *************************************/
 	/* Remember, ID is the same as ActionType */
@@ -86,8 +82,6 @@ public class ActionChoice extends ImageRenderComponent
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
 		image.draw(x, y);
-		gr.drawString(message, x, 250 + y);
-		gr.drawString(mousePos, 900, 0);
 	}
 
 	@Override
@@ -106,7 +100,6 @@ public class ActionChoice extends ImageRenderComponent
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
 				System.out.println("You are clicking " + display);
-				//message = "You are clicking " + display;
 				if(actionType == 1000) {
 					ability.done();
 				}
@@ -120,7 +113,6 @@ public class ActionChoice extends ImageRenderComponent
 				
 			}
 		}
-		mousePos = "Mouse Position x: " + mouseX + " y: " + mouseY;
 	}
 	
 	protected void performAction()

@@ -2012,22 +2012,24 @@ public class CharacterSheet implements Serializable
 		String r = "Name: " +name + " \n" +
 				   "Player Name: " + player + " \n" +
 				   "Race: " + raceName + " \n" +
-				   "Gender: " + gender + " \n" +
-				   "Age: " + age + " \n\n" +
+				   //"Gender: " + gender + " \n" +
+				   "Age: " + age + " \n\n";
 				   
+					if (recorder.size() > 0)
+					{
+						ClassRecorder clas = recorder.get(0);
+						r += "Class: " + clas.className + "\n" +
+								   "Hp:  " + clas.hp + "\n";
+					} /* end if */
+					
+				r += 	
 				   "Str: " + rawStats[ABILITY_STRENGTH][ABILITY_TOTAL] + "\n" +
 				   "Dex: " + rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] + "\n" +
 				   "Con: " + rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL] + "\n" +
 				   "Int: " + rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL] + "\n" +
 				   "Wis: " + rawStats[ABILITY_WISDOM][ABILITY_TOTAL] + "\n" +
-				   "Cha: " + rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] + "\n\n" +
+				   "Cha: " + rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] + "\n" +
 					"AC: " + this.getACTotal() + " \n\n";
-		if (recorder.size() > 0)
-		{
-			ClassRecorder clas = recorder.get(0);
-			r += "Class: " + clas.className + "\n" +
-					   "Hp: " + clas.hp;
-		} /* end if */
 		
 		return r;
 	}

@@ -25,45 +25,54 @@ public class TestMainPriority extends BasicGame
 			throws SlickException {
     	MapTool mt = new MapTool();
 		
-		CharacterObjects char1 = new CharacterObjects("(~*-*)~", null, 0, 0, mt.getMapAtLocation(4, 4), null);
-		
-		System.out.println("ObjectStackContent@ 0,0: expected output:\nfloor.toString()");
-		System.out.println(mt.getMapAtLocation(4, 4).contentToString(0, 0));		
-		System.out.println("The current map");
-		System.out.println(mt.getMapAtLocation(4, 4).toString());
-		
-		Floor floor1 = new Floor("floor1", null,0,0, 5, 5, mt.getMapAtLocation(0, 0));
-		System.out.println("place floor1 at 0,0");
-		mt.getMapAtLocation(4, 4).place(0, 0, floor1);
-		
-		System.out.println("place (~*-*)~ at 0,0");
-		mt.getMapAtLocation(4, 4).place(0, 0, char1);
-		System.out.println("ObjectStackContent@ 0,0: expected output: \ncharacter.toString() \nfloor1.toString()");
-		System.out.println(mt.getMapAtLocation(4, 4).contentToString(0, 0));		
-		System.out.println("The current map");
-		System.out.println(mt.getMapAtLocation(4, 4).toString());
-		
-		System.out.println("remove (~*-*)~ from 0,0");
-		mt.getMapAtLocation(4, 4).remove(0, 0);
-		System.out.println("ObjectStackContent@ 0,0: expected output:\nfloor1.toString()");
-		System.out.println(mt.getMapAtLocation(4, 4).contentToString(0, 0));		
-		System.out.println("The current map");
-		System.out.println(mt.getMapAtLocation(4, 4).toString());
-				
-		System.out.println("place (~*-*)~ at 19,19");
-		mt.getMapAtLocation(4, 4).place(19, 19, char1);
-		System.out.println("ObjectStackContent@ 19,19: expected output: \ncharacter.toString() \nfloor.toString()");
-		System.out.println(mt.getMapAtLocation(4, 4).contentToString(19, 19));		
-		System.out.println("The current map");
-		System.out.println(mt.getMapAtLocation(4, 4).toString());
-		
-		System.out.println("remove (~*-*)~ from 19,19");
-		mt.getMapAtLocation(4, 4).remove(19,19);
-		System.out.println("ObjectStackContent@ 19,19: expected output:\nfloor.toString()");
-		System.out.println(mt.getMapAtLocation(4, 4).contentToString(19,19));		
-		System.out.println("The current map");
-		System.out.println(mt.getMapAtLocation(4, 4).toString());
-		
+    	Grass grass = new Grass("grass",mt.getCurrentMap());
+    	mt.getCurrentMap().place(0, 0, grass);
+    	Floor flo = new Floor("floor", 0, 0, 5, 5, mt.getCurrentMap());
+    	mt.getCurrentMap().place(0, 0, flo);
+    	
+    	System.out.println(mt.getCurrentMap().getObjectAtLocation(0, 0).image);
+    	System.out.println(mt.getCurrentMap().toString());
+    	
+    	
+//		CharacterObjects char1 = new CharacterObjects("(~*-*)~", null, 0, 0, mt.getMapAtLocation(4, 4), null);
+//		
+//		System.out.println("ObjectStackContent@ 0,0: expected output:\nfloor.toString()");
+//		System.out.println(mt.getMapAtLocation(4, 4).contentToString(0, 0));		
+//		System.out.println("The current map");
+//		System.out.println(mt.getMapAtLocation(4, 4).toString());
+//		
+//		Floor floor1 = new Floor("floor1", null,0,0, 5, 5, mt.getMapAtLocation(0, 0));
+//		System.out.println("place floor1 at 0,0");
+//		mt.getMapAtLocation(4, 4).place(0, 0, floor1);
+//		
+//		System.out.println("place (~*-*)~ at 0,0");
+//		mt.getMapAtLocation(4, 4).place(0, 0, char1);
+//		System.out.println("ObjectStackContent@ 0,0: expected output: \ncharacter.toString() \nfloor1.toString()");
+//		System.out.println(mt.getMapAtLocation(4, 4).contentToString(0, 0));		
+//		System.out.println("The current map");
+//		System.out.println(mt.getMapAtLocation(4, 4).toString());
+//		
+//		System.out.println("remove (~*-*)~ from 0,0");
+//		mt.getMapAtLocation(4, 4).remove(0, 0);
+//		System.out.println("ObjectStackContent@ 0,0: expected output:\nfloor1.toString()");
+//		System.out.println(mt.getMapAtLocation(4, 4).contentToString(0, 0));		
+//		System.out.println("The current map");
+//		System.out.println(mt.getMapAtLocation(4, 4).toString());
+//				
+//		System.out.println("place (~*-*)~ at 19,19");
+//		mt.getMapAtLocation(4, 4).place(19, 19, char1);
+//		System.out.println("ObjectStackContent@ 19,19: expected output: \ncharacter.toString() \nfloor.toString()");
+//		System.out.println(mt.getMapAtLocation(4, 4).contentToString(19, 19));		
+//		System.out.println("The current map");
+//		System.out.println(mt.getMapAtLocation(4, 4).toString());
+//		
+//		System.out.println("remove (~*-*)~ from 19,19");
+//		mt.getMapAtLocation(4, 4).remove(19,19);
+//		System.out.println("ObjectStackContent@ 19,19: expected output:\nfloor.toString()");
+//		System.out.println(mt.getMapAtLocation(4, 4).contentToString(19,19));		
+//		System.out.println("The current map");
+//		System.out.println(mt.getMapAtLocation(4, 4).toString());
+//		
 		
 //		
 //		Floor floor1 = new Floor("floor1", null,0,0, 5, 5, mt.getMapAtLocation(0, 0));

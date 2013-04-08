@@ -78,15 +78,21 @@ public class ActionBox extends BoxInterface
 	protected Set<Integer> playersCharacters = null;/* A set that contains the players characters */
 	
 	/************************************ Button Images *************************************/
-	DDImage freeAction = new DDImage();
-	DDImage fullRoundAction = new DDImage();
-	DDImage immediateAction = new DDImage();
-	DDImage moveAction = new DDImage();
-	DDImage standardAction = new DDImage();
-	DDImage swiftAction = new DDImage();
+//	DDImage freeAction = new DDImage();
+//	DDImage fullRoundAction = new DDImage();
+//	DDImage immediateAction = new DDImage();
+//	DDImage moveAction = new DDImage();
+//	DDImage standardAction = new DDImage();
+//	DDImage swiftAction = new DDImage();
+//	DDImage standardAttack = new DDImage();
+//	DDImage endMove = new DDImage();
+//	DDImage endTurnButton = new DDImage();
+	
 	DDImage standardAttack = new DDImage();
+	DDImage moveAction = new DDImage();
 	DDImage endMove = new DDImage();
-	DDImage endTurnButton = new DDImage();
+	DDImage endTurn = new DDImage();
+	
 	int shift;
 	
 	public ActionBox(int id, float length, float width) throws SlickException
@@ -96,17 +102,20 @@ public class ActionBox extends BoxInterface
 		playersCharacters = new TreeSet<Integer>();
 		
 		
-		
-		freeAction.setImage(new Image("Images/ActionBox/FreeAction.png"));
-		fullRoundAction.setImage(new Image("Images/ActionBox/FullRoundAction.png"));
-		immediateAction.setImage(new Image("Images/ActionBox/ImmediateAction.png"));
-		moveAction.setImage(new Image("Images/ActionBox/MoveAction.png"));
-		standardAction.setImage(new Image("Images/ActionBox/StandardAction.png"));
-		swiftAction.setImage(new Image("Images/ActionBox/SwiftAction.png"));
+		standardAttack.setImage(new Image("Images/ActionBox/StandardAttack.png"));
+		moveAction.setImage(new Image("Images/ActionBox/Move.png"));
 		endMove.setImage(new Image("Images/ActionBox/EndMove.png"));
-		//endTurnButton = new Image("Images/ActionBox/EndMove.png"); //TODO: make button
+		endTurn.setImage(new Image("Images/ActionBox/EndTurn.png"));
+//		freeAction.setImage(new Image("Images/ActionBox/FreeAction.png"));
+//		fullRoundAction.setImage(new Image("Images/ActionBox/FullRoundAction.png"));
+//		immediateAction.setImage(new Image("Images/ActionBox/ImmediateAction.png"));
+//		moveAction.setImage(new Image("Images/ActionBox/MoveAction.png"));
+//		standardAction.setImage(new Image("Images/ActionBox/StandardAction.png"));
+//		swiftAction.setImage(new Image("Images/ActionBox/SwiftAction.png"));
+//		endMove.setImage(new Image("Images/ActionBox/EndMove.png"));
+//		endTurnButton = new Image("Images/ActionBox/EndMove.png"); //TODO: make button
 		
-		shift = freeAction.getHeight();
+		shift = standardAttack.getHeight() + 10;
 		Vector2f boxPosition = new Vector2f(660f, 10f);
 		this.setPosition(boxPosition);
 		
@@ -114,16 +123,17 @@ public class ActionBox extends BoxInterface
 	
 	public void addActionChoices() 
 	{
-		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Action", standardAction, position.x, position.y, new StandardAttack(this.id)));
+		this.addComponent(new ActionChoice(this.id, Action.STANDARD_ACTION.index, "Standard Attack", standardAttack, position.x, position.y, new StandardAttack(this.id)));
 		Move move = new Move(this.id);
 		this.addComponent(new ActionChoice(this.id, Action.MOVE_ACTION.index, "Move Action", moveAction, position.x, position.y + shift, move));
-		this.addComponent(new ActionChoice(this.id, Action.FULL_ROUND_ACTION.index, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
-		this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
-		this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
-		this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
-		//this.addComponent(new ActionChoice(this.id, Action.END_TURN.index, "End Turn", endTurnButton, position.x, position.y + shift*5, new EndTurn(this.id)));
+		this.addComponent(new ActionChoice(this.id, 1000, "End Move", endMove, position.x, position.y + shift*2, move));
+		this.addComponent(new ActionChoice(this.id, 2000, "End Turn", endTurn, position.x, position.y + shift*3, new EndTurn(this.id)));
 		
-		this.addComponent(new ActionChoice(this.id, 1000, "End Move", endMove, position.x, position.y + shift*6, move));
+		//this.addComponent(new ActionChoice(this.id, Action.FULL_ROUND_ACTION.index, "Full Round Action", fullRoundAction, position.x, position.y + shift*2));
+		//this.addComponent(new ActionChoice(this.id, Action.SWIFT_ACTION.index, "Swift Action", swiftAction, position.x, position.y + shift*3));
+		//this.addComponent(new ActionChoice(this.id, Action.IMMEDIATE_ACTION.index, "Immediate Action", immediateAction, position.x, position.y + shift*4));
+		//this.addComponent(new ActionChoice(this.id, Action.FREE_ACTION.index, "Free Action", freeAction, position.x, position.y + shift*5));
+		//this.addComponent(new ActionChoice(this.id, Action.END_TURN.index, "End Turn", endTurnButton, position.x, position.y + shift*5, new EndTurn(this.id)));
 		//this.addComponent(new ActionChoice(this.id, 2000, "Start New Turn", startNewTurn, position.x, position.y + shift*6));
 	}
 	
