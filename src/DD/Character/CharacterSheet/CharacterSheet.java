@@ -1981,10 +1981,17 @@ public class CharacterSheet implements Serializable
 	
 	public void applyArmorAndShield()
 	{
-		setACArmor();
-		setACShield();
-		setFlatfootArmor();
-		setFlatfootShield();
+		
+		if(getEquippedShield() != null)
+		{
+			setACShield();
+			setFlatfootShield();
+		}
+		if(getEquippedArmor() != null)
+		{
+			setFlatfootArmor();
+			setACArmor();
+		}
 	}
 	
 	public String getName(){
