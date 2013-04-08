@@ -25,7 +25,7 @@ public class MapTool implements Serializable {
 	public SelectList selectedList;
 	Map currentMap;
 	
-	public static final String ddPath = "/world/";
+	public static final String ddPath = "world/";
 	//TODO:fix
 	//String gamePath = userPath+"/Documents/DD"
 
