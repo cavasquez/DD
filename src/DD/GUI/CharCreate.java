@@ -183,6 +183,17 @@ public class CharCreate extends BasicGameState
 			g.drawString("HUMAN", 782, 448);
 			g.drawString("ELF", 1005, 448);
 			
+			characterName.setLocation(2000, 2000);
+			playerName.setLocation(2000,2000);
+			languages.setLocation(2000,2000);
+			height.setLocation(2000,2000);
+			weight.setLocation(2000,2000);
+			age.setLocation(2000,2000);
+			alignments.setLocation(2000,2000);
+			deity.setLocation(2000,2000);
+			background.setLocation(2000,2000);
+			occupation.setLocation(2000,2000);
+			
 			
 		}
 		
