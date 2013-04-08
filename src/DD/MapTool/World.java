@@ -22,7 +22,7 @@ public class World implements Serializable{
 	ArrayList<Objects> tempList;//holds temp items like from spells
 	
 //	String userPath =  System.getProperties().getProperty("user.home");
-	String path = MapTool.ddPath + "World/";
+	String path = MapTool.ddPath;
 		
 	public World(String name) throws SlickException {
 		this.worldName = name;

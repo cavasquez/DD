@@ -1,23 +1,17 @@
-//package DD.Network.Server;
-//
-//import java.io.ObjectInputStream;
-//import java.io.ObjectOutputStream;
-//import java.net.Socket;
-//import java.util.Queue;
-//import DD.Network.DDSocket;
-//import DD.Network.Message.NetworkMessage;
-//
-///*****************************************************************************************************
-// * Server is an experimental class that tries to implement listening and sending in one class.
-// * Server is a thread that will be dedicated to servicing one client. The services are as follows:
-// * 
-// * 1. Listen for messages. If a message is received, pass it to ServerSystem.
-// * 
-// * 2. Send a message passed from ServerSystem to the client.
-// ******************************************************************************************************/
-//
-//public class Server extends DDSocket
-//{
+package DD.Network.Server;
+import DD.Network.DDSocket;
+
+/*****************************************************************************************************
+ * Server is an experimental class that tries to implement listening and sending in one class.
+ * Server is a thread that will be dedicated to servicing one client. The services are as follows:
+ * 
+ * 1. Listen for messages. If a message is received, pass it to ServerSystem.
+ * 
+ * 2. Send a message passed from ServerSystem to the client.
+ ******************************************************************************************************/
+
+public class Server extends DDSocket
+{
 //	/************************************ Class Methods *************************************/
 //	public Server(Socket socket, int socketID)
 //	{
@@ -64,4 +58,4 @@
 //		closeStreams();
 //	} /* end run method */
 //	
-//} /* end Server class */
+} /* end Server class */
