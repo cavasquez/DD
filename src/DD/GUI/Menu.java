@@ -31,11 +31,11 @@ public class Menu extends BasicGameState
 	public void init(GameContainer gc, StateBasedGame sbg)throws SlickException
 	{
 		dungeon = new Music("Audio/Gauntlet.wav");
-		dungeon.loop();
+		//dungeon.loop();
 		screen = new Image("Images/Menus/menuscreen5.jpg");
 		playNow = new Image("Images/Menus/MenuButtons.png"); // Contains the menu button options
 		
-		exitButton = new Image("Images/Menus/exitButton.png");
+		
 		
 		button = new Sound("Audio/dunSound.wav");
 	}
@@ -44,12 +44,11 @@ public class Menu extends BasicGameState
 	{
 		
 		screen.draw(0,0);
-		playNow.draw(100,50); // Image with the menu button options.
+		playNow.draw(100,100); // Image with the menu button options.
 		
 		g.drawString(mousePos, 100, 10);
 		
-		exitButton.draw(142, 580);
-		
+				
 	}
 	
 	public void update(GameContainer gc, StateBasedGame sbg,int delta)throws SlickException
@@ -58,7 +57,7 @@ public class Menu extends BasicGameState
 		int posY = mouse.getMouseY();
 		
 		//Join Lobby button
-		if((posX > 130 && posX < 360) && (posY > 187 && posY < 254))
+		if((posX > 136 && posX < 334) && (posY > 227 && posY < 297))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -69,7 +68,7 @@ public class Menu extends BasicGameState
 		}
 		
 		//Create Lobby
-		if((posX > 130 && posX < 360) && (posY > 295 && posY < 360))
+		if((posX > 136 && posX < 334) && (posY > 333 && posY < 402))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -78,18 +77,10 @@ public class Menu extends BasicGameState
 			}
 		}
 		
-		//START game
-		if((posX > 130 && posX < 360) && (posY > 500 && posY < 566))
-		{
-			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-			{
-				button.play();
-				sbg.enterState(4);
-			}
-		}
+		
 		
 		//exit button
-		if((posX > 146 && posX < 338) && (posY > 584 && posY < 642))
+		if((posX > 136 && posX < 334) && (posY > 539 && posY < 606))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -99,7 +90,7 @@ public class Menu extends BasicGameState
 		}
 		
 		//map tool button
-		if((posX > 130 && posX < 362) && (posY > 400 && posY < 464))
+		if((posX > 136 && posX < 334) && (posY > 434 && posY < 503))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
@@ -110,7 +101,7 @@ public class Menu extends BasicGameState
 		
 		//CREATE CHARACTER
 		
-		if((posX > 128 && posX < 359) && (posY > 75 && posY < 145 ))
+		if((posX > 136 && posX < 334) && (posY > 123 && posY < 193 ))
 		{
 			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
 			{
