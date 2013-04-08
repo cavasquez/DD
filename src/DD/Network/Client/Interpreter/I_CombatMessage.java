@@ -3,6 +3,7 @@ package DD.Network.Client.Interpreter;
 import DD.CombatSystem.CombatSystem;
 import DD.Message.CombatMessage;
 import DD.Message.NetworkMessage;
+import DD.Trash.NetworkInterpreter;
 
 /*****************************************************************************************************
  * I_CombatMessage will pass combat messages to CombatSystem
