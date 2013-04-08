@@ -1,20 +1,21 @@
-package DD.Network;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Queue;
-
-/*****************************************************************************************************
-* DDSocket is an experimental socket that will attempt to use one thread to control both listening
-* and sending.
-******************************************************************************************************/
-
-public abstract class DDSocket extends Thread
-{
-
+//package DD.Network;
+//
+//import java.io.IOException;
+//import java.io.ObjectInputStream;
+//import java.io.ObjectOutputStream;
+//import java.net.Socket;
+//import java.util.ArrayList;
+//import java.util.Queue;
+//import DD.Network.Message.NetworkMessage;
+//
+///*****************************************************************************************************
+//* DDSocket is an experimental socket that will attempt to use one thread to control both listening
+//* and sending.
+//******************************************************************************************************/
+//
+//public abstract class DDSocket extends Thread
+//{
+//
 //	/************************************ Class Attributes *************************************/
 //	protected Socket socket = null;
 //	protected ObjectInputStream input = null;
@@ -116,4 +117,4 @@ public abstract class DDSocket extends Thread
 //		/* thread is done */
 //		done = true;
 //	} /* end close method */
-} /* end DDSocket */
+//} /* end DDSocket */

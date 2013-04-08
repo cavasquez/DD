@@ -26,6 +26,7 @@ public class MapTool implements Serializable {
 	Map currentMap;
 	
 	public static final String ddPath = "world/";
+
 	//TODO:fix
 	//String gamePath = userPath+"/Documents/DD"
 
@@ -47,7 +48,7 @@ public class MapTool implements Serializable {
 	public World loadWorld(String name, boolean loadChar) {
 		World world = null;
 		try {
-			FileInputStream fileIn = new FileInputStream(ddPath + name
+			FileInputStream fileIn = new FileInputStream(ddPath +  name
 					+ "/" + name + ".ser");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			world = (World) in.readObject();
