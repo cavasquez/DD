@@ -18,13 +18,16 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.Character.DDCharacter;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.Character.Equipment.Armor;
 import DD.Character.Equipment.Weapon;
+import DD.MapTool.MapTool;
 
 public class CharCreate extends BasicGameState
 {
 	
+	DDCharacter newchar = new DDCharacter(0);
 	CharacterSheet sheet = new CharacterSheet();
 	Image screen;
 	private String mouse = "No input yet!";
@@ -1307,21 +1310,11 @@ public class CharCreate extends BasicGameState
 	}
 	
 	//this is what the button should do then move to the next
-	public void setCharacterSheet()
+	public void setCharacterSheet() throws SlickException
 	{
 		
+		MapTool map = new MapTool();
 		
-		//CHRIS
-		/*
-		 * I NEED BUTTONS 
-		 * x2 race buttons 1 human 1 elf. the human button value set to 1 and elf to 0
-		 * x1 class button 1 barbarian barb button value set to 0
-		 *
-		 * x2 gender buttons 1M 1F
-		 * x3 size buttons sm med lrg (the values set to those are 1 for sm 0 for med and -1 for lrg)
-		 
-		 */
-		//fix with buttons
 		
 		//this method fills the characterSheet
 		sheet.fillBasic(characterName.getText(), playerName.getText(), race, languages.getText(), size, gender, 
@@ -1356,6 +1349,10 @@ public class CharCreate extends BasicGameState
 		}
 		
 		sheet.applyArmorAndShield();
+		
+		newchar.setCharacterSheet(sheet);
+		
+		newchar.writeMe(map.ddPath);
 		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
 	
 	}
