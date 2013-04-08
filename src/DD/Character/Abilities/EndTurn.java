@@ -22,7 +22,10 @@ public class EndTurn extends Ability
 	@Override
 	protected void action() throws SlickException 
 	{
-		/* First, send the message to the interpreter */
+		/* First, clear the ActionBox of it's components (since there should be none left) */
+		owner.removeAllComponents();
+		
+		/* Lastly, send the message to the interpreter */
 		CombatMessage cm = new CombatMessage
 			(
 				character.getCharacterID(),
@@ -34,8 +37,5 @@ public class EndTurn extends Ability
 		
 		sendToInterpreter(cm);
 		done();
-		
-		/* Lastly, clear the ActionBox of it's components (since there should be none left) */
-		owner.removeAllComponents();
 	} /* end action() method */
 } /* end EndTurn method */
