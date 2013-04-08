@@ -41,6 +41,7 @@ public class NetworkSystem extends Network
 	@Override
 	public boolean sendMessage(int sender, int receiver, Message message)
 	{
+		System.out.println("network" + network);
 		return network.sendMessage(sender, receiver, message);
 	} /* end sendMessage method */
 	
@@ -92,7 +93,7 @@ public class NetworkSystem extends Network
 
 	public void stop() 
 	{
-		network.stop();
+		if(network != null) network.stop();
 		network = null;
 	} /* end stop method */
 

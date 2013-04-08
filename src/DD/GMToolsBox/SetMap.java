@@ -49,7 +49,7 @@ public class SetMap extends Ability
 						null,
 						null,
 						CombatSystem.ActionType.SYSTEM,
-						CombatSystem.Action.PLACE_CHARACTER,
+						CombatSystem.Action.SET_MAP,
 						body
 					);
 			sendToInterpreter(cm);
