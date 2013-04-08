@@ -12,6 +12,7 @@ import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.*;
 
+import DD.ActionBox.ActionBox;
 import DD.Character.Abilities.Ability;
 import DD.GMToolsBox.GMToolsBox;
 import DD.MapTool.Map;
@@ -183,6 +184,11 @@ public class CreateLob extends BasicGameState
 				System.out.println("Start Game");
 				button.play();
 				Game.system.ns.stop();
+				/* Firstly, get ActionBox from GMGameplayState and link it */
+				ActionBox ab = new ActionBox(((GMGameplayState)sbg.getState(Game.gmGameplay)).stateID, 300, 200);;
+				((GMGameplayState)sbg.getState(Game.gmGameplay)).actionBox = ab;
+				Game.system.linkBoxes(ab);
+				
 				GMToolsBox gmt;
 				gmt = ((GMGameplayState)sbg.getState(Game.gmGameplay)).getGMToolsBox();
 				/* Firstly, give the map to all the characters */
@@ -196,7 +202,6 @@ public class CreateLob extends BasicGameState
 				
 				for(SerMapCharHelper character : preMadeCharacters)
 				{
-					System.out.println("CreateLob " + character.cs + " " +character.coord);
 					/* assume all SerMapCharHelper are mob */
 					gmt.addCharacter(GMToolsBox.Holder.MOB, character.cs, character.coord, true);
 				} /* end for loop */

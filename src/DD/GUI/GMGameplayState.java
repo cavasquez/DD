@@ -1,5 +1,7 @@
 package DD.GUI;
 
+import java.util.Set;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -7,6 +9,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import DD.ActionBox.ActionBox;
 import DD.Character.DDCharacter;
 import DD.Character.CharacterSheet.Monster.Goblin;
 import DD.GMToolsBox.GMToolsBox;
@@ -17,9 +20,11 @@ import DD.SlickTools.RenderComponent;
 
 public class GMGameplayState extends BasicGameState {
 	
-	private int stateID = 0;
+	public int stateID = 0;
 	private MapTool maptool;
 	private GMToolsBox gmToolsBox;
+	public ActionBox actionBox;
+	private 
 	Input mouse = new Input(650);
 	
 	private DDCharacter goblin1, goblin2;
@@ -31,16 +36,16 @@ public class GMGameplayState extends BasicGameState {
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
-		
-		
 	}
 	
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
 		maptool = new MapTool();
-		gmToolsBox = new GMToolsBox(stateID, 300, 200);
 
-	
+		gmToolsBox = new GMToolsBox(stateID, 300, 200);
+		Set<Integer> stuff = actionBox.getCharacters();
+		
+		System.out.println("GMState " + stuff.size());
 	}
 
 	@Override
@@ -48,6 +53,7 @@ public class GMGameplayState extends BasicGameState {
 		Game.system.getMap().render(gc, sb, g);
 		gmToolsBox.render(gc, sb, g);
 		g.drawString("BACK",1130,615);
+		actionBox.render(gc, sb, g);
 	}
 
 	@Override
@@ -73,6 +79,7 @@ public class GMGameplayState extends BasicGameState {
     	
     	//Update GMToolsBox
     	gmToolsBox.update(gc, sb, delta);
+    	actionBox.update(gc, sb, delta);
 
 		int posX = mouse.getMouseX();
 		int posY = mouse.getMouseY();

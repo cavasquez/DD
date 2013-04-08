@@ -101,6 +101,11 @@ public class CharacterSheet implements Serializable
 	{
 		return currency;
 	}
+	
+	public void setCurrency(int value)
+	{
+		currency = 1000;
+	}
 	/********* Ability *********/
 	
 	public static final int ABILITY_STRENGTH = 0;
@@ -1689,7 +1694,14 @@ public class CharacterSheet implements Serializable
 	
 	public Armor getEquippedShield()
 	{
-		return EquippedArmor.get(1);
+		if(EquippedArmor.size() < 2)
+		{
+			return null;
+		}
+		else
+		{
+			return EquippedArmor.get(1);
+		}
 	}
 	
 	/*
@@ -1715,10 +1727,14 @@ public class CharacterSheet implements Serializable
 		{
 			if(getEquippedShield() == null)
 			{
-				if(EquippedWeapon.get(hand) == armory.weapons.get(0))// if it is unarmed
+				System.out.println(EquippedWeapon.size());
+				if(EquippedWeapon.size() < 2)
 				{
-					
-					
+					EquippedWeapon.add(hand,w);
+				}
+				
+				else if(EquippedWeapon.get(hand) == armory.weapons.get(0))// if it is unarmed
+				{
 					
 					equipmentList.add(EquippedWeapon.remove(hand));
 					EquippedWeapon.add(hand,w);
@@ -1728,7 +1744,7 @@ public class CharacterSheet implements Serializable
 		}
 		else
 		{
-
+			
 			equipmentList.add(EquippedWeapon.remove(hand));
 			EquippedWeapon.add(hand,w);
 			
@@ -1969,10 +1985,17 @@ public class CharacterSheet implements Serializable
 	
 	public void applyArmorAndShield()
 	{
-		setACArmor();
-		setACShield();
-		setFlatfootArmor();
-		setFlatfootShield();
+		
+		if(getEquippedShield() != null)
+		{
+			setACShield();
+			setFlatfootShield();
+		}
+		if(getEquippedArmor() != null)
+		{
+			setFlatfootArmor();
+			setACArmor();
+		}
 	}
 	
 	public String getName(){
@@ -1989,22 +2012,24 @@ public class CharacterSheet implements Serializable
 		String r = "Name: " +name + " \n" +
 				   "Player Name: " + player + " \n" +
 				   "Race: " + raceName + " \n" +
-				   "Gender: " + gender + " \n" +
-				   "Age: " + age + " \n\n" +
+				   //"Gender: " + gender + " \n" +
+				   "Age: " + age + " \n\n";
 				   
+					if (recorder.size() > 0)
+					{
+						ClassRecorder clas = recorder.get(0);
+						r += "Class: " + clas.className + "\n" +
+								   "Hp:  " + clas.hp + "\n";
+					} /* end if */
+					
+				r += 	
 				   "Str: " + rawStats[ABILITY_STRENGTH][ABILITY_TOTAL] + "\n" +
 				   "Dex: " + rawStats[ABILITY_DEXTERITY][ABILITY_TOTAL] + "\n" +
 				   "Con: " + rawStats[ABILITY_CONSTITUTION][ABILITY_TOTAL] + "\n" +
 				   "Int: " + rawStats[ABILITY_INTELLIGENCE][ABILITY_TOTAL] + "\n" +
 				   "Wis: " + rawStats[ABILITY_WISDOM][ABILITY_TOTAL] + "\n" +
-				   "Cha: " + rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] + "\n\n" +
+				   "Cha: " + rawStats[ABILITY_CHARISMA][ABILITY_TOTAL] + "\n" +
 					"AC: " + this.getACTotal() + " \n\n";
-		if (recorder.size() > 0)
-		{
-			ClassRecorder clas = recorder.get(0);
-			r += "Class: " + clas.className + "\n" +
-					   "Hp: " + clas.hp;
-		} /* end if */
 		
 		return r;
 	}

@@ -401,6 +401,7 @@ public class MapToolState extends BasicGameState {
 						}
 					}
 				}
+    			System.out.println(maptool.getCurrentMap());
 //    			World world = maptool.loadWorld("world", true);
 //    			//System.out.println(world.toString());
 //    			

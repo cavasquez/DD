@@ -20,6 +20,7 @@ public class Game extends StateBasedGame
 	public static final int maptool = 5;
 	public static final int cc = 6; //this is for character creation
 	public static final int gmGameplay = 7;
+	//public static final int characterSheet = 8;
 	public static DDSystem system;
 	
 	public Game(String gamename)
@@ -40,6 +41,7 @@ public class Game extends StateBasedGame
 		this.addState(new GMGameplayState(gameplay));
 		this.addState(new MapToolState(maptool));
 		this.addState(new GMGameplayState(gmGameplay));
+		//this.addState(new CharacterSheetState(characterSheet));
 
 
 		

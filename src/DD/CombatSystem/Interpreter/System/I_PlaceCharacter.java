@@ -49,7 +49,7 @@ public class I_PlaceCharacter extends CombatInterpreter
 		
 		/* Give to the player that owns the character */
 		if(cs.getNetID() == cm.getCharacterData().getNetID()) ab.addCharacter(cm.getBody()[CHARACTER_ID]);
-		
+		System.out.println("I_Plae its id " + cm.getCharacterData().getNetID());
 		/* Check for reset */
 		if(cm.getBody()[RESET] == 1) newCharacter.resetCharacter();
 		/* now place character on map */
