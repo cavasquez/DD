@@ -20,6 +20,7 @@ import DD.Character.DDCharacter;
 import DD.Character.CharacterSheet.Monster.Goblin;
 import DD.MapTool.*;
 import DD.SlickTools.Component;
+import DD.SlickTools.DDImage;
 import DD.SlickTools.RenderComponent;
 
 import org.newdawn.slick.*;
@@ -48,6 +49,7 @@ public class MapToolState extends BasicGameState {
 	private Image loadMap = null;
 	private Image loadWorld = null;
 	private Image clearSelection = null;
+	private Image grass = null;
 	private TextField loadMapText = null;
 	private TextField loadWorldText = null;
 	UnicodeFont font = null;
@@ -61,7 +63,9 @@ public class MapToolState extends BasicGameState {
 	@Override
 	public void enter(GameContainer gc , StateBasedGame sbg) throws SlickException{
 		loadMapText = new TextField(gc, font, 945, 610, 180, 25);
+		loadMapText.setText("map0 - map24");
 		loadWorldText = new TextField(gc, font, 945, 570, 180, 25);
+		loadWorldText.setText("Unimplemented"); 
 	}
 
 	@Override
@@ -82,6 +86,7 @@ public class MapToolState extends BasicGameState {
 		loadMap = new Image("Images/MapTool/LoadMap.png");
 		loadWorld = new Image("Images/MapTool/LoadWorld.png");
 		clearSelection = new Image("Images/MapTool/ClearSelection.png");
+		grass = new Image("Images/MapTool/grassButton.png");
 		
 		font  = new UnicodeFont(new Font("Arial" , Font.PLAIN , 16));
 		font.getEffects().add(new ColorEffect(java.awt.Color.white));
@@ -124,11 +129,23 @@ public class MapToolState extends BasicGameState {
     	saveMap.draw(630, 610);
     	loadMap.draw(780, 610);
     	loadWorld.draw(780,570);
+    	grass.draw(820,100);
     	g.setFont(font);
     	if(loadMapText!=null) (loadMapText).render(gc,g);
     	if(loadWorldText!=null) (loadWorldText).render(gc,g);
     	g.drawString("BACK", 1130, 615);
     	g.drawString(mousePos, 900, 0);
+    	
+    	g.drawString("Hot Key List:", 975, 175);
+    	g.drawString("Make Selection (w)", 975, 200);
+    	g.drawString("Remove Selection (e)", 975, 225);
+    	g.drawString("Clear Selection (r)", 975, 250);
+    	g.drawString("Place Selection on Map (s)", 975, 275);
+    	g.drawString("Remove from Map (d)", 975, 300);
+    	g.drawString("Goblin (1)", 975, 325);
+    	g.drawString("Wall (2)", 975, 350);
+    	g.drawString("Grass (3)", 975, 375);
+    	
 	}
 
 	@Override
@@ -171,6 +188,7 @@ public class MapToolState extends BasicGameState {
     	saveMapButton(gc);
     	loadMapButton(gc);
     	loadWorldButton(gc);
+    	grassButton(gc);
     	
     	
     	//hotkeys
@@ -181,6 +199,7 @@ public class MapToolState extends BasicGameState {
     	makeRemoveOnMapHotKey(gc);
     	goblinHotKey(gc);
     	wallHotKey(gc);
+    	grassHotKey(gc);
     	
     	
 	}
@@ -287,6 +306,18 @@ public class MapToolState extends BasicGameState {
 			}
         }
 	}
+	public void grassHotKey(GameContainer gc) throws SlickException{
+		Input input = gc.getInput();
+		if(input.isKeyPressed(Input.KEY_3))
+        {
+			if(hotKeyActive){
+				Grass grass = new Grass("grass", new DDImage(1470, 577));
+    			object = grass;
+    			
+				System.out.println("grass hotkey");
+			}
+        }
+	}
 	
 	
 	
@@ -366,12 +397,23 @@ public class MapToolState extends BasicGameState {
 	}
 	
 	public void wallButton(GameContainer gc) throws SlickException {
-		if((posX > 735 && posX < 735 + goblinButton.getWidth()) && (posY > 100 && posY < (100 + goblinButton.getHeight()))) {
+		if((posX > 735 && posX < 735 + wallButton.getWidth()) && (posY > 100 && posY < (100 + wallButton.getHeight()))) {
     		//if you click on the button
     		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
     			Wall wall = new Wall("Wall", maptool.getCurrentMap());
     			object = wall;
     			System.out.println("chose wall");
+    		}
+    	}
+	}
+	public void grassButton(GameContainer gc) throws SlickException {
+		if((posX > 820 && posX < 820 + grass.getWidth()) && (posY > 100 && posY < (100 + grass.getHeight()))) {
+    		//if you click on the button
+    		if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON)) {
+    			Grass grass = new Grass("grass", new DDImage(1470, 577));
+    			object = grass;
+    			
+				System.out.println("grass button");
     		}
     	}
 	}

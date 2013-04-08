@@ -462,7 +462,7 @@ public class Map extends Entity implements Serializable{
 	      try
 	      {
 	         FileInputStream fileIn =
-	                          new FileInputStream(path+"/"+charName+".ser");
+	                          new FileInputStream(path+"/"+"Characters/"+charName+".ser");
 	         ObjectInputStream in = new ObjectInputStream(fileIn);
 	         e = (DDCharacter) in.readObject();
 	         in.close();
