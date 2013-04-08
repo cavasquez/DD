@@ -440,15 +440,17 @@ public class CharCreate extends BasicGameState
 			g.drawString("DONE", 765, 495);
 			g.drawString("START OVER", 890, 495);
 
-			
-			
-			
-			
-			
-			
-			
-			
+				
 		}
+		
+		
+		if(state == 14)
+		{
+			g.drawString("CHARACTER SAVED!", 778, 320);
+			g.drawString("JOIN LOBBY", 800, 375);
+		}
+		
+		
 //		textbox.render(gc, g);
 		if(playerName != null) playerName.render(gc, g);
 		if(characterName != null) characterName.render(gc, g);
@@ -463,10 +465,7 @@ public class CharCreate extends BasicGameState
 		
 		g.setFont(font2);
 //		textbox.setCursorVisible(true);
-		
-
-		
-		
+	
 		
 	}
 	
@@ -484,6 +483,7 @@ public class CharCreate extends BasicGameState
 			{
 				button.play();
 				sbg.enterState(0);
+				
 				/* kill the overlap */
 				characterName.setLocation(2000, 2000);
 				playerName.setLocation(2000,2000);
@@ -495,6 +495,8 @@ public class CharCreate extends BasicGameState
 				deity.setLocation(2000,2000);
 				background.setLocation(2000,2000);
 				occupation.setLocation(2000,2000);
+				
+				state = 0;
 
 			}
 		}
@@ -1286,6 +1288,31 @@ public class CharCreate extends BasicGameState
 			
 			}
 		}
+		
+		
+		/**************************CHARACTER IS SAVED GO TO LOBBY*************/
+		//IF STATE = 14 CHARACTER IS SAVED AND OPTION TO GO TO LOBBY  
+				
+		if(state == 14)
+		{
+			
+			
+			/****************WILL GO TO LOBBY AND DISPLAY CHARACTER SAVED*******************/
+			
+			
+			//JOIN LOBBY OPTION
+			
+			if((posX > 789 && posX < 900) && (posY > 258 && posY < 278))
+			{
+				if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+				{
+					button.play();
+					sbg.enterState(1);
+					state = 0;
+				}
+			
+			}
+		}
 			
 		
 		  myMoney = Integer.toString( sheet.getCurrency());		 
@@ -1339,10 +1366,13 @@ public class CharCreate extends BasicGameState
 		if(offHand != null)
 		{
 			sheet.equipWeapon(offHand, 1);
+			
+			
 		}
 		
 		
 		sheet.EquipArmor(newArmor);
+		
 		if(shield != null)
 		{
 			sheet.EquipShield(shield);
