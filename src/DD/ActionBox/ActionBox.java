@@ -214,6 +214,7 @@ public class ActionBox extends BoxInterface
 			{
 				/* If character is dead, end turn. Character can't do anything */
 				EndTurn end = new EndTurn(0);
+				end.setOwnerEntity(this);
 				try 
 				{
 					end.activate();

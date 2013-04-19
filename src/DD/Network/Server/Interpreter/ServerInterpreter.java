@@ -3,7 +3,6 @@ package DD.Network.Server.Interpreter;
 import DD.Message.NetworkMessage;
 import DD.Network.NetworkSystem;
 import DD.Network.Server.ServerSystem;
-import DD.Trash.NetworkInterpreter;
 
 /*****************************************************************************************************
  * ServerInterpreter will be used by ServerSystem to interpret every NetworkMessage. 
