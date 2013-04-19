@@ -136,6 +136,7 @@ public class MapTool implements Serializable {
 			}
 		}
 		this.world = world;
+		this.world.path = ddPath;
 		return world;
 	}
 
