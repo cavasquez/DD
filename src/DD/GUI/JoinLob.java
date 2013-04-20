@@ -90,10 +90,7 @@ public class JoinLob extends BasicGameState
 		//BACK BUTTON
 		g.drawString("BACK", 190, 552);
 		
-		
-
-		
-		
+				
 		
 	}
 	
@@ -120,23 +117,15 @@ public class JoinLob extends BasicGameState
 		
 		//this parameter is used for the LOAD CHARACTER function
 		else if((posX > 141 && posX < 295) && (posY > 111 && posY < 132))
-					{
-						if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-						{
-							button.play();
-							DDCharacter temp = new DDCharacter(0);
-							CharacterSheet temp1 = new CharacterSheet();
-							
-							MapTool mt = new MapTool();
-
-							temp = mt.getCurrentMap().loadCharacter(mt.ddPath, username.getText().trim());
-							temp1 = temp.getCharacterSheet();
-														
-							sheet = temp1;
-							jlsb.setCharacterSheet(sheet);
-							
-						}
-					}
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
+			{
+				button.play();
+				DDCharacter temp = new DDCharacter(0);
+				sheet = temp.load("", username.getText());				
+				jlsb.setCharacterSheet(sheet);
+			}
+		}
 				 
 		 
 	      mouse = "Mouse position x: " + posX + " y: " + posY;

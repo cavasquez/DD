@@ -126,7 +126,7 @@ public class GMToolsBox extends BoxInterface
 		
 		/* Add a character to the holder.  */
 		holder.get(type.index).add(new HolderTuple(sheet, returner.getId()));
-		
+		System.out.println("GMToolsBox " + sheet.getName() + " placed into GMToolsBox");
 		return returner;
 		
 	} /* end addCharacter method */

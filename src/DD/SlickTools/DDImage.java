@@ -147,6 +147,16 @@ public class DDImage implements Serializable
 		return returner;
 	} /* end getImage method */
 	
+	public int getX()
+	{
+		return x;
+	} /* end getX method */
+	
+	public int getY()
+	{
+		return y;
+	} /* end getY method */
+	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/

@@ -25,6 +25,8 @@ public class CreateLob extends BasicGameState
 	
 	Image screen;
 	private String mouse = "No input yet!";
+	private TextField loadMapText = null;
+	UnicodeFont font = null;
 	Music dungeon;
 	Sound button;
 //	UnicodeFont font;
@@ -32,6 +34,7 @@ public class CreateLob extends BasicGameState
 //	TextField mapX;
 //	TextField mapY;
 	private ArrayList<String> worldList;
+	private ArrayList<String> userList;
 	public MapTool maptool;
 	
 	
@@ -46,9 +49,11 @@ public class CreateLob extends BasicGameState
 		screen = new Image("Images/Menus/lobby.jpg");
 		worldList = new ArrayList<String>();
 		maptool = new MapTool();
+		userList = new ArrayList<String>();
 		
-		//dungeon = new Music("Audio/dunEffect1.wav");
-		//dungeon.loop();
+		font  = new UnicodeFont(new Font("Arial" , Font.PLAIN , 16));
+		font.getEffects().add(new ColorEffect(java.awt.Color.white));
+		font.loadGlyphs();
 		
 		button = new Sound("Audio/dunSound.wav");
 		
@@ -75,6 +80,7 @@ public class CreateLob extends BasicGameState
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sbg) throws SlickException
 	{
+		loadMapText = new TextField(gc, font, 640, 360, 180, 25);
 //		worldField = new TextField(gc, font, 700, 320, 180, 25);
 //		worldField.setText("World");
 //		mapX = new TextField(gc, font, 700, 350, 180, 25);
@@ -92,6 +98,7 @@ public class CreateLob extends BasicGameState
 		int y = 200;
 		int delta = 20;
 		g.drawString("World List: ",x , y);
+		if(loadMapText!=null) (loadMapText).render(gc,g);
 		for(int i = 0; i < worldList.size(); i++)
 		{
 			g.drawString(worldList.get(i),x ,y+=delta);
@@ -106,7 +113,7 @@ public class CreateLob extends BasicGameState
 		
 		g.drawString("LOAD WORLD",540,330);
 		
-//		g.drawString("CHOOSE WORLD",540,364);
+		if (maptool.world != null)g.drawString("CHOOSE MAP",540,364);
 		
 		g.drawString("START SERVER",540,404);
 		
@@ -120,7 +127,7 @@ public class CreateLob extends BasicGameState
 	{
 		int posX = Mouse.getX();
 		int posY = Mouse.getY();
-//		font.loadGlyphs();
+		font.loadGlyphs();
 		
 		//LOAD World
 		
@@ -135,20 +142,28 @@ public class CreateLob extends BasicGameState
 			}
 		}
 		
-		//CHOOSE WORLD
+		//LOAD Map
 		
-//		if((posX > 538 && posX < 650) && (posY > 270 && posY < 282))
-//		{
-//			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON))
-//			{
-//				System.out.println("Choose World");
-//				button.play();
-//				world = maptool.loadWorld(worldField.getText(), false);
-//				maptool.world = world;
-//    			
-//			}
-//		}
+		if((posX > 536 && posX < 616) && (posY > 270 && posY < 285) && maptool.world != null)
+		{
+			if(gc.getInput().isMousePressed(gc.getInput().MOUSE_LEFT_BUTTON) )
+			{
+				System.out.println("Load Map");
+				button.play();
 				
+				for (int i = 0; i < maptool.world.getWorldSize(); i++) {
+					for (int j = 0; j < maptool.world.getWorldSize(); j++) {
+						System.out.println("iteration j:"+ j +" input: "+loadMapText.getText().trim()+ " mapname: "+ maptool.world.getMap(i, j).getName());
+						if((loadMapText.getText().trim()).equals(maptool.world.getMap(i, j).getName())){
+					
+							maptool.setCurrentMap(i, j);
+							maptool.selectedList.clearSelectedList();
+							maptool.selectedList.setOwner(maptool.getCurrentMap());
+						}
+					}
+				}
+			}
+		}
 				
 				
 		//START SERVER
@@ -160,10 +175,11 @@ public class CreateLob extends BasicGameState
 				System.out.println("Start Server");
 				button.play();
 				Game.system.server();
-				Game.system.ns.setUsername("Gm Bitches");
+				Game.system.ns.setUsername("GM Bitches");
 				try 
 				{
 					Game.system.ns.setServerIP(InetAddress.getLocalHost().getHostAddress());
+					((GMGameplayState)sbg.getState(Game.gmGameplay)).getGMToolsBox(); /* gets the GMToolsBox made */ 
 				} /* end try */
 				catch (UnknownHostException e) 
 				{
@@ -206,6 +222,7 @@ public class CreateLob extends BasicGameState
 					gmt.addCharacter(GMToolsBox.Holder.MOB, character.cs, character.coord, true);
 				} /* end for loop */
 				sbg.enterState(Game.gmGameplay);
+				killTextFields();
 			}
 			
 		}
@@ -219,6 +236,7 @@ public class CreateLob extends BasicGameState
 			{
 				button.play();
 				sbg.enterState(0);
+				killTextFields();
 			}
 		}
 		
@@ -237,16 +255,17 @@ public class CreateLob extends BasicGameState
 		return 3;
 	}
 
-//	public UnicodeFont getNewFont(String fontName , int fontSize)
-//    {
-////        font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
-//////        font.addGlyphs("@");
-////        font.getEffects().add(new ColorEffect(java.awt.Color.white));
-//        return (font);
-//    }
+	public UnicodeFont getNewFont(String fontName , int fontSize)
+    {
+        font = new UnicodeFont(new Font(fontName , Font.PLAIN , fontSize));
+        font.addGlyphs("@");
+        font.getEffects().add(new ColorEffect(java.awt.Color.white));
+        return (font);
+    }
 	public void killTextFields()
 	{
 		/* put username and passible onto an inaccessible part of the gui */
+		loadMapText.setLocation(Game.Xsize + 100, Game.Ysize - 100);
 //		worldField.setLocation(Game.Xsize + 100, Game.Ysize - 100);
 //		mapX.setLocation(Game.Xsize + 100, Game.Ysize - 100);
 //		mapY.setLocation(Game.Xsize + 100, Game.Ysize - 100);

@@ -94,21 +94,14 @@ public class ClientSystem extends Network implements NetworkInterface
 		try 
 		{
 			spawner = new ListenerSpawner();
+			System.out.println("ClientSystem: waiting for spawener to be ready");
 			spawner.start();
 			
-			while(spawner.getSocketReady() != true)
+			while(spawner.getSocketReady() != true) 
 			{
-//				/* do nothing until listener is set up */
-//				try 
-//				{
-//					Thread.sleep(100);
-//				} /* end try */
-//				catch (InterruptedException e) 
-//				{
-//					System.out.println("interrupted in ClientSysetm at start while waiting for listener");
-//				} /* end catch */
+				System.out.println("ClientSystem: spawener ready? " + spawner.getSocketReady());
 			} /* end while loop */
-			
+			System.out.println("ClientSystem: Spawner is ready");
 			/* Now try to connect to server */
 			System.out.println("serverIP: " + serverIP);
 			sender = new ClientSender(new Socket(serverIP, Network.SERVER_PORT));

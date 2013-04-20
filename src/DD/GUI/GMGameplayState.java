@@ -27,22 +27,21 @@ public class GMGameplayState extends BasicGameState {
 	private 
 	Input mouse = new Input(650);
 	
-	private DDCharacter goblin1, goblin2;
-	
 	
 	public GMGameplayState(int stateID) {
 		this.stateID = stateID;
 	}
 
 	@Override
-	public void init(GameContainer gc, StateBasedGame sb) throws SlickException {
+	public void init(GameContainer gc, StateBasedGame sb) throws SlickException 
+	{
 	}
 	
 	@Override
 	public void enter(GameContainer gc, StateBasedGame sb) throws SlickException {
 		maptool = new MapTool();
 
-		gmToolsBox = new GMToolsBox(stateID, 300, 200);
+		
 		Set<Integer> stuff = actionBox.getCharacters();
 		
 		System.out.println("GMState " + stuff.size());
@@ -104,7 +103,8 @@ public class GMGameplayState extends BasicGameState {
     {
     	if (gmToolsBox == null)
 			try {
-				gmToolsBox = new GMToolsBox();
+				gmToolsBox = new GMToolsBox(stateID, 300, 200);
+				Game.system.cs.setGMToolsBox(gmToolsBox);
 			} catch (SlickException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

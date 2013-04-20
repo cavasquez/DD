@@ -40,6 +40,7 @@ public class I_InitialMessage extends ServerInterpreter
 			Socket socket = null;
 			try 
 			{
+				System.out.println("I_InitialMessage: Listening to " + system.getListenerIP(listenerID));
 				socket = new Socket(system.getListenerIP(listenerID), Network.CLIENT_PORT);
 				ServerSender sender = new ServerSender(socket);
 				clientList.addSender(newID, sender.getID(), sender);

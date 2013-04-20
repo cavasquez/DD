@@ -88,6 +88,7 @@ public class CharacterSheet implements Serializable
 	private String occupation;
 	private DDImage image = null;
 	protected int netID;  //TODO: should not be serialized. 
+	private int currentHP;
 	
 	private int currency = 1000;
 	
@@ -2060,5 +2061,15 @@ public class CharacterSheet implements Serializable
 	{
 		this.image = image;
 	} /* end setImage method */
+	
+	public int getCurrentHP()
+	{
+		return currentHP;
+	}
+	
+	public void setCurrentHP(int hp)
+	{
+		this.currentHP = hp;
+	}
 	
 } /* end CharacterSheet method */

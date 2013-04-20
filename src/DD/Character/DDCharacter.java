@@ -1,8 +1,10 @@
 package DD.Character;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import DD.Character.Abilities.Ability;
 import DD.Character.CharacterSheet.CharacterSheet;
 import DD.Character.Equipment.Weapon;
 import DD.CombatSystem.TargetingSystem.Coordinate;
+import DD.MapTool.World;
 import DD.SlickTools.*;
 
 /*****************************************************************************************************
@@ -39,7 +42,6 @@ public class DDCharacter extends CharacterEntity implements Serializable
 	/************************************ Class Attributes *************************************/
 	protected CharacterSheet sheet;
 	private boolean hasTurn = false;
-	private int currentHP;
 	private int currentSpeed;
 	private ArrayList<Ability> abilities = null;	
 	boolean moved; 									/* player moved this turn */
@@ -79,7 +81,7 @@ public class DDCharacter extends CharacterEntity implements Serializable
 			theDir.mkdir();  
 		}		
 		try{
-			FileOutputStream fileOut = new FileOutputStream(path+"/"+"Characters"+"/"+sheet.getName()+".ser");
+			FileOutputStream fileOut = new FileOutputStream(path+""+"Characters"+"/"+sheet.getName()+".ser");
 			ObjectOutputStream out =  new ObjectOutputStream(fileOut);
 			out.writeObject(this);
 			out.close();
@@ -89,6 +91,27 @@ public class DDCharacter extends CharacterEntity implements Serializable
 			e.printStackTrace();
 		}
 	}
+	
+	public CharacterSheet load(String path, String name)
+	{
+		CharacterSheet returner = null;
+		DDCharacter loadedObject = null;
+		try {
+			FileInputStream fileIn = new FileInputStream(path +  "Characters" + "/" + name + ".ser");
+			ObjectInputStream in = new ObjectInputStream(fileIn);
+			loadedObject = (DDCharacter) in.readObject();
+			in.close();
+			fileIn.close();
+			returner = loadedObject.getSheet();
+		} catch (IOException i) {
+			i.printStackTrace();
+
+		} catch (ClassNotFoundException c) {
+			c.printStackTrace();
+
+		}
+		return returner;
+	} /* end load method */
 	
 	public CharacterSheet getCharacterSheet() 
 	{
@@ -102,7 +125,7 @@ public class DDCharacter extends CharacterEntity implements Serializable
 	
 	public void resetCharacter()
 	{ /* TODO: generate */
-		currentHP = sheet.getHP();
+		sheet.setCurrentHP(sheet.getHP());
 	} /* end resetCharacter method */
 	
 	public void addAbility(Ability ability)
@@ -173,7 +196,7 @@ public class DDCharacter extends CharacterEntity implements Serializable
 		/* TODO: implement */
 		/* TODO: if hp drops to 0 or less, apply conditions. */
 		/* TODO: take care of damage reduction */
-		currentHP -= hit;
+		sheet.setCurrentHP(sheet.getCurrentHP() - hit);
 	} /* end getHit method */
 	
 	public void movedDiagonal()
@@ -358,7 +381,7 @@ public class DDCharacter extends CharacterEntity implements Serializable
 	
 	public int getCurrentHP()
 	{
-		return currentHP;
+		return sheet.getCurrentHP();
 	} /* end getCurrentHP method */
 	
 	public int getAC()
@@ -383,13 +406,13 @@ public class DDCharacter extends CharacterEntity implements Serializable
 	
 	public boolean isDying()
 	{
-		return (currentHP < 0);
+		return (sheet.getCurrentHP() < 0);
 	} /* end isDying method */
 	
 	public boolean isDead()
 	{
 		boolean returner = false;
-		if ((currentHP < 0) && ((currentHP * -1) >= sheet.getConInherent())) returner = true;
+		if ((sheet.getCurrentHP() < 0) && ((sheet.getCurrentHP() * -1) >= sheet.getConInherent())) returner = true;
 		return returner;
 	} /* end isDead method */
 	

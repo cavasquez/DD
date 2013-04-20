@@ -60,6 +60,7 @@ public class ListenerSpawner extends Thread
 			ClientListener listener = null;
 			try 
 			{
+				System.out.println("Client.ListenerSpawner: Waiting to accept server socket");
 				listener = new ClientListener(serverSocket.accept());
 				System.out.println("sucecssfully listened");
 				listener.start();

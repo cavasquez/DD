@@ -81,6 +81,7 @@ public class JoinLobbyStartButton extends RenderComponent
 						sheet.setNetID(netID);
 						AddCharacter add = new AddCharacter(0, sheet);
 						add.action();
+						sbg.enterState(Game.gameplay);
 					}
 				} /* successfully connected */
 				else

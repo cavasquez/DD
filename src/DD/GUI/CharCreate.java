@@ -23,6 +23,7 @@ import DD.Character.CharacterSheet.CharacterSheet;
 import DD.Character.Equipment.Armor;
 import DD.Character.Equipment.Weapon;
 import DD.MapTool.MapTool;
+import DD.SlickTools.DDImage;
 
 public class CharCreate extends BasicGameState
 {
@@ -1458,10 +1459,11 @@ public class CharCreate extends BasicGameState
 		}
 		
 		sheet.applyArmorAndShield();
+		sheet.setImage(new DDImage(2530, 1440));
 		
 		newchar.setCharacterSheet(sheet);
 		
-		newchar.writeMe(mt.ddPath);
+		newchar.writeMe("");
 		//after this we need to probably make an equipment purchase thing to buy armor to equip and weapons
 	
 	}

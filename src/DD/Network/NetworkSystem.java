@@ -72,22 +72,7 @@ public class NetworkSystem extends Network
 	
 	public void start() 
 	{
-		if (network == null)
-		{
-			switch(networkType)
-			{
-				case SERVER:
-					network = new ServerSystem();
-					ServerInterpreter.setServerSystem((ServerSystem)network);
-					ClientInterpreter.setClientSystem(null);
-					break;
-				case CLIENT:
-					network = new ClientSystem();
-					ServerInterpreter.setServerSystem(null);
-					ClientInterpreter.setClientSystem((ClientSystem)network);
-					break;
-			} /* end switch */
-		} /* end if */
+		if (network == null) setNetworkType(networkType);
 		network.start();
 	} /* end start method */
 
@@ -130,9 +115,13 @@ public class NetworkSystem extends Network
 		{
 			case SERVER:
 				network = new ServerSystem();
+				ServerInterpreter.setServerSystem((ServerSystem)network);
+				ClientInterpreter.setClientSystem(null);
 				break;
 			case CLIENT:
 				network = new ClientSystem();
+				ServerInterpreter.setServerSystem(null);
+				ClientInterpreter.setClientSystem((ClientSystem)network);
 				break;
 		} /* end switch */
 

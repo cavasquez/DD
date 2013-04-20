@@ -12,6 +12,7 @@ import DD.Character.Abilities.Dying;
 import DD.Character.Abilities.EndTurn;
 import DD.Character.Abilities.DefaultAbilities.Move.Move;
 import DD.Character.Abilities.DefaultAbilities.Standard.StandardAttack;
+import DD.Character.CharacterSheet.CharacterSheet;
 import DD.SlickTools.BoxInterface;
 import DD.SlickTools.Component;
 import DD.SlickTools.DDImage;
@@ -74,8 +75,9 @@ public class ActionBox extends BoxInterface
 
 	/************************************ Class Attributes *************************************/
 	protected ArrayList<Integer> subActions;		/* integer array list that holds the id of the subActions */
-	protected DDCharacter character = null;	/* The character performing the actions */
+	protected DDCharacter character = null;			/* The character performing the actions */
 	protected Set<Integer> playersCharacters = null;/* A set that contains the players characters */
+	private CharacterSheet sheet;					/* sheet to be displayed */
 	
 	/************************************ Button Images *************************************/
 //	DDImage freeAction = new DDImage();
@@ -195,6 +197,15 @@ public class ActionBox extends BoxInterface
 	{
 		return playersCharacters;
 	} /* end getCharacters method */
+	
+	public CharacterSheet getSheet()
+	{
+		CharacterSheet returner = null;
+		
+		if(character != null) returner = character.getCharacterSheet();
+		
+		return returner;
+	} /* end getSheet */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************

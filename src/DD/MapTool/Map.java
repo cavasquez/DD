@@ -20,6 +20,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import DD.Character.DDCharacter;
 import DD.CombatSystem.CombatSystem;
 import DD.CombatSystem.TargetingSystem.Coordinate;
+import DD.GUI.Game;
 import DD.SlickTools.*;
 
 
@@ -36,6 +37,7 @@ public class Map extends Entity implements Serializable{
 	String name;
 	public final int mapSize = 20;
 	public ArrayList<SerMapCharHelper> serMapHelper = new ArrayList<SerMapCharHelper>();
+	private RenderComponent renderComponent;
 
 	public Map() {
 		super();
@@ -47,6 +49,7 @@ public class Map extends Entity implements Serializable{
 		objectsStack =  new ObjectsPriorityStack[mapSize][mapSize];
 		tempObjects = new TempObjects[mapSize][mapSize];
 		super.components = new ArrayList<Component>();
+		renderComponent = null;
 		
 		spriteSheet = new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png");
     	// get the floor image
@@ -521,6 +524,7 @@ public class Map extends Entity implements Serializable{
 	}
 	
 	/************************************ Slick Methods *************************************/
+	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics gr)
 	{
 		//super.render(gc, sbg, gr);
@@ -552,6 +556,29 @@ public class Map extends Entity implements Serializable{
     		characters.get(i).render(gc, sbg, gr);
 		}
 	} /* end render method */
+	
+	@Override
+	public void update(GameContainer gc, StateBasedGame sb, int delta) throws SlickException
+	{
+		super.update(gc, sb, delta);
+		RenderComponent renderComponent = null;
+    	for(int i = 0; i < mapSize; i++) {
+    		for(int j = 0; j < mapSize; j++) {
+    			Objects[] list = new Objects[objectsStack[i][j].size()];
+    			System.arraycopy(objectsStack[i][j].toArray(), 0, list, 0, objectsStack[i][j].size());
+    			for(int k = 0; k < list.length; k++) {
+    				Component component = (Component)list[k];
+    				if (RenderComponent.class.isInstance(component))
+    				{
+    					
+    					renderComponent = (RenderComponent) component;
+    					renderComponent.update(gc, sb, delta);
+			
+    				}
+    			}
+    		}
+    	} /* end update method */
+	}
 	
 	
 	public ArrayList<Component> getComponents() {

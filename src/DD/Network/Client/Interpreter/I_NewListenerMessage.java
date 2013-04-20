@@ -24,8 +24,8 @@ public class I_NewListenerMessage extends ClientInterpreter
 		system.setListener((ClientListener)nlm.getListener());
 		
 		/* Send the ClientListenerReadyMessage to the server */
-		ClientListenerReadyMessage clrm = new ClientListenerReadyMessage(system.getClientID());
-		system.sendMessage(system.getClientID(), Network.GM_USER_ID, clrm);
+//		ClientListenerReadyMessage clrm = new ClientListenerReadyMessage(system.getClientID());
+//		system.sendMessage(system.getClientID(), Network.GM_USER_ID, clrm);
 		
 	} /* end interpret method */
 	
