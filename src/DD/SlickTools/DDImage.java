@@ -32,7 +32,8 @@ public class DDImage implements Serializable
 	/************************************ Class Constants *************************************/
 	private static final long serialVersionUID = 5614722491837796142L;
 	/************************************ Class Attributes *************************************/
-	private String spriteSheetPath;
+	private String spriteSheetPath = null;
+	private boolean subImage; 				/* tells us if the DDImage should be a subImage */
 	private int x;
 	private int y;
 	private int width;
@@ -49,6 +50,7 @@ public class DDImage implements Serializable
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		this.subImage = true;
 	} /* end DDImage constructor */
 	
 	public DDImage(int x, int y)
@@ -59,17 +61,13 @@ public class DDImage implements Serializable
 	public DDImage(Image image)
 	{
 		this.image = image;
+		subImage = false;
 	} /* end DDImage constructor */
 	
 	public DDImage(String path)
 	{
 		spriteSheetPath = path;
-		try {
-			this.image = new Image(path);
-		} catch (SlickException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		subImage = false;
 		
 	} /* end DDImage constructor */
 	
@@ -86,9 +84,10 @@ public class DDImage implements Serializable
 		Image spriteSheet = null;
 		try 
 		{
-			spriteSheetPath ="Images/Test/DungeonCrawl_ProjectUtumnoTileset.png";
+			if(spriteSheetPath == null) spriteSheetPath ="Images/Test/DungeonCrawl_ProjectUtumnoTileset.png";
 			spriteSheet = new Image(spriteSheetPath);
-			returner = spriteSheet.getSubImage(x, y, width, height);
+			if (subImage) returner = spriteSheet.getSubImage(x, y, width, height);
+			else returner = spriteSheet;
 		} /* end try */
 		catch (SlickException e) 
 		{

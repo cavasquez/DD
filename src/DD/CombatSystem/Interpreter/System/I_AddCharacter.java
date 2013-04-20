@@ -31,7 +31,7 @@ public class I_AddCharacter extends CombatInterpreter
 	@Override
 	public void interpret(CombatMessage cm) 
 	{
-		System.out.println("Interpreting AddCharacter");
+		System.out.println("Interpreting AddCharacter " + cm.getCharacterData().getName());
 		GMToolsBox gmtb = cs.getGMToolsBox();
 		if(gmtb != null)
 		{

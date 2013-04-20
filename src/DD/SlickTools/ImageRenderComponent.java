@@ -3,6 +3,7 @@ package DD.SlickTools;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 
 import org.newdawn.slick.GameContainer; 
 import org.newdawn.slick.Graphics;
@@ -14,8 +15,9 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public abstract class ImageRenderComponent extends RenderComponent
+public abstract class ImageRenderComponent extends RenderComponent implements Serializable
 {
+	private static final long serialVersionUID = 7853838660291699011L;
 	/************************************ Class Constants *************************************/
 	public DDImage image;
 	
