@@ -2,8 +2,6 @@ package DD.Network;
 
 import java.util.LinkedList;
 import java.util.Queue;
-
-import DD.CombatSystem.CombatMessage;
 import DD.Message.Message;
 import DD.Message.NetworkMessage;
 import DD.Message.QueueMessage;
@@ -60,8 +58,6 @@ public class MessageQueue extends Thread
 		
 		while(!done )
 		{
-			System.out.println("MesssageQueue: restarting the loop");
-			System.out.println("MessageQueue: empty queue? " + messageQueue.peek());
 			try
 			{
 				while(sendMessage()) {} /* loop through the queue and send the message */			
@@ -98,13 +94,11 @@ public class MessageQueue extends Thread
 	{
 		/* sendMessage provides a way for MessQueue to synchronize access to the queue
 		 * and send a message to the NetworkSystem */
-		System.out.println("MessageQueue: Entering sendMessage " + (messageQueue.peek() != null));
 		boolean returner = false;
 		if ((message = messageQueue.poll()) != null)
 		{
 			/* If there is a message to be send, tell the Network and then respond with true. */
 			system.getMessage(message.getListenerID(), message.getMessage());
-			System.out.println("MessageQueue: sent message " + message.getMessage().getType());
 			returner = true;
 		} /* end if */
 		return returner;
@@ -115,7 +109,6 @@ public class MessageQueue extends Thread
 		/* enqueueMessage synchronizes access to the queue and provides threads a way
 		 * of putting messages into the queue */
 		messageQueue.offer(new QueueMessage(listenerID, message));
-		System.out.println("MessageQueue: enqueued message " + message.getType());
 		hasMessage = true;
 	} /* end enqueueMessage method */
 	

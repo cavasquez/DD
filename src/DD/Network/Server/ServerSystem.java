@@ -232,19 +232,6 @@ public class ServerSystem extends Network implements NetworkInterface
 	/******************************************************************************
 	 ******************************* Setter Methods *******************************
 	 ******************************************************************************/
-	@Override
-	public void setCombatSystem(CombatSystem cs) 
-	{
-		// TODO Auto-generated method stub
-		
-	} /* end setCombatSystem method */
-
-	@Override
-	public void setChatSystem(ChatSystem chat)
-	{
-		// TODO Auto-generated method stub
-		
-	} /* end setChatSystem method */
 			
 	
 } /* end ServerSystem class */

@@ -35,15 +35,6 @@ public abstract class Network implements NetworkInterface
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
 	 ****************************************************************************************/
-	public CombatSystem getCombatSystem()
-	{
-		return this.cs;
-	} /* end getCombatSystem method */
-	
-	public ChatSystem getChatSystem()
-	{
-		return this.chat;
-	} /* end getChatSystem method */
 	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
@@ -69,16 +60,6 @@ public abstract class Network implements NetworkInterface
 		
 		return returner;
 	} /* end setServerIP method */
-	
-	public void setCombatSystem(CombatSystem cs)
-	{
-		this.cs = cs;
-	} /* end setCombatSystem method */
-	
-	public void setChatSystem(ChatSystem chat)
-	{
-		this.chat = chat;
-	} /* end setChatSystem method */
 	
 	public void setUsername(String username)
 	{

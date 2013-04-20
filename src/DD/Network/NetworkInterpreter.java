@@ -1,5 +1,7 @@
 package DD.Network;
 
+import DD.Chat.ChatSystem;
+import DD.CombatSystem.CombatSystem;
 import DD.Message.NetworkMessage;
 
 /*****************************************************************************************************
@@ -12,9 +14,21 @@ import DD.Message.NetworkMessage;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public interface NetworkInterpreter 
+public abstract class NetworkInterpreter 
 {
+	/************************************ Class Attributes *************************************/
+	static protected CombatSystem cs;
+	static protected ChatSystem chat;
+	
 	/************************************ Class Methods *************************************/
-	public void interpret(NetworkMessage message);
+	static public void setCombatSystem(CombatSystem cs)
+	{
+		NetworkInterpreter.cs = cs;
+	} /* end setCombatSystem method */
+	
+	static public void setChatSystem(ChatSystem chat)
+	{
+		NetworkInterpreter.chat = chat;
+	} /* end setCombatSystem method */
 
 } /* end MessageInterpreter class */

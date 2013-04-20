@@ -15,8 +15,6 @@ public class I_CombatMessage extends ClientInterpreter
 	@Override
 	public void interpret(NetworkMessage message)
 	{
-		CombatSystem cs = system.getCombatSystem();
-		
 		/* Run the combat message through the combat system */
 		cs.process((CombatMessage)message.getMessage());
 	} /* end Interpret method */

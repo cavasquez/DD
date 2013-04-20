@@ -20,7 +20,6 @@ public class I_CombatMessage extends ServerInterpreter
 		system.sendMessage(Network.GM_USER_ID, Network.EVERYONE, message, message.getSender());
 		
 		/* Run the combat message through the combat system */
-		CombatSystem cs = system.getCombatSystem();		
 		cs.process((CombatMessage)message.getMessage());
 		
 	} /* end interpret method */

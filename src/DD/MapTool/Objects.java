@@ -56,13 +56,18 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		image.makeImage();
 	}
 	
-	public Image getImage(){
-		return spriteSheet;
+//	public Image getImage(){
+//		return spriteSheet;
+//	}
+	
+	public DDImage getImage()
+	{
+		return image;
 	}
 	
-	public void setImage(Image image){
-		spriteSheet = image;
-	}	
+//	public void setImage(Image image){
+//		spriteSheet = image;
+//	}	
 	
 	public int getMovePenalty(){
 		return movePenalty;
@@ -145,15 +150,17 @@ public class Objects extends ImageRenderComponent implements Serializable{//figu
 		if(!Wall.class.isInstance(this) && 
 				!Floor.class.isInstance(this) && !TargetBlock.class.isInstance(this))
 		{
+//			System.out.println("Objects: render is rendering " + image);
 			float xCorrection = 30.85f;
 			float yCorrection = 30;
 			if(image != null)image.draw(x*xCorrection, (y+1)*yCorrection);
 			
 		}
 		else {
+//			System.out.println("Objects: render is rendering wall, floor, targetblock " + image);
 			//System.out.println("carlos' mother");
-			if(image != null)image.draw((x + (image.getHeight() * x)), ((y+40) + (image.getWidth() * y)));	//y offset by 40 to shift down a little
-			//System.out.println("chris' mother");
+			if(image != null) image.draw((x + (image.getHeight() * x)), ((y+40) + (image.getWidth() * y)));	//y offset by 40 to shift down a little
+			if(image != null) System.out.println("Objects: render " + image.getImage());
 		}
 		//if(CharacterObjects.class.isInstance(this)) System.out.println("x: " + (x + (image.getHeight() * x)) + ", y: " + (y + (image.getHeight() * y)));
 		//gr.drawString(message, 110, 10);

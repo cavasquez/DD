@@ -10,6 +10,7 @@ import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.MapTool.Map;
 import DD.Network.MessageQueue;
 import DD.Network.Network;
+import DD.Network.NetworkInterpreter;
 import DD.Network.NetworkSystem;
 
 /*****************************************************************************************************
@@ -49,8 +50,10 @@ public class DDSystem
 		Ability.setTargetingSystem(ts);
 		Ability.setNetworkSystem(ns);
 		
-		/* Provide the NetworkSystem to the MessageQueue */
+		/* Provide the NetworkSystem the necessary items */
 		MessageQueue.getInstance().setNetworkSystem(ns);
+		NetworkInterpreter.setCombatSystem(cs);
+		NetworkInterpreter.setChatSystem(chat);
 		
 	} /* end System constructor */
 	

@@ -531,18 +531,19 @@ public class Map extends Entity implements Serializable{
 		
 		RenderComponent renderComponent = null;
 		ArrayList<CharacterObjects> characters = new ArrayList<CharacterObjects>();
-    	
     	for(int i = 0; i < mapSize; i++) {
     		for(int j = 0; j < mapSize; j++) {
     			Objects[] list = new Objects[objectsStack[i][j].size()];
     			System.arraycopy(objectsStack[i][j].toArray(), 0, list, 0, objectsStack[i][j].size());
     			for(int k = list.length; k > 0; k--) {
     				Component component = (Component)list[k-1];
+    				
     				if (RenderComponent.class.isInstance(component))
     				{
     					if(CharacterObjects.class.isInstance(component)) characters.add((CharacterObjects) component);
     					else
     					{
+//    						System.out.println("Map: render is rendering non character " + ((Objects)component).getImage());
     						renderComponent = (RenderComponent) component;
         					renderComponent.render(gc, sbg, gr);
     					}
@@ -560,7 +561,6 @@ public class Map extends Entity implements Serializable{
 	@Override
 	public void update(GameContainer gc, StateBasedGame sb, int delta) throws SlickException
 	{
-		super.update(gc, sb, delta);
 		RenderComponent renderComponent = null;
     	for(int i = 0; i < mapSize; i++) {
     		for(int j = 0; j < mapSize; j++) {

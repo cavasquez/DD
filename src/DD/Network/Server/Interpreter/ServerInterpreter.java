@@ -1,6 +1,7 @@
 package DD.Network.Server.Interpreter;
 
 import DD.Message.NetworkMessage;
+import DD.Network.NetworkInterpreter;
 import DD.Network.NetworkSystem;
 import DD.Network.Server.ServerSystem;
 
@@ -12,7 +13,7 @@ import DD.Network.Server.ServerSystem;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public abstract class ServerInterpreter
+public abstract class ServerInterpreter extends NetworkInterpreter
 {
 	/************************************ Class Attributes *************************************/
 	protected static ServerSystem system;

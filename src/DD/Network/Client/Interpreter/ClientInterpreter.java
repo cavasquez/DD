@@ -1,6 +1,7 @@
 package DD.Network.Client.Interpreter;
 
 import DD.Message.NetworkMessage;
+import DD.Network.NetworkInterpreter;
 import DD.Network.Client.ClientSystem;
 
 /*****************************************************************************************************
@@ -12,7 +13,7 @@ import DD.Network.Client.ClientSystem;
  * @author Carlos Vasquez
  ******************************************************************************************************/
 
-public abstract class ClientInterpreter 
+public abstract class ClientInterpreter extends NetworkInterpreter
 {
 	/************************************ Class Attributes *************************************/
 	protected static ClientSystem system;

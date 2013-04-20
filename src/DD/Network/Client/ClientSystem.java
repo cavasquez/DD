@@ -217,20 +217,5 @@ public class ClientSystem extends Network implements NetworkInterface
 		
 		return returner;
 	} /* end setServerIP method */
-
-
-	@Override
-	public void setCombatSystem(CombatSystem cs) 
-	{
-		// TODO Auto-generated method stub
-		
-	} /* end setCombatSystem method */
-
-	@Override
-	public void setChatSystem(ChatSystem chat)
-	{
-		// TODO Auto-generated method stub
-		
-	} /* end setChatSystem method */
 	
 } /* end ServerSystem class */

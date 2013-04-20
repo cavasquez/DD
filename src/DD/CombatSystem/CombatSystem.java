@@ -109,7 +109,6 @@ public class CombatSystem
 	public CombatValidationMessage process(CombatMessage cm)
 	{ /* This will be the method called by ActionBox */
 		CombatValidationMessage returner = null;
-		
 		returner = CombatSystem.validate(cm);
 		if (returner.getValid()) 
 		{

@@ -126,18 +126,6 @@ public class NetworkSystem extends Network
 		} /* end switch */
 
 	} /* end setNetworkType */
-
-	@Override
-	public void setCombatSystem(CombatSystem cs) 
-	{
-		network.setCombatSystem(cs);		
-	} /* end setCombatSystem method */
-
-	@Override
-	public void setChatSystem(ChatSystem chat) 
-	{
-		network.setChatSystem(chat);		
-	} /* end setChatSystem method */
 	
 	@Override
 	public void setUsername(String username)
