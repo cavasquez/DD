@@ -80,16 +80,6 @@ public class ActionBox extends BoxInterface
 	private CharacterSheet sheet;					/* sheet to be displayed */
 	
 	/************************************ Button Images *************************************/
-//	DDImage freeAction = new DDImage();
-//	DDImage fullRoundAction = new DDImage();
-//	DDImage immediateAction = new DDImage();
-//	DDImage moveAction = new DDImage();
-//	DDImage standardAction = new DDImage();
-//	DDImage swiftAction = new DDImage();
-//	DDImage standardAttack = new DDImage();
-//	DDImage endMove = new DDImage();
-//	DDImage endTurnButton = new DDImage();
-	
 	DDImage standardAttack = new DDImage();
 	DDImage moveAction = new DDImage();
 	DDImage endMove = new DDImage();
@@ -200,11 +190,7 @@ public class ActionBox extends BoxInterface
 	
 	public CharacterSheet getSheet()
 	{
-		CharacterSheet returner = null;
-		
-		if(character != null) returner = character.getCharacterSheet();
-		
-		return returner;
+		return sheet;
 	} /* end getSheet */
 	
 	/****************************************************************************************
@@ -255,5 +241,10 @@ public class ActionBox extends BoxInterface
 		} /* end if */
 		else removeAllComponents();
 	} /* end setCharacter method */
+	
+	public void setSheet(CharacterSheet sheet)
+	{
+		this.sheet = sheet;
+	} /* end sheet */
 	
 } /* end ActionBox method */

@@ -122,7 +122,8 @@ public class JoinLob extends BasicGameState
 			{
 				button.play();
 				DDCharacter temp = new DDCharacter(0);
-				sheet = temp.load("", username.getText());				
+				sheet = temp.load("", username.getText());
+				sheet.setCurrentHP(sheet.getHP());
 				jlsb.setCharacterSheet(sheet);
 			}
 		}

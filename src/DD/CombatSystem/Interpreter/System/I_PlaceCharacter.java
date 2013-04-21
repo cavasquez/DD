@@ -76,6 +76,13 @@ public class I_PlaceCharacter extends CombatInterpreter
 			e.printStackTrace();
 		} /* end catch */
 		
+		/* Finally, check the actionBox. If the character sheets are the same (same
+		 * name or net ID for now), then replace with this sheet so they can
+		 * reflect changes. */
+		if(ab != null && 
+				ab.getSheet() != null &&
+				ab.getSheet().getNetID() == cm.getCharacterData().getNetID()) ab.setSheet(cm.getCharacterData());
+		
 	} /* end interpret method */
 
 } /* end I_PlaceCharacter class */

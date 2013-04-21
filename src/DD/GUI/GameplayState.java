@@ -1,29 +1,12 @@
 package DD.GUI;
- 
-import java.util.ArrayList;
-import java.util.Iterator;  
 
 import DD.ActionBox.ActionBox;
-import DD.ActionBox.Dice;
 import DD.Character.*; 
-import DD.Character.Abilities.Ability;
-import DD.Character.CharacterSheet.CharacterClass;
 import DD.Character.CharacterSheet.CharacterSheet;
-import DD.Character.CharacterSheet.Monster.Goblin;
-import DD.Character.Equipment.Weapon;
-import DD.CombatSystem.CombatSystem;
-import DD.CombatSystem.TargetingSystem.Coordinate;
-import DD.CombatSystem.TargetingSystem.TargetingSystem;
 import DD.GMToolsBox.GMToolsBox;
 import DD.MapTool.*;
-import DD.Network.NetworkSystem.NetworkType;
-import DD.SlickTools.Component;
 import DD.SlickTools.DDImage;
-import DD.SlickTools.ImageRenderComponent;
-import DD.SlickTools.RenderComponent;
-import DD.System.DDSystem;
 
-import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
@@ -35,11 +18,7 @@ public class GameplayState extends BasicGameState {
  
 	private int stateID = 0;
 	public MapTool maptool = null;
-    private DDCharacter player;
-    private DDCharacter goblin;
-    private CharacterObjects playerObj;
     private ActionBox actionBox;
-    private GMToolsBox gmToolsBox = null;
     private CharacterSheet sheet;
     private static Input mouse = new Input(650);
     private String mousePos;
@@ -68,6 +47,7 @@ public class GameplayState extends BasicGameState {
     	
         //Create ActionBox
         actionBox = new ActionBox(stateID, 300, 200);
+        actionBox.setSheet(sheet);
         Game.system.linkBoxes(actionBox, null);
     
     }
@@ -185,5 +165,10 @@ public class GameplayState extends BasicGameState {
     	shift += 27;
     	
     	
+    }
+    
+    public void setCharacterSheet(CharacterSheet sheet)
+    {
+    	this.sheet = sheet;
     }
 }

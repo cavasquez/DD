@@ -43,7 +43,6 @@ public class Goblin extends MonsterSheet
 		
 		this.equipWeapon(new Weapon(15,"Cutlass",Dice.DieSize.D6,2,18,5,'M','S',"Note:",4),0);
 		this.setImage(new DDImage("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png", 98, 65, 33, 34));
-		
 		 this.XP = 135;
 	}
 	

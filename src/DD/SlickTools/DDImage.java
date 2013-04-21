@@ -1,25 +1,10 @@
 package DD.SlickTools;
-
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-
-import DD.Character.DDCharacter;
-import DD.CombatSystem.Interpreter.CombatInterpreter;
-import DD.MapTool.CharacterObjects;
-import DD.MapTool.Map;
-import DD.MapTool.Objects;
-import DD.MapTool.SerMapCharHelper;
-import DD.MapTool.World;
-import DD.Network.NetworkSystem;
 
 /*****************************************************************************************************
  * DDImage will contain all the necessary information for a DD object to create a slick image;
@@ -56,6 +41,7 @@ public class DDImage implements Serializable
 	public DDImage(int x, int y)
 	{
 		this("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png",x,y, 33, 34);
+		this.subImage = true;
 	} /* end DDImage constructor */
 	
 	public DDImage(Image image)
@@ -84,10 +70,19 @@ public class DDImage implements Serializable
 		Image spriteSheet = null;
 		try 
 		{
-			if(spriteSheetPath == null) spriteSheetPath ="Images/Test/DungeonCrawl_ProjectUtumnoTileset.png";
-			spriteSheet = new Image(spriteSheetPath);
-			if (subImage) returner = spriteSheet.getSubImage(x, y, width, height);
-			else returner = spriteSheet;
+			if(spriteSheetPath == null)
+			{
+				spriteSheetPath ="Images/Test/DungeonCrawl_ProjectUtumnoTileset.png";
+				spriteSheet = new Image(spriteSheetPath);
+				returner = spriteSheet.getSubImage(x, y, width, height);
+			} /* end if */
+			else
+			{
+				spriteSheet = new Image(spriteSheetPath);
+				if (this.subImage == true) returner = spriteSheet.getSubImage(x, y, width, height);
+				else returner = spriteSheet;
+			} /* end else */
+			
 		} /* end try */
 		catch (SlickException e) 
 		{
@@ -100,14 +95,13 @@ public class DDImage implements Serializable
 	
 	public void draw(float x, float y, float scale)
 	{
-		getImage().draw(x, y, scale);
+		if(getImage() != null) getImage().draw(x, y, scale);
 	} /* end draw method */
 	
 	public void draw(float x, float y)
 	{
-		getImage().draw(x, y);
+		if(getImage() != null) getImage().draw(x, y);
 	} /* end draw method */
-	
 	
 	public void writeMe(){
 		try{
@@ -121,8 +115,6 @@ public class DDImage implements Serializable
 			e.printStackTrace();
 		}
 	}
-	
-
 	
 	/****************************************************************************************
 	 ************************************ Getter Methods ************************************
@@ -156,12 +148,18 @@ public class DDImage implements Serializable
 		return y;
 	} /* end getY method */
 	
+	public boolean getSubImage()
+	{
+		return subImage;
+		
+	} /* end getSubImage method */
+	
 	/****************************************************************************************
 	 ************************************ Setter Methods ************************************
 	 ****************************************************************************************/
 	public void setImage(Image image)
 	{
 		this.image = image;
-	}
+	} /* end setImage */
 	
 } /* end DDImage class */
