@@ -18,7 +18,7 @@ public class DDImage implements Serializable
 	private static final long serialVersionUID = 5614722491837796142L;
 	/************************************ Class Attributes *************************************/
 	private String spriteSheetPath = null;
-	private boolean subImage; 				/* tells us if the DDImage should be a subImage */
+	private boolean noSubImage; 				/* tells us if the DDImage should be a subImage */
 	private int x;
 	private int y;
 	private int width;
@@ -35,25 +35,25 @@ public class DDImage implements Serializable
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.subImage = true;
+		this.noSubImage = false;
 	} /* end DDImage constructor */
 	
 	public DDImage(int x, int y)
 	{
 		this("Images/Test/DungeonCrawl_ProjectUtumnoTileset.png",x,y, 33, 34);
-		this.subImage = true;
+		this.noSubImage = false;
 	} /* end DDImage constructor */
 	
 	public DDImage(Image image)
 	{
 		this.image = image;
-		subImage = false;
+		noSubImage = true;
 	} /* end DDImage constructor */
 	
 	public DDImage(String path)
 	{
 		spriteSheetPath = path;
-		subImage = false;
+		noSubImage = true;
 		
 	} /* end DDImage constructor */
 	
@@ -79,7 +79,7 @@ public class DDImage implements Serializable
 			else
 			{
 				spriteSheet = new Image(spriteSheetPath);
-				if (this.subImage == true) returner = spriteSheet.getSubImage(x, y, width, height);
+				if (this.noSubImage == false) returner = spriteSheet.getSubImage(x, y, width, height);
 				else returner = spriteSheet;
 			} /* end else */
 			
@@ -150,7 +150,7 @@ public class DDImage implements Serializable
 	
 	public boolean getSubImage()
 	{
-		return subImage;
+		return noSubImage;
 		
 	} /* end getSubImage method */
 	
